@@ -1,0 +1,47 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/warcraft-api",
+    "crates/warcraft-database",
+    "crates/warcraft-extractor",
+    "crates/warcraft-keybinds",
+    "crates/warcraft-slk",
+]
+# `warcraft-extractor` and `warcraft-slk` are native-only tools kept out of
+# default workspace operations (`cargo build`, `cargo clippy --all-targets`).
+# Regenerate the database:
+#   cargo run -p warcraft-extractor -- --casc <PATH>
+#   cargo fmt -p warcraft-database
+default-members = [
+    "crates/warcraft-api",
+    "crates/warcraft-database",
+    "crates/warcraft-keybinds",
+]
+
+[workspace.package]
+authors = ["clemenscodes"]
+edition = "2024"
+license = "AGPL-3.0-only"
+version = "0.1.0"
+
+[workspace.dependencies]
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+num-traits = "0.2"
+thiserror = "2.0.18"
+
+bcdec_rs = "0.2.0"
+casclib = { git = "https://github.com/clemenscodes/casclib-rs.git" }
+clap = { version = "4.6.1", features = ["derive", "env"] }
+ddsfile = "0.6.0"
+image = "0.25.10"
+paste = "1.0.15"
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
+
+[profile.release]
+codegen-units = 16
+opt-level = 3
+lto = false
+panic = 'unwind'
+strip = "symbols"
