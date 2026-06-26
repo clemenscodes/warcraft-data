@@ -1270,16 +1270,7 @@ dependencies = [
  "tracing",
  "tracing-subscriber",
  "warcraft-api",
- "warcraft-keybinds",
  "warcraft-slk",
-]
-
-[[package]]
-name = "warcraft-keybinds"
-version = "0.1.0"
-dependencies = [
- "warcraft-api",
- "warcraft-database",
 ]
 
 [[package]]

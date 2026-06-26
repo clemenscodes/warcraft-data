@@ -4,7 +4,6 @@ members = [
     "crates/warcraft-api",
     "crates/warcraft-database",
     "crates/warcraft-extractor",
-    "crates/warcraft-keybinds",
     "crates/warcraft-slk",
 ]
 # `warcraft-extractor` and `warcraft-slk` are native-only tools kept out of
@@ -15,7 +14,6 @@ members = [
 default-members = [
     "crates/warcraft-api",
     "crates/warcraft-database",
-    "crates/warcraft-keybinds",
 ]
 
 [workspace.package]

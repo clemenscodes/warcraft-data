@@ -25,7 +25,6 @@ tracing.workspace = true
 tracing-subscriber.workspace = true
 
 warcraft-api = { path = "../warcraft-api" }
-warcraft-keybinds = { path = "../warcraft-keybinds" }
 warcraft-slk = { path = "../warcraft-slk" }
 
 [[test]]

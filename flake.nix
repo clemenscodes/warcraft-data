@@ -54,15 +54,7 @@
 
         craneLib = (crane.mkLib pkgs).overrideToolchain rustToolchain;
 
-        # `warcraft-keybinds` inlines its `templates/` tree via include_str!,
-        # so it must be part of the build source set alongside cargo sources.
-        src = pkgs.lib.fileset.toSource {
-          root = ./.;
-          fileset = pkgs.lib.fileset.unions [
-            (craneLib.fileset.commonCargoSources ./.)
-            ./crates/warcraft-keybinds/templates
-          ];
-        };
+        src = craneLib.cleanCargoSource ./.;
 
         # `casclib-rs`'s build.rs compiles CascLib from source (cmake) and
         # links zlib. CASCLIB_DIR points it at the pinned source above so the

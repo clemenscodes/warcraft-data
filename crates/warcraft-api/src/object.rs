@@ -321,7 +321,18 @@ impl Serialize for ItemClass {
     where
         S: serde::Serializer,
     {
-        serializer.serialize_u8(*self as u8)
+        let name = match self {
+            ItemClass::Permanent => "Permanent",
+            ItemClass::Charged => "Charged",
+            ItemClass::PowerUp => "PowerUp",
+            ItemClass::Artifact => "Artifact",
+            ItemClass::Purchasable => "Purchasable",
+            ItemClass::Campaign => "Campaign",
+            ItemClass::Miscellaneous => "Miscellaneous",
+            ItemClass::Unknown => "Unknown",
+            ItemClass::Any => "Any",
+        };
+        serializer.serialize_str(name)
     }
 }
 
