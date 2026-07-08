@@ -1,0 +1,15 @@
+[package]
+name = "warcraft-keybinds"
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+description = "Parser and serializer for Warcraft III CustomKeys.txt files."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+ddd = { git = "https://github.com/clemenscodes/ddd", tag = "v0.1.0" }
+warcraft-api = { path = "../warcraft-api" }
+warcraft-database = { path = "../warcraft-database" }

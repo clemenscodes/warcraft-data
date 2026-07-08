@@ -3,6 +3,7 @@ resolver = "2"
 members = [
     "crates/warcraft-api",
     "crates/warcraft-database",
+    "crates/warcraft-keybinds",
     "crates/warcraft-extractor",
     "crates/warcraft-slk",
 ]
@@ -14,6 +15,7 @@ members = [
 default-members = [
     "crates/warcraft-api",
     "crates/warcraft-database",
+    "crates/warcraft-keybinds",
 ]
 
 [workspace.package]
