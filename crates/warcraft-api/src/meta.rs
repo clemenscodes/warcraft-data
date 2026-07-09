@@ -1202,7 +1202,7 @@ pub struct AbilityMeta {
     default_research_button_position: Option<GridCoordinate>,
     ubertip: Option<&'static str>,
     research_ubertip: Option<&'static str>,
-    code: Option<&'static str>,
+    code: Option<WarcraftObjectId>,
     morph_target_unit: Option<WarcraftObjectId>,
     off_button_position: Option<GridCoordinate>,
     off_tip: Option<&'static str>,
@@ -1282,7 +1282,7 @@ impl AbilityMeta {
         }
     }
 
-    pub const fn with_code(mut self, code: Option<&'static str>) -> Self {
+    pub const fn with_code(mut self, code: Option<WarcraftObjectId>) -> Self {
         self.code = code;
         self
     }
@@ -1322,7 +1322,7 @@ impl AbilityMeta {
     /// Game-mechanic class as listed in `units/abilitydata.slk`'s `code`
     /// column. Independent of the per-unit alias — e.g. multiple aliases
     /// can resolve to `code = "Apit"` (Purchase Item / shop button).
-    pub fn code(&self) -> Option<&'static str> {
+    pub fn code(&self) -> Option<WarcraftObjectId> {
         self.code
     }
 

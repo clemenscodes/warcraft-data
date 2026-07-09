@@ -5,8 +5,8 @@
 //! figure into a display string, choosing a colour — is the renderer's job, never
 //! the domain's; these types carry only the value.
 
+use warcraft_api::ObjectLookup;
 use warcraft_api::{RegenType, UnitMeta, WarcraftObjectMeta};
-use warcraft_database::ObjectLookup;
 
 /// A unit's maximum hit points.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Debug, Default)]
@@ -75,11 +75,11 @@ impl Mana {
 #[cfg(test)]
 mod evasion_tests {
     use super::Evasion;
-    use warcraft_api::WarcraftObjectMeta;
-    use warcraft_database::ObjectLookup;
+    use warcraft_api::ObjectLookup;
+    use warcraft_api::{WarcraftObjectId, WarcraftObjectMeta};
 
-    fn unit_evasion(unit_id: &str) -> f32 {
-        let object = ObjectLookup::by_id(unit_id).expect("unit exists in the database");
+    fn unit_evasion(unit_id: WarcraftObjectId) -> f32 {
+        let object = ObjectLookup::object(unit_id).expect("unit exists in the database");
         let WarcraftObjectMeta::Unit(unit_meta) = object.meta() else {
             panic!("object is not a unit");
         };
@@ -89,13 +89,13 @@ mod evasion_tests {
 
     #[test]
     fn a_unit_without_an_evasion_ability_resolves_to_zero() {
-        let footman_evasion = unit_evasion("hfoo");
+        let footman_evasion = unit_evasion(crate::test_support::object_id("hfoo"));
         assert_eq!(footman_evasion, 0.0);
     }
 
     #[test]
     fn a_hero_with_evasion_resolves_a_positive_chance() {
-        let demon_hunter_evasion = unit_evasion("Edem");
+        let demon_hunter_evasion = unit_evasion(crate::test_support::object_id("Edem"));
         assert!(demon_hunter_evasion > 0.0);
     }
 }
@@ -194,8 +194,7 @@ impl Evasion {
         let mut best_chance: f32 = 0.0;
         for ability_list in ability_lists {
             for ability_id in ability_list {
-                let ability_code = ability_id.value();
-                let Some(ability_object) = ObjectLookup::by_id(ability_code) else {
+                let Some(ability_object) = ObjectLookup::object(*ability_id) else {
                     continue;
                 };
                 let WarcraftObjectMeta::Ability(ability_meta) = ability_object.meta() else {

@@ -15,7 +15,7 @@ mod cascade_queue_tests {
         let mut put_command_at = |command_id: &'static str, column: ColumnIndex, row: RowIndex| {
             let position = GridCoordinate::new(column, row);
             let binding = CommandBinding::builder().button_position(position).build();
-            custom_keys.put_command(command_id, binding);
+            custom_keys.put_command(crate::test_support::object_id(command_id), binding);
         };
         put_command_at("CmdMove", ColumnIndex::Three, RowIndex::Two);
         put_command_at("CmdStop", ColumnIndex::Zero, RowIndex::Two);
@@ -167,9 +167,9 @@ mod cascade_queue_tests {
         let position = GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero);
         let binding = AbilityBinding::builder().button_position(position).build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", binding.clone());
-        custom_keys.put_ability("AHds", binding.clone());
-        custom_keys.put_ability("AHad", binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), binding.clone());
+        custom_keys.put_ability(crate::test_support::object_id("AHds"), binding.clone());
+        custom_keys.put_ability(crate::test_support::object_id("AHad"), binding);
         let graph = ConflictGraph::build(&custom_keys);
         let queue = AssignmentQueue::build(graph);
         let combined_movers: usize = queue
@@ -192,10 +192,10 @@ mod cascade_queue_tests {
         let position = GridCoordinate::new(ColumnIndex::One, RowIndex::One);
         let binding = AbilityBinding::builder().button_position(position).build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", binding.clone());
-        custom_keys.put_ability("AHds", binding.clone());
-        custom_keys.put_ability("AHad", binding.clone());
-        custom_keys.put_ability("AHre", binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), binding.clone());
+        custom_keys.put_ability(crate::test_support::object_id("AHds"), binding.clone());
+        custom_keys.put_ability(crate::test_support::object_id("AHad"), binding.clone());
+        custom_keys.put_ability(crate::test_support::object_id("AHre"), binding);
         let graph = ConflictGraph::build(&custom_keys);
         let queue = AssignmentQueue::build(graph);
         let combined_movers: usize = queue
@@ -294,10 +294,16 @@ mod cascade_queue_tests {
             .button_position(next_position)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", binding_collision.clone());
-        custom_keys.put_ability("AHds", binding_collision.clone());
-        custom_keys.put_ability("AHad", binding_collision);
-        custom_keys.put_ability("AHre", binding_next);
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHhb"),
+            binding_collision.clone(),
+        );
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHds"),
+            binding_collision.clone(),
+        );
+        custom_keys.put_ability(crate::test_support::object_id("AHad"), binding_collision);
+        custom_keys.put_ability(crate::test_support::object_id("AHre"), binding_next);
         let graph = ConflictGraph::build(&custom_keys);
         let queue = AssignmentQueue::build(graph);
         let fight_groups_at_next = queue
@@ -325,14 +331,20 @@ mod cascade_queue_tests {
         let mut custom_keys = CustomKeys::from_text("");
         let paladin_abilities = ["AHhb", "AHds", "AHad", "AHre"];
         for ability_id in paladin_abilities {
-            custom_keys.put_ability(ability_id, collision_binding.clone());
+            custom_keys.put_ability(
+                crate::test_support::object_id(ability_id),
+                collision_binding.clone(),
+            );
         }
         let graph = ConflictGraph::build(&custom_keys);
         let queue = AssignmentQueue::build(graph);
         let graph_ref = queue.graph();
         for ability_id in paladin_abilities {
             let node_index = graph_ref
-                .find_node(ability_id, GridRole::MainCommand)
+                .find_node(
+                    crate::test_support::object_id(ability_id),
+                    GridRole::MainCommand,
+                )
                 .expect("Paladin ability must exist as a graph node");
             assert!(
                 !queue.is_unresolved(node_index),
@@ -432,7 +444,10 @@ mod cascade_queue_tests {
     fn gap_pull_does_not_displace_abilities_with_intentional_gaps() {
         let queue = default_queue();
         let graph = queue.graph();
-        let Some(arav_index) = graph.find_node("Arav", GridRole::MainCommand) else {
+        let Some(arav_index) = graph.find_node(
+            crate::test_support::object_id("Arav"),
+            GridRole::MainCommand,
+        ) else {
             return;
         };
         let original_column = u8::from(graph.node(arav_index).current_position().column());
@@ -479,7 +494,10 @@ mod cascade_queue_tests {
         let queue = AssignmentQueue::build(graph);
         let graph_ref = queue.graph();
         let build_index = graph_ref
-            .find_node("CmdBuild", GridRole::MainCommand)
+            .find_node(
+                crate::test_support::object_id("CmdBuild"),
+                GridRole::MainCommand,
+            )
             .expect("CmdBuild must exist as a node on the main command card");
         let final_position = queue.final_position(build_index);
         assert!(

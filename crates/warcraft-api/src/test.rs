@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod tests {
-    use warcraft_api::{ItemClass, Race, UnitKind, WarcraftObjectKind, WarcraftObjectMeta};
+    use crate::{ItemClass, Race, UnitKind, WarcraftObjectKind, WarcraftObjectMeta};
 
     use crate::WARCRAFT_DATABASE;
 

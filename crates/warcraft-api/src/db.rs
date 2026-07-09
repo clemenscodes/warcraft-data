@@ -5,12 +5,12 @@
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 use std::sync::LazyLock;
 
-use warcraft_api::*;
+use crate::*;
 
-use warcraft_api::ItemClass::*;
-use warcraft_api::Race::*;
-use warcraft_api::UnitKind::*;
-use warcraft_api::WarcraftObjectKind::*;
+use crate::ItemClass::*;
+use crate::Race::*;
+use crate::UnitKind::*;
+use crate::WarcraftObjectKind::*;
 
 pub static WARCRAFT_DATABASE: LazyLock<WarcraftDatabase> = LazyLock::new(|| {
     let mut objects = std::collections::BTreeMap::new();
@@ -47,7 +47,7 @@ fn insert_objects_chunk_0(
                     Some("Gives extra damage to the attacks of nearby friendly units."),
                     None,
                 )
-                .with_code(Some("AOac"))
+                .with_code(Some(WarcraftObjectId::new("AOac")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -73,7 +73,7 @@ fn insert_objects_chunk_0(
                     Some("Raises 6 dead units in an area for 40 seconds."),
                     None,
                 )
-                .with_code(Some("ACad"))
+                .with_code(Some(WarcraftObjectId::new("ACad")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -89,7 +89,7 @@ fn insert_objects_chunk_0(
             ACAH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACAH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("An aura that gives nearby friendly units a damage shield, which deals 10% of an enemy unit's attack damage back to it."), None).with_code(Some("AEah")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACAH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("An aura that gives nearby friendly units a damage shield, which deals 10% of an enemy unit's attack damage back to it."), None).with_code(Some(WarcraftObjectId::new("AEah"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACAH_TIP_LEVELS, ACAH_UBERTIP_LEVELS),
         ),
     );
@@ -102,7 +102,7 @@ fn insert_objects_chunk_0(
             ACAM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACAM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Creates a barrier that stops spells from affecting a target unit. |nLasts 90 seconds."), None).with_code(Some("Aams")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACAM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Creates a barrier that stops spells from affecting a target unit. |nLasts 90 seconds."), None).with_code(Some(WarcraftObjectId::new("Aams"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACAM_TIP_LEVELS, ACAM_UBERTIP_LEVELS),
         ),
     );
@@ -115,7 +115,7 @@ fn insert_objects_chunk_0(
             ACAT_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACAT_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("An aura that gives nearby friendly units a 10% bonus damage to their ranged attacks."), None).with_code(Some("AEar")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACAT_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("An aura that gives nearby friendly units a 10% bonus damage to their ranged attacks."), None).with_code(Some(WarcraftObjectId::new("AEar"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACAT_TIP_LEVELS, ACAT_UBERTIP_LEVELS),
         ),
     );
@@ -138,7 +138,7 @@ fn insert_objects_chunk_0(
                     Some("Gives 3 additional armor to nearby friendly units."),
                     None,
                 )
-                .with_code(Some("AHad"))
+                .with_code(Some(WarcraftObjectId::new("AHad")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -154,7 +154,7 @@ fn insert_objects_chunk_0(
             ACBA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACBA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Gives additional mana regeneration to nearby friendly units of 0.5 mana per second."), None).with_code(Some("AHab")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACBA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Gives additional mana regeneration to nearby friendly units of 0.5 mana per second."), None).with_code(Some(WarcraftObjectId::new("AHab"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACBA_TIP_LEVELS, ACBA_UBERTIP_LEVELS),
         ),
     );
@@ -167,7 +167,7 @@ fn insert_objects_chunk_0(
             ACBB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACBB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Increases a target friendly unit's attack rate by 40% and movement speed by 25% for 40 seconds."), None).with_code(Some("Ablo")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnbloodlustoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACBB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Increases a target friendly unit's attack rate by 40% and movement speed by 25% for 40 seconds."), None).with_code(Some(WarcraftObjectId::new("Ablo"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnbloodlustoff.blp"))),
             WarcraftObjectText::with_alt(ACBB_TIP_LEVELS, ACBB_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -190,7 +190,7 @@ fn insert_objects_chunk_0(
                     Some("Breathes a cone of fire at enemy units, dealing 150 damage."),
                     None,
                 )
-                .with_code(Some("ANbf"))
+                .with_code(Some(WarcraftObjectId::new("ANbf")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -206,7 +206,7 @@ fn insert_objects_chunk_0(
             ACBF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACBF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Breathes a cone of frost at enemy units that deals 50 initial damage, and 7 damage per second over 5 seconds."), None).with_code(Some("ACbf")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACBF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Breathes a cone of frost at enemy units that deals 50 initial damage, and 7 damage per second over 5 seconds."), None).with_code(Some(WarcraftObjectId::new("ACbf"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACBF_TIP_LEVELS, ACBF_UBERTIP_LEVELS),
         ),
     );
@@ -219,7 +219,7 @@ fn insert_objects_chunk_0(
             ACBH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACBH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Gives a 15% chance that an attack will do 25 bonus damage and stun the target for 2 seconds."), None).with_code(Some("AHbh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACBH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Gives a 15% chance that an attack will do 25 bonus damage and stun the target for 2 seconds."), None).with_code(Some(WarcraftObjectId::new("AHbh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACBH_TIP_LEVELS, ACBH_UBERTIP_LEVELS),
         ),
     );
@@ -232,7 +232,7 @@ fn insert_objects_chunk_0(
             ACBK_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACBK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Adds 2 bonus damage to attacks. Units killed while under the effect of Black Arrow will turn into skeletons."), None).with_code(Some("ANba")).with_morph_target(Some(WarcraftObjectId::new("ndr1"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btntheblackarrowonoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACBK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Adds 2 bonus damage to attacks. Units killed while under the effect of Black Arrow will turn into skeletons."), None).with_code(Some(WarcraftObjectId::new("ANba"))).with_morph_target(Some(WarcraftObjectId::new("ndr1"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btntheblackarrowonoff.blp"))),
             WarcraftObjectText::with_alt(ACBK_TIP_LEVELS, ACBK_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -245,7 +245,7 @@ fn insert_objects_chunk_0(
             ACBL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACBL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Increases a target friendly unit's attack rate by 40% and movement speed by 25% for 40 seconds."), None).with_code(Some("Ablo")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnbloodlustoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACBL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Increases a target friendly unit's attack rate by 40% and movement speed by 25% for 40 seconds."), None).with_code(Some(WarcraftObjectId::new("Ablo"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnbloodlustoff.blp"))),
             WarcraftObjectText::with_alt(ACBL_TIP_LEVELS, ACBL_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -258,7 +258,7 @@ fn insert_objects_chunk_0(
             ACBZ_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACBZ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Calls down 6 freezing ice shard waves; each wave deals 15 damage to units in a small area."), None).with_code(Some("AHbz")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACBZ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Calls down 6 freezing ice shard waves; each wave deals 15 damage to units in a small area."), None).with_code(Some(WarcraftObjectId::new("AHbz"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACBZ_TIP_LEVELS, ACBZ_UBERTIP_LEVELS),
         ),
     );
@@ -271,7 +271,7 @@ fn insert_objects_chunk_0(
             ACC2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACC2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Sends a gigantic wave which deals 150 damage to each enemy land unit in a line, up to 900 max damage."), None).with_code(Some("AUcs")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACC2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Sends a gigantic wave which deals 150 damage to each enemy land unit in a line, up to 900 max damage."), None).with_code(Some(WarcraftObjectId::new("AUcs"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACC2_TIP_LEVELS, ACC2_UBERTIP_LEVELS),
         ),
     );
@@ -284,7 +284,7 @@ fn insert_objects_chunk_0(
             ACC3_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACC3_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Sends a gigantic wave which deals 100 damage to each enemy land unit in a line, up to 300 max damage."), None).with_code(Some("AUcs")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACC3_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Sends a gigantic wave which deals 100 damage to each enemy land unit in a line, up to 300 max damage."), None).with_code(Some(WarcraftObjectId::new("AUcs"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACC3_TIP_LEVELS, ACC3_UBERTIP_LEVELS),
         ),
     );
@@ -297,7 +297,7 @@ fn insert_objects_chunk_0(
             ACCA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Sends a horde of bats to deal 75 damage to each enemy land unit in a line, up to 300 max damage."), None).with_code(Some("AUcs")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Sends a horde of bats to deal 75 damage to each enemy land unit in a line, up to 300 max damage."), None).with_code(Some(WarcraftObjectId::new("AUcs"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACCA_TIP_LEVELS, ACCA_UBERTIP_LEVELS),
         ),
     );
@@ -310,7 +310,7 @@ fn insert_objects_chunk_0(
             ACCB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Throws a magical shard of ice at a target enemy unit, dealing 100 damage and stunning the target for 5 seconds."), None).with_code(Some("AHtb")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Throws a magical shard of ice at a target enemy unit, dealing 100 damage and stunning the target for 5 seconds."), None).with_code(Some(WarcraftObjectId::new("AHtb"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACCB_TIP_LEVELS, ACCB_UBERTIP_LEVELS),
         ),
     );
@@ -323,7 +323,7 @@ fn insert_objects_chunk_0(
             ACCE_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("The creature strikes with such force that 25% of their damage strikes through to enemies near the primary attacked unit."), None).with_code(Some("ANca")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("The creature strikes with such force that 25% of their damage strikes through to enemies near the primary attacked unit."), None).with_code(Some(WarcraftObjectId::new("ANca"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACCE_TIP_LEVELS, ACCE_UBERTIP_LEVELS),
         ),
     );
@@ -336,7 +336,7 @@ fn insert_objects_chunk_0(
             ACCH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Takes permanent control of a target enemy unit. |nCharm cannot be used on Heroes, or creeps above level 6."), None).with_code(Some("ANch")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Takes permanent control of a target enemy unit. |nCharm cannot be used on Heroes, or creeps above level 6."), None).with_code(Some(WarcraftObjectId::new("ANch"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACCH_TIP_LEVELS, ACCH_UBERTIP_LEVELS),
         ),
     );
@@ -349,7 +349,7 @@ fn insert_objects_chunk_0(
             ACCL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Hurls a bolt of lightning that bounces up to 4 times, dealing 100 damage to the primary target. Each jump deals less damage."), None).with_code(Some("AOcl")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Hurls a bolt of lightning that bounces up to 4 times, dealing 100 damage to the primary target. Each jump deals less damage."), None).with_code(Some(WarcraftObjectId::new("AOcl"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACCL_TIP_LEVELS, ACCL_UBERTIP_LEVELS),
         ),
     );
@@ -372,7 +372,7 @@ fn insert_objects_chunk_0(
                     Some("Consumes a nearby corpse to heal 12 hit points per second."),
                     None,
                 )
-                .with_code(Some("Acan"))
+                .with_code(Some(WarcraftObjectId::new("Acan")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -388,7 +388,7 @@ fn insert_objects_chunk_0(
             ACCR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Reduces movement speed by 75%, attack rate by 50%, and damage by 50% of a target enemy unit. |nLasts 20 seconds."), None).with_code(Some("Acri")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Reduces movement speed by 75%, attack rate by 50%, and damage by 50% of a target enemy unit. |nLasts 20 seconds."), None).with_code(Some(WarcraftObjectId::new("Acri"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACCR_TIP_LEVELS, ACCR_UBERTIP_LEVELS),
         ),
     );
@@ -401,7 +401,7 @@ fn insert_objects_chunk_0(
             ACCS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Curses a target enemy unit, causing it to have a 33% chance to miss on an attack. |nLasts 30 seconds."), None).with_code(Some("Acrs")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btncurseoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Curses a target enemy unit, causing it to have a 33% chance to miss on an attack. |nLasts 30 seconds."), None).with_code(Some(WarcraftObjectId::new("Acrs"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btncurseoff.blp"))),
             WarcraftObjectText::with_alt(ACCS_TIP_LEVELS, ACCS_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting."), Some("|cffc3dbffRight-click to deactivate auto-casting.")),
         ),
     );
@@ -424,7 +424,7 @@ fn insert_objects_chunk_0(
                     Some("Gives a 20% chance to do 2 times total damage on an attack."),
                     None,
                 )
-                .with_code(Some("AOcr"))
+                .with_code(Some(WarcraftObjectId::new("AOcr")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -440,7 +440,7 @@ fn insert_objects_chunk_0(
             ACCV_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Sends a gigantic wave which deals 150 damage to each enemy land unit in a line, up to 900 max damage."), None).with_code(Some("AUcs")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Sends a gigantic wave which deals 150 damage to each enemy land unit in a line, up to 900 max damage."), None).with_code(Some(WarcraftObjectId::new("AUcs"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACCV_TIP_LEVELS, ACCV_UBERTIP_LEVELS),
         ),
     );
@@ -453,7 +453,7 @@ fn insert_objects_chunk_0(
             ACCW_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Adds bonus cold damage to an attack and slows target, but drains mana with each shot fired."), None).with_code(Some("AHca")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btncoldarrowsoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Adds bonus cold damage to an attack and slows target, but drains mana with each shot fired."), None).with_code(Some(WarcraftObjectId::new("AHca"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btncoldarrowsoff.blp"))),
             WarcraftObjectText::with_alt(ACCW_TIP_LEVELS, ACCW_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -466,7 +466,7 @@ fn insert_objects_chunk_0(
             ACCY_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCY_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Tosses a target non-mechanical enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. |nLasts 20 seconds."), None).with_code(Some("Acyc")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACCY_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Tosses a target non-mechanical enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. |nLasts 20 seconds."), None).with_code(Some(WarcraftObjectId::new("Acyc"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACCY_TIP_LEVELS, ACCY_UBERTIP_LEVELS),
         ),
     );
@@ -479,7 +479,7 @@ fn insert_objects_chunk_0(
             ACD2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACD2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Dispels positive buffs from enemy units, and negative buffs from friendly units. |n|cffffcc00Deals 150 damage to summoned units.|r"), None).with_code(Some("Aadm")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btndryaddispelmagicoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACD2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Dispels positive buffs from enemy units, and negative buffs from friendly units. |n|cffffcc00Deals 150 damage to summoned units.|r"), None).with_code(Some(WarcraftObjectId::new("Aadm"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btndryaddispelmagicoff.blp"))),
             WarcraftObjectText::with_alt(ACD2_TIP_LEVELS, ACD2_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -492,7 +492,7 @@ fn insert_objects_chunk_0(
             ACDC_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACDC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("A coil of death that can heal a friendly Undead unit for 400 hit points, or deal half damage to an enemy living unit."), None).with_code(Some("AUdc")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACDC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("A coil of death that can heal a friendly Undead unit for 400 hit points, or deal half damage to an enemy living unit."), None).with_code(Some(WarcraftObjectId::new("AUdc"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACDC_TIP_LEVELS, ACDC_UBERTIP_LEVELS),
         ),
     );
@@ -505,7 +505,7 @@ fn insert_objects_chunk_0(
             ACDE_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACDE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Consumes all magical buffs from units in an area. Each unit that is devoured of magic gives the caster 50 hit points and 75 mana. |n|cffffcc00Deals 160 damage to summoned units.|r"), None).with_code(Some("Advm")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACDE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Consumes all magical buffs from units in an area. Each unit that is devoured of magic gives the caster 50 hit points and 75 mana. |n|cffffcc00Deals 160 damage to summoned units.|r"), None).with_code(Some(WarcraftObjectId::new("Advm"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACDE_TIP_LEVELS, ACDE_UBERTIP_LEVELS),
         ),
     );
@@ -518,7 +518,7 @@ fn insert_objects_chunk_0(
             ACDM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACDM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Dispels positive buffs from enemy units, and negative buffs from friendly units. |n|cffffcc00Deals 150 damage to summoned units.|r"), None).with_code(Some("Aadm")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btndryaddispelmagicoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACDM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Dispels positive buffs from enemy units, and negative buffs from friendly units. |n|cffffcc00Deals 150 damage to summoned units.|r"), None).with_code(Some(WarcraftObjectId::new("Aadm"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btndryaddispelmagicoff.blp"))),
             WarcraftObjectText::with_alt(ACDM_TIP_LEVELS, ACDM_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -531,7 +531,7 @@ fn insert_objects_chunk_0(
             ACDR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACDR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Absorbs the life essence of a target enemy unit by taking 55 hit points per second from it and giving them to the caster. |nLasts 8 seconds."), None).with_code(Some("AHdr")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACDR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Absorbs the life essence of a target enemy unit by taking 55 hit points per second from it and giving them to the caster. |nLasts 8 seconds."), None).with_code(Some(WarcraftObjectId::new("AHdr"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACDR_TIP_LEVELS, ACDR_UBERTIP_LEVELS),
         ),
     );
@@ -544,7 +544,7 @@ fn insert_objects_chunk_0(
             ACDS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACDS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("An impenetrable shield surrounds this unit, protecting it from all damage and spells for 10 seconds."), None).with_code(Some("AHds")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btndivineshieldoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACDS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("An impenetrable shield surrounds this unit, protecting it from all damage and spells for 10 seconds."), None).with_code(Some(WarcraftObjectId::new("AHds"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btndivineshieldoff.blp"))),
             WarcraftObjectText::with_alt(ACDS_TIP_LEVELS, ACDS_UBERTIP_LEVELS, Some("Deactivate Divine Shield"), None),
         ),
     );
@@ -557,7 +557,7 @@ fn insert_objects_chunk_0(
             ACDV_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACDV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Consumes an enemy unit, slowly digesting it and dealing 5 damage per second to it. If the creep is killed while the consumed unit is still digesting, the unit that was devoured will be released."), None).with_code(Some("ACdv")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACDV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Consumes an enemy unit, slowly digesting it and dealing 5 damage per second to it. If the creep is killed while the consumed unit is still digesting, the unit that was devoured will be released."), None).with_code(Some(WarcraftObjectId::new("ACdv"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACDV_TIP_LEVELS, ACDV_UBERTIP_LEVELS),
         ),
     );
@@ -570,7 +570,7 @@ fn insert_objects_chunk_0(
             ACEN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACEN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes a target enemy unit to be bound to the ground so that it cannot move for 8 seconds. Air units that are ensnared can be attacked as though they were land units."), None).with_code(Some("Aens")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACEN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes a target enemy unit to be bound to the ground so that it cannot move for 8 seconds. Air units that are ensnared can be attacked as though they were land units."), None).with_code(Some(WarcraftObjectId::new("Aens"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACEN_TIP_LEVELS, ACEN_UBERTIP_LEVELS),
         ),
     );
@@ -593,7 +593,7 @@ fn insert_objects_chunk_0(
                     Some("Gives a 15% percent chance to avoid an attack."),
                     None,
                 )
-                .with_code(Some("AEev"))
+                .with_code(Some(WarcraftObjectId::new("AEev")))
                 .with_morph_target(None)
                 .with_evasion_chances([0.15, 0.0, 0.0, 0.0])
                 .with_off_state(None, None, None, None),
@@ -610,7 +610,7 @@ fn insert_objects_chunk_0(
             ACF2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACF2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Creates a shield of frost around a target friendly unit. The shield adds 3 armor and slows melee units that attack it for 3 seconds. |nLasts 45 seconds."), None).with_code(Some("AUfu")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnfrostarmoroff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACF2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Creates a shield of frost around a target friendly unit. The shield adds 3 armor and slows melee units that attack it for 3 seconds. |nLasts 45 seconds."), None).with_code(Some(WarcraftObjectId::new("AUfu"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnfrostarmoroff.blp"))),
             WarcraftObjectText::with_alt(ACF2_TIP_LEVELS, ACF2_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -633,7 +633,7 @@ fn insert_objects_chunk_0(
                     Some("Horribly cripples the innards of a creature or building."),
                     Some("Horribly cripples the innards of a creature or building."),
                 )
-                .with_code(Some("ANfd"))
+                .with_code(Some(WarcraftObjectId::new("ANfd")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -659,7 +659,7 @@ fn insert_objects_chunk_0(
                     Some("Hurls a fiery bolt that stuns a target enemy unit."),
                     None,
                 )
-                .with_code(Some("ANfb"))
+                .with_code(Some(WarcraftObjectId::new("ANfb")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -685,7 +685,7 @@ fn insert_objects_chunk_0(
                     Some("Horribly cripples the innards of a creature or building."),
                     Some("Horribly cripples the innards of a creature or building."),
                 )
-                .with_code(Some("ANfd"))
+                .with_code(Some(WarcraftObjectId::new("ANfd")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -701,7 +701,7 @@ fn insert_objects_chunk_0(
             ACFF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACFF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Reduces a target enemy unit's armor by 4 and gives vision of that unit. |nLasts 30 seconds."), None).with_code(Some("Afae")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnfaeriefireoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACFF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Reduces a target enemy unit's armor by 4 and gives vision of that unit. |nLasts 30 seconds."), None).with_code(Some(WarcraftObjectId::new("Afae"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnfaeriefireoff.blp"))),
             WarcraftObjectText::with_alt(ACFF_TIP_LEVELS, ACFF_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -714,7 +714,7 @@ fn insert_objects_chunk_0(
             ACFL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACFL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Calls forth a cone of lightning on a target enemy unit, hitting up to 3 enemy units for 175 damage."), None).with_code(Some("ANfl")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACFL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Calls forth a cone of lightning on a target enemy unit, hitting up to 3 enemy units for 175 damage."), None).with_code(Some(WarcraftObjectId::new("ANfl"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACFL_TIP_LEVELS, ACFL_UBERTIP_LEVELS),
         ),
     );
@@ -727,7 +727,7 @@ fn insert_objects_chunk_0(
             ACFN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACFN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Blasts enemy units with a wave of frost that deals 50 damage to the target, and 50 nova damage. Cold damage slows units' movement and attack rate for 2 seconds."), None).with_code(Some("AUfn")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACFN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Blasts enemy units with a wave of frost that deals 50 damage to the target, and 50 nova damage. Cold damage slows units' movement and attack rate for 2 seconds."), None).with_code(Some(WarcraftObjectId::new("AUfn"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACFN_TIP_LEVELS, ACFN_UBERTIP_LEVELS),
         ),
     );
@@ -740,7 +740,7 @@ fn insert_objects_chunk_0(
             ACFR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACFR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Converts a small area of trees into 2 Treants. |nLasts 60 seconds. |n|n|cffffcc00Attacks land units.|r"), None).with_code(Some("AEfn")).with_morph_target(Some(WarcraftObjectId::new("efon"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACFR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Converts a small area of trees into 2 Treants. |nLasts 60 seconds. |n|n|cffffcc00Attacks land units.|r"), None).with_code(Some(WarcraftObjectId::new("AEfn"))).with_morph_target(Some(WarcraftObjectId::new("efon"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACFR_TIP_LEVELS, ACFR_UBERTIP_LEVELS),
         ),
     );
@@ -753,7 +753,7 @@ fn insert_objects_chunk_0(
             ACFU_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACFU_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Creates a shield of frost around a target friendly unit. The shield adds 3 armor and slows melee units that attack it for 5 seconds. |nLasts 45 seconds."), None).with_code(Some("AUfu")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnfrostarmoroff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACFU_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Creates a shield of frost around a target friendly unit. The shield adds 3 armor and slows melee units that attack it for 5 seconds. |nLasts 45 seconds."), None).with_code(Some(WarcraftObjectId::new("AUfu"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnfrostarmoroff.blp"))),
             WarcraftObjectText::with_alt(ACFU_TIP_LEVELS, ACFU_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting."), Some("|cffc3dbffRight-click to deactivate auto-casting.")),
         ),
     );
@@ -766,7 +766,7 @@ fn insert_objects_chunk_0(
             ACHV_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACHV_COOLDOWNS, None, None, Some("Calls forth a wave of healing energy that bounces up to 3 times, healing 130 damage on the primary target. Each jump heals less damage."), None).with_code(Some("AOhw")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACHV_COOLDOWNS, None, None, Some("Calls forth a wave of healing energy that bounces up to 3 times, healing 130 damage on the primary target. Each jump heals less damage."), None).with_code(Some(WarcraftObjectId::new("AOhw"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACHV_TIP_LEVELS, ACHV_UBERTIP_LEVELS),
         ),
     );
@@ -779,7 +779,7 @@ fn insert_objects_chunk_0(
             ACHW_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACHW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Summons an immovable ward that heals 2% of a nearby friendly non-mechanical unit's hit points per second. |nLasts 25 seconds."), None).with_code(Some("Ahwd")).with_morph_target(Some(WarcraftObjectId::new("ohwd"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACHW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Summons an immovable ward that heals 2% of a nearby friendly non-mechanical unit's hit points per second. |nLasts 25 seconds."), None).with_code(Some(WarcraftObjectId::new("Ahwd"))).with_morph_target(Some(WarcraftObjectId::new("ohwd"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACHW_TIP_LEVELS, ACHW_UBERTIP_LEVELS),
         ),
     );
@@ -802,7 +802,7 @@ fn insert_objects_chunk_0(
                     Some("Transforms an enemy unit into a random critter for 15 seconds."),
                     None,
                 )
-                .with_code(Some("AOhx"))
+                .with_code(Some(WarcraftObjectId::new("AOhx")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -818,7 +818,7 @@ fn insert_objects_chunk_0(
             ACIF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACIF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Increases a target friendly unit's damage by 10% and armor by 5. |nLasts 60 seconds."), None).with_code(Some("Ainf")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btninnerfireoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACIF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Increases a target friendly unit's damage by 10% and armor by 5. |nLasts 60 seconds."), None).with_code(Some(WarcraftObjectId::new("Ainf"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btninnerfireoff.blp"))),
             WarcraftObjectText::with_alt(ACIF_TIP_LEVELS, ACIF_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -831,7 +831,7 @@ fn insert_objects_chunk_0(
             ACIM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACIM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Activate Immolation to engulf this unit in flames, causing 5 damage per second to nearby enemy land units. |nDrains mana until deactivated."), None).with_code(Some("AEim")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnimmolationoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACIM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Activate Immolation to engulf this unit in flames, causing 5 damage per second to nearby enemy land units. |nDrains mana until deactivated."), None).with_code(Some(WarcraftObjectId::new("AEim"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnimmolationoff.blp"))),
             WarcraftObjectText::with_alt(ACIM_TIP_LEVELS, ACIM_UBERTIP_LEVELS, Some("Deactivate Immolation"), Some("Deactivate Immolation to stop draining mana.")),
         ),
     );
@@ -844,7 +844,7 @@ fn insert_objects_chunk_0(
             ACLS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACLS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Forms a shield of electricity around a target unit, dealing 20 damage per second to units around it. |nLasts 20 seconds."), None).with_code(Some("Alsh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACLS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Forms a shield of electricity around a target unit, dealing 20 damage per second to units around it. |nLasts 20 seconds."), None).with_code(Some(WarcraftObjectId::new("Alsh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACLS_TIP_LEVELS, ACLS_UBERTIP_LEVELS),
         ),
     );
@@ -867,7 +867,7 @@ fn insert_objects_chunk_0(
                     Some("Renders this unit immune to all spells."),
                     None,
                 )
-                .with_code(Some("Amim"))
+                .with_code(Some(WarcraftObjectId::new("Amim")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -893,7 +893,7 @@ fn insert_objects_chunk_0(
                     Some("Activates a shield that absorbs 2 damage per point of mana."),
                     None,
                 )
-                .with_code(Some("ANms"))
+                .with_code(Some(WarcraftObjectId::new("ANms")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)),
@@ -929,7 +929,7 @@ fn insert_objects_chunk_0(
                     Some("Renders this unit immune to magic and most spells."),
                     None,
                 )
-                .with_code(Some("Amim"))
+                .with_code(Some(WarcraftObjectId::new("Amim")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -945,7 +945,7 @@ fn insert_objects_chunk_0(
             ACMO_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACMO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Calls down a storm of lightning to strike enemy units for 20 damage in a small target area. |nLasts 15 seconds."), Some("Calls a storm of lightning bolts to strike enemy units for 20 damage. |nLasts 12 seconds. |n|n|cffffcc00Level 1|r - Small area. |n|cffffcc00Level 2|r - Medium area. |n|cffffcc00Level 3|r - Large area.")).with_code(Some("ANmo")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACMO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Calls down a storm of lightning to strike enemy units for 20 damage in a small target area. |nLasts 15 seconds."), Some("Calls a storm of lightning bolts to strike enemy units for 20 damage. |nLasts 12 seconds. |n|n|cffffcc00Level 1|r - Small area. |n|cffffcc00Level 2|r - Medium area. |n|cffffcc00Level 3|r - Large area.")).with_code(Some(WarcraftObjectId::new("ANmo"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACMO_TIP_LEVELS, ACMO_UBERTIP_LEVELS),
         ),
     );
@@ -960,7 +960,7 @@ fn insert_objects_chunk_0(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ACNR_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aoar"))
+                    .with_code(Some(WarcraftObjectId::new("Aoar")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -975,7 +975,7 @@ fn insert_objects_chunk_0(
             ACPA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACPA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Afflicts a target enemy unit with a deadly parasite that deals 5 damage per second for 15 seconds. If the afflicted unit dies while under the effect of Parasite, a minor minion will spawn from its corpse."), None).with_code(Some("ANpa")).with_morph_target(Some(WarcraftObjectId::new("nvdl"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnparasiteoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACPA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Afflicts a target enemy unit with a deadly parasite that deals 5 damage per second for 15 seconds. If the afflicted unit dies while under the effect of Parasite, a minor minion will spawn from its corpse."), None).with_code(Some(WarcraftObjectId::new("ANpa"))).with_morph_target(Some(WarcraftObjectId::new("nvdl"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnparasiteoff.blp"))),
             WarcraftObjectText::with_alt(ACPA_TIP_LEVELS, ACPA_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -988,7 +988,7 @@ fn insert_objects_chunk_0(
             ACPS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACPS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Displaces the soul of a target unit, giving you control of it, but destroying the caster's body. |nPossession cannot be used on flying units, Heroes, or creeps above level 5."), None).with_code(Some("Apos")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACPS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Displaces the soul of a target unit, giving you control of it, but destroying the caster's body. |nPossession cannot be used on flying units, Heroes, or creeps above level 5."), None).with_code(Some(WarcraftObjectId::new("Apos"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACPS_TIP_LEVELS, ACPS_UBERTIP_LEVELS),
         ),
     );
@@ -1001,7 +1001,7 @@ fn insert_objects_chunk_0(
             ACPU_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACPU_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Removes all buffs from a target unit, and slows its movement speed by a factor of 5. Purged units will slowly regain their movement speed over 5 seconds. |n|cffffcc00Deals 200 damage to summoned units.|r"), None).with_code(Some("Aprg")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACPU_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Removes all buffs from a target unit, and slows its movement speed by a factor of 5. Purged units will slowly regain their movement speed over 5 seconds. |n|cffffcc00Deals 200 damage to summoned units.|r"), None).with_code(Some(WarcraftObjectId::new("Aprg"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACPU_TIP_LEVELS, ACPU_UBERTIP_LEVELS),
         ),
     );
@@ -1024,7 +1024,7 @@ fn insert_objects_chunk_0(
                     Some("Gives a 15% chance that an attack will deal 30 damage to nearby units."),
                     None,
                 )
-                .with_code(Some("Awar"))
+                .with_code(Some(WarcraftObjectId::new("Awar")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -1040,7 +1040,7 @@ fn insert_objects_chunk_0(
             ACPY_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACPY_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Turns a target enemy unit into a sheep. The targeted unit retains its hit points and armor, but cannot attack. |nCannot be cast on Heroes or summoned units.|nLasts 20 seconds."), None).with_code(Some("Aply")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACPY_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Turns a target enemy unit into a sheep. The targeted unit retains its hit points and armor, but cannot attack. |nCannot be cast on Heroes or summoned units.|nLasts 20 seconds."), None).with_code(Some(WarcraftObjectId::new("Aply"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACPY_TIP_LEVELS, ACPY_UBERTIP_LEVELS),
         ),
     );
@@ -1063,7 +1063,7 @@ fn insert_objects_chunk_0(
                     Some("Heals a target friendly unit for 400 hit points over 12 seconds."),
                     None,
                 )
-                .with_code(Some("Arej"))
+                .with_code(Some(WarcraftObjectId::new("Arej")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -1089,7 +1089,7 @@ fn insert_objects_chunk_0(
                     Some("Raises 2 skeletons from a corpse."),
                     None,
                 )
-                .with_code(Some("Arai"))
+                .with_code(Some(WarcraftObjectId::new("Arai")))
                 .with_morph_target(Some(WarcraftObjectId::new("uske")))
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)),
@@ -1115,7 +1115,7 @@ fn insert_objects_chunk_0(
             ACRF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACRF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Calls down waves of fire that damage units in an area. Each wave deals 25 damage. |nLasts for 6 waves."), None).with_code(Some("ANrf")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACRF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Calls down waves of fire that damage units in an area. Each wave deals 25 damage. |nLasts for 6 waves."), None).with_code(Some(WarcraftObjectId::new("ANrf"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACRF_TIP_LEVELS, ACRF_UBERTIP_LEVELS),
         ),
     );
@@ -1138,7 +1138,7 @@ fn insert_objects_chunk_0(
                     Some("Heals a target friendly unit for 400 hit points over 12 seconds."),
                     None,
                 )
-                .with_code(Some("Arej"))
+                .with_code(Some(WarcraftObjectId::new("Arej")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -1154,7 +1154,7 @@ fn insert_objects_chunk_0(
             ACRK_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACRK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Reduces the duration of negative spells and renders the unit immune to certain spells."), None).with_code(Some("Arsk")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACRK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Reduces the duration of negative spells and renders the unit immune to certain spells."), None).with_code(Some(WarcraftObjectId::new("Arsk"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACRK_TIP_LEVELS, ACRK_UBERTIP_LEVELS),
         ),
     );
@@ -1167,7 +1167,7 @@ fn insert_objects_chunk_0(
             ACRN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACRN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("When killed, this unit will come back to life. Reincarnation has a 240 second cooldown."), None).with_code(Some("ACrn")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACRN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("When killed, this unit will come back to life. Reincarnation has a 240 second cooldown."), None).with_code(Some(WarcraftObjectId::new("ACrn"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACRN_TIP_LEVELS, ACRN_UBERTIP_LEVELS),
         ),
     );
@@ -1190,7 +1190,7 @@ fn insert_objects_chunk_0(
                     Some("Gives nearby friendly units a 25% bonus to damage. |nLasts 45 seconds."),
                     None,
                 )
-                .with_code(Some("Aroa"))
+                .with_code(Some(WarcraftObjectId::new("Aroa")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -1206,7 +1206,7 @@ fn insert_objects_chunk_0(
             ACS7_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ACS7_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Summons 2 Spirit Wolf companions. Each wolf has 250 hit points and deals 11 - 12 damage. |nLasts 60 seconds. |n|n|cffffcc00Attacks land units.|r"), Some("Summons 2 Spirit Wolves to fight the Far Seer's enemies. |nLasts 60 seconds. |n|n|cffffcc00Level 1|r - 250 hit points, 11 - 12 damage. |n|cffffcc00Level 2|r - 350 hit points, 16 - 17 damage and Critical Strike. |n|cffffcc00Level 3|r - 500 hit points, 21 - 22 damage, Critical Strike and Invisibility.")).with_code(Some("AOsf")).with_morph_target(Some(WarcraftObjectId::new("osw1"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ACS7_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Summons 2 Spirit Wolf companions. Each wolf has 250 hit points and deals 11 - 12 damage. |nLasts 60 seconds. |n|n|cffffcc00Attacks land units.|r"), Some("Summons 2 Spirit Wolves to fight the Far Seer's enemies. |nLasts 60 seconds. |n|n|cffffcc00Level 1|r - 250 hit points, 11 - 12 damage. |n|cffffcc00Level 2|r - 350 hit points, 16 - 17 damage and Critical Strike. |n|cffffcc00Level 3|r - 500 hit points, 21 - 22 damage, Critical Strike and Invisibility.")).with_code(Some(WarcraftObjectId::new("AOsf"))).with_morph_target(Some(WarcraftObjectId::new("osw1"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACS7_TIP_LEVELS, ACS7_UBERTIP_LEVELS),
         ),
     );
@@ -1219,7 +1219,7 @@ fn insert_objects_chunk_0(
             ACS9_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACS9_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Summons 2 Spirit Pig companions. |nLasts 60 seconds. |n|n|cffffcc00Attacks land units.|r"), None).with_code(Some("AOsf")).with_morph_target(Some(WarcraftObjectId::new("nspp"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACS9_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Summons 2 Spirit Pig companions. |nLasts 60 seconds. |n|n|cffffcc00Attacks land units.|r"), None).with_code(Some(WarcraftObjectId::new("AOsf"))).with_morph_target(Some(WarcraftObjectId::new("nspp"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACS9_TIP_LEVELS, ACS9_UBERTIP_LEVELS),
         ),
     );
@@ -1232,7 +1232,7 @@ fn insert_objects_chunk_0(
             ACSA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACSA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Adds 10 bonus fire damage to an attack against enemies, but drains mana with each shot fired."), None).with_code(Some("AHfa")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnsearingarrowsoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACSA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Adds 10 bonus fire damage to an attack against enemies, but drains mana with each shot fired."), None).with_code(Some(WarcraftObjectId::new("AHfa"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnsearingarrowsoff.blp"))),
             WarcraftObjectText::with_alt(ACSA_TIP_LEVELS, ACSA_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -1245,7 +1245,7 @@ fn insert_objects_chunk_0(
             ACSH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACSH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("A wave of force that ripples outward, causing 75 damage to land units in a line."), None).with_code(Some("AOsh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACSH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("A wave of force that ripples outward, causing 75 damage to land units in a line."), None).with_code(Some(WarcraftObjectId::new("AOsh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACSH_TIP_LEVELS, ACSH_UBERTIP_LEVELS),
         ),
     );
@@ -1268,7 +1268,7 @@ fn insert_objects_chunk_0(
                     Some("Stops all enemies in a target area from casting spells for 40 seconds."),
                     None,
                 )
-                .with_code(Some("ANsi"))
+                .with_code(Some(WarcraftObjectId::new("ANsi")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -1284,7 +1284,7 @@ fn insert_objects_chunk_0(
             ACSK_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACSK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::One)), None, Some("Reduces the duration of negative spells and renders the unit immune to certain spells."), None).with_code(Some("Arsk")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACSK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::One)), None, Some("Reduces the duration of negative spells and renders the unit immune to certain spells."), None).with_code(Some(WarcraftObjectId::new("Arsk"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACSK_TIP_LEVELS, ACSK_UBERTIP_LEVELS),
         ),
     );
@@ -1297,7 +1297,7 @@ fn insert_objects_chunk_0(
             ACSL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACSL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Puts a target enemy unit to sleep for 8 seconds. A sleeping unit can be awoken by attacking it."), None).with_code(Some("AUsl")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACSL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Puts a target enemy unit to sleep for 8 seconds. A sleeping unit can be awoken by attacking it."), None).with_code(Some(WarcraftObjectId::new("AUsl"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACSL_TIP_LEVELS, ACSL_UBERTIP_LEVELS),
         ),
     );
@@ -1310,7 +1310,7 @@ fn insert_objects_chunk_0(
             ACSS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACSS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Hurls a poisoned dagger with incredible force at an enemy, dealing 75 initial damage, and 10 damage every 3 seconds for 15.1 seconds. The poison slows the attack rate and movement speed of the enemy for a short duration."), None).with_code(Some("AEsh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACSS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Hurls a poisoned dagger with incredible force at an enemy, dealing 75 initial damage, and 10 damage every 3 seconds for 15.1 seconds. The poison slows the attack rate and movement speed of the enemy for a short duration."), None).with_code(Some(WarcraftObjectId::new("AEsh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACSS_TIP_LEVELS, ACSS_UBERTIP_LEVELS),
         ),
     );
@@ -1323,7 +1323,7 @@ fn insert_objects_chunk_0(
             ACSW_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACSW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Slows enemy unit's attack rate by 25% and movement speed by 60%. Lasts 20 seconds."), None).with_code(Some("Aslo")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnslowoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACSW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Slows enemy unit's attack rate by 25% and movement speed by 60%. Lasts 20 seconds."), None).with_code(Some(WarcraftObjectId::new("Aslo"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnslowoff.blp"))),
             WarcraftObjectText::with_alt(ACSW_TIP_LEVELS, ACSW_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -1336,7 +1336,7 @@ fn insert_objects_chunk_0(
             ACT2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACT2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Slams the ground, dealing 70 points of damage and slowing the movement and attack rate of nearby enemy units."), None).with_code(Some("ACtc")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACT2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Slams the ground, dealing 70 points of damage and slowing the movement and attack rate of nearby enemy units."), None).with_code(Some(WarcraftObjectId::new("ACtc"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACT2_TIP_LEVELS, ACT2_UBERTIP_LEVELS),
         ),
     );
@@ -1349,7 +1349,7 @@ fn insert_objects_chunk_0(
             ACTB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACTB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("A magical boulder that is thrown at an enemy unit, causing 100 points of damage and stunning the target for 2 seconds."), None).with_code(Some("ACtb")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACTB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("A magical boulder that is thrown at an enemy unit, causing 100 points of damage and stunning the target for 2 seconds."), None).with_code(Some(WarcraftObjectId::new("ACtb"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACTB_TIP_LEVELS, ACTB_UBERTIP_LEVELS),
         ),
     );
@@ -1362,7 +1362,7 @@ fn insert_objects_chunk_0(
             ACTC_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACTC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Slams the ground, dealing 70 points of damage and slowing the movement and attack rate of nearby enemy units."), None).with_code(Some("ACtc")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACTC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Slams the ground, dealing 70 points of damage and slowing the movement and attack rate of nearby enemy units."), None).with_code(Some(WarcraftObjectId::new("ACtc"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACTC_TIP_LEVELS, ACTC_UBERTIP_LEVELS),
         ),
     );
@@ -1385,7 +1385,7 @@ fn insert_objects_chunk_0(
                     Some("Unleashes a mighty tentacle upon the enemy."),
                     None,
                 )
-                .with_code(Some("AOwd"))
+                .with_code(Some(WarcraftObjectId::new("AOwd")))
                 .with_morph_target(Some(WarcraftObjectId::new("nfgt")))
                 .with_off_state(None, None, None, None),
             ),
@@ -1401,7 +1401,7 @@ fn insert_objects_chunk_0(
             ACUA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACUA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Increases nearby friendly units' movement speed by 10% and life regeneration rate by 50%."), None).with_code(Some("AUau")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACUA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Increases nearby friendly units' movement speed by 10% and life regeneration rate by 50%."), None).with_code(Some(WarcraftObjectId::new("AUau"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACUA_TIP_LEVELS, ACUA_UBERTIP_LEVELS),
         ),
     );
@@ -1414,7 +1414,7 @@ fn insert_objects_chunk_0(
             ACUF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACUF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Increases the attack rate of a target unit by 75%, but drains 2 hit points per second. |nLasts 45 seconds."), None).with_code(Some("Auhf")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACUF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Increases the attack rate of a target unit by 75%, but drains 2 hit points per second. |nLasts 45 seconds."), None).with_code(Some(WarcraftObjectId::new("Auhf"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACUF_TIP_LEVELS, ACUF_UBERTIP_LEVELS),
         ),
     );
@@ -1427,7 +1427,7 @@ fn insert_objects_chunk_0(
             ACVP_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACVP_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Nearby friendly melee units gain 20% of their attack damage when they hit enemy units."), None).with_code(Some("AUav")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACVP_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Nearby friendly melee units gain 20% of their attack damage when they hit enemy units."), None).with_code(Some(WarcraftObjectId::new("AUav"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACVP_TIP_LEVELS, ACVP_UBERTIP_LEVELS),
         ),
     );
@@ -1450,7 +1450,7 @@ fn insert_objects_chunk_0(
                     Some("Deals 2 poison damage per second. |nLasts 20 seconds."),
                     None,
                 )
-                .with_code(Some("Aven"))
+                .with_code(Some(WarcraftObjectId::new("Aven")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -1466,7 +1466,7 @@ fn insert_objects_chunk_0(
             ACWB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACWB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Binds a target enemy air unit in webbing, forcing it to the ground. Webbed units can be hit as though they were land units. |nLasts 12 seconds."), None).with_code(Some("Aweb")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnweboff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACWB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Binds a target enemy air unit in webbing, forcing it to the ground. Webbed units can be hit as though they were land units. |nLasts 12 seconds."), None).with_code(Some(WarcraftObjectId::new("Aweb"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnweboff.blp"))),
             WarcraftObjectText::with_alt(ACWB_TIP_LEVELS, ACWB_UBERTIP_LEVELS, Some("|cffc3dbff|cffc3dbffRight-click to activate auto-casting."), Some("|cffc3dbffRight-click to deactivate auto-casting.")),
         ),
     );
@@ -1479,7 +1479,7 @@ fn insert_objects_chunk_0(
             ACWE_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACWE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Summons a powerful Sea Elemental with 550 hit points that does 28 - 37 damage. |nLasts 65 seconds."), None).with_code(Some("AHwe")).with_morph_target(Some(WarcraftObjectId::new("nsel"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACWE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Summons a powerful Sea Elemental with 550 hit points that does 28 - 37 damage. |nLasts 65 seconds."), None).with_code(Some(WarcraftObjectId::new("AHwe"))).with_morph_target(Some(WarcraftObjectId::new("nsel"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACWE_TIP_LEVELS, ACWE_UBERTIP_LEVELS),
         ),
     );
@@ -1502,7 +1502,7 @@ fn insert_objects_chunk_0(
                     Some("Transforms the Demon Hunter into a powerful Demon with a ranged attack."),
                     Some("Transforms the Demon Hunter into a powerful Demon with a ranged attack."),
                 )
-                .with_code(Some("AEme"))
+                .with_code(Some(WarcraftObjectId::new("AEme")))
                 .with_morph_target(Some(WarcraftObjectId::new("Eilm")))
                 .with_off_state(None, None, None, None),
             ),
@@ -1518,7 +1518,7 @@ fn insert_objects_chunk_0(
             AEAH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEAH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("An aura that gives friendly nearby units a damage reflection, which deals 15% of an enemy unit's melee attack damage back to it."), Some("An aura that causes enemies to take a percentage of melee damage dealt to nearby friendly units. |n|n|cffffcc00Level 1|r - Returns 15% damage. |n|cffffcc00Level 2|r - Returns 30% damage. |n|cffffcc00Level 3|r - Returns 45% damage.")).with_code(Some("AEah")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEAH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("An aura that gives friendly nearby units a damage reflection, which deals 15% of an enemy unit's melee attack damage back to it."), Some("An aura that causes enemies to take a percentage of melee damage dealt to nearby friendly units. |n|n|cffffcc00Level 1|r - Returns 15% damage. |n|cffffcc00Level 2|r - Returns 30% damage. |n|cffffcc00Level 3|r - Returns 45% damage.")).with_code(Some(WarcraftObjectId::new("AEah"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AEAH_TIP_LEVELS, AEAH_UBERTIP_LEVELS),
         ),
     );
@@ -1531,7 +1531,7 @@ fn insert_objects_chunk_0(
             AEAR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEAR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("An aura that gives friendly nearby units a 10% bonus damage to their ranged attacks."), Some("An aura that gives friendly nearby units bonus damage to their ranged attacks. |n|n|cffffcc00Level 1|r - Increases base ranged damage by 10%. |n|cffffcc00Level 2|r - Increases base ranged damage by 20%. |n|cffffcc00Level 3|r - Increases base ranged damage by 30%.")).with_code(Some("AEar")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEAR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("An aura that gives friendly nearby units a 10% bonus damage to their ranged attacks."), Some("An aura that gives friendly nearby units bonus damage to their ranged attacks. |n|n|cffffcc00Level 1|r - Increases base ranged damage by 10%. |n|cffffcc00Level 2|r - Increases base ranged damage by 20%. |n|cffffcc00Level 3|r - Increases base ranged damage by 30%.")).with_code(Some(WarcraftObjectId::new("AEar"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AEAR_TIP_LEVELS, AEAR_UBERTIP_LEVELS),
         ),
     );
@@ -1544,7 +1544,7 @@ fn insert_objects_chunk_0(
             AEBL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEBL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Teleports the Warden a short distance, allowing her to move in and out of combat."), Some("Short distance teleportation that allows the Warden to move in and out of combat. |n|n|cffffcc00Level 1|r - 10 second cooldown, 50 mana. |n|cffffcc00Level 2|r - 5 second cooldown, 10 mana. |n|cffffcc00Level 3|r - 2.5 second cooldown, 10 mana.")).with_code(Some("AEbl")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEBL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Teleports the Warden a short distance, allowing her to move in and out of combat."), Some("Short distance teleportation that allows the Warden to move in and out of combat. |n|n|cffffcc00Level 1|r - 10 second cooldown, 50 mana. |n|cffffcc00Level 2|r - 5 second cooldown, 10 mana. |n|cffffcc00Level 3|r - 2.5 second cooldown, 10 mana.")).with_code(Some(WarcraftObjectId::new("AEbl"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AEBL_TIP_LEVELS, AEBL_UBERTIP_LEVELS),
         ),
     );
@@ -1567,7 +1567,7 @@ fn insert_objects_chunk_0(
                     None,
                     None,
                 )
-                .with_code(Some("AEbu"))
+                .with_code(Some(WarcraftObjectId::new("AEbu")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -1582,7 +1582,7 @@ fn insert_objects_chunk_0(
             AEER_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEER_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Causes roots to burst from the ground, immobilizing and disarming a target enemy unit for 9 seconds, and dealing 15 damage per second."), Some("Causes roots to burst from the ground, immobilizing, disarming and damaging a target enemy temporarily. |n|n|cffffcc00Level 1|r - 15 damage per second for 9 seconds. |n|cffffcc00Level 2|r - 20 damage per second for 17 seconds. |n|cffffcc00Level 3|r - 30 damage per second for 25 seconds.")).with_code(Some("AEer")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEER_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Causes roots to burst from the ground, immobilizing and disarming a target enemy unit for 9 seconds, and dealing 15 damage per second."), Some("Causes roots to burst from the ground, immobilizing, disarming and damaging a target enemy temporarily. |n|n|cffffcc00Level 1|r - 15 damage per second for 9 seconds. |n|cffffcc00Level 2|r - 20 damage per second for 17 seconds. |n|cffffcc00Level 3|r - 30 damage per second for 25 seconds.")).with_code(Some(WarcraftObjectId::new("AEer"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AEER_TIP_LEVELS, AEER_UBERTIP_LEVELS),
         ),
     );
@@ -1595,7 +1595,7 @@ fn insert_objects_chunk_0(
             AEEV_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEEV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 10% chance to avoid an attack."), Some("Gives a percent chance to avoid attacks. |n|n|cffffcc00Level 1|r - 10% chance that an opponent misses. |n|cffffcc00Level 2|r - 20% chance that an opponent misses. |n|cffffcc00Level 3|r - 30% chance that an opponent misses.")).with_code(Some("AEev")).with_morph_target(None).with_evasion_chances([0.1, 0.2, 0.3, 0.0]).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEEV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 10% chance to avoid an attack."), Some("Gives a percent chance to avoid attacks. |n|n|cffffcc00Level 1|r - 10% chance that an opponent misses. |n|cffffcc00Level 2|r - 20% chance that an opponent misses. |n|cffffcc00Level 3|r - 30% chance that an opponent misses.")).with_code(Some(WarcraftObjectId::new("AEev"))).with_morph_target(None).with_evasion_chances([0.1, 0.2, 0.3, 0.0]).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AEEV_TIP_LEVELS, AEEV_UBERTIP_LEVELS),
         ),
     );
@@ -1608,7 +1608,7 @@ fn insert_objects_chunk_0(
             AEFK_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEFK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("The Warden hurls a flurry of knives, damaging nearby enemies. Each knife does 70 damage."), Some("The Warden hurls a flurry of knives, damaging nearby enemies. |n|n|cffffcc00Level 1|r - 70 damage per target. |n|cffffcc00Level 2|r - 130 damage per target. |n|cffffcc00Level 3|r - 200 damage per target.")).with_code(Some("AEfk")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEFK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("The Warden hurls a flurry of knives, damaging nearby enemies. Each knife does 70 damage."), Some("The Warden hurls a flurry of knives, damaging nearby enemies. |n|n|cffffcc00Level 1|r - 70 damage per target. |n|cffffcc00Level 2|r - 130 damage per target. |n|cffffcc00Level 3|r - 200 damage per target.")).with_code(Some(WarcraftObjectId::new("AEfk"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AEFK_TIP_LEVELS, AEFK_UBERTIP_LEVELS),
         ),
     );
@@ -1621,7 +1621,7 @@ fn insert_objects_chunk_0(
             AEFN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEFN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Converts a small area of trees into 2 Treants. Treants have 300 hit points and deal 15 - 17 damage. Can learn Nature's Blessing. |nLasts 60 seconds. |n|n|cffffcc00Attacks land units.|r"), Some("Converts an area of trees into Treants. Treants have 300 hit points and deal 15 - 17 damage. Can learn Nature's Blessing. |n|n|cffffcc00Attacks land units.|r |n|n|cffffcc00Level 1|r - Raises 2 Treants for 60 seconds. |n|cffffcc00Level 2|r - Raises 3 Treants for 60 seconds. |n|cffffcc00Level 3|r - Raises 4 Treants for 60 seconds.")).with_code(Some("AEfn")).with_morph_target(Some(WarcraftObjectId::new("efon"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEFN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Converts a small area of trees into 2 Treants. Treants have 300 hit points and deal 15 - 17 damage. Can learn Nature's Blessing. |nLasts 60 seconds. |n|n|cffffcc00Attacks land units.|r"), Some("Converts an area of trees into Treants. Treants have 300 hit points and deal 15 - 17 damage. Can learn Nature's Blessing. |n|n|cffffcc00Attacks land units.|r |n|n|cffffcc00Level 1|r - Raises 2 Treants for 60 seconds. |n|cffffcc00Level 2|r - Raises 3 Treants for 60 seconds. |n|cffffcc00Level 3|r - Raises 4 Treants for 60 seconds.")).with_code(Some(WarcraftObjectId::new("AEfn"))).with_morph_target(Some(WarcraftObjectId::new("efon"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AEFN_TIP_LEVELS, AEFN_UBERTIP_LEVELS),
         ),
     );
@@ -1634,7 +1634,7 @@ fn insert_objects_chunk_0(
             AEIM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEIM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Activate Immolation to engulf this unit in flames, causing 6 damage per 0.5 second to nearby enemy land units. |nDrains mana until deactivated."), Some("Engulfs the Demon Hunter in flames, causing damage to nearby enemy land units. |nDrains mana until deactivated. |n|n|cffffcc00Level 1|r - 6 damage per 0.5 second. |n|cffffcc00Level 2|r - 11 damage per 0.5 second. |n|cffffcc00Level 3|r - 17 damage per 0.5 second.")).with_code(Some("AEim")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnimmolationoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEIM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Activate Immolation to engulf this unit in flames, causing 6 damage per 0.5 second to nearby enemy land units. |nDrains mana until deactivated."), Some("Engulfs the Demon Hunter in flames, causing damage to nearby enemy land units. |nDrains mana until deactivated. |n|n|cffffcc00Level 1|r - 6 damage per 0.5 second. |n|cffffcc00Level 2|r - 11 damage per 0.5 second. |n|cffffcc00Level 3|r - 17 damage per 0.5 second.")).with_code(Some(WarcraftObjectId::new("AEim"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnimmolationoff.blp"))),
             WarcraftObjectText::with_alt(AEIM_TIP_LEVELS, AEIM_UBERTIP_LEVELS, Some("Deactivate Immolation"), Some("Deactivate Immolation to stop draining mana.")),
         ),
     );
@@ -1647,7 +1647,7 @@ fn insert_objects_chunk_0(
             AEMB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEMB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Sends a bolt of negative energy that burns up to 50 points of a target enemy unit's mana. The mana combusts, dealing damage equal to the amount of mana burned."), Some("Sends a bolt of negative energy that burns a target enemy unit's mana. Burned mana combusts, dealing damage to the target equal to the amount of mana burned. |n|n|cffffcc00Level 1|r - Burns up to 50 mana. |n|cffffcc00Level 2|r - Burns up to 100 mana. |n|cffffcc00Level 3|r - Burns up to 150 mana.")).with_code(Some("AEmb")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEMB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Sends a bolt of negative energy that burns up to 50 points of a target enemy unit's mana. The mana combusts, dealing damage equal to the amount of mana burned."), Some("Sends a bolt of negative energy that burns a target enemy unit's mana. Burned mana combusts, dealing damage to the target equal to the amount of mana burned. |n|n|cffffcc00Level 1|r - Burns up to 50 mana. |n|cffffcc00Level 2|r - Burns up to 100 mana. |n|cffffcc00Level 3|r - Burns up to 150 mana.")).with_code(Some(WarcraftObjectId::new("AEmb"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AEMB_TIP_LEVELS, AEMB_UBERTIP_LEVELS),
         ),
     );
@@ -1660,7 +1660,7 @@ fn insert_objects_chunk_0(
             AEME_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AEME_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Transforms the Demon Hunter into a powerful Demon with a ranged attack and 500 bonus hit points. |nLasts 45 seconds."), Some("Transforms the Demon Hunter into a powerful Demon with a ranged attack and 500 bonus hit points. |nLasts 45 seconds.")).with_code(Some("AEme")).with_morph_target(Some(WarcraftObjectId::new("Edmm"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AEME_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Transforms the Demon Hunter into a powerful Demon with a ranged attack and 500 bonus hit points. |nLasts 45 seconds."), Some("Transforms the Demon Hunter into a powerful Demon with a ranged attack and 500 bonus hit points. |nLasts 45 seconds.")).with_code(Some(WarcraftObjectId::new("AEme"))).with_morph_target(Some(WarcraftObjectId::new("Edmm"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AEME_TIP_LEVELS, AEME_UBERTIP_LEVELS),
         ),
     );
@@ -1673,7 +1673,7 @@ fn insert_objects_chunk_0(
             AESB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AESB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Calls down a wave of falling stars every 2 seconds that damages nearby enemy units. Each wave deals 50 damage. |nLasts for 35 seconds."), Some("Calls down waves of falling stars that damage nearby enemy units. Each wave deals 50 damage. |nLasts for 35 seconds.")).with_code(Some("AEsf")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AESB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Calls down a wave of falling stars every 2 seconds that damages nearby enemy units. Each wave deals 50 damage. |nLasts for 35 seconds."), Some("Calls down waves of falling stars that damage nearby enemy units. Each wave deals 50 damage. |nLasts for 35 seconds.")).with_code(Some(WarcraftObjectId::new("AEsf"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AESB_TIP_LEVELS, AESB_UBERTIP_LEVELS),
         ),
     );
@@ -1686,7 +1686,7 @@ fn insert_objects_chunk_0(
             AESF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AESF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Calls down waves of falling stars that damage nearby enemy units. Each wave deals 60 damage. |nLasts for 30 seconds. Pierces spell immunity."), Some("Calls down waves of falling stars that damage nearby enemy units. Each wave deals 60 damage. |nLasts for 30 seconds. Pierces spell immunity.")).with_code(Some("AEsf")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AESF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Calls down waves of falling stars that damage nearby enemy units. Each wave deals 60 damage. |nLasts for 30 seconds. Pierces spell immunity."), Some("Calls down waves of falling stars that damage nearby enemy units. Each wave deals 60 damage. |nLasts for 30 seconds. Pierces spell immunity.")).with_code(Some(WarcraftObjectId::new("AEsf"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AESF_TIP_LEVELS, AESF_UBERTIP_LEVELS),
         ),
     );
@@ -1699,7 +1699,7 @@ fn insert_objects_chunk_0(
             AESH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AESH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Hurls a poisoned dagger at a target enemy unit, dealing 75 initial damage, and 10 damage every 3 seconds for 15.1 seconds. The poison slows the movement speed of the targeted unit for a short duration."), Some("Hurls a poisoned dagger which deals large initial damage, and then deals damage over time. The poisoned unit has its movement speed slowed for a short duration. |n|n|cffffcc00Level 1|r - 75 strike damage, 10 duration damage. |n|cffffcc00Level 2|r - 150 strike damage, 30 duration damage. |n|cffffcc00Level 3|r - 225 strike damage, 45 duration damage.")).with_code(Some("AEsh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AESH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Hurls a poisoned dagger at a target enemy unit, dealing 75 initial damage, and 10 damage every 3 seconds for 15.1 seconds. The poison slows the movement speed of the targeted unit for a short duration."), Some("Hurls a poisoned dagger which deals large initial damage, and then deals damage over time. The poisoned unit has its movement speed slowed for a short duration. |n|n|cffffcc00Level 1|r - 75 strike damage, 10 duration damage. |n|cffffcc00Level 2|r - 150 strike damage, 30 duration damage. |n|cffffcc00Level 3|r - 225 strike damage, 45 duration damage.")).with_code(Some(WarcraftObjectId::new("AEsh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AESH_TIP_LEVELS, AESH_UBERTIP_LEVELS),
         ),
     );
@@ -1712,7 +1712,7 @@ fn insert_objects_chunk_0(
             AEST_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEST_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Summons an invincible Owl Scout, which can be used to scout.|nCan see invisible units. |nLasts 60 seconds."), Some("Temporarily summons an invincible Owl Scout, which can be used to scout the map. |nCan see invisible units. |n|n|cffffcc00Level 1|r - Summons an Owl Scout for 50 mana. |n|cffffcc00Level 2|r - Summons a better Owl Scout for 50 mana. |n|cffffcc00Level 3|r - Summons the best Owl Scout for 50 mana.")).with_code(Some("AEst")).with_morph_target(Some(WarcraftObjectId::new("nowl"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEST_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Summons an invincible Owl Scout, which can be used to scout.|nCan see invisible units. |nLasts 60 seconds."), Some("Temporarily summons an invincible Owl Scout, which can be used to scout the map. |nCan see invisible units. |n|n|cffffcc00Level 1|r - Summons an Owl Scout for 50 mana. |n|cffffcc00Level 2|r - Summons a better Owl Scout for 50 mana. |n|cffffcc00Level 3|r - Summons the best Owl Scout for 50 mana.")).with_code(Some(WarcraftObjectId::new("AEst"))).with_morph_target(Some(WarcraftObjectId::new("nowl"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AEST_TIP_LEVELS, AEST_UBERTIP_LEVELS),
         ),
     );
@@ -1725,7 +1725,7 @@ fn insert_objects_chunk_0(
             AESV_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AESV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Creates a powerful avatar that summons invulnerable spirits from nearby corpses to attack your enemies. When the Avatar of Vengeance dies, the spirits vanish. |nLasts 180 seconds."), Some("Creates a powerful avatar that summons invulnerable spirits from nearby corpses to attack your enemies. When the Avatar of Vengeance dies, the spirits vanish. |nLasts 180 seconds.")).with_code(Some("AEsv")).with_morph_target(Some(WarcraftObjectId::new("espv"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AESV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Creates a powerful avatar that summons invulnerable spirits from nearby corpses to attack your enemies. When the Avatar of Vengeance dies, the spirits vanish. |nLasts 180 seconds."), Some("Creates a powerful avatar that summons invulnerable spirits from nearby corpses to attack your enemies. When the Avatar of Vengeance dies, the spirits vanish. |nLasts 180 seconds.")).with_code(Some(WarcraftObjectId::new("AEsv"))).with_morph_target(Some(WarcraftObjectId::new("espv"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AESV_TIP_LEVELS, AESV_UBERTIP_LEVELS),
         ),
     );
@@ -1738,7 +1738,7 @@ fn insert_objects_chunk_0(
             AETQ_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AETQ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Causes rains of healing energy to pour down in a large area, healing friendly allied units for 48 hit points per second. |nLasts 12 seconds."), Some("Causes rains of healing energy to pour down in a large area, healing friendly allied units for 48 hit points per second. |nLasts 12 seconds.")).with_code(Some("AEtq")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AETQ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Causes rains of healing energy to pour down in a large area, healing friendly allied units for 48 hit points per second. |nLasts 12 seconds."), Some("Causes rains of healing energy to pour down in a large area, healing friendly allied units for 48 hit points per second. |nLasts 12 seconds.")).with_code(Some(WarcraftObjectId::new("AEtq"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AETQ_TIP_LEVELS, AETQ_UBERTIP_LEVELS),
         ),
     );
@@ -1761,7 +1761,7 @@ fn insert_objects_chunk_0(
                     Some("Transforms the Demon Hunter into a powerful Demon with a ranged attack."),
                     Some("Transforms the Demon Hunter into a powerful Demon with a ranged attack."),
                 )
-                .with_code(Some("AEme"))
+                .with_code(Some(WarcraftObjectId::new("AEme")))
                 .with_morph_target(Some(WarcraftObjectId::new("Eevm")))
                 .with_off_state(None, None, None, None),
             ),
@@ -1777,7 +1777,7 @@ fn insert_objects_chunk_0(
             AHAB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHAB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives additional mana regeneration to nearby friendly units."), Some("Gives additional mana regeneration to nearby friendly units. |n|n|cffffcc00Level 1|r - Grants minor mana regeneration. |n|cffffcc00Level 2|r - Grants moderate mana regeneration. |n|cffffcc00Level 3|r - Grants heavy mana regeneration.")).with_code(Some("AHab")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHAB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives additional mana regeneration to nearby friendly units."), Some("Gives additional mana regeneration to nearby friendly units. |n|n|cffffcc00Level 1|r - Grants minor mana regeneration. |n|cffffcc00Level 2|r - Grants moderate mana regeneration. |n|cffffcc00Level 3|r - Grants heavy mana regeneration.")).with_code(Some(WarcraftObjectId::new("AHab"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHAB_TIP_LEVELS, AHAB_UBERTIP_LEVELS),
         ),
     );
@@ -1790,7 +1790,7 @@ fn insert_objects_chunk_0(
             AHAD_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHAD_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives 2 additional armor to nearby friendly units."), Some("Gives additional armor to nearby friendly units. |n|n|cffffcc00Level 1|r - Increases base armor by 2. |n|cffffcc00Level 2|r - Increases base armor by 3.5. |n|cffffcc00Level 3|r - Increases base armor by 5.")).with_code(Some("AHad")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHAD_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives 2 additional armor to nearby friendly units."), Some("Gives additional armor to nearby friendly units. |n|n|cffffcc00Level 1|r - Increases base armor by 2. |n|cffffcc00Level 2|r - Increases base armor by 3.5. |n|cffffcc00Level 3|r - Increases base armor by 5.")).with_code(Some(WarcraftObjectId::new("AHad"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHAD_TIP_LEVELS, AHAD_UBERTIP_LEVELS),
         ),
     );
@@ -1803,7 +1803,7 @@ fn insert_objects_chunk_0(
             AHAV_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AHAV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Activate Avatar to give the Mountain King 5 bonus armor, 500 bonus hit points, 20 bonus damage and spell immunity. |nLasts 60 seconds."), Some("When Avatar is activated, it gives the Mountain King 5 bonus armor, 500 bonus hit points, 20 bonus damage and spell immunity. |nLasts 60 seconds.")).with_code(Some("AHav")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnavataroff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AHAV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Activate Avatar to give the Mountain King 5 bonus armor, 500 bonus hit points, 20 bonus damage and spell immunity. |nLasts 60 seconds."), Some("When Avatar is activated, it gives the Mountain King 5 bonus armor, 500 bonus hit points, 20 bonus damage and spell immunity. |nLasts 60 seconds.")).with_code(Some(WarcraftObjectId::new("AHav"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnavataroff.blp"))),
             WarcraftObjectText::with_alt(AHAV_TIP_LEVELS, AHAV_UBERTIP_LEVELS, Some("Deactivate Avatar"), None),
         ),
     );
@@ -1816,7 +1816,7 @@ fn insert_objects_chunk_0(
             AHBH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHBH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 20% chance that an attack will do 25 bonus damage and stun the target for 2 seconds."), Some("Gives a chance that an attack will do 25 bonus damage and stun the target for 2 seconds. |n|n|cffffcc00Level 1|r - 20% chance per attack. 25 bonus damage. |n|cffffcc00Level 2|r - 30% chance per attack. 40 bonus damage. |n|cffffcc00Level 3|r - 40% chance per attack. 55 bonus damage.")).with_code(Some("AHbh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHBH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 20% chance that an attack will do 25 bonus damage and stun the target for 2 seconds."), Some("Gives a chance that an attack will do 25 bonus damage and stun the target for 2 seconds. |n|n|cffffcc00Level 1|r - 20% chance per attack. 25 bonus damage. |n|cffffcc00Level 2|r - 30% chance per attack. 40 bonus damage. |n|cffffcc00Level 3|r - 40% chance per attack. 55 bonus damage.")).with_code(Some(WarcraftObjectId::new("AHbh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHBH_TIP_LEVELS, AHBH_UBERTIP_LEVELS),
         ),
     );
@@ -1829,7 +1829,7 @@ fn insert_objects_chunk_0(
             AHBN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHBN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Turns a non-mechanical unit ethereal and slows its movement speed by 50% for 12 seconds. Ethereal creatures cannot attack, but they can cast spells and certain spells cast upon them will have a greater effect."), Some("Turns a non-mechanical unit ethereal and slows its movement speed by 50% for a short duration. Ethereal creatures cannot attack, but they can cast spells and certain spells cast upon them will have a greater effect. |n|n|cffffcc00Level 1|r - 75 mana, lasts 12 seconds. |n|cffffcc00Level 2|r - 60 mana, lasts 15 seconds. |n|cffffcc00Level 3|r - 50 mana, lasts 18 seconds.")).with_code(Some("AHbn")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHBN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Turns a non-mechanical unit ethereal and slows its movement speed by 50% for 12 seconds. Ethereal creatures cannot attack, but they can cast spells and certain spells cast upon them will have a greater effect."), Some("Turns a non-mechanical unit ethereal and slows its movement speed by 50% for a short duration. Ethereal creatures cannot attack, but they can cast spells and certain spells cast upon them will have a greater effect. |n|n|cffffcc00Level 1|r - 75 mana, lasts 12 seconds. |n|cffffcc00Level 2|r - 60 mana, lasts 15 seconds. |n|cffffcc00Level 3|r - 50 mana, lasts 18 seconds.")).with_code(Some(WarcraftObjectId::new("AHbn"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHBN_TIP_LEVELS, AHBN_UBERTIP_LEVELS),
         ),
     );
@@ -1852,7 +1852,7 @@ fn insert_objects_chunk_0(
                     None,
                     None,
                 )
-                .with_code(Some("AHbu"))
+                .with_code(Some(WarcraftObjectId::new("AHbu")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -1867,7 +1867,7 @@ fn insert_objects_chunk_0(
             AHBZ_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHBZ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Calls down 6 freezing ice shard waves; each wave deals 30 damage to units in an area."), Some("Calls down waves of freezing ice shards that damage units in a target area. |n|n|cffffcc00Level 1|r - 6 waves at 30 damage each. |n|cffffcc00Level 2|r - 8 waves at 40 damage each. |n|cffffcc00Level 3|r - 10 waves at 50 damage each.")).with_code(Some("AHbz")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHBZ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Calls down 6 freezing ice shard waves; each wave deals 30 damage to units in an area."), Some("Calls down waves of freezing ice shards that damage units in a target area. |n|n|cffffcc00Level 1|r - 6 waves at 30 damage each. |n|cffffcc00Level 2|r - 8 waves at 40 damage each. |n|cffffcc00Level 3|r - 10 waves at 50 damage each.")).with_code(Some(WarcraftObjectId::new("AHbz"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHBZ_TIP_LEVELS, AHBZ_UBERTIP_LEVELS),
         ),
     );
@@ -1880,7 +1880,7 @@ fn insert_objects_chunk_0(
             AHCA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHCA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Adds a cold effect to each attack, slowing a target enemy unit's attacks by 30% and movement by 30% for 6 seconds."), Some("Adds a cold effect to each attack, slowing a target enemy unit's attacks and movement. |n|n|cffffcc00Level 1|r - 30% attack rate, 30% movement speed, lasts 6 seconds. |n|cffffcc00Level 2|r - 50% attack rate, 50% movement speed, lasts 6 seconds. |n|cffffcc00Level 3|r - 70% attack rate, 70% movement speed, lasts 6 seconds.")).with_code(Some("AHca")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btncoldarrowsoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHCA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Adds a cold effect to each attack, slowing a target enemy unit's attacks by 30% and movement by 30% for 6 seconds."), Some("Adds a cold effect to each attack, slowing a target enemy unit's attacks and movement. |n|n|cffffcc00Level 1|r - 30% attack rate, 30% movement speed, lasts 6 seconds. |n|cffffcc00Level 2|r - 50% attack rate, 50% movement speed, lasts 6 seconds. |n|cffffcc00Level 3|r - 70% attack rate, 70% movement speed, lasts 6 seconds.")).with_code(Some(WarcraftObjectId::new("AHca"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btncoldarrowsoff.blp"))),
             WarcraftObjectText::with_alt(AHCA_TIP_LEVELS, AHCA_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -1893,7 +1893,7 @@ fn insert_objects_chunk_0(
             AHDR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHDR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Transfers mana between the Blood Mage and a target. Drains 15 mana per second from an enemy, or transfers 30 mana per second to an ally.|n|nSiphon Mana can push the Blood Mage's mana over its maximum value, though excess mana drains off rapidly if not used.|nLasts 6 seconds."), Some("Transfers mana between the Blood Mage and a target. Drains mana from an enemy, or transfers mana to an ally.|n|nSiphon Mana can push the Blood Mage's mana over its maximum value, though excess mana drains off rapidly if not used.|nLasts 6 seconds.|n|n|cffffcc00Level 1|r - 15 mana drained per second. |n|cffffcc00Level 2|r - 25 mana drained per second. |n|cffffcc00Level 3|r - 40 mana drained per second.")).with_code(Some("AHdr")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHDR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Transfers mana between the Blood Mage and a target. Drains 15 mana per second from an enemy, or transfers 30 mana per second to an ally.|n|nSiphon Mana can push the Blood Mage's mana over its maximum value, though excess mana drains off rapidly if not used.|nLasts 6 seconds."), Some("Transfers mana between the Blood Mage and a target. Drains mana from an enemy, or transfers mana to an ally.|n|nSiphon Mana can push the Blood Mage's mana over its maximum value, though excess mana drains off rapidly if not used.|nLasts 6 seconds.|n|n|cffffcc00Level 1|r - 15 mana drained per second. |n|cffffcc00Level 2|r - 25 mana drained per second. |n|cffffcc00Level 3|r - 40 mana drained per second.")).with_code(Some(WarcraftObjectId::new("AHdr"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHDR_TIP_LEVELS, AHDR_UBERTIP_LEVELS),
         ),
     );
@@ -1906,7 +1906,7 @@ fn insert_objects_chunk_0(
             AHDS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHDS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("An impenetrable shield surrounds this unit, protecting it from all damage and spells for 15 seconds."), Some("An impenetrable shield surrounds the Paladin, protecting him from all damage and spells for a set amount of time. |n|n|cffffcc00Level 1|r - Lasts 15 seconds. |n|cffffcc00Level 2|r - Lasts 25 seconds. |n|cffffcc00Level 3|r - Lasts 35 seconds.")).with_code(Some("AHds")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btndivineshieldoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHDS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("An impenetrable shield surrounds this unit, protecting it from all damage and spells for 15 seconds."), Some("An impenetrable shield surrounds the Paladin, protecting him from all damage and spells for a set amount of time. |n|n|cffffcc00Level 1|r - Lasts 15 seconds. |n|cffffcc00Level 2|r - Lasts 25 seconds. |n|cffffcc00Level 3|r - Lasts 35 seconds.")).with_code(Some(WarcraftObjectId::new("AHds"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btndivineshieldoff.blp"))),
             WarcraftObjectText::with_alt(AHDS_TIP_LEVELS, AHDS_UBERTIP_LEVELS, Some("Deactivate Divine Shield"), None),
         ),
     );
@@ -1919,7 +1919,7 @@ fn insert_objects_chunk_0(
             AHFA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHFA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Adds 12 bonus fire damage to an attack against enemies, but drains mana with each shot fired."), Some("Increases the damage of the Priestess' attack by adding fire. |n|n|cffffcc00Level 1|r - 12 bonus damage. |n|cffffcc00Level 2|r - 24 bonus damage. |n|cffffcc00Level 3|r - 48 bonus damage.")).with_code(Some("AHfa")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnsearingarrowsoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHFA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Adds 12 bonus fire damage to an attack against enemies, but drains mana with each shot fired."), Some("Increases the damage of the Priestess' attack by adding fire. |n|n|cffffcc00Level 1|r - 12 bonus damage. |n|cffffcc00Level 2|r - 24 bonus damage. |n|cffffcc00Level 3|r - 48 bonus damage.")).with_code(Some(WarcraftObjectId::new("AHfa"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnsearingarrowsoff.blp"))),
             WarcraftObjectText::with_alt(AHFA_TIP_LEVELS, AHFA_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -1932,7 +1932,7 @@ fn insert_objects_chunk_0(
             AHFS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHFS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Conjures a pillar of flame that burns ground units for 45 damage a second for 3 seconds. As the pillar of flame subsides, units within the fire continue to take minor damage."), Some("Conjures a pillar of fire which damages ground units in a target area over time. |n|n|cffffcc00Level 1|r - 45 damage a second for 3 seconds, followed by minor damage for 6 seconds. |n|cffffcc00Level 2|r - 80 damage a second for 3 seconds, followed by light damage for 6 seconds. |n|cffffcc00Level 3|r - 110 damage a second for 3 seconds, followed by moderate damage for 6 seconds.")).with_code(Some("AHfs")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHFS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Conjures a pillar of flame that burns ground units for 45 damage a second for 3 seconds. As the pillar of flame subsides, units within the fire continue to take minor damage."), Some("Conjures a pillar of fire which damages ground units in a target area over time. |n|n|cffffcc00Level 1|r - 45 damage a second for 3 seconds, followed by minor damage for 6 seconds. |n|cffffcc00Level 2|r - 80 damage a second for 3 seconds, followed by light damage for 6 seconds. |n|cffffcc00Level 3|r - 110 damage a second for 3 seconds, followed by moderate damage for 6 seconds.")).with_code(Some(WarcraftObjectId::new("AHfs"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHFS_TIP_LEVELS, AHFS_UBERTIP_LEVELS),
         ),
     );
@@ -1945,7 +1945,7 @@ fn insert_objects_chunk_0(
             AHHB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHHB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("A holy light that can heal a friendly living unit for 200 or deal half damage to an enemy Undead unit. Healing pierces spell immunity."), Some("A holy light that can heal a friendly living unit or damage an enemy Undead unit. Healing pierces spell immunity. |n|n|cffffcc00Level 1|r - Heals for 200 hit points. |n|cffffcc00Level 2|r - Heals for 400 hit points. |n|cffffcc00Level 3|r - Heals for 600 hit points. ")).with_code(Some("AHhb")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHHB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("A holy light that can heal a friendly living unit for 200 or deal half damage to an enemy Undead unit. Healing pierces spell immunity."), Some("A holy light that can heal a friendly living unit or damage an enemy Undead unit. Healing pierces spell immunity. |n|n|cffffcc00Level 1|r - Heals for 200 hit points. |n|cffffcc00Level 2|r - Heals for 400 hit points. |n|cffffcc00Level 3|r - Heals for 600 hit points. ")).with_code(Some(WarcraftObjectId::new("AHhb"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHHB_TIP_LEVELS, AHHB_UBERTIP_LEVELS),
         ),
     );
@@ -1958,7 +1958,7 @@ fn insert_objects_chunk_0(
             AHMT_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AHMT_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Teleports 24 of the player's nearby units, including the Archmage, to a friendly ground unit or structure."), Some("Teleports 24 of the player's nearby units, including the Archmage, to a friendly ground unit or structure.")).with_code(Some("AHmt")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AHMT_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Teleports 24 of the player's nearby units, including the Archmage, to a friendly ground unit or structure."), Some("Teleports 24 of the player's nearby units, including the Archmage, to a friendly ground unit or structure.")).with_code(Some(WarcraftObjectId::new("AHmt"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHMT_TIP_LEVELS, AHMT_UBERTIP_LEVELS),
         ),
     );
@@ -1971,7 +1971,7 @@ fn insert_objects_chunk_0(
             AHPX_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AHPX_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Summons a powerful Phoenix. The Phoenix burns with such intensity that it damages itself and nearby enemy units. Has Magic and Spell Immunity, and Resistant Skin. When a Phoenix dies, it creates an egg that will hatch into a Phoenix. |n|n|cffffcc00Attacks land and air units.|r"), Some("Summons a powerful Phoenix. The Phoenix burns with such intensity that it damages itself and nearby enemy units. Has Magic and Spell Immunity, and Resistant Skin. When a Phoenix dies, it creates an egg that will hatch into a Phoenix. |n|n|cffffcc00Attacks land and air units.|r")).with_code(Some("AHpx")).with_morph_target(Some(WarcraftObjectId::new("hphx"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AHPX_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Summons a powerful Phoenix. The Phoenix burns with such intensity that it damages itself and nearby enemy units. Has Magic and Spell Immunity, and Resistant Skin. When a Phoenix dies, it creates an egg that will hatch into a Phoenix. |n|n|cffffcc00Attacks land and air units.|r"), Some("Summons a powerful Phoenix. The Phoenix burns with such intensity that it damages itself and nearby enemy units. Has Magic and Spell Immunity, and Resistant Skin. When a Phoenix dies, it creates an egg that will hatch into a Phoenix. |n|n|cffffcc00Attacks land and air units.|r")).with_code(Some(WarcraftObjectId::new("AHpx"))).with_morph_target(Some(WarcraftObjectId::new("hphx"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHPX_TIP_LEVELS, AHPX_UBERTIP_LEVELS),
         ),
     );
@@ -1994,7 +1994,7 @@ fn insert_objects_chunk_0(
                     Some("Brings back to life the corpses of 6 friendly nearby units."),
                     Some("Brings back to life the corpses of 6 friendly nearby units."),
                 )
-                .with_code(Some("AHre"))
+                .with_code(Some(WarcraftObjectId::new("AHre")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -2010,7 +2010,7 @@ fn insert_objects_chunk_0(
             AHTA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AHTA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Reveals an area of the map. |nDetects invisible units. |nLasts 15 seconds."), None).with_code(Some("AIta")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AHTA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Reveals an area of the map. |nDetects invisible units. |nLasts 15 seconds."), None).with_code(Some(WarcraftObjectId::new("AIta"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHTA_TIP_LEVELS, AHTA_UBERTIP_LEVELS),
         ),
     );
@@ -2023,7 +2023,7 @@ fn insert_objects_chunk_0(
             AHTB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHTB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Throws a magical hammer at a target enemy unit, dealing 100 damage and stunning the target for 5 seconds."), Some("A magical hammer that is thrown at an enemy unit, causing damage and stunning the target. |n|n|cffffcc00Level 1|r - 100 damage, 5 second stun. |n|cffffcc00Level 2|r - 200 damage, 5 second stun. |n|cffffcc00Level 3|r - 310 damage, 5 second stun.")).with_code(Some("AHtb")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHTB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Throws a magical hammer at a target enemy unit, dealing 100 damage and stunning the target for 5 seconds."), Some("A magical hammer that is thrown at an enemy unit, causing damage and stunning the target. |n|n|cffffcc00Level 1|r - 100 damage, 5 second stun. |n|cffffcc00Level 2|r - 200 damage, 5 second stun. |n|cffffcc00Level 3|r - 310 damage, 5 second stun.")).with_code(Some(WarcraftObjectId::new("AHtb"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHTB_TIP_LEVELS, AHTB_UBERTIP_LEVELS),
         ),
     );
@@ -2036,7 +2036,7 @@ fn insert_objects_chunk_0(
             AHTC_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHTC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Slams the ground, dealing 60 damage to nearby enemy land units and slowing their movement by 50% and attack rate by 50%."), Some("Slams the ground, dealing damage to and slowing the movement speed and attack rate of nearby enemy land units. |n|n|cffffcc00Level 1|r - 60 damage, 50% move, 50% attack. |n|cffffcc00Level 2|r - 110 damage, 50% move, 50% attack. |n|cffffcc00Level 3|r - 150 damage, 50% move, 50% attack.")).with_code(Some("AHtc")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHTC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Slams the ground, dealing 60 damage to nearby enemy land units and slowing their movement by 50% and attack rate by 50%."), Some("Slams the ground, dealing damage to and slowing the movement speed and attack rate of nearby enemy land units. |n|n|cffffcc00Level 1|r - 60 damage, 50% move, 50% attack. |n|cffffcc00Level 2|r - 110 damage, 50% move, 50% attack. |n|cffffcc00Level 3|r - 150 damage, 50% move, 50% attack.")).with_code(Some(WarcraftObjectId::new("AHtc"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHTC_TIP_LEVELS, AHTC_UBERTIP_LEVELS),
         ),
     );
@@ -2049,7 +2049,7 @@ fn insert_objects_chunk_0(
             AHWE_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHWE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Summons a water elemental to attack the Archmage's enemies. Has 500 hit points and deals 19 - 23 damage. |nLasts 60 seconds. |n|n|cffffcc00Attacks land and air units.|r"), Some("Summons a water elemental to attack the Archmage's enemies. |nLasts 60 seconds. |n|n|cffffcc00Attacks land and air units.|r |n|n|cffffcc00Level 1|r - 500 hit points, 19 - 23 damage. |n|cffffcc00Level 2|r - 625 hit points, 32 - 40 damage. |n|cffffcc00Level 3|r - 825 hit points, 44 - 52 damage.")).with_code(Some("AHwe")).with_morph_target(Some(WarcraftObjectId::new("hwat"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHWE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Summons a water elemental to attack the Archmage's enemies. Has 500 hit points and deals 19 - 23 damage. |nLasts 60 seconds. |n|n|cffffcc00Attacks land and air units.|r"), Some("Summons a water elemental to attack the Archmage's enemies. |nLasts 60 seconds. |n|n|cffffcc00Attacks land and air units.|r |n|n|cffffcc00Level 1|r - 500 hit points, 19 - 23 damage. |n|cffffcc00Level 2|r - 625 hit points, 32 - 40 damage. |n|cffffcc00Level 3|r - 825 hit points, 44 - 52 damage.")).with_code(Some(WarcraftObjectId::new("AHwe"))).with_morph_target(Some(WarcraftObjectId::new("hwat"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHWE_TIP_LEVELS, AHWE_UBERTIP_LEVELS),
         ),
     );
@@ -2062,7 +2062,7 @@ fn insert_objects_chunk_0(
             AIHM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AIHM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::One)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::One)), Some("Stops the hero with Cloak of Shadows from auto-acquiring enemies, allowing it to remain unseen. |n|nDuring nighttime units with Shadowmeld will also stop auto-acquiring enemies."), None).with_code(Some("Ashm")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AIHM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::One)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::One)), Some("Stops the hero with Cloak of Shadows from auto-acquiring enemies, allowing it to remain unseen. |n|nDuring nighttime units with Shadowmeld will also stop auto-acquiring enemies."), None).with_code(Some(WarcraftObjectId::new("Ashm"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AIHM_TIP_LEVELS, AIHM_UBERTIP_LEVELS),
         ),
     );
@@ -2077,7 +2077,7 @@ fn insert_objects_chunk_0(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AINV_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("AInv"))
+                    .with_code(Some(WarcraftObjectId::new("AInv")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -2094,7 +2094,7 @@ fn insert_objects_chunk_0(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AIUV_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Ault"))
+                    .with_code(Some(WarcraftObjectId::new("Ault")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -2109,7 +2109,7 @@ fn insert_objects_chunk_0(
             ANAB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANAB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Hurls a flask of acid at a target.  The flask breaks upon impact, splashing a powerful acid on nearby hostile units.|n|nDecreases armor by 3; deals 5 damage per second to the primary target; deals slightly less damage to nearby targets.|nLasts 15 seconds."), Some("Hurls a flask of acid at a target.  The flask breaks upon impact, splashing a powerful acid on nearby hostile units.|n|nDecreases armor; deals high damage over time to the primary target; deals slightly less damage over time to nearby targets.|nLasts 15 seconds.|n|n|cffffcc00Level 1|r - 5 max damage per second, reduces armor by 3.|n|cffffcc00Level 2|r - 10 max damage per second, reduces armor by 4.|n|cffffcc00Level 3|r - 17 max damage per second, reduces armor by 5.")).with_code(Some("ANab")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANAB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Hurls a flask of acid at a target.  The flask breaks upon impact, splashing a powerful acid on nearby hostile units.|n|nDecreases armor by 3; deals 5 damage per second to the primary target; deals slightly less damage to nearby targets.|nLasts 15 seconds."), Some("Hurls a flask of acid at a target.  The flask breaks upon impact, splashing a powerful acid on nearby hostile units.|n|nDecreases armor; deals high damage over time to the primary target; deals slightly less damage over time to nearby targets.|nLasts 15 seconds.|n|n|cffffcc00Level 1|r - 5 max damage per second, reduces armor by 3.|n|cffffcc00Level 2|r - 10 max damage per second, reduces armor by 4.|n|cffffcc00Level 3|r - 17 max damage per second, reduces armor by 5.")).with_code(Some(WarcraftObjectId::new("ANab"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANAB_TIP_LEVELS, ANAB_UBERTIP_LEVELS),
         ),
     );
@@ -2122,7 +2122,7 @@ fn insert_objects_chunk_0(
             ANAV_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANAV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Activate Avatar to give Lord Garithos 5 bonus armor, 500 bonus hit points, 20 bonus damage and spell immunity. |nLasts 60 seconds."), Some("When Avatar is activated, it gives Lord Garithos 5 bonus armor, 500 bonus hit points, 20 bonus damage and spell immunity. |nLasts 60 seconds.")).with_code(Some("AHav")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnavataroff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANAV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Activate Avatar to give Lord Garithos 5 bonus armor, 500 bonus hit points, 20 bonus damage and spell immunity. |nLasts 60 seconds."), Some("When Avatar is activated, it gives Lord Garithos 5 bonus armor, 500 bonus hit points, 20 bonus damage and spell immunity. |nLasts 60 seconds.")).with_code(Some(WarcraftObjectId::new("AHav"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnavataroff.blp"))),
             WarcraftObjectText::with_alt(ANAV_TIP_LEVELS, ANAV_UBERTIP_LEVELS, Some("Deactivate Avatar"), None),
         ),
     );
@@ -2135,7 +2135,7 @@ fn insert_objects_chunk_0(
             ANB2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANB2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Gives a 35% chance that an attack will do 50 bonus damage and stun the target for 2 seconds."), None).with_code(Some("AHbh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANB2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Gives a 35% chance that an attack will do 50 bonus damage and stun the target for 2 seconds."), None).with_code(Some(WarcraftObjectId::new("AHbh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANB2_TIP_LEVELS, ANB2_UBERTIP_LEVELS),
         ),
     );
@@ -2148,7 +2148,7 @@ fn insert_objects_chunk_0(
             ANBA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANBA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Adds 2 bonus damage to attacks. Units killed while under the effect of Black Arrow will turn into 215 hit point skeletons."), Some("Adds extra damage to attacks. Units killed while under the effect of Black Arrow will turn into skeletons. |n|n|cffffcc00Level 1|r - 2 bonus damage, 215 hit point skeleton. |n|cffffcc00Level 2|r - 10 bonus damage, 290 hit point skeleton. |n|cffffcc00Level 3|r - 20 bonus damage, 405 hit point skeleton.")).with_code(Some("ANba")).with_morph_target(Some(WarcraftObjectId::new("ndr1"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btntheblackarrowonoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANBA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Adds 2 bonus damage to attacks. Units killed while under the effect of Black Arrow will turn into 215 hit point skeletons."), Some("Adds extra damage to attacks. Units killed while under the effect of Black Arrow will turn into skeletons. |n|n|cffffcc00Level 1|r - 2 bonus damage, 215 hit point skeleton. |n|cffffcc00Level 2|r - 10 bonus damage, 290 hit point skeleton. |n|cffffcc00Level 3|r - 20 bonus damage, 405 hit point skeleton.")).with_code(Some(WarcraftObjectId::new("ANba"))).with_morph_target(Some(WarcraftObjectId::new("ndr1"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btntheblackarrowonoff.blp"))),
             WarcraftObjectText::with_alt(ANBA_TIP_LEVELS, ANBA_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -2161,7 +2161,7 @@ fn insert_objects_chunk_0(
             ANBF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANBF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Breathes a cone of fire at enemy units, dealing 80 initial damage. Units that have Drunken Haze on them will ignite and burn for 10 damage per second over 5 seconds."), Some("Breathes a cone of fire at enemy units which deals damage. Units that have Drunken Haze on them will ignite and take burn damage over time. |nLasts 5 seconds. |n|n|cffffcc00Level 1|r - 80 initial damage, 10 damage per second. |n|cffffcc00Level 2|r - 130 initial damage, 15 damage per second. |n|cffffcc00Level 3|r - 180 initial damage, 25 damage per second.")).with_code(Some("ANbf")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANBF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Breathes a cone of fire at enemy units, dealing 80 initial damage. Units that have Drunken Haze on them will ignite and burn for 10 damage per second over 5 seconds."), Some("Breathes a cone of fire at enemy units which deals damage. Units that have Drunken Haze on them will ignite and take burn damage over time. |nLasts 5 seconds. |n|n|cffffcc00Level 1|r - 80 initial damage, 10 damage per second. |n|cffffcc00Level 2|r - 130 initial damage, 15 damage per second. |n|cffffcc00Level 3|r - 180 initial damage, 25 damage per second.")).with_code(Some(WarcraftObjectId::new("ANbf"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANBF_TIP_LEVELS, ANBF_UBERTIP_LEVELS),
         ),
     );
@@ -2174,7 +2174,7 @@ fn insert_objects_chunk_0(
             ANBH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANBH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Gives a 25% chance that an attack will do 25 bonus damage and stun the target for 2 seconds."), None).with_code(Some("AHbh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANBH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Gives a 25% chance that an attack will do 25 bonus damage and stun the target for 2 seconds."), None).with_code(Some(WarcraftObjectId::new("AHbh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANBH_TIP_LEVELS, ANBH_UBERTIP_LEVELS),
         ),
     );
@@ -2187,7 +2187,7 @@ fn insert_objects_chunk_0(
             ANBL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANBL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Teleports the bear a short distance, allowing it to move in and out of combat."), None).with_code(Some("AEbl")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANBL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Teleports the bear a short distance, allowing it to move in and out of combat."), None).with_code(Some(WarcraftObjectId::new("AEbl"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANBL_TIP_LEVELS, ANBL_UBERTIP_LEVELS),
         ),
     );
@@ -2200,7 +2200,7 @@ fn insert_objects_chunk_0(
             ANC1_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANC1_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Bombards an area with rockets, dealing up to 45 damage to nearby enemy ground and air units and stunning them for 1.01 second. Also hits mechanicals and buildings"), Some("Bombards an area with rockets, stunning enemy ground and air units for 1.01 second and damaging nearby enemy units. Also hits mechanicals and buildings. |n|n|cffffcc00Level 1|r - 45 damage.|n|cffffcc00Level 2|r - 75 damage.|n|cffffcc00Level 3|r - 110 damage")).with_code(Some("ANcs")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANC1_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Bombards an area with rockets, dealing up to 45 damage to nearby enemy ground and air units and stunning them for 1.01 second. Also hits mechanicals and buildings"), Some("Bombards an area with rockets, stunning enemy ground and air units for 1.01 second and damaging nearby enemy units. Also hits mechanicals and buildings. |n|n|cffffcc00Level 1|r - 45 damage.|n|cffffcc00Level 2|r - 75 damage.|n|cffffcc00Level 3|r - 110 damage")).with_code(Some(WarcraftObjectId::new("ANcs"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANC1_TIP_LEVELS, ANC1_UBERTIP_LEVELS),
         ),
     );
@@ -2213,7 +2213,7 @@ fn insert_objects_chunk_0(
             ANC2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANC2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Bombards an area with rockets, dealing up to 45 damage to nearby enemy units and stunning them for 1.01 second."), Some("Bombards an area with rockets, stunning enemy units for 1.01 second and damaging nearby enemy units.|n|n|cffffcc00Level 1|r - 45 damage.|n|cffffcc00Level 2|r - 75 damage.|n|cffffcc00Level 3|r - 110 damage")).with_code(Some("ANcs")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANC2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Bombards an area with rockets, dealing up to 45 damage to nearby enemy units and stunning them for 1.01 second."), Some("Bombards an area with rockets, stunning enemy units for 1.01 second and damaging nearby enemy units.|n|n|cffffcc00Level 1|r - 45 damage.|n|cffffcc00Level 2|r - 75 damage.|n|cffffcc00Level 3|r - 110 damage")).with_code(Some(WarcraftObjectId::new("ANcs"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANC2_TIP_LEVELS, ANC2_UBERTIP_LEVELS),
         ),
     );
@@ -2226,7 +2226,7 @@ fn insert_objects_chunk_0(
             ANC3_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANC3_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Bombards an area with rockets, dealing up to 45 damage to nearby enemy units and stunning them for 1.01 second."), Some("Bombards an area with rockets, stunning enemy units for 1.01 second and damaging nearby enemy units.|n|n|cffffcc00Level 1|r - 45 damage.|n|cffffcc00Level 2|r - 75 damage.|n|cffffcc00Level 3|r - 110 damage")).with_code(Some("ANcs")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANC3_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Bombards an area with rockets, dealing up to 45 damage to nearby enemy units and stunning them for 1.01 second."), Some("Bombards an area with rockets, stunning enemy units for 1.01 second and damaging nearby enemy units.|n|n|cffffcc00Level 1|r - 45 damage.|n|cffffcc00Level 2|r - 75 damage.|n|cffffcc00Level 3|r - 110 damage")).with_code(Some(WarcraftObjectId::new("ANcs"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANC3_TIP_LEVELS, ANC3_UBERTIP_LEVELS),
         ),
     );
@@ -2239,7 +2239,7 @@ fn insert_objects_chunk_0(
             ANCA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANCA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("The Pit Lord strikes with such force that 40% of his damage strikes through to enemies near the primary attacked unit."), Some("The Pit Lord strikes with such force that he damages multiple enemies with his attack. |n|n|cffffcc00Level 1|r - 40% damage is splash. |n|cffffcc00Level 2|r - 65% damage is splash. |n|cffffcc00Level 3|r - 90% damage is splash.")).with_code(Some("ANca")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANCA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("The Pit Lord strikes with such force that 40% of his damage strikes through to enemies near the primary attacked unit."), Some("The Pit Lord strikes with such force that he damages multiple enemies with his attack. |n|n|cffffcc00Level 1|r - 40% damage is splash. |n|cffffcc00Level 2|r - 65% damage is splash. |n|cffffcc00Level 3|r - 90% damage is splash.")).with_code(Some(WarcraftObjectId::new("ANca"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANCA_TIP_LEVELS, ANCA_UBERTIP_LEVELS),
         ),
     );
@@ -2252,7 +2252,7 @@ fn insert_objects_chunk_0(
             ANCF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANCF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Breathes a cone of fire at enemy units, dealing 50 initial damage. Units that have Drunken Haze on them will ignite and burn for 7 damage per second over 5 seconds."), Some("Breathes a cone of fire at enemy units which deals damage. Units that have Drunken Haze on them will ignite and take burn damage over time. |nLasts 5 seconds. |n|n|cffffcc00Level 1|r - 50 initial damage, 7 damage per second. |n|cffffcc00Level 2|r - 100 initial damage, 14 damage per second. |n|cffffcc00Level 3|r - 150 initial damage, 21 damage per second. |n|cffffcc00Level 4|r - 225 initial damage, 30 damage per second.")).with_code(Some("ANbf")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANCF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Breathes a cone of fire at enemy units, dealing 50 initial damage. Units that have Drunken Haze on them will ignite and burn for 7 damage per second over 5 seconds."), Some("Breathes a cone of fire at enemy units which deals damage. Units that have Drunken Haze on them will ignite and take burn damage over time. |nLasts 5 seconds. |n|n|cffffcc00Level 1|r - 50 initial damage, 7 damage per second. |n|cffffcc00Level 2|r - 100 initial damage, 14 damage per second. |n|cffffcc00Level 3|r - 150 initial damage, 21 damage per second. |n|cffffcc00Level 4|r - 225 initial damage, 30 damage per second.")).with_code(Some(WarcraftObjectId::new("ANbf"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANCF_TIP_LEVELS, ANCF_UBERTIP_LEVELS),
         ),
     );
@@ -2265,7 +2265,7 @@ fn insert_objects_chunk_0(
             ANCH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANCH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Takes permanent control of a target enemy unit. |nCharm pierces spell immunity, but cannot be used on Heroes, or creeps above level 5."), Some("Takes permanent control of a target enemy unit. |nCharm pierces spell immunity, but cannot be used on Heroes, or creeps above level 5.")).with_code(Some("ANch")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANCH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Takes permanent control of a target enemy unit. |nCharm pierces spell immunity, but cannot be used on Heroes, or creeps above level 5."), Some("Takes permanent control of a target enemy unit. |nCharm pierces spell immunity, but cannot be used on Heroes, or creeps above level 5.")).with_code(Some(WarcraftObjectId::new("ANch"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANCH_TIP_LEVELS, ANCH_UBERTIP_LEVELS),
         ),
     );
@@ -2288,7 +2288,7 @@ fn insert_objects_chunk_0(
                     Some("Channels powerful warding magic."),
                     None,
                 )
-                .with_code(Some("ANcl"))
+                .with_code(Some(WarcraftObjectId::new("ANcl")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -2304,7 +2304,7 @@ fn insert_objects_chunk_0(
             ANCR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANCR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("The Alchemist causes his Ogre to enter a chemically induced rage, increasing movement rate by 50% and increasing attack rate by 25% for 15 seconds."), Some("The Alchemist causes his Ogre to enter a chemically induced rage, increasing movement rate by 50% and increasing attack rate.|nLasts 15 seconds.|n|n|cffffcc00Level 1|r - 25% attack rate increase.|n|cffffcc00Level 2|r - 75% attack rate increase.|n|cffffcc00Level 3|r - 125% attack rate increase.")).with_code(Some("ANcr")).with_morph_target(Some(WarcraftObjectId::new("Nalm"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANCR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("The Alchemist causes his Ogre to enter a chemically induced rage, increasing movement rate by 50% and increasing attack rate by 25% for 15 seconds."), Some("The Alchemist causes his Ogre to enter a chemically induced rage, increasing movement rate by 50% and increasing attack rate.|nLasts 15 seconds.|n|n|cffffcc00Level 1|r - 25% attack rate increase.|n|cffffcc00Level 2|r - 75% attack rate increase.|n|cffffcc00Level 3|r - 125% attack rate increase.")).with_code(Some(WarcraftObjectId::new("ANcr"))).with_morph_target(Some(WarcraftObjectId::new("Nalm"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANCR_TIP_LEVELS, ANCR_UBERTIP_LEVELS),
         ),
     );
@@ -2317,7 +2317,7 @@ fn insert_objects_chunk_0(
             ANCS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANCS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Bombards an area with rockets, dealing up to 45 damage to nearby enemy units and stunning them for 1.01 second. Also hits mechanicals and buildings"), Some("Bombards an area with rockets, damaging and stunning enemy ground and air units for 1.01 second. Also hits mechanicals and buildings.|n|n|cffffcc00Level 1|r - 45 damage.|n|cffffcc00Level 2|r - 75 damage.|n|cffffcc00Level 3|r - 110 damage.")).with_code(Some("ANcs")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANCS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Bombards an area with rockets, dealing up to 45 damage to nearby enemy units and stunning them for 1.01 second. Also hits mechanicals and buildings"), Some("Bombards an area with rockets, damaging and stunning enemy ground and air units for 1.01 second. Also hits mechanicals and buildings.|n|n|cffffcc00Level 1|r - 45 damage.|n|cffffcc00Level 2|r - 75 damage.|n|cffffcc00Level 3|r - 110 damage.")).with_code(Some(WarcraftObjectId::new("ANcs"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANCS_TIP_LEVELS, ANCS_UBERTIP_LEVELS),
         ),
     );
@@ -2340,7 +2340,7 @@ fn insert_objects_chunk_0(
                     Some("Causes attacks to do 2.5 times normal damage to buildings."),
                     None,
                 )
-                .with_code(Some("ANde"))
+                .with_code(Some(WarcraftObjectId::new("ANde")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -2366,7 +2366,7 @@ fn insert_objects_chunk_0(
                     Some("Causes attacks to do 3 times normal damage to buildings."),
                     None,
                 )
-                .with_code(Some("ANde"))
+                .with_code(Some(WarcraftObjectId::new("ANde")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -2392,7 +2392,7 @@ fn insert_objects_chunk_0(
                     Some("Causes attacks to do 3.5 times normal damage to buildings."),
                     None,
                 )
-                .with_code(Some("ANde"))
+                .with_code(Some(WarcraftObjectId::new("ANde")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -2408,7 +2408,7 @@ fn insert_objects_chunk_0(
             ANDB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANDB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 7% chance to dodge an attack and a 10% chance to deal 2 times total damage."), Some("Gives a percent chance to avoid attacks and a 10% chance to deal additional damage. |n|n|cffffcc00Level 1|r - 7% dodge, 2 times total damage. |n|cffffcc00Level 2|r - 14% dodge, 3 times total damage. |n|cffffcc00Level 3|r - 21% dodge, 4 times total damage.")).with_code(Some("ANdb")).with_morph_target(None).with_evasion_chances([0.07, 0.14, 0.21, 0.0]).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANDB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 7% chance to dodge an attack and a 10% chance to deal 2 times total damage."), Some("Gives a percent chance to avoid attacks and a 10% chance to deal additional damage. |n|n|cffffcc00Level 1|r - 7% dodge, 2 times total damage. |n|cffffcc00Level 2|r - 14% dodge, 3 times total damage. |n|cffffcc00Level 3|r - 21% dodge, 4 times total damage.")).with_code(Some(WarcraftObjectId::new("ANdb"))).with_morph_target(None).with_evasion_chances([0.07, 0.14, 0.21, 0.0]).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANDB_TIP_LEVELS, ANDB_UBERTIP_LEVELS),
         ),
     );
@@ -2431,7 +2431,7 @@ fn insert_objects_chunk_0(
                     Some("Puts a target villager to sleep and converts it into a zombie."),
                     Some("Puts a target villager to sleep and converts it into a zombie."),
                 )
-                .with_code(Some("ANdc"))
+                .with_code(Some(WarcraftObjectId::new("ANdc")))
                 .with_morph_target(Some(WarcraftObjectId::new("nzom")))
                 .with_off_state(None, None, None, None),
             ),
@@ -2457,7 +2457,7 @@ fn insert_objects_chunk_0(
                     Some("Causes attacks to do 2 times normal damage to buildings."),
                     None,
                 )
-                .with_code(Some("ANde"))
+                .with_code(Some(WarcraftObjectId::new("ANde")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -2473,7 +2473,7 @@ fn insert_objects_chunk_0(
             ANDH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANDH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Drenches enemy units in alcohol, causing their movement speed to be reduced by 15%, and have a 45% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. |nLasts 12 seconds."), Some("Drenches enemy units in alcohol, causing their movement speed to be reduced, and have a chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage over time. |nLasts 12 seconds |n|n|cffffcc00Level 1|r - 15% movement speed reduction, 45% miss chance. |n|cffffcc00Level 2|r - 30% movement speed reduction, 65% miss chance. |n|cffffcc00Level 3|r - 50% movement speed reduction, 80% miss chance.")).with_code(Some("ANdh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANDH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Drenches enemy units in alcohol, causing their movement speed to be reduced by 15%, and have a 45% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. |nLasts 12 seconds."), Some("Drenches enemy units in alcohol, causing their movement speed to be reduced, and have a chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage over time. |nLasts 12 seconds |n|n|cffffcc00Level 1|r - 15% movement speed reduction, 45% miss chance. |n|cffffcc00Level 2|r - 30% movement speed reduction, 65% miss chance. |n|cffffcc00Level 3|r - 50% movement speed reduction, 80% miss chance.")).with_code(Some(WarcraftObjectId::new("ANdh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANDH_TIP_LEVELS, ANDH_UBERTIP_LEVELS),
         ),
     );
@@ -2486,7 +2486,7 @@ fn insert_objects_chunk_0(
             ANDO_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANDO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Marks a target unit for the manifestation of a Demon. The afflicted unit cannot cast spells and will take 40 damage per second until it dies. Upon its death, a great Demon will spawn from its corpse. Doom cannot be dispelled or cancelled. Pierces spell immunity."), Some("Marks a target unit for the manifestation of a Demon. The afflicted unit cannot cast spells and will take 40 damage per second until it dies. Upon its death, a great Demon will spawn from its corpse. Doom cannot be dispelled or cancelled. Pierces spell immunity.")).with_code(Some("ANdo")).with_morph_target(Some(WarcraftObjectId::new("nba2"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANDO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Marks a target unit for the manifestation of a Demon. The afflicted unit cannot cast spells and will take 40 damage per second until it dies. Upon its death, a great Demon will spawn from its corpse. Doom cannot be dispelled or cancelled. Pierces spell immunity."), Some("Marks a target unit for the manifestation of a Demon. The afflicted unit cannot cast spells and will take 40 damage per second until it dies. Upon its death, a great Demon will spawn from its corpse. Doom cannot be dispelled or cancelled. Pierces spell immunity.")).with_code(Some(WarcraftObjectId::new("ANdo"))).with_morph_target(Some(WarcraftObjectId::new("nba2"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANDO_TIP_LEVELS, ANDO_UBERTIP_LEVELS),
         ),
     );
@@ -2499,7 +2499,7 @@ fn insert_objects_chunk_0(
             ANDP_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANDP_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Opens a portal, allowing demons to step through and do Archimonde's bidding."), Some("Opens a portal, allowing demons to step through and do Archimonde's bidding.")).with_code(Some("ANdp")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANDP_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Opens a portal, allowing demons to step through and do Archimonde's bidding."), Some("Opens a portal, allowing demons to step through and do Archimonde's bidding.")).with_code(Some(WarcraftObjectId::new("ANdp"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANDP_TIP_LEVELS, ANDP_UBERTIP_LEVELS),
         ),
     );
@@ -2512,7 +2512,7 @@ fn insert_objects_chunk_0(
             ANDR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANDR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Absorbs the life essence of a target enemy unit by taking 30 hit points per second from it and giving them to the Dark Ranger, or transfers 30 hit points from the Dark Ranger to an ally. |n|nAlso applies the current rank of the Black Arrow debuff to the target. |nLasts 8 seconds."), Some("Absorbs the life essence of a target enemy unit by taking hit points from it every second and giving them to the Dark Ranger, or transfers hit points from the Dark Ranger to an ally. |n|nLife Drain also applies the current rank of the Black Arrow debuff to the target. |nLasts 8 seconds. |n|n|cffffcc00Level 1|r - 30 hit point drain per second, or transfers 30 hit points per second to an ally. |n|cffffcc00Level 2|r - 45 hit point drain per second, or transfers 45 hit points per second to an ally. |n|cffffcc00Level 3|r - 60 hit point drain per second, or transfers 60 hit points per second to an ally.")).with_code(Some("AHdr")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANDR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Absorbs the life essence of a target enemy unit by taking 30 hit points per second from it and giving them to the Dark Ranger, or transfers 30 hit points from the Dark Ranger to an ally. |n|nAlso applies the current rank of the Black Arrow debuff to the target. |nLasts 8 seconds."), Some("Absorbs the life essence of a target enemy unit by taking hit points from it every second and giving them to the Dark Ranger, or transfers hit points from the Dark Ranger to an ally. |n|nLife Drain also applies the current rank of the Black Arrow debuff to the target. |nLasts 8 seconds. |n|n|cffffcc00Level 1|r - 30 hit point drain per second, or transfers 30 hit points per second to an ally. |n|cffffcc00Level 2|r - 45 hit point drain per second, or transfers 45 hit points per second to an ally. |n|cffffcc00Level 3|r - 60 hit point drain per second, or transfers 60 hit points per second to an ally.")).with_code(Some(WarcraftObjectId::new("AHdr"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANDR_TIP_LEVELS, ANDR_UBERTIP_LEVELS),
         ),
     );
@@ -2525,7 +2525,7 @@ fn insert_objects_chunk_0(
             ANEF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANEF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Splits the Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn. |nLasts 45 seconds."), Some("Splits the Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn. |nLasts 45 seconds.")).with_code(Some("ANef")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANEF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Splits the Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn. |nLasts 45 seconds."), Some("Splits the Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn. |nLasts 45 seconds.")).with_code(Some(WarcraftObjectId::new("ANef"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANEF_TIP_LEVELS, ANEF_UBERTIP_LEVELS),
         ),
     );
@@ -2538,7 +2538,7 @@ fn insert_objects_chunk_0(
             ANEG_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANEG_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Improves other Tinker abilities, gives 2 attack damage and increases Tinker movement speed by 10%."), Some("Enhances other Tinker abilities with each level learned:|n|n|cffffcc00Cluster Rockets|r - Larger Area.|n|cffffcc00Pocket Factory|r - Builds Clockwerk Goblins more quickly.|n|cffffcc00Robo-Goblin|r - Increases armor and Strength; enhances Demolish.|n|nAlso gives bonus damage and increases the Tinker's movement speed.|n|n|cffffcc00Level 1|r - +2 damage, +10% movement.|n|cffffcc00Level 2|r - +4 damage, +20% movement.|n|cffffcc00Level 3|r - +6 damage, +30% movement.")).with_code(Some("ANeg")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANEG_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Improves other Tinker abilities, gives 2 attack damage and increases Tinker movement speed by 10%."), Some("Enhances other Tinker abilities with each level learned:|n|n|cffffcc00Cluster Rockets|r - Larger Area.|n|cffffcc00Pocket Factory|r - Builds Clockwerk Goblins more quickly.|n|cffffcc00Robo-Goblin|r - Increases armor and Strength; enhances Demolish.|n|nAlso gives bonus damage and increases the Tinker's movement speed.|n|n|cffffcc00Level 1|r - +2 damage, +10% movement.|n|cffffcc00Level 2|r - +4 damage, +20% movement.|n|cffffcc00Level 3|r - +6 damage, +30% movement.")).with_code(Some(WarcraftObjectId::new("ANeg"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANEG_TIP_LEVELS, ANEG_UBERTIP_LEVELS),
         ),
     );
@@ -2551,7 +2551,7 @@ fn insert_objects_chunk_0(
             ANEN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANEN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes a target enemy unit to be bound to the ground so that it cannot move for 9 seconds. Air units that are ensnared can be attacked as though they were land units."), None).with_code(Some("Aens")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANEN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes a target enemy unit to be bound to the ground so that it cannot move for 9 seconds. Air units that are ensnared can be attacked as though they were land units."), None).with_code(Some(WarcraftObjectId::new("Aens"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANEN_TIP_LEVELS, ANEN_UBERTIP_LEVELS),
         ),
     );
@@ -2564,7 +2564,7 @@ fn insert_objects_chunk_0(
             ANFA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANFA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Adds a cold effect to each attack, dealing 5 bonus damage, slowing a target enemy unit's attacks by 30% and movement by 30% for 5 seconds."), Some("Adds a cold effect to each attack, causing bonus damage and slowing a target enemy unit's attacks and movement. |n|n|cffffcc00Level 1|r - 30% attack rate, 30% movement speed, 5 bonus damage.|n|cffffcc00Level 2|r - 50% attack rate, 50% movement speed, 10 bonus damage.|n|cffffcc00Level 3|r - 70% attack rate, 70% movement speed, 15 bonus damage.")).with_code(Some("AHca")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btncoldarrowsoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANFA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Adds a cold effect to each attack, dealing 5 bonus damage, slowing a target enemy unit's attacks by 30% and movement by 30% for 5 seconds."), Some("Adds a cold effect to each attack, causing bonus damage and slowing a target enemy unit's attacks and movement. |n|n|cffffcc00Level 1|r - 30% attack rate, 30% movement speed, 5 bonus damage.|n|cffffcc00Level 2|r - 50% attack rate, 50% movement speed, 10 bonus damage.|n|cffffcc00Level 3|r - 70% attack rate, 70% movement speed, 15 bonus damage.")).with_code(Some(WarcraftObjectId::new("AHca"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btncoldarrowsoff.blp"))),
             WarcraftObjectText::with_alt(ANFA_TIP_LEVELS, ANFA_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -2587,7 +2587,7 @@ fn insert_objects_chunk_0(
                     Some("Hurls a fiery bolt that stuns a target enemy unit."),
                     None,
                 )
-                .with_code(Some("ANfb"))
+                .with_code(Some(WarcraftObjectId::new("ANfb")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -2617,7 +2617,7 @@ fn insert_objects_chunk_0(
                         "Instantly turns a creature or building inside-out, destroying it utterly.",
                     ),
                 )
-                .with_code(Some("ANfd"))
+                .with_code(Some(WarcraftObjectId::new("ANfd")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -2633,7 +2633,7 @@ fn insert_objects_chunk_0(
             ANFL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANFL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Calls forth a cone of lightning on a target enemy unit, hitting up to 3 enemy units for 85 damage."), Some("Calls forth a cone of lightning to damage enemies. |n|n|cffffcc00Level 1|r - 85 damage per unit. |n|cffffcc00Level 2|r - 160 damage per unit. |n|cffffcc00Level 3|r - 250 damage per unit.")).with_code(Some("ANfl")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANFL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Calls forth a cone of lightning on a target enemy unit, hitting up to 3 enemy units for 85 damage."), Some("Calls forth a cone of lightning to damage enemies. |n|n|cffffcc00Level 1|r - 85 damage per unit. |n|cffffcc00Level 2|r - 160 damage per unit. |n|cffffcc00Level 3|r - 250 damage per unit.")).with_code(Some(WarcraftObjectId::new("ANfl"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANFL_TIP_LEVELS, ANFL_UBERTIP_LEVELS),
         ),
     );
@@ -2646,7 +2646,7 @@ fn insert_objects_chunk_0(
             ANG1_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANG1_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- 7 bonus Strength and 2 bonus armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- Bonus Strength and armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells.")).with_code(Some("ANrg")).with_morph_target(Some(WarcraftObjectId::new("Nrob"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnherotinker.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANG1_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- 7 bonus Strength and 2 bonus armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- Bonus Strength and armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells.")).with_code(Some(WarcraftObjectId::new("ANrg"))).with_morph_target(Some(WarcraftObjectId::new("Nrob"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnherotinker.blp"))),
             WarcraftObjectText::with_alt(ANG1_TIP_LEVELS, ANG1_UBERTIP_LEVELS, Some("Revert to Tinker Form"), Some("Returns to normal Tinker form, losing the benefits of Robo-Goblin but once again becoming organic.")),
         ),
     );
@@ -2659,7 +2659,7 @@ fn insert_objects_chunk_0(
             ANG2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANG2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- 9 bonus Strength and 3 bonus armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- Bonus Strength and armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells.")).with_code(Some("ANrg")).with_morph_target(Some(WarcraftObjectId::new("Nrob"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnherotinker.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANG2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- 9 bonus Strength and 3 bonus armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- Bonus Strength and armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells.")).with_code(Some(WarcraftObjectId::new("ANrg"))).with_morph_target(Some(WarcraftObjectId::new("Nrob"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnherotinker.blp"))),
             WarcraftObjectText::with_alt(ANG2_TIP_LEVELS, ANG2_UBERTIP_LEVELS, Some("Revert to Tinker Form"), Some("Returns to normal Tinker form, losing the benefits of Robo-Goblin but once again becoming organic.")),
         ),
     );
@@ -2672,7 +2672,7 @@ fn insert_objects_chunk_0(
             ANG3_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANG3_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- 11 bonus Strength and 4 bonus armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- Bonus Strength and armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells.")).with_code(Some("ANrg")).with_morph_target(Some(WarcraftObjectId::new("Nrob"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnherotinker.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANG3_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- 11 bonus Strength and 4 bonus armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- Bonus Strength and armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells.")).with_code(Some(WarcraftObjectId::new("ANrg"))).with_morph_target(Some(WarcraftObjectId::new("Nrob"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnherotinker.blp"))),
             WarcraftObjectText::with_alt(ANG3_TIP_LEVELS, ANG3_UBERTIP_LEVELS, Some("Revert to Tinker Form"), Some("Returns to normal Tinker form, losing the benefits of Robo-Goblin but once again becoming organic.")),
         ),
     );
@@ -2695,7 +2695,7 @@ fn insert_objects_chunk_0(
                     Some("Mines gold from gold mines and harvests lumber from trees."),
                     None,
                 )
-                .with_code(Some("Ahar"))
+                .with_code(Some(WarcraftObjectId::new("Ahar")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::One)),
@@ -2721,7 +2721,7 @@ fn insert_objects_chunk_0(
             ANHS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANHS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Sprays 3 waves of healing mist; each wave heals 30 damage to all friendly units in an area."), Some("Sprays waves of healing mist that heal friendly units in a target area. |n|n|cffffcc00Level 1|r - 3 waves at 30 hit points healed each. |n|cffffcc00Level 2|r - 4 waves at 45 hit points healed each. |n|cffffcc00Level 3|r - 5 waves at 60 hit points healed each.")).with_code(Some("ANhs")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANHS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Sprays 3 waves of healing mist; each wave heals 30 damage to all friendly units in an area."), Some("Sprays waves of healing mist that heal friendly units in a target area. |n|n|cffffcc00Level 1|r - 3 waves at 30 hit points healed each. |n|cffffcc00Level 2|r - 4 waves at 45 hit points healed each. |n|cffffcc00Level 3|r - 5 waves at 60 hit points healed each.")).with_code(Some(WarcraftObjectId::new("ANhs"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANHS_TIP_LEVELS, ANHS_UBERTIP_LEVELS),
         ),
     );
@@ -2734,7 +2734,7 @@ fn insert_objects_chunk_0(
             ANHT_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANHT_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("The Pit Lord lets loose a terrifying howl that reduces nearby enemy units' attack damage by 30% for 15 seconds."), Some("The Pit Lord lets loose a terrifying howl that causes nearby enemy units to shiver in fear, reducing their attack damage. |nLasts 15 seconds. |n|n|cffffcc00Level 1|r - 30% attack damage reduction. |n|cffffcc00Level 2|r - 40% attack damage reduction. |n|cffffcc00Level 3|r - 50% attack damage reduction.")).with_code(Some("ANht")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANHT_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("The Pit Lord lets loose a terrifying howl that reduces nearby enemy units' attack damage by 30% for 15 seconds."), Some("The Pit Lord lets loose a terrifying howl that causes nearby enemy units to shiver in fear, reducing their attack damage. |nLasts 15 seconds. |n|n|cffffcc00Level 1|r - 30% attack damage reduction. |n|cffffcc00Level 2|r - 40% attack damage reduction. |n|cffffcc00Level 3|r - 50% attack damage reduction.")).with_code(Some(WarcraftObjectId::new("ANht"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANHT_TIP_LEVELS, ANHT_UBERTIP_LEVELS),
         ),
     );
@@ -2747,7 +2747,7 @@ fn insert_objects_chunk_0(
             ANHW_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANHW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Calls forth a wave of healing energy that bounces up to 3 times, healing 130 damage on the primary target. Each jump heals less damage."), Some("Calls forth a wave of energy that heals a target and bounces to nearby friendlies. Each bounce heals less damage. |n|n|cffffcc00Level 1|r - Heals 130 damage, jumps 3 times. |n|cffffcc00Level 2|r - Heals 215 damage, jumps 4 times. |n|cffffcc00Level 3|r - Heals 300 damage, jumps 5 times. |n|cffffcc00Level 4|r - Heals 425 damage, jumps 6 times.")).with_code(Some("AOhw")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANHW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Calls forth a wave of healing energy that bounces up to 3 times, healing 130 damage on the primary target. Each jump heals less damage."), Some("Calls forth a wave of energy that heals a target and bounces to nearby friendlies. Each bounce heals less damage. |n|n|cffffcc00Level 1|r - Heals 130 damage, jumps 3 times. |n|cffffcc00Level 2|r - Heals 215 damage, jumps 4 times. |n|cffffcc00Level 3|r - Heals 300 damage, jumps 5 times. |n|cffffcc00Level 4|r - Heals 425 damage, jumps 6 times.")).with_code(Some(WarcraftObjectId::new("AOhw"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANHW_TIP_LEVELS, ANHW_UBERTIP_LEVELS),
         ),
     );
@@ -2760,7 +2760,7 @@ fn insert_objects_chunk_0(
             ANHX_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANHX_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Transforms an enemy unit into a random critter for 15 seconds."), Some("Transforms an enemy unit into a random critter, disabling special abilities. |n|n|cffffcc00Level 1|r - 70 mana, lasts 15 seconds. |n|cffffcc00Level 2|r - 70 mana, lasts 30 seconds. |n|cffffcc00Level 3|r - 70 mana, lasts 45 seconds. |n|cffffcc00Level 4|r - 25 mana, lasts 45 seconds.")).with_code(Some("AOhx")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANHX_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Transforms an enemy unit into a random critter for 15 seconds."), Some("Transforms an enemy unit into a random critter, disabling special abilities. |n|n|cffffcc00Level 1|r - 70 mana, lasts 15 seconds. |n|cffffcc00Level 2|r - 70 mana, lasts 30 seconds. |n|cffffcc00Level 3|r - 70 mana, lasts 45 seconds. |n|cffffcc00Level 4|r - 25 mana, lasts 45 seconds.")).with_code(Some(WarcraftObjectId::new("AOhx"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANHX_TIP_LEVELS, ANHX_UBERTIP_LEVELS),
         ),
     );
@@ -2773,7 +2773,7 @@ fn insert_objects_chunk_0(
             ANIA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANIA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Each attack made is enhanced with living flames that cling to the target. These flames add 2 damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing up to 30 damage to all nearby hostile units."), Some("Each attack made is enhanced with living flames that cling to the target. These flames add a small amount of damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing significant damage to all nearby hostile units.|n|n|cffffcc00Level 1|r - 2 bonus damage, 30 incineration damage.|n|cffffcc00Level 2|r - 3 bonus damage, 45 incineration damage.|n|cffffcc00Level 3|r - 4 bonus damage, 60 incineration damage.")).with_code(Some("ANia")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btnincinerateoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANIA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Each attack made is enhanced with living flames that cling to the target. These flames add 2 damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing up to 30 damage to all nearby hostile units."), Some("Each attack made is enhanced with living flames that cling to the target. These flames add a small amount of damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing significant damage to all nearby hostile units.|n|n|cffffcc00Level 1|r - 2 bonus damage, 30 incineration damage.|n|cffffcc00Level 2|r - 3 bonus damage, 45 incineration damage.|n|cffffcc00Level 3|r - 4 bonus damage, 60 incineration damage.")).with_code(Some(WarcraftObjectId::new("ANia"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btnincinerateoff.blp"))),
             WarcraftObjectText::with_alt(ANIA_TIP_LEVELS, ANIA_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -2786,7 +2786,7 @@ fn insert_objects_chunk_0(
             ANIC_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANIC_COOLDOWNS, None, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Each attack made is enhanced with living flames that cling to the target. These flames add 2 damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing up to 30 damage to all nearby hostile units."), Some("Each attack made is enhanced with living flames that cling to the target. These flames add a small amount of damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing significant damage to all nearby hostile units.|n|n|cffffcc00Level 1|r - 2 bonus damage, 30 incineration damage.|n|cffffcc00Level 2|r - 3 bonus damage, 45 incineration damage.|n|cffffcc00Level 3|r - 4 bonus damage, 60 incineration damage.")).with_code(Some("ANic")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANIC_COOLDOWNS, None, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Each attack made is enhanced with living flames that cling to the target. These flames add 2 damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing up to 30 damage to all nearby hostile units."), Some("Each attack made is enhanced with living flames that cling to the target. These flames add a small amount of damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing significant damage to all nearby hostile units.|n|n|cffffcc00Level 1|r - 2 bonus damage, 30 incineration damage.|n|cffffcc00Level 2|r - 3 bonus damage, 45 incineration damage.|n|cffffcc00Level 3|r - 4 bonus damage, 60 incineration damage.")).with_code(Some(WarcraftObjectId::new("ANic"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANIC_TIP_LEVELS, ANIC_UBERTIP_LEVELS),
         ),
     );
@@ -2799,7 +2799,7 @@ fn insert_objects_chunk_0(
             ANIN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANIN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Summons an Infernal from the sky, causing area effect damage where it lands."), None).with_code(Some("ANin")).with_morph_target(Some(WarcraftObjectId::new("ninf"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANIN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Summons an Infernal from the sky, causing area effect damage where it lands."), None).with_code(Some(WarcraftObjectId::new("ANin"))).with_morph_target(Some(WarcraftObjectId::new("ninf"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANIN_TIP_LEVELS, ANIN_UBERTIP_LEVELS),
         ),
     );
@@ -2812,7 +2812,7 @@ fn insert_objects_chunk_0(
             ANLM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANLM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Summons a Lava Spawn, a resilient and deadly fire creature. As a Lava Spawn deals damage, it consumes the flesh of its target, thereby fueling its fires and eventually splitting into two healthy Lava Spawns.|n|nHas 425 hit points and deals 11 - 27 damage.|nLasts 70 seconds.|n|n|cffffcc00Attacks ground and air units.|r"), Some("Summons a Lava Spawn, a resilient and deadly fire creature. As a Lava Spawn deals damage, it consumes the flesh of its target, eventually splitting into two healthy Lava Spawns.|nLasts 70 seconds.|n|n|cffffcc00Level 1|r - 425 hit points, 11 - 27 damage.|n|cffffcc00Level 2|r - 550 hit points, 21 - 45 damage.|n|cffffcc00Level 3|r - 700 hit points, 32 - 56 damage.|n|n|cffffcc00Attacks ground and air units.|r")).with_code(Some("ANlm")).with_morph_target(Some(WarcraftObjectId::new("nlv1"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANLM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Summons a Lava Spawn, a resilient and deadly fire creature. As a Lava Spawn deals damage, it consumes the flesh of its target, thereby fueling its fires and eventually splitting into two healthy Lava Spawns.|n|nHas 425 hit points and deals 11 - 27 damage.|nLasts 70 seconds.|n|n|cffffcc00Attacks ground and air units.|r"), Some("Summons a Lava Spawn, a resilient and deadly fire creature. As a Lava Spawn deals damage, it consumes the flesh of its target, eventually splitting into two healthy Lava Spawns.|nLasts 70 seconds.|n|n|cffffcc00Level 1|r - 425 hit points, 11 - 27 damage.|n|cffffcc00Level 2|r - 550 hit points, 21 - 45 damage.|n|cffffcc00Level 3|r - 700 hit points, 32 - 56 damage.|n|n|cffffcc00Attacks ground and air units.|r")).with_code(Some(WarcraftObjectId::new("ANlm"))).with_morph_target(Some(WarcraftObjectId::new("nlv1"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANLM_TIP_LEVELS, ANLM_UBERTIP_LEVELS),
         ),
     );
@@ -2825,7 +2825,7 @@ fn insert_objects_chunk_0(
             ANMS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANMS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Activates a shield that absorbs 2 damage per point of mana. Blocked damage ignores Armor and Armor Types. "), Some("Creates a shield that absorbs damage by using the Sea Witch's mana. Blocked damage ignores Armor and Armor Types. |n|n|cffffcc00Level 1|r - 2 damage per point of mana. |n|cffffcc00Level 2|r - 3 damage per point of mana. |n|cffffcc00Level 3|r - 4 damage per point of mana.")).with_code(Some("ANms")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btnneutralmanashieldoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANMS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Activates a shield that absorbs 2 damage per point of mana. Blocked damage ignores Armor and Armor Types. "), Some("Creates a shield that absorbs damage by using the Sea Witch's mana. Blocked damage ignores Armor and Armor Types. |n|n|cffffcc00Level 1|r - 2 damage per point of mana. |n|cffffcc00Level 2|r - 3 damage per point of mana. |n|cffffcc00Level 3|r - 4 damage per point of mana.")).with_code(Some(WarcraftObjectId::new("ANms"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btnneutralmanashieldoff.blp"))),
             WarcraftObjectText::with_alt(ANMS_TIP_LEVELS, ANMS_UBERTIP_LEVELS, Some("Deactivate Mana Shield"), None),
         ),
     );
@@ -2838,7 +2838,7 @@ fn insert_objects_chunk_0(
             ANPA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANPA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Afflicts a target enemy unit with a deadly parasite that deals 5 damage per second for 15 seconds. If the afflicted unit dies while under the effect of Parasite, a minor minion will spawn from its corpse."), None).with_code(Some("ANpa")).with_morph_target(Some(WarcraftObjectId::new("ncfs"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnparasiteoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANPA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Afflicts a target enemy unit with a deadly parasite that deals 5 damage per second for 15 seconds. If the afflicted unit dies while under the effect of Parasite, a minor minion will spawn from its corpse."), None).with_code(Some(WarcraftObjectId::new("ANpa"))).with_morph_target(Some(WarcraftObjectId::new("ncfs"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnparasiteoff.blp"))),
             WarcraftObjectText::with_alt(ANPA_TIP_LEVELS, ANPA_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -2861,7 +2861,7 @@ fn insert_objects_chunk_0(
                     Some("Burns nearby enemy units for 10 points of damage per second."),
                     None,
                 )
-                .with_code(Some("ANpi"))
+                .with_code(Some(WarcraftObjectId::new("ANpi")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -2877,7 +2877,7 @@ fn insert_objects_chunk_0(
             ANR2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANR2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("When killed, this Hero will come back to life. Reincarnation has a 240 second cooldown."), Some("When killed, this Hero will come back to life. Reincarnation has a 240 second cooldown.")).with_code(Some("AOre")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANR2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("When killed, this Hero will come back to life. Reincarnation has a 240 second cooldown."), Some("When killed, this Hero will come back to life. Reincarnation has a 240 second cooldown.")).with_code(Some(WarcraftObjectId::new("AOre"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANR2_TIP_LEVELS, ANR2_UBERTIP_LEVELS),
         ),
     );
@@ -2900,7 +2900,7 @@ fn insert_objects_chunk_0(
                     Some("Calls down multiple Infernals from the sky."),
                     Some("Calls down multiple Infernals from the sky."),
                 )
-                .with_code(Some("ANrc"))
+                .with_code(Some(WarcraftObjectId::new("ANrc")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -2926,7 +2926,7 @@ fn insert_objects_chunk_0(
                     Some("Calls down multiple Infernals from the sky."),
                     Some("Calls down multiple Infernals from the sky."),
                 )
-                .with_code(Some("ANrc"))
+                .with_code(Some(WarcraftObjectId::new("ANrc")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -2944,7 +2944,7 @@ fn insert_objects_chunk_0(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ANRE_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aarm"))
+                    .with_code(Some(WarcraftObjectId::new("Aarm")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -2959,7 +2959,7 @@ fn insert_objects_chunk_0(
             ANRF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANRF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Calls down waves of fire that damage units in an area. Each wave deals 25 initial damage and 5 damage per second for 3 seconds. |nLasts for 6 waves."), Some("Calls down waves of fire that damage units in an area. Each wave deals initial damage and then burns enemies for 3 seconds. |n|n|cffffcc00Level 1|r - 25 wave damage, 6 waves, 5 damage per second. |n|cffffcc00Level 2|r - 30 wave damage, 8 waves, 10 damage per second. |n|cffffcc00Level 3|r - 35 wave damage, 10 waves, 15 damage per second.")).with_code(Some("ANrf")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANRF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Calls down waves of fire that damage units in an area. Each wave deals 25 initial damage and 5 damage per second for 3 seconds. |nLasts for 6 waves."), Some("Calls down waves of fire that damage units in an area. Each wave deals initial damage and then burns enemies for 3 seconds. |n|n|cffffcc00Level 1|r - 25 wave damage, 6 waves, 5 damage per second. |n|cffffcc00Level 2|r - 30 wave damage, 8 waves, 10 damage per second. |n|cffffcc00Level 3|r - 35 wave damage, 10 waves, 15 damage per second.")).with_code(Some(WarcraftObjectId::new("ANrf"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANRF_TIP_LEVELS, ANRF_UBERTIP_LEVELS),
         ),
     );
@@ -2972,7 +2972,7 @@ fn insert_objects_chunk_0(
             ANRG_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANRG_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- 5 bonus Strength and 1 bonus armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- Bonus Strength and armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells.")).with_code(Some("ANrg")).with_morph_target(Some(WarcraftObjectId::new("Nrob"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnherotinker.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANRG_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- 5 bonus Strength and 1 bonus armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."), Some("Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- Bonus Strength and armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells.")).with_code(Some(WarcraftObjectId::new("ANrg"))).with_morph_target(Some(WarcraftObjectId::new("Nrob"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnherotinker.blp"))),
             WarcraftObjectText::with_alt(ANRG_TIP_LEVELS, ANRG_UBERTIP_LEVELS, Some("Revert to Tinker Form"), Some("Returns to normal Tinker form, losing the benefits of Robo-Goblin but once again becoming organic.")),
         ),
     );
@@ -2985,7 +2985,7 @@ fn insert_objects_chunk_0(
             ANRN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANRN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("When killed, the demon will come back to life. Reincarnation has a 240 second cooldown."), Some("When killed, the demon will come back to life. Reincarnation has a 240 second cooldown.")).with_code(Some("AOre")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANRN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("When killed, the demon will come back to life. Reincarnation has a 240 second cooldown."), Some("When killed, the demon will come back to life. Reincarnation has a 240 second cooldown.")).with_code(Some(WarcraftObjectId::new("AOre"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANRN_TIP_LEVELS, ANRN_UBERTIP_LEVELS),
         ),
     );
@@ -2998,7 +2998,7 @@ fn insert_objects_chunk_0(
             ANS1_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANS1_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have 80 hit points, deal 12 - 14 damage, and explode upon death, causing up to 30 damage to nearby enemy units.|nFactory lasts 40 seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r"), Some("Creates a factory which automatically constructs Clockwerk Goblins. These artificial Goblins, in addition to being potent attackers, explode upon death, causing damage to nearby enemy units. |n|n|cffffcc00Level 1|r - Explosion does 30 damage.|n|cffffcc00Level 2|r - Explosion does 60 damage.|n|cffffcc00Level 3|r - Explosion does 80 damage.|nFactory lasts 40 seconds.")).with_code(Some("ANsy")).with_morph_target(Some(WarcraftObjectId::new("nfac"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANS1_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have 80 hit points, deal 12 - 14 damage, and explode upon death, causing up to 30 damage to nearby enemy units.|nFactory lasts 40 seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r"), Some("Creates a factory which automatically constructs Clockwerk Goblins. These artificial Goblins, in addition to being potent attackers, explode upon death, causing damage to nearby enemy units. |n|n|cffffcc00Level 1|r - Explosion does 30 damage.|n|cffffcc00Level 2|r - Explosion does 60 damage.|n|cffffcc00Level 3|r - Explosion does 80 damage.|nFactory lasts 40 seconds.")).with_code(Some(WarcraftObjectId::new("ANsy"))).with_morph_target(Some(WarcraftObjectId::new("nfac"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANS1_TIP_LEVELS, ANS1_UBERTIP_LEVELS),
         ),
     );
@@ -3011,7 +3011,7 @@ fn insert_objects_chunk_0(
             ANS2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANS2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have 80 hit points, deal 12 - 14 damage, and explode upon death, causing up to 30 damage to nearby enemy units.|nFactory lasts 40 seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r"), Some("Creates a factory which automatically constructs Clockwerk Goblins. These artificial Goblins, in addition to being potent attackers, explode upon death, causing damage to nearby enemy units. |n|n|cffffcc00Level 1|r - Explosion does 30 damage.|n|cffffcc00Level 2|r - Explosion does 60 damage.|n|cffffcc00Level 3|r - Explosion does 80 damage.|nFactory lasts 40 seconds.")).with_code(Some("ANsy")).with_morph_target(Some(WarcraftObjectId::new("nfac"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANS2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have 80 hit points, deal 12 - 14 damage, and explode upon death, causing up to 30 damage to nearby enemy units.|nFactory lasts 40 seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r"), Some("Creates a factory which automatically constructs Clockwerk Goblins. These artificial Goblins, in addition to being potent attackers, explode upon death, causing damage to nearby enemy units. |n|n|cffffcc00Level 1|r - Explosion does 30 damage.|n|cffffcc00Level 2|r - Explosion does 60 damage.|n|cffffcc00Level 3|r - Explosion does 80 damage.|nFactory lasts 40 seconds.")).with_code(Some(WarcraftObjectId::new("ANsy"))).with_morph_target(Some(WarcraftObjectId::new("nfac"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANS2_TIP_LEVELS, ANS2_UBERTIP_LEVELS),
         ),
     );
@@ -3024,7 +3024,7 @@ fn insert_objects_chunk_0(
             ANS3_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANS3_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have 80 hit points, deal 12 - 14 damage, and explode upon death, causing up to 30 damage to nearby enemy units.|nFactory lasts 40 seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r"), Some("Creates a factory which automatically constructs Clockwerk Goblins. These artificial Goblins, in addition to being potent attackers, explode upon death, causing damage to nearby enemy units. |n|n|cffffcc00Level 1|r - Explosion does 30 damage.|n|cffffcc00Level 2|r - Explosion does 60 damage.|n|cffffcc00Level 3|r - Explosion does 80 damage.|nFactory lasts 40 seconds.")).with_code(Some("ANsy")).with_morph_target(Some(WarcraftObjectId::new("nfac"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANS3_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have 80 hit points, deal 12 - 14 damage, and explode upon death, causing up to 30 damage to nearby enemy units.|nFactory lasts 40 seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r"), Some("Creates a factory which automatically constructs Clockwerk Goblins. These artificial Goblins, in addition to being potent attackers, explode upon death, causing damage to nearby enemy units. |n|n|cffffcc00Level 1|r - Explosion does 30 damage.|n|cffffcc00Level 2|r - Explosion does 60 damage.|n|cffffcc00Level 3|r - Explosion does 80 damage.|nFactory lasts 40 seconds.")).with_code(Some(WarcraftObjectId::new("ANsy"))).with_morph_target(Some(WarcraftObjectId::new("nfac"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANS3_TIP_LEVELS, ANS3_UBERTIP_LEVELS),
         ),
     );
@@ -3037,7 +3037,7 @@ fn insert_objects_chunk_0(
             ANSB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANSB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Throws a magical hammer at a target enemy unit, dealing 100 damage and stunning the target for 5 seconds."), Some("A magical hammer that is thrown at an enemy unit, causing damage and stunning the target. |n|n|cffffcc00Level 1|r - 100 damage, 5 second stun. |n|cffffcc00Level 2|r - 200 damage, 7 second stun. |n|cffffcc00Level 3|r - 300 damage, 9 second stun. |n|cffffcc00Level 4|r - 450 damage, 12 second stun.")).with_code(Some("AHtb")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANSB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Throws a magical hammer at a target enemy unit, dealing 100 damage and stunning the target for 5 seconds."), Some("A magical hammer that is thrown at an enemy unit, causing damage and stunning the target. |n|n|cffffcc00Level 1|r - 100 damage, 5 second stun. |n|cffffcc00Level 2|r - 200 damage, 7 second stun. |n|cffffcc00Level 3|r - 300 damage, 9 second stun. |n|cffffcc00Level 4|r - 450 damage, 12 second stun.")).with_code(Some(WarcraftObjectId::new("AHtb"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANSB_TIP_LEVELS, ANSB_UBERTIP_LEVELS),
         ),
     );
@@ -3050,7 +3050,7 @@ fn insert_objects_chunk_0(
             ANSG_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANSG_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Summons a powerful 600 hit point bear to attack your enemies. |nLasts 70 seconds."), Some("Summons a powerful bear to attack your enemies. |nLasts 70 seconds. |n|n|cffffcc00Level 1|r - 600 hit points, 19 to 21 damage. |n|cffffcc00Level 2|r - 900 hit points, 28 to 30 damage, has Bash. |n|cffffcc00Level 3|r - 1200 hit points, 38 to 40 damage, has Bash and Blink.")).with_code(Some("ANsg")).with_morph_target(Some(WarcraftObjectId::new("ngz1"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANSG_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Summons a powerful 600 hit point bear to attack your enemies. |nLasts 70 seconds."), Some("Summons a powerful bear to attack your enemies. |nLasts 70 seconds. |n|n|cffffcc00Level 1|r - 600 hit points, 19 to 21 damage. |n|cffffcc00Level 2|r - 900 hit points, 28 to 30 damage, has Bash. |n|cffffcc00Level 3|r - 1200 hit points, 38 to 40 damage, has Bash and Blink.")).with_code(Some(WarcraftObjectId::new("ANsg"))).with_morph_target(Some(WarcraftObjectId::new("ngz1"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANSG_TIP_LEVELS, ANSG_UBERTIP_LEVELS),
         ),
     );
@@ -3063,7 +3063,7 @@ fn insert_objects_chunk_0(
             ANSH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANSH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("A wave of force that ripples outward, causing 75 damage to land units in a line."), Some("A wave of force that ripples out from the Hero, causing damage to land units in a line. |n|n|cffffcc00Level 1|r - 75 damage. |n|cffffcc00Level 2|r - 130 damage. |n|cffffcc00Level 3|r - 200 damage.")).with_code(Some("AOsh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANSH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("A wave of force that ripples outward, causing 75 damage to land units in a line."), Some("A wave of force that ripples out from the Hero, causing damage to land units in a line. |n|n|cffffcc00Level 1|r - 75 damage. |n|cffffcc00Level 2|r - 130 damage. |n|cffffcc00Level 3|r - 200 damage.")).with_code(Some(WarcraftObjectId::new("AOsh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANSH_TIP_LEVELS, ANSH_UBERTIP_LEVELS),
         ),
     );
@@ -3076,7 +3076,7 @@ fn insert_objects_chunk_0(
             ANSI_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANSI_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Stops all enemies in a small target area from casting spells for 16 seconds."), Some("Stops all enemies in a target area from casting spells. The area of effect and duration increase with level. |n|n|cffffcc00Level 1|r - Small area, lasts 16 seconds. |n|cffffcc00Level 2|r - Medium area, lasts 20 seconds. |n|cffffcc00Level 3|r - Large area, lasts 24 seconds.")).with_code(Some("ANsi")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANSI_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Stops all enemies in a small target area from casting spells for 16 seconds."), Some("Stops all enemies in a target area from casting spells. The area of effect and duration increase with level. |n|n|cffffcc00Level 1|r - Small area, lasts 16 seconds. |n|cffffcc00Level 2|r - Medium area, lasts 20 seconds. |n|cffffcc00Level 3|r - Large area, lasts 24 seconds.")).with_code(Some(WarcraftObjectId::new("ANsi"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANSI_TIP_LEVELS, ANSI_UBERTIP_LEVELS),
         ),
     );
@@ -3099,7 +3099,7 @@ fn insert_objects_chunk_0(
                     Some("Puts a converted zombie into the nether-realm for later use."),
                     Some("Puts a converted zombie into the nether-realm for later use."),
                 )
-                .with_code(Some("ANsl"))
+                .with_code(Some(WarcraftObjectId::new("ANsl")))
                 .with_morph_target(Some(WarcraftObjectId::new("nzom")))
                 .with_off_state(None, None, None, None),
             ),
@@ -3115,7 +3115,7 @@ fn insert_objects_chunk_0(
             ANSO_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANSO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Wreaths an enemy unit in magical flames which cause 5 damage per second, prevent the casting of spells, and reduce attack damage by 75%.|nLasts 16 seconds."), Some("Wreaths an enemy unit in magical flames which cause damage over time, prevent the casting of spells, and reduce attack damage by 75%.|n|n|cffffcc00Level 1|r - 80 damage over 16 seconds.|n|cffffcc00Level 2|r - 200 damage over 18 seconds.|n|cffffcc00Level 3|r - 340 damage over 20 seconds.|n|nSoul Burn lasts roughly half as long on Heroes.")).with_code(Some("ANso")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANSO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Wreaths an enemy unit in magical flames which cause 5 damage per second, prevent the casting of spells, and reduce attack damage by 75%.|nLasts 16 seconds."), Some("Wreaths an enemy unit in magical flames which cause damage over time, prevent the casting of spells, and reduce attack damage by 75%.|n|n|cffffcc00Level 1|r - 80 damage over 16 seconds.|n|cffffcc00Level 2|r - 200 damage over 18 seconds.|n|cffffcc00Level 3|r - 340 damage over 20 seconds.|n|nSoul Burn lasts roughly half as long on Heroes.")).with_code(Some(WarcraftObjectId::new("ANso"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANSO_TIP_LEVELS, ANSO_UBERTIP_LEVELS),
         ),
     );
@@ -3128,7 +3128,7 @@ fn insert_objects_chunk_0(
             ANSQ_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANSQ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Summons an angry 425 hit point quilbeast to fling spines at your enemies. |nLasts 70 seconds."), Some("Summons an angry quilbeast to attack your enemies. |nLasts 70 seconds. |n|n|cffffcc00Level 1|r - 425 hit points, 13 to 15 damage. |n|cffffcc00Level 2|r - 515 hit points, 26 to 30 damage, has Frenzy. |n|cffffcc00Level 3|r - 600 hit points, 39 to 45 area effect damage, has Frenzy.")).with_code(Some("ANsq")).with_morph_target(Some(WarcraftObjectId::new("nqb1"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANSQ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Summons an angry 425 hit point quilbeast to fling spines at your enemies. |nLasts 70 seconds."), Some("Summons an angry quilbeast to attack your enemies. |nLasts 70 seconds. |n|n|cffffcc00Level 1|r - 425 hit points, 13 to 15 damage. |n|cffffcc00Level 2|r - 515 hit points, 26 to 30 damage, has Frenzy. |n|cffffcc00Level 3|r - 600 hit points, 39 to 45 area effect damage, has Frenzy.")).with_code(Some(WarcraftObjectId::new("ANsq"))).with_morph_target(Some(WarcraftObjectId::new("nqb1"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANSQ_TIP_LEVELS, ANSQ_UBERTIP_LEVELS),
         ),
     );
@@ -3141,7 +3141,7 @@ fn insert_objects_chunk_0(
             ANST_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANST_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Calls down hordes of rampaging thunder lizards to explode upon the Beastmaster's enemies. Each exploding lizard deals 60 damage. Pierces spell immunity. |nLasts 30 seconds."), Some("Calls down hordes of rampaging thunder lizards to explode upon the Beastmaster's enemies. Each exploding lizard deals 60 damage. Pierces spell immunity. |nLasts 30 seconds.")).with_code(Some("ANst")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANST_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Calls down hordes of rampaging thunder lizards to explode upon the Beastmaster's enemies. Each exploding lizard deals 60 damage. Pierces spell immunity. |nLasts 30 seconds."), Some("Calls down hordes of rampaging thunder lizards to explode upon the Beastmaster's enemies. Each exploding lizard deals 60 damage. Pierces spell immunity. |nLasts 30 seconds.")).with_code(Some(WarcraftObjectId::new("ANst"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANST_TIP_LEVELS, ANST_UBERTIP_LEVELS),
         ),
     );
@@ -3154,7 +3154,7 @@ fn insert_objects_chunk_0(
             ANSW_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANSW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Summons a proud 300 hit point hawk to spy on your enemies. Has the True Sight ability. |nLasts 70 seconds."), Some("Summons a proud hawk to spy on your enemies. |nLasts 70 seconds. |n|n|cffffcc00Level 1|r - 300 hit points, has True Sight. |n|cffffcc00Level 2|r - 450 hit points, 21 to 25 damage, has True Sight. |n|cffffcc00Level 3|r - 650 hit points, 48 to 57 damage, has True Sight and Invisibility.")).with_code(Some("ANsw")).with_morph_target(Some(WarcraftObjectId::new("nwe1"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANSW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Summons a proud 300 hit point hawk to spy on your enemies. Has the True Sight ability. |nLasts 70 seconds."), Some("Summons a proud hawk to spy on your enemies. |nLasts 70 seconds. |n|n|cffffcc00Level 1|r - 300 hit points, has True Sight. |n|cffffcc00Level 2|r - 450 hit points, 21 to 25 damage, has True Sight. |n|cffffcc00Level 3|r - 650 hit points, 48 to 57 damage, has True Sight and Invisibility.")).with_code(Some(WarcraftObjectId::new("ANsw"))).with_morph_target(Some(WarcraftObjectId::new("nwe1"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANSW_TIP_LEVELS, ANSW_UBERTIP_LEVELS),
         ),
     );
@@ -3167,7 +3167,7 @@ fn insert_objects_chunk_0(
             ANSY_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANSY_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have 80 hit points, deal 12 - 14 damage, and explode upon death, causing up to 30 damage to nearby enemy units.|nFactory lasts 40 seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r"), Some("Creates a factory which automatically constructs Clockwerk Goblins. These artificial Goblins, in addition to being potent attackers, explode upon death, causing damage to nearby enemy units. |n|n|cffffcc00Level 1|r - Explosion does 30 damage.|n|cffffcc00Level 2|r - Explosion does 60 damage.|n|cffffcc00Level 3|r - Explosion does 80 damage.|nFactory lasts 40 seconds.")).with_code(Some("ANsy")).with_morph_target(Some(WarcraftObjectId::new("nfac"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANSY_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have 80 hit points, deal 12 - 14 damage, and explode upon death, causing up to 30 damage to nearby enemy units.|nFactory lasts 40 seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r"), Some("Creates a factory which automatically constructs Clockwerk Goblins. These artificial Goblins, in addition to being potent attackers, explode upon death, causing damage to nearby enemy units. |n|n|cffffcc00Level 1|r - Explosion does 30 damage.|n|cffffcc00Level 2|r - Explosion does 60 damage.|n|cffffcc00Level 3|r - Explosion does 80 damage.|nFactory lasts 40 seconds.")).with_code(Some(WarcraftObjectId::new("ANsy"))).with_morph_target(Some(WarcraftObjectId::new("nfac"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANSY_TIP_LEVELS, ANSY_UBERTIP_LEVELS),
         ),
     );
@@ -3180,7 +3180,7 @@ fn insert_objects_chunk_0(
             ANT2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANT2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Razor-sharp spikes on the Turtle's shell deal 30% of an enemy unit's melee attack damage back to it."), None).with_code(Some("AUts")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANT2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Razor-sharp spikes on the Turtle's shell deal 30% of an enemy unit's melee attack damage back to it."), None).with_code(Some(WarcraftObjectId::new("AUts"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANT2_TIP_LEVELS, ANT2_UBERTIP_LEVELS),
         ),
     );
@@ -3203,7 +3203,7 @@ fn insert_objects_chunk_0(
                     Some("The closest 10 enemies are forced to attack this unit."),
                     None,
                 )
-                .with_code(Some("Atau"))
+                .with_code(Some(WarcraftObjectId::new("Atau")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -3223,7 +3223,7 @@ fn insert_objects_chunk_1(
             ANTH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANTH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Razor-sharp spikes on the Turtle's shell deal 30% of an enemy unit's melee attack damage back to it."), None).with_code(Some("AUts")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANTH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Razor-sharp spikes on the Turtle's shell deal 30% of an enemy unit's melee attack damage back to it."), None).with_code(Some(WarcraftObjectId::new("AUts"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, None)),
             WarcraftObjectText::new(ANTH_TIP_LEVELS, ANTH_UBERTIP_LEVELS),
         ),
     );
@@ -3236,7 +3236,7 @@ fn insert_objects_chunk_1(
             ANTM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANTM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Kills a target enemy unit instantly, transforming it into gold which is added to your available gold!|nTransmute pierces spell immunity, but cannot be used on Heroes, or creeps above level 5."), Some("Kills a target enemy unit instantly, transforming it into gold which is added to your available gold!|nTransmute pierces spell immunity, but cannot be used on Heroes, or creeps above level 5.")).with_code(Some("ANtm")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANTM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Kills a target enemy unit instantly, transforming it into gold which is added to your available gold!|nTransmute pierces spell immunity, but cannot be used on Heroes, or creeps above level 5."), Some("Kills a target enemy unit instantly, transforming it into gold which is added to your available gold!|nTransmute pierces spell immunity, but cannot be used on Heroes, or creeps above level 5.")).with_code(Some(WarcraftObjectId::new("ANtm"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANTM_TIP_LEVELS, ANTM_UBERTIP_LEVELS),
         ),
     );
@@ -3249,7 +3249,7 @@ fn insert_objects_chunk_1(
             ANTO_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANTO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Summons a fierce controllable Tornado that slows enemy units' movement speed, randomly tosses enemy ground units into the air and damages enemy buildings. Pierces spell immunity. |nLasts 20 seconds."), Some("Summons a fierce controllable Tornado that slows enemy units' movement speed, randomly tosses enemy ground units into the air and damages enemy buildings. Pierces spell immunity. |nLasts 20 seconds.")).with_code(Some("ANto")).with_morph_target(Some(WarcraftObjectId::new("ntor"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANTO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Summons a fierce controllable Tornado that slows enemy units' movement speed, randomly tosses enemy ground units into the air and damages enemy buildings. Pierces spell immunity. |nLasts 20 seconds."), Some("Summons a fierce controllable Tornado that slows enemy units' movement speed, randomly tosses enemy ground units into the air and damages enemy buildings. Pierces spell immunity. |nLasts 20 seconds.")).with_code(Some(WarcraftObjectId::new("ANto"))).with_morph_target(Some(WarcraftObjectId::new("ntor"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANTO_TIP_LEVELS, ANTO_UBERTIP_LEVELS),
         ),
     );
@@ -3272,7 +3272,7 @@ fn insert_objects_chunk_1(
                     Some("Reveals nearby invisible units."),
                     None,
                 )
-                .with_code(Some("Atru"))
+                .with_code(Some(WarcraftObjectId::new("Atru")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -3288,7 +3288,7 @@ fn insert_objects_chunk_1(
             ANVC_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANVC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Causes the ground to erupt into a massive Volcano. Every 3 seconds, a wave of molten rocks is hurled from the Volcano at nearby ground units and buildings, causing 125 damage to each target and stunning it for 2 seconds. Buildings take 2 times more damage from molten rocks than units do.|nLasts 35 seconds."), Some("Causes the ground to erupt into a massive Volcano. Every 3 seconds, a wave of molten rocks is hurled from the Volcano at nearby ground units and buildings, causing 125 damage to each target and stunning it for 2 seconds. Buildings take 2 times more damage from molten rocks than units do.|nLasts 35 seconds.")).with_code(Some("ANvc")).with_morph_target(Some(WarcraftObjectId::new("Volc"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ANVC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Causes the ground to erupt into a massive Volcano. Every 3 seconds, a wave of molten rocks is hurled from the Volcano at nearby ground units and buildings, causing 125 damage to each target and stunning it for 2 seconds. Buildings take 2 times more damage from molten rocks than units do.|nLasts 35 seconds."), Some("Causes the ground to erupt into a massive Volcano. Every 3 seconds, a wave of molten rocks is hurled from the Volcano at nearby ground units and buildings, causing 125 damage to each target and stunning it for 2 seconds. Buildings take 2 times more damage from molten rocks than units do.|nLasts 35 seconds.")).with_code(Some(WarcraftObjectId::new("ANvc"))).with_morph_target(Some(WarcraftObjectId::new("Volc"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANVC_TIP_LEVELS, ANVC_UBERTIP_LEVELS),
         ),
     );
@@ -3301,7 +3301,7 @@ fn insert_objects_chunk_1(
             ANWK_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANWK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Allows the Pandaren to become invisible, and move 10% faster. If the Pandaren attacks a unit to break invisibility, the attack will do 50 bonus damage."), None).with_code(Some("AOwk")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANWK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Allows the Pandaren to become invisible, and move 10% faster. If the Pandaren attacks a unit to break invisibility, the attack will do 50 bonus damage."), None).with_code(Some(WarcraftObjectId::new("AOwk"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANWK_TIP_LEVELS, ANWK_UBERTIP_LEVELS),
         ),
     );
@@ -3314,7 +3314,7 @@ fn insert_objects_chunk_1(
             AOAE_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOAE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Increases nearby friendly units' movement speed by 10% and attack rate by 5%."), Some("Increases the movement speed and attack rate of nearby friendly units. |n|n|cffffcc00Level 1|r - 10% movement, 5% attack. |n|cffffcc00Level 2|r - 15% movement, 10% attack. |n|cffffcc00Level 3|r - 20% movement, 15% attack.")).with_code(Some("AOae")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOAE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Increases nearby friendly units' movement speed by 10% and attack rate by 5%."), Some("Increases the movement speed and attack rate of nearby friendly units. |n|n|cffffcc00Level 1|r - 10% movement, 5% attack. |n|cffffcc00Level 2|r - 15% movement, 10% attack. |n|cffffcc00Level 3|r - 20% movement, 15% attack.")).with_code(Some(WarcraftObjectId::new("AOae"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOAE_TIP_LEVELS, AOAE_UBERTIP_LEVELS),
         ),
     );
@@ -3337,7 +3337,7 @@ fn insert_objects_chunk_1(
                     None,
                     None,
                 )
-                .with_code(Some("AObu"))
+                .with_code(Some(WarcraftObjectId::new("AObu")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -3352,7 +3352,7 @@ fn insert_objects_chunk_1(
             AOCL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOCL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Calls forth a bolt of lightning that bounces up to 4 times, dealing 85 damage on the primary target. Each jump deals less damage."), Some("Hurls a bolt of damaging lightning at a target enemy that jumps to nearby enemies. Each jump deals less damage. |n|n|cffffcc00Level 1|r - 85 damage, jumps 4 times. |n|cffffcc00Level 2|r - 125 damage, jumps 6 times. |n|cffffcc00Level 3|r - 180 damage, jumps 8 times.")).with_code(Some("AOcl")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOCL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Calls forth a bolt of lightning that bounces up to 4 times, dealing 85 damage on the primary target. Each jump deals less damage."), Some("Hurls a bolt of damaging lightning at a target enemy that jumps to nearby enemies. Each jump deals less damage. |n|n|cffffcc00Level 1|r - 85 damage, jumps 4 times. |n|cffffcc00Level 2|r - 125 damage, jumps 6 times. |n|cffffcc00Level 3|r - 180 damage, jumps 8 times.")).with_code(Some(WarcraftObjectId::new("AOcl"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOCL_TIP_LEVELS, AOCL_UBERTIP_LEVELS),
         ),
     );
@@ -3365,7 +3365,7 @@ fn insert_objects_chunk_1(
             AOCR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOCR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 15% chance to do 2 times damage on an attack."), Some("Gives a chance to do more damage on an attack. |n|n|cffffcc00Level 1|r - 15% chance, 2 times damage. |n|cffffcc00Level 2|r - 15% chance, 3 times damage. |n|cffffcc00Level 3|r - 15% chance, 4 times damage.")).with_code(Some("AOcr")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOCR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 15% chance to do 2 times damage on an attack."), Some("Gives a chance to do more damage on an attack. |n|n|cffffcc00Level 1|r - 15% chance, 2 times damage. |n|cffffcc00Level 2|r - 15% chance, 3 times damage. |n|cffffcc00Level 3|r - 15% chance, 4 times damage.")).with_code(Some(WarcraftObjectId::new("AOcr"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOCR_TIP_LEVELS, AOCR_UBERTIP_LEVELS),
         ),
     );
@@ -3378,7 +3378,7 @@ fn insert_objects_chunk_1(
             AOEQ_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AOEQ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Makes the ground tremble and break, causing 60 damage per second to buildings and slowing units by 75% within the area of effect. |nLasts 20 seconds."), Some("Makes the ground tremble and break, causing 60 damage per second to buildings and slowing units by 75% within the area of effect. Lasts 20 seconds.")).with_code(Some("AOeq")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AOEQ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Makes the ground tremble and break, causing 60 damage per second to buildings and slowing units by 75% within the area of effect. |nLasts 20 seconds."), Some("Makes the ground tremble and break, causing 60 damage per second to buildings and slowing units by 75% within the area of effect. Lasts 20 seconds.")).with_code(Some(WarcraftObjectId::new("AOeq"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOEQ_TIP_LEVELS, AOEQ_UBERTIP_LEVELS),
         ),
     );
@@ -3391,7 +3391,7 @@ fn insert_objects_chunk_1(
             AOFS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOFS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Reveals the area of the map that it is cast upon for 8 seconds. Also reveals invisible units."), Some("Reveals the area of the map that it is cast upon. Also reveals invisible units. |n|n|cffffcc00Level 1|r - Reveals a small area. |n|cffffcc00Level 2|r - Reveals a large area. |n|cffffcc00Level 3|r - Reveals a huge area.")).with_code(Some("AOfs")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOFS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Reveals the area of the map that it is cast upon for 8 seconds. Also reveals invisible units."), Some("Reveals the area of the map that it is cast upon. Also reveals invisible units. |n|n|cffffcc00Level 1|r - Reveals a small area. |n|cffffcc00Level 2|r - Reveals a large area. |n|cffffcc00Level 3|r - Reveals a huge area.")).with_code(Some(WarcraftObjectId::new("AOfs"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOFS_TIP_LEVELS, AOFS_UBERTIP_LEVELS),
         ),
     );
@@ -3404,7 +3404,7 @@ fn insert_objects_chunk_1(
             AOHW_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOHW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Calls forth a wave of healing energy that bounces up to 3 times, healing 130 damage on the primary target. Each bounce restores fewer hit points."), Some("Calls forth a wave of energy that heals a target and bounces to nearby friendlies. Each bounce restores fewer hit points. |n|n|cffffcc00Level 1|r - Heals 130 damage, jumps 3 times. |n|cffffcc00Level 2|r - Heals 215 damage, jumps 4 times. |n|cffffcc00Level 3|r - Heals 300 damage, jumps 5 times.")).with_code(Some("AOhw")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOHW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Calls forth a wave of healing energy that bounces up to 3 times, healing 130 damage on the primary target. Each bounce restores fewer hit points."), Some("Calls forth a wave of energy that heals a target and bounces to nearby friendlies. Each bounce restores fewer hit points. |n|n|cffffcc00Level 1|r - Heals 130 damage, jumps 3 times. |n|cffffcc00Level 2|r - Heals 215 damage, jumps 4 times. |n|cffffcc00Level 3|r - Heals 300 damage, jumps 5 times.")).with_code(Some(WarcraftObjectId::new("AOhw"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOHW_TIP_LEVELS, AOHW_UBERTIP_LEVELS),
         ),
     );
@@ -3417,7 +3417,7 @@ fn insert_objects_chunk_1(
             AOHX_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOHX_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Transforms an enemy unit into a random critter for 15 seconds. Hex disables a unit’s abilities, item usage, ability to attack, and slows the unit to minimum movement speed."), Some("Transforms an enemy unit into a random critter, disabling special abilities. Hex disables a unit’s abilities, item usage, ability to attack, and slows the unit to minimum movement speed. |n|n|cffffcc00Level 1|r - Lasts 15 seconds. |n|cffffcc00Level 2|r - Lasts 30 seconds. |n|cffffcc00Level 3|r - Lasts 45 seconds.")).with_code(Some("AOhx")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOHX_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Transforms an enemy unit into a random critter for 15 seconds. Hex disables a unit’s abilities, item usage, ability to attack, and slows the unit to minimum movement speed."), Some("Transforms an enemy unit into a random critter, disabling special abilities. Hex disables a unit’s abilities, item usage, ability to attack, and slows the unit to minimum movement speed. |n|n|cffffcc00Level 1|r - Lasts 15 seconds. |n|cffffcc00Level 2|r - Lasts 30 seconds. |n|cffffcc00Level 3|r - Lasts 45 seconds.")).with_code(Some(WarcraftObjectId::new("AOhx"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOHX_TIP_LEVELS, AOHX_UBERTIP_LEVELS),
         ),
     );
@@ -3430,7 +3430,7 @@ fn insert_objects_chunk_1(
             AOLS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AOLS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Creates a swarm of angry spirits that drain the life energies of nearby enemy units. They store the life energy they drain from their victims and use it to replenish Rokhan's hit points when they return.|nLasts 30 seconds."), Some("Creates a swarm of angry spirits that drain the life energies of nearby enemy units. They store the life energy they drain from their victims and use it to replenish Rokhan's hit points when they return.|n|n|cffffcc00Level 1|r - 20 spirits. |n|cffffcc00Level 2|r - 35 spirits.|n|nLasts 30 seconds.")).with_code(Some("AUls")).with_morph_target(Some(WarcraftObjectId::new("uloc"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AOLS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Creates a swarm of angry spirits that drain the life energies of nearby enemy units. They store the life energy they drain from their victims and use it to replenish Rokhan's hit points when they return.|nLasts 30 seconds."), Some("Creates a swarm of angry spirits that drain the life energies of nearby enemy units. They store the life energy they drain from their victims and use it to replenish Rokhan's hit points when they return.|n|n|cffffcc00Level 1|r - 20 spirits. |n|cffffcc00Level 2|r - 35 spirits.|n|nLasts 30 seconds.")).with_code(Some(WarcraftObjectId::new("AUls"))).with_morph_target(Some(WarcraftObjectId::new("uloc"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOLS_TIP_LEVELS, AOLS_UBERTIP_LEVELS),
         ),
     );
@@ -3443,7 +3443,7 @@ fn insert_objects_chunk_1(
             AOMI_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOMI_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Confuses the enemy by creating 1 illusion of the Blademaster. Dispels all magic from the Blademaster. |nLasts 60 seconds."), Some("Confuses the enemy by creating illusions of the Blademaster and dispelling all magic from the Blademaster. |n|n|cffffcc00Level 1|r - Creates 1 illusion. |n|cffffcc00Level 2|r - Creates 2 illusions. |n|cffffcc00Level 3|r - Creates 3 illusions.")).with_code(Some("AOmi")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOMI_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Confuses the enemy by creating 1 illusion of the Blademaster. Dispels all magic from the Blademaster. |nLasts 60 seconds."), Some("Confuses the enemy by creating illusions of the Blademaster and dispelling all magic from the Blademaster. |n|n|cffffcc00Level 1|r - Creates 1 illusion. |n|cffffcc00Level 2|r - Creates 2 illusions. |n|cffffcc00Level 3|r - Creates 3 illusions.")).with_code(Some(WarcraftObjectId::new("AOmi"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOMI_TIP_LEVELS, AOMI_UBERTIP_LEVELS),
         ),
     );
@@ -3456,7 +3456,7 @@ fn insert_objects_chunk_1(
             AOR2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AOR2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Increases nearby friendly units' movement speed by 10% and attack rate by 5%."), Some("Increases the movement speed and attack rate of nearby friendly units. |n|n|cffffcc00Level 1|r - 10% movement, 5% attack. |n|cffffcc00Level 2|r - 20% movement, 10% attack. |n|cffffcc00Level 3|r - 30% movement, 15% attack. |n|cffffcc00Level 4|r - 40% movement, 25% attack.")).with_code(Some("AOae")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AOR2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Increases nearby friendly units' movement speed by 10% and attack rate by 5%."), Some("Increases the movement speed and attack rate of nearby friendly units. |n|n|cffffcc00Level 1|r - 10% movement, 5% attack. |n|cffffcc00Level 2|r - 20% movement, 10% attack. |n|cffffcc00Level 3|r - 30% movement, 15% attack. |n|cffffcc00Level 4|r - 40% movement, 25% attack.")).with_code(Some(WarcraftObjectId::new("AOae"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOR2_TIP_LEVELS, AOR2_UBERTIP_LEVELS),
         ),
     );
@@ -3469,7 +3469,7 @@ fn insert_objects_chunk_1(
             AOR3_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AOR3_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("When killed, Cairne will come back to life. Reincarnation has a 240 second cooldown."), Some("When killed, the Tauren Chieftain will come back to life. |n|n|cffffcc00Level 1|r - 240 second cooldown. |n|cffffcc00Level 2|r - 120 second cooldown.")).with_code(Some("AOre")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AOR3_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("When killed, Cairne will come back to life. Reincarnation has a 240 second cooldown."), Some("When killed, the Tauren Chieftain will come back to life. |n|n|cffffcc00Level 1|r - 240 second cooldown. |n|cffffcc00Level 2|r - 120 second cooldown.")).with_code(Some(WarcraftObjectId::new("AOre"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOR3_TIP_LEVELS, AOR3_UBERTIP_LEVELS),
         ),
     );
@@ -3482,7 +3482,7 @@ fn insert_objects_chunk_1(
             AORE_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AORE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("When killed, the Tauren Chieftain will come back to life. Reincarnation has a 240 second cooldown."), Some("When killed, the Tauren Chieftain will come back to life. Reincarnation has a 240 second cooldown.")).with_code(Some("AOre")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AORE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("When killed, the Tauren Chieftain will come back to life. Reincarnation has a 240 second cooldown."), Some("When killed, the Tauren Chieftain will come back to life. Reincarnation has a 240 second cooldown.")).with_code(Some(WarcraftObjectId::new("AOre"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AORE_TIP_LEVELS, AORE_UBERTIP_LEVELS),
         ),
     );
@@ -3495,7 +3495,7 @@ fn insert_objects_chunk_1(
             AOS2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AOS2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("A wave of force that ripples outward, causing 75 damage to land units in a line."), Some("A wave of force that ripples out from the Hero, causing damage to land units in a line. |n|n|cffffcc00Level 1|r - 75 damage. |n|cffffcc00Level 2|r - 130 damage. |n|cffffcc00Level 3|r - 200 damage. |n|cffffcc00Level 4|r - 300 damage.")).with_code(Some("AOsh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AOS2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("A wave of force that ripples outward, causing 75 damage to land units in a line."), Some("A wave of force that ripples out from the Hero, causing damage to land units in a line. |n|n|cffffcc00Level 1|r - 75 damage. |n|cffffcc00Level 2|r - 130 damage. |n|cffffcc00Level 3|r - 200 damage. |n|cffffcc00Level 4|r - 300 damage.")).with_code(Some(WarcraftObjectId::new("AOsh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOS2_TIP_LEVELS, AOS2_UBERTIP_LEVELS),
         ),
     );
@@ -3508,7 +3508,7 @@ fn insert_objects_chunk_1(
             AOSF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOSF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Summons 2 Spirit Wolf companions. Each wolf has 250 hit points and deals 11 - 12 damage. |nLasts 60 seconds. |n|n|cffffcc00Attacks land units.|r"), Some("Summons 2 Spirit Wolves to fight the Far Seer's enemies. |nLasts 60 seconds. |n|n|cffffcc00Level 1|r - 250 hit points, 11 - 12 damage. |n|cffffcc00Level 2|r - 350 hit points, 16 - 17 damage and Critical Strike. |n|cffffcc00Level 3|r - 500 hit points, 21 - 22 damage, Critical Strike and Invisibility.")).with_code(Some("AOsf")).with_morph_target(Some(WarcraftObjectId::new("osw1"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOSF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Summons 2 Spirit Wolf companions. Each wolf has 250 hit points and deals 11 - 12 damage. |nLasts 60 seconds. |n|n|cffffcc00Attacks land units.|r"), Some("Summons 2 Spirit Wolves to fight the Far Seer's enemies. |nLasts 60 seconds. |n|n|cffffcc00Level 1|r - 250 hit points, 11 - 12 damage. |n|cffffcc00Level 2|r - 350 hit points, 16 - 17 damage and Critical Strike. |n|cffffcc00Level 3|r - 500 hit points, 21 - 22 damage, Critical Strike and Invisibility.")).with_code(Some(WarcraftObjectId::new("AOsf"))).with_morph_target(Some(WarcraftObjectId::new("osw1"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOSF_TIP_LEVELS, AOSF_UBERTIP_LEVELS),
         ),
     );
@@ -3521,7 +3521,7 @@ fn insert_objects_chunk_1(
             AOSH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOSH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("A wave of force that ripples outward, causing 75 damage to land units in a line."), Some("A wave of force that ripples out from the Hero, causing damage to land units in a line. |n|n|cffffcc00Level 1|r - 75 damage. |n|cffffcc00Level 2|r - 130 damage. |n|cffffcc00Level 3|r - 200 damage.")).with_code(Some("AOsh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOSH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("A wave of force that ripples outward, causing 75 damage to land units in a line."), Some("A wave of force that ripples out from the Hero, causing damage to land units in a line. |n|n|cffffcc00Level 1|r - 75 damage. |n|cffffcc00Level 2|r - 130 damage. |n|cffffcc00Level 3|r - 200 damage.")).with_code(Some(WarcraftObjectId::new("AOsh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOSH_TIP_LEVELS, AOSH_UBERTIP_LEVELS),
         ),
     );
@@ -3534,7 +3534,7 @@ fn insert_objects_chunk_1(
             AOSW_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOSW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward has 90 hit points, is magic and spell immune, and deals 14 - 16 damage. |nLasts 40 seconds. |n|n|cffffcc00Attacks land and air units.|r"), Some("Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward is immune to magic and spells. |nLasts 40 seconds. |n|n|cffffcc00Attacks land and air units.|r |n|n|cffffcc00Level 1|r - 90 hit points, 14 - 16 damage. |n|cffffcc00Level 2|r - 165 hit points, 27 - 30 damage. |n|cffffcc00Level 3|r - 200 hit points, 46 - 50 damage.")).with_code(Some("AOwd")).with_morph_target(Some(WarcraftObjectId::new("osp1"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOSW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward has 90 hit points, is magic and spell immune, and deals 14 - 16 damage. |nLasts 40 seconds. |n|n|cffffcc00Attacks land and air units.|r"), Some("Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward is immune to magic and spells. |nLasts 40 seconds. |n|n|cffffcc00Attacks land and air units.|r |n|n|cffffcc00Level 1|r - 90 hit points, 14 - 16 damage. |n|cffffcc00Level 2|r - 165 hit points, 27 - 30 damage. |n|cffffcc00Level 3|r - 200 hit points, 46 - 50 damage.")).with_code(Some(WarcraftObjectId::new("AOwd"))).with_morph_target(Some(WarcraftObjectId::new("osp1"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOSW_TIP_LEVELS, AOSW_UBERTIP_LEVELS),
         ),
     );
@@ -3547,7 +3547,7 @@ fn insert_objects_chunk_1(
             AOVD_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AOVD_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Turns all friendly units invulnerable in an area around the Shadow Hunter. |nThe Shadow Hunter does not turn invulnerable. |nLasts 30 seconds."), Some("Turns all friendly units invulnerable in an area around the Shadow Hunter. |nThe Shadow Hunter does not turn invulnerable. |nLasts 30 seconds.")).with_code(Some("AOvd")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AOVD_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Turns all friendly units invulnerable in an area around the Shadow Hunter. |nThe Shadow Hunter does not turn invulnerable. |nLasts 30 seconds."), Some("Turns all friendly units invulnerable in an area around the Shadow Hunter. |nThe Shadow Hunter does not turn invulnerable. |nLasts 30 seconds.")).with_code(Some(WarcraftObjectId::new("AOvd"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOVD_TIP_LEVELS, AOVD_UBERTIP_LEVELS),
         ),
     );
@@ -3560,7 +3560,7 @@ fn insert_objects_chunk_1(
             AOW2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(4, false, AOW2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Slams the ground, dealing 25 damage to nearby enemy land units and stunning them for 3 seconds."), Some("Slams the ground, stunning and damaging nearby enemy land units. |n|n|cffffcc00Level 1|r - 25 damage, 3 second stun. |n|cffffcc00Level 2|r - 50 damage, 4 second stun. |n|cffffcc00Level 3|r - 75 damage, 5 second stun. |n|cffffcc00Level 4|r - 100 damage, 6 second stun.")).with_code(Some("AOws")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(4, false, AOW2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Slams the ground, dealing 25 damage to nearby enemy land units and stunning them for 3 seconds."), Some("Slams the ground, stunning and damaging nearby enemy land units. |n|n|cffffcc00Level 1|r - 25 damage, 3 second stun. |n|cffffcc00Level 2|r - 50 damage, 4 second stun. |n|cffffcc00Level 3|r - 75 damage, 5 second stun. |n|cffffcc00Level 4|r - 100 damage, 6 second stun.")).with_code(Some(WarcraftObjectId::new("AOws"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOW2_TIP_LEVELS, AOW2_UBERTIP_LEVELS),
         ),
     );
@@ -3573,7 +3573,7 @@ fn insert_objects_chunk_1(
             AOWK_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOWK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Allows the Blademaster to become invisible, move through units, and move 10% faster for 20 seconds. If the Blademaster attacks a unit to break invisibility, the attack will do 40 bonus damage."), Some("Allows the Blademaster to become invisible, move through units, and move faster for a set amount of time. When the Blademaster attacks a unit to break invisibility, he will deal bonus damage. |n|n|cffffcc00Level 1|r - 10% move, 40 bonus damage, 20 seconds. |n|cffffcc00Level 2|r - 40% move, 70 bonus damage, 35 seconds. |n|cffffcc00Level 3|r - 70% move, 100 bonus damage, 50 seconds.")).with_code(Some("AOwk")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOWK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Allows the Blademaster to become invisible, move through units, and move 10% faster for 20 seconds. If the Blademaster attacks a unit to break invisibility, the attack will do 40 bonus damage."), Some("Allows the Blademaster to become invisible, move through units, and move faster for a set amount of time. When the Blademaster attacks a unit to break invisibility, he will deal bonus damage. |n|n|cffffcc00Level 1|r - 10% move, 40 bonus damage, 20 seconds. |n|cffffcc00Level 2|r - 40% move, 70 bonus damage, 35 seconds. |n|cffffcc00Level 3|r - 70% move, 100 bonus damage, 50 seconds.")).with_code(Some(WarcraftObjectId::new("AOwk"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOWK_TIP_LEVELS, AOWK_UBERTIP_LEVELS),
         ),
     );
@@ -3586,7 +3586,7 @@ fn insert_objects_chunk_1(
             AOWS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOWS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Slams the ground, dealing 30 damage to nearby enemy land units and stunning them for 3 seconds."), Some("Slams the ground, stunning and damaging nearby enemy land units. |n|n|cffffcc00Level 1|r - 30 damage, 3 second stun. |n|cffffcc00Level 2|r - 60 damage, 4 second stun. |n|cffffcc00Level 3|r - 90 damage, 5 second stun.")).with_code(Some("AOws")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AOWS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Slams the ground, dealing 30 damage to nearby enemy land units and stunning them for 3 seconds."), Some("Slams the ground, stunning and damaging nearby enemy land units. |n|n|cffffcc00Level 1|r - 30 damage, 3 second stun. |n|cffffcc00Level 2|r - 60 damage, 4 second stun. |n|cffffcc00Level 3|r - 90 damage, 5 second stun.")).with_code(Some(WarcraftObjectId::new("AOws"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOWS_TIP_LEVELS, AOWS_UBERTIP_LEVELS),
         ),
     );
@@ -3599,7 +3599,7 @@ fn insert_objects_chunk_1(
             AOWW_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AOWW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Causes a bladestorm of destructive force around the Blademaster, rendering him immune to magic and spells, dealing 140 damage per second to nearby enemy land units. |nLasts 7 seconds."), Some("Causes a bladestorm of destructive force around the Blademaster, rendering him immune to magic and spells, dealing 140 damage per second to nearby enemy land units.")).with_code(Some("AOww")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AOWW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Causes a bladestorm of destructive force around the Blademaster, rendering him immune to magic and spells, dealing 140 damage per second to nearby enemy land units. |nLasts 7 seconds."), Some("Causes a bladestorm of destructive force around the Blademaster, rendering him immune to magic and spells, dealing 140 damage per second to nearby enemy land units.")).with_code(Some(WarcraftObjectId::new("AOww"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOWW_TIP_LEVELS, AOWW_UBERTIP_LEVELS),
         ),
     );
@@ -3622,7 +3622,7 @@ fn insert_objects_chunk_1(
                     None,
                     None,
                 )
-                .with_code(Some("ARal"))
+                .with_code(Some(WarcraftObjectId::new("ARal")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -3637,7 +3637,7 @@ fn insert_objects_chunk_1(
             AUA2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AUA2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Raises 6 dead units in an area to fight for the Death Knight for 40 seconds."), Some("Raises 6 dead units in an area to fight for the Death Knight for 40 seconds.")).with_code(Some("AUa2")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AUA2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Raises 6 dead units in an area to fight for the Death Knight for 40 seconds."), Some("Raises 6 dead units in an area to fight for the Death Knight for 40 seconds.")).with_code(Some(WarcraftObjectId::new("AUa2"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUA2_TIP_LEVELS, AUA2_UBERTIP_LEVELS),
         ),
     );
@@ -3650,7 +3650,7 @@ fn insert_objects_chunk_1(
             AUAN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AUAN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Raises 6 dead units in an area to fight for the Death Knight for 40 seconds."), Some("Raises 6 dead units in an area to fight for the Death Knight for 40 seconds.")).with_code(Some("AUan")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AUAN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Raises 6 dead units in an area to fight for the Death Knight for 40 seconds."), Some("Raises 6 dead units in an area to fight for the Death Knight for 40 seconds.")).with_code(Some(WarcraftObjectId::new("AUan"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUAN_TIP_LEVELS, AUAN_UBERTIP_LEVELS),
         ),
     );
@@ -3663,7 +3663,7 @@ fn insert_objects_chunk_1(
             AUAU_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUAU_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Increases nearby friendly units' movement speed by 10% and life regeneration rate."), Some("Increases the movement speed and life regeneration rate of nearby friendly units. |n|n|cffffcc00Level 1|r - 10% movement, minor regeneration bonus. |n|cffffcc00Level 2|r - 15% movement, moderate regeneration bonus. |n|cffffcc00Level 3|r - 20% movement, greater regeneration bonus.")).with_code(Some("AUau")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUAU_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Increases nearby friendly units' movement speed by 10% and life regeneration rate."), Some("Increases the movement speed and life regeneration rate of nearby friendly units. |n|n|cffffcc00Level 1|r - 10% movement, minor regeneration bonus. |n|cffffcc00Level 2|r - 15% movement, moderate regeneration bonus. |n|cffffcc00Level 3|r - 20% movement, greater regeneration bonus.")).with_code(Some(WarcraftObjectId::new("AUau"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUAU_TIP_LEVELS, AUAU_UBERTIP_LEVELS),
         ),
     );
@@ -3676,7 +3676,7 @@ fn insert_objects_chunk_1(
             AUAV_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUAV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Nearby friendly melee units gain 20% of their attack damage when they hit enemy units."), Some("Nearby friendly melee units gain hit points when they hit enemy units. |n|n|cffffcc00Level 1|r - Gains 20% of attack damage. |n|cffffcc00Level 2|r - Gains 35% of attack damage. |n|cffffcc00Level 3|r - Gains 50% of attack damage.")).with_code(Some("AUav")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUAV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Nearby friendly melee units gain 20% of their attack damage when they hit enemy units."), Some("Nearby friendly melee units gain hit points when they hit enemy units. |n|n|cffffcc00Level 1|r - Gains 20% of attack damage. |n|cffffcc00Level 2|r - Gains 35% of attack damage. |n|cffffcc00Level 3|r - Gains 50% of attack damage.")).with_code(Some(WarcraftObjectId::new("AUav"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUAV_TIP_LEVELS, AUAV_UBERTIP_LEVELS),
         ),
     );
@@ -3699,7 +3699,7 @@ fn insert_objects_chunk_1(
                     None,
                     None,
                 )
-                .with_code(Some("AUbu"))
+                .with_code(Some(WarcraftObjectId::new("AUbu")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -3714,7 +3714,7 @@ fn insert_objects_chunk_1(
             AUCB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUCB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Progenerates 2 Beetle from a target corpse. Beetles have 170 hit points, and deal 8 - 9 damage. Beetles are permanent until killed. |nMaximum of 6 Beetles."), Some("The Crypt Lord progenerates 2 Carrion Beetle from a target corpse to attack the Crypt Lord's enemies. Beetles are permanent, but only 6 can be controlled at a time. |n|n|cffffcc00Level 1|r - 170 hit points, 8 - 9 damage. |n|cffffcc00Level 2|r - 300 hit points, 15 - 18 damage, Beetles can learn Burrow. |n|cffffcc00Level 3|r - 440 hit points, 22 - 27 damage, Beetles can learn Burrow.")).with_code(Some("AUcb")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btncarrionscarabsoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUCB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Progenerates 2 Beetle from a target corpse. Beetles have 170 hit points, and deal 8 - 9 damage. Beetles are permanent until killed. |nMaximum of 6 Beetles."), Some("The Crypt Lord progenerates 2 Carrion Beetle from a target corpse to attack the Crypt Lord's enemies. Beetles are permanent, but only 6 can be controlled at a time. |n|n|cffffcc00Level 1|r - 170 hit points, 8 - 9 damage. |n|cffffcc00Level 2|r - 300 hit points, 15 - 18 damage, Beetles can learn Burrow. |n|cffffcc00Level 3|r - 440 hit points, 22 - 27 damage, Beetles can learn Burrow.")).with_code(Some(WarcraftObjectId::new("AUcb"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btncarrionscarabsoff.blp"))),
             WarcraftObjectText::with_alt(AUCB_TIP_LEVELS, AUCB_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting."), Some("|cffc3dbffRight-click to deactivate auto-casting.")),
         ),
     );
@@ -3727,7 +3727,7 @@ fn insert_objects_chunk_1(
             AUCS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUCS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Sends a horde of bats to deal 75 damage to each enemy unit in a cone."), Some("Sends a horde of bats to damage enemies. |n|n|cffffcc00Level 1|r - 75 damage per unit. |n|cffffcc00Level 2|r - 135 damage per unit. |n|cffffcc00Level 3|r - 200 damage per unit.")).with_code(Some("AUcs")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUCS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Sends a horde of bats to deal 75 damage to each enemy unit in a cone."), Some("Sends a horde of bats to damage enemies. |n|n|cffffcc00Level 1|r - 75 damage per unit. |n|cffffcc00Level 2|r - 135 damage per unit. |n|cffffcc00Level 3|r - 200 damage per unit.")).with_code(Some(WarcraftObjectId::new("AUcs"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUCS_TIP_LEVELS, AUCS_UBERTIP_LEVELS),
         ),
     );
@@ -3740,7 +3740,7 @@ fn insert_objects_chunk_1(
             AUDC_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUDC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("A coil of death that can heal a friendly Undead or Demon unit for 200 hit points, or deal half damage to an enemy living unit."), Some("A coil of death that can damage an enemy living unit, or heal a friendly Undead or Demon unit. Healing pierces spell immunity. |n|n|cffffcc00Level 1|r - Heals for 200 hit points. |n|cffffcc00Level 2|r - Heals for 400 hit points. |n|cffffcc00Level 3|r - Heals for 600 hit points.")).with_code(Some("AUdc")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUDC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("A coil of death that can heal a friendly Undead or Demon unit for 200 hit points, or deal half damage to an enemy living unit."), Some("A coil of death that can damage an enemy living unit, or heal a friendly Undead or Demon unit. Healing pierces spell immunity. |n|n|cffffcc00Level 1|r - Heals for 200 hit points. |n|cffffcc00Level 2|r - Heals for 400 hit points. |n|cffffcc00Level 3|r - Heals for 600 hit points.")).with_code(Some(WarcraftObjectId::new("AUdc"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUDC_TIP_LEVELS, AUDC_UBERTIP_LEVELS),
         ),
     );
@@ -3753,7 +3753,7 @@ fn insert_objects_chunk_1(
             AUDD_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AUDD_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Damages everything in its area of effect by 4% of its max hit points per second. Also destroys trees. |nLasts 35 seconds."), Some("Damages everything in its area of effect by 4% of its max hit points per second. Also destroys trees.")).with_code(Some("AUdd")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AUDD_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Damages everything in its area of effect by 4% of its max hit points per second. Also destroys trees. |nLasts 35 seconds."), Some("Damages everything in its area of effect by 4% of its max hit points per second. Also destroys trees.")).with_code(Some(WarcraftObjectId::new("AUdd"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUDD_TIP_LEVELS, AUDD_UBERTIP_LEVELS),
         ),
     );
@@ -3766,7 +3766,7 @@ fn insert_objects_chunk_1(
             AUDP_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUDP_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Kills a target friendly Undead unit, giving 100% of its hit points to the Death Knight."), Some("Kills a target friendly Undead unit, giving a percentage of its hit points to the Death Knight. |n|n|cffffcc00Level 1|r - 100% conversion. |n|cffffcc00Level 2|r - 200% conversion. |n|cffffcc00Level 3|r - 300% conversion.")).with_code(Some("AUdp")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUDP_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Kills a target friendly Undead unit, giving 100% of its hit points to the Death Knight."), Some("Kills a target friendly Undead unit, giving a percentage of its hit points to the Death Knight. |n|n|cffffcc00Level 1|r - 100% conversion. |n|cffffcc00Level 2|r - 200% conversion. |n|cffffcc00Level 3|r - 300% conversion.")).with_code(Some(WarcraftObjectId::new("AUdp"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUDP_TIP_LEVELS, AUDP_UBERTIP_LEVELS),
         ),
     );
@@ -3779,7 +3779,7 @@ fn insert_objects_chunk_1(
             AUDR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUDR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Sacrifices a target friendly Undead unit to convert 33% of its hit points into mana for the Lich."), Some("Sacrifices a target friendly Undead unit to convert its hit points into mana for the Lich. |n|n|cffffcc00Level 1|r - 33% of hit points to mana. |n|cffffcc00Level 2|r - 55% of hit points to mana. |n|cffffcc00Level 3|r - 80% of hit points to mana.")).with_code(Some("AUdr")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUDR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Sacrifices a target friendly Undead unit to convert 33% of its hit points into mana for the Lich."), Some("Sacrifices a target friendly Undead unit to convert its hit points into mana for the Lich. |n|n|cffffcc00Level 1|r - 33% of hit points to mana. |n|cffffcc00Level 2|r - 55% of hit points to mana. |n|cffffcc00Level 3|r - 80% of hit points to mana.")).with_code(Some(WarcraftObjectId::new("AUdr"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUDR_TIP_LEVELS, AUDR_UBERTIP_LEVELS),
         ),
     );
@@ -3792,7 +3792,7 @@ fn insert_objects_chunk_1(
             AUFA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUFA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Creates a shield of frost around a target friendly unit. The shield adds 3 armor and slows melee units that attack it for 4 seconds. |nLasts 45 seconds."), Some("Creates a shield of frost around a target friendly unit. The shield adds armor and slows melee units that attack it. |n|n|cffffcc00Level 1|r - Adds 3 armor. |n|cffffcc00Level 2|r - Adds 5 armor. |n|cffffcc00Level 3|r - Adds 7 armor.")).with_code(Some("AUfa")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUFA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Creates a shield of frost around a target friendly unit. The shield adds 3 armor and slows melee units that attack it for 4 seconds. |nLasts 45 seconds."), Some("Creates a shield of frost around a target friendly unit. The shield adds armor and slows melee units that attack it. |n|n|cffffcc00Level 1|r - Adds 3 armor. |n|cffffcc00Level 2|r - Adds 5 armor. |n|cffffcc00Level 3|r - Adds 7 armor.")).with_code(Some(WarcraftObjectId::new("AUfa"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUFA_TIP_LEVELS, AUFA_UBERTIP_LEVELS),
         ),
     );
@@ -3805,7 +3805,7 @@ fn insert_objects_chunk_1(
             AUFN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUFN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Blasts enemy units with a wave of frost that deals 100 damage to the target, and 50 nova damage. Cold damage slows units' movement and attack rate for 4 seconds."), Some("Blasts enemy units around a target enemy unit with a wave of damaging frost that slows movement and attack rate. |n|n|cffffcc00Level 1|r - 100 target damage, 50 nova damage. |n|cffffcc00Level 2|r - 100 target damage, 100 nova damage. |n|cffffcc00Level 3|r - 100 target damage, 150 nova damage.")).with_code(Some("AUfn")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUFN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Blasts enemy units with a wave of frost that deals 100 damage to the target, and 50 nova damage. Cold damage slows units' movement and attack rate for 4 seconds."), Some("Blasts enemy units around a target enemy unit with a wave of damaging frost that slows movement and attack rate. |n|n|cffffcc00Level 1|r - 100 target damage, 50 nova damage. |n|cffffcc00Level 2|r - 100 target damage, 100 nova damage. |n|cffffcc00Level 3|r - 100 target damage, 150 nova damage.")).with_code(Some(WarcraftObjectId::new("AUfn"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUFN_TIP_LEVELS, AUFN_UBERTIP_LEVELS),
         ),
     );
@@ -3818,7 +3818,7 @@ fn insert_objects_chunk_1(
             AUFU_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUFU_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Creates a shield of frost around a target friendly unit. The shield adds 3 armor and slows melee units that attack it for 3 seconds. |nLasts 45 seconds."), Some("Creates a shield of frost around a target friendly unit. The shield adds armor and slows melee units that attack it. |n|n|cffffcc00Level 1|r - Adds 3 armor. |n|cffffcc00Level 2|r - Adds 5 armor. |n|cffffcc00Level 3|r - Adds 7 armor.")).with_code(Some("AUfu")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnfrostarmoroff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUFU_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Creates a shield of frost around a target friendly unit. The shield adds 3 armor and slows melee units that attack it for 3 seconds. |nLasts 45 seconds."), Some("Creates a shield of frost around a target friendly unit. The shield adds armor and slows melee units that attack it. |n|n|cffffcc00Level 1|r - Adds 3 armor. |n|cffffcc00Level 2|r - Adds 5 armor. |n|cffffcc00Level 3|r - Adds 7 armor.")).with_code(Some(WarcraftObjectId::new("AUfu"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnfrostarmoroff.blp"))),
             WarcraftObjectText::with_alt(AUFU_TIP_LEVELS, AUFU_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting."), Some("|cffc3dbffRight-click to deactivate auto-casting.")),
         ),
     );
@@ -3831,7 +3831,7 @@ fn insert_objects_chunk_1(
             AUIM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUIM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line, dealing 60 damage and hurling enemy ground units into the air in their wake, stunning them for 2 seconds."), Some("Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line, dealing damage and hurling enemy ground units into the air in their wake. |n|n|cffffcc00Level 1|r - 60 damage, 2 second stun. |n|cffffcc00Level 2|r - 105 damage, 3 second stun. |n|cffffcc00Level 3|r - 150 damage, 4 second stun.")).with_code(Some("AUim")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUIM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line, dealing 60 damage and hurling enemy ground units into the air in their wake, stunning them for 2 seconds."), Some("Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line, dealing damage and hurling enemy ground units into the air in their wake. |n|n|cffffcc00Level 1|r - 60 damage, 2 second stun. |n|cffffcc00Level 2|r - 105 damage, 3 second stun. |n|cffffcc00Level 3|r - 150 damage, 4 second stun.")).with_code(Some(WarcraftObjectId::new("AUim"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUIM_TIP_LEVELS, AUIM_UBERTIP_LEVELS),
         ),
     );
@@ -3844,7 +3844,7 @@ fn insert_objects_chunk_1(
             AUIN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AUIN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 180 seconds."), Some("Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 180 seconds.")).with_code(Some("AUin")).with_morph_target(Some(WarcraftObjectId::new("ninf"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AUIN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 180 seconds."), Some("Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 180 seconds.")).with_code(Some(WarcraftObjectId::new("AUin"))).with_morph_target(Some(WarcraftObjectId::new("ninf"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUIN_TIP_LEVELS, AUIN_UBERTIP_LEVELS),
         ),
     );
@@ -3857,7 +3857,7 @@ fn insert_objects_chunk_1(
             AULS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AULS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Creates a swarm of angry locusts that bite and tear at nearby enemy units. As they chew the enemy flesh, they convert it into a substance that restores hit points to the Crypt Lord when they return. Pierces spell immunity. |nLasts 30 seconds."), Some("Creates a swarm of angry locusts that bite and tear at nearby enemy units. As they chew the enemy flesh, they convert it into a substance that restores hit points to the Crypt Lord when they return. Pierces spell immunity. |nLasts 30 seconds.")).with_code(Some("AUls")).with_morph_target(Some(WarcraftObjectId::new("uloc"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, AULS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Creates a swarm of angry locusts that bite and tear at nearby enemy units. As they chew the enemy flesh, they convert it into a substance that restores hit points to the Crypt Lord when they return. Pierces spell immunity. |nLasts 30 seconds."), Some("Creates a swarm of angry locusts that bite and tear at nearby enemy units. As they chew the enemy flesh, they convert it into a substance that restores hit points to the Crypt Lord when they return. Pierces spell immunity. |nLasts 30 seconds.")).with_code(Some(WarcraftObjectId::new("AUls"))).with_morph_target(Some(WarcraftObjectId::new("uloc"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AULS_TIP_LEVELS, AULS_UBERTIP_LEVELS),
         ),
     );
@@ -3870,7 +3870,7 @@ fn insert_objects_chunk_1(
             AUSL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUSL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Puts a target enemy unit to sleep for 15 seconds. A sleeping unit can be awoken by attacking it."), Some("Puts a target enemy unit to sleep. A sleeping unit can be awoken by attacking it. |n|n|cffffcc00Level 1|r - 15 second sleep for 80 mana. |n|cffffcc00Level 2|r - 35 second sleep for 65 mana. |n|cffffcc00Level 3|r - 55 second sleep for 50 mana.")).with_code(Some("AUsl")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUSL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Puts a target enemy unit to sleep for 15 seconds. A sleeping unit can be awoken by attacking it."), Some("Puts a target enemy unit to sleep. A sleeping unit can be awoken by attacking it. |n|n|cffffcc00Level 1|r - 15 second sleep for 80 mana. |n|cffffcc00Level 2|r - 35 second sleep for 65 mana. |n|cffffcc00Level 3|r - 55 second sleep for 50 mana.")).with_code(Some(WarcraftObjectId::new("AUsl"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUSL_TIP_LEVELS, AUSL_UBERTIP_LEVELS),
         ),
     );
@@ -3883,7 +3883,7 @@ fn insert_objects_chunk_1(
             AUTS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUTS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Enhances the Crypt Lord's chitinous armor with organic barbs, giving the Crypt Lord 4 bonus armor and returning 15% of melee attack damage to enemies."), Some("The Crypt Lord forms barbed layers of chitinous armor that increases its defense and returns damage to enemy melee attackers.  |n|n|cffffcc00Level 1|r - 15% damage returned, 4 bonus armor. |n|cffffcc00Level 2|r -  30% damage returned, 8 bonus armor. |n|cffffcc00Level 3|r -  45% damage returned, 12 bonus armor.")).with_code(Some("AUts")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUTS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Enhances the Crypt Lord's chitinous armor with organic barbs, giving the Crypt Lord 4 bonus armor and returning 15% of melee attack damage to enemies."), Some("The Crypt Lord forms barbed layers of chitinous armor that increases its defense and returns damage to enemy melee attackers.  |n|n|cffffcc00Level 1|r - 15% damage returned, 4 bonus armor. |n|cffffcc00Level 2|r -  30% damage returned, 8 bonus armor. |n|cffffcc00Level 3|r -  45% damage returned, 12 bonus armor.")).with_code(Some(WarcraftObjectId::new("AUts"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, None)),
             WarcraftObjectText::new(AUTS_TIP_LEVELS, AUTS_UBERTIP_LEVELS),
         ),
     );
@@ -3906,7 +3906,7 @@ fn insert_objects_chunk_1(
                     Some("Takes all mana from one of your units and gives it to the Destroyer."),
                     None,
                 )
-                .with_code(Some("Aabs"))
+                .with_code(Some(WarcraftObjectId::new("Aabs")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -3922,7 +3922,7 @@ fn insert_objects_chunk_1(
             AADM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AADM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Dispels positive buffs from enemy units, and negative buffs from friendly units. |n|cffffcc00Deals 250 damage to summoned units.|r"), None).with_code(Some("Aadm")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btndryaddispelmagicoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AADM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Dispels positive buffs from enemy units, and negative buffs from friendly units. |n|cffffcc00Deals 250 damage to summoned units.|r"), None).with_code(Some(WarcraftObjectId::new("Aadm"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btndryaddispelmagicoff.blp"))),
             WarcraftObjectText::with_alt(AADM_TIP_LEVELS, AADM_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -3945,7 +3945,7 @@ fn insert_objects_chunk_1(
                     Some("Mines gold from Haunted Gold Mines."),
                     None,
                 )
-                .with_code(Some("Aaha"))
+                .with_code(Some(WarcraftObjectId::new("Aaha")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::One)),
@@ -3981,7 +3981,7 @@ fn insert_objects_chunk_1(
                     Some("Adds a damage increase to the attacks of nearby friendly units."),
                     None,
                 )
-                .with_code(Some("Aakb"))
+                .with_code(Some(WarcraftObjectId::new("Aakb")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -4007,7 +4007,7 @@ fn insert_objects_chunk_1(
                     None,
                     None,
                 )
-                .with_code(Some("Aall"))
+                .with_code(Some(WarcraftObjectId::new("Aall")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)),
@@ -4027,7 +4027,7 @@ fn insert_objects_chunk_1(
             AAM2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AAM2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Creates a barrier that stops 300 points of spell, summon, or magic damage from affecting a target unit. |nLasts 90 seconds."), None).with_code(Some("Aams")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AAM2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Creates a barrier that stops 300 points of spell, summon, or magic damage from affecting a target unit. |nLasts 90 seconds."), None).with_code(Some(WarcraftObjectId::new("Aams"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AAM2_TIP_LEVELS, AAM2_UBERTIP_LEVELS),
         ),
     );
@@ -4040,7 +4040,7 @@ fn insert_objects_chunk_1(
             AAMK_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(4, false, AAMK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::One)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::One)), Some("Gives a total of 3 points to Agility, Intelligence, and Strength"), Some("Gives a permanent bonus to Agility, Intelligence, and Strength. |n|n|cffffcc00Level 1|r - Adds three points to all stats.|n|cffffcc00Level 2|r - Adds three additional points.|n|cffffcc00Level 3|r - Adds three additional points.|n|cffffcc00Level 4|r - Adds three additional points.")).with_code(Some("Aamk")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(4, false, AAMK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::One)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::One)), Some("Gives a total of 3 points to Agility, Intelligence, and Strength"), Some("Gives a permanent bonus to Agility, Intelligence, and Strength. |n|n|cffffcc00Level 1|r - Adds three points to all stats.|n|cffffcc00Level 2|r - Adds three additional points.|n|cffffcc00Level 3|r - Adds three additional points.|n|cffffcc00Level 4|r - Adds three additional points.")).with_code(Some(WarcraftObjectId::new("Aamk"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AAMK_TIP_LEVELS, AAMK_UBERTIP_LEVELS),
         ),
     );
@@ -4053,7 +4053,7 @@ fn insert_objects_chunk_1(
             AAMS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AAMS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Creates a barrier that stops spells from affecting a target unit. |nLasts 90 seconds."), None).with_code(Some("Aams")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AAMS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Creates a barrier that stops spells from affecting a target unit. |nLasts 90 seconds."), None).with_code(Some(WarcraftObjectId::new("Aams"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AAMS_TIP_LEVELS, AAMS_UBERTIP_LEVELS),
         ),
     );
@@ -4066,7 +4066,7 @@ fn insert_objects_chunk_1(
             AAP1_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AAP1_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Infects nearby enemy living units with Disease Cloud. Disease Cloud deals 2 damage per second. |nLasts 75 seconds."), None).with_code(Some("Aapl")).with_morph_target(Some(WarcraftObjectId::new("uplg"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AAP1_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Infects nearby enemy living units with Disease Cloud. Disease Cloud deals 2 damage per second. |nLasts 75 seconds."), None).with_code(Some(WarcraftObjectId::new("Aapl"))).with_morph_target(Some(WarcraftObjectId::new("uplg"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AAP1_TIP_LEVELS, AAP1_UBERTIP_LEVELS),
         ),
     );
@@ -4079,7 +4079,7 @@ fn insert_objects_chunk_1(
             AAP2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AAP2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Infects nearby enemy living units with Disease Cloud. Disease Cloud deals 2 damage per second. |nLasts 75 seconds."), None).with_code(Some("Aapl")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AAP2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Infects nearby enemy living units with Disease Cloud. Disease Cloud deals 2 damage per second. |nLasts 75 seconds."), None).with_code(Some(WarcraftObjectId::new("Aapl"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AAP2_TIP_LEVELS, AAP2_UBERTIP_LEVELS),
         ),
     );
@@ -4092,7 +4092,7 @@ fn insert_objects_chunk_1(
             AAP3_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AAP3_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Infects nearby enemy living units with Disease Cloud. Disease Cloud deals 1 damage per second. |nLasts 75 seconds."), None).with_code(Some("Aapl")).with_morph_target(Some(WarcraftObjectId::new("uplg"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AAP3_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Infects nearby enemy living units with Disease Cloud. Disease Cloud deals 1 damage per second. |nLasts 75 seconds."), None).with_code(Some(WarcraftObjectId::new("Aapl"))).with_morph_target(Some(WarcraftObjectId::new("uplg"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AAP3_TIP_LEVELS, AAP3_UBERTIP_LEVELS),
         ),
     );
@@ -4107,7 +4107,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AASL_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aasl"))
+                    .with_code(Some(WarcraftObjectId::new("Aasl")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -4122,7 +4122,7 @@ fn insert_objects_chunk_1(
             AAST_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AAST_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Raises a fallen non-Hero Tauren from the dead. The Tauren is revived with 100% of its hit points restored."), None).with_code(Some("Aast")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AAST_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Raises a fallen non-Hero Tauren from the dead. The Tauren is revived with 100% of its hit points restored."), None).with_code(Some(WarcraftObjectId::new("Aast"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AAST_TIP_LEVELS, AAST_UBERTIP_LEVELS),
         ),
     );
@@ -4145,7 +4145,7 @@ fn insert_objects_chunk_1(
                     Some("Engages enemy flying units first unless ordered otherwise."),
                     None,
                 )
-                .with_code(Some("Aatp"))
+                .with_code(Some(WarcraftObjectId::new("Aatp")))
                 .with_morph_target(None)
                 .with_off_state(
                     None,
@@ -4181,7 +4181,7 @@ fn insert_objects_chunk_1(
                     None,
                     None,
                 )
-                .with_code(Some("Aave"))
+                .with_code(Some(WarcraftObjectId::new("Aave")))
                 .with_morph_target(Some(WarcraftObjectId::new("ubsp")))
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)),
@@ -4203,7 +4203,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AAWA_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aawa"))
+                    .with_code(Some(WarcraftObjectId::new("Aawa")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -4220,7 +4220,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ABDL_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Abli"))
+                    .with_code(Some(WarcraftObjectId::new("Abli")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -4237,7 +4237,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ABDS_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Abli"))
+                    .with_code(Some(WarcraftObjectId::new("Abli")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -4254,7 +4254,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ABGL_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Abli"))
+                    .with_code(Some(WarcraftObjectId::new("Abli")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -4271,7 +4271,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ABGM_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Abgm"))
+                    .with_code(Some(WarcraftObjectId::new("Abgm")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -4288,7 +4288,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ABGS_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Abli"))
+                    .with_code(Some(WarcraftObjectId::new("Abli")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -4303,7 +4303,7 @@ fn insert_objects_chunk_1(
             ABLO_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ABLO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Increases a friendly unit's attack rate by 40% and movement speed by 25%. |nLasts 60 seconds."), None).with_code(Some("Ablo")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btnbloodlustoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ABLO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Increases a friendly unit's attack rate by 40% and movement speed by 25%. |nLasts 60 seconds."), None).with_code(Some(WarcraftObjectId::new("Ablo"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btnbloodlustoff.blp"))),
             WarcraftObjectText::with_alt(ABLO_TIP_LEVELS, ABLO_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -4316,7 +4316,7 @@ fn insert_objects_chunk_1(
             ABOF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ABOF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Drenches the Demolisher ammo in burning oil, causing them to light the ground on fire and burn enemy units."), None).with_code(Some("Abof")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ABOF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Drenches the Demolisher ammo in burning oil, causing them to light the ground on fire and burn enemy units."), None).with_code(Some(WarcraftObjectId::new("Abof"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ABOF_TIP_LEVELS, ABOF_UBERTIP_LEVELS),
         ),
     );
@@ -4329,7 +4329,7 @@ fn insert_objects_chunk_1(
             ABRF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ABRF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Transforms the Druid into a bear, slowing mana regeneration, but making him an excellent warrior."), None).with_code(Some("Abrf")).with_morph_target(Some(WarcraftObjectId::new("edcm"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btndruidoftheclaw.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ABRF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Transforms the Druid into a bear, slowing mana regeneration, but making him an excellent warrior."), None).with_code(Some(WarcraftObjectId::new("Abrf"))).with_morph_target(Some(WarcraftObjectId::new("edcm"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btndruidoftheclaw.blp"))),
             WarcraftObjectText::with_alt(ABRF_TIP_LEVELS, ABRF_UBERTIP_LEVELS, Some("Night Elf Form"), Some("Transforms the Druid into a Night Elf.")),
         ),
     );
@@ -4352,7 +4352,7 @@ fn insert_objects_chunk_1(
                     Some("Causes this unit to attack 50% faster, but take 40% more damage."),
                     None,
                 )
-                .with_code(Some("Absk"))
+                .with_code(Some(WarcraftObjectId::new("Absk")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -4368,7 +4368,7 @@ fn insert_objects_chunk_1(
             ABTL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ABTL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes nearby Peons to run into the Burrow so that they can defend their base."), None).with_code(Some("Abtl")).with_morph_target(Some(WarcraftObjectId::new("opeo"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ABTL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes nearby Peons to run into the Burrow so that they can defend their base."), None).with_code(Some(WarcraftObjectId::new("Abtl"))).with_morph_target(Some(WarcraftObjectId::new("opeo"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ABTL_TIP_LEVELS, ABTL_UBERTIP_LEVELS),
         ),
     );
@@ -4391,7 +4391,7 @@ fn insert_objects_chunk_1(
                     Some("The Carrion Beetle digs into the ground and becomes invisible."),
                     None,
                 )
-                .with_code(Some("Abur"))
+                .with_code(Some(WarcraftObjectId::new("Abur")))
                 .with_morph_target(Some(WarcraftObjectId::new("ucsB")))
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)),
@@ -4427,7 +4427,7 @@ fn insert_objects_chunk_1(
                     Some("The Carrion Beetle digs into the ground and becomes invisible."),
                     None,
                 )
-                .with_code(Some("Abur"))
+                .with_code(Some(WarcraftObjectId::new("Abur")))
                 .with_morph_target(Some(WarcraftObjectId::new("ucsC")))
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)),
@@ -4463,7 +4463,7 @@ fn insert_objects_chunk_1(
                     Some("The Arachnathid digs into the ground and becomes invisible."),
                     None,
                 )
-                .with_code(Some("Abur"))
+                .with_code(Some(WarcraftObjectId::new("Abur")))
                 .with_morph_target(Some(WarcraftObjectId::new("nbnb")))
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)),
@@ -4491,7 +4491,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ABUN_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Abun"))
+                    .with_code(Some(WarcraftObjectId::new("Abun")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -4506,7 +4506,7 @@ fn insert_objects_chunk_1(
             ABUR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ABUR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("The Crypt Fiend digs into the ground, becomes invisible, and gains a regeneration rate of 5 hit points per second. |nThe Crypt Fiend cannot attack while burrowed."), None).with_code(Some("Abur")).with_morph_target(Some(WarcraftObjectId::new("ucrm"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btncryptfiendunburrow.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ABUR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("The Crypt Fiend digs into the ground, becomes invisible, and gains a regeneration rate of 5 hit points per second. |nThe Crypt Fiend cannot attack while burrowed."), None).with_code(Some(WarcraftObjectId::new("Abur"))).with_morph_target(Some(WarcraftObjectId::new("ucrm"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btncryptfiendunburrow.blp"))),
             WarcraftObjectText::with_alt(ABUR_TIP_LEVELS, ABUR_UBERTIP_LEVELS, Some("Unburrow"), Some("The Crypt Fiend pops out of the ground and becomes visible again.")),
         ),
     );
@@ -4529,7 +4529,7 @@ fn insert_objects_chunk_1(
                     Some("Consumes a nearby corpse to heal 16 hit points per second."),
                     None,
                 )
-                .with_code(Some("Acan"))
+                .with_code(Some(WarcraftObjectId::new("Acan")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -4545,7 +4545,7 @@ fn insert_objects_chunk_1(
             ACDB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(4, false, ACDB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 7% chance to dodge an attack and a 10% chance to deal 2 times normal damage."), Some("Gives a percent chance to avoid attacks and a 10% chance to deal additional damage. |n|n|cffffcc00Level 1|r - 7% dodge, 2 times normal damage. |n|cffffcc00Level 2|r - 14% dodge, 3 times normal damage. |n|cffffcc00Level 3|r - 21% dodge, 4 times normal damage. |n|cffffcc00Level 4|r - 30% dodge, 6 times normal damage.")).with_code(Some("ANdb")).with_morph_target(None).with_evasion_chances([0.07, 0.14, 0.21, 0.3]).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(4, false, ACDB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 7% chance to dodge an attack and a 10% chance to deal 2 times normal damage."), Some("Gives a percent chance to avoid attacks and a 10% chance to deal additional damage. |n|n|cffffcc00Level 1|r - 7% dodge, 2 times normal damage. |n|cffffcc00Level 2|r - 14% dodge, 3 times normal damage. |n|cffffcc00Level 3|r - 21% dodge, 4 times normal damage. |n|cffffcc00Level 4|r - 30% dodge, 6 times normal damage.")).with_code(Some(WarcraftObjectId::new("ANdb"))).with_morph_target(None).with_evasion_chances([0.07, 0.14, 0.21, 0.3]).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACDB_TIP_LEVELS, ACDB_UBERTIP_LEVELS),
         ),
     );
@@ -4558,7 +4558,7 @@ fn insert_objects_chunk_1(
             ACDH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ACDH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Drenches enemy units in alcohol, causing their movement speed to be reduced by 50%, and have a 45% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. |nLasts 12 seconds."), Some("Drenches enemy units in alcohol, causing their movement speed to be reduced, and have a chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage over time. |nLasts 12 seconds |n|n|cffffcc00Level 1|r - 50% movement speed, 45% miss chance. |n|cffffcc00Level 2|r - 50% movement speed, 65% miss chance. |n|cffffcc00Level 3|r - 50% movement speed, 80% miss chance.|n|cffffcc00Level 4|r - 50% movement speed, 95% miss chance.")).with_code(Some("ANdh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ACDH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Drenches enemy units in alcohol, causing their movement speed to be reduced by 50%, and have a 45% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. |nLasts 12 seconds."), Some("Drenches enemy units in alcohol, causing their movement speed to be reduced, and have a chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage over time. |nLasts 12 seconds |n|n|cffffcc00Level 1|r - 50% movement speed, 45% miss chance. |n|cffffcc00Level 2|r - 50% movement speed, 65% miss chance. |n|cffffcc00Level 3|r - 50% movement speed, 80% miss chance.|n|cffffcc00Level 4|r - 50% movement speed, 95% miss chance.")).with_code(Some(WarcraftObjectId::new("ANdh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACDH_TIP_LEVELS, ACDH_UBERTIP_LEVELS),
         ),
     );
@@ -4571,7 +4571,7 @@ fn insert_objects_chunk_1(
             ACEF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ACEF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Splits the Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn."), Some("Splits the Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn.|n|n|cffffcc00Level 1|r - Summons three mighty Pandas. |n|cffffcc00Level 2|r - Summons three even mightier Pandas.")).with_code(Some("ANef")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ACEF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Splits the Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn."), Some("Splits the Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn.|n|n|cffffcc00Level 1|r - Summons three mighty Pandas. |n|cffffcc00Level 2|r - Summons three even mightier Pandas.")).with_code(Some(WarcraftObjectId::new("ANef"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACEF_TIP_LEVELS, ACEF_UBERTIP_LEVELS),
         ),
     );
@@ -4586,7 +4586,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ACHD_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Achd"))
+                    .with_code(Some(WarcraftObjectId::new("Achd")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -4601,7 +4601,7 @@ fn insert_objects_chunk_1(
             ACHE_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACHE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Conjures a stream of neutralizing magic that bounces up to 8 times, dispelling units in its wake."), None).with_code(Some("AIdc")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACHE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Conjures a stream of neutralizing magic that bounces up to 8 times, dispelling units in its wake."), None).with_code(Some(WarcraftObjectId::new("AIdc"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACHE_TIP_LEVELS, ACHE_UBERTIP_LEVELS),
         ),
     );
@@ -4614,7 +4614,7 @@ fn insert_objects_chunk_1(
             ACHT_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACHT_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Emits a terrifying howl that reduces nearby enemy units' attack damage by 25% for 10 seconds."), None).with_code(Some("ANht")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACHT_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Emits a terrifying howl that reduces nearby enemy units' attack damage by 25% for 10 seconds."), None).with_code(Some(WarcraftObjectId::new("ANht"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACHT_TIP_LEVELS, ACHT_UBERTIP_LEVELS),
         ),
     );
@@ -4627,7 +4627,7 @@ fn insert_objects_chunk_1(
             ACLF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACLF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Cast on enemy buildings with ranged attacks to stop the buildings from attacking. |nLasts 30 seconds."), None).with_code(Some("Aclf")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACLF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Cast on enemy buildings with ranged attacks to stop the buildings from attacking. |nLasts 30 seconds."), None).with_code(Some(WarcraftObjectId::new("Aclf"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACLF_TIP_LEVELS, ACLF_UBERTIP_LEVELS),
         ),
     );
@@ -4640,7 +4640,7 @@ fn insert_objects_chunk_1(
             ACMG_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACMG_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Takes control of an enemy summoned unit. The mana cost is 35% of the summoned unit's current hit points."), None).with_code(Some("Acmg")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACMG_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Takes control of an enemy summoned unit. The mana cost is 35% of the summoned unit's current hit points."), None).with_code(Some(WarcraftObjectId::new("Acmg"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACMG_TIP_LEVELS, ACMG_UBERTIP_LEVELS),
         ),
     );
@@ -4663,7 +4663,7 @@ fn insert_objects_chunk_1(
                     Some("Consumes a nearby corpse to heal 25 hit points per second."),
                     None,
                 )
-                .with_code(Some("Acan"))
+                .with_code(Some(WarcraftObjectId::new("Acan")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -4679,7 +4679,7 @@ fn insert_objects_chunk_1(
             ACNY_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACNY_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Tosses a target non-mechanical enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. |nLasts 20 seconds."), None).with_code(Some("Acyc")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACNY_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Tosses a target non-mechanical enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. |nLasts 20 seconds."), None).with_code(Some(WarcraftObjectId::new("Acyc"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACNY_TIP_LEVELS, ACNY_UBERTIP_LEVELS),
         ),
     );
@@ -4692,7 +4692,7 @@ fn insert_objects_chunk_1(
             ACO2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACO2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Mounts a Hippogryph so that the Archer can attack from the air. |n|n|cffffcc00Attacks land and air units.|r"), None).with_code(Some("Acoi")).with_morph_target(Some(WarcraftObjectId::new("ehpr"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACO2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Mounts a Hippogryph so that the Archer can attack from the air. |n|n|cffffcc00Attacks land and air units.|r"), None).with_code(Some(WarcraftObjectId::new("Acoi"))).with_morph_target(Some(WarcraftObjectId::new("ehpr"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACO2_TIP_LEVELS, ACO2_UBERTIP_LEVELS),
         ),
     );
@@ -4705,7 +4705,7 @@ fn insert_objects_chunk_1(
             ACO3_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACO3_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Picks up an Archer so that the Archer can attack from the air. |n|n|cffffcc00Attacks land and air units.|r"), None).with_code(Some("Acoi")).with_morph_target(Some(WarcraftObjectId::new("ehpr"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACO3_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Picks up an Archer so that the Archer can attack from the air. |n|n|cffffcc00Attacks land and air units.|r"), None).with_code(Some(WarcraftObjectId::new("Acoi"))).with_morph_target(Some(WarcraftObjectId::new("ehpr"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACO3_TIP_LEVELS, ACO3_UBERTIP_LEVELS),
         ),
     );
@@ -4718,7 +4718,7 @@ fn insert_objects_chunk_1(
             ACOA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACOA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Mounts a Hippogryph so that the Archer can attack from the air. The mounted unit cannot dismount. |n|n|cffffcc00Attacks land and air units.|r"), None).with_code(Some("Acoa")).with_morph_target(Some(WarcraftObjectId::new("ehpr"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACOA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Mounts a Hippogryph so that the Archer can attack from the air. The mounted unit cannot dismount. |n|n|cffffcc00Attacks land and air units.|r"), None).with_code(Some(WarcraftObjectId::new("Acoa"))).with_morph_target(Some(WarcraftObjectId::new("ehpr"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACOA_TIP_LEVELS, ACOA_UBERTIP_LEVELS),
         ),
     );
@@ -4731,7 +4731,7 @@ fn insert_objects_chunk_1(
             ACOH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACOH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Picks up an Archer so that the Archer can attack from the air. The mounted unit cannot dismount. |n|n|cffffcc00Attacks land and air units.|r"), None).with_code(Some("Acoh")).with_morph_target(Some(WarcraftObjectId::new("ehpr"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACOH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Picks up an Archer so that the Archer can attack from the air. The mounted unit cannot dismount. |n|n|cffffcc00Attacks land and air units.|r"), None).with_code(Some(WarcraftObjectId::new("Acoh"))).with_morph_target(Some(WarcraftObjectId::new("ehpr"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACOH_TIP_LEVELS, ACOH_UBERTIP_LEVELS),
         ),
     );
@@ -4754,7 +4754,7 @@ fn insert_objects_chunk_1(
                     Some("Hurls a ball of corrosive bile that is effective against buildings."),
                     None,
                 )
-                .with_code(Some("Acor"))
+                .with_code(Some(WarcraftObjectId::new("Acor")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -4770,7 +4770,7 @@ fn insert_objects_chunk_1(
             ACPF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACPF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Turns the Spirit Walker corporeal, allowing him to attack and take physical damage."), None).with_code(Some("Acpf")).with_morph_target(Some(WarcraftObjectId::new("ospw"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnetherealformon.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACPF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Turns the Spirit Walker corporeal, allowing him to attack and take physical damage."), None).with_code(Some(WarcraftObjectId::new("Acpf"))).with_morph_target(Some(WarcraftObjectId::new("ospw"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnetherealformon.blp"))),
             WarcraftObjectText::with_alt(ACPF_TIP_LEVELS, ACPF_UBERTIP_LEVELS, Some("Ethereal Form"), Some("Turns the Spirit Walker ethereal, making him immune to physical damage but unable to attack. He can cast spells and will take extra damage from Magic attacks and spells.")),
         ),
     );
@@ -4783,7 +4783,7 @@ fn insert_objects_chunk_1(
             ACRI_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACRI_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Reduces movement speed by 75%, attack rate by 50%, and damage by 50% of a target enemy unit. |nLasts 60 seconds."), None).with_code(Some("Acri")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACRI_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Reduces movement speed by 75%, attack rate by 50%, and damage by 50% of a target enemy unit. |nLasts 60 seconds."), None).with_code(Some(WarcraftObjectId::new("Acri"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACRI_TIP_LEVELS, ACRI_UBERTIP_LEVELS),
         ),
     );
@@ -4796,7 +4796,7 @@ fn insert_objects_chunk_1(
             ACRS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACRS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Curses a target enemy unit, causing it to have a 33% chance to miss on an attack. |nLasts 60 seconds."), None).with_code(Some("Acrs")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btncurseoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACRS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Curses a target enemy unit, causing it to have a 33% chance to miss on an attack. |nLasts 60 seconds."), None).with_code(Some(WarcraftObjectId::new("Acrs"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btncurseoff.blp"))),
             WarcraftObjectText::with_alt(ACRS_TIP_LEVELS, ACRS_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting."), Some("|cffc3dbffRight-click to deactivate auto-casting.")),
         ),
     );
@@ -4809,7 +4809,7 @@ fn insert_objects_chunk_1(
             ACYC_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACYC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Tosses a target non-mechanical enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. |nLasts 20 seconds."), None).with_code(Some("Acyc")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ACYC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Tosses a target non-mechanical enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. |nLasts 20 seconds."), None).with_code(Some(WarcraftObjectId::new("Acyc"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACYC_TIP_LEVELS, ACYC_UBERTIP_LEVELS),
         ),
     );
@@ -4822,7 +4822,7 @@ fn insert_objects_chunk_1(
             ADCN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ADCN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Removes all buffs from units in a target area. |n|cffffcc00Deals 250 damage to hostile summoned units.|r"), None).with_code(Some("Adis")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ADCN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Removes all buffs from units in a target area. |n|cffffcc00Deals 250 damage to hostile summoned units.|r"), None).with_code(Some(WarcraftObjectId::new("Adis"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ADCN_TIP_LEVELS, ADCN_UBERTIP_LEVELS),
         ),
     );
@@ -4845,7 +4845,7 @@ fn insert_objects_chunk_1(
                     Some("Dismounts the Archer from the Hippogryph."),
                     None,
                 )
-                .with_code(Some("Adec"))
+                .with_code(Some(WarcraftObjectId::new("Adec")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -4861,7 +4861,7 @@ fn insert_objects_chunk_1(
             ADEF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ADEF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Activate to have a 25% chance to reflect Piercing attacks upon the source, and to take only 50% of the damage from attacks that are not reflected. While Defend is active, move speed is reduced by 30%."), None).with_code(Some("Adef")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btndefendstop.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ADEF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Activate to have a 25% chance to reflect Piercing attacks upon the source, and to take only 50% of the damage from attacks that are not reflected. While Defend is active, move speed is reduced by 30%."), None).with_code(Some(WarcraftObjectId::new("Adef"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btndefendstop.blp"))),
             WarcraftObjectText::with_alt(ADEF_TIP_LEVELS, ADEF_UBERTIP_LEVELS, Some("Stop Defend"), Some("Deactivate to move at normal speed, but take regular damage from Piercing attacks.")),
         ),
     );
@@ -4874,7 +4874,7 @@ fn insert_objects_chunk_1(
             ADEV_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ADEV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Consumes an enemy land unit, slowly digesting it and dealing 5 damage per second to it. If the Kodo Beast is killed while the consumed unit is still digesting, the unit that was devoured will be released."), None).with_code(Some("Adev")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ADEV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Consumes an enemy land unit, slowly digesting it and dealing 5 damage per second to it. If the Kodo Beast is killed while the consumed unit is still digesting, the unit that was devoured will be released."), None).with_code(Some(WarcraftObjectId::new("Adev"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ADEV_TIP_LEVELS, ADEV_UBERTIP_LEVELS),
         ),
     );
@@ -4887,7 +4887,7 @@ fn insert_objects_chunk_1(
             ADIS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ADIS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Removes all buffs from units in a target area. |n|cffffcc00Deals 200 damage to summoned units.|r"), None).with_code(Some("Adis")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ADIS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Removes all buffs from units in a target area. |n|cffffcc00Deals 200 damage to summoned units.|r"), None).with_code(Some(WarcraftObjectId::new("Adis"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ADIS_TIP_LEVELS, ADIS_UBERTIP_LEVELS),
         ),
     );
@@ -4910,7 +4910,7 @@ fn insert_objects_chunk_1(
                     Some("Unloads all units."),
                     None,
                 )
-                .with_code(Some("Adri"))
+                .with_code(Some(WarcraftObjectId::new("Adri")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -4936,7 +4936,7 @@ fn insert_objects_chunk_1(
                     Some("Unloads all carried units at a target location."),
                     None,
                 )
-                .with_code(Some("Adro"))
+                .with_code(Some(WarcraftObjectId::new("Adro")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -4952,7 +4952,7 @@ fn insert_objects_chunk_1(
             ADSM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ADSM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Removes all buffs from units in a target area. |n|cffffcc00Deals 200 damage to summoned units.|r"), None).with_code(Some("Adis")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ADSM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Removes all buffs from units in a target area. |n|cffffcc00Deals 200 damage to summoned units.|r"), None).with_code(Some(WarcraftObjectId::new("Adis"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ADSM_TIP_LEVELS, ADSM_UBERTIP_LEVELS),
         ),
     );
@@ -4975,7 +4975,7 @@ fn insert_objects_chunk_1(
                     None,
                     None,
                 )
-                .with_code(Some("Adet"))
+                .with_code(Some(WarcraftObjectId::new("Adet")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -5000,7 +5000,7 @@ fn insert_objects_chunk_1(
                     Some("Reveals nearby invisible units."),
                     None,
                 )
-                .with_code(Some("Atru"))
+                .with_code(Some(WarcraftObjectId::new("Atru")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -5016,7 +5016,7 @@ fn insert_objects_chunk_1(
             ADTN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ADTN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Destroys the Wisp, dispelling all magical buffs and draining 40 mana from each unit in an area around the Wisp. |n|cffffcc00Deals 225 damage to summoned units.|r"), None).with_code(Some("Adtn")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ADTN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Destroys the Wisp, dispelling all magical buffs and draining 40 mana from each unit in an area around the Wisp. |n|cffffcc00Deals 225 damage to summoned units.|r"), None).with_code(Some(WarcraftObjectId::new("Adtn"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ADTN_TIP_LEVELS, ADTN_UBERTIP_LEVELS),
         ),
     );
@@ -5039,7 +5039,7 @@ fn insert_objects_chunk_1(
                     Some("Reveals nearby invisible units."),
                     None,
                 )
-                .with_code(Some("Adts"))
+                .with_code(Some(WarcraftObjectId::new("Adts")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -5057,7 +5057,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ADVC_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Advc"))
+                    .with_code(Some(WarcraftObjectId::new("Advc")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -5072,7 +5072,7 @@ fn insert_objects_chunk_1(
             ADVM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ADVM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Consumes all magical buffs from units in an area. Each unit that is devoured of magic gives the Destroyer 50 hit points and 75 mana. |n|cffffcc00Deals 160 damage to summoned units.|r"), None).with_code(Some("Advm")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ADVM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Consumes all magical buffs from units in an area. Each unit that is devoured of magic gives the Destroyer 50 hit points and 75 mana. |n|cffffcc00Deals 160 damage to summoned units.|r"), None).with_code(Some(WarcraftObjectId::new("Advm"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ADVM_TIP_LEVELS, ADVM_UBERTIP_LEVELS),
         ),
     );
@@ -5095,7 +5095,7 @@ fn insert_objects_chunk_1(
                     Some("Consume a tree to restore 500 hit points over 30 seconds."),
                     None,
                 )
-                .with_code(Some("Aeat"))
+                .with_code(Some(WarcraftObjectId::new("Aeat")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -5113,7 +5113,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AEGM_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aegm"))
+                    .with_code(Some(WarcraftObjectId::new("Aegm")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -5128,7 +5128,7 @@ fn insert_objects_chunk_1(
             AEGR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AEGR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Reduces the damage taken from Piercing attacks to 65%, and spells and Magic attacks to 80%."), None).with_code(Some("AIdd")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AEGR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Reduces the damage taken from Piercing attacks to 65%, and spells and Magic attacks to 80%."), None).with_code(Some(WarcraftObjectId::new("AIdd"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AEGR_TIP_LEVELS, AEGR_UBERTIP_LEVELS),
         ),
     );
@@ -5151,7 +5151,7 @@ fn insert_objects_chunk_1(
                     Some("Increases attack range."),
                     None,
                 )
-                .with_code(Some("APai"))
+                .with_code(Some(WarcraftObjectId::new("APai")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -5177,7 +5177,7 @@ fn insert_objects_chunk_1(
                     Some("Increases damage of Archers and Hippogryph Riders by 4."),
                     None,
                 )
-                .with_code(Some("APai"))
+                .with_code(Some(WarcraftObjectId::new("APai")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -5203,7 +5203,7 @@ fn insert_objects_chunk_1(
                     Some("Orders a Wisp to enter the gold mine."),
                     None,
                 )
-                .with_code(Some("Aenc"))
+                .with_code(Some(WarcraftObjectId::new("Aenc")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)),
@@ -5229,7 +5229,7 @@ fn insert_objects_chunk_1(
             AENR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AENR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes roots to burst from the ground, immobilizing a target enemy unit for 6 seconds, and dealing 10 damage per second."), None).with_code(Some("AEer")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AENR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes roots to burst from the ground, immobilizing a target enemy unit for 6 seconds, and dealing 10 damage per second."), None).with_code(Some(WarcraftObjectId::new("AEer"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AENR_TIP_LEVELS, AENR_UBERTIP_LEVELS),
         ),
     );
@@ -5242,7 +5242,7 @@ fn insert_objects_chunk_1(
             AENS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AENS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes a target enemy unit to be bound to the ground so that it cannot move for 9 seconds. Air units that are ensnared can be attacked as though they were land units."), None).with_code(Some("Aens")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AENS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes a target enemy unit to be bound to the ground so that it cannot move for 9 seconds. Air units that are ensnared can be attacked as though they were land units."), None).with_code(Some(WarcraftObjectId::new("Aens"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AENS_TIP_LEVELS, AENS_UBERTIP_LEVELS),
         ),
     );
@@ -5265,7 +5265,7 @@ fn insert_objects_chunk_1(
                     Some("Entangles the gold mine, allowing Wisps to enter and mine the gold."),
                     None,
                 )
-                .with_code(Some("Aent"))
+                .with_code(Some(WarcraftObjectId::new("Aent")))
                 .with_morph_target(Some(WarcraftObjectId::new("egol")))
                 .with_off_state(None, None, None, None),
             ),
@@ -5281,7 +5281,7 @@ fn insert_objects_chunk_1(
             AENW_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AENW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes roots to burst from the ground, immobilizing a target enemy unit for 6 seconds, and dealing 10 damage per second."), None).with_code(Some("AEer")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AENW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes roots to burst from the ground, immobilizing a target enemy unit for 6 seconds, and dealing 10 damage per second."), None).with_code(Some(WarcraftObjectId::new("AEer"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AENW_TIP_LEVELS, AENW_UBERTIP_LEVELS),
         ),
     );
@@ -5294,7 +5294,7 @@ fn insert_objects_chunk_1(
             AESN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AESN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Send an owl to a nearby tree to reveal the area around it. |nCan see invisible units. |nLasts 120 seconds."), None).with_code(Some("Aesn")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AESN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Send an owl to a nearby tree to reveal the area around it. |nCan see invisible units. |nLasts 120 seconds."), None).with_code(Some(WarcraftObjectId::new("Aesn"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AESN_TIP_LEVELS, AESN_UBERTIP_LEVELS),
         ),
     );
@@ -5307,7 +5307,7 @@ fn insert_objects_chunk_1(
             AESR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AESR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Send an owl to a nearby tree to reveal the area around it. |nCan see invisible units."), None).with_code(Some("Aesn")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AESR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Send an owl to a nearby tree to reveal the area around it. |nCan see invisible units."), None).with_code(Some(WarcraftObjectId::new("Aesn"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AESR_TIP_LEVELS, AESR_UBERTIP_LEVELS),
         ),
     );
@@ -5322,7 +5322,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AETH_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aeth"))
+                    .with_code(Some(WarcraftObjectId::new("Aeth")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -5337,7 +5337,7 @@ fn insert_objects_chunk_1(
             AEWS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AEWS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), None, Some("Increases the amount of mana that can be stored in Moon Wells by 100, and their rate of mana regeneration by 52%."), None).with_code(Some("APai")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AEWS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), None, Some("Increases the amount of mana that can be stored in Moon Wells by 100, and their rate of mana regeneration by 52%."), None).with_code(Some(WarcraftObjectId::new("APai"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AEWS_TIP_LEVELS, AEWS_UBERTIP_LEVELS),
         ),
     );
@@ -5360,7 +5360,7 @@ fn insert_objects_chunk_1(
                     Some("Generates a corpse within the Meat Wagon every 15 seconds."),
                     None,
                 )
-                .with_code(Some("Aexh"))
+                .with_code(Some(WarcraftObjectId::new("Aexh")))
                 .with_morph_target(Some(WarcraftObjectId::new("ugho")))
                 .with_off_state(None, None, None, None),
             ),
@@ -5376,7 +5376,7 @@ fn insert_objects_chunk_1(
             AEYE_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AEYE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Summons an invisible and immovable ward that provides vision in an area. Wards are spell immune. |nCan see invisible units. |nLasts 600 seconds."), None).with_code(Some("Aeye")).with_morph_target(Some(WarcraftObjectId::new("oeye"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AEYE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Summons an invisible and immovable ward that provides vision in an area. Wards are spell immune. |nCan see invisible units. |nLasts 600 seconds."), None).with_code(Some(WarcraftObjectId::new("Aeye"))).with_morph_target(Some(WarcraftObjectId::new("oeye"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AEYE_TIP_LEVELS, AEYE_UBERTIP_LEVELS),
         ),
     );
@@ -5389,7 +5389,7 @@ fn insert_objects_chunk_1(
             AFA2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFA2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Reduces a target enemy unit's armor by 4 and gives vision of that unit. |nLasts 70 seconds."), None).with_code(Some("Afae")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnfaeriefireoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFA2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Reduces a target enemy unit's armor by 4 and gives vision of that unit. |nLasts 70 seconds."), None).with_code(Some(WarcraftObjectId::new("Afae"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnfaeriefireoff.blp"))),
             WarcraftObjectText::with_alt(AFA2_TIP_LEVELS, AFA2_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -5402,7 +5402,7 @@ fn insert_objects_chunk_1(
             AFAE_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFAE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Reduces a target enemy unit's armor by 4 and gives vision of that unit. |nLasts 70 seconds."), None).with_code(Some("Afae")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnfaeriefireoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFAE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Reduces a target enemy unit's armor by 4 and gives vision of that unit. |nLasts 70 seconds."), None).with_code(Some(WarcraftObjectId::new("Afae"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnfaeriefireoff.blp"))),
             WarcraftObjectText::with_alt(AFAE_TIP_LEVELS, AFAE_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -5415,7 +5415,7 @@ fn insert_objects_chunk_1(
             AFAK_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFAK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Adds 15 bonus damage to the Destroyer's attack and causes his attacks to do area of effect damage."), None).with_code(Some("Afak")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnorbofdeathoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFAK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Adds 15 bonus damage to the Destroyer's attack and causes his attacks to do area of effect damage."), None).with_code(Some(WarcraftObjectId::new("Afak"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnorbofdeathoff.blp"))),
             WarcraftObjectText::with_alt(AFAK_TIP_LEVELS, AFAK_UBERTIP_LEVELS, Some("|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -5428,7 +5428,7 @@ fn insert_objects_chunk_1(
             AFBB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFBB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Spirit Beast attacks destroy 20 mana per hit. The mana combusts, dealing damage to the attacked unit."), None).with_code(Some("Afbk")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFBB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Spirit Beast attacks destroy 20 mana per hit. The mana combusts, dealing damage to the attacked unit."), None).with_code(Some(WarcraftObjectId::new("Afbk"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AFBB_TIP_LEVELS, AFBB_UBERTIP_LEVELS),
         ),
     );
@@ -5441,7 +5441,7 @@ fn insert_objects_chunk_1(
             AFBK_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFBK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Spellbreaker attacks destroy 20 mana per hit. The mana combusts, dealing damage to the attacked unit."), None).with_code(Some("Afbk")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFBK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Spellbreaker attacks destroy 20 mana per hit. The mana combusts, dealing damage to the attacked unit."), None).with_code(Some(WarcraftObjectId::new("Afbk"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AFBK_TIP_LEVELS, AFBK_UBERTIP_LEVELS),
         ),
     );
@@ -5454,7 +5454,7 @@ fn insert_objects_chunk_1(
             AFBT_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFBT_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("This tower's attacks destroy 24 mana per hit against any unit, causing bonus damage equal to the mana destroyed.|n|nAdditionally, attacks made by this tower cause 20 bonus damage against summoned units."), None).with_code(Some("Afbk")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFBT_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("This tower's attacks destroy 24 mana per hit against any unit, causing bonus damage equal to the mana destroyed.|n|nAdditionally, attacks made by this tower cause 20 bonus damage against summoned units."), None).with_code(Some(WarcraftObjectId::new("Afbk"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AFBT_TIP_LEVELS, AFBT_UBERTIP_LEVELS),
         ),
     );
@@ -5467,7 +5467,7 @@ fn insert_objects_chunk_1(
             AFLA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFLA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Launches a Dwarven flare above a target point, which reveals that area for 15 seconds. |nReveals invisible units."), None).with_code(Some("Afla")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFLA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Launches a Dwarven flare above a target point, which reveals that area for 15 seconds. |nReveals invisible units."), None).with_code(Some(WarcraftObjectId::new("Afla"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AFLA_TIP_LEVELS, AFLA_UBERTIP_LEVELS),
         ),
     );
@@ -5490,7 +5490,7 @@ fn insert_objects_chunk_1(
                     Some("Uses powerful cannons to deal area effect damage against air units."),
                     None,
                 )
-                .with_code(Some("Aflk"))
+                .with_code(Some(WarcraftObjectId::new("Aflk")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -5506,7 +5506,7 @@ fn insert_objects_chunk_1(
             AFR2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFR2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Adds a cold effect to this unit's attacks that slows enemy units' movement speed."), None).with_code(Some("Afra")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFR2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Adds a cold effect to this unit's attacks that slows enemy units' movement speed."), None).with_code(Some(WarcraftObjectId::new("Afra"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AFR2_TIP_LEVELS, AFR2_UBERTIP_LEVELS),
         ),
     );
@@ -5519,7 +5519,7 @@ fn insert_objects_chunk_1(
             AFRA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFRA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Adds a cold effect to this unit's attacks that slows enemy units' movement speed."), None).with_code(Some("Afra")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFRA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Adds a cold effect to this unit's attacks that slows enemy units' movement speed."), None).with_code(Some(WarcraftObjectId::new("Afra"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AFRA_TIP_LEVELS, AFRA_UBERTIP_LEVELS),
         ),
     );
@@ -5534,7 +5534,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AFRB_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Afrb"))
+                    .with_code(Some(WarcraftObjectId::new("Afrb")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -5549,7 +5549,7 @@ fn insert_objects_chunk_1(
             AFRC_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFRC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Adds a cold effect to this unit's attacks that slows enemy units' movement speed."), None).with_code(Some("Afra")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFRC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Adds a cold effect to this unit's attacks that slows enemy units' movement speed."), None).with_code(Some(WarcraftObjectId::new("Afra"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AFRC_TIP_LEVELS, AFRC_UBERTIP_LEVELS),
         ),
     );
@@ -5562,7 +5562,7 @@ fn insert_objects_chunk_1(
             AFRZ_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFRZ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("When used on a building, temporarily stops all building activities. |nLasts 5 seconds."), None).with_code(Some("Afrz")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFRZ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("When used on a building, temporarily stops all building activities. |nLasts 5 seconds."), None).with_code(Some(WarcraftObjectId::new("Afrz"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AFRZ_TIP_LEVELS, AFRZ_UBERTIP_LEVELS),
         ),
     );
@@ -5575,7 +5575,7 @@ fn insert_objects_chunk_1(
             AFSH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFSH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Uses fragmentation mortars to increase damage dealt to Unarmored and Medium armor units."), None).with_code(Some("Afsh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFSH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Uses fragmentation mortars to increase damage dealt to Unarmored and Medium armor units."), None).with_code(Some(WarcraftObjectId::new("Afsh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AFSH_TIP_LEVELS, AFSH_UBERTIP_LEVELS),
         ),
     );
@@ -5588,7 +5588,7 @@ fn insert_objects_chunk_1(
             AFZY_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFZY_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Increases the unit's attack rate by 40% and movement speed by 25% for 20 seconds."), None).with_code(Some("Afzy")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnbloodlustoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AFZY_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Increases the unit's attack rate by 40% and movement speed by 25% for 20 seconds."), None).with_code(Some(WarcraftObjectId::new("Afzy"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnbloodlustoff.blp"))),
             WarcraftObjectText::with_alt(AFZY_TIP_LEVELS, AFZY_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -5603,7 +5603,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AGHO_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Agho"))
+                    .with_code(Some(WarcraftObjectId::new("Agho")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -5620,7 +5620,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AGLD_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Agld"))
+                    .with_code(Some(WarcraftObjectId::new("Agld")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -5635,7 +5635,7 @@ fn insert_objects_chunk_1(
             AGRA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AGRA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Picks up a tree to give the Mountain Giant Siege damage, and increased attack range. |nLasts for 15 strikes."), None).with_code(Some("Agra")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AGRA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Picks up a tree to give the Mountain Giant Siege damage, and increased attack range. |nLasts for 15 strikes."), None).with_code(Some(WarcraftObjectId::new("Agra"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AGRA_TIP_LEVELS, AGRA_UBERTIP_LEVELS),
         ),
     );
@@ -5658,7 +5658,7 @@ fn insert_objects_chunk_1(
                     Some("Allows Flying Machines to attack land units."),
                     None,
                 )
-                .with_code(Some("Agyb"))
+                .with_code(Some(WarcraftObjectId::new("Agyb")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -5676,7 +5676,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AGYD_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Agyd"))
+                    .with_code(Some(WarcraftObjectId::new("Agyd")))
                     .with_morph_target(Some(WarcraftObjectId::new("ugho")))
                     .with_off_state(None, None, None, None),
             ),
@@ -5701,7 +5701,7 @@ fn insert_objects_chunk_1(
                     Some("Reveals nearby invisible units."),
                     None,
                 )
-                .with_code(Some("Agyv"))
+                .with_code(Some(WarcraftObjectId::new("Agyv")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -5727,7 +5727,7 @@ fn insert_objects_chunk_1(
                     Some("Increases the maximum hit points of this unit by 100."),
                     None,
                 )
-                .with_code(Some("APai"))
+                .with_code(Some(WarcraftObjectId::new("APai")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -5753,7 +5753,7 @@ fn insert_objects_chunk_1(
                     Some("Mines gold from gold mines and harvests lumber from trees."),
                     None,
                 )
-                .with_code(Some("Ahar"))
+                .with_code(Some(WarcraftObjectId::new("Ahar")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::One)),
@@ -5789,7 +5789,7 @@ fn insert_objects_chunk_1(
                     Some("Heals a target friendly non-mechanical wounded unit for 25 hit points."),
                     None,
                 )
-                .with_code(Some("Ahea"))
+                .with_code(Some(WarcraftObjectId::new("Ahea")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)),
@@ -5815,7 +5815,7 @@ fn insert_objects_chunk_1(
             AHID_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AHID_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::One)), None, Some("Stops the unit from auto-acquiring enemies, allowing it to Shadowmeld and remain unseen at night."), None).with_code(Some("Ahid")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AHID_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::One)), None, Some("Stops the unit from auto-acquiring enemies, allowing it to Shadowmeld and remain unseen at night."), None).with_code(Some(WarcraftObjectId::new("Ahid"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHID_TIP_LEVELS, AHID_UBERTIP_LEVELS),
         ),
     );
@@ -5838,7 +5838,7 @@ fn insert_objects_chunk_1(
                     Some("Increases the amount of lumber that Peasants can carry by 10."),
                     None,
                 )
-                .with_code(Some("APai"))
+                .with_code(Some(WarcraftObjectId::new("APai")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -5864,7 +5864,7 @@ fn insert_objects_chunk_1(
                     Some("Summons energies from the twisting nether."),
                     None,
                 )
-                .with_code(Some("Aroa"))
+                .with_code(Some(WarcraftObjectId::new("Aroa")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -5880,7 +5880,7 @@ fn insert_objects_chunk_1(
             AHPE_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AHPE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("The Phoenix spreads enchanted flames to nearby enemies, dealing 20 damage on impact and burning them for 2 per second over 10 seconds. Its flames burn with such intensity that the Phoenix damages itself as well. When it dies, it creates an egg that will hatch into a Phoenix."), None).with_code(Some("APai")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AHPE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("The Phoenix spreads enchanted flames to nearby enemies, dealing 20 damage on impact and burning them for 2 per second over 10 seconds. Its flames burn with such intensity that the Phoenix damages itself as well. When it dies, it creates an egg that will hatch into a Phoenix."), None).with_code(Some(WarcraftObjectId::new("APai"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHPE_TIP_LEVELS, AHPE_UBERTIP_LEVELS),
         ),
     );
@@ -5903,7 +5903,7 @@ fn insert_objects_chunk_1(
                     Some("Harvests lumber from trees."),
                     None,
                 )
-                .with_code(Some("Ahrl"))
+                .with_code(Some(WarcraftObjectId::new("Ahrl")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::One)),
@@ -5939,7 +5939,7 @@ fn insert_objects_chunk_1(
                     Some("Increases attack range."),
                     None,
                 )
-                .with_code(Some("APai"))
+                .with_code(Some(WarcraftObjectId::new("APai")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -5965,7 +5965,7 @@ fn insert_objects_chunk_1(
                     Some("Harvests lumber from trees."),
                     None,
                 )
-                .with_code(Some("Ahrl"))
+                .with_code(Some(WarcraftObjectId::new("Ahrl")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::One)),
@@ -6001,7 +6001,7 @@ fn insert_objects_chunk_1(
                     Some("Repairs mechanical units and structures at the cost of resources."),
                     None,
                 )
-                .with_code(Some("Arep"))
+                .with_code(Some(WarcraftObjectId::new("Arep")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::One, RowIndex::One)),
@@ -6037,7 +6037,7 @@ fn insert_objects_chunk_1(
                     Some("Increases damage dealt to enemy targets with Medium armor by 10%."),
                     None,
                 )
-                .with_code(Some("Aaab"))
+                .with_code(Some(WarcraftObjectId::new("Aaab")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -6053,7 +6053,7 @@ fn insert_objects_chunk_1(
             AHWD_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AHWD_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Summons an immovable ward that heals 2% of a nearby friendly non-mechanical unit's hit points per second. Wards are spell immune. |nLasts 25 seconds."), None).with_code(Some("Ahwd")).with_morph_target(Some(WarcraftObjectId::new("ohwd"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AHWD_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Summons an immovable ward that heals 2% of a nearby friendly non-mechanical unit's hit points per second. Wards are spell immune. |nLasts 25 seconds."), None).with_code(Some(WarcraftObjectId::new("Ahwd"))).with_morph_target(Some(WarcraftObjectId::new("ohwd"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHWD_TIP_LEVELS, AHWD_UBERTIP_LEVELS),
         ),
     );
@@ -6066,7 +6066,7 @@ fn insert_objects_chunk_1(
             AIEN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AIEN_COOLDOWNS, None, None, Some("Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."), None).with_code(Some("AInv")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AIEN_COOLDOWNS, None, None, Some("Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."), None).with_code(Some(WarcraftObjectId::new("AInv"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AIEN_TIP_LEVELS, AIEN_UBERTIP_LEVELS),
         ),
     );
@@ -6079,7 +6079,7 @@ fn insert_objects_chunk_1(
             AIHN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AIHN_COOLDOWNS, None, None, Some("Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."), None).with_code(Some("AInv")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AIHN_COOLDOWNS, None, None, Some("Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."), None).with_code(Some(WarcraftObjectId::new("AInv"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AIHN_TIP_LEVELS, AIHN_UBERTIP_LEVELS),
         ),
     );
@@ -6094,7 +6094,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AIMP_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aimp"))
+                    .with_code(Some(WarcraftObjectId::new("Aimp")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -6110,7 +6110,7 @@ fn insert_objects_chunk_1(
             AINF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AINF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Increases a target friendly unit's damage by 10% and armor by 5. |nLasts 60 seconds."), None).with_code(Some("Ainf")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btninnerfireoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AINF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Increases a target friendly unit's damage by 10% and armor by 5. |nLasts 60 seconds."), None).with_code(Some(WarcraftObjectId::new("Ainf"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btninnerfireoff.blp"))),
             WarcraftObjectText::with_alt(AINF_TIP_LEVELS, AINF_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -6123,7 +6123,7 @@ fn insert_objects_chunk_1(
             AION_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AION_COOLDOWNS, None, None, Some("Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."), None).with_code(Some("AInv")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AION_COOLDOWNS, None, None, Some("Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."), None).with_code(Some(WarcraftObjectId::new("AInv"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AION_TIP_LEVELS, AION_UBERTIP_LEVELS),
         ),
     );
@@ -6136,7 +6136,7 @@ fn insert_objects_chunk_1(
             AIUN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AIUN_COOLDOWNS, None, None, Some("Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."), None).with_code(Some("AInv")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AIUN_COOLDOWNS, None, None, Some("Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."), None).with_code(Some(WarcraftObjectId::new("AInv"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AIUN_TIP_LEVELS, AIUN_UBERTIP_LEVELS),
         ),
     );
@@ -6149,7 +6149,7 @@ fn insert_objects_chunk_1(
             AIVS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AIVS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Makes a unit invisible. If the unit attacks, uses an ability or casts a spell, it will become visible. |nLasts 120 seconds."), None).with_code(Some("Aivs")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AIVS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Makes a unit invisible. If the unit attacks, uses an ability or casts a spell, it will become visible. |nLasts 120 seconds."), None).with_code(Some(WarcraftObjectId::new("Aivs"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AIVS_TIP_LEVELS, AIVS_UBERTIP_LEVELS),
         ),
     );
@@ -6162,7 +6162,7 @@ fn insert_objects_chunk_1(
             ALAM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ALAM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Target a Sacrificial Pit to sacrifice the Acolyte and turn it into a Shade. Shades are invisible spirits that can see invisible units. |nShades cannot attack."), None).with_code(Some("Alam")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ALAM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Target a Sacrificial Pit to sacrifice the Acolyte and turn it into a Shade. Shades are invisible spirits that can see invisible units. |nShades cannot attack."), None).with_code(Some(WarcraftObjectId::new("Alam"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ALAM_TIP_LEVELS, ALAM_UBERTIP_LEVELS),
         ),
     );
@@ -6175,7 +6175,7 @@ fn insert_objects_chunk_1(
             ALIQ_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ALIQ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Flings a volatile liquid that causes buildings to take damage over time. Buildings that are currently taking damage from Liquid Fire have their repair time increased by 175%, and have their attack rate reduced by 60%."), None).with_code(Some("Aliq")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ALIQ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Flings a volatile liquid that causes buildings to take damage over time. Buildings that are currently taking damage from Liquid Fire have their repair time increased by 175%, and have their attack rate reduced by 60%."), None).with_code(Some(WarcraftObjectId::new("Aliq"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ALIQ_TIP_LEVELS, ALIQ_UBERTIP_LEVELS),
         ),
     );
@@ -6190,7 +6190,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ALIT_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Alit"))
+                    .with_code(Some(WarcraftObjectId::new("Alit")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -6215,7 +6215,7 @@ fn insert_objects_chunk_1(
                     Some("Loads a targeted friendly land unit."),
                     None,
                 )
-                .with_code(Some("Aloa"))
+                .with_code(Some(WarcraftObjectId::new("Aloa")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -6233,7 +6233,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ALOC_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aloc"))
+                    .with_code(Some(WarcraftObjectId::new("Aloc")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -6248,7 +6248,7 @@ fn insert_objects_chunk_1(
             ALSH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ALSH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Forms a shield of electricity around a target unit, dealing 20 damage per second to units around it. |nLasts 20 seconds."), None).with_code(Some("Alsh")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ALSH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Forms a shield of electricity around a target unit, dealing 20 damage per second to units around it. |nLasts 20 seconds."), None).with_code(Some(WarcraftObjectId::new("Alsh"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ALSH_TIP_LEVELS, ALSH_UBERTIP_LEVELS),
         ),
     );
@@ -6261,7 +6261,7 @@ fn insert_objects_chunk_1(
             AMBB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMBB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Sends a bolt of negative energy that burns 50 points of a target enemy unit's mana. The mana combusts, dealing damage equal to the amount of mana burned."), None).with_code(Some("AEmb")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMBB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Sends a bolt of negative energy that burns 50 points of a target enemy unit's mana. The mana combusts, dealing damage equal to the amount of mana burned."), None).with_code(Some(WarcraftObjectId::new("AEmb"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AMBB_TIP_LEVELS, AMBB_UBERTIP_LEVELS),
         ),
     );
@@ -6274,7 +6274,7 @@ fn insert_objects_chunk_1(
             AMBD_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMBD_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Sends a bolt of negative energy that burns 50 points of a target enemy unit's mana. The mana combusts, dealing damage equal to the amount of mana burned."), None).with_code(Some("AEmb")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMBD_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Sends a bolt of negative energy that burns 50 points of a target enemy unit's mana. The mana combusts, dealing damage equal to the amount of mana burned."), None).with_code(Some(WarcraftObjectId::new("AEmb"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AMBD_TIP_LEVELS, AMBD_UBERTIP_LEVELS),
         ),
     );
@@ -6297,7 +6297,7 @@ fn insert_objects_chunk_1(
                     Some("Replenish the life and mana of a target friendly unit."),
                     None,
                 )
-                .with_code(Some("Ambt"))
+                .with_code(Some(WarcraftObjectId::new("Ambt")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)),
@@ -6333,7 +6333,7 @@ fn insert_objects_chunk_1(
                     Some("Drops all corpses for immediate use."),
                     None,
                 )
-                .with_code(Some("Amed"))
+                .with_code(Some(WarcraftObjectId::new("Amed")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -6359,7 +6359,7 @@ fn insert_objects_chunk_1(
                     Some("Picks up a nearby corpse for later use."),
                     None,
                 )
-                .with_code(Some("Amel"))
+                .with_code(Some(WarcraftObjectId::new("Amel")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)),
@@ -6385,7 +6385,7 @@ fn insert_objects_chunk_1(
             AMFL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMFL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Causes the Faerie Dragon to channel negative magical energies that damage nearby enemies when they cast spells. Also increases the Faerie Dragon's armor by 12. |nLasts 30 seconds."), None).with_code(Some("Amfl")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnmanaflareoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMFL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Causes the Faerie Dragon to channel negative magical energies that damage nearby enemies when they cast spells. Also increases the Faerie Dragon's armor by 12. |nLasts 30 seconds."), None).with_code(Some(WarcraftObjectId::new("Amfl"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, None, Some("commandbuttons/btnmanaflareoff.blp"))),
             WarcraftObjectText::with_alt(AMFL_TIP_LEVELS, AMFL_UBERTIP_LEVELS, Some("Stop Mana Flare"), Some("Stops channeling Mana Flare.")),
         ),
     );
@@ -6400,7 +6400,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AMGI_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Amgi"))
+                    .with_code(Some(WarcraftObjectId::new("Amgi")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -6415,7 +6415,7 @@ fn insert_objects_chunk_1(
             AMGL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMGL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Gives the Huntress the ability to strike additional units with her bouncing glaive attacks, and changes their armor type to Heavy."), None).with_code(Some("Amgl")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMGL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Gives the Huntress the ability to strike additional units with her bouncing glaive attacks, and changes their armor type to Heavy."), None).with_code(Some(WarcraftObjectId::new("Amgl"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AMGL_TIP_LEVELS, AMGL_UBERTIP_LEVELS),
         ),
     );
@@ -6428,7 +6428,7 @@ fn insert_objects_chunk_1(
             AMGR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMGR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Gives the Huntress the ability to strike additional units with her bouncing glaive attacks."), None).with_code(Some("Amgl")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMGR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Gives the Huntress the ability to strike additional units with her bouncing glaive attacks."), None).with_code(Some(WarcraftObjectId::new("Amgl"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AMGR_TIP_LEVELS, AMGR_UBERTIP_LEVELS),
         ),
     );
@@ -6441,7 +6441,7 @@ fn insert_objects_chunk_1(
             AMIC_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMIC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Call all nearby Peasants to the Town Hall to be converted to Militia. |nLasts 42.5 seconds."), None).with_code(Some("Amic")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btnbacktowork.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMIC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Call all nearby Peasants to the Town Hall to be converted to Militia. |nLasts 42.5 seconds."), None).with_code(Some(WarcraftObjectId::new("Amic"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btnbacktowork.blp"))),
             WarcraftObjectText::with_alt(AMIC_TIP_LEVELS, AMIC_UBERTIP_LEVELS, Some("Back to Work"), Some("Call all nearby Militia to the Town Hall to be converted to Peasants.")),
         ),
     );
@@ -6454,7 +6454,7 @@ fn insert_objects_chunk_1(
             AMIL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMIL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Run to the nearest Keep, Castle or starting Town Hall to arm the Peasant, converting him into Militia. |nLasts 42.5 seconds."), None).with_code(Some("Amil")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btnbacktowork.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMIL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Run to the nearest Keep, Castle or starting Town Hall to arm the Peasant, converting him into Militia. |nLasts 42.5 seconds."), None).with_code(Some(WarcraftObjectId::new("Amil"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, None, Some("commandbuttons/btnbacktowork.blp"))),
             WarcraftObjectText::with_alt(AMIL_TIP_LEVELS, AMIL_UBERTIP_LEVELS, Some("Back to Work"), Some("Run to the nearest Keep, Castle or starting Town Hall to disarm the Militia, converting it into a Peasant.")),
         ),
     );
@@ -6477,7 +6477,7 @@ fn insert_objects_chunk_1(
                     Some("Renders this unit immune to magic and most spells."),
                     None,
                 )
-                .with_code(Some("Amim"))
+                .with_code(Some(WarcraftObjectId::new("Amim")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -6495,7 +6495,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AMIN_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Amin"))
+                    .with_code(Some(WarcraftObjectId::new("Amin")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -6510,7 +6510,7 @@ fn insert_objects_chunk_1(
             AMLS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMLS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Magically binds a target enemy air unit, so that it cannot move or attack and takes 30 damage per second. |nLasts 40 seconds."), None).with_code(Some("Amls")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AMLS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Magically binds a target enemy air unit, so that it cannot move or attack and takes 30 damage per second. |nLasts 40 seconds."), None).with_code(Some(WarcraftObjectId::new("Amls"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AMLS_TIP_LEVELS, AMLS_UBERTIP_LEVELS),
         ),
     );
@@ -6525,7 +6525,7 @@ fn insert_objects_chunk_1(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AMNX_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Adda"))
+                    .with_code(Some(WarcraftObjectId::new("Adda")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -6550,7 +6550,7 @@ fn insert_objects_chunk_1(
                     Some("Turn into a Crow."),
                     None,
                 )
-                .with_code(Some("Arav"))
+                .with_code(Some(WarcraftObjectId::new("Arav")))
                 .with_morph_target(Some(WarcraftObjectId::new("nmdm")))
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)),
@@ -6576,7 +6576,7 @@ fn insert_objects_chunk_1(
             ANDM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANDM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Dispels positive buffs from enemy units, and negative buffs from friendly units. |n|cffffcc00Deals 250 damage to summoned units.|r"), None).with_code(Some("Aadm")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btndryaddispelmagicoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANDM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Dispels positive buffs from enemy units, and negative buffs from friendly units. |n|cffffcc00Deals 250 damage to summoned units.|r"), None).with_code(Some(WarcraftObjectId::new("Aadm"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btndryaddispelmagicoff.blp"))),
             WarcraftObjectText::with_alt(ANDM_TIP_LEVELS, ANDM_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -6601,7 +6601,7 @@ fn insert_objects_chunk_1(
                     ),
                     None,
                 )
-                .with_code(Some("Andt"))
+                .with_code(Some(WarcraftObjectId::new("Andt")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -6627,7 +6627,7 @@ fn insert_objects_chunk_1(
                     None,
                     None,
                 )
-                .with_code(Some("Aneu"))
+                .with_code(Some(WarcraftObjectId::new("Aneu")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)),
@@ -6689,7 +6689,7 @@ fn insert_objects_chunk_1(
                     None,
                     None,
                 )
-                .with_code(Some("Aneu"))
+                .with_code(Some(WarcraftObjectId::new("Aneu")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)),
@@ -6725,7 +6725,7 @@ fn insert_objects_chunk_1(
                     Some("Heals a target friendly non-mechanical wounded unit."),
                     None,
                 )
-                .with_code(Some("Anhe"))
+                .with_code(Some(WarcraftObjectId::new("Anhe")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)),
@@ -6761,7 +6761,7 @@ fn insert_objects_chunk_1(
                     Some("Heals a target friendly non-mechanical wounded unit."),
                     None,
                 )
-                .with_code(Some("Anhe"))
+                .with_code(Some(WarcraftObjectId::new("Anhe")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)),
@@ -6787,7 +6787,7 @@ fn insert_objects_chunk_1(
             ANSK_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANSK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Reduces all attacks on the unit by 12 damage. Attacks cannot be reduced below 3 damage."), None).with_code(Some("Assk")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ANSK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Reduces all attacks on the unit by 12 damage. Attacks cannot be reduced below 3 damage."), None).with_code(Some(WarcraftObjectId::new("Assk"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANSK_TIP_LEVELS, ANSK_UBERTIP_LEVELS),
         ),
     );
@@ -6806,7 +6806,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AOAR_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aoar"))
+                    .with_code(Some(WarcraftObjectId::new("Aoar")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -6821,7 +6821,7 @@ fn insert_objects_chunk_2(
             AOBK_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AOBK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Transforms Headhunters into Berserkers, giving them increased hit points and the Berserk ability."), None).with_code(Some("APai")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AOBK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Transforms Headhunters into Berserkers, giving them increased hit points and the Berserk ability."), None).with_code(Some(WarcraftObjectId::new("APai"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOBK_TIP_LEVELS, AOBK_UBERTIP_LEVELS),
         ),
     );
@@ -6834,7 +6834,7 @@ fn insert_objects_chunk_2(
             AOBS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AOBS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Improves the fighting capabilities of Grunts with a 125 hit point increase, and 3 bonus attack damage."), None).with_code(Some("APai")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AOBS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Improves the fighting capabilities of Grunts with a 125 hit point increase, and 3 bonus attack damage."), None).with_code(Some(WarcraftObjectId::new("APai"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOBS_TIP_LEVELS, AOBS_UBERTIP_LEVELS),
         ),
     );
@@ -6857,7 +6857,7 @@ fn insert_objects_chunk_2(
                     Some("Upgrades Burrows and Watch Towers so that they have Fortified armor."),
                     None,
                 )
-                .with_code(Some("APai"))
+                .with_code(Some(WarcraftObjectId::new("APai")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -6873,7 +6873,7 @@ fn insert_objects_chunk_2(
             AOSP_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AOSP_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Surrounds Orc buildings with spikes that damage enemy melee attackers. Deals 5 damage per attack plus an additional 20% of the attacker's damage."), None).with_code(Some("APai")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AOSP_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Surrounds Orc buildings with spikes that damage enemy melee attackers. Deals 5 damage per attack plus an additional 20% of the attacker's damage."), None).with_code(Some(WarcraftObjectId::new("APai"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOSP_TIP_LEVELS, AOSP_UBERTIP_LEVELS),
         ),
     );
@@ -6886,7 +6886,7 @@ fn insert_objects_chunk_2(
             AOTR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AOTR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Increases the hit point regeneration rate of Headhunters, Witch Doctors and Batriders."), None).with_code(Some("APai")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AOTR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Increases the hit point regeneration rate of Headhunters, Witch Doctors and Batriders."), None).with_code(Some(WarcraftObjectId::new("APai"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AOTR_TIP_LEVELS, AOTR_UBERTIP_LEVELS),
         ),
     );
@@ -6899,7 +6899,7 @@ fn insert_objects_chunk_2(
             APAK_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APAK_COOLDOWNS, None, None, Some("Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."), None).with_code(Some("AInv")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APAK_COOLDOWNS, None, None, Some("Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."), None).with_code(Some(WarcraftObjectId::new("AInv"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(APAK_TIP_LEVELS, APAK_UBERTIP_LEVELS),
         ),
     );
@@ -6912,7 +6912,7 @@ fn insert_objects_chunk_2(
             APG2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APG2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Removes all buffs from a target unit. Enemy units are also immobilized for 3 seconds and their movement speed is reduced by a factor of 5; they will slowly regain their movement speed over 15 seconds. |n|cffffcc00Deals 400 damage to summoned units.|r"), None).with_code(Some("Aprg")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APG2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Removes all buffs from a target unit. Enemy units are also immobilized for 3 seconds and their movement speed is reduced by a factor of 5; they will slowly regain their movement speed over 15 seconds. |n|cffffcc00Deals 400 damage to summoned units.|r"), None).with_code(Some(WarcraftObjectId::new("Aprg"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(APG2_TIP_LEVELS, APG2_UBERTIP_LEVELS),
         ),
     );
@@ -6927,7 +6927,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, APHX_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aphx"))
+                    .with_code(Some(WarcraftObjectId::new("Aphx")))
                     .with_morph_target(Some(WarcraftObjectId::new("hpxe")))
                     .with_off_state(None, None, None, None),
             ),
@@ -6952,7 +6952,7 @@ fn insert_objects_chunk_2(
                     Some("Burns nearby enemy units for 10 points of damage per second."),
                     None,
                 )
-                .with_code(Some("Apig"))
+                .with_code(Some(WarcraftObjectId::new("Apig")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -6970,7 +6970,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, APIT_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Apit"))
+                    .with_code(Some(WarcraftObjectId::new("Apit")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -6987,7 +6987,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, APIV_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Apiv"))
+                    .with_code(Some(WarcraftObjectId::new("Apiv")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -7002,7 +7002,7 @@ fn insert_objects_chunk_2(
             APLY_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APLY_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Turns a target enemy unit into a sheep. The targeted unit retains its hit points and armor, but cannot attack. |nCannot be cast on Heroes. |nLasts 60 seconds."), None).with_code(Some("Aply")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APLY_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Turns a target enemy unit into a sheep. The targeted unit retains its hit points and armor, but cannot attack. |nCannot be cast on Heroes. |nLasts 60 seconds."), None).with_code(Some(WarcraftObjectId::new("Aply"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(APLY_TIP_LEVELS, APLY_UBERTIP_LEVELS),
         ),
     );
@@ -7015,7 +7015,7 @@ fn insert_objects_chunk_2(
             APOS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APOS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Displaces the soul of an enemy, giving you permanent control of it, but destroying the caster's body. |nPossession cannot be used on flying units, Heroes, or creeps above level 5."), None).with_code(Some("Apos")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APOS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Displaces the soul of an enemy, giving you permanent control of it, but destroying the caster's body. |nPossession cannot be used on flying units, Heroes, or creeps above level 5."), None).with_code(Some(WarcraftObjectId::new("Apos"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(APOS_TIP_LEVELS, APOS_UBERTIP_LEVELS),
         ),
     );
@@ -7028,7 +7028,7 @@ fn insert_objects_chunk_2(
             APRG_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APRG_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Removes all buffs from a target unit, and slows its movement speed by a factor of 5. Purged units will slowly regain their movement speed over 15 seconds. |n|cffffcc00Deals 400 damage to summoned units.|r"), None).with_code(Some("Aprg")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APRG_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Removes all buffs from a target unit, and slows its movement speed by a factor of 5. Purged units will slowly regain their movement speed over 15 seconds. |n|cffffcc00Deals 400 damage to summoned units.|r"), None).with_code(Some(WarcraftObjectId::new("Aprg"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(APRG_TIP_LEVELS, APRG_UBERTIP_LEVELS),
         ),
     );
@@ -7041,7 +7041,7 @@ fn insert_objects_chunk_2(
             APS2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APS2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Stuns a target unit and the Banshee for 4.5 seconds, during which the Banshee takes extra damage from attacks. She then displaces the soul of the enemy, giving you permanent control of it, but destroying the caster's body. |nPossession cannot be used on flying units, Heroes, or creeps above level 5."), None).with_code(Some("Aps2")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APS2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Stuns a target unit and the Banshee for 4.5 seconds, during which the Banshee takes extra damage from attacks. She then displaces the soul of the enemy, giving you permanent control of it, but destroying the caster's body. |nPossession cannot be used on flying units, Heroes, or creeps above level 5."), None).with_code(Some(WarcraftObjectId::new("Aps2"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(APS2_TIP_LEVELS, APS2_UBERTIP_LEVELS),
         ),
     );
@@ -7054,7 +7054,7 @@ fn insert_objects_chunk_2(
             APSH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APSH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes this unit to shift out of existence whenever it takes damage, temporarily avoiding any further damage. |nLasts 1.5 second."), None).with_code(Some("Apsh")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnphaseshiftoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APSH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes this unit to shift out of existence whenever it takes damage, temporarily avoiding any further damage. |nLasts 1.5 second."), None).with_code(Some(WarcraftObjectId::new("Apsh"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnphaseshiftoff.blp"))),
             WarcraftObjectText::with_alt(APSH_TIP_LEVELS, APSH_UBERTIP_LEVELS, Some("|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -7067,7 +7067,7 @@ fn insert_objects_chunk_2(
             APTS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APTS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Drops a Disease Cloud with each attack. Disease Cloud deals 2 damage per second. |nLasts 75 seconds."), None).with_code(Some("Apts")).with_morph_target(Some(WarcraftObjectId::new("uplg"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, APTS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Drops a Disease Cloud with each attack. Disease Cloud deals 2 damage per second. |nLasts 75 seconds."), None).with_code(Some(WarcraftObjectId::new("Apts"))).with_morph_target(Some(WarcraftObjectId::new("uplg"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(APTS_TIP_LEVELS, APTS_UBERTIP_LEVELS),
         ),
     );
@@ -7090,7 +7090,7 @@ fn insert_objects_chunk_2(
                     Some("Fires down streams of flame, lighting nearby enemies on fire."),
                     None,
                 )
-                .with_code(Some("Apxf"))
+                .with_code(Some(WarcraftObjectId::new("Apxf")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -7116,7 +7116,7 @@ fn insert_objects_chunk_2(
                     Some("Gives friendly nearby units a 25% bonus to damage. |nLasts 45 seconds."),
                     None,
                 )
-                .with_code(Some("Aroa"))
+                .with_code(Some(WarcraftObjectId::new("Aroa")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -7142,7 +7142,7 @@ fn insert_objects_chunk_2(
                     Some("Raises 2 skeletons from a corpse."),
                     None,
                 )
-                .with_code(Some("Arai"))
+                .with_code(Some(WarcraftObjectId::new("Arai")))
                 .with_morph_target(Some(WarcraftObjectId::new("uske")))
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)),
@@ -7178,7 +7178,7 @@ fn insert_objects_chunk_2(
                     Some("Transforms the Druid into a storm crow, giving him the ability to fly."),
                     None,
                 )
-                .with_code(Some("Arav"))
+                .with_code(Some(WarcraftObjectId::new("Arav")))
                 .with_morph_target(Some(WarcraftObjectId::new("edtm")))
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)),
@@ -7214,7 +7214,7 @@ fn insert_objects_chunk_2(
                     Some("Gives Burrows Fortified armor."),
                     None,
                 )
-                .with_code(Some("Arbr"))
+                .with_code(Some(WarcraftObjectId::new("Arbr")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -7240,7 +7240,7 @@ fn insert_objects_chunk_2(
                     Some("Heals a target friendly unit for 400 hit points over 12 seconds."),
                     None,
                 )
-                .with_code(Some("Arej"))
+                .with_code(Some(WarcraftObjectId::new("Arej")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -7256,7 +7256,7 @@ fn insert_objects_chunk_2(
             AREN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AREN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::One)), None, Some("Renews friendly Night Elf buildings, allied buildings, and friendly mechanical units."), None).with_code(Some("Aren")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::One)), None, None, Some("commandbuttons/btnwisphealoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AREN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::One)), None, Some("Renews friendly Night Elf buildings, allied buildings, and friendly mechanical units."), None).with_code(Some(WarcraftObjectId::new("Aren"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::One)), None, None, Some("commandbuttons/btnwisphealoff.blp"))),
             WarcraftObjectText::with_alt(AREN_TIP_LEVELS, AREN_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -7279,7 +7279,7 @@ fn insert_objects_chunk_2(
                     Some("Repairs mechanical units and structures at the cost of resources."),
                     None,
                 )
-                .with_code(Some("Arep"))
+                .with_code(Some(WarcraftObjectId::new("Arep")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::One, RowIndex::One)),
@@ -7307,7 +7307,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ARGL_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Artn"))
+                    .with_code(Some(WarcraftObjectId::new("Artn")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -7324,7 +7324,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ARLM_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Artn"))
+                    .with_code(Some(WarcraftObjectId::new("Artn")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -7341,7 +7341,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ARNG_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Arng"))
+                    .with_code(Some(WarcraftObjectId::new("Arng")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -7356,7 +7356,7 @@ fn insert_objects_chunk_2(
             ARO1_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ARO1_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Burrows the Ancient's roots into the ground, rendering it immobile, but allowing it to build units. For the Ancient Protector, this allows it to hurl enormous rocks through the air to damage enemy units. Also gives the Ancient Fortified armor."), None).with_code(Some("Aroo")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnuproot.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ARO1_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Burrows the Ancient's roots into the ground, rendering it immobile, but allowing it to build units. For the Ancient Protector, this allows it to hurl enormous rocks through the air to damage enemy units. Also gives the Ancient Fortified armor."), None).with_code(Some(WarcraftObjectId::new("Aroo"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnuproot.blp"))),
             WarcraftObjectText::with_alt(ARO1_TIP_LEVELS, ARO1_UBERTIP_LEVELS, Some("Uproot"), Some("Allows the Ancient to pull itself up out of the ground so that it can move and engage units in melee combat. Also gives the Ancient Heavy armor.")),
         ),
     );
@@ -7369,7 +7369,7 @@ fn insert_objects_chunk_2(
             ARO2_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ARO2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Burrows the Ancient's roots into the ground, rendering it immobile, but allowing it to build units. For the Ancient Protector, this allows it to hurl enormous rocks through the air to damage enemy units. Also gives the Ancient Fortified armor."), None).with_code(Some("Aroo")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnuproot.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ARO2_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Burrows the Ancient's roots into the ground, rendering it immobile, but allowing it to build units. For the Ancient Protector, this allows it to hurl enormous rocks through the air to damage enemy units. Also gives the Ancient Fortified armor."), None).with_code(Some(WarcraftObjectId::new("Aroo"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnuproot.blp"))),
             WarcraftObjectText::with_alt(ARO2_TIP_LEVELS, ARO2_UBERTIP_LEVELS, Some("Uproot"), Some("Allows the Ancient to pull itself up out of the ground so that it can move and engage units in melee combat. Also gives the Ancient Heavy armor.")),
         ),
     );
@@ -7392,7 +7392,7 @@ fn insert_objects_chunk_2(
                     Some("Gives friendly nearby units a 25% bonus to damage. |nLasts 45 seconds."),
                     None,
                 )
-                .with_code(Some("Aroa"))
+                .with_code(Some(WarcraftObjectId::new("Aroa")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -7420,7 +7420,7 @@ fn insert_objects_chunk_2(
                     ),
                     None,
                 )
-                .with_code(Some("Aroc"))
+                .with_code(Some(WarcraftObjectId::new("Aroc")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -7446,7 +7446,7 @@ fn insert_objects_chunk_2(
                     Some("Restores 10 hit points to up to 6 nearby friendly non-mechanical units."),
                     None,
                 )
-                .with_code(Some("Arpl"))
+                .with_code(Some(WarcraftObjectId::new("Arpl")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)),
@@ -7482,7 +7482,7 @@ fn insert_objects_chunk_2(
                     Some("Restores 2 mana to up to 6 nearby friendly non-mechanical units."),
                     None,
                 )
-                .with_code(Some("Arpm"))
+                .with_code(Some(WarcraftObjectId::new("Arpm")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)),
@@ -7508,7 +7508,7 @@ fn insert_objects_chunk_2(
             ARSG_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ARSG_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Summons Misha, a powerful 900 hit point bear, to attack your enemies."), Some("Summons Misha, a powerful bear, to attack your enemies. |n|n|cffffcc00Level 1|r - 900 hit points, 28 to 31 damage. |n|cffffcc00Level 2|r - 1200 hit points, 38 to 41 damage, has Bash. |n|cffffcc00Level 3|r - 1800 hit points, 46 to 49 damage, has Maul. |n|cffffcc00Level 4|r - 2250 hit points, 59 to 69 damage, has Maul.")).with_code(Some("AOsf")).with_morph_target(Some(WarcraftObjectId::new("ngzc"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ARSG_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Summons Misha, a powerful 900 hit point bear, to attack your enemies."), Some("Summons Misha, a powerful bear, to attack your enemies. |n|n|cffffcc00Level 1|r - 900 hit points, 28 to 31 damage. |n|cffffcc00Level 2|r - 1200 hit points, 38 to 41 damage, has Bash. |n|cffffcc00Level 3|r - 1800 hit points, 46 to 49 damage, has Maul. |n|cffffcc00Level 4|r - 2250 hit points, 59 to 69 damage, has Maul.")).with_code(Some(WarcraftObjectId::new("AOsf"))).with_morph_target(Some(WarcraftObjectId::new("ngzc"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ARSG_TIP_LEVELS, ARSG_UBERTIP_LEVELS),
         ),
     );
@@ -7521,7 +7521,7 @@ fn insert_objects_chunk_2(
             ARSK_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ARSK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Reduces the duration of negative spells and renders the Mountain Giant immune to certain spells."), None).with_code(Some("Arsk")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ARSK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Reduces the duration of negative spells and renders the Mountain Giant immune to certain spells."), None).with_code(Some(WarcraftObjectId::new("Arsk"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ARSK_TIP_LEVELS, ARSK_UBERTIP_LEVELS),
         ),
     );
@@ -7534,7 +7534,7 @@ fn insert_objects_chunk_2(
             ARSP_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ARSP_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Calls down hordes of rampaging thunder lizards to explode upon the Beastmaster's enemies. Each exploding lizard deals 80 damage. |nLasts 30 seconds."), Some("Calls down hordes of rampaging thunder lizards to explode upon the Beastmaster's enemies. |n|n|cffffcc00Level 1|r -  Each exploding lizard deals 80 damage. |n|cffffcc00Level 2|r -  Each exploding lizard deals 130 damage. |n|nLasts 30 seconds.")).with_code(Some("ANst")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ARSP_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Calls down hordes of rampaging thunder lizards to explode upon the Beastmaster's enemies. Each exploding lizard deals 80 damage. |nLasts 30 seconds."), Some("Calls down hordes of rampaging thunder lizards to explode upon the Beastmaster's enemies. |n|n|cffffcc00Level 1|r -  Each exploding lizard deals 80 damage. |n|cffffcc00Level 2|r -  Each exploding lizard deals 130 damage. |n|nLasts 30 seconds.")).with_code(Some(WarcraftObjectId::new("ANst"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ARSP_TIP_LEVELS, ARSP_UBERTIP_LEVELS),
         ),
     );
@@ -7547,7 +7547,7 @@ fn insert_objects_chunk_2(
             ARSQ_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ARSQ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Summons an angry 425 hit point quilbeast to fling spines at your enemies. |nLasts 70 seconds."), Some("Summons an angry quilbeast to attack your enemies. |nLasts 70 seconds. |n|n|cffffcc00Level 1|r - 425 hit points, 13 to 15 damage. |n|cffffcc00Level 2|r - 515 hit points, 26 to 30 damage, has Frenzy. |n|cffffcc00Level 3|r - 600 hit points, 39 to 45 area effect damage, has Frenzy. |n|cffffcc00Level 4|r - 700 hit points, 52 to 60 area effect damage, has Frenzy.")).with_code(Some("ANsq")).with_morph_target(Some(WarcraftObjectId::new("nqb1"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ARSQ_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Summons an angry 425 hit point quilbeast to fling spines at your enemies. |nLasts 70 seconds."), Some("Summons an angry quilbeast to attack your enemies. |nLasts 70 seconds. |n|n|cffffcc00Level 1|r - 425 hit points, 13 to 15 damage. |n|cffffcc00Level 2|r - 515 hit points, 26 to 30 damage, has Frenzy. |n|cffffcc00Level 3|r - 600 hit points, 39 to 45 area effect damage, has Frenzy. |n|cffffcc00Level 4|r - 700 hit points, 52 to 60 area effect damage, has Frenzy.")).with_code(Some(WarcraftObjectId::new("ANsq"))).with_morph_target(Some(WarcraftObjectId::new("nqb1"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ARSQ_TIP_LEVELS, ARSQ_UBERTIP_LEVELS),
         ),
     );
@@ -7570,7 +7570,7 @@ fn insert_objects_chunk_2(
                     Some("Repairs mechanical units and structures at the cost of resources."),
                     None,
                 )
-                .with_code(Some("Arst"))
+                .with_code(Some(WarcraftObjectId::new("Arst")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::One, RowIndex::One)),
@@ -7596,7 +7596,7 @@ fn insert_objects_chunk_2(
             ARSW_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ARSW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward has 90 hit points, is magic immune, and deals 14 - 16 damage. |nLasts 40 seconds. |n|n|cffffcc00Attacks land and air units.|r"), Some("Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward is immune to magic. |nLasts 40 seconds. |n|n|cffffcc00Attacks land and air units.|r |n|n|cffffcc00Level 1|r - 90 hit points, 14 - 16 damage. |n|cffffcc00Level 2|r - 165 hit points, 27 - 30 damage. |n|cffffcc00Level 3|r - 200 hit points, 46 - 50 damage. |n|cffffcc00Level 4|r - 135 hit points, 41 - 45 splash damage.")).with_code(Some("AOwd")).with_morph_target(Some(WarcraftObjectId::new("osp1"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, ARSW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward has 90 hit points, is magic immune, and deals 14 - 16 damage. |nLasts 40 seconds. |n|n|cffffcc00Attacks land and air units.|r"), Some("Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward is immune to magic. |nLasts 40 seconds. |n|n|cffffcc00Attacks land and air units.|r |n|n|cffffcc00Level 1|r - 90 hit points, 14 - 16 damage. |n|cffffcc00Level 2|r - 165 hit points, 27 - 30 damage. |n|cffffcc00Level 3|r - 200 hit points, 46 - 50 damage. |n|cffffcc00Level 4|r - 135 hit points, 41 - 45 splash damage.")).with_code(Some(WarcraftObjectId::new("AOwd"))).with_morph_target(Some(WarcraftObjectId::new("osp1"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ARSW_TIP_LEVELS, ARSW_UBERTIP_LEVELS),
         ),
     );
@@ -7609,7 +7609,7 @@ fn insert_objects_chunk_2(
             ASAC_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASAC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), None, Some("Target an Acolyte to sacrifice it and turn it into a Shade. Shades are invisible spirits that can see invisible units. |nShades cannot attack."), None).with_code(Some("Asac")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASAC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), None, Some("Target an Acolyte to sacrifice it and turn it into a Shade. Shades are invisible spirits that can see invisible units. |nShades cannot attack."), None).with_code(Some(WarcraftObjectId::new("Asac"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ASAC_TIP_LEVELS, ASAC_UBERTIP_LEVELS),
         ),
     );
@@ -7632,7 +7632,7 @@ fn insert_objects_chunk_2(
                     Some("Each attack that does damage to an enemy building also gains resources."),
                     None,
                 )
-                .with_code(Some("Asal"))
+                .with_code(Some(WarcraftObjectId::new("Asal")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -7658,7 +7658,7 @@ fn insert_objects_chunk_2(
                     Some("Allows this unit to dive beneath water, hiding it from view."),
                     None,
                 )
-                .with_code(Some("ANsu"))
+                .with_code(Some(WarcraftObjectId::new("ANsu")))
                 .with_morph_target(Some(WarcraftObjectId::new("nmys")))
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)),
@@ -7694,7 +7694,7 @@ fn insert_objects_chunk_2(
                     Some("Allows this unit to dive beneath water, hiding it from view."),
                     None,
                 )
-                .with_code(Some("ANsu"))
+                .with_code(Some(WarcraftObjectId::new("ANsu")))
                 .with_morph_target(Some(WarcraftObjectId::new("nnrs")))
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)),
@@ -7730,7 +7730,7 @@ fn insert_objects_chunk_2(
                     Some("Allows this unit to dive beneath water, hiding it from view."),
                     None,
                 )
-                .with_code(Some("ANsu"))
+                .with_code(Some(WarcraftObjectId::new("ANsu")))
                 .with_morph_target(Some(WarcraftObjectId::new("nsbs")))
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)),
@@ -7766,7 +7766,7 @@ fn insert_objects_chunk_2(
                     Some("Deals 60 damage in a small area."),
                     None,
                 )
-                .with_code(Some("Asds"))
+                .with_code(Some(WarcraftObjectId::new("Asds")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)),
@@ -7802,7 +7802,7 @@ fn insert_objects_chunk_2(
                     Some("Deals 80 damage in a small area."),
                     None,
                 )
-                .with_code(Some("Asds"))
+                .with_code(Some(WarcraftObjectId::new("Asds")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)),
@@ -7838,7 +7838,7 @@ fn insert_objects_chunk_2(
                     Some("Deals 30 damage in a small area."),
                     None,
                 )
-                .with_code(Some("Asds"))
+                .with_code(Some(WarcraftObjectId::new("Asds")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)),
@@ -7876,7 +7876,7 @@ fn insert_objects_chunk_2(
                     ),
                     None,
                 )
-                .with_code(Some("Asds"))
+                .with_code(Some(WarcraftObjectId::new("Asds")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)),
@@ -7902,7 +7902,7 @@ fn insert_objects_chunk_2(
             ASHM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASHM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::One)), None, Some("Stops the unit from auto-acquiring enemies, allowing it to Shadowmeld and remain unseen at night."), None).with_code(Some("Ashm")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASHM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::One)), None, Some("Stops the unit from auto-acquiring enemies, allowing it to Shadowmeld and remain unseen at night."), None).with_code(Some(WarcraftObjectId::new("Ashm"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ASHM_TIP_LEVELS, ASHM_UBERTIP_LEVELS),
         ),
     );
@@ -7925,7 +7925,7 @@ fn insert_objects_chunk_2(
                     Some("Permits the sale of items."),
                     None,
                 )
-                .with_code(Some("Asid"))
+                .with_code(Some(WarcraftObjectId::new("Asid")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -7941,7 +7941,7 @@ fn insert_objects_chunk_2(
             ASLO_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASLO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Slows a target enemy unit's attack rate by 25% and movement speed by 55%. |nLasts 45 seconds."), None).with_code(Some("Aslo")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnslowoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASLO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Slows a target enemy unit's attack rate by 25% and movement speed by 55%. |nLasts 45 seconds."), None).with_code(Some(WarcraftObjectId::new("Aslo"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnslowoff.blp"))),
             WarcraftObjectText::with_alt(ASLO_TIP_LEVELS, ASLO_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -7954,7 +7954,7 @@ fn insert_objects_chunk_2(
             ASLP_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASLP_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Summons 2 Makrura Prawns to do their master's bidding. |nLasts 60 seconds."), None).with_code(Some("ANwm")).with_morph_target(Some(WarcraftObjectId::new("nlps"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASLP_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Summons 2 Makrura Prawns to do their master's bidding. |nLasts 60 seconds."), None).with_code(Some(WarcraftObjectId::new("ANwm"))).with_morph_target(Some(WarcraftObjectId::new("nlps"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ASLP_TIP_LEVELS, ASLP_UBERTIP_LEVELS),
         ),
     );
@@ -7969,7 +7969,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ASP1_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Asph"))
+                    .with_code(Some(WarcraftObjectId::new("Asph")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -7986,7 +7986,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ASPA_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aspa"))
+                    .with_code(Some(WarcraftObjectId::new("Aspa")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8003,7 +8003,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ASPD_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aspd"))
+                    .with_code(Some(WarcraftObjectId::new("Aspd")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8020,7 +8020,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ASPH_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Asph"))
+                    .with_code(Some(WarcraftObjectId::new("Asph")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8037,7 +8037,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ASPI_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aspi"))
+                    .with_code(Some(WarcraftObjectId::new("Aspi")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8052,7 +8052,7 @@ fn insert_objects_chunk_2(
             ASPL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASPL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Links 4 units together in a chain. All units with Spirit Link on them will live longer, by distributing 50% of the damage they take across other Spirit Linked units. |nLasts 75 seconds."), None).with_code(Some("Aspl")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASPL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Links 4 units together in a chain. All units with Spirit Link on them will live longer, by distributing 50% of the damage they take across other Spirit Linked units. |nLasts 75 seconds."), None).with_code(Some(WarcraftObjectId::new("Aspl"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, None)),
             WarcraftObjectText::new(ASPL_TIP_LEVELS, ASPL_UBERTIP_LEVELS),
         ),
     );
@@ -8065,7 +8065,7 @@ fn insert_objects_chunk_2(
             ASPO_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASPO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("A poison attack that deals 4 damage per second, and slows the target enemy's movement by 50% and attack by 25% for 5 seconds."), None).with_code(Some("Aspo")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASPO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("A poison attack that deals 4 damage per second, and slows the target enemy's movement by 50% and attack by 25% for 5 seconds."), None).with_code(Some(WarcraftObjectId::new("Aspo"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ASPO_TIP_LEVELS, ASPO_UBERTIP_LEVELS),
         ),
     );
@@ -8078,7 +8078,7 @@ fn insert_objects_chunk_2(
             ASPS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASPS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Steals a positive buff from an enemy unit and applies it to a nearby friendly unit, or takes a negative buff from a friendly unit and applies it to a nearby enemy unit."), None).with_code(Some("Asps")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnspellstealoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASPS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Steals a positive buff from an enemy unit and applies it to a nearby friendly unit, or takes a negative buff from a friendly unit and applies it to a nearby enemy unit."), None).with_code(Some(WarcraftObjectId::new("Asps"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnspellstealoff.blp"))),
             WarcraftObjectText::with_alt(ASPS_TIP_LEVELS, ASPS_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -8093,7 +8093,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ASPT_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aspd"))
+                    .with_code(Some(WarcraftObjectId::new("Aspd")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8110,7 +8110,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ASPY_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Aspd"))
+                    .with_code(Some(WarcraftObjectId::new("Aspd")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8125,7 +8125,7 @@ fn insert_objects_chunk_2(
             ASSK_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASSK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Reduces all attacks on the Mountain Giant by 8 damage. Attacks cannot be reduced below 3 damage."), None).with_code(Some("Assk")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASSK_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Reduces all attacks on the Mountain Giant by 8 damage. Attacks cannot be reduced below 3 damage."), None).with_code(Some(WarcraftObjectId::new("Assk"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ASSK_TIP_LEVELS, ASSK_UBERTIP_LEVELS),
         ),
     );
@@ -8140,7 +8140,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ASSP_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Assp"))
+                    .with_code(Some(WarcraftObjectId::new("Assp")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8155,7 +8155,7 @@ fn insert_objects_chunk_2(
             ASTA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASTA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Summons an invisible and immovable ward that stuns enemy land units around it. The trap activates when an enemy land unit approaches and destroys all other stasis wards in its area of effect. Wards are spell immune. |nThe trap lasts 150 seconds. |nThe stun lasts 4 seconds."), None).with_code(Some("Asta")).with_morph_target(Some(WarcraftObjectId::new("otot"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASTA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Summons an invisible and immovable ward that stuns enemy land units around it. The trap activates when an enemy land unit approaches and destroys all other stasis wards in its area of effect. Wards are spell immune. |nThe trap lasts 150 seconds. |nThe stun lasts 4 seconds."), None).with_code(Some(WarcraftObjectId::new("Asta"))).with_morph_target(Some(WarcraftObjectId::new("otot"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ASTA_TIP_LEVELS, ASTA_UBERTIP_LEVELS),
         ),
     );
@@ -8178,7 +8178,7 @@ fn insert_objects_chunk_2(
                     Some("Causes Peons within the Burrow to return to work."),
                     None,
                 )
-                .with_code(Some("Astd"))
+                .with_code(Some(WarcraftObjectId::new("Astd")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -8204,7 +8204,7 @@ fn insert_objects_chunk_2(
                     Some("Causes a Gryphon Rider's attacks to damage multiple units."),
                     None,
                 )
-                .with_code(Some("Asth"))
+                .with_code(Some(WarcraftObjectId::new("Asth")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -8220,7 +8220,7 @@ fn insert_objects_chunk_2(
             ASTN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASTN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Transforms the Gargoyle into a statue that is immune to spells, gains additional armor and has a regeneration rate of 8 hit points per second. |nThe Gargoyle cannot attack in this form."), None).with_code(Some("Astn")).with_morph_target(Some(WarcraftObjectId::new("ugrm"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btngargoyle.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ASTN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Transforms the Gargoyle into a statue that is immune to spells, gains additional armor and has a regeneration rate of 8 hit points per second. |nThe Gargoyle cannot attack in this form."), None).with_code(Some(WarcraftObjectId::new("Astn"))).with_morph_target(Some(WarcraftObjectId::new("ugrm"))).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btngargoyle.blp"))),
             WarcraftObjectText::with_alt(ASTN_TIP_LEVELS, ASTN_UBERTIP_LEVELS, Some("Gargoyle Form"), Some("Returns the Gargoyle to the air.")),
         ),
     );
@@ -8243,7 +8243,7 @@ fn insert_objects_chunk_2(
                     Some("Permits the sale of units."),
                     None,
                 )
-                .with_code(Some("Asud"))
+                .with_code(Some(WarcraftObjectId::new("Asud")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -8259,7 +8259,7 @@ fn insert_objects_chunk_2(
             ATAU_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ATAU_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("The closest 10 enemies are forced to attack this unit. After 3 seconds Taunt will activate again."), None).with_code(Some("Atau")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, ATAU_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("The closest 10 enemies are forced to attack this unit. After 3 seconds Taunt will activate again."), None).with_code(Some(WarcraftObjectId::new("Atau"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ATAU_TIP_LEVELS, ATAU_UBERTIP_LEVELS),
         ),
     );
@@ -8274,7 +8274,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ATDG_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Atdg"))
+                    .with_code(Some(WarcraftObjectId::new("Atdg")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8291,7 +8291,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ATOL_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Atol"))
+                    .with_code(Some(WarcraftObjectId::new("Atol")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8316,7 +8316,7 @@ fn insert_objects_chunk_2(
                     Some("Reveals nearby invisible units."),
                     None,
                 )
-                .with_code(Some("Atru"))
+                .with_code(Some(WarcraftObjectId::new("Atru")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -8334,7 +8334,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ATSP_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Atsp"))
+                    .with_code(Some(WarcraftObjectId::new("Atsp")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8351,7 +8351,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, ATWA_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Atwa"))
+                    .with_code(Some(WarcraftObjectId::new("Atwa")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8366,7 +8366,7 @@ fn insert_objects_chunk_2(
             AUCO_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AUCO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes a powerful explosion that deals 600 damage to a target air unit, and 140 damage to nearby enemy air units."), None).with_code(Some("Auco")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnunstableconcoction.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AUCO_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes a powerful explosion that deals 600 damage to a target air unit, and 140 damage to nearby enemy air units."), None).with_code(Some(WarcraftObjectId::new("Auco"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnunstableconcoction.blp"))),
             WarcraftObjectText::with_alt(AUCO_TIP_LEVELS, AUCO_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting.|r"), Some("|cffc3dbffRight-click to deactivate auto-casting.|r")),
         ),
     );
@@ -8389,7 +8389,7 @@ fn insert_objects_chunk_2(
                     Some("Increases Ghoul movement speed, and attack rate by 35%."),
                     None,
                 )
-                .with_code(Some("APai"))
+                .with_code(Some(WarcraftObjectId::new("APai")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -8415,7 +8415,7 @@ fn insert_objects_chunk_2(
                     Some("This unit is permanently invisible."),
                     None,
                 )
-                .with_code(Some("APai"))
+                .with_code(Some(WarcraftObjectId::new("APai")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -8431,7 +8431,7 @@ fn insert_objects_chunk_2(
             AUHF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AUHF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Increases the attack rate of a target unit by 75%, but drains 2 hit points per second. |nLasts 45 seconds."), None).with_code(Some("Auhf")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AUHF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Increases the attack rate of a target unit by 75%, but drains 2 hit points per second. |nLasts 45 seconds."), None).with_code(Some(WarcraftObjectId::new("Auhf"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUHF_TIP_LEVELS, AUHF_UBERTIP_LEVELS),
         ),
     );
@@ -8446,7 +8446,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AULT_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Ault"))
+                    .with_code(Some(WarcraftObjectId::new("Ault")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8471,7 +8471,7 @@ fn insert_objects_chunk_2(
                     Some("Unsummons your building to regain 50% of the spent resources."),
                     None,
                 )
-                .with_code(Some("Auns"))
+                .with_code(Some(WarcraftObjectId::new("Auns")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -8487,7 +8487,7 @@ fn insert_objects_chunk_2(
             AUSM_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AUSM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Causes one of the two skeletons created by Raise Dead to be a Skeletal Mage and increases the duration of raised Skeleton Warriors and Skeletal Mages by 20 seconds."), None).with_code(Some("APai")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AUSM_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, Some("Causes one of the two skeletons created by Raise Dead to be a Skeletal Mage and increases the duration of raised Skeleton Warriors and Skeletal Mages by 20 seconds."), None).with_code(Some(WarcraftObjectId::new("APai"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUSM_TIP_LEVELS, AUSM_UBERTIP_LEVELS),
         ),
     );
@@ -8510,7 +8510,7 @@ fn insert_objects_chunk_2(
                     Some("Deals 3 poison damage per second. |nLasts 25 seconds."),
                     None,
                 )
-                .with_code(Some("Aven"))
+                .with_code(Some(WarcraftObjectId::new("Aven")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -8526,7 +8526,7 @@ fn insert_objects_chunk_2(
             AVNG_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AVNG_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Raises an invulnerable feral spirit from a corpse. Lasts 50 seconds or until the avatar dies."), None).with_code(Some("Avng")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnavengingwatcheroff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AVNG_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Raises an invulnerable feral spirit from a corpse. Lasts 50 seconds or until the avatar dies."), None).with_code(Some(WarcraftObjectId::new("Avng"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnavengingwatcheroff.blp"))),
             WarcraftObjectText::with_alt(AVNG_TIP_LEVELS, AVNG_UBERTIP_LEVELS, Some("|cffc3dbffRight-click to activate auto-casting."), Some("|cffc3dbffRight-click to deactivate auto-casting.")),
         ),
     );
@@ -8541,7 +8541,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AVUL_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Avul"))
+                    .with_code(Some(WarcraftObjectId::new("Avul")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8558,7 +8558,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AWAN_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Awan"))
+                    .with_code(Some(WarcraftObjectId::new("Awan")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8583,7 +8583,7 @@ fn insert_objects_chunk_2(
                     Some("Gives a 25% chance that an attack will deal 20 damage to nearby units."),
                     None,
                 )
-                .with_code(Some("Awar"))
+                .with_code(Some(WarcraftObjectId::new("Awar")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -8599,7 +8599,7 @@ fn insert_objects_chunk_2(
             AWEB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AWEB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Binds a target enemy air unit in webbing, forcing it to the ground. Webbed units can be hit as though they were land units. |nLasts 12 seconds."), None).with_code(Some("Aweb")).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnweboff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AWEB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Binds a target enemy air unit in webbing, forcing it to the ground. Webbed units can be hit as though they were land units. |nLasts 12 seconds."), None).with_code(Some(WarcraftObjectId::new("Aweb"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, None, Some("commandbuttons/btnweboff.blp"))),
             WarcraftObjectText::with_alt(AWEB_TIP_LEVELS, AWEB_UBERTIP_LEVELS, Some("|cffc3dbff|cffc3dbffRight-click to activate auto-casting."), Some("|cffc3dbffRight-click to deactivate auto-casting.")),
         ),
     );
@@ -8622,7 +8622,7 @@ fn insert_objects_chunk_2(
                     Some("Hurls a fiery bolt that stuns a target enemy unit."),
                     None,
                 )
-                .with_code(Some("ANfb"))
+                .with_code(Some(WarcraftObjectId::new("ANfb")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -8648,7 +8648,7 @@ fn insert_objects_chunk_2(
                     Some("Mines gold from Entangled Gold Mines and harvests lumber from trees."),
                     None,
                 )
-                .with_code(Some("Awha"))
+                .with_code(Some(WarcraftObjectId::new("Awha")))
                 .with_morph_target(None)
                 .with_off_state(
                     Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::One)),
@@ -8669,7 +8669,7 @@ fn insert_objects_chunk_2(
             AWRH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AWRH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Slams the ground, dealing 25 damage to nearby enemy land units and stunning them for 3 seconds."), None).with_code(Some("AOws")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AWRH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Slams the ground, dealing 25 damage to nearby enemy land units and stunning them for 3 seconds."), None).with_code(Some(WarcraftObjectId::new("AOws"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AWRH_TIP_LEVELS, AWRH_UBERTIP_LEVELS),
         ),
     );
@@ -8684,7 +8684,7 @@ fn insert_objects_chunk_2(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, AWRP_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Awrp"))
+                    .with_code(Some(WarcraftObjectId::new("Awrp")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -8699,7 +8699,7 @@ fn insert_objects_chunk_2(
             AWRS_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AWRS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Slams the ground, dealing 25 damage to nearby enemy land units and stunning them for 3 seconds."), None).with_code(Some("AOws")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, AWRS_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Slams the ground, dealing 25 damage to nearby enemy land units and stunning them for 3 seconds."), None).with_code(Some(WarcraftObjectId::new("AOws"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AWRS_TIP_LEVELS, AWRS_UBERTIP_LEVELS),
         ),
     );
@@ -14316,7 +14316,7 @@ fn insert_objects_chunk_3(
             SCAE_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, SCAE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Increases nearby friendly units' movement speed by 10% and attack rate by 5%."), None).with_code(Some("AOae")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, SCAE_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Increases nearby friendly units' movement speed by 10% and attack rate by 5%."), None).with_code(Some(WarcraftObjectId::new("AOae"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(SCAE_TIP_LEVELS, SCAE_UBERTIP_LEVELS),
         ),
     );
@@ -14329,7 +14329,7 @@ fn insert_objects_chunk_3(
             SCC1_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, SCC1_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::One)), None, Some("Tosses a target enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. |nLasts 30 seconds."), None).with_code(Some("Acyc")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, SCC1_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::One)), None, Some("Tosses a target enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. |nLasts 30 seconds."), None).with_code(Some(WarcraftObjectId::new("Acyc"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(SCC1_TIP_LEVELS, SCC1_UBERTIP_LEVELS),
         ),
     );
@@ -14342,7 +14342,7 @@ fn insert_objects_chunk_3(
             SNIN_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, SNIN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 360 seconds."), Some("Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 360 seconds.")).with_code(Some("AUin")).with_morph_target(Some(WarcraftObjectId::new("ninf"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, true, SNIN_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 360 seconds."), Some("Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 360 seconds.")).with_code(Some(WarcraftObjectId::new("AUin"))).with_morph_target(Some(WarcraftObjectId::new("ninf"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(SNIN_TIP_LEVELS, SNIN_UBERTIP_LEVELS),
         ),
     );
@@ -14357,7 +14357,7 @@ fn insert_objects_chunk_3(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, SBSK_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Acha"))
+                    .with_code(Some(WarcraftObjectId::new("Acha")))
                     .with_morph_target(Some(WarcraftObjectId::new("otbk")))
                     .with_off_state(None, None, None, None),
             ),
@@ -14372,7 +14372,7 @@ fn insert_objects_chunk_3(
             SBTL_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, SBTL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes nearby Peons to run into the Burrow so that they can defend their base."), None).with_code(Some("Abtl")).with_morph_target(Some(WarcraftObjectId::new("ncpn"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, SBTL_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), None, Some("Causes nearby Peons to run into the Burrow so that they can defend their base."), None).with_code(Some(WarcraftObjectId::new("Abtl"))).with_morph_target(Some(WarcraftObjectId::new("ncpn"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(SBTL_TIP_LEVELS, SBTL_UBERTIP_LEVELS),
         ),
     );
@@ -14387,7 +14387,7 @@ fn insert_objects_chunk_3(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, SCH2_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Amtc"))
+                    .with_code(Some(WarcraftObjectId::new("Amtc")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -14404,7 +14404,7 @@ fn insert_objects_chunk_3(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, SCH3_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Acar"))
+                    .with_code(Some(WarcraftObjectId::new("Acar")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -14421,7 +14421,7 @@ fn insert_objects_chunk_3(
             None,
             WarcraftObjectMeta::Ability(
                 AbilityMeta::with_ubertips(1, false, SCH5_COOLDOWNS, None, None, None, None)
-                    .with_code(Some("Acar"))
+                    .with_code(Some(WarcraftObjectId::new("Acar")))
                     .with_morph_target(None)
                     .with_off_state(None, None, None, None),
             ),
@@ -14436,7 +14436,7 @@ fn insert_objects_chunk_3(
             SCRI_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, SCRI_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Reduces movement speed by 75%, attack rate by 50%, and damage by 50% of a target enemy unit. |nLasts 60 seconds."), None).with_code(Some("Acri")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, SCRI_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), None, Some("Reduces movement speed by 75%, attack rate by 50%, and damage by 50% of a target enemy unit. |nLasts 60 seconds."), None).with_code(Some(WarcraftObjectId::new("Acri"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(SCRI_TIP_LEVELS, SCRI_UBERTIP_LEVELS),
         ),
     );
@@ -14459,7 +14459,7 @@ fn insert_objects_chunk_3(
                     Some("Unloads all carried units at a target location."),
                     None,
                 )
-                .with_code(Some("Adro"))
+                .with_code(Some(WarcraftObjectId::new("Adro")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -14485,7 +14485,7 @@ fn insert_objects_chunk_3(
                     Some("Loads a targeted friendly Wisp."),
                     None,
                 )
-                .with_code(Some("Aloa"))
+                .with_code(Some(WarcraftObjectId::new("Aloa")))
                 .with_morph_target(Some(WarcraftObjectId::new("ewsp")))
                 .with_off_state(None, None, None, None),
             ),
@@ -14511,7 +14511,7 @@ fn insert_objects_chunk_3(
                     Some("Loads a targeted friendly land unit."),
                     None,
                 )
-                .with_code(Some("Aloa"))
+                .with_code(Some(WarcraftObjectId::new("Aloa")))
                 .with_morph_target(None)
                 .with_off_state(None, None, None, None),
             ),
@@ -14527,7 +14527,7 @@ fn insert_objects_chunk_3(
             SUHF_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, SUHF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Increases the attack rate of a target unit by 75%, but drains 2 hit points per second. |nLasts 45 seconds."), None).with_code(Some("Auhf")).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(1, false, SUHF_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), None, Some("Increases the attack rate of a target unit by 75%, but drains 2 hit points per second. |nLasts 45 seconds."), None).with_code(Some(WarcraftObjectId::new("Auhf"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(SUHF_TIP_LEVELS, SUHF_UBERTIP_LEVELS),
         ),
     );

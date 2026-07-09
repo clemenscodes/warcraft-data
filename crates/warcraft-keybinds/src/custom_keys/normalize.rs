@@ -4,7 +4,6 @@
 //! an `impl CustomKeys` continuation; a child module sees the parent's private
 //! fields and helpers.
 
-use super::mirrors::{BUILD_COMMAND_MIRRORS, MORPH_ABILITY_MIRRORS};
 use super::{BUNDLED_BASELINE, CustomKeys, GRID_COLUMNS, GRID_ROWS};
 use crate::identity::slot::GridSlotId;
 use crate::model::{ColumnIndex, GridCoordinate, Hotkey, RowIndex, WarcraftKeybinding};
@@ -12,8 +11,9 @@ use crate::unit::grids::UnitGrids;
 use crate::unit::slots::UnitCommandSlots;
 use std::collections::HashSet;
 use std::sync::OnceLock;
-use warcraft_api::{WarcraftObjectKind, WarcraftObjectMeta};
-use warcraft_database::WARCRAFT_DATABASE;
+use warcraft_api::WARCRAFT_DATABASE;
+use warcraft_api::{BUILD_COMMAND_MIRRORS, MORPH_ABILITY_MIRRORS};
+use warcraft_api::{WarcraftObjectId, WarcraftObjectKind, WarcraftObjectMeta};
 
 impl CustomKeys {
     pub fn normalize(&self) -> Self {
@@ -41,8 +41,7 @@ impl CustomKeys {
             let WarcraftKeybinding::Ability(ability_binding) = keybinding else {
                 continue;
             };
-            let object_code = object_id.value();
-            let object_option = WARCRAFT_DATABASE.by_id(object_code);
+            let object_option = WARCRAFT_DATABASE.object(*object_id);
             let Some(warcraft_object) = object_option else {
                 continue;
             };
@@ -98,8 +97,7 @@ impl CustomKeys {
             if ability_binding.unbutton_position().is_none() {
                 continue;
             }
-            let ability_lowercase = object_id.value().to_ascii_lowercase();
-            if independent_off_slots.contains(&ability_lowercase) {
+            if independent_off_slots.contains(object_id) {
                 continue;
             }
             let Some(button_position) = ability_binding.button_position().copied() else {
@@ -117,8 +115,7 @@ impl CustomKeys {
     fn mirror_build_commands_to_abilities(&mut self) {
         for mirror in BUILD_COMMAND_MIRRORS {
             let command_id = mirror.command_id();
-            let command_name = command_id.value();
-            let Some(command_binding) = self.command(command_name) else {
+            let Some(command_binding) = self.command(command_id) else {
                 continue;
             };
             let position_ref = command_binding.button_position();
@@ -177,7 +174,7 @@ impl CustomKeys {
             if !matches!(binding, WarcraftKeybinding::Ability(_)) {
                 return true;
             }
-            let object_option = WARCRAFT_DATABASE.by_id(object_id.value());
+            let object_option = WARCRAFT_DATABASE.object(*object_id);
             let Some(warcraft_object) = object_option else {
                 return true;
             };
@@ -217,17 +214,16 @@ impl CustomKeys {
     /// cell can render only one of them — the editor shows the off-state in the
     /// grid and edits the on-state in a separate dialog — so its dialog-only
     /// state must track the one shown in the grid.
-    fn abilities_with_independent_off_slot() -> &'static HashSet<String> {
-        static CACHE: OnceLock<HashSet<String>> = OnceLock::new();
+    fn abilities_with_independent_off_slot() -> &'static HashSet<WarcraftObjectId> {
+        static CACHE: OnceLock<HashSet<WarcraftObjectId>> = OnceLock::new();
         CACHE.get_or_init(|| {
-            let mut independent: HashSet<String> = HashSet::new();
+            let mut independent: HashSet<WarcraftObjectId> = HashSet::new();
             for unit_id in WARCRAFT_DATABASE.all_unit_ids() {
                 let unit_grids = UnitGrids::for_unit(unit_id);
                 for named_grid in unit_grids.grids() {
                     for slot in named_grid.card().filled_slots() {
                         if let GridSlotId::AbilityOff(ability_id) = slot {
-                            let lowercase = ability_id.value().to_ascii_lowercase();
-                            independent.insert(lowercase);
+                            independent.insert(ability_id.object_id());
                         }
                     }
                 }
@@ -308,8 +304,7 @@ impl CustomKeys {
             }
             let mut occupied_positions: HashSet<GridCoordinate> = HashSet::new();
             for item_id_object in sell_items {
-                let item_id = item_id_object.value();
-                let item_binding = self.binding(item_id);
+                let item_binding = self.binding(*item_id_object);
                 let position_ref = item_binding.and_then(|binding| binding.button_position());
                 let existing_position = position_ref.copied();
                 if let Some(position) = existing_position {
@@ -317,8 +312,7 @@ impl CustomKeys {
                 }
             }
             for unit_id_object in sell_units {
-                let unit_id = unit_id_object.value();
-                let unit_binding = self.binding(unit_id);
+                let unit_binding = self.binding(*unit_id_object);
                 let position_ref = unit_binding.and_then(|binding| binding.button_position());
                 let existing_position = position_ref.copied();
                 if let Some(position) = existing_position {
@@ -326,8 +320,7 @@ impl CustomKeys {
                 }
             }
             for item_id_object in sell_items {
-                let item_id = item_id_object.value();
-                let item_binding = self.binding(item_id);
+                let item_binding = self.binding(*item_id_object);
                 let position_ref = item_binding.and_then(|binding| binding.button_position());
                 let has_position = position_ref.is_some();
                 if has_position {
@@ -343,8 +336,7 @@ impl CustomKeys {
                 }
             }
             for unit_id_object in sell_units {
-                let unit_id = unit_id_object.value();
-                let unit_binding = self.binding(unit_id);
+                let unit_binding = self.binding(*unit_id_object);
                 let position_ref = unit_binding.and_then(|binding| binding.button_position());
                 let has_position = position_ref.is_some();
                 if has_position {

@@ -12,10 +12,9 @@ impl Extend<(WarcraftObjectId, WarcraftKeybinding)> for CustomKeys {
         I: IntoIterator<Item = (WarcraftObjectId, WarcraftKeybinding)>,
     {
         for (object_id, binding) in iter {
-            let raw_key = object_id.value();
             match binding {
                 WarcraftKeybinding::Ability(source_binding) => {
-                    if self.system(raw_key).is_some() {
+                    if self.system(object_id).is_some() {
                         continue;
                     }
                     let Some(target_binding) = self.binding_or_default_mut(object_id) else {

@@ -9,7 +9,7 @@ use warcraft_extractor::*;
 
 const DEFAULT_DATABASE_FILE: &str = concat!(
     env!("CARGO_WORKSPACE_DIR"),
-    "crates/warcraft-database/src/db.rs"
+    "crates/warcraft-api/src/db.rs"
 );
 
 #[derive(Parser)]
@@ -27,11 +27,11 @@ struct Args {
     casc_root: PathBuf,
 
     /// Write generated Rust to FILE. Defaults to the workspace-relative
-    /// `crates/warcraft-database/src/db.rs`. Pass `-` to stream to stdout.
+    /// `crates/warcraft-api/src/db.rs`. Pass `-` to stream to stdout.
     #[arg(short = 'o', long = "output", value_name = "FILE", default_value = DEFAULT_DATABASE_FILE)]
     output_file: PathBuf,
 
-    /// Skip the post-write `cargo check` verification of `warcraft-database`.
+    /// Skip the post-write `cargo check` verification of `warcraft-api`.
     /// Useful for debugging or when the downstream crate is already known to
     /// be broken.
     #[arg(long)]
@@ -133,7 +133,7 @@ fn main() {
     }
 }
 
-const VERIFIED_PACKAGE: &str = "warcraft-database";
+const VERIFIED_PACKAGE: &str = "warcraft-api";
 
 enum CargoCheckOutcome {
     Success,
@@ -331,11 +331,11 @@ impl CodegenContext {
             "// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
         );
         output.push_str("use std::sync::LazyLock;\n\n");
-        output.push_str("use warcraft_api::*;\n\n");
-        output.push_str("use warcraft_api::WarcraftObjectKind::*;\n");
-        output.push_str("use warcraft_api::Race::*;\n");
-        output.push_str("use warcraft_api::UnitKind::*;\n");
-        output.push_str("use warcraft_api::ItemClass::*;\n\n");
+        output.push_str("use crate::*;\n\n");
+        output.push_str("use crate::WarcraftObjectKind::*;\n");
+        output.push_str("use crate::Race::*;\n");
+        output.push_str("use crate::UnitKind::*;\n");
+        output.push_str("use crate::ItemClass::*;\n\n");
 
         const OBJECTS_PER_CHUNK: usize = 200;
         let database_objects = database.db();
@@ -676,7 +676,10 @@ impl CodegenContext {
                 let ubertip_literal = format_static_str_option(ability_meta.ubertip());
                 let research_ubertip_literal =
                     format_static_str_option(ability_meta.research_ubertip());
-                let code_literal = format_static_str_option(ability_meta.code());
+                let code_literal = ability_meta
+                    .code()
+                    .map(|code| format!("Some(WarcraftObjectId::new(\"{}\"))", code.value()))
+                    .unwrap_or_else(|| "None".to_string());
                 let morph_target_literal = ability_meta
                     .morph_target_unit()
                     .map(|target| format!("Some(WarcraftObjectId::new(\"{}\"))", target.value()))

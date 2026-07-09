@@ -2,6 +2,7 @@ use crate::display::ability_cell::AbilityCell;
 use crate::identity::ability_id::AbilityId;
 use crate::model::{AbilityBinding, CommandBinding, GridCoordinate};
 use std::fmt;
+use warcraft_api::PINNED_ROOT_ABILITY_IDS;
 use warcraft_api::WarcraftObjectId;
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
@@ -73,7 +74,8 @@ impl GridSlotId {
         match self {
             Self::Command(_) => true,
             Self::Ability(ability_id) | Self::AbilityOff(ability_id) => {
-                matches!(ability_id.value(), "Aro1" | "Aro2")
+                let object_id = ability_id.object_id();
+                PINNED_ROOT_ABILITY_IDS.contains(&object_id)
             }
         }
     }
@@ -185,40 +187,40 @@ mod slot_tests {
 
     #[test]
     fn ability_slot_display_shows_id() {
-        let slot = GridSlotId::ability("Ahrl");
+        let slot = crate::test_support::ability_slot("Ahrl");
         assert_eq!(slot.to_string(), "Ahrl");
     }
 
     #[test]
     fn ability_off_slot_display_shows_id() {
-        let slot = GridSlotId::ability_off("Ahrl");
+        let slot = crate::test_support::ability_off_slot("Ahrl");
         assert_eq!(slot.to_string(), "Ahrl");
     }
 
     #[test]
     fn command_slot_display_shows_id() {
-        let slot = GridSlotId::command("CmdAttack");
+        let slot = crate::test_support::command_slot("CmdAttack");
         assert_eq!(slot.to_string(), "CmdAttack");
     }
 
     #[test]
     fn from_ability_slot_gives_warcraft_object_id() {
-        let slot = GridSlotId::ability("Ahrl");
+        let slot = crate::test_support::ability_slot("Ahrl");
         let object_id = WarcraftObjectId::from(slot);
         assert_eq!(object_id.value(), "Ahrl");
     }
 
     #[test]
     fn from_command_slot_gives_warcraft_object_id() {
-        let slot = GridSlotId::command("CmdMove");
+        let slot = crate::test_support::command_slot("CmdMove");
         let object_id = WarcraftObjectId::from(slot);
         assert_eq!(object_id.value(), "CmdMove");
     }
 
     #[test]
     fn ability_slot_and_ability_off_slot_have_same_id() {
-        let on_slot = GridSlotId::ability("AHbh");
-        let off_slot = GridSlotId::ability_off("AHbh");
+        let on_slot = crate::test_support::ability_slot("AHbh");
+        let off_slot = crate::test_support::ability_off_slot("AHbh");
         assert_eq!(on_slot.id(), off_slot.id());
         assert_ne!(on_slot, off_slot);
     }
@@ -233,7 +235,7 @@ mod slot_tests {
     fn command_card_place_fills_slot_at_position() {
         let mut card = CommandCard::empty();
         let position = GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero);
-        let slot = GridSlotId::ability("Ahrl");
+        let slot = crate::test_support::ability_slot("Ahrl");
         let placed = card.place(position, slot);
         assert!(placed);
         assert_eq!(card.slot_at(position), Some(slot));
@@ -243,8 +245,8 @@ mod slot_tests {
     fn command_card_place_rejects_occupied_position() {
         let mut card = CommandCard::empty();
         let position = GridCoordinate::new(ColumnIndex::One, RowIndex::One);
-        let first_slot = GridSlotId::ability("Ahrl");
-        let second_slot = GridSlotId::command("CmdAttack");
+        let first_slot = crate::test_support::ability_slot("Ahrl");
+        let second_slot = crate::test_support::command_slot("CmdAttack");
         card.place(position, first_slot);
         let rejected = card.place(position, second_slot);
         assert!(!rejected);
@@ -256,8 +258,8 @@ mod slot_tests {
         let mut card = CommandCard::empty();
         let position_a = GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero);
         let position_b = GridCoordinate::new(ColumnIndex::Three, RowIndex::Two);
-        let slot_a = GridSlotId::ability("Ahrl");
-        let slot_b = GridSlotId::command("CmdAttack");
+        let slot_a = crate::test_support::ability_slot("Ahrl");
+        let slot_b = crate::test_support::command_slot("CmdAttack");
         card.place(position_a, slot_a);
         card.place(position_b, slot_b);
         let filled: Vec<GridSlotId> = card.filled_slots().collect();
@@ -270,7 +272,7 @@ mod slot_tests {
     fn command_card_is_not_empty_after_placing_a_slot() {
         let mut card = CommandCard::empty();
         let position = GridCoordinate::new(ColumnIndex::Two, RowIndex::One);
-        let slot = GridSlotId::command("CmdMove");
+        let slot = crate::test_support::command_slot("CmdMove");
         card.place(position, slot);
         assert!(!card.is_empty());
     }

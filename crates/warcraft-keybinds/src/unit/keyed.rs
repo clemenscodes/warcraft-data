@@ -4,8 +4,8 @@ use crate::model::{AbilityBinding, AbilityBindingBuilder, GridCoordinate, Hotkey
 use crate::unit::slots::UnitCommandSlots;
 use std::collections::HashMap;
 use std::fmt;
+use warcraft_api::WARCRAFT_DATABASE;
 use warcraft_api::{WarcraftObjectId, WarcraftObjectKind, WarcraftObjectMeta};
-use warcraft_database::WARCRAFT_DATABASE;
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Default)]
 pub struct UnitKeyedCustomKeys {
@@ -64,11 +64,11 @@ impl UnitKeyedCustomKeys {
         &self.groups
     }
 
-    pub fn for_unit(&self, unit_id: &str) -> Self {
+    pub fn for_unit(&self, unit_id: WarcraftObjectId) -> Self {
         let groups = self
             .groups
             .iter()
-            .filter(|group| group.unit_id().value().eq_ignore_ascii_case(unit_id))
+            .filter(|group| group.unit_id() == unit_id)
             .cloned()
             .collect();
         Self { groups }
@@ -77,9 +77,9 @@ impl UnitKeyedCustomKeys {
 
 impl From<&CustomKeys> for UnitKeyedCustomKeys {
     fn from(custom_keys: &CustomKeys) -> Self {
-        let overridden_ids: HashMap<&'static str, &AbilityBinding> = custom_keys
+        let overridden_ids: HashMap<WarcraftObjectId, &AbilityBinding> = custom_keys
             .bindings_in_order()
-            .map(|entry| (entry.ability_id().value(), entry.binding()))
+            .map(|entry| (entry.ability_id().object_id(), entry.binding()))
             .collect();
         let mut groups: Vec<UnitAbilityGroup> = WARCRAFT_DATABASE
             .iter()
@@ -98,7 +98,7 @@ impl From<&CustomKeys> for UnitKeyedCustomKeys {
                 let mut slots: [Option<UnitAbilitySlot>; 12] = [None; 12];
                 let mut slot_count: usize = 0;
                 for slot_id in command_card.filled_slots() {
-                    let Some(binding) = overridden_ids.get(slot_id.as_str()) else {
+                    let Some(binding) = overridden_ids.get(&slot_id.id()) else {
                         continue;
                     };
                     let hotkey = binding.hotkey().cloned();
@@ -135,10 +135,11 @@ impl From<&CustomKeys> for UnitKeyedCustomKeys {
 impl From<&UnitKeyedCustomKeys> for CustomKeys {
     fn from(unit_keyed: &UnitKeyedCustomKeys) -> Self {
         let mut custom_keys = Self::parse_raw("");
-        let mut seen: std::collections::HashSet<&'static str> = std::collections::HashSet::new();
+        let mut seen: std::collections::HashSet<WarcraftObjectId> =
+            std::collections::HashSet::new();
         for group in unit_keyed.groups() {
             for slot in group.slots() {
-                let id = slot.slot_id().as_str();
+                let id = slot.slot_id().id();
                 if !seen.insert(id) {
                     continue;
                 }
@@ -208,11 +209,11 @@ mod unit_keyed_tests {
             .button_position(position)
             .build();
         let mut original = CustomKeys::parse_raw("");
-        original.put_ability("AHhb", binding);
+        original.put_ability(crate::test_support::object_id("AHhb"), binding);
         let unit_keyed = UnitKeyedCustomKeys::from(&original);
         let reconstructed = CustomKeys::from(&unit_keyed);
         let reconstructed_binding = reconstructed
-            .binding("AHhb")
+            .binding(crate::test_support::object_id("AHhb"))
             .expect("AHhb must survive round trip");
         assert_eq!(reconstructed_binding.hotkey(), Some(&hotkey));
         assert_eq!(reconstructed_binding.button_position(), Some(&position));
@@ -225,11 +226,11 @@ mod unit_keyed_tests {
             .research_hotkey(research_hotkey)
             .build();
         let mut original = CustomKeys::parse_raw("");
-        original.put_ability("AHds", binding);
+        original.put_ability(crate::test_support::object_id("AHds"), binding);
         let unit_keyed = UnitKeyedCustomKeys::from(&original);
         let reconstructed = CustomKeys::from(&unit_keyed);
         let reconstructed_binding = reconstructed
-            .binding("AHds")
+            .binding(crate::test_support::object_id("AHds"))
             .expect("AHds must survive round trip");
         assert_eq!(
             reconstructed_binding.research_hotkey(),
@@ -241,12 +242,13 @@ mod unit_keyed_tests {
     fn for_unit_returns_only_matching_groups() {
         let custom_keys = CustomKeys::from_text("");
         let unit_keyed = UnitKeyedCustomKeys::from(&custom_keys);
-        let paladin_only = unit_keyed.for_unit("Hpal");
+        let paladin_only = unit_keyed.for_unit(crate::test_support::object_id("Hpal"));
+        let paladin_id = crate::test_support::object_id("Hpal");
         assert!(
             paladin_only
                 .groups()
                 .iter()
-                .all(|group| group.unit_id().value().eq_ignore_ascii_case("Hpal")),
+                .all(|group| group.unit_id() == paladin_id),
             "for_unit must return only groups whose unit_id matches",
         );
     }
@@ -255,8 +257,8 @@ mod unit_keyed_tests {
     fn for_unit_is_case_insensitive() {
         let custom_keys = CustomKeys::from_text("");
         let unit_keyed = UnitKeyedCustomKeys::from(&custom_keys);
-        let upper = unit_keyed.for_unit("HPAL");
-        let lower = unit_keyed.for_unit("hpal");
+        let upper = unit_keyed.for_unit(crate::test_support::object_id("HPAL"));
+        let lower = unit_keyed.for_unit(crate::test_support::object_id("hpal"));
         assert_eq!(
             upper.groups().len(),
             lower.groups().len(),
@@ -268,7 +270,7 @@ mod unit_keyed_tests {
     fn for_unit_returns_empty_when_no_match() {
         let custom_keys = CustomKeys::from_text("");
         let unit_keyed = UnitKeyedCustomKeys::from(&custom_keys);
-        let result = unit_keyed.for_unit("ZZZZ");
+        let result = unit_keyed.for_unit(crate::test_support::object_id("AHhb"));
         assert!(
             result.groups().is_empty(),
             "unknown unit id must yield empty result"
@@ -281,11 +283,13 @@ mod unit_keyed_tests {
             .hotkey(Hotkey::Letter('X'))
             .build();
         let mut original = CustomKeys::parse_raw("");
-        original.put_ability("ZZZZ", binding);
+        original.put_ability(crate::test_support::object_id("Aall"), binding);
         let unit_keyed = UnitKeyedCustomKeys::from(&original);
         let reconstructed = CustomKeys::from(&unit_keyed);
         assert!(
-            reconstructed.binding("ZZZZ").is_none(),
+            reconstructed
+                .binding(crate::test_support::object_id("Aall"))
+                .is_none(),
             "ability not in any command card must not appear in reconstructed CustomKeys",
         );
     }

@@ -1,13 +1,33 @@
 use std::fmt;
 
-use warcraft_api::{SystemKeybind, SystemKeybindClass};
+use crate::{SystemKeybind, SystemKeybindClass, WarcraftObjectId};
 
 use crate::db::WARCRAFT_SYSTEM_KEYBINDS;
 
-const INVENTORY_SLOT_IDS: [&str; 6] = ["itm1", "itm2", "itm3", "itm4", "itm5", "itm6"];
-const HERO_SELECTION_IDS: [&str; 3] = ["her1", "her2", "her3"];
-const CONTROL_GROUP_IDS: [&str; 10] = [
-    "Ctr1", "Ctr2", "Ctr3", "Ctr4", "Ctr5", "Ctr6", "Ctr7", "Ctr8", "Ctr9", "Ctr0",
+const INVENTORY_SLOT_IDS: [WarcraftObjectId; 6] = [
+    WarcraftObjectId::new("itm1"),
+    WarcraftObjectId::new("itm2"),
+    WarcraftObjectId::new("itm3"),
+    WarcraftObjectId::new("itm4"),
+    WarcraftObjectId::new("itm5"),
+    WarcraftObjectId::new("itm6"),
+];
+const HERO_SELECTION_IDS: [WarcraftObjectId; 3] = [
+    WarcraftObjectId::new("her1"),
+    WarcraftObjectId::new("her2"),
+    WarcraftObjectId::new("her3"),
+];
+const CONTROL_GROUP_IDS: [WarcraftObjectId; 10] = [
+    WarcraftObjectId::new("Ctr1"),
+    WarcraftObjectId::new("Ctr2"),
+    WarcraftObjectId::new("Ctr3"),
+    WarcraftObjectId::new("Ctr4"),
+    WarcraftObjectId::new("Ctr5"),
+    WarcraftObjectId::new("Ctr6"),
+    WarcraftObjectId::new("Ctr7"),
+    WarcraftObjectId::new("Ctr8"),
+    WarcraftObjectId::new("Ctr9"),
+    WarcraftObjectId::new("Ctr0"),
 ];
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -47,7 +67,7 @@ impl SystemHotkeysCategory {
         }
     }
 
-    fn collect_in_order(section_ids: &'static [&'static str]) -> Vec<&'static SystemKeybind> {
+    fn collect_in_order(section_ids: &'static [WarcraftObjectId]) -> Vec<&'static SystemKeybind> {
         let mut ordered: Vec<&'static SystemKeybind> = Vec::with_capacity(section_ids.len());
         for wanted_id in section_ids {
             for entry in WARCRAFT_SYSTEM_KEYBINDS.iter() {

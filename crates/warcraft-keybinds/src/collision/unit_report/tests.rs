@@ -1,7 +1,6 @@
 #[cfg(test)]
 mod unit_collision_report_tests {
     use super::super::*;
-    use crate::identity::slot::GridSlotId;
     use crate::model::{AbilityBinding, ColumnIndex, GridCoordinate, Hotkey, RowIndex};
     use crate::unit::grids::{GridRole, HotkeyCollisionCardBuilder, PositionCollisionCardBuilder};
     use warcraft_api::WarcraftObjectId;
@@ -46,7 +45,7 @@ mod unit_collision_report_tests {
             empty_hot: HotkeyCollisionCard,
         ) -> Self {
             Self {
-                unit_id: WarcraftObjectId::new(unit_id),
+                unit_id: crate::test_support::object_id(unit_id),
                 unit_name,
                 position_cards: [empty_pos, empty_pos],
                 hotkey_cards: [empty_hot, empty_hot],
@@ -79,7 +78,7 @@ mod unit_collision_report_tests {
     }
 
     fn paladin_id() -> WarcraftObjectId {
-        WarcraftObjectId::new("Hpal")
+        crate::test_support::object_id("Hpal")
     }
 
     #[test]
@@ -87,7 +86,7 @@ mod unit_collision_report_tests {
         let custom_keys = CustomKeys::from_text("");
         let layout = GridLayout::qwerty_grid();
         let report = UnitCollisionReport::compute(&custom_keys, layout);
-        let paladin_filtered = report.for_unit("Hpal");
+        let paladin_filtered = report.for_unit(paladin_id());
         assert!(
             paladin_filtered.is_empty(),
             "Paladin must have no collisions in the normalized default on QWERTY",
@@ -104,8 +103,11 @@ mod unit_collision_report_tests {
             .button_position(shared_position)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", holy_light_binding);
-        custom_keys.put_ability("AHds", divine_shield_binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHds"),
+            divine_shield_binding,
+        );
         let layout = GridLayout::qwerty_grid();
         let report = UnitCollisionReport::compute(&custom_keys, layout);
         let paladin_entry = report
@@ -145,8 +147,11 @@ mod unit_collision_report_tests {
             .hotkey(hotkey_q)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", holy_light_binding);
-        custom_keys.put_ability("AHds", divine_shield_binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHds"),
+            divine_shield_binding,
+        );
         let layout = GridLayout::qwerty_grid();
         let report = UnitCollisionReport::compute(&custom_keys, layout);
         let paladin_entry = report
@@ -174,11 +179,14 @@ mod unit_collision_report_tests {
             .button_position(shared_position)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", holy_light_binding);
-        custom_keys.put_ability("AHds", divine_shield_binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHds"),
+            divine_shield_binding,
+        );
         let layout = GridLayout::qwerty_grid();
         let report = UnitCollisionReport::compute(&custom_keys, layout);
-        let filtered = report.for_unit("Hpal");
+        let filtered = report.for_unit(paladin_id());
         assert!(
             filtered
                 .entries()
@@ -193,7 +201,7 @@ mod unit_collision_report_tests {
         let custom_keys = CustomKeys::from_text("");
         let layout = GridLayout::qwerty_grid();
         let report = UnitCollisionReport::compute(&custom_keys, layout);
-        let filtered = report.for_unit("ZZZZ");
+        let filtered = report.for_unit(crate::test_support::object_id("AHhb"));
         assert!(
             filtered.is_empty(),
             "unknown unit id must yield empty report"
@@ -344,13 +352,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     1,
                     2,
-                    &[GridSlotId::ability("Awrh"), GridSlotId::ability("Aspo")],
+                    &[
+                        crate::test_support::ability_slot("Awrh"),
+                        crate::test_support::ability_slot("Aspo"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'X',
-                    &[GridSlotId::ability("Awrh"), GridSlotId::ability("Aspo")],
+                    &[
+                        crate::test_support::ability_slot("Awrh"),
+                        crate::test_support::ability_slot("Aspo"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nahy", "Ancient Hydra", empty_pos, empty_hot);
@@ -366,13 +380,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     1,
                     2,
-                    &[GridSlotId::ability("ACfr"), GridSlotId::ability("ACtc")],
+                    &[
+                        crate::test_support::ability_slot("ACfr"),
+                        crate::test_support::ability_slot("ACtc"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'X',
-                    &[GridSlotId::ability("ACfr"), GridSlotId::ability("ACtc")],
+                    &[
+                        crate::test_support::ability_slot("ACfr"),
+                        crate::test_support::ability_slot("ACtc"),
+                    ],
                 )
                 .build();
             let eb =
@@ -389,7 +409,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     3,
                     2,
-                    &[GridSlotId::ability("Anei"), GridSlotId::ability("Aro1")],
+                    &[
+                        crate::test_support::ability_slot("Anei"),
+                        crate::test_support::ability_slot("Aro1"),
+                    ],
                 )
                 .build();
             let eb =
@@ -404,7 +427,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'V',
-                    &[GridSlotId::ability("Avng"), GridSlotId::ability("ACrk")],
+                    &[
+                        crate::test_support::ability_slot("Avng"),
+                        crate::test_support::ability_slot("ACrk"),
+                    ],
                 )
                 .build();
             let eb =
@@ -420,7 +446,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     0,
-                    &[GridSlotId::ability("ogru"), GridSlotId::ability("ocat")],
+                    &[
+                        crate::test_support::ability_slot("ogru"),
+                        crate::test_support::ability_slot("ocat"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("obar", "Barracks", empty_pos, empty_hot);
@@ -434,7 +463,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'S',
-                    &[GridSlotId::ability("CmdStop"), GridSlotId::ability("Aamk")],
+                    &[
+                        crate::test_support::ability_slot("CmdStop"),
+                        crate::test_support::ability_slot("Aamk"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Orex", "Beastmaster", empty_pos, empty_hot);
@@ -450,8 +482,8 @@ mod unit_collision_report_tests {
                     3,
                     0,
                     &[
-                        GridSlotId::ability("Rupm"),
-                        GridSlotId::ability("CmdAttack"),
+                        crate::test_support::ability_slot("Rupm"),
+                        crate::test_support::ability_slot("CmdAttack"),
                     ],
                 )
                 .build();
@@ -467,7 +499,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("Afrc"), GridSlotId::ability("ACdv")],
+                    &[
+                        crate::test_support::ability_slot("Afrc"),
+                        crate::test_support::ability_slot("ACdv"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nadr", "Blue Dragon", empty_pos, empty_hot);
@@ -482,13 +517,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     2,
                     2,
-                    &[GridSlotId::ability("ACav"), GridSlotId::ability("ACev")],
+                    &[
+                        crate::test_support::ability_slot("ACav"),
+                        crate::test_support::ability_slot("ACev"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("ACav"), GridSlotId::ability("ACev")],
+                    &[
+                        crate::test_support::ability_slot("ACav"),
+                        crate::test_support::ability_slot("ACev"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new(
@@ -508,7 +549,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'S',
-                    &[GridSlotId::ability("CmdStop"), GridSlotId::ability("Aamk")],
+                    &[
+                        crate::test_support::ability_slot("CmdStop"),
+                        crate::test_support::ability_slot("Aamk"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Nsjs", "Brewmaster", empty_pos, empty_hot);
@@ -523,13 +567,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACen"), GridSlotId::ability("ACvs")],
+                    &[
+                        crate::test_support::ability_slot("ACen"),
+                        crate::test_support::ability_slot("ACvs"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'Z',
-                    &[GridSlotId::ability("ACen"), GridSlotId::ability("ACvs")],
+                    &[
+                        crate::test_support::ability_slot("ACen"),
+                        crate::test_support::ability_slot("ACvs"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nsbm", "Brood Mother", empty_pos, empty_hot);
@@ -545,7 +595,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACdm"), GridSlotId::ability("ACbl")],
+                    &[
+                        crate::test_support::ability_slot("ACdm"),
+                        crate::test_support::ability_slot("ACbl"),
+                    ],
                 )
                 .build();
             let eb =
@@ -561,7 +614,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("Adsm"), GridSlotId::ability("Anh2")],
+                    &[
+                        crate::test_support::ability_slot("Adsm"),
+                        crate::test_support::ability_slot("Anh2"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nchp", "Chaplain", empty_pos, empty_hot);
@@ -576,7 +632,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACdm"), GridSlotId::ability("Anh2")],
+                    &[
+                        crate::test_support::ability_slot("ACdm"),
+                        crate::test_support::ability_slot("Anh2"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new(
@@ -596,13 +655,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     2,
                     2,
-                    &[GridSlotId::ability("ACpy"), GridSlotId::ability("ACba")],
+                    &[
+                        crate::test_support::ability_slot("ACpy"),
+                        crate::test_support::ability_slot("ACba"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("ACpy"), GridSlotId::ability("ACba")],
+                    &[
+                        crate::test_support::ability_slot("ACpy"),
+                        crate::test_support::ability_slot("ACba"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nwzd", "Dark Wizard", empty_pos, empty_hot);
@@ -617,7 +682,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("AUdc"), GridSlotId::ability("AUau")],
+                    &[
+                        crate::test_support::ability_slot("AUdc"),
+                        crate::test_support::ability_slot("AUau"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Udea", "Death Knight", empty_pos, empty_hot);
@@ -631,7 +699,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("AUdc"), GridSlotId::ability("AUau")],
+                    &[
+                        crate::test_support::ability_slot("AUdc"),
+                        crate::test_support::ability_slot("AUau"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Uear", "Death Knight", empty_pos, empty_hot);
@@ -646,7 +717,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACdc"), GridSlotId::ability("ACrd")],
+                    &[
+                        crate::test_support::ability_slot("ACdc"),
+                        crate::test_support::ability_slot("ACrd"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nrvd", "Death Revenant", empty_pos, empty_hot);
@@ -660,7 +734,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'S',
-                    &[GridSlotId::ability("CmdStop"), GridSlotId::ability("SCc1")],
+                    &[
+                        crate::test_support::ability_slot("CmdStop"),
+                        crate::test_support::ability_slot("SCc1"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Ecen", "Demigod", empty_pos, empty_hot);
@@ -676,8 +753,8 @@ mod unit_collision_report_tests {
                     2,
                     0,
                     &[
-                        GridSlotId::ability("CmdHoldPos"),
-                        GridSlotId::ability("ANcl"),
+                        crate::test_support::ability_slot("CmdHoldPos"),
+                        crate::test_support::ability_slot("ANcl"),
                     ],
                 )
                 .build();
@@ -694,8 +771,8 @@ mod unit_collision_report_tests {
                     2,
                     0,
                     &[
-                        GridSlotId::ability("CmdHoldPos"),
-                        GridSlotId::ability("ANcl"),
+                        crate::test_support::ability_slot("CmdHoldPos"),
+                        crate::test_support::ability_slot("ANcl"),
                     ],
                 )
                 .build();
@@ -711,7 +788,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("Aabs"), GridSlotId::ability("Advm")],
+                    &[
+                        crate::test_support::ability_slot("Aabs"),
+                        crate::test_support::ability_slot("Advm"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("ubsp", "Destroyer", empty_pos, empty_hot);
@@ -725,7 +805,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'F',
-                    &[GridSlotId::ability("ACsk"), GridSlotId::ability("ACrf")],
+                    &[
+                        crate::test_support::ability_slot("ACsk"),
+                        crate::test_support::ability_slot("ACrf"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nba2", "Doom Guard", empty_pos, empty_hot);
@@ -739,7 +822,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'F',
-                    &[GridSlotId::ability("ACsk"), GridSlotId::ability("ACrf")],
+                    &[
+                        crate::test_support::ability_slot("ACsk"),
+                        crate::test_support::ability_slot("ACrf"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nbal", "Doom Guard", empty_pos, empty_hot);
@@ -754,13 +840,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     2,
                     0,
-                    &[GridSlotId::ability("ndrt"), GridSlotId::ability("ndrn")],
+                    &[
+                        crate::test_support::ability_slot("ndrt"),
+                        crate::test_support::ability_slot("ndrn"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'E',
-                    &[GridSlotId::ability("ndrt"), GridSlotId::ability("ndrn")],
+                    &[
+                        crate::test_support::ability_slot("ndrt"),
+                        crate::test_support::ability_slot("ndrn"),
+                    ],
                 )
                 .build();
             let eb =
@@ -777,7 +869,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("AChv"), GridSlotId::ability("ACsw")],
+                    &[
+                        crate::test_support::ability_slot("AChv"),
+                        crate::test_support::ability_slot("ACsw"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("ndrs", "Draenei Seer", empty_pos, empty_hot);
@@ -791,13 +886,19 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'E',
-                    &[GridSlotId::ability("AUsl"), GridSlotId::ability("AOeq")],
+                    &[
+                        crate::test_support::ability_slot("AUsl"),
+                        crate::test_support::ability_slot("AOeq"),
+                    ],
                 )
                 .build();
             let secondary_hot = HotkeyCollisionCardBuilder::new(GridRole::HeroSkillTree, layout)
                 .collision(
                     'E',
-                    &[GridSlotId::ability("AUsl"), GridSlotId::ability("AOeq")],
+                    &[
+                        crate::test_support::ability_slot("AUsl"),
+                        crate::test_support::ability_slot("AOeq"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Ubal", "Dreadlord", empty_pos, empty_hot);
@@ -812,7 +913,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("AUcs"), GridSlotId::ability("AUav")],
+                    &[
+                        crate::test_support::ability_slot("AUcs"),
+                        crate::test_support::ability_slot("AUav"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Udre", "Dreadlord", empty_pos, empty_hot);
@@ -826,13 +930,19 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'D',
-                    &[GridSlotId::ability("AEsh"), GridSlotId::ability("AUdd")],
+                    &[
+                        crate::test_support::ability_slot("AEsh"),
+                        crate::test_support::ability_slot("AUdd"),
+                    ],
                 )
                 .build();
             let secondary_hot = HotkeyCollisionCardBuilder::new(GridRole::HeroSkillTree, layout)
                 .collision(
                     'D',
-                    &[GridSlotId::ability("AEsh"), GridSlotId::ability("AUdd")],
+                    &[
+                        crate::test_support::ability_slot("AEsh"),
+                        crate::test_support::ability_slot("AUdd"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Udth", "Dreadlord", empty_pos, empty_hot);
@@ -847,13 +957,19 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("AUcs"), GridSlotId::ability("ANdc")],
+                    &[
+                        crate::test_support::ability_slot("AUcs"),
+                        crate::test_support::ability_slot("ANdc"),
+                    ],
                 )
                 .build();
             let secondary_hot = HotkeyCollisionCardBuilder::new(GridRole::HeroSkillTree, layout)
                 .collision(
                     'E',
-                    &[GridSlotId::ability("AUsl"), GridSlotId::ability("ANdc")],
+                    &[
+                        crate::test_support::ability_slot("AUsl"),
+                        crate::test_support::ability_slot("ANdc"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Umal", "Dreadlord", empty_pos, empty_hot);
@@ -869,12 +985,18 @@ mod unit_collision_report_tests {
                 .collision_at(
                     1,
                     2,
-                    &[GridSlotId::ability("ANrc"), GridSlotId::ability("AUsl")],
+                    &[
+                        crate::test_support::ability_slot("ANrc"),
+                        crate::test_support::ability_slot("AUsl"),
+                    ],
                 )
                 .collision_at(
                     3,
                     2,
-                    &[GridSlotId::ability("AUin"), GridSlotId::ability("ANfd")],
+                    &[
+                        crate::test_support::ability_slot("AUin"),
+                        crate::test_support::ability_slot("ANfd"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Utic", "Dreadlord", empty_pos, empty_hot);
@@ -888,7 +1010,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("AUcs"), GridSlotId::ability("AUav")],
+                    &[
+                        crate::test_support::ability_slot("AUcs"),
+                        crate::test_support::ability_slot("AUav"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Uvng", "Dreadlord", empty_pos, empty_hot);
@@ -903,7 +1028,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ANta"), GridSlotId::ability("ACpv")],
+                    &[
+                        crate::test_support::ability_slot("ANta"),
+                        crate::test_support::ability_slot("ACpv"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("npn3", "Earth", empty_pos, empty_hot);
@@ -918,7 +1046,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ANta"), GridSlotId::ability("ACpv")],
+                    &[
+                        crate::test_support::ability_slot("ANta"),
+                        crate::test_support::ability_slot("ACpv"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("npn6", "Earth", empty_pos, empty_hot);
@@ -933,13 +1064,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACde"), GridSlotId::ability("ACfl")],
+                    &[
+                        crate::test_support::ability_slot("ACde"),
+                        crate::test_support::ability_slot("ACfl"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'Z',
-                    &[GridSlotId::ability("ACde"), GridSlotId::ability("ACfl")],
+                    &[
+                        crate::test_support::ability_slot("ACde"),
+                        crate::test_support::ability_slot("ACfl"),
+                    ],
                 )
                 .build();
             let eb =
@@ -956,13 +1093,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ANfb"), GridSlotId::ability("ACpa")],
+                    &[
+                        crate::test_support::ability_slot("ANfb"),
+                        crate::test_support::ability_slot("ACpa"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'Z',
-                    &[GridSlotId::ability("ANfb"), GridSlotId::ability("ACpa")],
+                    &[
+                        crate::test_support::ability_slot("ANfb"),
+                        crate::test_support::ability_slot("ACpa"),
+                    ],
                 )
                 .build();
             let eb =
@@ -979,13 +1122,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     1,
                     2,
-                    &[GridSlotId::ability("ACmf"), GridSlotId::ability("ACsl")],
+                    &[
+                        crate::test_support::ability_slot("ACmf"),
+                        crate::test_support::ability_slot("ACsl"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'X',
-                    &[GridSlotId::ability("ACmf"), GridSlotId::ability("ACsl")],
+                    &[
+                        crate::test_support::ability_slot("ACmf"),
+                        crate::test_support::ability_slot("ACsl"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1002,7 +1151,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACpu"), GridSlotId::ability("ACcs")],
+                    &[
+                        crate::test_support::ability_slot("ACpu"),
+                        crate::test_support::ability_slot("ACcs"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new(
@@ -1022,13 +1174,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACde"), GridSlotId::ability("ACbk")],
+                    &[
+                        crate::test_support::ability_slot("ACde"),
+                        crate::test_support::ability_slot("ACbk"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'Z',
-                    &[GridSlotId::ability("ACde"), GridSlotId::ability("ACbk")],
+                    &[
+                        crate::test_support::ability_slot("ACde"),
+                        crate::test_support::ability_slot("ACbk"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("npfm", "Fel Ravager", empty_pos, empty_hot);
@@ -1044,7 +1202,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACdm"), GridSlotId::ability("Anh1")],
+                    &[
+                        crate::test_support::ability_slot("ACdm"),
+                        crate::test_support::ability_slot("Anh1"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new(
@@ -1064,13 +1225,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACtn"), GridSlotId::ability("ACfb")],
+                    &[
+                        crate::test_support::ability_slot("ACtn"),
+                        crate::test_support::ability_slot("ACfb"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'Z',
-                    &[GridSlotId::ability("ACtn"), GridSlotId::ability("ACfb")],
+                    &[
+                        crate::test_support::ability_slot("ACtn"),
+                        crate::test_support::ability_slot("ACfb"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nfgo", "Forgotten One", empty_pos, empty_hot);
@@ -1086,7 +1253,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     0,
-                    &[GridSlotId::ability("CmdMove"), GridSlotId::ability("Aatp")],
+                    &[
+                        crate::test_support::ability_slot("CmdMove"),
+                        crate::test_support::ability_slot("Aatp"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("ugar", "Gargoyle", empty_pos, empty_hot);
@@ -1101,13 +1271,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACen"), GridSlotId::ability("ACvs")],
+                    &[
+                        crate::test_support::ability_slot("ACen"),
+                        crate::test_support::ability_slot("ACvs"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'Z',
-                    &[GridSlotId::ability("ACen"), GridSlotId::ability("ACvs")],
+                    &[
+                        crate::test_support::ability_slot("ACen"),
+                        crate::test_support::ability_slot("ACvs"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nsgt", "Giant Spider", empty_pos, empty_hot);
@@ -1123,13 +1299,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACro"), GridSlotId::ability("ACbl")],
+                    &[
+                        crate::test_support::ability_slot("ACro"),
+                        crate::test_support::ability_slot("ACbl"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'Z',
-                    &[GridSlotId::ability("ACro"), GridSlotId::ability("ACbl")],
+                    &[
+                        crate::test_support::ability_slot("ACro"),
+                        crate::test_support::ability_slot("ACbl"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("ngow", "Gnoll Warlord", empty_pos, empty_hot);
@@ -1146,9 +1328,9 @@ mod unit_collision_report_tests {
                     0,
                     0,
                     &[
-                        GridSlotId::ability("ngsp"),
-                        GridSlotId::ability("nzep"),
-                        GridSlotId::ability("Andt"),
+                        crate::test_support::ability_slot("ngsp"),
+                        crate::test_support::ability_slot("nzep"),
+                        crate::test_support::ability_slot("Andt"),
                     ],
                 )
                 .build();
@@ -1164,7 +1346,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'E',
-                    &[GridSlotId::ability("bspd"), GridSlotId::ability("stel")],
+                    &[
+                        crate::test_support::ability_slot("bspd"),
+                        crate::test_support::ability_slot("stel"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1181,8 +1366,8 @@ mod unit_collision_report_tests {
                     3,
                     0,
                     &[
-                        GridSlotId::ability("Rupm"),
-                        GridSlotId::ability("CmdAttack"),
+                        crate::test_support::ability_slot("Rupm"),
+                        crate::test_support::ability_slot("CmdAttack"),
                     ],
                 )
                 .build();
@@ -1199,7 +1384,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACca"), GridSlotId::ability("ACrd")],
+                    &[
+                        crate::test_support::ability_slot("ACca"),
+                        crate::test_support::ability_slot("ACrd"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nhhr", "Heretic", empty_pos, empty_hot);
@@ -1213,7 +1401,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'D',
-                    &[GridSlotId::ability("nws1"), GridSlotId::ability("Rhde")],
+                    &[
+                        crate::test_support::ability_slot("nws1"),
+                        crate::test_support::ability_slot("Rhde"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1229,7 +1420,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     1,
                     2,
-                    &[GridSlotId::ability("ACd2"), GridSlotId::ability("ACf2")],
+                    &[
+                        crate::test_support::ability_slot("ACd2"),
+                        crate::test_support::ability_slot("ACf2"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new(
@@ -1249,7 +1443,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACdm"), GridSlotId::ability("ACsw")],
+                    &[
+                        crate::test_support::ability_slot("ACdm"),
+                        crate::test_support::ability_slot("ACsw"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1265,7 +1462,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACcl"), GridSlotId::ability("ACpu")],
+                    &[
+                        crate::test_support::ability_slot("ACcl"),
+                        crate::test_support::ability_slot("ACpu"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1280,7 +1480,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("Amel"), GridSlotId::ability("Apts")],
+                    &[
+                        crate::test_support::ability_slot("Amel"),
+                        crate::test_support::ability_slot("Apts"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("umtw", "Meat Wagon", empty_pos, empty_hot);
@@ -1295,13 +1498,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     0,
-                    &[GridSlotId::ability("ncea"), GridSlotId::ability("ncen")],
+                    &[
+                        crate::test_support::ability_slot("ncea"),
+                        crate::test_support::ability_slot("ncen"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'W',
-                    &[GridSlotId::ability("nhrw"), GridSlotId::ability("nqbh")],
+                    &[
+                        crate::test_support::ability_slot("nhrw"),
+                        crate::test_support::ability_slot("nqbh"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nmr4", "Mercenary Camp", empty_pos, empty_hot);
@@ -1318,9 +1527,9 @@ mod unit_collision_report_tests {
                     0,
                     0,
                     &[
-                        GridSlotId::ability("ntkh"),
-                        GridSlotId::ability("nbdw"),
-                        GridSlotId::ability("nubw"),
+                        crate::test_support::ability_slot("ntkh"),
+                        crate::test_support::ability_slot("nbdw"),
+                        crate::test_support::ability_slot("nubw"),
                     ],
                 )
                 .build();
@@ -1335,7 +1544,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("AHtc"), GridSlotId::ability("AHbh")],
+                    &[
+                        crate::test_support::ability_slot("AHtc"),
+                        crate::test_support::ability_slot("AHbh"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Hmbr", "Mountain King", empty_pos, empty_hot);
@@ -1349,7 +1561,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("AHtc"), GridSlotId::ability("AHbh")],
+                    &[
+                        crate::test_support::ability_slot("AHtc"),
+                        crate::test_support::ability_slot("AHbh"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Hmkg", "Mountain King", empty_pos, empty_hot);
@@ -1364,7 +1579,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACdm"), GridSlotId::ability("ACsw")],
+                    &[
+                        crate::test_support::ability_slot("ACdm"),
+                        crate::test_support::ability_slot("ACsw"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1380,13 +1598,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACcb"), GridSlotId::ability("ACcv")],
+                    &[
+                        crate::test_support::ability_slot("ACcb"),
+                        crate::test_support::ability_slot("ACcv"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'Z',
-                    &[GridSlotId::ability("ACcb"), GridSlotId::ability("ACcv")],
+                    &[
+                        crate::test_support::ability_slot("ACcb"),
+                        crate::test_support::ability_slot("ACcv"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1403,7 +1627,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACrd"), GridSlotId::ability("ACca")],
+                    &[
+                        crate::test_support::ability_slot("ACrd"),
+                        crate::test_support::ability_slot("ACca"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nnwq", "Nerubian Queen", empty_pos, empty_hot);
@@ -1418,7 +1645,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACdm"), GridSlotId::ability("ACrd")],
+                    &[
+                        crate::test_support::ability_slot("ACdm"),
+                        crate::test_support::ability_slot("ACrd"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nnwr", "Nerubian Seer", empty_pos, empty_hot);
@@ -1433,7 +1663,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACrd"), GridSlotId::ability("ACwb")],
+                    &[
+                        crate::test_support::ability_slot("ACrd"),
+                        crate::test_support::ability_slot("ACwb"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1449,13 +1682,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     2,
                     2,
-                    &[GridSlotId::ability("ACcr"), GridSlotId::ability("ACmi")],
+                    &[
+                        crate::test_support::ability_slot("ACcr"),
+                        crate::test_support::ability_slot("ACmi"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("ACcr"), GridSlotId::ability("ACmi")],
+                    &[
+                        crate::test_support::ability_slot("ACcr"),
+                        crate::test_support::ability_slot("ACmi"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nndr", "Nether Dragon", empty_pos, empty_hot);
@@ -1470,13 +1709,19 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("AHtc"), GridSlotId::ability("ANrn")],
+                    &[
+                        crate::test_support::ability_slot("AHtc"),
+                        crate::test_support::ability_slot("ANrn"),
+                    ],
                 )
                 .build();
             let secondary_hot = HotkeyCollisionCardBuilder::new(GridRole::HeroSkillTree, layout)
                 .collision(
                     'E',
-                    &[GridSlotId::ability("ANrn"), GridSlotId::ability("AOeq")],
+                    &[
+                        crate::test_support::ability_slot("ANrn"),
+                        crate::test_support::ability_slot("AOeq"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Nman", "Pit Lord", empty_pos, empty_hot);
@@ -1491,13 +1736,19 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("AHtc"), GridSlotId::ability("ANrn")],
+                    &[
+                        crate::test_support::ability_slot("AHtc"),
+                        crate::test_support::ability_slot("ANrn"),
+                    ],
                 )
                 .build();
             let secondary_hot = HotkeyCollisionCardBuilder::new(GridRole::HeroSkillTree, layout)
                 .collision(
                     'E',
-                    &[GridSlotId::ability("ANrn"), GridSlotId::ability("AOeq")],
+                    &[
+                        crate::test_support::ability_slot("ANrn"),
+                        crate::test_support::ability_slot("AOeq"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Npld", "Pit Lord", empty_pos, empty_hot);
@@ -1513,13 +1764,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACvs"), GridSlotId::ability("Aenr")],
+                    &[
+                        crate::test_support::ability_slot("ACvs"),
+                        crate::test_support::ability_slot("Aenr"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'Z',
-                    &[GridSlotId::ability("ACvs"), GridSlotId::ability("Aenr")],
+                    &[
+                        crate::test_support::ability_slot("ACvs"),
+                        crate::test_support::ability_slot("Aenr"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nenp", "Poison Treant", empty_pos, empty_hot);
@@ -1535,7 +1792,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("AChv"), GridSlotId::ability("ACfn")],
+                    &[
+                        crate::test_support::ability_slot("AChv"),
+                        crate::test_support::ability_slot("ACfn"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new(
@@ -1554,7 +1814,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("AEst"), GridSlotId::ability("AEar")],
+                    &[
+                        crate::test_support::ability_slot("AEst"),
+                        crate::test_support::ability_slot("AEar"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new(
@@ -1573,7 +1836,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("AEst"), GridSlotId::ability("AEar")],
+                    &[
+                        crate::test_support::ability_slot("AEst"),
+                        crate::test_support::ability_slot("AEar"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new(
@@ -1592,7 +1858,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("AEst"), GridSlotId::ability("AEar")],
+                    &[
+                        crate::test_support::ability_slot("AEst"),
+                        crate::test_support::ability_slot("AEar"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Hvwd", "Ranger", empty_pos, empty_hot);
@@ -1608,16 +1877,19 @@ mod unit_collision_report_tests {
                     0,
                     2,
                     &[
-                        GridSlotId::ability("Ambd"),
-                        GridSlotId::ability("ACdm"),
-                        GridSlotId::ability("ACbl"),
+                        crate::test_support::ability_slot("Ambd"),
+                        crate::test_support::ability_slot("ACdm"),
+                        crate::test_support::ability_slot("ACbl"),
                     ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'Z',
-                    &[GridSlotId::ability("Ambd"), GridSlotId::ability("ACbl")],
+                    &[
+                        crate::test_support::ability_slot("Ambd"),
+                        crate::test_support::ability_slot("ACbl"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1634,7 +1906,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACrd"), GridSlotId::ability("Ambd")],
+                    &[
+                        crate::test_support::ability_slot("ACrd"),
+                        crate::test_support::ability_slot("Ambd"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1650,7 +1925,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACtb"), GridSlotId::ability("ACpv")],
+                    &[
+                        crate::test_support::ability_slot("ACtb"),
+                        crate::test_support::ability_slot("ACpv"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1666,13 +1944,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACen"), GridSlotId::ability("ACpv")],
+                    &[
+                        crate::test_support::ability_slot("ACen"),
+                        crate::test_support::ability_slot("ACpv"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'Z',
-                    &[GridSlotId::ability("ACen"), GridSlotId::ability("ACpv")],
+                    &[
+                        crate::test_support::ability_slot("ACen"),
+                        crate::test_support::ability_slot("ACpv"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1689,13 +1973,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     0,
-                    &[GridSlotId::ability("ndrs"), GridSlotId::ability("ndrh")],
+                    &[
+                        crate::test_support::ability_slot("ndrs"),
+                        crate::test_support::ability_slot("ndrh"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'Q',
-                    &[GridSlotId::ability("ndrs"), GridSlotId::ability("ndrh")],
+                    &[
+                        crate::test_support::ability_slot("ndrs"),
+                        crate::test_support::ability_slot("ndrh"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("ndh4", "Seer's Den", empty_pos, empty_hot);
@@ -1710,7 +2000,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'S',
-                    &[GridSlotId::ability("CmdStop"), GridSlotId::ability("Aamk")],
+                    &[
+                        crate::test_support::ability_slot("CmdStop"),
+                        crate::test_support::ability_slot("Aamk"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Orkn", "Shadow Hunter", empty_pos, empty_hot);
@@ -1725,7 +2018,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     0,
-                    &[GridSlotId::ability("nnsw"), GridSlotId::ability("nwgs")],
+                    &[
+                        crate::test_support::ability_slot("nnsw"),
+                        crate::test_support::ability_slot("nwgs"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1741,13 +2037,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     2,
                     2,
-                    &[GridSlotId::ability("ACvp"), GridSlotId::ability("ACcr")],
+                    &[
+                        crate::test_support::ability_slot("ACvp"),
+                        crate::test_support::ability_slot("ACcr"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("ACvp"), GridSlotId::ability("ACcr")],
+                    &[
+                        crate::test_support::ability_slot("ACvp"),
+                        crate::test_support::ability_slot("ACcr"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new(
@@ -1768,13 +2070,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACac"), GridSlotId::ability("ACbl")],
+                    &[
+                        crate::test_support::ability_slot("ACac"),
+                        crate::test_support::ability_slot("ACbl"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'Z',
-                    &[GridSlotId::ability("ACac"), GridSlotId::ability("ACbl")],
+                    &[
+                        crate::test_support::ability_slot("ACac"),
+                        crate::test_support::ability_slot("ACbl"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new(
@@ -1796,9 +2104,9 @@ mod unit_collision_report_tests {
                     0,
                     0,
                     &[
-                        GridSlotId::ability("nmyr"),
-                        GridSlotId::ability("nsnp"),
-                        GridSlotId::ability("nhyc"),
+                        crate::test_support::ability_slot("nmyr"),
+                        crate::test_support::ability_slot("nsnp"),
+                        crate::test_support::ability_slot("nhyc"),
                     ],
                 )
                 .build();
@@ -1814,7 +2122,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("Acmg"), GridSlotId::ability("Amim")],
+                    &[
+                        crate::test_support::ability_slot("Acmg"),
+                        crate::test_support::ability_slot("Amim"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("hspt", "Spellbreaker", empty_pos, empty_hot);
@@ -1828,7 +2139,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'F',
-                    &[GridSlotId::ability("ACsk"), GridSlotId::ability("Acpf")],
+                    &[
+                        crate::test_support::ability_slot("ACsk"),
+                        crate::test_support::ability_slot("Acpf"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("ospm", "Spirit Walker", empty_pos, empty_hot);
@@ -1843,13 +2157,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     2,
                     2,
-                    &[GridSlotId::ability("ACbh"), GridSlotId::ability("SCae")],
+                    &[
+                        crate::test_support::ability_slot("ACbh"),
+                        crate::test_support::ability_slot("SCae"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("ACbh"), GridSlotId::ability("SCae")],
+                    &[
+                        crate::test_support::ability_slot("ACbh"),
+                        crate::test_support::ability_slot("SCae"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1866,7 +2186,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ANwk"), GridSlotId::ability("Adsm")],
+                    &[
+                        crate::test_support::ability_slot("ANwk"),
+                        crate::test_support::ability_slot("Adsm"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("npn2", "Storm", empty_pos, empty_hot);
@@ -1881,7 +2204,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ANwk"), GridSlotId::ability("Adsm")],
+                    &[
+                        crate::test_support::ability_slot("ANwk"),
+                        crate::test_support::ability_slot("Adsm"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("npn5", "Storm", empty_pos, empty_hot);
@@ -1896,7 +2222,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACdv"), GridSlotId::ability("ACcl")],
+                    &[
+                        crate::test_support::ability_slot("ACdv"),
+                        crate::test_support::ability_slot("ACcl"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nstw", "Storm Wyrm", empty_pos, empty_hot);
@@ -1911,13 +2240,19 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACcl"), GridSlotId::ability("ACbl")],
+                    &[
+                        crate::test_support::ability_slot("ACcl"),
+                        crate::test_support::ability_slot("ACbl"),
+                    ],
                 )
                 .build();
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'Z',
-                    &[GridSlotId::ability("ACcl"), GridSlotId::ability("ACbl")],
+                    &[
+                        crate::test_support::ability_slot("ACcl"),
+                        crate::test_support::ability_slot("ACbl"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new(
@@ -1937,7 +2272,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'S',
-                    &[GridSlotId::ability("CmdStop"), GridSlotId::ability("Aamk")],
+                    &[
+                        crate::test_support::ability_slot("CmdStop"),
+                        crate::test_support::ability_slot("Aamk"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1953,7 +2291,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     0,
-                    &[GridSlotId::ability("nmpe"), GridSlotId::ability("nnmg")],
+                    &[
+                        crate::test_support::ability_slot("nmpe"),
+                        crate::test_support::ability_slot("nnmg"),
+                    ],
                 )
                 .build();
             let eb =
@@ -1968,7 +2309,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'S',
-                    &[GridSlotId::ability("CmdStop"), GridSlotId::ability("ANde")],
+                    &[
+                        crate::test_support::ability_slot("CmdStop"),
+                        crate::test_support::ability_slot("ANde"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Nrob", "Tinker", empty_pos, empty_hot);
@@ -1983,7 +2327,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("Anh1"), GridSlotId::ability("ACdm")],
+                    &[
+                        crate::test_support::ability_slot("Anh1"),
+                        crate::test_support::ability_slot("ACdm"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("ntkh", "Tuskarr Healer", empty_pos, empty_hot);
@@ -1997,7 +2344,10 @@ mod unit_collision_report_tests {
             let secondary_hot = HotkeyCollisionCardBuilder::new(GridRole::HeroSkillTree, layout)
                 .collision(
                     'D',
-                    &[GridSlotId::ability("AEsh"), GridSlotId::ability("AIhm")],
+                    &[
+                        crate::test_support::ability_slot("AEsh"),
+                        crate::test_support::ability_slot("AIhm"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Ewar", "Warden", empty_pos, empty_hot);
@@ -2011,7 +2361,10 @@ mod unit_collision_report_tests {
             let secondary_hot = HotkeyCollisionCardBuilder::new(GridRole::HeroSkillTree, layout)
                 .collision(
                     'D',
-                    &[GridSlotId::ability("AEsh"), GridSlotId::ability("AIhm")],
+                    &[
+                        crate::test_support::ability_slot("AEsh"),
+                        crate::test_support::ability_slot("AIhm"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Ewrd", "Warden", empty_pos, empty_hot);
@@ -2025,7 +2378,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'S',
-                    &[GridSlotId::ability("CmdStop"), GridSlotId::ability("ACm2")],
+                    &[
+                        crate::test_support::ability_slot("CmdStop"),
+                        crate::test_support::ability_slot("ACm2"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("Uwar", "Warlock", empty_pos, empty_hot);
@@ -2040,7 +2396,10 @@ mod unit_collision_report_tests {
                 .collision_at(
                     0,
                     2,
-                    &[GridSlotId::ability("ACdm"), GridSlotId::ability("ACsw")],
+                    &[
+                        crate::test_support::ability_slot("ACdm"),
+                        crate::test_support::ability_slot("ACsw"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("nsns", "Watery Minion", empty_pos, empty_hot);
@@ -2054,7 +2413,10 @@ mod unit_collision_report_tests {
             let main_hot = HotkeyCollisionCardBuilder::new(GridRole::MainCommand, layout)
                 .collision(
                     'C',
-                    &[GridSlotId::ability("ACcs"), GridSlotId::ability("ACps")],
+                    &[
+                        crate::test_support::ability_slot("ACcs"),
+                        crate::test_support::ability_slot("ACps"),
+                    ],
                 )
                 .build();
             let eb = UnitCollisionEntryBuilder::new("ngh2", "Wraith", empty_pos, empty_hot);

@@ -50,7 +50,8 @@ impl CustomKeysParser {
         if let Some(section_id) = Self::extract_section_id(trimmed) {
             self.flush_pending_section();
             if let Some(resolution) = SectionResolution::from_section_id(&section_id) {
-                let already_present = self.entries.contains_key(resolution.canonical_id().value());
+                let canonical_id = resolution.canonical_id();
+                let already_present = self.entries.contains_key(&canonical_id);
                 if already_present {
                     self.current_id = None;
                     self.accumulator = None;

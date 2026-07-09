@@ -1,3 +1,162 @@
+[Aabs]
+Hotkey=B
+Buttonpos=3,2
+Tip=Absorb Mana
+Ubertip=Takes all mana from one of your units and gives it to the Destroyer.
+
+[Aadm]
+Hotkey=B
+Unhotkey=B
+Buttonpos=0,2
+Unbuttonpos=0,2
+Tip=Abolish Magic
+UnTip=|cffc3dbffRight-click to activate auto-casting.|r
+Ubertip=Dispels positive buffs from enemy units, and negative buffs from friendly units. Deals 250 damage to summoned units.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
+
+[Aaha]
+Hotkey=G
+Unhotkey=R
+Buttonpos=3,1
+Unbuttonpos=3,1
+Tip=Gather
+UnTip=Return Resources
+Ubertip=Mines gold from Haunted Gold Mines.
+Unubertip=Return the carried resources to the nearest town hall.
+
+[Aakb]
+Buttonpos=1,2
+Tip=War Drums
+Ubertip=Adds a damage increase to the attacks of nearby friendly units.
+
+[Aam2]
+Hotkey=N
+Buttonpos=1,2
+Tip=Anti-magic Shell
+Ubertip=Creates a barrier that stops 300 points of spell, summon, or magic damage from affecting a target unit. Lasts 90 seconds.
+
+[Aamk]
+Buttonpos=1,1
+Researchhotkey=F
+Researchbuttonpos=3,1
+Tip=Attribute Bonus - [Level 1],Attribute Bonus - [Level 2],Attribute Bonus - [Level 3],Attribute Bonus - [Level 4]
+Ubertip=Gives a total of 3 points to Agility, Intelligence, and Strength,Gives a total of 6 points to Agility, Intelligence, and Strength,Gives a total of 9 points to Agility, Intelligence, and Strength,Gives a total of 12 points to Agility, Intelligence, and Strength
+Researchubertip=Gives a permanent bonus to Agility, Intelligence, and Strength. |n|n|cffffcc00Level 1|r - Adds three points to all stats.|n|cffffcc00Level 2|r - Adds three additional points.|n|cffffcc00Level 3|r - Adds three additional points.|n|cffffcc00Level 4|r - Adds three additional points.
+
+[Aams]
+Hotkey=X
+Buttonpos=1,2
+Tip=Anti-magic Shell
+Ubertip=Creates a barrier that stops spells from affecting a target unit. Lasts 90 seconds.
+
+[Aap1]
+Buttonpos=1,2
+Tip=Disease Cloud
+Ubertip=Infects nearby enemy living units with Disease Cloud. Disease Cloud deals 2 damage per second. Lasts 75 seconds.
+
+[Aap2]
+Buttonpos=0,2
+Tip=Disease Cloud
+Ubertip=Infects nearby enemy living units with Disease Cloud. Disease Cloud deals 2 damage per second. Lasts 75 seconds.
+
+[Aap3]
+Buttonpos=1,2
+Tip=Disease Cloud
+Ubertip=Infects nearby enemy living units with Disease Cloud. Disease Cloud deals 1 damage per second. Lasts 75 seconds.
+
+[Aast]
+Hotkey=C
+Buttonpos=2,2
+Tip=Ancestral Spirit
+Ubertip=Raises a fallen non-Hero Tauren from the dead. The Tauren is revived with 100% of its hit points restored.
+
+[Aatp]
+Buttonpos=1,1
+Unbuttonpos=1,1
+
+[Aave]
+Hotkey=T
+Unhotkey=V
+Buttonpos=3,2
+Unbuttonpos=3,2
+
+[Ablo]
+Hotkey=B
+Unhotkey=B
+Buttonpos=2,2
+Unbuttonpos=2,2
+Tip=Bloodlust
+UnTip=|cffc3dbffRight-click to activate auto-casting.|r
+Ubertip=Increases a friendly unit's attack rate by 40% and movement speed by 25%. Lasts 60 seconds.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
+
+[Abof]
+Buttonpos=0,2
+Tip=Burning Oil
+Ubertip=Drenches the Demolisher ammo in burning oil, causing them to light the ground on fire and burn enemy units.
+
+[Abrf]
+Hotkey=F
+Unhotkey=F
+Buttonpos=3,2
+Unbuttonpos=3,2
+Tip=Bear Form
+UnTip=Night Elf Form
+Ubertip=Transforms the Druid into a bear, slowing mana regeneration, but making him an excellent warrior.
+Unubertip=Transforms the Druid into a Night Elf.
+
+[Absk]
+Hotkey=B
+Buttonpos=0,2
+Tip=Berserk
+Ubertip=Causes this unit to attack 50% faster, but take 40% more damage.
+
+[Abtl]
+Hotkey=B
+Buttonpos=0,2
+Tip=Battle Stations
+Ubertip=Causes nearby Peons to run into the Burrow so that they can defend their base.
+
+[Abu2]
+Hotkey=B
+Unhotkey=B
+Buttonpos=3,2
+Unbuttonpos=3,2
+Tip=Burrow
+UnTip=Unburrow
+Ubertip=The Carrion Beetle digs into the ground and becomes invisible.
+Unubertip=The Carrion Beetle pops out of the ground and becomes visible again.
+
+[Abu3]
+Hotkey=B
+Unhotkey=B
+Buttonpos=3,2
+Unbuttonpos=3,2
+Tip=Burrow
+UnTip=Unburrow
+Ubertip=The Carrion Beetle digs into the ground and becomes invisible.
+Unubertip=The Carrion Beetle pops out of the ground and becomes visible again.
+
+[Abu5]
+Hotkey=V
+Unhotkey=V
+Buttonpos=3,2
+Unbuttonpos=3,2
+Tip=Burrow
+UnTip=Unburrow
+Ubertip=The Arachnathid digs into the ground and becomes invisible.
+Unubertip=The Arachnathid pops out of the ground and becomes visible again.
+
+[Abur]
+Hotkey=B
+Unhotkey=B
+Buttonpos=3,2
+Unbuttonpos=3,2
+Tip=Burrow
+UnTip=Unburrow
+Ubertip=The Crypt Fiend digs into the ground, becomes invisible, and gains a regeneration rate of 5 hit points per second. The Crypt Fiend cannot attack while burrowed.
+Unubertip=The Crypt Fiend pops out of the ground and becomes visible again.
+
 [ACac]
 Buttonpos=0,2
 Tip=Command Aura
@@ -19,6 +178,12 @@ Hotkey=X
 Buttonpos=1,2
 Tip=Anti-magic Shell
 Ubertip=Creates a barrier that stops spells from affecting a target unit. Lasts 90 seconds.
+
+[Acan]
+Hotkey=C
+Buttonpos=0,2
+Tip=Cannibalize
+Ubertip=Consumes a nearby corpse to heal 16 hit points per second.
 
 [ACat]
 Buttonpos=2,2
@@ -194,6 +359,14 @@ UnTip=|cffc3dbffRight-click to activate auto-casting.|r
 Ubertip=Dispels positive buffs from enemy units, and negative buffs from friendly units. Deals 150 damage to summoned units.
 Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
 
+[Acdb]
+Buttonpos=2,2
+Researchhotkey=E
+Researchbuttonpos=2,0
+Tip=Drunken Brawler - [Level 1],Drunken Brawler - [Level 2],Drunken Brawler - [Level 3],Drunken Brawler - [Level 4]
+Ubertip=Gives a 7% chance to dodge an attack and a 10% chance to deal 2 times normal damage.,Gives a 14% chance to dodge an attack and a 10% chance to deal 3 times normal damage.,Gives a 21% chance to dodge an attack and a 10% chance to deal 4 times normal damage.,Gives a 30% chance to dodge an attack and a 10% chance to deal 6 times normal damage.
+Researchubertip=Gives a percent chance to avoid attacks and a 10% chance to deal additional damage. |n|n|cffffcc00Level 1|r - 7% dodge, 2 times normal damage. |n|cffffcc00Level 2|r - 14% dodge, 3 times normal damage. |n|cffffcc00Level 3|r - 21% dodge, 4 times normal damage. |n|cffffcc00Level 4|r - 30% dodge, 6 times normal damage.
+
 [ACdc]
 Hotkey=Z
 Buttonpos=0,2
@@ -205,6 +378,15 @@ Hotkey=Z
 Buttonpos=0,2
 Tip=Devour Magic
 Ubertip=Consumes all magical buffs from units in an area. Each unit that is devoured of magic gives the caster 50 hit points and 75 mana. Deals 160 damage to summoned units.
+
+[Acdh]
+Hotkey=X
+Buttonpos=1,2
+Researchhotkey=W
+Researchbuttonpos=1,0
+Tip=Drunken Haze - [Level 1],Drunken Haze - [Level 2],Drunken Haze - [Level 3],Drunken Haze - [Level 4]
+Ubertip=Drenches enemy units in alcohol, causing their movement speed to be reduced by 50%, and have a 45% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. Lasts 12 seconds.,Drenches enemy units in alcohol, causing their movement speed to be reduced by 50%, and have a 65% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. Lasts 12 seconds.,Drenches enemy units in alcohol, causing their movement speed to be reduced by 50%, and have a 80% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. Lasts 12 seconds.,Drenches enemy units in alcohol, causing their movement speed to be reduced by 50%, and have a 95% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. Lasts 12 seconds.
+Researchubertip=Drenches enemy units in alcohol, causing their movement speed to be reduced, and have a chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage over time. |nLasts 12 seconds |n|n|cffffcc00Level 1|r - 50% movement speed, 45% miss chance. |n|cffffcc00Level 2|r - 50% movement speed, 65% miss chance. |n|cffffcc00Level 3|r - 50% movement speed, 80% miss chance.|n|cffffcc00Level 4|r - 50% movement speed, 95% miss chance.
 
 [ACdm]
 Hotkey=B
@@ -236,6 +418,15 @@ Hotkey=D
 Buttonpos=0,2
 Tip=Devour
 Ubertip=Consumes an enemy unit, slowly digesting it and dealing 5 damage per second to it. If the creep is killed while the consumed unit is still digesting, the unit that was devoured will be released.
+
+[Acef]
+Hotkey=V
+Buttonpos=3,2
+Researchhotkey=R
+Researchbuttonpos=3,0
+Tip=Storm, Earth, And Fire - [Level 1],Storm, Earth, And Fire - [Level 2]
+Ubertip=Splits the Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn.,Splits the Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn.
+Researchubertip=Splits the Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn.|n|n|cffffcc00Level 1|r - Summons three mighty Pandas. |n|cffffcc00Level 2|r - Summons three even mightier Pandas.
 
 [ACen]
 Hotkey=Z
@@ -320,6 +511,18 @@ UnTip=|cffc3dbffRight-click to activate auto-casting.
 Ubertip=Creates a shield of frost around a target friendly unit. The shield adds 3 armor and slows melee units that attack it for 5 seconds. Lasts 45 seconds.
 Unubertip=|cffc3dbffRight-click to deactivate auto-casting.
 
+[Ache]
+Hotkey=X
+Buttonpos=1,2
+Tip=Cast Ray of Disruption
+Ubertip=Conjures a stream of neutralizing magic that bounces up to 8 times, dispelling units in its wake.
+
+[Acht]
+Hotkey=Z
+Buttonpos=0,2
+Tip=Howl of Terror
+Ubertip=Emits a terrifying howl that reduces nearby enemy units' attack damage by 25% for 10 seconds.
+
 [AChv]
 Hotkey=Z
 Buttonpos=3,2
@@ -358,6 +561,12 @@ UnTip=Deactivate Immolation
 Ubertip=Activate Immolation to engulf this unit in flames, causing 5 damage per second to nearby enemy land units. Drains mana until deactivated.
 Unubertip=Deactivate Immolation to stop draining mana.
 
+[Aclf]
+Hotkey=C
+Buttonpos=1,2
+Tip=Cloud
+Ubertip=Cast on enemy buildings with ranged attacks to stop the buildings from attacking. Lasts 30 seconds.
+
 [ACls]
 Hotkey=X
 Buttonpos=2,2
@@ -378,6 +587,12 @@ Tip=Mana Shield
 UnTip=Deactivate Mana Shield
 Ubertip=Activates a shield that absorbs 2 damage per point of mana.
 
+[Acmg]
+Hotkey=C
+Buttonpos=1,2
+Tip=Control Magic
+Ubertip=Takes control of an enemy summoned unit. The mana cost is 35% of the summoned unit's current hit points.
+
 [ACmi]
 Buttonpos=2,2
 Tip=Spell Immunity
@@ -392,6 +607,47 @@ Tip=Monsoon - [Level 1],Monsoon - [Level 2],Monsoon - [Level 3]
 Ubertip=Calls down a storm of lightning to strike enemy units for 20 damage in a small target area. Lasts 15 seconds.,Calls down a storm of lightning to strike enemy units for ? damage in a medium target area. Lasts 15 seconds.,Calls down a storm of lightning to strike enemy units for ? damage in a large target area. Lasts 15 seconds.
 Researchubertip=Calls a storm of lightning bolts to strike enemy units for 20 damage. |nLasts 12 seconds. |n|n|cffffcc00Level 1|r - Small area. |n|cffffcc00Level 2|r - Medium area. |n|cffffcc00Level 3|r - Large area.
 
+[Acn2]
+Hotkey=C
+Buttonpos=0,2
+Tip=Cannibalize
+Ubertip=Consumes a nearby corpse to heal 25 hit points per second.
+
+[Acny]
+Hotkey=C
+Buttonpos=2,2
+Tip=Cyclone
+Ubertip=Tosses a target non-mechanical enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. Lasts 20 seconds.
+
+[Aco2]
+Hotkey=U
+Buttonpos=0,2
+Tip=Mount Hippogryph
+Ubertip=Mounts a Hippogryph so that the Archer can attack from the air. Attacks land and air units.
+
+[Aco3]
+Hotkey=U
+Buttonpos=0,2
+Tip=Pick up Archer
+Ubertip=Picks up an Archer so that the Archer can attack from the air. Attacks land and air units.
+
+[Acoa]
+Hotkey=Z
+Buttonpos=0,2
+Tip=Mount Hippogryph
+Ubertip=Mounts a Hippogryph so that the Archer can attack from the air. The mounted unit cannot dismount. Attacks land and air units.
+
+[Acoh]
+Hotkey=Z
+Buttonpos=0,2
+Tip=Pick up Archer
+Ubertip=Picks up an Archer so that the Archer can attack from the air. The mounted unit cannot dismount. Attacks land and air units.
+
+[Acor]
+Buttonpos=0,2
+Tip=Corrosive Breath
+Ubertip=Hurls a ball of corrosive bile that is effective against buildings.
+
 [ACpa]
 Hotkey=Z
 Unhotkey=Z
@@ -401,6 +657,16 @@ Tip=Parasite
 UnTip=|cffc3dbffRight-click to activate auto-casting.|r
 Ubertip=Afflicts a target enemy unit with a deadly parasite that deals 5 damage per second for 15 seconds. If the afflicted unit dies while under the effect of Parasite, a minor minion will spawn from its corpse.
 Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
+
+[Acpf]
+Hotkey=F
+Unhotkey=F
+Buttonpos=3,2
+Unbuttonpos=3,2
+Tip=Corporeal Form
+UnTip=Ethereal Form
+Ubertip=Turns the Spirit Walker corporeal, allowing him to attack and take physical damage.
+Unubertip=Turns the Spirit Walker ethereal, making him immune to physical damage but unable to attack. He can cast spells and will take extra damage from Magic attacks and spells.
 
 [ACps]
 Hotkey=C
@@ -447,6 +713,12 @@ Buttonpos=2,2
 Tip=Rain of Fire
 Ubertip=Calls down waves of fire that damage units in an area. Each wave deals 25 damage. Lasts for 6 waves.
 
+[Acri]
+Hotkey=C
+Buttonpos=2,2
+Tip=Cripple
+Ubertip=Reduces movement speed by 75%, attack rate by 50%, and damage by 50% of a target enemy unit. Lasts 60 seconds.
+
 [ACrj]
 Hotkey=X
 Buttonpos=1,2
@@ -468,6 +740,16 @@ Hotkey=Z
 Buttonpos=0,2
 Tip=Roar
 Ubertip=Gives nearby friendly units a 25% bonus to damage. Lasts 45 seconds.
+
+[Acrs]
+Hotkey=C
+Unhotkey=C
+Buttonpos=0,2
+Unbuttonpos=0,2
+Tip=Curse
+UnTip=|cffc3dbffRight-click to activate auto-casting.
+Ubertip=Curses a target enemy unit, causing it to have a 33% chance to miss on an attack. Lasts 60 seconds.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.
 
 [ACs7]
 Hotkey=X
@@ -600,14 +882,85 @@ Researchbuttonpos=1,0
 Tip=Summon Sea Elemental
 Ubertip=Summons a powerful Sea Elemental with 550 hit points that does 28 - 37 damage. Lasts 65 seconds.
 
-[AEIl]
-Hotkey=V
-Buttonpos=3,2
-Researchhotkey=R
-Researchbuttonpos=3,0
-Tip=Metamorphosis
-Ubertip=Transforms the Demon Hunter into a powerful Demon with a ranged attack.
-Researchubertip=Transforms the Demon Hunter into a powerful Demon with a ranged attack.
+[Acyc]
+Hotkey=C
+Buttonpos=1,2
+Tip=Cyclone
+Ubertip=Tosses a target non-mechanical enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. Lasts 20 seconds.
+
+[Adcn]
+Hotkey=D
+Buttonpos=1,2
+Tip=Disenchant
+Ubertip=Removes all buffs from units in a target area. Deals 250 damage to hostile summoned units.
+
+[Adec]
+Hotkey=U
+Buttonpos=0,2
+Tip=Dismount Archer & Hippogryph
+Ubertip=Dismounts the Archer from the Hippogryph.
+
+[Adef]
+Hotkey=D
+Unhotkey=D
+Buttonpos=0,2
+Unbuttonpos=0,2
+Tip=Defend
+UnTip=Stop Defend
+Ubertip=Activate to have a 25% chance to reflect Piercing attacks upon the source, and to take only 50% of the damage from attacks that are not reflected. While Defend is active, move speed is reduced by 30%.
+Unubertip=Deactivate to move at normal speed, but take regular damage from Piercing attacks.
+
+[Adev]
+Hotkey=D
+Buttonpos=0,2
+Tip=Devour
+Ubertip=Consumes an enemy land unit, slowly digesting it and dealing 5 damage per second to it. If the Kodo Beast is killed while the consumed unit is still digesting, the unit that was devoured will be released.
+
+[Adis]
+Hotkey=D
+Buttonpos=1,2
+Tip=Dispel Magic
+Ubertip=Removes all buffs from units in a target area. Deals 200 damage to summoned units.
+
+[Adri]
+Hotkey=U
+Buttonpos=1,2
+Tip=Unload All
+Ubertip=Unloads all units.
+
+[Adro]
+Hotkey=U
+Buttonpos=1,2
+Tip=Unload All
+Ubertip=Unloads all carried units at a target location.
+
+[Adsm]
+Hotkey=D
+Buttonpos=0,2
+Tip=Dispel Magic
+Ubertip=Removes all buffs from units in a target area. Deals 200 damage to summoned units.
+
+[Adtg]
+Buttonpos=0,2
+Tip=True Sight
+Ubertip=Reveals nearby invisible units.
+
+[Adtn]
+Hotkey=D
+Buttonpos=1,2
+Tip=Detonate
+Ubertip=Destroys the Wisp, dispelling all magical buffs and draining 40 mana from each unit in an area around the Wisp. Deals 225 damage to summoned units.
+
+[Adts]
+Buttonpos=2,1
+Tip=Magic Sentry
+Ubertip=Reveals nearby invisible units.
+
+[Advm]
+Hotkey=D
+Buttonpos=0,2
+Tip=Devour Magic
+Ubertip=Consumes all magical buffs from units in an area. Each unit that is devoured of magic gives the Destroyer 50 hit points and 75 mana. Deals 160 damage to summoned units.
 
 [AEah]
 Buttonpos=2,2
@@ -624,6 +977,12 @@ Researchbuttonpos=2,0
 Tip=Trueshot Aura - [Level 1],Trueshot Aura - [Level 2],Trueshot Aura - [Level 3]
 Ubertip=An aura that gives friendly nearby units a 10% bonus damage to their ranged attacks.,An aura that gives friendly nearby units a 20% bonus damage to their ranged attacks.,An aura that gives friendly nearby units a 30% bonus damage to their ranged attacks.
 Researchubertip=An aura that gives friendly nearby units bonus damage to their ranged attacks. |n|n|cffffcc00Level 1|r - Increases base ranged damage by 10%. |n|cffffcc00Level 2|r - Increases base ranged damage by 20%. |n|cffffcc00Level 3|r - Increases base ranged damage by 30%.
+
+[Aeat]
+Hotkey=E
+Buttonpos=0,2
+Tip=Eat Tree
+Ubertip=Consume a tree to restore 500 hit points over 30 seconds.
 
 [AEbl]
 Hotkey=B
@@ -674,6 +1033,25 @@ Tip=Force of Nature - [Level 1],Force of Nature - [Level 2],Force of Nature - [L
 Ubertip=Converts a small area of trees into 2 Treants. Treants have 300 hit points and deal 15 - 17 damage. Can learn Nature's Blessing. Lasts 60 seconds. Attacks land units.,Converts a large area of trees into 3 Treants. Treants have 300 hit points and deal 15 - 17 damage. Can learn Nature's Blessing. Lasts 60 seconds. Attacks land units.,Converts a very large area of trees into 4 Treants. Treants have 300 hit points and deal 15 - 17 damage. Can learn Nature's Blessing. Lasts 60 seconds. Attacks land units.
 Researchubertip=Converts an area of trees into Treants. Treants have 300 hit points and deal 15 - 17 damage. Can learn Nature's Blessing. |n|n|cffffcc00Attacks land units.|r |n|n|cffffcc00Level 1|r - Raises 2 Treants for 60 seconds. |n|cffffcc00Level 2|r - Raises 3 Treants for 60 seconds. |n|cffffcc00Level 3|r - Raises 4 Treants for 60 seconds.
 
+[Aegr]
+Buttonpos=1,2
+Tip=Elune's Grace
+Ubertip=Reduces the damage taken from Piercing attacks to 65%, and spells and Magic attacks to 80%.
+
+[Aeib]
+Buttonpos=2,2
+Tip=Improved Bows
+Ubertip=Increases attack range.
+
+[AEIl]
+Hotkey=V
+Buttonpos=3,2
+Researchhotkey=R
+Researchbuttonpos=3,0
+Tip=Metamorphosis
+Ubertip=Transforms the Demon Hunter into a powerful Demon with a ranged attack.
+Researchubertip=Transforms the Demon Hunter into a powerful Demon with a ranged attack.
+
 [AEim]
 Hotkey=L
 Unhotkey=L
@@ -705,6 +1083,45 @@ Tip=Metamorphosis
 Ubertip=Transforms the Demon Hunter into a powerful Demon with a ranged attack and 500 bonus hit points. Lasts 45 seconds.
 Researchubertip=Transforms the Demon Hunter into a powerful Demon with a ranged attack and 500 bonus hit points. |nLasts 45 seconds.
 
+[Aemk]
+Buttonpos=3,2
+Tip=Marksmanship
+Ubertip=Increases damage of Archers and Hippogryph Riders by 4.
+
+[Aenc]
+Hotkey=L
+Unhotkey=U
+Buttonpos=1,2
+Unbuttonpos=1,2
+Tip=Load
+UnTip=Unload All
+Ubertip=Orders a Wisp to enter the gold mine.
+Unubertip=Removes all Wisps from the gold mine.
+
+[Aenr]
+Hotkey=Z
+Buttonpos=0,2
+Tip=Entangling Roots
+Ubertip=Causes roots to burst from the ground, immobilizing a target enemy unit for 6 seconds, and dealing 10 damage per second.
+
+[Aens]
+Hotkey=E
+Buttonpos=0,2
+Tip=Ensnare
+Ubertip=Causes a target enemy unit to be bound to the ground so that it cannot move for 9 seconds. Air units that are ensnared can be attacked as though they were land units.
+
+[Aent]
+Hotkey=G
+Buttonpos=1,2
+Tip=Entangle Gold Mine
+Ubertip=Entangles the gold mine, allowing Wisps to enter and mine the gold.
+
+[Aenw]
+Hotkey=Z
+Buttonpos=0,2
+Tip=Entangling Roots
+Ubertip=Causes roots to burst from the ground, immobilizing a target enemy unit for 6 seconds, and dealing 10 damage per second.
+
 [AEsb]
 Hotkey=V
 Buttonpos=3,2
@@ -731,6 +1148,18 @@ Researchbuttonpos=2,0
 Tip=Shadow Strike - [Level 1],Shadow Strike - [Level 2],Shadow Strike - [Level 3]
 Ubertip=Hurls a poisoned dagger at a target enemy unit, dealing 75 initial damage, and 10 damage every 3 seconds for 15.1 seconds. The poison slows the movement speed of the targeted unit for a short duration.,Hurls a poisoned dagger at a target enemy unit, dealing 150 initial damage, and 30 damage every 3 seconds for 15.1 seconds. The poison slows the movement speed of the targeted unit for a short duration.,Hurls a poisoned dagger at a target enemy unit, dealing 225 initial damage, and 45 damage every 3 seconds for 15.1 seconds. The poison slows the movement speed of the targeted unit for a short duration.
 Researchubertip=Hurls a poisoned dagger which deals large initial damage, and then deals damage over time. The poisoned unit has its movement speed slowed for a short duration. |n|n|cffffcc00Level 1|r - 75 strike damage, 10 duration damage. |n|cffffcc00Level 2|r - 150 strike damage, 30 duration damage. |n|cffffcc00Level 3|r - 225 strike damage, 45 duration damage.
+
+[Aesn]
+Hotkey=E
+Buttonpos=0,2
+Tip=Sentinel
+Ubertip=Send an owl to a nearby tree to reveal the area around it. Can see invisible units. Lasts 120 seconds.
+
+[Aesr]
+Hotkey=Z
+Buttonpos=0,2
+Tip=Sentinel
+Ubertip=Send an owl to a nearby tree to reveal the area around it. Can see invisible units.
 
 [AEst]
 Hotkey=C
@@ -768,6 +1197,129 @@ Tip=Metamorphosis
 Ubertip=Transforms the Demon Hunter into a powerful Demon with a ranged attack.
 Researchubertip=Transforms the Demon Hunter into a powerful Demon with a ranged attack.
 
+[Aews]
+Buttonpos=1,0
+Tip=Well Spring
+Ubertip=Increases the amount of mana that can be stored in Moon Wells by 100, and their rate of mana regeneration by 52%.
+
+[Aexh]
+Buttonpos=3,2
+Tip=Exhume Corpses
+Ubertip=Generates a corpse within the Meat Wagon every 15 seconds.
+
+[Aeye]
+Hotkey=W
+Buttonpos=0,2
+Tip=Sentry Ward
+Ubertip=Summons an invisible and immovable ward that provides vision in an area. Wards are spell immune. Can see invisible units. Lasts 600 seconds.
+
+[Afa2]
+Hotkey=R
+Unhotkey=R
+Buttonpos=0,2
+Unbuttonpos=0,2
+Tip=Faerie Fire
+UnTip=|cffc3dbffRight-click to activate auto-casting.|r
+Ubertip=Reduces a target enemy unit's armor by 4 and gives vision of that unit. Lasts 70 seconds.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
+
+[Afae]
+Hotkey=R
+Unhotkey=R
+Buttonpos=0,2
+Unbuttonpos=0,2
+Tip=Faerie Fire
+UnTip=|cffc3dbffRight-click to activate auto-casting.|r
+Ubertip=Reduces a target enemy unit's armor by 4 and gives vision of that unit. Lasts 70 seconds.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
+
+[Afak]
+Hotkey=O
+Unhotkey=O
+Buttonpos=1,2
+Unbuttonpos=1,2
+Tip=Orb of Annihilation
+UnTip=|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r
+Ubertip=Adds 15 bonus damage to the Destroyer's attack and causes his attacks to do area of effect damage.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
+
+[Afbb]
+Buttonpos=1,2
+Tip=Feedback
+Ubertip=Spirit Beast attacks destroy 20 mana per hit. The mana combusts, dealing damage to the attacked unit.
+
+[Afbk]
+Buttonpos=3,2
+Tip=Feedback
+Ubertip=Spellbreaker attacks destroy 20 mana per hit. The mana combusts, dealing damage to the attacked unit.
+
+[Afbt]
+Buttonpos=3,2
+Tip=Feedback
+Ubertip=This tower's attacks destroy 24 mana per hit against any unit, causing bonus damage equal to the mana destroyed. Additionally, attacks made by this tower cause 20 bonus damage against summoned units.
+
+[Afla]
+Hotkey=F
+Buttonpos=0,2
+Tip=Flare
+Ubertip=Launches a Dwarven flare above a target point, which reveals that area for 15 seconds. Reveals invisible units.
+
+[Aflk]
+Buttonpos=2,2
+Tip=Flak Cannons
+Ubertip=Uses powerful cannons to deal area effect damage against air units.
+
+[Afr2]
+Buttonpos=1,2
+Tip=Frost Attack
+Ubertip=Adds a cold effect to this unit's attacks that slows enemy units' movement speed.
+
+[Afra]
+Buttonpos=0,2
+Tip=Frost Attack
+Ubertip=Adds a cold effect to this unit's attacks that slows enemy units' movement speed.
+
+[Afrc]
+Buttonpos=1,2
+Tip=Frost Attack
+Ubertip=Adds a cold effect to this unit's attacks that slows enemy units' movement speed.
+
+[Afrz]
+Buttonpos=2,2
+Tip=Freezing Breath
+Ubertip=When used on a building, temporarily stops all building activities. Lasts 5 seconds.
+
+[Afsh]
+Buttonpos=1,2
+Tip=Fragmentation Shards
+Ubertip=Uses fragmentation mortars to increase damage dealt to Unarmored and Medium armor units.
+
+[Afzy]
+Hotkey=F
+Unhotkey=F
+Buttonpos=0,2
+Unbuttonpos=0,2
+Tip=Frenzy
+UnTip=|cffc3dbffRight-click to activate auto-casting.|r
+Ubertip=Increases the unit's attack rate by 40% and movement speed by 25% for 20 seconds.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
+
+[Agra]
+Hotkey=W
+Buttonpos=1,2
+Tip=War Club
+Ubertip=Picks up a tree to give the Mountain Giant Siege damage, and increased attack range. Lasts for 15 strikes.
+
+[Agyb]
+Buttonpos=1,2
+Tip=Flying Machine Bombs
+Ubertip=Allows Flying Machines to attack land units.
+
+[Agyv]
+Buttonpos=0,2
+Tip=True Sight
+Ubertip=Reveals nearby invisible units.
+
 [AHab]
 Buttonpos=2,2
 Researchhotkey=R
@@ -783,6 +1335,21 @@ Researchbuttonpos=2,0
 Tip=Devotion Aura - [Level 1],Devotion Aura - [Level 2],Devotion Aura - [Level 3]
 Ubertip=Gives 2 additional armor to nearby friendly units.,Gives 3.5 additional armor to nearby friendly units.,Gives 5 additional armor to nearby friendly units.
 Researchubertip=Gives additional armor to nearby friendly units. |n|n|cffffcc00Level 1|r - Increases base armor by 2. |n|cffffcc00Level 2|r - Increases base armor by 3.5. |n|cffffcc00Level 3|r - Increases base armor by 5.
+
+[Ahan]
+Buttonpos=3,2
+Tip=Animal War Training
+Ubertip=Increases the maximum hit points of this unit by 100.
+
+[Ahar]
+Hotkey=G
+Unhotkey=E
+Buttonpos=3,1
+Unbuttonpos=3,1
+Tip=Gather
+UnTip=Return Resources
+Ubertip=Mines gold from gold mines and harvests lumber from trees.
+Unubertip=Return the carried resources to the nearest town hall.
 
 [AHav]
 Hotkey=V
@@ -861,6 +1428,16 @@ UnTip=Deactivate Divine Shield
 Ubertip=An impenetrable shield surrounds this unit, protecting it from all damage and spells for 15 seconds.,An impenetrable shield surrounds this unit, protecting it from all damage and spells for 25 seconds.,An impenetrable shield surrounds this unit, protecting it from all damage and spells for 35 seconds.
 Researchubertip=An impenetrable shield surrounds the Paladin, protecting him from all damage and spells for a set amount of time. |n|n|cffffcc00Level 1|r - Lasts 15 seconds. |n|cffffcc00Level 2|r - Lasts 25 seconds. |n|cffffcc00Level 3|r - Lasts 35 seconds.
 
+[Ahea]
+Hotkey=E
+Unhotkey=E
+Buttonpos=0,2
+Unbuttonpos=0,2
+Tip=Heal
+UnTip=|cffc3dbffRight-click to activate auto-casting.|r
+Ubertip=Heals a target friendly non-mechanical wounded unit for 25 hit points.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
+
 [AHfa]
 Hotkey=R
 Unhotkey=R
@@ -892,6 +1469,17 @@ Tip=Holy Light - [Level 1],Holy Light - [Level 2],Holy Light - [Level 3]
 Ubertip=A holy light that can heal a friendly living unit for 200 or deal half damage to an enemy Undead unit. Healing pierces spell immunity.,A holy light that can heal a friendly living unit for 400 or deal half damage to an enemy Undead unit. Healing pierces spell immunity.,A holy light that can heal a friendly living unit for 600 or deal half damage to an enemy Undead unit. Healing pierces spell immunity.
 Researchubertip=A holy light that can heal a friendly living unit or damage an enemy Undead unit. Healing pierces spell immunity. |n|n|cffffcc00Level 1|r - Heals for 200 hit points. |n|cffffcc00Level 2|r - Heals for 400 hit points. |n|cffffcc00Level 3|r - Heals for 600 hit points.
 
+[Ahid]
+Hotkey=I
+Buttonpos=2,1
+Tip=Hide
+Ubertip=Stops the unit from auto-acquiring enemies, allowing it to Shadowmeld and remain unseen at night.
+
+[Ahlh]
+Buttonpos=2,1
+Tip=Improved Lumber Harvesting,Improved Lumber Harvesting,Advanced Lumber Harvesting
+Ubertip=Increases the amount of lumber that Peasants can carry by 10.,Increases the amount of lumber that Peasants can carry by 10.,Further increases the amount of lumber that Peasants can carry by 10.
+
 [AHmt]
 Hotkey=T
 Buttonpos=3,2
@@ -900,6 +1488,17 @@ Researchbuttonpos=3,0
 Tip=Mass Teleport
 Ubertip=Teleports 24 of the player's nearby units, including the Archmage, to a friendly ground unit or structure.
 Researchubertip=Teleports 24 of the player's nearby units, including the Archmage, to a friendly ground unit or structure.
+
+[Ahnl]
+Hotkey=V
+Buttonpos=3,2
+Tip=Summoning Ritual
+Ubertip=Summons energies from the twisting nether.
+
+[Ahpe]
+Buttonpos=0,2
+Tip=Phoenix
+Ubertip=The Phoenix spreads enchanted flames to nearby enemies, dealing 20 damage on impact and burning them for 2 per second over 10 seconds. Its flames burn with such intensity that the Phoenix damages itself as well. When it dies, it creates an egg that will hatch into a Phoenix.
 
 [AHpx]
 Hotkey=X
@@ -910,6 +1509,16 @@ Tip=Phoenix
 Ubertip=Summons a powerful Phoenix. The Phoenix burns with such intensity that it damages itself and nearby enemy units. Has Magic and Spell Immunity, and Resistant Skin. When a Phoenix dies, it creates an egg that will hatch into a Phoenix. Attacks land and air units.
 Researchubertip=Summons a powerful Phoenix. The Phoenix burns with such intensity that it damages itself and nearby enemy units. Has Magic and Spell Immunity, and Resistant Skin. When a Phoenix dies, it creates an egg that will hatch into a Phoenix. |n|n|cffffcc00Attacks land and air units.|r
 
+[Ahr3]
+Hotkey=G
+Unhotkey=E
+Buttonpos=3,1
+Unbuttonpos=3,1
+Tip=Gather
+UnTip=Return Resources
+Ubertip=Harvests lumber from trees.
+Unubertip=Return the carried lumber to the nearest building capable of receiving it.
+
 [AHre]
 Hotkey=R
 Buttonpos=3,2
@@ -918,6 +1527,36 @@ Researchbuttonpos=3,0
 Tip=Resurrection
 Ubertip=Brings back to life the corpses of 6 friendly nearby units.
 Researchubertip=Brings back to life the corpses of 6 friendly nearby units.
+
+[Ahri]
+Buttonpos=0,2
+Tip=Long Rifles
+Ubertip=Increases attack range.
+
+[Ahrl]
+Hotkey=G
+Unhotkey=E
+Buttonpos=3,1
+Unbuttonpos=3,1
+Tip=Gather
+UnTip=Return Resources
+Ubertip=Harvests lumber from trees.
+Unubertip=Return the carried resources to the nearest Necropolis or Graveyard.
+
+[Ahrp]
+Hotkey=R
+Unhotkey=R
+Buttonpos=1,1
+Unbuttonpos=1,1
+Tip=Repair
+UnTip=|cffc3dbffRight-click to activate auto-casting.|r
+Ubertip=Repairs mechanical units and structures at the cost of resources.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
+
+[Ahsb]
+Buttonpos=0,2
+Tip=Sundering Blades
+Ubertip=Increases damage dealt to enemy targets with Medium armor by 10%.
 
 [AHta]
 Hotkey=R
@@ -943,6 +1582,12 @@ Tip=Thunder Clap - [Level 1],Thunder Clap - [Level 2],Thunder Clap - [Level 3]
 Ubertip=Slams the ground, dealing 60 damage to nearby enemy land units and slowing their movement by 50% and attack rate by 50%.,Slams the ground, dealing 110 damage to nearby enemy land units and slowing their movement by 50% and attack rate by 50%.,Slams the ground, dealing 150 damage to nearby enemy land units and slowing their movement by 50% and attack rate by 50%.
 Researchubertip=Slams the ground, dealing damage to and slowing the movement speed and attack rate of nearby enemy land units. |n|n|cffffcc00Level 1|r - 60 damage, 50% move, 50% attack. |n|cffffcc00Level 2|r - 110 damage, 50% move, 50% attack. |n|cffffcc00Level 3|r - 150 damage, 50% move, 50% attack.
 
+[Ahwd]
+Hotkey=E
+Buttonpos=2,2
+Tip=Healing Ward
+Ubertip=Summons an immovable ward that heals 2% of a nearby friendly non-mechanical unit's hit points per second. Wards are spell immune. Lasts 25 seconds.
+
 [AHwe]
 Hotkey=W
 Buttonpos=1,2
@@ -959,6 +1604,157 @@ Researchhotkey=D
 Researchbuttonpos=2,1
 Tip=Hide
 Ubertip=Stops the hero with Cloak of Shadows from auto-acquiring enemies, allowing it to remain unseen. During nighttime units with Shadowmeld will also stop auto-acquiring enemies.
+
+[Ainf]
+Hotkey=F
+Unhotkey=F
+Buttonpos=2,2
+Unbuttonpos=2,2
+Tip=Inner Fire
+UnTip=|cffc3dbffRight-click to activate auto-casting.|r
+Ubertip=Increases a target friendly unit's damage by 10% and armor by 5. Lasts 60 seconds.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
+
+[Aivs]
+Hotkey=I
+Buttonpos=1,2
+Tip=Invisibility
+Ubertip=Makes a unit invisible. If the unit attacks, uses an ability or casts a spell, it will become visible. Lasts 120 seconds.
+
+[Alam]
+Hotkey=C
+Buttonpos=3,2
+Tip=Sacrifice
+Ubertip=Target a Sacrificial Pit to sacrifice the Acolyte and turn it into a Shade. Shades are invisible spirits that can see invisible units. Shades cannot attack.
+
+[alcm]
+Hotkey=65
+GameCommand=1
+Modifier=Alt
+
+[Aliq]
+Buttonpos=1,2
+Tip=Liquid Fire
+Ubertip=Flings a volatile liquid that causes buildings to take damage over time. Buildings that are currently taking damage from Liquid Fire have their repair time increased by 175%, and have their attack rate reduced by 60%.
+
+[Ally]
+Hotkey=122
+MenuCommand=1
+
+[Aloa]
+Hotkey=L
+Buttonpos=0,2
+Tip=Load
+Ubertip=Loads a targeted friendly land unit.
+
+[Alsh]
+Hotkey=L
+Buttonpos=1,2
+Tip=Lightning Shield
+Ubertip=Forms a shield of electricity around a target unit, dealing 20 damage per second to units around it. Lasts 20 seconds.
+
+[Ambb]
+Hotkey=B
+Buttonpos=0,2
+Researchhotkey=Q
+Researchbuttonpos=0,0
+Tip=Mana Burn
+Ubertip=Sends a bolt of negative energy that burns 50 points of a target enemy unit's mana. The mana combusts, dealing damage equal to the amount of mana burned.
+
+[Ambd]
+Hotkey=Z
+Buttonpos=3,2
+Researchhotkey=Q
+Researchbuttonpos=0,0
+Tip=Mana Burn
+Ubertip=Sends a bolt of negative energy that burns 50 points of a target enemy unit's mana. The mana combusts, dealing damage equal to the amount of mana burned.
+
+[Ambt]
+Hotkey=R
+Unhotkey=R
+Buttonpos=0,0
+Unbuttonpos=0,0
+Tip=Replenish Mana and Life
+UnTip=|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r
+Ubertip=Replenish the life and mana of a target friendly unit.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
+
+[Amed]
+Hotkey=D
+Buttonpos=1,2
+Tip=Drop All Corpses
+Ubertip=Drops all corpses for immediate use.
+
+[Amel]
+Hotkey=C
+Unhotkey=C
+Buttonpos=0,2
+Unbuttonpos=0,2
+Tip=Get Corpse
+UnTip=|cffc3dbffRight-click to activate auto-casting.
+Ubertip=Picks up a nearby corpse for later use.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.
+
+[Amfl]
+Hotkey=F
+Unhotkey=F
+Buttonpos=1,2
+Unbuttonpos=1,2
+Tip=Mana Flare
+UnTip=Stop Mana Flare
+Ubertip=Causes the Faerie Dragon to channel negative magical energies that damage nearby enemies when they cast spells. Also increases the Faerie Dragon's armor by 12. Lasts 30 seconds.
+Unubertip=Stops channeling Mana Flare.
+
+[Amgl]
+Buttonpos=1,2
+Tip=Moon Glaive
+Ubertip=Gives the Huntress the ability to strike additional units with her bouncing glaive attacks, and changes their armor type to Heavy.
+
+[Amgr]
+Buttonpos=1,2
+Tip=Moon Glaive
+Ubertip=Gives the Huntress the ability to strike additional units with her bouncing glaive attacks.
+
+[Amic]
+Hotkey=C
+Unhotkey=W
+Buttonpos=1,2
+Unbuttonpos=2,2
+Tip=Call to Arms
+UnTip=Back to Work
+Ubertip=Call all nearby Peasants to the Town Hall to be converted to Militia. Lasts 42.5 seconds.
+Unubertip=Call all nearby Militia to the Town Hall to be converted to Peasants.
+
+[Amil]
+Hotkey=C
+Unhotkey=W
+Buttonpos=1,2
+Unbuttonpos=2,2
+Tip=Call to Arms
+UnTip=Back to Work
+Ubertip=Run to the nearest Keep, Castle or starting Town Hall to arm the Peasant, converting him into Militia. Lasts 42.5 seconds.
+Unubertip=Run to the nearest Keep, Castle or starting Town Hall to disarm the Militia, converting it into a Peasant.
+
+[Amim]
+Buttonpos=2,2
+Tip=Spell Immunity
+Ubertip=Renders this unit immune to magic and most spells.
+
+[Amls]
+Hotkey=E
+Buttonpos=0,2
+Tip=Aerial Shackles
+Ubertip=Magically binds a target enemy air unit, so that it cannot move or attack and takes 30 damage per second. Lasts 40 seconds.
+
+[Amrf]
+Hotkey=V
+Unhotkey=V
+Buttonpos=3,2
+Unbuttonpos=3,2
+Tip=Crow Form
+UnTip=Human Form
+Ubertip=Turn into a Crow.
+Unubertip=Turn into a Human.
 
 [ANab]
 Hotkey=B
@@ -1142,6 +1938,16 @@ Tip=Drunken Haze - [Level 1],Drunken Haze - [Level 2],Drunken Haze - [Level 3]
 Ubertip=Drenches enemy units in alcohol, causing their movement speed to be reduced by 15%, and have a 45% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. Lasts 12 seconds.,Drenches enemy units in alcohol, causing their movement speed to be reduced by 30%, and have a 65% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. Lasts 12 seconds.,Drenches enemy units in alcohol, causing their movement speed to be reduced by 50%, and have a 80% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. Lasts 12 seconds.
 Researchubertip=Drenches enemy units in alcohol, causing their movement speed to be reduced, and have a chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage over time. |nLasts 12 seconds |n|n|cffffcc00Level 1|r - 15% movement speed reduction, 45% miss chance. |n|cffffcc00Level 2|r - 30% movement speed reduction, 65% miss chance. |n|cffffcc00Level 3|r - 50% movement speed reduction, 80% miss chance.
 
+[Andm]
+Hotkey=Z
+Unhotkey=Z
+Buttonpos=0,2
+Unbuttonpos=0,2
+Tip=Abolish Magic
+UnTip=|cffc3dbffRight-click to activate auto-casting.|r
+Ubertip=Dispels positive buffs from enemy units, and negative buffs from friendly units. Deals 250 damage to summoned units.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
+
 [ANdo]
 Hotkey=D
 Buttonpos=3,2
@@ -1169,6 +1975,12 @@ Tip=Life Drain - [Level 1],Life Drain - [Level 2],Life Drain - [Level 3]
 Ubertip=Absorbs the life essence of a target enemy unit by taking 30 hit points per second from it and giving them to the Dark Ranger, or transfers 30 hit points from the Dark Ranger to an ally. Also applies the current rank of the Black Arrow debuff to the target. Lasts 8 seconds.,Absorbs the life essence of a target enemy unit by taking 45 hit points per second from it and giving them to the Dark Ranger, or transfers 45 hit points from the Dark Ranger to an ally. Also applies the current rank of the Black Arrow debuff to the target. Lasts 8 seconds.,Absorbs the life essence of a target enemy unit by taking 60 hit points per second from it and giving them to the Dark Ranger, or transfers 60 hit points from the Dark Ranger to an ally. Also applies the current rank of the Black Arrow debuff to the target. Lasts 8 seconds.
 Researchubertip=Absorbs the life essence of a target enemy unit by taking hit points from it every second and giving them to the Dark Ranger, or transfers hit points from the Dark Ranger to an ally. |n|nLife Drain also applies the current rank of the Black Arrow debuff to the target. |nLasts 8 seconds. |n|n|cffffcc00Level 1|r - 30 hit point drain per second, or transfers 30 hit points per second to an ally. |n|cffffcc00Level 2|r - 45 hit point drain per second, or transfers 45 hit points per second to an ally. |n|cffffcc00Level 3|r - 60 hit point drain per second, or transfers 60 hit points per second to an ally.
 
+[Andt]
+Hotkey=R
+Buttonpos=0,0
+Tip=Reveal
+Ubertip=Reveals an area of the map. Detects invisible units. Lasts 6 seconds.
+
 [ANef]
 Hotkey=E
 Buttonpos=3,2
@@ -1186,6 +1998,13 @@ Researchbuttonpos=2,0
 Tip=Engineering Upgrade - [Level 1],Engineering Upgrade - [Level 2],Engineering Upgrade - [Level 3]
 Ubertip=Improves other Tinker abilities, gives 2 attack damage and increases Tinker movement speed by 10%.,Improves other Tinker abilities, gives 4 attack damage and increases Tinker movement speed by 20%.,Improves other Tinker abilities, gives 6 attack damage and increases Tinker movement speed by 30%.
 Researchubertip=Enhances other Tinker abilities with each level learned:|n|n|cffffcc00Cluster Rockets|r - Larger Area.|n|cffffcc00Pocket Factory|r - Builds Clockwerk Goblins more quickly.|n|cffffcc00Robo-Goblin|r - Increases armor and Strength; enhances Demolish.|n|nAlso gives bonus damage and increases the Tinker's movement speed.|n|n|cffffcc00Level 1|r - +2 damage, +10% movement.|n|cffffcc00Level 2|r - +4 damage, +20% movement.|n|cffffcc00Level 3|r - +6 damage, +30% movement.
+
+[Anei]
+Hotkey=U
+Buttonpos=2,2
+Researchhotkey=V
+Researchbuttonpos=3,2
+Tip=Select User
 
 [ANen]
 Hotkey=Z
@@ -1268,6 +2087,26 @@ UnTip=Revert to Tinker Form
 Ubertip=Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits: - 11 bonus Strength and 4 bonus armor. - Use of the Demolish ability, which grants bonus damage against buildings. - The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells.
 Researchubertip=Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- Bonus Strength and armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells.
 Unubertip=Returns to normal Tinker form, losing the benefits of Robo-Goblin but once again becoming organic.
+
+[Anh1]
+Hotkey=E
+Unhotkey=E
+Buttonpos=1,2
+Unbuttonpos=1,2
+Tip=Heal
+UnTip=|cffc3dbffRight-click to activate auto-casting.|r
+Ubertip=Heals a target friendly non-mechanical wounded unit.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
+
+[Anh2]
+Hotkey=E
+Unhotkey=E
+Buttonpos=1,2
+Unbuttonpos=1,2
+Tip=Heal
+UnTip=|cffc3dbffRight-click to activate auto-casting.|r
+Ubertip=Heals a target friendly non-mechanical wounded unit.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
 
 [ANha]
 Hotkey=F
@@ -1496,6 +2335,11 @@ Tip=Silence - [Level 1],Silence - [Level 2],Silence - [Level 3]
 Ubertip=Stops all enemies in a small target area from casting spells for 16 seconds.,Stops all enemies in a medium target area from casting spells for 20 seconds.,Stops all enemies in a large target area from casting spells for 24 seconds.
 Researchubertip=Stops all enemies in a target area from casting spells. The area of effect and duration increase with level. |n|n|cffffcc00Level 1|r - Small area, lasts 16 seconds. |n|cffffcc00Level 2|r - Medium area, lasts 20 seconds. |n|cffffcc00Level 3|r - Large area, lasts 24 seconds.
 
+[Ansk]
+Buttonpos=3,2
+Tip=Hardened Skin
+Ubertip=Reduces all attacks on the unit by 12 damage. Attacks cannot be reduced below 3 damage.
+
 [ANsl]
 Hotkey=V
 Buttonpos=3,2
@@ -1620,6 +2464,16 @@ Tip=Endurance Aura - [Level 1],Endurance Aura - [Level 2],Endurance Aura - [Leve
 Ubertip=Increases nearby friendly units' movement speed by 10% and attack rate by 5%.,Increases nearby friendly units' movement speed by 15% and attack rate by 10%.,Increases nearby friendly units' movement speed by 20% and attack rate by 15%.
 Researchubertip=Increases the movement speed and attack rate of nearby friendly units. |n|n|cffffcc00Level 1|r - 10% movement, 5% attack. |n|cffffcc00Level 2|r - 15% movement, 10% attack. |n|cffffcc00Level 3|r - 20% movement, 15% attack.
 
+[Aobk]
+Buttonpos=1,2
+Tip=Berserker Upgrade
+Ubertip=Transforms Headhunters into Berserkers, giving them increased hit points and the Berserk ability.
+
+[Aobs]
+Buttonpos=0,2
+Tip=Brute Strength
+Ubertip=Improves the fighting capabilities of Grunts with a 125 hit point increase, and 3 bonus attack damage.
+
 [AObu]
 Hotkey=B
 Buttonpos=0,2
@@ -1712,6 +2566,11 @@ Tip=Reincarnation - [Level 1],Reincarnation - [Level 1]
 Ubertip=When killed, Cairne will come back to life. Reincarnation has a 240 second cooldown.,When killed, Cairne will come back to life. Reincarnation has a 120 second cooldown.
 Researchubertip=When killed, the Tauren Chieftain will come back to life. |n|n|cffffcc00Level 1|r - 240 second cooldown. |n|cffffcc00Level 2|r - 120 second cooldown.
 
+[Aorb]
+Buttonpos=3,2
+Tip=Reinforced Defenses
+Ubertip=Upgrades Burrows and Watch Towers so that they have Fortified armor.
+
 [AOre]
 Buttonpos=3,2
 Researchhotkey=R
@@ -1747,6 +2606,11 @@ Tip=Shockwave - [Level 1],Shockwave - [Level 2],Shockwave - [Level 3]
 Ubertip=A wave of force that ripples outward, causing 75 damage to land units in a line.,A wave of force that ripples outward, causing 130 damage to land units in a line.,A wave of force that ripples outward, causing 200 damage to land units in a line.
 Researchubertip=A wave of force that ripples out from the Hero, causing damage to land units in a line. |n|n|cffffcc00Level 1|r - 75 damage. |n|cffffcc00Level 2|r - 130 damage. |n|cffffcc00Level 3|r - 200 damage.
 
+[Aosp]
+Buttonpos=3,2
+Tip=Spiked Barricades,Spiked Barricades,Improved Spiked Barricades
+Ubertip=Surrounds Orc buildings with spikes that damage enemy melee attackers. Deals 5 damage per attack plus an additional 20% of the attacker's damage.,Surrounds Orc buildings with spikes that damage enemy melee attackers. Deals 5 damage per attack plus an additional 20% of the attacker's damage.,Surrounds Orc buildings with spikes that damage enemy melee attackers. Deals 5 damage per attack plus an additional 20% of the attacker's damage.
+
 [AOsw]
 Hotkey=W
 Buttonpos=2,2
@@ -1755,6 +2619,11 @@ Researchbuttonpos=2,0
 Tip=Serpent Ward - [Level 1],Serpent Ward - [Level 2],Serpent Ward - [Level 3]
 Ubertip=Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward has 90 hit points, is magic and spell immune, and deals 14 - 16 damage. Lasts 40 seconds. Attacks land and air units.,Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward has 165 hit points, is magic and spell immune, and deals 27 - 30 damage. Lasts 40 seconds. Attacks land and air units.,Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward has 200 hit points, is magic and spell immune, and deals 46 - 50 damage. Lasts 40 seconds. Attacks land and air units.
 Researchubertip=Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward is immune to magic and spells. |nLasts 40 seconds. |n|n|cffffcc00Attacks land and air units.|r |n|n|cffffcc00Level 1|r - 90 hit points, 14 - 16 damage. |n|cffffcc00Level 2|r - 165 hit points, 27 - 30 damage. |n|cffffcc00Level 3|r - 200 hit points, 46 - 50 damage.
+
+[Aotr]
+Buttonpos=3,2
+Tip=Troll Regeneration
+Ubertip=Increases the hit point regeneration rate of Headhunters, Witch Doctors and Batriders.
 
 [AOvd]
 Hotkey=V
@@ -1800,1048 +2669,6 @@ Researchbuttonpos=3,0
 Tip=Bladestorm
 Ubertip=Causes a bladestorm of destructive force around the Blademaster, rendering him immune to magic and spells, dealing 140 damage per second to nearby enemy land units. Lasts 7 seconds.
 Researchubertip=Causes a bladestorm of destructive force around the Blademaster, rendering him immune to magic and spells, dealing 140 damage per second to nearby enemy land units.
-
-[ARal]
-Hotkey=Y
-Buttonpos=3,1
-
-[AUa2]
-Hotkey=D
-Buttonpos=3,2
-Researchhotkey=D
-Researchbuttonpos=3,0
-Tip=Animate Dead
-Ubertip=Raises 6 dead units in an area to fight for the Death Knight for 40 seconds.
-Researchubertip=Raises 6 dead units in an area to fight for the Death Knight for 40 seconds.
-
-[AUan]
-Hotkey=D
-Buttonpos=3,2
-Researchhotkey=D
-Researchbuttonpos=3,0
-Tip=Animate Dead
-Ubertip=Raises 6 dead units in an area to fight for the Death Knight for 40 seconds.
-Researchubertip=Raises 6 dead units in an area to fight for the Death Knight for 40 seconds.
-
-[AUau]
-Buttonpos=2,2
-Researchhotkey=U
-Researchbuttonpos=2,0
-Tip=Unholy Aura - [Level 1],Unholy Aura - [Level 2],Unholy Aura - [Level 3]
-Ubertip=Increases nearby friendly units' movement speed by 10% and life regeneration rate.,Increases nearby friendly units' movement speed by 15% and life regeneration rate.,Increases nearby friendly units' movement speed by 20% and life regeneration rate.
-Researchubertip=Increases the movement speed and life regeneration rate of nearby friendly units. |n|n|cffffcc00Level 1|r - 10% movement, minor regeneration bonus. |n|cffffcc00Level 2|r - 15% movement, moderate regeneration bonus. |n|cffffcc00Level 3|r - 20% movement, greater regeneration bonus.
-
-[AUav]
-Buttonpos=2,2
-Researchhotkey=V
-Researchbuttonpos=2,0
-Tip=Vampiric Aura - [Level 1],Vampiric Aura - [Level 2],Vampiric Aura - [Level 3]
-Ubertip=Nearby friendly melee units gain 20% of their attack damage when they hit enemy units.,Nearby friendly melee units gain 35% of their attack damage when they hit enemy units.,Nearby friendly melee units gain 50% of their attack damage when they hit enemy units.
-Researchubertip=Nearby friendly melee units gain hit points when they hit enemy units. |n|n|cffffcc00Level 1|r - Gains 20% of attack damage. |n|cffffcc00Level 2|r - Gains 35% of attack damage. |n|cffffcc00Level 3|r - Gains 50% of attack damage.
-
-[AUbu]
-Hotkey=B
-Buttonpos=0,2
-Researchbuttonpos=0,2
-
-[AUcb]
-Hotkey=C
-Unhotkey=C
-Buttonpos=2,2
-Unbuttonpos=2,2
-Researchhotkey=C
-Researchbuttonpos=2,0
-Tip=Carrion Beetles - [Level 1],Carrion Beetles - [Level 2],Carrion Beetles - [Level 3]
-UnTip=|cffc3dbffRight-click to activate auto-casting.
-Ubertip=Progenerates 2 Beetle from a target corpse. Beetles have 170 hit points, and deal 8 - 9 damage. Beetles are permanent until killed. Maximum of 6 Beetles.,Progenerates 2 Beetle from a target corpse. Beetles have 300 hit points, and deal 15 - 18 damage. Can learn Burrow. Beetles are permanent until killed. Maximum of 6 Beetles.,Progenerates 2 Beetle from a target corpse. Beetles have 440 hit points, and deal 22 - 27 damage. Can learn Burrow. Beetles are permanent until killed. Maximum of 6 Beetles.
-Researchubertip=The Crypt Lord progenerates 2 Carrion Beetle from a target corpse to attack the Crypt Lord's enemies. Beetles are permanent, but only 6 can be controlled at a time. |n|n|cffffcc00Level 1|r - 170 hit points, 8 - 9 damage. |n|cffffcc00Level 2|r - 300 hit points, 15 - 18 damage, Beetles can learn Burrow. |n|cffffcc00Level 3|r - 440 hit points, 22 - 27 damage, Beetles can learn Burrow.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.
-
-[AUcs]
-Hotkey=C
-Buttonpos=0,2
-Researchhotkey=C
-Researchbuttonpos=0,0
-Tip=Carrion Swarm - [Level 1],Carrion Swarm - [Level 2],Carrion Swarm - [Level 3]
-Ubertip=Sends a horde of bats to deal 75 damage to each enemy unit in a cone.,Sends a horde of bats to deal 135 damage to each enemy unit in a cone.,Sends a horde of bats to deal 200 damage to each enemy unit in a cone.
-Researchubertip=Sends a horde of bats to damage enemies. |n|n|cffffcc00Level 1|r - 75 damage per unit. |n|cffffcc00Level 2|r - 135 damage per unit. |n|cffffcc00Level 3|r - 200 damage per unit.
-
-[AUdc]
-Hotkey=C
-Buttonpos=0,2
-Researchhotkey=C
-Researchbuttonpos=0,0
-Tip=Death Coil - [Level 1],Death Coil - [Level 2],Death Coil - [Level 3]
-Ubertip=A coil of death that can heal a friendly Undead or Demon unit for 200 hit points, or deal half damage to an enemy living unit.,A coil of death that can heal a friendly Undead or Demon unit for 400 hit points , or deal half damage to an enemy living unit.,A coil of death that can heal a friendly Undead or Demon unit for 600 hit points, or deal half damage to an enemy living unit.
-Researchubertip=A coil of death that can damage an enemy living unit, or heal a friendly Undead or Demon unit. Healing pierces spell immunity. |n|n|cffffcc00Level 1|r - Heals for 200 hit points. |n|cffffcc00Level 2|r - Heals for 400 hit points. |n|cffffcc00Level 3|r - Heals for 600 hit points.
-
-[AUdd]
-Hotkey=D
-Buttonpos=3,2
-Researchhotkey=D
-Researchbuttonpos=3,0
-Tip=Death And Decay
-Ubertip=Damages everything in its area of effect by 4% of its max hit points per second. Also destroys trees. Lasts 35 seconds.
-Researchubertip=Damages everything in its area of effect by 4% of its max hit points per second. Also destroys trees.
-
-[AUdp]
-Hotkey=E
-Buttonpos=1,2
-Researchhotkey=E
-Researchbuttonpos=1,0
-Tip=Death Pact - [Level 1],Death Pact - [Level 2],Death Pact - [Level 3]
-Ubertip=Kills a target friendly Undead unit, giving 100% of its hit points to the Death Knight.,Kills a target friendly Undead unit, giving 200% of its hit points to the Death Knight.,Kills a target friendly Undead unit, giving 300% of its hit points to the Death Knight.
-Researchubertip=Kills a target friendly Undead unit, giving a percentage of its hit points to the Death Knight. |n|n|cffffcc00Level 1|r - 100% conversion. |n|cffffcc00Level 2|r - 200% conversion. |n|cffffcc00Level 3|r - 300% conversion.
-
-[AUdr]
-Hotkey=R
-Buttonpos=2,2
-Researchhotkey=R
-Researchbuttonpos=2,0
-Tip=Dark Ritual - [Level 1],Dark Ritual - [Level 2],Dark Ritual - [Level 3]
-Ubertip=Sacrifices a target friendly Undead unit to convert 33% of its hit points into mana for the Lich.,Sacrifices a target friendly Undead unit to convert 55% of its hit points into mana for the Lich.,Sacrifices a target friendly Undead unit to convert 80% of its hit points into mana for the Lich.
-Researchubertip=Sacrifices a target friendly Undead unit to convert its hit points into mana for the Lich. |n|n|cffffcc00Level 1|r - 33% of hit points to mana. |n|cffffcc00Level 2|r - 55% of hit points to mana. |n|cffffcc00Level 3|r - 80% of hit points to mana.
-
-[AUfa]
-Hotkey=X
-Buttonpos=1,2
-Researchhotkey=W
-Researchbuttonpos=1,0
-Tip=Frost Armor - [Level 1],Frost Armor - [Level 2],Frost Armor - [Level 3]
-Ubertip=Creates a shield of frost around a target friendly unit. The shield adds 3 armor and slows melee units that attack it for 4 seconds. Lasts 45 seconds.,Creates a shield of frost around a target friendly unit. The shield adds 5 armor and slows melee units that attack it for 4 seconds. Lasts 45 seconds.,Creates a shield of frost around a target friendly unit. The shield adds 7 armor and slows melee units that attack it for 4 seconds. Lasts 45 seconds.
-Researchubertip=Creates a shield of frost around a target friendly unit. The shield adds armor and slows melee units that attack it. |n|n|cffffcc00Level 1|r - Adds 3 armor. |n|cffffcc00Level 2|r - Adds 5 armor. |n|cffffcc00Level 3|r - Adds 7 armor.
-
-[AUfn]
-Hotkey=N
-Buttonpos=0,2
-Researchhotkey=N
-Researchbuttonpos=0,0
-Tip=Frost Nova - [Level 1],Frost Nova - [Level 2],Frost Nova - [Level 3]
-Ubertip=Blasts enemy units with a wave of frost that deals 100 damage to the target, and 50 nova damage. Cold damage slows units' movement and attack rate for 4 seconds.,Blasts enemy units with a wave of frost that deals 100 damage to the target, and 100 nova damage. Cold damage slows units' movement and attack rate for 5 seconds.,Blasts enemy units with a wave of frost that deals 100 damage to the target, and 150 nova damage. Cold damage slows units' movement and attack rate for 6 seconds.
-Researchubertip=Blasts enemy units around a target enemy unit with a wave of damaging frost that slows movement and attack rate. |n|n|cffffcc00Level 1|r - 100 target damage, 50 nova damage. |n|cffffcc00Level 2|r - 100 target damage, 100 nova damage. |n|cffffcc00Level 3|r - 100 target damage, 150 nova damage.
-
-[AUfu]
-Hotkey=F
-Unhotkey=X
-Buttonpos=1,2
-Unbuttonpos=1,2
-Researchhotkey=F
-Researchbuttonpos=1,0
-Tip=Frost Armor - [Level 1],Frost Armor - [Level 2],Frost Armor - [Level 3]
-UnTip=|cffc3dbffRight-click to activate auto-casting.
-Ubertip=Creates a shield of frost around a target friendly unit. The shield adds 3 armor and slows melee units that attack it for 3 seconds. Lasts 45 seconds.,Creates a shield of frost around a target friendly unit. The shield adds 5 armor and slows melee units that attack it for 5 seconds. Lasts 45 seconds.,Creates a shield of frost around a target friendly unit. The shield adds 7 armor and slows melee units that attack it for 7 seconds. Lasts 45 seconds.
-Researchubertip=Creates a shield of frost around a target friendly unit. The shield adds armor and slows melee units that attack it. |n|n|cffffcc00Level 1|r - Adds 3 armor. |n|cffffcc00Level 2|r - Adds 5 armor. |n|cffffcc00Level 3|r - Adds 7 armor.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.
-
-[AUim]
-Hotkey=E
-Buttonpos=0,2
-Researchhotkey=E
-Researchbuttonpos=0,0
-Tip=Impale - [Level 1],Impale - [Level 2],Impale - [Level 3]
-Ubertip=Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line, dealing 60 damage and hurling enemy ground units into the air in their wake, stunning them for 2 seconds.,Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line dealing 105 damage and hurling enemy ground units into the air in their wake, stunning them for 3 seconds.,Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line dealing 150 damage and hurling enemy ground units into the air in their wake, stunning them for 4 seconds.
-Researchubertip=Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line, dealing damage and hurling enemy ground units into the air in their wake. |n|n|cffffcc00Level 1|r - 60 damage, 2 second stun. |n|cffffcc00Level 2|r - 105 damage, 3 second stun. |n|cffffcc00Level 3|r - 150 damage, 4 second stun.
-
-[AUin]
-Hotkey=N
-Buttonpos=3,2
-Researchhotkey=N
-Researchbuttonpos=3,0
-Tip=Inferno
-Ubertip=Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 180 seconds.
-Researchubertip=Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 180 seconds.
-
-[AUls]
-Hotkey=L
-Buttonpos=3,2
-Researchhotkey=L
-Researchbuttonpos=3,0
-Tip=Locust Swarm
-Ubertip=Creates a swarm of angry locusts that bite and tear at nearby enemy units. As they chew the enemy flesh, they convert it into a substance that restores hit points to the Crypt Lord when they return. Pierces spell immunity. Lasts 30 seconds.
-Researchubertip=Creates a swarm of angry locusts that bite and tear at nearby enemy units. As they chew the enemy flesh, they convert it into a substance that restores hit points to the Crypt Lord when they return. Pierces spell immunity. |nLasts 30 seconds.
-
-[AUsl]
-Hotkey=E
-Buttonpos=1,2
-Researchhotkey=E
-Researchbuttonpos=1,0
-Tip=Sleep - [Level 1],Sleep - [Level 2],Sleep - [Level 3]
-Ubertip=Puts a target enemy unit to sleep for 15 seconds. A sleeping unit can be awoken by attacking it.,Puts a target enemy unit to sleep for 35 seconds. A sleeping unit can be awoken by attacking it.,Puts a target enemy unit to sleep for 55 seconds. A sleeping unit can be awoken by attacking it.
-Researchubertip=Puts a target enemy unit to sleep. A sleeping unit can be awoken by attacking it. |n|n|cffffcc00Level 1|r - 15 second sleep for 80 mana. |n|cffffcc00Level 2|r - 35 second sleep for 65 mana. |n|cffffcc00Level 3|r - 55 second sleep for 50 mana.
-
-[AUts]
-Unhotkey=X
-Buttonpos=1,2
-Unbuttonpos=1,2
-Researchhotkey=S
-Researchbuttonpos=1,0
-Tip=Spiked Carapace - [Level 1],Spiked Carapace - [Level 2],Spiked Carapace - [Level 3]
-Ubertip=Enhances the Crypt Lord's chitinous armor with organic barbs, giving the Crypt Lord 4 bonus armor and returning 15% of melee attack damage to enemies.,Enhances the Crypt Lord's chitinous armor with organic barbs, giving him 8 bonus armor and returning 30% of melee attack damage to enemies.,Enhances the Crypt Lord's chitinous armor with organic barbs, giving him 12 bonus armor and returning 45% of melee attack damage to enemies.
-Researchubertip=The Crypt Lord forms barbed layers of chitinous armor that increases its defense and returns damage to enemy melee attackers.  |n|n|cffffcc00Level 1|r - 15% damage returned, 4 bonus armor. |n|cffffcc00Level 2|r -  30% damage returned, 8 bonus armor. |n|cffffcc00Level 3|r -  45% damage returned, 12 bonus armor.
-
-[Aabs]
-Hotkey=B
-Buttonpos=3,2
-Tip=Absorb Mana
-Ubertip=Takes all mana from one of your units and gives it to the Destroyer.
-
-[Aadm]
-Hotkey=B
-Unhotkey=B
-Buttonpos=0,2
-Unbuttonpos=0,2
-Tip=Abolish Magic
-UnTip=|cffc3dbffRight-click to activate auto-casting.|r
-Ubertip=Dispels positive buffs from enemy units, and negative buffs from friendly units. Deals 250 damage to summoned units.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
-
-[Aaha]
-Hotkey=G
-Unhotkey=R
-Buttonpos=3,1
-Unbuttonpos=3,1
-Tip=Gather
-UnTip=Return Resources
-Ubertip=Mines gold from Haunted Gold Mines.
-Unubertip=Return the carried resources to the nearest town hall.
-
-[Aakb]
-Buttonpos=1,2
-Tip=War Drums
-Ubertip=Adds a damage increase to the attacks of nearby friendly units.
-
-[Aam2]
-Hotkey=N
-Buttonpos=1,2
-Tip=Anti-magic Shell
-Ubertip=Creates a barrier that stops 300 points of spell, summon, or magic damage from affecting a target unit. Lasts 90 seconds.
-
-[Aamk]
-Buttonpos=1,1
-Researchhotkey=F
-Researchbuttonpos=3,1
-Tip=Attribute Bonus - [Level 1],Attribute Bonus - [Level 2],Attribute Bonus - [Level 3],Attribute Bonus - [Level 4]
-Ubertip=Gives a total of 3 points to Agility, Intelligence, and Strength,Gives a total of 6 points to Agility, Intelligence, and Strength,Gives a total of 9 points to Agility, Intelligence, and Strength,Gives a total of 12 points to Agility, Intelligence, and Strength
-Researchubertip=Gives a permanent bonus to Agility, Intelligence, and Strength. |n|n|cffffcc00Level 1|r - Adds three points to all stats.|n|cffffcc00Level 2|r - Adds three additional points.|n|cffffcc00Level 3|r - Adds three additional points.|n|cffffcc00Level 4|r - Adds three additional points.
-
-[Aams]
-Hotkey=X
-Buttonpos=1,2
-Tip=Anti-magic Shell
-Ubertip=Creates a barrier that stops spells from affecting a target unit. Lasts 90 seconds.
-
-[Aap1]
-Buttonpos=1,2
-Tip=Disease Cloud
-Ubertip=Infects nearby enemy living units with Disease Cloud. Disease Cloud deals 2 damage per second. Lasts 75 seconds.
-
-[Aap2]
-Buttonpos=0,2
-Tip=Disease Cloud
-Ubertip=Infects nearby enemy living units with Disease Cloud. Disease Cloud deals 2 damage per second. Lasts 75 seconds.
-
-[Aap3]
-Buttonpos=1,2
-Tip=Disease Cloud
-Ubertip=Infects nearby enemy living units with Disease Cloud. Disease Cloud deals 1 damage per second. Lasts 75 seconds.
-
-[Aast]
-Hotkey=C
-Buttonpos=2,2
-Tip=Ancestral Spirit
-Ubertip=Raises a fallen non-Hero Tauren from the dead. The Tauren is revived with 100% of its hit points restored.
-
-[Aatp]
-Buttonpos=1,1
-Unbuttonpos=1,1
-
-[Aave]
-Hotkey=T
-Unhotkey=V
-Buttonpos=3,2
-Unbuttonpos=3,2
-
-[Ablo]
-Hotkey=B
-Unhotkey=B
-Buttonpos=2,2
-Unbuttonpos=2,2
-Tip=Bloodlust
-UnTip=|cffc3dbffRight-click to activate auto-casting.|r
-Ubertip=Increases a friendly unit's attack rate by 40% and movement speed by 25%. Lasts 60 seconds.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
-
-[Abof]
-Buttonpos=0,2
-Tip=Burning Oil
-Ubertip=Drenches the Demolisher ammo in burning oil, causing them to light the ground on fire and burn enemy units.
-
-[Abrf]
-Hotkey=F
-Unhotkey=F
-Buttonpos=3,2
-Unbuttonpos=3,2
-Tip=Bear Form
-UnTip=Night Elf Form
-Ubertip=Transforms the Druid into a bear, slowing mana regeneration, but making him an excellent warrior.
-Unubertip=Transforms the Druid into a Night Elf.
-
-[Absk]
-Hotkey=B
-Buttonpos=0,2
-Tip=Berserk
-Ubertip=Causes this unit to attack 50% faster, but take 40% more damage.
-
-[Abtl]
-Hotkey=B
-Buttonpos=0,2
-Tip=Battle Stations
-Ubertip=Causes nearby Peons to run into the Burrow so that they can defend their base.
-
-[Abu2]
-Hotkey=B
-Unhotkey=B
-Buttonpos=3,2
-Unbuttonpos=3,2
-Tip=Burrow
-UnTip=Unburrow
-Ubertip=The Carrion Beetle digs into the ground and becomes invisible.
-Unubertip=The Carrion Beetle pops out of the ground and becomes visible again.
-
-[Abu3]
-Hotkey=B
-Unhotkey=B
-Buttonpos=3,2
-Unbuttonpos=3,2
-Tip=Burrow
-UnTip=Unburrow
-Ubertip=The Carrion Beetle digs into the ground and becomes invisible.
-Unubertip=The Carrion Beetle pops out of the ground and becomes visible again.
-
-[Abu5]
-Hotkey=V
-Unhotkey=V
-Buttonpos=3,2
-Unbuttonpos=3,2
-Tip=Burrow
-UnTip=Unburrow
-Ubertip=The Arachnathid digs into the ground and becomes invisible.
-Unubertip=The Arachnathid pops out of the ground and becomes visible again.
-
-[Abur]
-Hotkey=B
-Unhotkey=B
-Buttonpos=3,2
-Unbuttonpos=3,2
-Tip=Burrow
-UnTip=Unburrow
-Ubertip=The Crypt Fiend digs into the ground, becomes invisible, and gains a regeneration rate of 5 hit points per second. The Crypt Fiend cannot attack while burrowed.
-Unubertip=The Crypt Fiend pops out of the ground and becomes visible again.
-
-[Acan]
-Hotkey=C
-Buttonpos=0,2
-Tip=Cannibalize
-Ubertip=Consumes a nearby corpse to heal 16 hit points per second.
-
-[Acdb]
-Buttonpos=2,2
-Researchhotkey=E
-Researchbuttonpos=2,0
-Tip=Drunken Brawler - [Level 1],Drunken Brawler - [Level 2],Drunken Brawler - [Level 3],Drunken Brawler - [Level 4]
-Ubertip=Gives a 7% chance to dodge an attack and a 10% chance to deal 2 times normal damage.,Gives a 14% chance to dodge an attack and a 10% chance to deal 3 times normal damage.,Gives a 21% chance to dodge an attack and a 10% chance to deal 4 times normal damage.,Gives a 30% chance to dodge an attack and a 10% chance to deal 6 times normal damage.
-Researchubertip=Gives a percent chance to avoid attacks and a 10% chance to deal additional damage. |n|n|cffffcc00Level 1|r - 7% dodge, 2 times normal damage. |n|cffffcc00Level 2|r - 14% dodge, 3 times normal damage. |n|cffffcc00Level 3|r - 21% dodge, 4 times normal damage. |n|cffffcc00Level 4|r - 30% dodge, 6 times normal damage.
-
-[Acdh]
-Hotkey=X
-Buttonpos=1,2
-Researchhotkey=W
-Researchbuttonpos=1,0
-Tip=Drunken Haze - [Level 1],Drunken Haze - [Level 2],Drunken Haze - [Level 3],Drunken Haze - [Level 4]
-Ubertip=Drenches enemy units in alcohol, causing their movement speed to be reduced by 50%, and have a 45% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. Lasts 12 seconds.,Drenches enemy units in alcohol, causing their movement speed to be reduced by 50%, and have a 65% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. Lasts 12 seconds.,Drenches enemy units in alcohol, causing their movement speed to be reduced by 50%, and have a 80% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. Lasts 12 seconds.,Drenches enemy units in alcohol, causing their movement speed to be reduced by 50%, and have a 95% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. Lasts 12 seconds.
-Researchubertip=Drenches enemy units in alcohol, causing their movement speed to be reduced, and have a chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage over time. |nLasts 12 seconds |n|n|cffffcc00Level 1|r - 50% movement speed, 45% miss chance. |n|cffffcc00Level 2|r - 50% movement speed, 65% miss chance. |n|cffffcc00Level 3|r - 50% movement speed, 80% miss chance.|n|cffffcc00Level 4|r - 50% movement speed, 95% miss chance.
-
-[Acef]
-Hotkey=V
-Buttonpos=3,2
-Researchhotkey=R
-Researchbuttonpos=3,0
-Tip=Storm, Earth, And Fire - [Level 1],Storm, Earth, And Fire - [Level 2]
-Ubertip=Splits the Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn.,Splits the Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn.
-Researchubertip=Splits the Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn.|n|n|cffffcc00Level 1|r - Summons three mighty Pandas. |n|cffffcc00Level 2|r - Summons three even mightier Pandas.
-
-[Ache]
-Hotkey=X
-Buttonpos=1,2
-Tip=Cast Ray of Disruption
-Ubertip=Conjures a stream of neutralizing magic that bounces up to 8 times, dispelling units in its wake.
-
-[Acht]
-Hotkey=Z
-Buttonpos=0,2
-Tip=Howl of Terror
-Ubertip=Emits a terrifying howl that reduces nearby enemy units' attack damage by 25% for 10 seconds.
-
-[Aclf]
-Hotkey=C
-Buttonpos=1,2
-Tip=Cloud
-Ubertip=Cast on enemy buildings with ranged attacks to stop the buildings from attacking. Lasts 30 seconds.
-
-[Acmg]
-Hotkey=C
-Buttonpos=1,2
-Tip=Control Magic
-Ubertip=Takes control of an enemy summoned unit. The mana cost is 35% of the summoned unit's current hit points.
-
-[Acn2]
-Hotkey=C
-Buttonpos=0,2
-Tip=Cannibalize
-Ubertip=Consumes a nearby corpse to heal 25 hit points per second.
-
-[Acny]
-Hotkey=C
-Buttonpos=2,2
-Tip=Cyclone
-Ubertip=Tosses a target non-mechanical enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. Lasts 20 seconds.
-
-[Aco2]
-Hotkey=U
-Buttonpos=0,2
-Tip=Mount Hippogryph
-Ubertip=Mounts a Hippogryph so that the Archer can attack from the air. Attacks land and air units.
-
-[Aco3]
-Hotkey=U
-Buttonpos=0,2
-Tip=Pick up Archer
-Ubertip=Picks up an Archer so that the Archer can attack from the air. Attacks land and air units.
-
-[Acoa]
-Hotkey=Z
-Buttonpos=0,2
-Tip=Mount Hippogryph
-Ubertip=Mounts a Hippogryph so that the Archer can attack from the air. The mounted unit cannot dismount. Attacks land and air units.
-
-[Acoh]
-Hotkey=Z
-Buttonpos=0,2
-Tip=Pick up Archer
-Ubertip=Picks up an Archer so that the Archer can attack from the air. The mounted unit cannot dismount. Attacks land and air units.
-
-[Acor]
-Buttonpos=0,2
-Tip=Corrosive Breath
-Ubertip=Hurls a ball of corrosive bile that is effective against buildings.
-
-[Acpf]
-Hotkey=F
-Unhotkey=F
-Buttonpos=3,2
-Unbuttonpos=3,2
-Tip=Corporeal Form
-UnTip=Ethereal Form
-Ubertip=Turns the Spirit Walker corporeal, allowing him to attack and take physical damage.
-Unubertip=Turns the Spirit Walker ethereal, making him immune to physical damage but unable to attack. He can cast spells and will take extra damage from Magic attacks and spells.
-
-[Acri]
-Hotkey=C
-Buttonpos=2,2
-Tip=Cripple
-Ubertip=Reduces movement speed by 75%, attack rate by 50%, and damage by 50% of a target enemy unit. Lasts 60 seconds.
-
-[Acrs]
-Hotkey=C
-Unhotkey=C
-Buttonpos=0,2
-Unbuttonpos=0,2
-Tip=Curse
-UnTip=|cffc3dbffRight-click to activate auto-casting.
-Ubertip=Curses a target enemy unit, causing it to have a 33% chance to miss on an attack. Lasts 60 seconds.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.
-
-[Acyc]
-Hotkey=C
-Buttonpos=1,2
-Tip=Cyclone
-Ubertip=Tosses a target non-mechanical enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. Lasts 20 seconds.
-
-[Adcn]
-Hotkey=D
-Buttonpos=1,2
-Tip=Disenchant
-Ubertip=Removes all buffs from units in a target area. Deals 250 damage to hostile summoned units.
-
-[Adec]
-Hotkey=U
-Buttonpos=0,2
-Tip=Dismount Archer & Hippogryph
-Ubertip=Dismounts the Archer from the Hippogryph.
-
-[Adef]
-Hotkey=D
-Unhotkey=D
-Buttonpos=0,2
-Unbuttonpos=0,2
-Tip=Defend
-UnTip=Stop Defend
-Ubertip=Activate to have a 25% chance to reflect Piercing attacks upon the source, and to take only 50% of the damage from attacks that are not reflected. While Defend is active, move speed is reduced by 30%.
-Unubertip=Deactivate to move at normal speed, but take regular damage from Piercing attacks.
-
-[Adev]
-Hotkey=D
-Buttonpos=0,2
-Tip=Devour
-Ubertip=Consumes an enemy land unit, slowly digesting it and dealing 5 damage per second to it. If the Kodo Beast is killed while the consumed unit is still digesting, the unit that was devoured will be released.
-
-[Adis]
-Hotkey=D
-Buttonpos=1,2
-Tip=Dispel Magic
-Ubertip=Removes all buffs from units in a target area. Deals 200 damage to summoned units.
-
-[Adri]
-Hotkey=U
-Buttonpos=1,2
-Tip=Unload All
-Ubertip=Unloads all units.
-
-[Adro]
-Hotkey=U
-Buttonpos=1,2
-Tip=Unload All
-Ubertip=Unloads all carried units at a target location.
-
-[Adsm]
-Hotkey=D
-Buttonpos=0,2
-Tip=Dispel Magic
-Ubertip=Removes all buffs from units in a target area. Deals 200 damage to summoned units.
-
-[Adtg]
-Buttonpos=0,2
-Tip=True Sight
-Ubertip=Reveals nearby invisible units.
-
-[Adtn]
-Hotkey=D
-Buttonpos=1,2
-Tip=Detonate
-Ubertip=Destroys the Wisp, dispelling all magical buffs and draining 40 mana from each unit in an area around the Wisp. Deals 225 damage to summoned units.
-
-[Adts]
-Buttonpos=2,1
-Tip=Magic Sentry
-Ubertip=Reveals nearby invisible units.
-
-[Advm]
-Hotkey=D
-Buttonpos=0,2
-Tip=Devour Magic
-Ubertip=Consumes all magical buffs from units in an area. Each unit that is devoured of magic gives the Destroyer 50 hit points and 75 mana. Deals 160 damage to summoned units.
-
-[Aeat]
-Hotkey=E
-Buttonpos=0,2
-Tip=Eat Tree
-Ubertip=Consume a tree to restore 500 hit points over 30 seconds.
-
-[Aegr]
-Buttonpos=1,2
-Tip=Elune's Grace
-Ubertip=Reduces the damage taken from Piercing attacks to 65%, and spells and Magic attacks to 80%.
-
-[Aeib]
-Buttonpos=2,2
-Tip=Improved Bows
-Ubertip=Increases attack range.
-
-[Aemk]
-Buttonpos=3,2
-Tip=Marksmanship
-Ubertip=Increases damage of Archers and Hippogryph Riders by 4.
-
-[Aenc]
-Hotkey=L
-Unhotkey=U
-Buttonpos=1,2
-Unbuttonpos=1,2
-Tip=Load
-UnTip=Unload All
-Ubertip=Orders a Wisp to enter the gold mine.
-Unubertip=Removes all Wisps from the gold mine.
-
-[Aenr]
-Hotkey=Z
-Buttonpos=0,2
-Tip=Entangling Roots
-Ubertip=Causes roots to burst from the ground, immobilizing a target enemy unit for 6 seconds, and dealing 10 damage per second.
-
-[Aens]
-Hotkey=E
-Buttonpos=0,2
-Tip=Ensnare
-Ubertip=Causes a target enemy unit to be bound to the ground so that it cannot move for 9 seconds. Air units that are ensnared can be attacked as though they were land units.
-
-[Aent]
-Hotkey=G
-Buttonpos=1,2
-Tip=Entangle Gold Mine
-Ubertip=Entangles the gold mine, allowing Wisps to enter and mine the gold.
-
-[Aenw]
-Hotkey=Z
-Buttonpos=0,2
-Tip=Entangling Roots
-Ubertip=Causes roots to burst from the ground, immobilizing a target enemy unit for 6 seconds, and dealing 10 damage per second.
-
-[Aesn]
-Hotkey=E
-Buttonpos=0,2
-Tip=Sentinel
-Ubertip=Send an owl to a nearby tree to reveal the area around it. Can see invisible units. Lasts 120 seconds.
-
-[Aesr]
-Hotkey=Z
-Buttonpos=0,2
-Tip=Sentinel
-Ubertip=Send an owl to a nearby tree to reveal the area around it. Can see invisible units.
-
-[Aews]
-Buttonpos=1,0
-Tip=Well Spring
-Ubertip=Increases the amount of mana that can be stored in Moon Wells by 100, and their rate of mana regeneration by 52%.
-
-[Aexh]
-Buttonpos=3,2
-Tip=Exhume Corpses
-Ubertip=Generates a corpse within the Meat Wagon every 15 seconds.
-
-[Aeye]
-Hotkey=W
-Buttonpos=0,2
-Tip=Sentry Ward
-Ubertip=Summons an invisible and immovable ward that provides vision in an area. Wards are spell immune. Can see invisible units. Lasts 600 seconds.
-
-[Afa2]
-Hotkey=R
-Unhotkey=R
-Buttonpos=0,2
-Unbuttonpos=0,2
-Tip=Faerie Fire
-UnTip=|cffc3dbffRight-click to activate auto-casting.|r
-Ubertip=Reduces a target enemy unit's armor by 4 and gives vision of that unit. Lasts 70 seconds.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
-
-[Afae]
-Hotkey=R
-Unhotkey=R
-Buttonpos=0,2
-Unbuttonpos=0,2
-Tip=Faerie Fire
-UnTip=|cffc3dbffRight-click to activate auto-casting.|r
-Ubertip=Reduces a target enemy unit's armor by 4 and gives vision of that unit. Lasts 70 seconds.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
-
-[Afak]
-Hotkey=O
-Unhotkey=O
-Buttonpos=1,2
-Unbuttonpos=1,2
-Tip=Orb of Annihilation
-UnTip=|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r
-Ubertip=Adds 15 bonus damage to the Destroyer's attack and causes his attacks to do area of effect damage.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
-
-[Afbb]
-Buttonpos=1,2
-Tip=Feedback
-Ubertip=Spirit Beast attacks destroy 20 mana per hit. The mana combusts, dealing damage to the attacked unit.
-
-[Afbk]
-Buttonpos=3,2
-Tip=Feedback
-Ubertip=Spellbreaker attacks destroy 20 mana per hit. The mana combusts, dealing damage to the attacked unit.
-
-[Afbt]
-Buttonpos=3,2
-Tip=Feedback
-Ubertip=This tower's attacks destroy 24 mana per hit against any unit, causing bonus damage equal to the mana destroyed. Additionally, attacks made by this tower cause 20 bonus damage against summoned units.
-
-[Afla]
-Hotkey=F
-Buttonpos=0,2
-Tip=Flare
-Ubertip=Launches a Dwarven flare above a target point, which reveals that area for 15 seconds. Reveals invisible units.
-
-[Aflk]
-Buttonpos=2,2
-Tip=Flak Cannons
-Ubertip=Uses powerful cannons to deal area effect damage against air units.
-
-[Afr2]
-Buttonpos=1,2
-Tip=Frost Attack
-Ubertip=Adds a cold effect to this unit's attacks that slows enemy units' movement speed.
-
-[Afra]
-Buttonpos=0,2
-Tip=Frost Attack
-Ubertip=Adds a cold effect to this unit's attacks that slows enemy units' movement speed.
-
-[Afrc]
-Buttonpos=1,2
-Tip=Frost Attack
-Ubertip=Adds a cold effect to this unit's attacks that slows enemy units' movement speed.
-
-[Afrz]
-Buttonpos=2,2
-Tip=Freezing Breath
-Ubertip=When used on a building, temporarily stops all building activities. Lasts 5 seconds.
-
-[Afsh]
-Buttonpos=1,2
-Tip=Fragmentation Shards
-Ubertip=Uses fragmentation mortars to increase damage dealt to Unarmored and Medium armor units.
-
-[Afzy]
-Hotkey=F
-Unhotkey=F
-Buttonpos=0,2
-Unbuttonpos=0,2
-Tip=Frenzy
-UnTip=|cffc3dbffRight-click to activate auto-casting.|r
-Ubertip=Increases the unit's attack rate by 40% and movement speed by 25% for 20 seconds.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
-
-[Agra]
-Hotkey=W
-Buttonpos=1,2
-Tip=War Club
-Ubertip=Picks up a tree to give the Mountain Giant Siege damage, and increased attack range. Lasts for 15 strikes.
-
-[Agyb]
-Buttonpos=1,2
-Tip=Flying Machine Bombs
-Ubertip=Allows Flying Machines to attack land units.
-
-[Agyv]
-Buttonpos=0,2
-Tip=True Sight
-Ubertip=Reveals nearby invisible units.
-
-[Ahan]
-Buttonpos=3,2
-Tip=Animal War Training
-Ubertip=Increases the maximum hit points of this unit by 100.
-
-[Ahar]
-Hotkey=G
-Unhotkey=E
-Buttonpos=3,1
-Unbuttonpos=3,1
-Tip=Gather
-UnTip=Return Resources
-Ubertip=Mines gold from gold mines and harvests lumber from trees.
-Unubertip=Return the carried resources to the nearest town hall.
-
-[Ahea]
-Hotkey=E
-Unhotkey=E
-Buttonpos=0,2
-Unbuttonpos=0,2
-Tip=Heal
-UnTip=|cffc3dbffRight-click to activate auto-casting.|r
-Ubertip=Heals a target friendly non-mechanical wounded unit for 25 hit points.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
-
-[Ahid]
-Hotkey=I
-Buttonpos=2,1
-Tip=Hide
-Ubertip=Stops the unit from auto-acquiring enemies, allowing it to Shadowmeld and remain unseen at night.
-
-[Ahlh]
-Buttonpos=2,1
-Tip=Improved Lumber Harvesting,Improved Lumber Harvesting,Advanced Lumber Harvesting
-Ubertip=Increases the amount of lumber that Peasants can carry by 10.,Increases the amount of lumber that Peasants can carry by 10.,Further increases the amount of lumber that Peasants can carry by 10.
-
-[Ahnl]
-Hotkey=V
-Buttonpos=3,2
-Tip=Summoning Ritual
-Ubertip=Summons energies from the twisting nether.
-
-[Ahpe]
-Buttonpos=0,2
-Tip=Phoenix
-Ubertip=The Phoenix spreads enchanted flames to nearby enemies, dealing 20 damage on impact and burning them for 2 per second over 10 seconds. Its flames burn with such intensity that the Phoenix damages itself as well. When it dies, it creates an egg that will hatch into a Phoenix.
-
-[Ahr3]
-Hotkey=G
-Unhotkey=E
-Buttonpos=3,1
-Unbuttonpos=3,1
-Tip=Gather
-UnTip=Return Resources
-Ubertip=Harvests lumber from trees.
-Unubertip=Return the carried lumber to the nearest building capable of receiving it.
-
-[Ahri]
-Buttonpos=0,2
-Tip=Long Rifles
-Ubertip=Increases attack range.
-
-[Ahrl]
-Hotkey=G
-Unhotkey=E
-Buttonpos=3,1
-Unbuttonpos=3,1
-Tip=Gather
-UnTip=Return Resources
-Ubertip=Harvests lumber from trees.
-Unubertip=Return the carried resources to the nearest Necropolis or Graveyard.
-
-[Ahrp]
-Hotkey=R
-Unhotkey=R
-Buttonpos=1,1
-Unbuttonpos=1,1
-Tip=Repair
-UnTip=|cffc3dbffRight-click to activate auto-casting.|r
-Ubertip=Repairs mechanical units and structures at the cost of resources.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
-
-[Ahsb]
-Buttonpos=0,2
-Tip=Sundering Blades
-Ubertip=Increases damage dealt to enemy targets with Medium armor by 10%.
-
-[Ahwd]
-Hotkey=E
-Buttonpos=2,2
-Tip=Healing Ward
-Ubertip=Summons an immovable ward that heals 2% of a nearby friendly non-mechanical unit's hit points per second. Wards are spell immune. Lasts 25 seconds.
-
-[Ainf]
-Hotkey=F
-Unhotkey=F
-Buttonpos=2,2
-Unbuttonpos=2,2
-Tip=Inner Fire
-UnTip=|cffc3dbffRight-click to activate auto-casting.|r
-Ubertip=Increases a target friendly unit's damage by 10% and armor by 5. Lasts 60 seconds.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
-
-[Aivs]
-Hotkey=I
-Buttonpos=1,2
-Tip=Invisibility
-Ubertip=Makes a unit invisible. If the unit attacks, uses an ability or casts a spell, it will become visible. Lasts 120 seconds.
-
-[Alam]
-Hotkey=C
-Buttonpos=3,2
-Tip=Sacrifice
-Ubertip=Target a Sacrificial Pit to sacrifice the Acolyte and turn it into a Shade. Shades are invisible spirits that can see invisible units. Shades cannot attack.
-
-[Aliq]
-Buttonpos=1,2
-Tip=Liquid Fire
-Ubertip=Flings a volatile liquid that causes buildings to take damage over time. Buildings that are currently taking damage from Liquid Fire have their repair time increased by 175%, and have their attack rate reduced by 60%.
-
-[Ally]
-Hotkey=122
-MenuCommand=1
-
-[Aloa]
-Hotkey=L
-Buttonpos=0,2
-Tip=Load
-Ubertip=Loads a targeted friendly land unit.
-
-[Alsh]
-Hotkey=L
-Buttonpos=1,2
-Tip=Lightning Shield
-Ubertip=Forms a shield of electricity around a target unit, dealing 20 damage per second to units around it. Lasts 20 seconds.
-
-[Ambb]
-Hotkey=B
-Buttonpos=0,2
-Researchhotkey=Q
-Researchbuttonpos=0,0
-Tip=Mana Burn
-Ubertip=Sends a bolt of negative energy that burns 50 points of a target enemy unit's mana. The mana combusts, dealing damage equal to the amount of mana burned.
-
-[Ambd]
-Hotkey=Z
-Buttonpos=3,2
-Researchhotkey=Q
-Researchbuttonpos=0,0
-Tip=Mana Burn
-Ubertip=Sends a bolt of negative energy that burns 50 points of a target enemy unit's mana. The mana combusts, dealing damage equal to the amount of mana burned.
-
-[Ambt]
-Hotkey=R
-Unhotkey=R
-Buttonpos=0,0
-Unbuttonpos=0,0
-Tip=Replenish Mana and Life
-UnTip=|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r
-Ubertip=Replenish the life and mana of a target friendly unit.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
-
-[Amed]
-Hotkey=D
-Buttonpos=1,2
-Tip=Drop All Corpses
-Ubertip=Drops all corpses for immediate use.
-
-[Amel]
-Hotkey=C
-Unhotkey=C
-Buttonpos=0,2
-Unbuttonpos=0,2
-Tip=Get Corpse
-UnTip=|cffc3dbffRight-click to activate auto-casting.
-Ubertip=Picks up a nearby corpse for later use.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.
-
-[Amfl]
-Hotkey=F
-Unhotkey=F
-Buttonpos=1,2
-Unbuttonpos=1,2
-Tip=Mana Flare
-UnTip=Stop Mana Flare
-Ubertip=Causes the Faerie Dragon to channel negative magical energies that damage nearby enemies when they cast spells. Also increases the Faerie Dragon's armor by 12. Lasts 30 seconds.
-Unubertip=Stops channeling Mana Flare.
-
-[Amgl]
-Buttonpos=1,2
-Tip=Moon Glaive
-Ubertip=Gives the Huntress the ability to strike additional units with her bouncing glaive attacks, and changes their armor type to Heavy.
-
-[Amgr]
-Buttonpos=1,2
-Tip=Moon Glaive
-Ubertip=Gives the Huntress the ability to strike additional units with her bouncing glaive attacks.
-
-[Amic]
-Hotkey=C
-Unhotkey=W
-Buttonpos=1,2
-Unbuttonpos=2,2
-Tip=Call to Arms
-UnTip=Back to Work
-Ubertip=Call all nearby Peasants to the Town Hall to be converted to Militia. Lasts 42.5 seconds.
-Unubertip=Call all nearby Militia to the Town Hall to be converted to Peasants.
-
-[Amil]
-Hotkey=C
-Unhotkey=W
-Buttonpos=1,2
-Unbuttonpos=2,2
-Tip=Call to Arms
-UnTip=Back to Work
-Ubertip=Run to the nearest Keep, Castle or starting Town Hall to arm the Peasant, converting him into Militia. Lasts 42.5 seconds.
-Unubertip=Run to the nearest Keep, Castle or starting Town Hall to disarm the Militia, converting it into a Peasant.
-
-[Amim]
-Buttonpos=2,2
-Tip=Spell Immunity
-Ubertip=Renders this unit immune to magic and most spells.
-
-[Amls]
-Hotkey=E
-Buttonpos=0,2
-Tip=Aerial Shackles
-Ubertip=Magically binds a target enemy air unit, so that it cannot move or attack and takes 30 damage per second. Lasts 40 seconds.
-
-[Amrf]
-Hotkey=V
-Unhotkey=V
-Buttonpos=3,2
-Unbuttonpos=3,2
-Tip=Crow Form
-UnTip=Human Form
-Ubertip=Turn into a Crow.
-Unubertip=Turn into a Human.
-
-[Andm]
-Hotkey=Z
-Unhotkey=Z
-Buttonpos=0,2
-Unbuttonpos=0,2
-Tip=Abolish Magic
-UnTip=|cffc3dbffRight-click to activate auto-casting.|r
-Ubertip=Dispels positive buffs from enemy units, and negative buffs from friendly units. Deals 250 damage to summoned units.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
-
-[Andt]
-Hotkey=R
-Buttonpos=0,0
-Tip=Reveal
-Ubertip=Reveals an area of the map. Detects invisible units. Lasts 6 seconds.
-
-[Anei]
-Hotkey=U
-Buttonpos=2,2
-Researchhotkey=V
-Researchbuttonpos=3,2
-Tip=Select User
-
-[Anh1]
-Hotkey=E
-Unhotkey=E
-Buttonpos=1,2
-Unbuttonpos=1,2
-Tip=Heal
-UnTip=|cffc3dbffRight-click to activate auto-casting.|r
-Ubertip=Heals a target friendly non-mechanical wounded unit.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
-
-[Anh2]
-Hotkey=E
-Unhotkey=E
-Buttonpos=1,2
-Unbuttonpos=1,2
-Tip=Heal
-UnTip=|cffc3dbffRight-click to activate auto-casting.|r
-Ubertip=Heals a target friendly non-mechanical wounded unit.
-Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
-
-[Ansk]
-Buttonpos=3,2
-Tip=Hardened Skin
-Ubertip=Reduces all attacks on the unit by 12 damage. Attacks cannot be reduced below 3 damage.
-
-[Aobk]
-Buttonpos=1,2
-Tip=Berserker Upgrade
-Ubertip=Transforms Headhunters into Berserkers, giving them increased hit points and the Berserk ability.
-
-[Aobs]
-Buttonpos=0,2
-Tip=Brute Strength
-Ubertip=Improves the fighting capabilities of Grunts with a 125 hit point increase, and 3 bonus attack damage.
-
-[Aorb]
-Buttonpos=3,2
-Tip=Reinforced Defenses
-Ubertip=Upgrades Burrows and Watch Towers so that they have Fortified armor.
-
-[Aosp]
-Buttonpos=3,2
-Tip=Spiked Barricades,Spiked Barricades,Improved Spiked Barricades
-Ubertip=Surrounds Orc buildings with spikes that damage enemy melee attackers. Deals 5 damage per attack plus an additional 20% of the attacker's damage.,Surrounds Orc buildings with spikes that damage enemy melee attackers. Deals 5 damage per attack plus an additional 20% of the attacker's damage.,Surrounds Orc buildings with spikes that damage enemy melee attackers. Deals 5 damage per attack plus an additional 20% of the attacker's damage.
-
-[Aotr]
-Buttonpos=3,2
-Tip=Troll Regeneration
-Ubertip=Increases the hit point regeneration rate of Headhunters, Witch Doctors and Batriders.
 
 [Apg2]
 Hotkey=G
@@ -2914,6 +2741,10 @@ Tip=Raise Dead
 UnTip=|cffc3dbffRight-click to activate auto-casting.
 Ubertip=Raises 2 skeletons from a corpse.
 Unubertip=|cffc3dbffRight-click to deactivate auto-casting.
+
+[ARal]
+Hotkey=Y
+Buttonpos=3,1
 
 [Arav]
 Hotkey=F
@@ -3224,6 +3055,58 @@ Buttonpos=0,2
 Tip=True Sight
 Ubertip=Reveals nearby invisible units.
 
+[AUa2]
+Hotkey=D
+Buttonpos=3,2
+Researchhotkey=D
+Researchbuttonpos=3,0
+Tip=Animate Dead
+Ubertip=Raises 6 dead units in an area to fight for the Death Knight for 40 seconds.
+Researchubertip=Raises 6 dead units in an area to fight for the Death Knight for 40 seconds.
+
+[AUan]
+Hotkey=D
+Buttonpos=3,2
+Researchhotkey=D
+Researchbuttonpos=3,0
+Tip=Animate Dead
+Ubertip=Raises 6 dead units in an area to fight for the Death Knight for 40 seconds.
+Researchubertip=Raises 6 dead units in an area to fight for the Death Knight for 40 seconds.
+
+[AUau]
+Buttonpos=2,2
+Researchhotkey=U
+Researchbuttonpos=2,0
+Tip=Unholy Aura - [Level 1],Unholy Aura - [Level 2],Unholy Aura - [Level 3]
+Ubertip=Increases nearby friendly units' movement speed by 10% and life regeneration rate.,Increases nearby friendly units' movement speed by 15% and life regeneration rate.,Increases nearby friendly units' movement speed by 20% and life regeneration rate.
+Researchubertip=Increases the movement speed and life regeneration rate of nearby friendly units. |n|n|cffffcc00Level 1|r - 10% movement, minor regeneration bonus. |n|cffffcc00Level 2|r - 15% movement, moderate regeneration bonus. |n|cffffcc00Level 3|r - 20% movement, greater regeneration bonus.
+
+[AUav]
+Buttonpos=2,2
+Researchhotkey=V
+Researchbuttonpos=2,0
+Tip=Vampiric Aura - [Level 1],Vampiric Aura - [Level 2],Vampiric Aura - [Level 3]
+Ubertip=Nearby friendly melee units gain 20% of their attack damage when they hit enemy units.,Nearby friendly melee units gain 35% of their attack damage when they hit enemy units.,Nearby friendly melee units gain 50% of their attack damage when they hit enemy units.
+Researchubertip=Nearby friendly melee units gain hit points when they hit enemy units. |n|n|cffffcc00Level 1|r - Gains 20% of attack damage. |n|cffffcc00Level 2|r - Gains 35% of attack damage. |n|cffffcc00Level 3|r - Gains 50% of attack damage.
+
+[AUbu]
+Hotkey=B
+Buttonpos=0,2
+Researchbuttonpos=0,2
+
+[AUcb]
+Hotkey=C
+Unhotkey=C
+Buttonpos=2,2
+Unbuttonpos=2,2
+Researchhotkey=C
+Researchbuttonpos=2,0
+Tip=Carrion Beetles - [Level 1],Carrion Beetles - [Level 2],Carrion Beetles - [Level 3]
+UnTip=|cffc3dbffRight-click to activate auto-casting.
+Ubertip=Progenerates 2 Beetle from a target corpse. Beetles have 170 hit points, and deal 8 - 9 damage. Beetles are permanent until killed. Maximum of 6 Beetles.,Progenerates 2 Beetle from a target corpse. Beetles have 300 hit points, and deal 15 - 18 damage. Can learn Burrow. Beetles are permanent until killed. Maximum of 6 Beetles.,Progenerates 2 Beetle from a target corpse. Beetles have 440 hit points, and deal 22 - 27 damage. Can learn Burrow. Beetles are permanent until killed. Maximum of 6 Beetles.
+Researchubertip=The Crypt Lord progenerates 2 Carrion Beetle from a target corpse to attack the Crypt Lord's enemies. Beetles are permanent, but only 6 can be controlled at a time. |n|n|cffffcc00Level 1|r - 170 hit points, 8 - 9 damage. |n|cffffcc00Level 2|r - 300 hit points, 15 - 18 damage, Beetles can learn Burrow. |n|cffffcc00Level 3|r - 440 hit points, 22 - 27 damage, Beetles can learn Burrow.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.
+
 [Auco]
 Hotkey=C
 Unhotkey=C
@@ -3233,6 +3116,82 @@ Tip=Unstable Concoction
 UnTip=|cffc3dbffRight-click to activate auto-casting.|r
 Ubertip=Causes a powerful explosion that deals 600 damage to a target air unit, and 140 damage to nearby enemy air units.
 Unubertip=|cffc3dbffRight-click to deactivate auto-casting.|r
+
+[AUcs]
+Hotkey=C
+Buttonpos=0,2
+Researchhotkey=C
+Researchbuttonpos=0,0
+Tip=Carrion Swarm - [Level 1],Carrion Swarm - [Level 2],Carrion Swarm - [Level 3]
+Ubertip=Sends a horde of bats to deal 75 damage to each enemy unit in a cone.,Sends a horde of bats to deal 135 damage to each enemy unit in a cone.,Sends a horde of bats to deal 200 damage to each enemy unit in a cone.
+Researchubertip=Sends a horde of bats to damage enemies. |n|n|cffffcc00Level 1|r - 75 damage per unit. |n|cffffcc00Level 2|r - 135 damage per unit. |n|cffffcc00Level 3|r - 200 damage per unit.
+
+[AUdc]
+Hotkey=C
+Buttonpos=0,2
+Researchhotkey=C
+Researchbuttonpos=0,0
+Tip=Death Coil - [Level 1],Death Coil - [Level 2],Death Coil - [Level 3]
+Ubertip=A coil of death that can heal a friendly Undead or Demon unit for 200 hit points, or deal half damage to an enemy living unit.,A coil of death that can heal a friendly Undead or Demon unit for 400 hit points , or deal half damage to an enemy living unit.,A coil of death that can heal a friendly Undead or Demon unit for 600 hit points, or deal half damage to an enemy living unit.
+Researchubertip=A coil of death that can damage an enemy living unit, or heal a friendly Undead or Demon unit. Healing pierces spell immunity. |n|n|cffffcc00Level 1|r - Heals for 200 hit points. |n|cffffcc00Level 2|r - Heals for 400 hit points. |n|cffffcc00Level 3|r - Heals for 600 hit points.
+
+[AUdd]
+Hotkey=D
+Buttonpos=3,2
+Researchhotkey=D
+Researchbuttonpos=3,0
+Tip=Death And Decay
+Ubertip=Damages everything in its area of effect by 4% of its max hit points per second. Also destroys trees. Lasts 35 seconds.
+Researchubertip=Damages everything in its area of effect by 4% of its max hit points per second. Also destroys trees.
+
+[AUdp]
+Hotkey=E
+Buttonpos=1,2
+Researchhotkey=E
+Researchbuttonpos=1,0
+Tip=Death Pact - [Level 1],Death Pact - [Level 2],Death Pact - [Level 3]
+Ubertip=Kills a target friendly Undead unit, giving 100% of its hit points to the Death Knight.,Kills a target friendly Undead unit, giving 200% of its hit points to the Death Knight.,Kills a target friendly Undead unit, giving 300% of its hit points to the Death Knight.
+Researchubertip=Kills a target friendly Undead unit, giving a percentage of its hit points to the Death Knight. |n|n|cffffcc00Level 1|r - 100% conversion. |n|cffffcc00Level 2|r - 200% conversion. |n|cffffcc00Level 3|r - 300% conversion.
+
+[AUdr]
+Hotkey=R
+Buttonpos=2,2
+Researchhotkey=R
+Researchbuttonpos=2,0
+Tip=Dark Ritual - [Level 1],Dark Ritual - [Level 2],Dark Ritual - [Level 3]
+Ubertip=Sacrifices a target friendly Undead unit to convert 33% of its hit points into mana for the Lich.,Sacrifices a target friendly Undead unit to convert 55% of its hit points into mana for the Lich.,Sacrifices a target friendly Undead unit to convert 80% of its hit points into mana for the Lich.
+Researchubertip=Sacrifices a target friendly Undead unit to convert its hit points into mana for the Lich. |n|n|cffffcc00Level 1|r - 33% of hit points to mana. |n|cffffcc00Level 2|r - 55% of hit points to mana. |n|cffffcc00Level 3|r - 80% of hit points to mana.
+
+[AUfa]
+Hotkey=X
+Buttonpos=1,2
+Researchhotkey=W
+Researchbuttonpos=1,0
+Tip=Frost Armor - [Level 1],Frost Armor - [Level 2],Frost Armor - [Level 3]
+Ubertip=Creates a shield of frost around a target friendly unit. The shield adds 3 armor and slows melee units that attack it for 4 seconds. Lasts 45 seconds.,Creates a shield of frost around a target friendly unit. The shield adds 5 armor and slows melee units that attack it for 4 seconds. Lasts 45 seconds.,Creates a shield of frost around a target friendly unit. The shield adds 7 armor and slows melee units that attack it for 4 seconds. Lasts 45 seconds.
+Researchubertip=Creates a shield of frost around a target friendly unit. The shield adds armor and slows melee units that attack it. |n|n|cffffcc00Level 1|r - Adds 3 armor. |n|cffffcc00Level 2|r - Adds 5 armor. |n|cffffcc00Level 3|r - Adds 7 armor.
+
+[AUfn]
+Hotkey=N
+Buttonpos=0,2
+Researchhotkey=N
+Researchbuttonpos=0,0
+Tip=Frost Nova - [Level 1],Frost Nova - [Level 2],Frost Nova - [Level 3]
+Ubertip=Blasts enemy units with a wave of frost that deals 100 damage to the target, and 50 nova damage. Cold damage slows units' movement and attack rate for 4 seconds.,Blasts enemy units with a wave of frost that deals 100 damage to the target, and 100 nova damage. Cold damage slows units' movement and attack rate for 5 seconds.,Blasts enemy units with a wave of frost that deals 100 damage to the target, and 150 nova damage. Cold damage slows units' movement and attack rate for 6 seconds.
+Researchubertip=Blasts enemy units around a target enemy unit with a wave of damaging frost that slows movement and attack rate. |n|n|cffffcc00Level 1|r - 100 target damage, 50 nova damage. |n|cffffcc00Level 2|r - 100 target damage, 100 nova damage. |n|cffffcc00Level 3|r - 100 target damage, 150 nova damage.
+
+[AUfu]
+Hotkey=F
+Unhotkey=X
+Buttonpos=1,2
+Unbuttonpos=1,2
+Researchhotkey=F
+Researchbuttonpos=1,0
+Tip=Frost Armor - [Level 1],Frost Armor - [Level 2],Frost Armor - [Level 3]
+UnTip=|cffc3dbffRight-click to activate auto-casting.
+Ubertip=Creates a shield of frost around a target friendly unit. The shield adds 3 armor and slows melee units that attack it for 3 seconds. Lasts 45 seconds.,Creates a shield of frost around a target friendly unit. The shield adds 5 armor and slows melee units that attack it for 5 seconds. Lasts 45 seconds.,Creates a shield of frost around a target friendly unit. The shield adds 7 armor and slows melee units that attack it for 7 seconds. Lasts 45 seconds.
+Researchubertip=Creates a shield of frost around a target friendly unit. The shield adds armor and slows melee units that attack it. |n|n|cffffcc00Level 1|r - Adds 3 armor. |n|cffffcc00Level 2|r - Adds 5 armor. |n|cffffcc00Level 3|r - Adds 7 armor.
+Unubertip=|cffc3dbffRight-click to deactivate auto-casting.
 
 [Augf]
 Buttonpos=1,2
@@ -3250,16 +3209,62 @@ Buttonpos=1,2
 Tip=Unholy Frenzy
 Ubertip=Increases the attack rate of a target unit by 75%, but drains 2 hit points per second. Lasts 45 seconds.
 
+[AUim]
+Hotkey=E
+Buttonpos=0,2
+Researchhotkey=E
+Researchbuttonpos=0,0
+Tip=Impale - [Level 1],Impale - [Level 2],Impale - [Level 3]
+Ubertip=Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line, dealing 60 damage and hurling enemy ground units into the air in their wake, stunning them for 2 seconds.,Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line dealing 105 damage and hurling enemy ground units into the air in their wake, stunning them for 3 seconds.,Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line dealing 150 damage and hurling enemy ground units into the air in their wake, stunning them for 4 seconds.
+Researchubertip=Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line, dealing damage and hurling enemy ground units into the air in their wake. |n|n|cffffcc00Level 1|r - 60 damage, 2 second stun. |n|cffffcc00Level 2|r - 105 damage, 3 second stun. |n|cffffcc00Level 3|r - 150 damage, 4 second stun.
+
+[AUin]
+Hotkey=N
+Buttonpos=3,2
+Researchhotkey=N
+Researchbuttonpos=3,0
+Tip=Inferno
+Ubertip=Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 180 seconds.
+Researchubertip=Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 180 seconds.
+
+[AUls]
+Hotkey=L
+Buttonpos=3,2
+Researchhotkey=L
+Researchbuttonpos=3,0
+Tip=Locust Swarm
+Ubertip=Creates a swarm of angry locusts that bite and tear at nearby enemy units. As they chew the enemy flesh, they convert it into a substance that restores hit points to the Crypt Lord when they return. Pierces spell immunity. Lasts 30 seconds.
+Researchubertip=Creates a swarm of angry locusts that bite and tear at nearby enemy units. As they chew the enemy flesh, they convert it into a substance that restores hit points to the Crypt Lord when they return. Pierces spell immunity. |nLasts 30 seconds.
+
 [Auns]
 Hotkey=U
 Buttonpos=1,2
 Tip=Unsummon Building
 Ubertip=Unsummons your building to regain 50% of the spent resources.
 
+[AUsl]
+Hotkey=E
+Buttonpos=1,2
+Researchhotkey=E
+Researchbuttonpos=1,0
+Tip=Sleep - [Level 1],Sleep - [Level 2],Sleep - [Level 3]
+Ubertip=Puts a target enemy unit to sleep for 15 seconds. A sleeping unit can be awoken by attacking it.,Puts a target enemy unit to sleep for 35 seconds. A sleeping unit can be awoken by attacking it.,Puts a target enemy unit to sleep for 55 seconds. A sleeping unit can be awoken by attacking it.
+Researchubertip=Puts a target enemy unit to sleep. A sleeping unit can be awoken by attacking it. |n|n|cffffcc00Level 1|r - 15 second sleep for 80 mana. |n|cffffcc00Level 2|r - 35 second sleep for 65 mana. |n|cffffcc00Level 3|r - 55 second sleep for 50 mana.
+
 [Ausm]
 Buttonpos=3,2
 Tip=Skeletal Mastery
 Ubertip=Causes one of the two skeletons created by Raise Dead to be a Skeletal Mage and increases the duration of raised Skeleton Warriors and Skeletal Mages by 20 seconds.
+
+[AUts]
+Unhotkey=X
+Buttonpos=1,2
+Unbuttonpos=1,2
+Researchhotkey=S
+Researchbuttonpos=1,0
+Tip=Spiked Carapace - [Level 1],Spiked Carapace - [Level 2],Spiked Carapace - [Level 3]
+Ubertip=Enhances the Crypt Lord's chitinous armor with organic barbs, giving the Crypt Lord 4 bonus armor and returning 15% of melee attack damage to enemies.,Enhances the Crypt Lord's chitinous armor with organic barbs, giving him 8 bonus armor and returning 30% of melee attack damage to enemies.,Enhances the Crypt Lord's chitinous armor with organic barbs, giving him 12 bonus armor and returning 45% of melee attack damage to enemies.
+Researchubertip=The Crypt Lord forms barbed layers of chitinous armor that increases its defense and returns damage to enemy melee attackers.  |n|n|cffffcc00Level 1|r - 15% damage returned, 4 bonus armor. |n|cffffcc00Level 2|r -  30% damage returned, 8 bonus armor. |n|cffffcc00Level 3|r -  45% damage returned, 12 bonus armor.
 
 [Aven]
 Buttonpos=0,2
@@ -3319,9 +3324,21 @@ Buttonpos=1,2
 Tip=War Stomp
 Ubertip=Slams the ground, dealing 25 damage to nearby enemy land units and stunning them for 3 seconds.
 
+[bspd]
+Buttonpos=2,0
+
+[capt]
+Hotkey=67
+CameraCommand=1
+Modifier=Ctrl_or_Alt
+
 [Chat]
 Hotkey=123
 MenuCommand=1
+
+[clnt]
+Hotkey=32
+CameraCommand=1
 
 [CmdAttack]
 Hotkey=A
@@ -3412,6 +3429,16 @@ Hotkey=S
 Buttonpos=1,0
 Tip=Stop
 
+[cnob]
+Hotkey=C
+Buttonpos=0,0
+Tip=Purchase Circlet of Nobility
+Ubertip=Increases the Strength, Agility and Intelligence of the Hero by 2 when worn.
+
+[ctcr]
+Hotkey=8
+CameraCommand=1
+
 [Ctr0]
 Hotkey=48
 CtrlGroupCommand=1
@@ -3455,964 +3482,6 @@ CtrlGroupCommand=1
 [DeGS]
 Hotkey=189
 ReplayCommand=1
-
-[Edem]
-Hotkey=D
-Buttonpos=0,2
-Tip=Summon Demon Hunter
-Ubertip=Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. Attacks land units.
-
-[Edmm]
-Hotkey=D
-Buttonpos=0,2
-Tip=Summon Demon Hunter
-Ubertip=Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. Attacks land units.
-
-[Ekee]
-Hotkey=K
-Buttonpos=1,2
-Tip=Summon Keeper of the Grove
-Ubertip=Mystical Hero, adept at using nature spells. Can learn Entangling Roots, Force of Nature, Thorns Aura, and Tranquility. Attacks land and air units.
-
-[Emoo]
-Hotkey=P
-Buttonpos=2,2
-Tip=Summon Priestess of the Moon
-Ubertip=Warrior Hero, adept at enhancing ranged attacks and slaying enemies from afar. Can learn Scout, Searing Arrows, Trueshot Aura, and Starfall. Attacks land and air units.
-
-[Ewar]
-Hotkey=W
-Buttonpos=0,1
-Tip=Summon Warden
-Ubertip=Cunning Hero, adept at entering and escaping combat. Can learn Blink, Fan of Knives, Shadow Strike and Vengeance. Attacks land units.
-
-[Ewrd]
-Hotkey=W
-Buttonpos=0,1
-Ubertip=Cunning Hero, adept at entering and escaping combat. Can learn Blink, Fan of Knives, Shadow Strike and Vengeance. Attacks land units.
-
-[Hamg]
-Hotkey=A
-Buttonpos=0,2
-Tip=Summon Archmage
-Ubertip=Mystical Hero, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Mass Teleport. Attacks land and air units.
-
-[Hant]
-Hotkey=A
-Buttonpos=0,1
-Ubertip=Mystical Hero, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Mass Teleport. Attacks land and air units.
-
-[Hblm]
-Hotkey=B
-Buttonpos=0,1
-Tip=Summon Blood Mage
-Ubertip=Mystical Hero, adept at controlling magic and ranged assaults. Can learn Flame Strike, Banish, Siphon Mana and Phoenix. Attacks land and air units.
-
-[Hgam]
-Hotkey=A
-Buttonpos=0,1
-Ubertip=Mystical Hero Spirit, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Mass Teleport. Attacks land and air units.
-
-[Hkal]
-Hotkey=B
-Buttonpos=0,1
-Ubertip=Mystical Hero, adept at controlling magic and ranged assaults. Can learn Flame Strike, Banish, Siphon Mana and Phoenix. Attacks land and air units.
-
-[Hmkg]
-Hotkey=M
-Buttonpos=1,2
-Tip=Summon Mountain King
-Ubertip=Warrior Hero, adept at offensive combat and disrupting enemy troops. Can learn Storm Bolt, Thunder Clap, Bash and Avatar. Attacks land units.
-
-[Hpal]
-Hotkey=L
-Buttonpos=2,2
-Tip=Summon Paladin
-Ubertip=Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. Attacks land units.
-
-[Hvsh]
-Hotkey=N
-Buttonpos=0,0
-Ubertip=Mystical Hero, adept at ranged combat. Can learn Forked Lightning, Frost Arrows, Mana Shield, and Tornado. Attacks land and air units.
-
-[InGS]
-Hotkey=187
-ReplayCommand=1
-
-[MEnd]
-Hotkey=81
-MenuCommand=1
-Modifier=Alt
-
-[MHlp]
-Hotkey=72
-MenuCommand=1
-Modifier=Alt
-
-[MLod]
-Hotkey=76
-MenuCommand=1
-Modifier=Alt
-
-[MOpt]
-Hotkey=79
-MenuCommand=1
-Modifier=Alt
-
-[MSav]
-Hotkey=83
-MenuCommand=1
-Modifier=Alt
-
-[Menu]
-Hotkey=121
-MenuCommand=1
-
-[Naka]
-Hotkey=K
-Buttonpos=0,0
-
-[Nal2]
-Hotkey=X
-Buttonpos=3,2
-Tip=Summon Alchemist
-Ubertip=Warrior Hero, known for offensive and defensive versatility. Can learn Healing Spray, Chemical Rage, Acid Bomb and Transmute. Attacks land and air units.
-
-[Nal3]
-Hotkey=X
-Buttonpos=3,2
-Tip=Summon Alchemist
-Ubertip=Warrior Hero, known for offensive and defensive versatility. Can learn Healing Spray, Chemical Rage, Acid Bomb and Transmute. Attacks land and air units.
-
-[Nalc]
-Hotkey=X
-Buttonpos=3,2
-Tip=Summon Alchemist
-Ubertip=Warrior Hero, known for offensive and defensive versatility. Can learn Healing Spray, Chemical Rage, Acid Bomb and Transmute. Attacks land and air units.
-
-[Nalm]
-Hotkey=X
-Buttonpos=3,2
-Tip=Summon Alchemist
-Ubertip=Warrior Hero, known for offensive and defensive versatility. Can learn Healing Spray, Chemical Rage, Acid Bomb and Transmute. Attacks land and air units.
-
-[Nbrn]
-Hotkey=R
-Buttonpos=1,1
-Tip=Summon Dark Ranger
-Ubertip=Cunning Hero, adept at manipulating opponents. Can learn Silence, Black Arrow, Life Drain, and Charm. Attacks land and air units.
-
-[Nbst]
-Hotkey=S
-Buttonpos=1,2
-Tip=Summon Beastmaster
-Ubertip=Warrior Hero, adept at summoning beasts into battle. Can learn Summon Bear, Summon Quilbeast, Summon Hawk, and Stampede. Attacks land units.
-
-[Nfir]
-Hotkey=O
-Buttonpos=3,1
-Tip=Summon Firelord
-Ubertip=Mystical Hero, adept at disrupting spells and dealing large amounts of fire damage. Can learn Soul Burn, Summon Lava Spawn, Incinerate and Volcano. Attacks land and air units.
-
-[Nmsr]
-Hotkey=S
-Buttonpos=0,2
-Tip=Summon Murloc Sorcerer
-Ubertip=Mystical Murloc, adept at ranged assaults. Can learn Rain of Fire. Attacks land and air units.
-
-[Nngs]
-Hotkey=G
-Buttonpos=0,1
-Tip=Summon Sea Witch
-Ubertip=Mystical Hero, adept at ranged combat. Can learn Forked Lightning, Frost Arrows, Mana Shield, and Tornado. Attacks land and air units.
-
-[Npbm]
-Hotkey=N
-Buttonpos=2,1
-Tip=Summon Brewmaster
-Ubertip=Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Breath of Fire, Drunken Haze, Drunken Brawler and Storm, Earth, And Fire. Attacks land units.
-
-[Nplh]
-Hotkey=I
-Buttonpos=0,2
-Tip=Summon Pit Lord
-Ubertip=Warrior Hero, adept at terrorizing enemies. Can learn Rain of Fire, Howl of Terror, Cleaving Attack, and Doom. Attacks land units.
-
-[Nrob]
-Hotkey=Z
-Buttonpos=2,2
-Tip=Summon Tinker
-Ubertip=Cunning Hero, exceptional at disrupting battles and enduring damage. Can learn Pocket Factory, Cluster Rockets, Engineering Upgrade and Robo-Goblin. Attacks land units.
-
-[Nsjs]
-Hotkey=N
-Buttonpos=1,1
-Tip=Summon Brewmaster
-Ubertip=Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Breath of Fire, Drunken Haze, Drunken Brawler and Storm, Earth And Fire. Attacks land units.
-
-[Nswt]
-Hotkey=W
-Buttonpos=0,2
-Tip=Summon Sea Witch
-Ubertip=Mystical Sea Witch, adept at ranged assaults. Can learn Summon Water Elemental, Brilliance Aura, and Earthquake. Attacks land and air units.
-
-[Ntin]
-Hotkey=Z
-Buttonpos=2,2
-Tip=Summon Tinker
-Ubertip=Cunning Hero, exceptional at disrupting battles and enduring damage. Can learn Pocket Factory, Cluster Rockets, Engineering Upgrade and Robo-Goblin. Attacks land units.
-
-[Obla]
-Hotkey=B
-Buttonpos=0,2
-Tip=Summon Blademaster
-Ubertip=Cunning Hero, adept at quickly killing individual units and creating confusion among enemies. Can learn Mirror Image, Wind Walk, Critical Strike and Bladestorm. Attacks land units.
-
-[Odrt]
-Hotkey=F
-Buttonpos=1,2
-Tip=Summon Far Seer
-Ubertip=Mystical Hero, effective at ranged attacks and scouting. Can learn Chain Lightning, Far Sight, Feral Spirit and Earthquake. Attacks land and air units.
-
-[Ofar]
-Hotkey=F
-Buttonpos=1,2
-Tip=Summon Far Seer
-Ubertip=Mystical Hero, effective at ranged attacks and scouting. Can learn Chain Lightning, Far Sight, Feral Spirit and Earthquake. Attacks land and air units.
-
-[Ogld]
-Hotkey=W
-Buttonpos=0,1
-Tip=Summon Warlock
-Ubertip=Powerful Warlock working under the tutelage of Kil'jaeden himself. Attacks land and air units.
-
-[Orex]
-Hotkey=B
-Buttonpos=0,0
-Tip=Summon Beastmaster
-Ubertip=Warrior Hero, adept at summoning beasts and rallying his allies. Can learn Summon Bear, Summon Quilbeast, Battle Roar, and Stampede. Attacks land and air units.
-
-[Orkn]
-Hotkey=S
-Buttonpos=0,1
-Tip=Summon Shadow Hunter
-Ubertip=Cunning Hero, adept at healing magics and voodoo curses. Can learn Healing Wave, Hex, Serpent Ward and Big Bad Voodoo. Attacks land and air units.
-
-[Osam]
-Hotkey=B
-Buttonpos=0,2
-Ubertip=Cunning Hero, adept at quickly killing individual units and creating confusion among enemies. Can learn Mirror Image, Wind Walk, Critical Strike and Bladestorm. Attacks land units.
-
-[Oshd]
-Hotkey=H
-Buttonpos=0,1
-Tip=Summon Shadow Hunter
-Ubertip=Cunning Hero, adept at healing magics and voodoo curses. Can learn Healing Wave, Hex, Serpent Ward and Big Bad Voodoo. Attacks land and air units.
-
-[Otch]
-Hotkey=T
-Buttonpos=2,2
-Tip=Summon Tauren Chieftain
-Ubertip=Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Shockwave, War Stomp, Endurance Aura and Reincarnation. Attacks land units.
-
-[QLog]
-Hotkey=120
-MenuCommand=1
-
-[QSav]
-Hotkey=117
-MenuCommand=1
-
-[Recb]
-Hotkey=B
-Buttonpos=0,2
-Tip=Research Corrosive Breath
-Ubertip=Gives Chimaeras the ability to hurl corrosive bile onto enemy buildings.
-
-[Redc]
-Hotkey=L,L
-Buttonpos=1,2
-Tip=Druid of the Claw Adept Training,Druid of the Claw Master Training
-Ubertip=Increases their Night Elf Form's mana capacity, mana regeneration rate, hit points, attack damage and gives them the ability Rejuvenation.,Increases their Night Elf Form's mana capacity, mana regeneration rate, hit points, attack damage and gives them the ability Bear Form.
-
-[Redt]
-Hotkey=A,A
-Buttonpos=1,2
-Tip=Druid of the Talon Adept Training,Druid of the Talon Master Training
-Ubertip=Increases their Night Elf Form's mana capacity, mana regeneration rate, hit points, and gives them the ability Storm Crow Form.,Increases their Night Elf Form's mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Cyclone.
-
-[Reeb]
-Hotkey=M
-Buttonpos=1,1
-Tip=Research Mark of the Claw
-Ubertip=Allows Druids of the Claw to cast Roar while in Bear Form.
-
-[Reec]
-Hotkey=M
-Buttonpos=1,1
-Tip=Research Mark of the Talon
-Ubertip=Allows Druids of the Talon to cast Faerie Fire while in Storm Crow Form.
-
-[Rehs]
-Hotkey=H
-Buttonpos=2,1
-Tip=Research Hardened Skin
-Ubertip=Gives Mountain Giants increased resistance to attack damage.
-
-[Reht]
-Hotkey=I
-Buttonpos=0,2
-Tip=Research Hippogryph Taming
-Ubertip=Trains Hippogryphs to allow Archers to mount them. This allows them to attack both air and ground units.
-
-[Reib]
-Hotkey=I
-Buttonpos=0,2
-Tip=Research Improved Bows
-Ubertip=Increases the Archer's and Hippogryph Rider's attack range.
-
-[Rema]
-Hotkey=A,A,A
-Buttonpos=0,1
-Tip=Upgrade to Moon Armor,Upgrade to Improved Moon Armor,Upgrade to Advanced Moon Armor
-Ubertip=Increases the armor of Archers, Huntresses, and Hippogryph Riders.,Further increases the armor of Archers, Huntresses, and Hippogryph Riders.,Further increases the armor of Archers, Huntresses, and Hippogryph Riders.
-
-[Remg]
-Hotkey=G
-Buttonpos=1,1
-Tip=Upgrade Moon Glaive
-Ubertip=Gives the Huntress the ability to strike additional units with her bouncing glaive attacks, and changes their armor type to Heavy.
-
-[Remk]
-Hotkey=M
-Buttonpos=0,1
-Tip=Research Marksmanship
-Ubertip=Increases damage of Archers and Hippogryph Riders by 4.
-
-[Renb]
-Hotkey=N
-Buttonpos=2,0
-Tip=Research Nature's Blessing
-Ubertip=Upgrades all Ancients' and Treants' movement speed and armor.
-
-[Repb]
-Hotkey=P
-Buttonpos=2,2
-Tip=Research Vorpal Blades
-Ubertip=Increases the speed of glaives launched by the Glaive Thrower, and increases damage by 10. Also allows them to attack trees.
-
-[Repm]
-Hotkey=B
-Buttonpos=3,0
-Tip=Research Backpack
-Ubertip=Gives specific Night Elf ground units the ability to carry items.
-
-[Rerh]
-Hotkey=R,R,R
-Buttonpos=1,1
-Tip=Upgrade to Reinforced Hides,Upgrade to Improved Reinforced Hides,Upgrade to Advanced Reinforced Hides
-Ubertip=Increases the armor of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.,Further increases the armor of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.,Further increases the armor of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.
-
-[Rers]
-Hotkey=T
-Buttonpos=2,2
-Tip=Research Resistant Skin
-Ubertip=Gives Mountain Giants increased resistance to spell damage.
-
-[Resc]
-Hotkey=S
-Buttonpos=1,2
-Tip=Research Sentinel
-Ubertip=Gives the Huntress the ability to send her owl companion to a nearby tree and provide vision. Can see invisible units.
-
-[Resi]
-Hotkey=S
-Buttonpos=0,2
-Tip=Research Abolish Magic
-Ubertip=Gives the Dryad the ability to dispel positive buffs from enemy units, and negative buffs from friendly units. Damages summoned units.
-
-[Resm]
-Hotkey=M,M,M
-Buttonpos=0,0
-Tip=Upgrade to Strength of the Moon,Upgrade to Improved Strength of the Moon,Upgrade to Advanced Strength of the Moon
-Ubertip=Increases the damage of Archers, Huntresses, Glaive Throwers, and Hippogryph Riders.,Further increases the damage of Archers, Huntresses, Glaive Throwers, and Hippogryph Riders.,Further increases the damage of Archers, Huntresses, Glaive Throwers, and Hippogryph Riders.
-
-[Resw]
-Hotkey=W,W,W
-Buttonpos=1,0
-Tip=Upgrade to Strength of the Wild,Upgrade to Improved Strength of the Wild,Upgrade to Advanced Strength of the Wild
-Ubertip=Increases the damage of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.,Further increases the damage of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.,Further increases the damage of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.
-
-[Reuv]
-Hotkey=U
-Buttonpos=2,0
-Tip=Upgrade to Ultravision
-Ubertip=Gives Night Elves the ability to see as far at night as they do during the day.
-
-[Rews]
-Hotkey=E
-Buttonpos=3,0
-Tip=Research Well Spring
-Ubertip=Increases the amount of mana that can be stored in Moon Wells by 100, and their rate of mana regeneration by 52%.
-
-[Rhac]
-Hotkey=M,M,M
-Buttonpos=1,0
-Tip=Upgrade to Improved Masonry,Upgrade to Advanced Masonry,Upgrade to Imbued Masonry
-Ubertip=Increases the armor and hit points of Human buildings.,Further increases the armor and hit points of Human buildings.,Further increases the armor and hit points of Human buildings.
-
-[Rhan]
-Hotkey=A
-Buttonpos=2,2
-Tip=Research Animal War Training
-Ubertip=Increases the maximum hit points of Knights, Dragonhawk Riders, and Gryphon Riders by 100.
-
-[Rhar]
-Hotkey=P,P,P
-Buttonpos=0,1
-Tip=Upgrade to Iron Plating,Upgrade to Steel Plating,Upgrade to Mithril Plating
-Ubertip=Increases the armor of Militia, Footmen, Spellbreakers, Knights, Flying Machines and Siege Engines.,Further increases the armor of Militia, Footmen, Spellbreakers, Knights, Flying Machines and Siege Engines.,Further increases the armor of Militia, Footmen, Spellbreakers, Knights, Flying Machines and Siege Engines.
-
-[Rhcd]
-Hotkey=C
-Buttonpos=0,2
-Tip=Research Cloud
-Ubertip=Provides Dragonhawk Riders with the Cloud ability, which stops ranged buildings from attacking.
-
-[Rhde]
-Hotkey=D
-Buttonpos=0,2
-Tip=Research Defend
-Ubertip=Allows Footmen to use the Defend ability, which increases their defensive capabilities against Piercing attacks.
-
-[Rhfc]
-Hotkey=C
-Buttonpos=0,2
-Tip=Research Flak Cannons
-Ubertip=Upgrades the weapons on Flying Machines to give them an area effect damage attack against air units.
-
-[Rhfl]
-Hotkey=R
-Buttonpos=1,2
-Tip=Research Flare
-Ubertip=Provides Mortar Teams with the Flare ability. Flares can be used to reveal any area of the map. Can see invisible units.
-
-[Rhfs]
-Hotkey=S
-Buttonpos=1,1
-Tip=Research Fragmentation Shards
-Ubertip=Upgrades the mortar shells on Mortar Teams and Cannon Towers to increase the damage they deal to Unarmored and Medium armor units.
-
-[Rhgb]
-Hotkey=B
-Buttonpos=0,1
-Tip=Research Flying Machine Bombs
-Ubertip=Allows Flying Machines to attack land units.
-
-[Rhhb]
-Hotkey=H
-Buttonpos=1,2
-Tip=Research Storm Hammers
-Ubertip=Causes a Gryphon Rider's attacks to damage multiple units.
-
-[Rhla]
-Hotkey=A,A,A
-Buttonpos=1,1
-Tip=Upgrade to Studded Leather Armor,Upgrade to Reinforced Leather Armor,Upgrade to Dragonhide Armor
-Ubertip=Increases the armor of Riflemen, Mortar Teams, Dragonhawk Riders and Gryphon Riders.,Further increases the armor of Riflemen, Mortar Teams, Dragonhawk Riders and Gryphon Riders.,Further increases the armor of Riflemen, Mortar Teams, Dragonhawk Riders and Gryphon Riders.
-
-[Rhlh]
-Hotkey=L,L
-Buttonpos=0,0
-Tip=Improved Lumber Harvesting,Advanced Lumber Harvesting
-Ubertip=Increases the amount of lumber that Peasants can carry by 10.,Further increases the amount of lumber that Peasants can carry by 10.
-
-[Rhme]
-Hotkey=S,S,S
-Buttonpos=0,0
-Tip=Upgrade to Iron Forged Swords,Upgrade to Steel Forged Swords,Upgrade to Mithril Forged Swords
-Ubertip=Increases the attack damage of Militia, Footmen, Spellbreakers, Dragonhawk Riders, Gryphon Riders and Knights.,Further increases the attack damage of Militia, Footmen, Spellbreakers, Dragonhawk Riders, Gryphon Riders and Knights.,Further increases the attack damage of Militia, Footmen, Spellbreakers, Dragonhawk Riders, Gryphon Riders and Knights.
-
-[Rhpm]
-Hotkey=B
-Buttonpos=3,0
-Tip=Research Backpack
-Ubertip=Gives specific Human ground units the ability to carry items.
-
-[Rhpt]
-Hotkey=T,T
-Buttonpos=1,2
-Tip=Priest Adept Training,Priest Master Training
-Ubertip=Increases Priests' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Dispel Magic.,Increases Priests' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Inner Fire.
-
-[Rhra]
-Hotkey=G,G,G
-Buttonpos=1,0
-Tip=Upgrade to Black Gunpowder,Upgrade to Refined Gunpowder,Upgrade to Imbued Gunpowder
-Ubertip=Increases the ranged attack damage of Riflemen, Mortar Teams, Siege Engines and Flying Machines.,Further increases the ranged attack damage of Riflemen, Mortar Teams, Siege Engines and Flying Machines.,Further increases the ranged attack damage of Riflemen, Mortar Teams, Siege Engines and Flying Machines.
-
-[Rhri]
-Hotkey=L
-Buttonpos=1,2
-Tip=Upgrade to Long Rifles
-Ubertip=Increases the range of Riflemen attacks.
-
-[Rhrt]
-Hotkey=G
-Buttonpos=2,1
-Tip=Research Barrage
-Ubertip=Upgrades Siege Engines, giving them the Barrage ability, which allows them to damage nearby enemy air units.
-
-[Rhsb]
-Hotkey=B
-Buttonpos=2,1
-Tip=Research Sundering Blades
-Ubertip=Upgrades Knights to deal increased damage to targets with Medium armor.
-
-[Rhse]
-Hotkey=M
-Buttonpos=2,2
-Tip=Research Magic Sentry
-Ubertip=Provides Human towers with the ability to detect invisible units.
-
-[Rhss]
-Hotkey=G
-Buttonpos=2,1
-Tip=Research Control Magic
-Ubertip=Gives Spellbreakers the ability to take control of enemy summoned units.
-
-[Rhst]
-Hotkey=O,O
-Buttonpos=0,2
-Tip=Sorceress Adept Training,Sorceress Master Training
-Ubertip=Increases Sorceresses' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Invisibility.,Increases Sorceresses' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Polymorph.
-
-[Roar]
-Hotkey=A,A,A
-Buttonpos=0,1
-Tip=Upgrade to Steel Unit Armor,Upgrade to Thorium Unit Armor,Upgrade to Arcanite Unit Armor
-Ubertip=Increases the armor of Grunts, Raiders, Batriders, Tauren, Headhunters, Wind Riders and Demolishers.,Further increases the armor of Grunts, Raiders, Batriders, Tauren, Headhunters, Wind Riders and Demolishers.,Further increases the armor of Grunts, Raiders, Batriders, Tauren, Headhunters, Wind Riders and Demolishers.
-
-[Robf]
-Hotkey=N
-Buttonpos=2,1
-Tip=Burning Oil
-Ubertip=Upgrades Demolishers to fire rocks smothered in burning oil, which causes the ground to burn.
-
-[Robk]
-Hotkey=E
-Buttonpos=1,1
-Tip=Berserker Upgrade
-Ubertip=Transforms Headhunters into Berserkers, giving them increased hit points and the Berserk ability.
-
-[Robs]
-Hotkey=B
-Buttonpos=0,2
-Tip=Research Brute Strength
-Ubertip=Improves the fighting capabilities of Grunts with a 125 hit point increase, and 3 bonus attack damage.
-
-[Roen]
-Hotkey=N
-Buttonpos=0,2
-Tip=Research Ensnare
-Ubertip=Enables Raiders to use the Ensnare ability. Ensnare causes a target enemy unit to be bound to the ground so that it cannot move. Air units that are ensnared can be attacked as though they were land units.
-
-[Rolf]
-Hotkey=L
-Buttonpos=2,1
-Tip=Research Liquid Fire
-Ubertip=Gives Batriders the Liquid Fire attack, which deals damage over time to enemy buildings, reduces the repaired rate and the attack rate of enemy buildings.
-
-[Rome]
-Hotkey=M,M,M
-Buttonpos=0,0
-Tip=Upgrade to Steel Melee Weapons,Upgrade to Thorium Melee Weapons,Upgrade to Arcanite Melee Weapons
-Ubertip=Increases the melee attack damage of Grunts, Raiders and Tauren.,Further increases the melee attack damage of Grunts, Raiders and Tauren.,Further increases the melee attack damage of Grunts, Raiders and Tauren.
-
-[Ropg]
-Hotkey=G
-Buttonpos=2,0
-Tip=Pillage
-Ubertip=Causes Peons', Grunts', and Raiders' attacks to gain resources when hitting enemy buildings.
-
-[Ropm]
-Hotkey=B
-Buttonpos=3,0
-Tip=Research Backpack
-Ubertip=Gives specific Orc ground units the ability to carry items.
-
-[Rora]
-Hotkey=R,R,R
-Buttonpos=1,0
-Tip=Upgrade to Steel Ranged Weapons,Upgrade to Thorium Ranged Weapons,Upgrade to Arcanite Ranged Weapons
-Ubertip=Increases the ranged attack damage of Headhunters, Wind Riders, Batriders and Demolishers.,Further increases the ranged attack damage of Headhunters, Wind Riders, Batriders and Demolishers.,Further increases the ranged attack damage of Headhunters, Wind Riders, Batriders and Demolishers.
-
-[Rorb]
-Hotkey=D
-Buttonpos=2,1
-Tip=Reinforced Defenses
-Ubertip=Upgrades Burrows and Watch Towers so that they have Fortified armor.
-
-[Rosp]
-Hotkey=S,S,S
-Buttonpos=2,0
-Tip=Upgrade to Spiked Barricades,Upgrade to Improved Spiked Barricades,Upgrade to Advanced Spiked Barricades
-Ubertip=Surrounds Orc buildings with spikes that damage enemy melee attackers. Deals 5 damage per attack plus an additional 20% of the attacker's damage.,Increases the additional damage by 30% of the attacker's damage.,Further increases the amount of damage inflicted on melee attackers by 0.
-
-[Rost]
-Hotkey=M,M
-Buttonpos=0,2
-Tip=Shaman Adept Training,Shaman Master Training
-Ubertip=Increases Shaman mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Lightning Shield.,Increases Shaman mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Bloodlust.
-
-[Rotr]
-Hotkey=R
-Buttonpos=1,2
-Tip=Research Troll Regeneration,Research Improved Troll Regeneration,Research Advanced Troll Regeneration
-Ubertip=Increases the hit point regeneration rate of Headhunters, Witch Doctors and Batriders.,Further increases the hit point regeneration rate of Headhunters, Witch Doctors and Batriders.,Further increases the hit point regeneration rate of Headhunters, Witch Doctors and Batriders.
-
-[Rovs]
-Hotkey=E
-Buttonpos=1,2
-Tip=Research Envenomed Spears
-Ubertip=Adds an additional poison effect to Wind Riders' attacks. A unit poisoned by Envenomed Spears takes damage over time.
-
-[Rowd]
-Hotkey=D,D
-Buttonpos=1,2
-Tip=Witch Doctor Adept Training,Witch Doctor Master Training
-Ubertip=Increases Witch Doctors' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Stasis Trap.,Increases Witch Doctors' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Healing Ward.
-
-[Rows]
-Hotkey=P
-Buttonpos=1,2
-Tip=Upgrade Pulverize
-Ubertip=Upgrades the totem carried by Tauren, increasing the damage of their Pulverize ability.
-
-[Rowt]
-Hotkey=R,R
-Buttonpos=0,2
-Tip=Spirit Walker Adept Training,Spirit Walker Master Training
-Ubertip=Increases Spirit Walkers' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Disenchant.,Increases Spirit Walkers' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Ancestral Spirit.
-
-[Ruac]
-Hotkey=C
-Buttonpos=0,2
-Tip=Research Cannibalize
-Ubertip=Enables Ghouls and Abominations to use the Cannibalize ability. Cannibalize consumes a nearby corpse to restore health.
-
-[Ruar]
-Hotkey=U,U,U
-Buttonpos=0,1
-Tip=Upgrade to Unholy Armor,Upgrade to Improved Unholy Armor,Upgrade to Advanced Unholy Armor
-Ubertip=Increases the armor of Ghouls, Abominations, Skeleton Warriors, and Skeletal Mages.,Further increases the armor of Ghouls, Abominations, Skeleton Warriors, and Skeletal Mages.,Further increases the armor of Ghouls, Abominations, Skeleton Warriors, and Skeletal Mages.
-
-[Ruba]
-Hotkey=A,A
-Buttonpos=1,2
-Tip=Banshee Adept Training,Banshee Master Training
-Ubertip=Increases Banshees' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Anti-magic Shell.,Increases Banshees' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Possession.
-
-[Rubu]
-Hotkey=B
-Buttonpos=1,1
-Tip=Research Burrow
-Ubertip=Crypt Fiends gain the ability to burrow. Burrowed Crypt Fiends are invisible and gain increased hit point regeneration, but cannot attack.
-
-[Rucr]
-Hotkey=C,C,C
-Buttonpos=1,1
-Tip=Upgrade to Creature Carapace,Upgrade to Improved Creature Carapace,Upgrade to Advanced Creature Carapace
-Ubertip=Increases the armor of Crypt Fiends, Gargoyles, Destroyers, and Frost Wyrms.,Further increases the armor of Crypt Fiends, Gargoyles, Destroyers, and Frost Wyrms.,Further increases the armor of the Crypt Fiends, Gargoyles, Destroyers, and Frost Wyrms.
-
-[Ruex]
-Hotkey=E
-Buttonpos=0,2
-Tip=Research Exhume Corpses
-Ubertip=Gives Meat Wagons the ability to generate corpses.
-
-[Rufb]
-Hotkey=B
-Buttonpos=0,2
-Tip=Research Freezing Breath
-Ubertip=Enables Frost Wyrms to use the Freezing Breath ability. When cast on a building, temporarily stops production.
-
-[Rugf]
-Hotkey=Z
-Buttonpos=0,1
-Tip=Research Ghoul Frenzy
-Ubertip=Increases the attack rate of Ghouls by 35%, and increases their movement speed.
-
-[Rume]
-Hotkey=S,S,S
-Buttonpos=0,0
-Tip=Upgrade to Unholy Strength,Upgrade to Improved Unholy Strength,Upgrade to Advanced Unholy Strength
-Ubertip=Increases the attack damage of Ghouls, Meat Wagons, Abominations, Skeleton Warriors, and Skeletal Mages.,Further increases the attack damage of Ghouls, Meat Wagons, Abominations, Skeleton Warriors, and Skeletal Mages.,Further increases the attack damage of Ghouls, Meat Wagons, Abominations, Skeleton Warriors, and Skeletal Mages.
-
-[Rune]
-Hotkey=E,E
-Buttonpos=0,2
-Tip=Necromancer Adept Training,Necromancer Master Training
-Ubertip=Increases Necromancers' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Unholy Frenzy.,Increases Necromancers' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Cripple.
-
-[Rupc]
-Hotkey=D
-Buttonpos=1,2
-Tip=Research Disease Cloud
-Ubertip=Gives Abominations a Disease Cloud aura that deals 2 damage per second for 75 seconds to nearby enemy units. Meat Wagons will cause Disease Clouds wherever they attack that deal 2 damage per second for 75 seconds to nearby enemy units. Undead are immune to Disease Cloud.
-
-[Rupm]
-Hotkey=B
-Buttonpos=0,1
-Tip=Research Backpack
-Ubertip=Gives specific Undead ground units the ability to carry items.
-
-[Rura]
-Hotkey=A,A,A
-Buttonpos=1,0
-Tip=Upgrade to Creature Attack,Upgrade to Improved Creature Attack,Upgrade to Advanced Creature Attack
-Ubertip=Increases the attack damage of Crypt Fiends, Gargoyles, Destroyers, and Frost Wyrms.,Further increases the attack damage of Crypt Fiends, Gargoyles, Destroyers, and Frost Wyrms.,Further increases the attack damage of Crypt Fiends, Gargoyles, Destroyers, and Frost Wyrms.
-
-[Rusf]
-Hotkey=S
-Buttonpos=2,1
-Tip=Research Stone Form
-Ubertip=Enables the ability for Gargoyles to assume Stone Form. Stone Form transforms the Gargoyle into a statue with high armor, spell immunity, and regeneration. The Gargoyle cannot attack in this form.
-
-[Rusl]
-Hotkey=S
-Buttonpos=2,1
-Tip=Research Skeletal Longevity
-Ubertip=Increases the duration of raised Skeleton Warriors and Skeletal Mages by 20 seconds.
-
-[Rusm]
-Hotkey=M
-Buttonpos=0,1
-Tip=Research Skeletal Mastery
-Ubertip=Causes one of the two skeletons created by Raise Dead to be a Skeletal Mage and increases the duration of raised Skeleton Warriors and Skeletal Mages by 20 seconds.
-
-[Rusp]
-Hotkey=T
-Buttonpos=2,2
-Tip=Research Destroyer Form
-Ubertip=Allows the Obsidian Statue to transform into a Destroyer, a large flying unit that must devour magic to sustain its mana. The Destroyer have Magic and Spell Immunity, Devour Magic, Absorb Mana, and Orb of Annihilation. Attacks land and air units.
-
-[Ruwb]
-Hotkey=W
-Buttonpos=1,2
-Tip=Research Web
-Ubertip=Enables Crypt Fiends to use the Web ability. Web binds a target enemy air unit in webbing, forcing it to the ground. Webbed units can be hit as though they were land units.
-
-[Rwdm]
-Hotkey=D
-Buttonpos=2,2
-Tip=Upgrade War Drums
-Ubertip=Increases the damage bonus that the War Drums aura on the Kodo Beast gives. War Drums increases the damage of friendly units around Kodo Beasts.
-
-[SCae]
-Buttonpos=3,1
-Tip=Endurance Aura
-Ubertip=Increases nearby friendly units' movement speed by 10% and attack rate by 5%.,Increases nearby friendly units' movement speed by ?% and attack rate by ?%.,Increases nearby friendly units' movement speed by ?% and attack rate by ?%.
-
-[SCc1]
-Hotkey=S
-Buttonpos=1,1
-Tip=Cyclone
-Ubertip=Tosses a target enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. Lasts 30 seconds.
-
-[SNin]
-Hotkey=V
-Buttonpos=3,2
-Researchhotkey=R
-Researchbuttonpos=3,0
-Tip=Inferno
-Ubertip=Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 360 seconds.
-Researchubertip=Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 360 seconds.
-
-[SPQM]
-Hotkey=80
-ObserverCommand=1
-Modifier=Alt
-
-[SULM]
-Hotkey=85
-ObserverCommand=1
-Modifier=Alt
-
-[Sbtl]
-Hotkey=Z
-Buttonpos=0,2
-Tip=Battle Stations
-Ubertip=Causes nearby Peons to run into the Burrow so that they can defend their base.
-
-[Scri]
-Hotkey=C
-Buttonpos=2,2
-Tip=Cripple
-Ubertip=Reduces movement speed by 75%, attack rate by 50%, and damage by 50% of a target enemy unit. Lasts 60 seconds.
-
-[Sdro]
-Hotkey=U
-Buttonpos=1,2
-Tip=Unload All
-Ubertip=Unloads all carried units at a target location.
-
-[Slo2]
-Hotkey=L
-Buttonpos=0,2
-Tip=Load Wisp
-Ubertip=Loads a targeted friendly Wisp.
-
-[Slo3]
-Hotkey=L
-Buttonpos=0,2
-Tip=Load
-Ubertip=Loads a targeted friendly land unit.
-
-[Suhf]
-Hotkey=X
-Buttonpos=1,2
-Tip=Unholy Frenzy
-Ubertip=Increases the attack rate of a target unit by 75%, but drains 2 hit points per second. Lasts 45 seconds.
-
-[TAHb]
-Hotkey=219
-GameCommand=1
-
-[TAll]
-Hotkey=65
-ObserverCommand=1
-
-[TAuC]
-Hotkey=101
-ReplayCommand=1
-
-[TEHb]
-Hotkey=221
-GameCommand=1
-
-[TFmv]
-Hotkey=70
-GameCommand=1
-Modifier=Alt
-
-[TFoW]
-Hotkey=100
-ReplayCommand=1
-
-[THer]
-Hotkey=72
-ObserverCommand=1
-
-[TMap]
-Hotkey=77
-ObserverCommand=1
-
-[TMcd]
-Hotkey=82
-GameCommand=1
-Modifier=Alt
-
-[TMtr]
-Hotkey=84
-GameCommand=1
-Modifier=Alt
-
-[TMus]
-Hotkey=77
-MenuCommand=1
-Modifier=Ctrl
-
-[TPPl]
-Hotkey=80
-ReplayCommand=1
-
-[TPUQ]
-Hotkey=81
-ObserverCommand=1
-
-[TRpl]
-Hotkey=82
-ReplayCommand=1
-
-[TSFX]
-Hotkey=83
-MenuCommand=1
-Modifier=Ctrl
-
-[TSel]
-Hotkey=83
-ObserverCommand=1
-
-[TSta]
-Hotkey=84
-ObserverCommand=1
-
-[TToD]
-Hotkey=68
-ObserverCommand=1
-
-[Uanb]
-Hotkey=C
-Buttonpos=0,1
-Ubertip=Warrior Hero, adept at summoning insect minions and crushing enemies. Can learn Impale, Spiked Carapace, Carrion Beetles and Locust Swarm. Attacks land units.
-
-[Ucrl]
-Hotkey=C
-Buttonpos=0,1
-Tip=Summon Crypt Lord
-Ubertip=Warrior Hero, adept at summoning insect minions and crushing enemies. Can learn Impale, Spiked Carapace, Carrion Beetles and Locust Swarm. Attacks land units.
-
-[Udea]
-Hotkey=D
-Buttonpos=0,2
-Tip=Summon Death Knight
-Ubertip=Warrior Hero, evil counterpart to the Human Paladin. Can learn Death Coil, Death Pact, Unholy Aura, and Animate Dead. Attacks land units.
-
-[Udre]
-Hotkey=E
-Buttonpos=1,2
-Tip=Summon Dreadlord
-Ubertip=Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sleep, Vampiric Aura, and Inferno. Attacks land units.
-
-[Ulic]
-Hotkey=L
-Buttonpos=2,2
-Tip=Summon Lich
-Ubertip=Mystical Hero, particularly adept at cold magic. Can learn Frost Armor, Frost Nova, Dark Ritual and Death And Decay. Attacks land and air units.
-
-[Usyl]
-Hotkey=D
-Buttonpos=0,0
-Tip=Summon Dark Ranger
-Ubertip=Cunning Hero, adept at manipulating opponents. Can learn Silence, Black Arrow, Life Drain, and Charm. Attacks land and air units.
-
-[alcm]
-Hotkey=65
-GameCommand=1
-Modifier=Alt
-
-[bspd]
-Buttonpos=2,0
-
-[capt]
-Hotkey=67
-CameraCommand=1
-Modifier=Ctrl_or_Alt
-
-[clnt]
-Hotkey=32
-CameraCommand=1
-
-[cnob]
-Hotkey=C
-Buttonpos=0,0
-Tip=Purchase Circlet of Nobility
-Ubertip=Increases the Strength, Agility and Intelligence of the Hero by 2 when worn.
-
-[ctcr]
-Hotkey=8
-CameraCommand=1
 
 [dust]
 Hotkey=D
@@ -4473,6 +3542,12 @@ Buttonpos=1,0
 Tip=Train Druid of the Claw
 Ubertip=Melee spellcaster. Can initially cast Roar, which increases attack damage. Can also learn Rejuvenation, Bear Form and Mark of the Claw. Attacks land units.
 
+[Edem]
+Hotkey=D
+Buttonpos=0,2
+Tip=Summon Demon Hunter
+Ubertip=Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. Attacks land units.
+
 [eden]
 Hotkey=D
 Buttonpos=2,2
@@ -4484,6 +3559,12 @@ Hotkey=F
 Buttonpos=1,0
 Tip=Hire Frigate
 Ubertip=A versatile attack ship good at destroying air attackers. Attacks land and air units.
+
+[Edmm]
+Hotkey=D
+Buttonpos=0,2
+Tip=Summon Demon Hunter
+Ubertip=Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. Attacks land units.
 
 [edob]
 Hotkey=H
@@ -4541,6 +3622,18 @@ Buttonpos=0,0
 Tip=Ride Hippogryph
 Ubertip=Archer mounted Hippogryph. Attacks land and air units.
 
+[Ekee]
+Hotkey=K
+Buttonpos=1,2
+Tip=Summon Keeper of the Grove
+Ubertip=Mystical Hero, adept at using nature spells. Can learn Entangling Roots, Force of Nature, Thorns Aura, and Tranquility. Attacks land and air units.
+
+[Emoo]
+Hotkey=P
+Buttonpos=2,2
+Tip=Summon Priestess of the Moon
+Ubertip=Warrior Hero, adept at enhancing ranged attacks and slaying enemies from afar. Can learn Scout, Searing Arrows, Trueshot Aura, and Starfall. Attacks land and air units.
+
 [emow]
 Hotkey=M
 Buttonpos=0,1
@@ -4595,6 +3688,17 @@ Buttonpos=0,0
 [even]
 Buttonpos=0,0
 
+[Ewar]
+Hotkey=W
+Buttonpos=0,1
+Tip=Summon Warden
+Ubertip=Cunning Hero, adept at entering and escaping combat. Can learn Blink, Fan of Knives, Shadow Strike and Vengeance. Attacks land units.
+
+[Ewrd]
+Hotkey=W
+Buttonpos=0,1
+Ubertip=Cunning Hero, adept at entering and escaping combat. Can learn Blink, Fan of Knives, Shadow Strike and Vengeance. Attacks land units.
+
 [ewsp]
 Hotkey=W
 Buttonpos=0,0
@@ -4606,6 +3710,17 @@ Hotkey=A
 Buttonpos=1,1
 Tip=Build Altar of Kings
 Ubertip=Summons Heroes. Revives slain Heroes.
+
+[Hamg]
+Hotkey=A
+Buttonpos=0,2
+Tip=Summon Archmage
+Ubertip=Mystical Hero, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Mass Teleport. Attacks land and air units.
+
+[Hant]
+Hotkey=A
+Buttonpos=0,1
+Ubertip=Mystical Hero, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Mass Teleport. Attacks land and air units.
 
 [harm]
 Hotkey=W
@@ -4641,6 +3756,12 @@ Hotkey=S
 Buttonpos=3,0
 Tip=Build Blacksmith
 Ubertip=Contains upgrades for improved armor, weaponry and gunpowder.
+
+[Hblm]
+Hotkey=B
+Buttonpos=0,1
+Tip=Summon Blood Mage
+Ubertip=Mystical Hero, adept at controlling magic and ranged assaults. Can learn Flame Strike, Banish, Siphon Mana and Phoenix. Attacks land and air units.
 
 [hbot]
 Hotkey=T
@@ -4696,6 +3817,11 @@ Buttonpos=0,0
 Tip=Train Footman
 Ubertip=Versatile foot soldier. Can learn the Defend ability. Attacks land units.
 
+[Hgam]
+Hotkey=A
+Buttonpos=0,1
+Ubertip=Mystical Hero Spirit, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Mass Teleport. Attacks land and air units.
+
 [hgra]
 Hotkey=G
 Buttonpos=1,2
@@ -4726,6 +3852,11 @@ Buttonpos=0,1
 Tip=Build Farm
 Ubertip=Provides food, which increases the maximum number of units that can be trained.
 
+[Hkal]
+Hotkey=B
+Buttonpos=0,1
+Ubertip=Mystical Hero, adept at controlling magic and ranged assaults. Can learn Flame Strike, Banish, Siphon Mana and Phoenix. Attacks land and air units.
+
 [hkee]
 Hotkey=U
 Buttonpos=0,2
@@ -4744,6 +3875,12 @@ Buttonpos=2,0
 Tip=Build Lumber Mill
 Ubertip=Serves as a drop-off point for harvested lumber. Also contains the upgrades for Lumber Harvesting and Masonry.
 
+[Hmkg]
+Hotkey=M
+Buttonpos=1,2
+Tip=Summon Mountain King
+Ubertip=Warrior Hero, adept at offensive combat and disrupting enemy troops. Can learn Storm Bolt, Thunder Clap, Bash and Avatar. Attacks land units.
+
 [hmpr]
 Hotkey=P
 Buttonpos=1,0
@@ -4761,6 +3898,12 @@ Hotkey=E
 Buttonpos=2,0
 Tip=Train Siege Engine
 Ubertip=Heavily armored vehicle, effective at destroying buildings. Can be upgraded with the Barrage ability. Attacks buildings.
+
+[Hpal]
+Hotkey=L
+Buttonpos=2,2
+Tip=Summon Paladin
+Ubertip=Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. Attacks land units.
 
 [hpea]
 Hotkey=P
@@ -4813,11 +3956,20 @@ Buttonpos=2,2
 Tip=Build Arcane Vault
 Ubertip=Creates a shop with purchasable items. The items available depend upon what level of upgrade your Town Hall has (Town Hall, Keep, or Castle) and which buildings you have.
 
+[Hvsh]
+Hotkey=N
+Buttonpos=0,0
+Ubertip=Mystical Hero, adept at ranged combat. Can learn Forked Lightning, Frost Arrows, Mana Shield, and Tornado. Attacks land and air units.
+
 [hwtw]
 Hotkey=T
 Buttonpos=0,2
 Tip=Build Scout Tower
 Ubertip=Basic observation tower. Has no attack, but can be upgraded into a Guard Tower, an Arcane Tower, or a Cannon Tower. Can learn the Magic Sentry ability.
+
+[InGS]
+Hotkey=187
+ReplayCommand=1
 
 [itm1]
 Hotkey=103
@@ -4849,15 +4001,44 @@ Buttonpos=2,0
 Tip=Purchase Mechanical Critter
 Ubertip=Creates a player-controlled critter that can be used to scout enemies.
 
+[MEnd]
+Hotkey=81
+MenuCommand=1
+Modifier=Alt
+
+[Menu]
+Hotkey=121
+MenuCommand=1
+
+[MHlp]
+Hotkey=72
+MenuCommand=1
+Modifier=Alt
+
+[MLod]
+Hotkey=76
+MenuCommand=1
+Modifier=Alt
+
 [moon]
 Hotkey=N
 Buttonpos=0,0
 Tip=Purchase Moonstone
 Ubertip=Causes an eclipse that blocks out the sun and creates an artificial night. Lasts 30 seconds.
 
+[MOpt]
+Hotkey=79
+MenuCommand=1
+Modifier=Alt
+
 [mpng]
 Hotkey=71
 GameCommand=1
+Modifier=Alt
+
+[MSav]
+Hotkey=83
+MenuCommand=1
 Modifier=Alt
 
 [mvcb]
@@ -4890,10 +4071,38 @@ Buttonpos=0,0
 Tip=Hire Ancient Hydra
 Ubertip=Heavy ranged amphibious unit with Devour, War Stomp, and Slow Poison. When it is slain, smaller Hydras will arise from its corpse. Attacks land and air units.
 
+[Naka]
+Hotkey=K
+Buttonpos=0,0
+
+[Nal2]
+Hotkey=X
+Buttonpos=3,2
+Tip=Summon Alchemist
+Ubertip=Warrior Hero, known for offensive and defensive versatility. Can learn Healing Spray, Chemical Rage, Acid Bomb and Transmute. Attacks land and air units.
+
+[Nal3]
+Hotkey=X
+Buttonpos=3,2
+Tip=Summon Alchemist
+Ubertip=Warrior Hero, known for offensive and defensive versatility. Can learn Healing Spray, Chemical Rage, Acid Bomb and Transmute. Attacks land and air units.
+
 [nalb]
 Buttonpos=0,0
 Tip=Invoke Albatross
 Ubertip=Call upon the spirit of Albatross to save you.
+
+[Nalc]
+Hotkey=X
+Buttonpos=3,2
+Tip=Summon Alchemist
+Ubertip=Warrior Hero, known for offensive and defensive versatility. Can learn Healing Spray, Chemical Rage, Acid Bomb and Transmute. Attacks land and air units.
+
+[Nalm]
+Hotkey=X
+Buttonpos=3,2
+Tip=Summon Alchemist
+Ubertip=Warrior Hero, known for offensive and defensive versatility. Can learn Healing Spray, Chemical Rage, Acid Bomb and Transmute. Attacks land and air units.
 
 [nanb]
 Hotkey=B
@@ -4988,6 +4197,18 @@ Hotkey=T
 Buttonpos=0,0
 Tip=Hire Transport Ship
 Ubertip=A sea vessel capable of carrying units.
+
+[Nbrn]
+Hotkey=R
+Buttonpos=1,1
+Tip=Summon Dark Ranger
+Ubertip=Cunning Hero, adept at manipulating opponents. Can learn Silence, Black Arrow, Life Drain, and Charm. Attacks land and air units.
+
+[Nbst]
+Hotkey=S
+Buttonpos=1,2
+Tip=Summon Beastmaster
+Ubertip=Warrior Hero, adept at summoning beasts into battle. Can learn Summon Bear, Summon Quilbeast, Summon Hawk, and Stampede. Attacks land units.
 
 [nbt1]
 Hotkey=B
@@ -5238,6 +4459,12 @@ Buttonpos=0,0
 Buttonpos=0,0
 Tip=Hire Forgotten One
 Ubertip=An ancient and powerful creature who hurls fire at its enemies. Can cast Spawn Tentacle, Firebolt, and Charm. Attacks land and air units.
+
+[Nfir]
+Hotkey=O
+Buttonpos=3,1
+Tip=Summon Firelord
+Ubertip=Mystical Hero, adept at disrupting spells and dealing large amounts of fire damage. Can learn Soul Burn, Summon Lava Spawn, Incinerate and Volcano. Attacks land and air units.
 
 [nfod]
 Buttonpos=0,0
@@ -5615,6 +4842,12 @@ Buttonpos=2,0
 Tip=Hire Mur'gul Snarecaster
 Ubertip=Medium ranged amphibious unit with Abolish Magic and Slow. Attacks land and air units.
 
+[Nmsr]
+Hotkey=S
+Buttonpos=0,2
+Tip=Summon Murloc Sorcerer
+Ubertip=Mystical Murloc, adept at ranged assaults. Can learn Rain of Fire. Attacks land and air units.
+
 [nmtw]
 Buttonpos=0,0
 Tip=Hire Mur'gul Tidewarrior
@@ -5649,6 +4882,12 @@ Hotkey=C
 Buttonpos=2,0
 Tip=Build Coral Bed
 Ubertip=Provides food, which increases the maximum number of units that can be trained.
+
+[Nngs]
+Hotkey=G
+Buttonpos=0,1
+Tip=Summon Sea Witch
+Ubertip=Mystical Hero, adept at ranged combat. Can learn Forked Lightning, Frost Arrows, Mana Shield, and Tornado. Attacks land and air units.
 
 [nnht]
 Buttonpos=0,0
@@ -5750,6 +4989,12 @@ Buttonpos=1,0
 Tip=Summon Wildkin
 Ubertip=Medium melee unit. Attacks land units.
 
+[Npbm]
+Hotkey=N
+Buttonpos=2,1
+Tip=Summon Brewmaster
+Ubertip=Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Breath of Fire, Drunken Haze, Drunken Brawler and Storm, Earth, And Fire. Attacks land units.
+
 [npfl]
 Hotkey=F
 Buttonpos=0,0
@@ -5766,6 +5011,12 @@ Buttonpos=0,0
 Tip=Hire Giant Polar Bear
 Ubertip=Heavy melee amphibious unit. Attacks land units.
 
+[Nplh]
+Hotkey=I
+Buttonpos=0,2
+Tip=Summon Pit Lord
+Ubertip=Warrior Hero, adept at terrorizing enemies. Can learn Rain of Fire, Howl of Terror, Cleaving Attack, and Doom. Attacks land units.
+
 [nqbh]
 Buttonpos=1,0
 
@@ -5779,6 +5030,12 @@ Buttonpos=0,0
 
 [nrdr]
 Buttonpos=1,0
+
+[Nrob]
+Hotkey=Z
+Buttonpos=2,2
+Tip=Summon Tinker
+Ubertip=Cunning Hero, exceptional at disrupting battles and enduring damage. Can learn Pocket Factory, Cluster Rockets, Engineering Upgrade and Robo-Goblin. Attacks land units.
 
 [nrog]
 Buttonpos=0,0
@@ -5836,6 +5093,12 @@ Ubertip=Heavy melee amphibious unit with Ensnare, and Pulverize. Attacks land un
 Buttonpos=0,0
 Tip=Summon Sea Giant
 Ubertip=Light melee amphibious unit with Pulverize. Attacks land units.
+
+[Nsjs]
+Hotkey=N
+Buttonpos=1,1
+Tip=Summon Brewmaster
+Ubertip=Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Breath of Fire, Drunken Haze, Drunken Brawler and Storm, Earth And Fire. Attacks land units.
 
 [nskf]
 Hotkey=B
@@ -5935,6 +5198,18 @@ Hotkey=S
 Buttonpos=3,0
 Tip=Hire Satyr Shadowdancer
 Ubertip=Light ranged unit with Shadowmeld. Can cast Curse. Attacks land and air units.
+
+[Nswt]
+Hotkey=W
+Buttonpos=0,2
+Tip=Summon Sea Witch
+Ubertip=Mystical Sea Witch, adept at ranged assaults. Can learn Summon Water Elemental, Brilliance Aura, and Earthquake. Attacks land and air units.
+
+[Ntin]
+Hotkey=Z
+Buttonpos=2,2
+Tip=Summon Tinker
+Ubertip=Cunning Hero, exceptional at disrupting battles and enduring damage. Can learn Pocket Factory, Cluster Rockets, Engineering Upgrade and Robo-Goblin. Attacks land units.
 
 [ntka]
 Buttonpos=0,0
@@ -6096,6 +5371,12 @@ Buttonpos=3,1
 Tip=Build Beastiary
 Ubertip=Trains Raiders, Kodo Beasts, Batriders, and Wind Riders. Also contains the Ensnare, Envenomed Spears, Liquid Fire and War Drums upgrades.
 
+[Obla]
+Hotkey=B
+Buttonpos=0,2
+Tip=Summon Blademaster
+Ubertip=Cunning Hero, adept at quickly killing individual units and creating confusion among enemies. Can learn Mirror Image, Wind Walk, Critical Strike and Bladestorm. Attacks land units.
+
 [obot]
 Hotkey=T
 Buttonpos=0,0
@@ -6134,6 +5415,18 @@ Buttonpos=1,0
 Tip=Train Witch Doctor
 Ubertip=Supporting spellcaster. Can initially cast Sentry Ward, which summons an invisible detector. Can also learn Stasis Trap and Healing Ward. Attacks land and air units.
 
+[Odrt]
+Hotkey=F
+Buttonpos=1,2
+Tip=Summon Far Seer
+Ubertip=Mystical Hero, effective at ranged attacks and scouting. Can learn Chain Lightning, Far Sight, Feral Spirit and Earthquake. Attacks land and air units.
+
+[Ofar]
+Hotkey=F
+Buttonpos=1,2
+Tip=Summon Far Seer
+Ubertip=Mystical Hero, effective at ranged attacks and scouting. Can learn Chain Lightning, Far Sight, Feral Spirit and Earthquake. Attacks land and air units.
+
 [ofir]
 Hotkey=F
 Buttonpos=0,2
@@ -6157,6 +5450,12 @@ Hotkey=U
 Buttonpos=0,2
 Tip=Upgrade to Fortress
 Ubertip=Upgrade to Fortress to enable the production of additional types of structures and units.
+
+[Ogld]
+Hotkey=W
+Buttonpos=0,1
+Tip=Summon Warlock
+Ubertip=Powerful Warlock working under the tutelage of Kil'jaeden himself. Attacks land and air units.
 
 [ogre]
 Hotkey=H
@@ -6212,6 +5511,29 @@ Buttonpos=0,0
 Tip=Train Raider
 Ubertip=Highly mobile wolf rider. Effective against buildings. Can learn the Ensnare ability. Attacks land units.
 
+[Orex]
+Hotkey=B
+Buttonpos=0,0
+Tip=Summon Beastmaster
+Ubertip=Warrior Hero, adept at summoning beasts and rallying his allies. Can learn Summon Bear, Summon Quilbeast, Battle Roar, and Stampede. Attacks land and air units.
+
+[Orkn]
+Hotkey=S
+Buttonpos=0,1
+Tip=Summon Shadow Hunter
+Ubertip=Cunning Hero, adept at healing magics and voodoo curses. Can learn Healing Wave, Hex, Serpent Ward and Big Bad Voodoo. Attacks land and air units.
+
+[Osam]
+Hotkey=B
+Buttonpos=0,2
+Ubertip=Cunning Hero, adept at quickly killing individual units and creating confusion among enemies. Can learn Mirror Image, Wind Walk, Critical Strike and Bladestorm. Attacks land units.
+
+[Oshd]
+Hotkey=H
+Buttonpos=0,1
+Tip=Summon Shadow Hunter
+Ubertip=Cunning Hero, adept at healing magics and voodoo curses. Can learn Healing Wave, Hex, Serpent Ward and Big Bad Voodoo. Attacks land and air units.
+
 [oshm]
 Hotkey=S
 Buttonpos=0,0
@@ -6265,6 +5587,12 @@ Hotkey=B
 Buttonpos=3,0
 Tip=Train Batrider
 Ubertip=Light flying unit with incredible perception. Good at destroying buildings. Has the Unstable Concoction ability, which allows the Batrider to explode, dealing damage to nearby enemy air units. Can learn Liquid Fire, and Troll Regeneration. Attacks land units.
+
+[Otch]
+Hotkey=T
+Buttonpos=2,2
+Tip=Summon Tauren Chieftain
+Ubertip=Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Shockwave, War Stomp, Endurance Aura and Reincarnation. Attacks land units.
 
 [otrb]
 Hotkey=O
@@ -6350,15 +5678,287 @@ Buttonpos=1,0
 Tip=Purchase Periapt of Vitality
 Ubertip=Increases the hit points of the Hero by 150 when worn.
 
+[QLog]
+Hotkey=120
+MenuCommand=1
+
+[QSav]
+Hotkey=117
+MenuCommand=1
+
 [rde1]
 Hotkey=2
 Buttonpos=0,0
 Tip=Purchase Ring of Protection +2
 Ubertip=Increases the armor of the Hero by 2 when worn.
 
+[Recb]
+Hotkey=B
+Buttonpos=0,2
+Tip=Research Corrosive Breath
+Ubertip=Gives Chimaeras the ability to hurl corrosive bile onto enemy buildings.
+
+[Redc]
+Hotkey=L,L
+Buttonpos=1,2
+Tip=Druid of the Claw Adept Training,Druid of the Claw Master Training
+Ubertip=Increases their Night Elf Form's mana capacity, mana regeneration rate, hit points, attack damage and gives them the ability Rejuvenation.,Increases their Night Elf Form's mana capacity, mana regeneration rate, hit points, attack damage and gives them the ability Bear Form.
+
+[Redt]
+Hotkey=A,A
+Buttonpos=1,2
+Tip=Druid of the Talon Adept Training,Druid of the Talon Master Training
+Ubertip=Increases their Night Elf Form's mana capacity, mana regeneration rate, hit points, and gives them the ability Storm Crow Form.,Increases their Night Elf Form's mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Cyclone.
+
+[Reeb]
+Hotkey=M
+Buttonpos=1,1
+Tip=Research Mark of the Claw
+Ubertip=Allows Druids of the Claw to cast Roar while in Bear Form.
+
+[Reec]
+Hotkey=M
+Buttonpos=1,1
+Tip=Research Mark of the Talon
+Ubertip=Allows Druids of the Talon to cast Faerie Fire while in Storm Crow Form.
+
+[Rehs]
+Hotkey=H
+Buttonpos=2,1
+Tip=Research Hardened Skin
+Ubertip=Gives Mountain Giants increased resistance to attack damage.
+
+[Reht]
+Hotkey=I
+Buttonpos=0,2
+Tip=Research Hippogryph Taming
+Ubertip=Trains Hippogryphs to allow Archers to mount them. This allows them to attack both air and ground units.
+
+[Reib]
+Hotkey=I
+Buttonpos=0,2
+Tip=Research Improved Bows
+Ubertip=Increases the Archer's and Hippogryph Rider's attack range.
+
+[Rema]
+Hotkey=A,A,A
+Buttonpos=0,1
+Tip=Upgrade to Moon Armor,Upgrade to Improved Moon Armor,Upgrade to Advanced Moon Armor
+Ubertip=Increases the armor of Archers, Huntresses, and Hippogryph Riders.,Further increases the armor of Archers, Huntresses, and Hippogryph Riders.,Further increases the armor of Archers, Huntresses, and Hippogryph Riders.
+
+[Remg]
+Hotkey=G
+Buttonpos=1,1
+Tip=Upgrade Moon Glaive
+Ubertip=Gives the Huntress the ability to strike additional units with her bouncing glaive attacks, and changes their armor type to Heavy.
+
+[Remk]
+Hotkey=M
+Buttonpos=0,1
+Tip=Research Marksmanship
+Ubertip=Increases damage of Archers and Hippogryph Riders by 4.
+
+[Renb]
+Hotkey=N
+Buttonpos=2,0
+Tip=Research Nature's Blessing
+Ubertip=Upgrades all Ancients' and Treants' movement speed and armor.
+
+[Repb]
+Hotkey=P
+Buttonpos=2,2
+Tip=Research Vorpal Blades
+Ubertip=Increases the speed of glaives launched by the Glaive Thrower, and increases damage by 10. Also allows them to attack trees.
+
+[Repm]
+Hotkey=B
+Buttonpos=3,0
+Tip=Research Backpack
+Ubertip=Gives specific Night Elf ground units the ability to carry items.
+
+[Rerh]
+Hotkey=R,R,R
+Buttonpos=1,1
+Tip=Upgrade to Reinforced Hides,Upgrade to Improved Reinforced Hides,Upgrade to Advanced Reinforced Hides
+Ubertip=Increases the armor of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.,Further increases the armor of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.,Further increases the armor of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.
+
+[Rers]
+Hotkey=T
+Buttonpos=2,2
+Tip=Research Resistant Skin
+Ubertip=Gives Mountain Giants increased resistance to spell damage.
+
+[Resc]
+Hotkey=S
+Buttonpos=1,2
+Tip=Research Sentinel
+Ubertip=Gives the Huntress the ability to send her owl companion to a nearby tree and provide vision. Can see invisible units.
+
+[Resi]
+Hotkey=S
+Buttonpos=0,2
+Tip=Research Abolish Magic
+Ubertip=Gives the Dryad the ability to dispel positive buffs from enemy units, and negative buffs from friendly units. Damages summoned units.
+
+[Resm]
+Hotkey=M,M,M
+Buttonpos=0,0
+Tip=Upgrade to Strength of the Moon,Upgrade to Improved Strength of the Moon,Upgrade to Advanced Strength of the Moon
+Ubertip=Increases the damage of Archers, Huntresses, Glaive Throwers, and Hippogryph Riders.,Further increases the damage of Archers, Huntresses, Glaive Throwers, and Hippogryph Riders.,Further increases the damage of Archers, Huntresses, Glaive Throwers, and Hippogryph Riders.
+
+[Resw]
+Hotkey=W,W,W
+Buttonpos=1,0
+Tip=Upgrade to Strength of the Wild,Upgrade to Improved Strength of the Wild,Upgrade to Advanced Strength of the Wild
+Ubertip=Increases the damage of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.,Further increases the damage of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.,Further increases the damage of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.
+
+[Reuv]
+Hotkey=U
+Buttonpos=2,0
+Tip=Upgrade to Ultravision
+Ubertip=Gives Night Elves the ability to see as far at night as they do during the day.
+
+[Rews]
+Hotkey=E
+Buttonpos=3,0
+Tip=Research Well Spring
+Ubertip=Increases the amount of mana that can be stored in Moon Wells by 100, and their rate of mana regeneration by 52%.
+
 [rezm]
 Hotkey=116
 CameraCommand=1
+
+[Rhac]
+Hotkey=M,M,M
+Buttonpos=1,0
+Tip=Upgrade to Improved Masonry,Upgrade to Advanced Masonry,Upgrade to Imbued Masonry
+Ubertip=Increases the armor and hit points of Human buildings.,Further increases the armor and hit points of Human buildings.,Further increases the armor and hit points of Human buildings.
+
+[Rhan]
+Hotkey=A
+Buttonpos=2,2
+Tip=Research Animal War Training
+Ubertip=Increases the maximum hit points of Knights, Dragonhawk Riders, and Gryphon Riders by 100.
+
+[Rhar]
+Hotkey=P,P,P
+Buttonpos=0,1
+Tip=Upgrade to Iron Plating,Upgrade to Steel Plating,Upgrade to Mithril Plating
+Ubertip=Increases the armor of Militia, Footmen, Spellbreakers, Knights, Flying Machines and Siege Engines.,Further increases the armor of Militia, Footmen, Spellbreakers, Knights, Flying Machines and Siege Engines.,Further increases the armor of Militia, Footmen, Spellbreakers, Knights, Flying Machines and Siege Engines.
+
+[Rhcd]
+Hotkey=C
+Buttonpos=0,2
+Tip=Research Cloud
+Ubertip=Provides Dragonhawk Riders with the Cloud ability, which stops ranged buildings from attacking.
+
+[Rhde]
+Hotkey=D
+Buttonpos=0,2
+Tip=Research Defend
+Ubertip=Allows Footmen to use the Defend ability, which increases their defensive capabilities against Piercing attacks.
+
+[Rhfc]
+Hotkey=C
+Buttonpos=0,2
+Tip=Research Flak Cannons
+Ubertip=Upgrades the weapons on Flying Machines to give them an area effect damage attack against air units.
+
+[Rhfl]
+Hotkey=R
+Buttonpos=1,2
+Tip=Research Flare
+Ubertip=Provides Mortar Teams with the Flare ability. Flares can be used to reveal any area of the map. Can see invisible units.
+
+[Rhfs]
+Hotkey=S
+Buttonpos=1,1
+Tip=Research Fragmentation Shards
+Ubertip=Upgrades the mortar shells on Mortar Teams and Cannon Towers to increase the damage they deal to Unarmored and Medium armor units.
+
+[Rhgb]
+Hotkey=B
+Buttonpos=0,1
+Tip=Research Flying Machine Bombs
+Ubertip=Allows Flying Machines to attack land units.
+
+[Rhhb]
+Hotkey=H
+Buttonpos=1,2
+Tip=Research Storm Hammers
+Ubertip=Causes a Gryphon Rider's attacks to damage multiple units.
+
+[Rhla]
+Hotkey=A,A,A
+Buttonpos=1,1
+Tip=Upgrade to Studded Leather Armor,Upgrade to Reinforced Leather Armor,Upgrade to Dragonhide Armor
+Ubertip=Increases the armor of Riflemen, Mortar Teams, Dragonhawk Riders and Gryphon Riders.,Further increases the armor of Riflemen, Mortar Teams, Dragonhawk Riders and Gryphon Riders.,Further increases the armor of Riflemen, Mortar Teams, Dragonhawk Riders and Gryphon Riders.
+
+[Rhlh]
+Hotkey=L,L
+Buttonpos=0,0
+Tip=Improved Lumber Harvesting,Advanced Lumber Harvesting
+Ubertip=Increases the amount of lumber that Peasants can carry by 10.,Further increases the amount of lumber that Peasants can carry by 10.
+
+[Rhme]
+Hotkey=S,S,S
+Buttonpos=0,0
+Tip=Upgrade to Iron Forged Swords,Upgrade to Steel Forged Swords,Upgrade to Mithril Forged Swords
+Ubertip=Increases the attack damage of Militia, Footmen, Spellbreakers, Dragonhawk Riders, Gryphon Riders and Knights.,Further increases the attack damage of Militia, Footmen, Spellbreakers, Dragonhawk Riders, Gryphon Riders and Knights.,Further increases the attack damage of Militia, Footmen, Spellbreakers, Dragonhawk Riders, Gryphon Riders and Knights.
+
+[Rhpm]
+Hotkey=B
+Buttonpos=3,0
+Tip=Research Backpack
+Ubertip=Gives specific Human ground units the ability to carry items.
+
+[Rhpt]
+Hotkey=T,T
+Buttonpos=1,2
+Tip=Priest Adept Training,Priest Master Training
+Ubertip=Increases Priests' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Dispel Magic.,Increases Priests' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Inner Fire.
+
+[Rhra]
+Hotkey=G,G,G
+Buttonpos=1,0
+Tip=Upgrade to Black Gunpowder,Upgrade to Refined Gunpowder,Upgrade to Imbued Gunpowder
+Ubertip=Increases the ranged attack damage of Riflemen, Mortar Teams, Siege Engines and Flying Machines.,Further increases the ranged attack damage of Riflemen, Mortar Teams, Siege Engines and Flying Machines.,Further increases the ranged attack damage of Riflemen, Mortar Teams, Siege Engines and Flying Machines.
+
+[Rhri]
+Hotkey=L
+Buttonpos=1,2
+Tip=Upgrade to Long Rifles
+Ubertip=Increases the range of Riflemen attacks.
+
+[Rhrt]
+Hotkey=G
+Buttonpos=2,1
+Tip=Research Barrage
+Ubertip=Upgrades Siege Engines, giving them the Barrage ability, which allows them to damage nearby enemy air units.
+
+[Rhsb]
+Hotkey=B
+Buttonpos=2,1
+Tip=Research Sundering Blades
+Ubertip=Upgrades Knights to deal increased damage to targets with Medium armor.
+
+[Rhse]
+Hotkey=M
+Buttonpos=2,2
+Tip=Research Magic Sentry
+Ubertip=Provides Human towers with the ability to detect invisible units.
+
+[Rhss]
+Hotkey=G
+Buttonpos=2,1
+Tip=Research Control Magic
+Ubertip=Gives Spellbreakers the ability to take control of enemy summoned units.
+
+[Rhst]
+Hotkey=O,O
+Buttonpos=0,2
+Tip=Sorceress Adept Training,Sorceress Master Training
+Ubertip=Increases Sorceresses' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Invisibility.,Increases Sorceresses' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Polymorph.
 
 [ritd]
 Hotkey=A
@@ -6369,6 +5969,30 @@ Ubertip=Non-Combat Consumable Sacrifices a friendly Undead unit to regenerate 20
 [rnec]
 Buttonpos=0,0
 
+[Roar]
+Hotkey=A,A,A
+Buttonpos=0,1
+Tip=Upgrade to Steel Unit Armor,Upgrade to Thorium Unit Armor,Upgrade to Arcanite Unit Armor
+Ubertip=Increases the armor of Grunts, Raiders, Batriders, Tauren, Headhunters, Wind Riders and Demolishers.,Further increases the armor of Grunts, Raiders, Batriders, Tauren, Headhunters, Wind Riders and Demolishers.,Further increases the armor of Grunts, Raiders, Batriders, Tauren, Headhunters, Wind Riders and Demolishers.
+
+[Robf]
+Hotkey=N
+Buttonpos=2,1
+Tip=Burning Oil
+Ubertip=Upgrades Demolishers to fire rocks smothered in burning oil, which causes the ground to burn.
+
+[Robk]
+Hotkey=E
+Buttonpos=1,1
+Tip=Berserker Upgrade
+Ubertip=Transforms Headhunters into Berserkers, giving them increased hit points and the Berserk ability.
+
+[Robs]
+Hotkey=B
+Buttonpos=0,2
+Tip=Research Brute Strength
+Ubertip=Improves the fighting capabilities of Grunts with a 125 hit point increase, and 3 bonus attack damage.
+
 [rocl]
 Hotkey=45
 CameraCommand=1
@@ -6376,6 +6000,204 @@ CameraCommand=1
 [rocr]
 Hotkey=46
 CameraCommand=1
+
+[Roen]
+Hotkey=N
+Buttonpos=0,2
+Tip=Research Ensnare
+Ubertip=Enables Raiders to use the Ensnare ability. Ensnare causes a target enemy unit to be bound to the ground so that it cannot move. Air units that are ensnared can be attacked as though they were land units.
+
+[Rolf]
+Hotkey=L
+Buttonpos=2,1
+Tip=Research Liquid Fire
+Ubertip=Gives Batriders the Liquid Fire attack, which deals damage over time to enemy buildings, reduces the repaired rate and the attack rate of enemy buildings.
+
+[Rome]
+Hotkey=M,M,M
+Buttonpos=0,0
+Tip=Upgrade to Steel Melee Weapons,Upgrade to Thorium Melee Weapons,Upgrade to Arcanite Melee Weapons
+Ubertip=Increases the melee attack damage of Grunts, Raiders and Tauren.,Further increases the melee attack damage of Grunts, Raiders and Tauren.,Further increases the melee attack damage of Grunts, Raiders and Tauren.
+
+[Ropg]
+Hotkey=G
+Buttonpos=2,0
+Tip=Pillage
+Ubertip=Causes Peons', Grunts', and Raiders' attacks to gain resources when hitting enemy buildings.
+
+[Ropm]
+Hotkey=B
+Buttonpos=3,0
+Tip=Research Backpack
+Ubertip=Gives specific Orc ground units the ability to carry items.
+
+[Rora]
+Hotkey=R,R,R
+Buttonpos=1,0
+Tip=Upgrade to Steel Ranged Weapons,Upgrade to Thorium Ranged Weapons,Upgrade to Arcanite Ranged Weapons
+Ubertip=Increases the ranged attack damage of Headhunters, Wind Riders, Batriders and Demolishers.,Further increases the ranged attack damage of Headhunters, Wind Riders, Batriders and Demolishers.,Further increases the ranged attack damage of Headhunters, Wind Riders, Batriders and Demolishers.
+
+[Rorb]
+Hotkey=D
+Buttonpos=2,1
+Tip=Reinforced Defenses
+Ubertip=Upgrades Burrows and Watch Towers so that they have Fortified armor.
+
+[Rosp]
+Hotkey=S,S,S
+Buttonpos=2,0
+Tip=Upgrade to Spiked Barricades,Upgrade to Improved Spiked Barricades,Upgrade to Advanced Spiked Barricades
+Ubertip=Surrounds Orc buildings with spikes that damage enemy melee attackers. Deals 5 damage per attack plus an additional 20% of the attacker's damage.,Increases the additional damage by 30% of the attacker's damage.,Further increases the amount of damage inflicted on melee attackers by 0.
+
+[Rost]
+Hotkey=M,M
+Buttonpos=0,2
+Tip=Shaman Adept Training,Shaman Master Training
+Ubertip=Increases Shaman mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Lightning Shield.,Increases Shaman mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Bloodlust.
+
+[Rotr]
+Hotkey=R
+Buttonpos=1,2
+Tip=Research Troll Regeneration,Research Improved Troll Regeneration,Research Advanced Troll Regeneration
+Ubertip=Increases the hit point regeneration rate of Headhunters, Witch Doctors and Batriders.,Further increases the hit point regeneration rate of Headhunters, Witch Doctors and Batriders.,Further increases the hit point regeneration rate of Headhunters, Witch Doctors and Batriders.
+
+[Rovs]
+Hotkey=E
+Buttonpos=1,2
+Tip=Research Envenomed Spears
+Ubertip=Adds an additional poison effect to Wind Riders' attacks. A unit poisoned by Envenomed Spears takes damage over time.
+
+[Rowd]
+Hotkey=D,D
+Buttonpos=1,2
+Tip=Witch Doctor Adept Training,Witch Doctor Master Training
+Ubertip=Increases Witch Doctors' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Stasis Trap.,Increases Witch Doctors' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Healing Ward.
+
+[Rows]
+Hotkey=P
+Buttonpos=1,2
+Tip=Upgrade Pulverize
+Ubertip=Upgrades the totem carried by Tauren, increasing the damage of their Pulverize ability.
+
+[Rowt]
+Hotkey=R,R
+Buttonpos=0,2
+Tip=Spirit Walker Adept Training,Spirit Walker Master Training
+Ubertip=Increases Spirit Walkers' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Disenchant.,Increases Spirit Walkers' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Ancestral Spirit.
+
+[Ruac]
+Hotkey=C
+Buttonpos=0,2
+Tip=Research Cannibalize
+Ubertip=Enables Ghouls and Abominations to use the Cannibalize ability. Cannibalize consumes a nearby corpse to restore health.
+
+[Ruar]
+Hotkey=U,U,U
+Buttonpos=0,1
+Tip=Upgrade to Unholy Armor,Upgrade to Improved Unholy Armor,Upgrade to Advanced Unholy Armor
+Ubertip=Increases the armor of Ghouls, Abominations, Skeleton Warriors, and Skeletal Mages.,Further increases the armor of Ghouls, Abominations, Skeleton Warriors, and Skeletal Mages.,Further increases the armor of Ghouls, Abominations, Skeleton Warriors, and Skeletal Mages.
+
+[Ruba]
+Hotkey=A,A
+Buttonpos=1,2
+Tip=Banshee Adept Training,Banshee Master Training
+Ubertip=Increases Banshees' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Anti-magic Shell.,Increases Banshees' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Possession.
+
+[Rubu]
+Hotkey=B
+Buttonpos=1,1
+Tip=Research Burrow
+Ubertip=Crypt Fiends gain the ability to burrow. Burrowed Crypt Fiends are invisible and gain increased hit point regeneration, but cannot attack.
+
+[Rucr]
+Hotkey=C,C,C
+Buttonpos=1,1
+Tip=Upgrade to Creature Carapace,Upgrade to Improved Creature Carapace,Upgrade to Advanced Creature Carapace
+Ubertip=Increases the armor of Crypt Fiends, Gargoyles, Destroyers, and Frost Wyrms.,Further increases the armor of Crypt Fiends, Gargoyles, Destroyers, and Frost Wyrms.,Further increases the armor of the Crypt Fiends, Gargoyles, Destroyers, and Frost Wyrms.
+
+[Ruex]
+Hotkey=E
+Buttonpos=0,2
+Tip=Research Exhume Corpses
+Ubertip=Gives Meat Wagons the ability to generate corpses.
+
+[Rufb]
+Hotkey=B
+Buttonpos=0,2
+Tip=Research Freezing Breath
+Ubertip=Enables Frost Wyrms to use the Freezing Breath ability. When cast on a building, temporarily stops production.
+
+[Rugf]
+Hotkey=Z
+Buttonpos=0,1
+Tip=Research Ghoul Frenzy
+Ubertip=Increases the attack rate of Ghouls by 35%, and increases their movement speed.
+
+[Rume]
+Hotkey=S,S,S
+Buttonpos=0,0
+Tip=Upgrade to Unholy Strength,Upgrade to Improved Unholy Strength,Upgrade to Advanced Unholy Strength
+Ubertip=Increases the attack damage of Ghouls, Meat Wagons, Abominations, Skeleton Warriors, and Skeletal Mages.,Further increases the attack damage of Ghouls, Meat Wagons, Abominations, Skeleton Warriors, and Skeletal Mages.,Further increases the attack damage of Ghouls, Meat Wagons, Abominations, Skeleton Warriors, and Skeletal Mages.
+
+[Rune]
+Hotkey=E,E
+Buttonpos=0,2
+Tip=Necromancer Adept Training,Necromancer Master Training
+Ubertip=Increases Necromancers' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Unholy Frenzy.,Increases Necromancers' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Cripple.
+
+[Rupc]
+Hotkey=D
+Buttonpos=1,2
+Tip=Research Disease Cloud
+Ubertip=Gives Abominations a Disease Cloud aura that deals 2 damage per second for 75 seconds to nearby enemy units. Meat Wagons will cause Disease Clouds wherever they attack that deal 2 damage per second for 75 seconds to nearby enemy units. Undead are immune to Disease Cloud.
+
+[Rupm]
+Hotkey=B
+Buttonpos=0,1
+Tip=Research Backpack
+Ubertip=Gives specific Undead ground units the ability to carry items.
+
+[Rura]
+Hotkey=A,A,A
+Buttonpos=1,0
+Tip=Upgrade to Creature Attack,Upgrade to Improved Creature Attack,Upgrade to Advanced Creature Attack
+Ubertip=Increases the attack damage of Crypt Fiends, Gargoyles, Destroyers, and Frost Wyrms.,Further increases the attack damage of Crypt Fiends, Gargoyles, Destroyers, and Frost Wyrms.,Further increases the attack damage of Crypt Fiends, Gargoyles, Destroyers, and Frost Wyrms.
+
+[Rusf]
+Hotkey=S
+Buttonpos=2,1
+Tip=Research Stone Form
+Ubertip=Enables the ability for Gargoyles to assume Stone Form. Stone Form transforms the Gargoyle into a statue with high armor, spell immunity, and regeneration. The Gargoyle cannot attack in this form.
+
+[Rusl]
+Hotkey=S
+Buttonpos=2,1
+Tip=Research Skeletal Longevity
+Ubertip=Increases the duration of raised Skeleton Warriors and Skeletal Mages by 20 seconds.
+
+[Rusm]
+Hotkey=M
+Buttonpos=0,1
+Tip=Research Skeletal Mastery
+Ubertip=Causes one of the two skeletons created by Raise Dead to be a Skeletal Mage and increases the duration of raised Skeleton Warriors and Skeletal Mages by 20 seconds.
+
+[Rusp]
+Hotkey=T
+Buttonpos=2,2
+Tip=Research Destroyer Form
+Ubertip=Allows the Obsidian Statue to transform into a Destroyer, a large flying unit that must devour magic to sustain its mana. The Destroyer have Magic and Spell Immunity, Devour Magic, Absorb Mana, and Orb of Annihilation. Attacks land and air units.
+
+[Ruwb]
+Hotkey=W
+Buttonpos=1,2
+Tip=Research Web
+Ubertip=Enables Crypt Fiends to use the Web ability. Web binds a target enemy air unit in webbing, forcing it to the ground. Webbed units can be hit as though they were land units.
+
+[Rwdm]
+Hotkey=D
+Buttonpos=2,2
+Tip=Upgrade War Drums
+Ubertip=Increases the damage bonus that the War Drums aura on the Kodo Beast gives. War Drums increases the damage of friendly units around Kodo Beasts.
 
 [rwiz]
 Hotkey=B
@@ -6386,6 +6208,35 @@ Ubertip=Increases the Hero's rate of mana regeneration by 50% when worn.
 [sbgp]
 Hotkey=9
 GameCommand=1
+
+[Sbtl]
+Hotkey=Z
+Buttonpos=0,2
+Tip=Battle Stations
+Ubertip=Causes nearby Peons to run into the Burrow so that they can defend their base.
+
+[SCae]
+Buttonpos=3,1
+Tip=Endurance Aura
+Ubertip=Increases nearby friendly units' movement speed by 10% and attack rate by 5%.,Increases nearby friendly units' movement speed by ?% and attack rate by ?%.,Increases nearby friendly units' movement speed by ?% and attack rate by ?%.
+
+[SCc1]
+Hotkey=S
+Buttonpos=1,1
+Tip=Cyclone
+Ubertip=Tosses a target enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. Lasts 30 seconds.
+
+[Scri]
+Hotkey=C
+Buttonpos=2,2
+Tip=Cripple
+Ubertip=Reduces movement speed by 75%, attack rate by 50%, and damage by 50% of a target enemy unit. Lasts 60 seconds.
+
+[Sdro]
+Hotkey=U
+Buttonpos=1,2
+Tip=Unload All
+Ubertip=Unloads all carried units at a target location.
 
 [shas]
 Hotkey=S
@@ -6408,6 +6259,32 @@ Hotkey=K
 Buttonpos=2,0
 Tip=Purchase Sacrificial Skull
 Ubertip=Creates an area of Blight at a target location.
+
+[Slo2]
+Hotkey=L
+Buttonpos=0,2
+Tip=Load Wisp
+Ubertip=Loads a targeted friendly Wisp.
+
+[Slo3]
+Hotkey=L
+Buttonpos=0,2
+Tip=Load
+Ubertip=Loads a targeted friendly land unit.
+
+[SNin]
+Hotkey=V
+Buttonpos=3,2
+Researchhotkey=R
+Researchbuttonpos=3,0
+Tip=Inferno
+Ubertip=Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 360 seconds.
+Researchubertip=Calls an Infernal down from the sky, dealing 50 damage and stunning enemy land units for 4 seconds in an area. The Infernal lasts 360 seconds.
+
+[SPQM]
+Hotkey=80
+ObserverCommand=1
+Modifier=Alt
 
 [spre]
 Hotkey=E
@@ -6442,11 +6319,78 @@ Buttonpos=2,1
 Tip=Purchase Scroll of Town Portal
 Ubertip=Teleports the Hero and any of its nearby troops to a target friendly town hall.
 
+[Suhf]
+Hotkey=X
+Buttonpos=1,2
+Tip=Unholy Frenzy
+Ubertip=Increases the attack rate of a target unit by 75%, but drains 2 hit points per second. Lasts 45 seconds.
+
+[SULM]
+Hotkey=85
+ObserverCommand=1
+Modifier=Alt
+
+[TAHb]
+Hotkey=219
+GameCommand=1
+
+[TAll]
+Hotkey=65
+ObserverCommand=1
+
+[TAuC]
+Hotkey=101
+ReplayCommand=1
+
+[TEHb]
+Hotkey=221
+GameCommand=1
+
+[TFmv]
+Hotkey=70
+GameCommand=1
+Modifier=Alt
+
+[TFoW]
+Hotkey=100
+ReplayCommand=1
+
 [tgrh]
 Hotkey=G
 Buttonpos=1,2
 Tip=Purchase Tiny Great Hall
 Ubertip=Creates a Great Hall at a target location. Human, Night Elf, and Undead players will get their racial equivalent town hall.
+
+[THer]
+Hotkey=72
+ObserverCommand=1
+
+[TMap]
+Hotkey=77
+ObserverCommand=1
+
+[TMcd]
+Hotkey=82
+GameCommand=1
+Modifier=Alt
+
+[TMtr]
+Hotkey=84
+GameCommand=1
+Modifier=Alt
+
+[TMus]
+Hotkey=77
+MenuCommand=1
+Modifier=Ctrl
+
+[TPPl]
+Hotkey=80
+ReplayCommand=1
+
+[TPUQ]
+Hotkey=81
+ObserverCommand=1
 
 [tret]
 Hotkey=O
@@ -6454,11 +6398,32 @@ Buttonpos=0,2
 Tip=Purchase Tome of Retraining
 Ubertip=Unlearns all of the Hero's spells, allowing the Hero to learn different skills.
 
+[TRpl]
+Hotkey=82
+ReplayCommand=1
+
 [tsct]
 Hotkey=V
 Buttonpos=3,1
 Tip=Purchase Ivory Tower
 Ubertip=Creates a Scout Tower at a target location.
+
+[TSel]
+Hotkey=83
+ObserverCommand=1
+
+[TSFX]
+Hotkey=83
+MenuCommand=1
+Modifier=Ctrl
+
+[TSta]
+Hotkey=84
+ObserverCommand=1
+
+[TToD]
+Hotkey=68
+ObserverCommand=1
 
 [uabc]
 Hotkey=A
@@ -6477,6 +6442,11 @@ Hotkey=C
 Buttonpos=0,0
 Tip=Train Acolyte
 Ubertip=Basic worker. Can summon structures, harvest gold, and Restore. Acolytes may be sacrificed at a Sacrificial Pit to create Shades. Attacks land units.
+
+[Uanb]
+Hotkey=C
+Buttonpos=0,1
+Ubertip=Warrior Hero, adept at summoning insect minions and crushing enemies. Can learn Impale, Spiked Carapace, Carrion Beetles and Locust Swarm. Attacks land units.
 
 [uaod]
 Hotkey=A
@@ -6515,6 +6485,12 @@ Ubertip=A sturdy transport ship capable of carrying units over the sea.
 Hotkey=T
 Buttonpos=3,2
 
+[Ucrl]
+Hotkey=C
+Buttonpos=0,1
+Tip=Summon Crypt Lord
+Ubertip=Warrior Hero, adept at summoning insect minions and crushing enemies. Can learn Impale, Spiked Carapace, Carrion Beetles and Locust Swarm. Attacks land units.
+
 [ucrm]
 Hotkey=F
 Buttonpos=1,0
@@ -6527,11 +6503,23 @@ Buttonpos=1,0
 Tip=Train Crypt Fiend
 Ubertip=Ranged combat support creature. Can learn the Web, and Burrow abilities. Attacks land units.
 
+[Udea]
+Hotkey=D
+Buttonpos=0,2
+Tip=Summon Death Knight
+Ubertip=Warrior Hero, evil counterpart to the Human Paladin. Can learn Death Coil, Death Pact, Unholy Aura, and Animate Dead. Attacks land units.
+
 [udes]
 Hotkey=F
 Buttonpos=1,0
 Tip=Hire Frigate
 Ubertip=A versatile attack ship good at destroying air attackers. Attacks land and air units.
+
+[Udre]
+Hotkey=E
+Buttonpos=1,2
+Tip=Summon Dreadlord
+Ubertip=Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sleep, Vampiric Aura, and Inferno. Attacks land units.
 
 [ufro]
 Hotkey=F
@@ -6568,6 +6556,12 @@ Hotkey=V
 Buttonpos=3,0
 Tip=Summon Graveyard
 Ubertip=Provides attack and armor upgrades for Undead units. Also produces corpses and serves as a drop-off point for harvested lumber.
+
+[Ulic]
+Hotkey=L
+Buttonpos=2,2
+Tip=Summon Lich
+Ubertip=Mystical Hero, particularly adept at cold magic. Can learn Frost Armor, Frost Nova, Dark Ritual and Death And Decay. Attacks land and air units.
 
 [umtw]
 Hotkey=M
@@ -6625,6 +6619,12 @@ Ubertip=Produces Abominations, Obsidian Statues, and Meat Wagons. Also contains 
 
 [uswb]
 Buttonpos=1,0
+
+[Usyl]
+Hotkey=D
+Buttonpos=0,0
+Tip=Summon Dark Ranger
+Ubertip=Cunning Hero, adept at manipulating opponents. Can learn Silence, Black Arrow, Life Drain, and Charm. Attacks land and air units.
 
 [utod]
 Hotkey=T

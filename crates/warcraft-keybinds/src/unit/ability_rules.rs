@@ -8,43 +8,23 @@
 use ddd::DomainLayer;
 use ddd::Layered;
 use ddd::Specification;
+use warcraft_api::BuildingTraits;
+use warcraft_api::HIDDEN_UNIT_ABILITIES;
+use warcraft_api::ROOTED_ONLY_ABILITY_CODES;
+use warcraft_api::ROOTED_ONLY_ABILITY_IDS;
+use warcraft_api::UNIT_UPGRADE_SWAPS;
 use warcraft_api::WarcraftDatabase;
 use warcraft_api::WarcraftObjectId;
-use warcraft_database::BuildingTraits;
-use warcraft_database::UNIT_UPGRADE_SWAPS;
 
-const ROOTED_ONLY_ABILITY_CODES: &[WarcraftObjectId] =
-    &[WarcraftObjectId::new("Apit"), WarcraftObjectId::new("Aall")];
-
-const ROOTED_ONLY_ABILITY_IDS: &[WarcraftObjectId] =
-    &[WarcraftObjectId::new("Anei"), WarcraftObjectId::new("Aent")];
-
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-struct HiddenUnitAbility {
+/// An ability considered on a specific unit's command card.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub struct AbilityOnUnit {
     unit_id: WarcraftObjectId,
     ability_id: WarcraftObjectId,
 }
 
-const HIDDEN_UNIT_ABILITIES: &[HiddenUnitAbility] = &[
-    HiddenUnitAbility {
-        unit_id: WarcraftObjectId::new("hphx"),
-        ability_id: WarcraftObjectId::new("Apxf"),
-    },
-    HiddenUnitAbility {
-        unit_id: WarcraftObjectId::new("egol"),
-        ability_id: WarcraftObjectId::new("Aenc"),
-    },
-];
-
-/// An ability considered on a specific unit's command card.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub struct AbilityOnUnit<'a> {
-    unit_id: &'a str,
-    ability_id: &'a str,
-}
-
-impl<'a> AbilityOnUnit<'a> {
-    pub fn new(unit_id: &'a str, ability_id: &'a str) -> Self {
+impl AbilityOnUnit {
+    pub fn new(unit_id: WarcraftObjectId, ability_id: WarcraftObjectId) -> Self {
         Self {
             unit_id,
             ability_id,
@@ -54,13 +34,13 @@ impl<'a> AbilityOnUnit<'a> {
 
 /// A pair of units tested for being the same trainable button at two tech tiers.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub struct UnitPair<'a> {
-    first_unit_id: &'a str,
-    second_unit_id: &'a str,
+pub struct UnitPair {
+    first_unit_id: WarcraftObjectId,
+    second_unit_id: WarcraftObjectId,
 }
 
-impl<'a> UnitPair<'a> {
-    pub fn new(first_unit_id: &'a str, second_unit_id: &'a str) -> Self {
+impl UnitPair {
+    pub fn new(first_unit_id: WarcraftObjectId, second_unit_id: WarcraftObjectId) -> Self {
         Self {
             first_unit_id,
             second_unit_id,
@@ -73,12 +53,16 @@ impl<'a> UnitPair<'a> {
 #[derive(Clone, Copy, Debug)]
 pub struct MorphAgainstHost<'a> {
     database: &'a WarcraftDatabase,
-    ability_id: &'a str,
-    host_unit_id: &'a str,
+    ability_id: WarcraftObjectId,
+    host_unit_id: WarcraftObjectId,
 }
 
 impl<'a> MorphAgainstHost<'a> {
-    pub fn new(database: &'a WarcraftDatabase, ability_id: &'a str, host_unit_id: &'a str) -> Self {
+    pub fn new(
+        database: &'a WarcraftDatabase,
+        ability_id: WarcraftObjectId,
+        host_unit_id: WarcraftObjectId,
+    ) -> Self {
         Self {
             database,
             ability_id,
@@ -91,11 +75,11 @@ impl<'a> MorphAgainstHost<'a> {
 #[derive(Clone, Copy, Debug)]
 pub struct AbilityInDatabase<'a> {
     database: &'a WarcraftDatabase,
-    ability_id: &'a str,
+    ability_id: WarcraftObjectId,
 }
 
 impl<'a> AbilityInDatabase<'a> {
-    pub fn new(database: &'a WarcraftDatabase, ability_id: &'a str) -> Self {
+    pub fn new(database: &'a WarcraftDatabase, ability_id: WarcraftObjectId) -> Self {
         Self {
             database,
             ability_id,
@@ -111,17 +95,10 @@ impl Layered for HiddenAbility {
     type Layer = DomainLayer;
 }
 
-impl Specification<AbilityOnUnit<'_>> for HiddenAbility {
-    fn is_satisfied_by(&self, candidate: &AbilityOnUnit<'_>) -> bool {
+impl Specification<AbilityOnUnit> for HiddenAbility {
+    fn is_satisfied_by(&self, candidate: &AbilityOnUnit) -> bool {
         HIDDEN_UNIT_ABILITIES.iter().any(|hidden| {
-            hidden
-                .unit_id
-                .value()
-                .eq_ignore_ascii_case(candidate.unit_id)
-                && hidden
-                    .ability_id
-                    .value()
-                    .eq_ignore_ascii_case(candidate.ability_id)
+            hidden.unit_id() == candidate.unit_id && hidden.ability_id() == candidate.ability_id
         })
     }
 }
@@ -136,17 +113,15 @@ impl Layered for FormUpgradeSwap {
     type Layer = DomainLayer;
 }
 
-impl Specification<UnitPair<'_>> for FormUpgradeSwap {
-    fn is_satisfied_by(&self, candidate: &UnitPair<'_>) -> bool {
+impl Specification<UnitPair> for FormUpgradeSwap {
+    fn is_satisfied_by(&self, candidate: &UnitPair) -> bool {
         for swap in UNIT_UPGRADE_SWAPS {
             let from_object_id = swap.from_unit_id();
             let to_object_id = swap.to_unit_id();
-            let from_id = from_object_id.value();
-            let to_id = to_object_id.value();
-            let forward = from_id.eq_ignore_ascii_case(candidate.first_unit_id)
-                && to_id.eq_ignore_ascii_case(candidate.second_unit_id);
-            let backward = from_id.eq_ignore_ascii_case(candidate.second_unit_id)
-                && to_id.eq_ignore_ascii_case(candidate.first_unit_id);
+            let forward = from_object_id == candidate.first_unit_id
+                && to_object_id == candidate.second_unit_id;
+            let backward = from_object_id == candidate.second_unit_id
+                && to_object_id == candidate.first_unit_id;
             if forward || backward {
                 return true;
             }
@@ -166,12 +141,12 @@ impl Layered for RevertsToHost {
 
 impl Specification<MorphAgainstHost<'_>> for RevertsToHost {
     fn is_satisfied_by(&self, candidate: &MorphAgainstHost<'_>) -> bool {
-        let ability_object = candidate.database.by_id(candidate.ability_id);
+        let ability_object = candidate.database.object(candidate.ability_id);
         let Some(target_id) = ability_object.and_then(|object| object.ability_morph_target_id())
         else {
             return false;
         };
-        if !target_id.eq_ignore_ascii_case(candidate.host_unit_id) {
+        if target_id != candidate.host_unit_id {
             return false;
         }
         !BuildingTraits::ability_has_alt_state(candidate.ability_id)
@@ -189,19 +164,14 @@ impl Layered for RootedOnlyAbility {
 
 impl Specification<AbilityInDatabase<'_>> for RootedOnlyAbility {
     fn is_satisfied_by(&self, candidate: &AbilityInDatabase<'_>) -> bool {
-        if ROOTED_ONLY_ABILITY_IDS
-            .iter()
-            .any(|id| id.value().eq_ignore_ascii_case(candidate.ability_id))
-        {
+        if ROOTED_ONLY_ABILITY_IDS.contains(&candidate.ability_id) {
             return true;
         }
-        let ability_object = candidate.database.by_id(candidate.ability_id);
+        let ability_object = candidate.database.object(candidate.ability_id);
         let Some(ability_code) = ability_object.and_then(|object| object.ability_code()) else {
             return false;
         };
-        ROOTED_ONLY_ABILITY_CODES
-            .iter()
-            .any(|code| code.value().eq_ignore_ascii_case(ability_code))
+        ROOTED_ONLY_ABILITY_CODES.contains(&ability_code)
     }
 }
 
@@ -217,12 +187,12 @@ mod ddd_marker_tests {
     use super::UnitPair;
     use crate::ddd_conformance::assert_specification;
     use ddd::Specification;
-    use warcraft_database::WARCRAFT_DATABASE;
+    use warcraft_api::WARCRAFT_DATABASE;
 
     #[test]
     fn ability_rules_are_specifications() {
-        assert_specification::<AbilityOnUnit<'_>, HiddenAbility>();
-        assert_specification::<UnitPair<'_>, FormUpgradeSwap>();
+        assert_specification::<AbilityOnUnit, HiddenAbility>();
+        assert_specification::<UnitPair, FormUpgradeSwap>();
         assert_specification::<MorphAgainstHost<'_>, RevertsToHost>();
         assert_specification::<AbilityInDatabase<'_>, RootedOnlyAbility>();
     }
@@ -230,8 +200,14 @@ mod ddd_marker_tests {
     #[test]
     fn hidden_ability_matches_only_the_listed_pairs() {
         let hidden = HiddenAbility;
-        let phoenix_fire = AbilityOnUnit::new("hphx", "Apxf");
-        let unrelated = AbilityOnUnit::new("hpea", "Apxf");
+        let phoenix_fire = AbilityOnUnit::new(
+            crate::test_support::object_id("hphx"),
+            crate::test_support::object_id("Apxf"),
+        );
+        let unrelated = AbilityOnUnit::new(
+            crate::test_support::object_id("hpea"),
+            crate::test_support::object_id("Apxf"),
+        );
         assert!(hidden.is_satisfied_by(&phoenix_fire));
         assert!(!hidden.is_satisfied_by(&unrelated));
     }
@@ -239,8 +215,10 @@ mod ddd_marker_tests {
     #[test]
     fn rooted_only_ability_flags_a_known_rooted_ability() {
         let rooted_only = RootedOnlyAbility;
-        let rooted = AbilityInDatabase::new(&WARCRAFT_DATABASE, "Anei");
-        let regular = AbilityInDatabase::new(&WARCRAFT_DATABASE, "AHbz");
+        let rooted =
+            AbilityInDatabase::new(&WARCRAFT_DATABASE, crate::test_support::object_id("Anei"));
+        let regular =
+            AbilityInDatabase::new(&WARCRAFT_DATABASE, crate::test_support::object_id("AHbz"));
         assert!(rooted_only.is_satisfied_by(&rooted));
         assert!(!rooted_only.is_satisfied_by(&regular));
     }

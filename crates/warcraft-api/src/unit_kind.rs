@@ -1,4 +1,4 @@
-use warcraft_api::{Race, UnitKind, UnitMeta, WarcraftObjectId};
+use crate::{Race, UnitKind, UnitMeta, WarcraftObjectId};
 
 use crate::unit_catalog::{CatalogVisibility, SearchField, UnitCatalog};
 use crate::unit_mode::UnitMode;

@@ -98,8 +98,11 @@ mod tests {
                 .button_position(shared_position)
                 .build();
             let mut custom_keys = CustomKeys::from_text("");
-            custom_keys.put_ability("AHhb", holy_light_binding);
-            custom_keys.put_ability("AHds", divine_shield_binding);
+            custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+            custom_keys.put_ability(
+                crate::test_support::object_id("AHds"),
+                divine_shield_binding,
+            );
             let layout = GridLayout::qwerty_grid();
             let summary = CollisionSummary::compute(&custom_keys, layout);
             assert!(
@@ -137,8 +140,11 @@ mod tests {
                 .hotkey(hotkey_q)
                 .build();
             let mut custom_keys = CustomKeys::from_text("");
-            custom_keys.put_ability("AHhb", holy_light_binding);
-            custom_keys.put_ability("AHds", divine_shield_binding);
+            custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+            custom_keys.put_ability(
+                crate::test_support::object_id("AHds"),
+                divine_shield_binding,
+            );
             let layout = GridLayout::qwerty_grid();
             let summary = CollisionSummary::compute(&custom_keys, layout);
             assert!(

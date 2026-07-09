@@ -1,7 +1,7 @@
 use std::collections::{HashMap, HashSet};
 use std::sync::LazyLock;
 
-use warcraft_api::{
+use crate::{
     Race, UnitKind, WarcraftObject, WarcraftObjectId, WarcraftObjectKind, WarcraftObjectMeta,
 };
 
@@ -65,15 +65,14 @@ impl CatalogVisibility {
 /// appears as a buy-button on a Mercenary Camp — so the catalog needs
 /// this reverse lookup to keep it instead of mistaking it for a dead
 /// placeholder. Built once; the database is static.
-static SOLD_UNIT_IDS: LazyLock<HashSet<&'static str>> = LazyLock::new(|| {
+static SOLD_UNIT_IDS: LazyLock<HashSet<WarcraftObjectId>> = LazyLock::new(|| {
     let mut sold_unit_ids = HashSet::new();
     for (_seller_object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
         let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
             continue;
         };
         for sold_unit_id in unit_meta.sell_units() {
-            let sold_unit_value = sold_unit_id.value();
-            sold_unit_ids.insert(sold_unit_value);
+            sold_unit_ids.insert(*sold_unit_id);
         }
     }
     sold_unit_ids
@@ -88,8 +87,8 @@ static SOLD_UNIT_IDS: LazyLock<HashSet<&'static str>> = LazyLock::new(|| {
 /// list is a deliberate approximation of the exact command card, which lives in
 /// `warcraft-keybinds` and cannot be reached from here. Built once; the database
 /// is static, so per-keystroke matching is one lookup plus a `contains`.
-static UNIT_ABILITY_HAYSTACK: LazyLock<HashMap<&'static str, String>> = LazyLock::new(|| {
-    let mut unit_ability_haystack: HashMap<&'static str, String> = HashMap::new();
+static UNIT_ABILITY_HAYSTACK: LazyLock<HashMap<WarcraftObjectId, String>> = LazyLock::new(|| {
+    let mut unit_ability_haystack: HashMap<WarcraftObjectId, String> = HashMap::new();
     for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
         let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
             continue;
@@ -101,7 +100,7 @@ static UNIT_ABILITY_HAYSTACK: LazyLock<HashMap<&'static str, String>> = LazyLock
         let mut haystack = String::new();
         for ability_id in ability_ids {
             let ability_id_value = ability_id.value();
-            let Some(ability_object) = WARCRAFT_DATABASE.by_id(ability_id_value) else {
+            let Some(ability_object) = WARCRAFT_DATABASE.object(*ability_id) else {
                 continue;
             };
             let WarcraftObjectMeta::Ability(ability_meta) = ability_object.meta() else {
@@ -121,8 +120,7 @@ static UNIT_ABILITY_HAYSTACK: LazyLock<HashMap<&'static str, String>> = LazyLock
         }
         if !haystack.is_empty() {
             haystack.push(' ');
-            let unit_id_value = object_id.value();
-            unit_ability_haystack.insert(unit_id_value, haystack);
+            unit_ability_haystack.insert(*object_id, haystack);
         }
     }
     unit_ability_haystack
@@ -135,9 +133,9 @@ static UNIT_ABILITY_HAYSTACK: LazyLock<HashMap<&'static str, String>> = LazyLock
 /// of a main-building chain (Town Hall → Keep → Castle) the same base cost, so
 /// they group together and order by depth; whole chains then order by the base's
 /// gold cost. Built once; the database is static.
-static BUILDING_RANKS: LazyLock<HashMap<&'static str, u32>> = LazyLock::new(|| {
-    let mut gold_cost: HashMap<&'static str, u32> = HashMap::new();
-    let mut upgrade_parent: HashMap<&'static str, &'static str> = HashMap::new();
+static BUILDING_RANKS: LazyLock<HashMap<WarcraftObjectId, u32>> = LazyLock::new(|| {
+    let mut gold_cost: HashMap<WarcraftObjectId, u32> = HashMap::new();
+    let mut upgrade_parent: HashMap<WarcraftObjectId, WarcraftObjectId> = HashMap::new();
     for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
         let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
             continue;
@@ -145,11 +143,11 @@ static BUILDING_RANKS: LazyLock<HashMap<&'static str, u32>> = LazyLock::new(|| {
         if unit_meta.unit_kind() != UnitKind::Building {
             continue;
         }
-        let source_id = object_id.value();
+        let source_id = *object_id;
         gold_cost.insert(source_id, unit_meta.gold_cost());
         for research_id in unit_meta.researches() {
-            let target_id = research_id.value();
-            let target_is_building = WARCRAFT_DATABASE.by_id(target_id).is_some_and(|object| {
+            let target_id = *research_id;
+            let target_is_building = WARCRAFT_DATABASE.object(target_id).is_some_and(|object| {
                 matches!(
                     object.meta(),
                     WarcraftObjectMeta::Unit(target_meta)
@@ -161,18 +159,18 @@ static BUILDING_RANKS: LazyLock<HashMap<&'static str, u32>> = LazyLock::new(|| {
             }
         }
     }
-    let mut ranks: HashMap<&'static str, u32> = HashMap::new();
+    let mut ranks: HashMap<WarcraftObjectId, u32> = HashMap::new();
     for building_id in gold_cost.keys().copied() {
         let mut base_id = building_id;
         let mut upgrade_depth: u32 = 0;
-        while let Some(parent_id) = upgrade_parent.get(base_id).copied() {
+        while let Some(parent_id) = upgrade_parent.get(&base_id).copied() {
             base_id = parent_id;
             upgrade_depth += 1;
             if upgrade_depth > 16 {
                 break;
             }
         }
-        let base_gold_cost = gold_cost.get(base_id).copied().unwrap_or(0);
+        let base_gold_cost = gold_cost.get(&base_id).copied().unwrap_or(0);
         let key = base_gold_cost
             .saturating_mul(1000)
             .saturating_add(upgrade_depth);
@@ -185,10 +183,7 @@ static BUILDING_RANKS: LazyLock<HashMap<&'static str, u32>> = LazyLock::new(|| {
 /// upgrade-chain + gold-cost rank; everything else uses the unit's tech tier.
 fn availability_key(entry: &CatalogEntry) -> u32 {
     if entry.unit_kind == UnitKind::Building {
-        return BUILDING_RANKS
-            .get(entry.unit_id.value())
-            .copied()
-            .unwrap_or(0);
+        return BUILDING_RANKS.get(&entry.unit_id).copied().unwrap_or(0);
     }
     match entry.warcraft_object.meta() {
         WarcraftObjectMeta::Unit(unit_meta) => unit_meta.level(),
@@ -232,15 +227,14 @@ impl CatalogEntry {
     /// Builds the entry for a canonical variant unit looked up fresh from the
     /// database. Used when a weaker variant collapses onto its strongest
     /// sibling, which may not itself have matched the active filter or query.
-    fn canonical_entry(unit_id: &'static str) -> Option<Self> {
-        let warcraft_object = WARCRAFT_DATABASE.by_id(unit_id)?;
+    fn canonical_entry(unit_id: WarcraftObjectId) -> Option<Self> {
+        let warcraft_object = WARCRAFT_DATABASE.object(unit_id)?;
         let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
             return None;
         };
         let effective_kind = UnitKindHelpers::effective_kind(unit_meta);
-        let canonical_unit_id = WarcraftObjectId::new(unit_id);
         let entry = Self {
-            unit_id: canonical_unit_id,
+            unit_id,
             warcraft_object,
             unit_kind: effective_kind,
         };
@@ -324,8 +318,7 @@ impl UnitCatalog {
                     .iter()
                     .chain(unit_meta.hero_abilities().iter());
                 let has_visible_ability = all_abilities.any(|ability_id| {
-                    let ability_id_str = ability_id.value();
-                    let Some(ability_object) = WARCRAFT_DATABASE.by_id(ability_id_str) else {
+                    let Some(ability_object) = WARCRAFT_DATABASE.object(*ability_id) else {
                         return false;
                     };
                     let WarcraftObjectMeta::Ability(ability_meta) = ability_object.meta() else {
@@ -339,8 +332,7 @@ impl UnitCatalog {
                 // at a shop, which renders their buy-button and exposes a
                 // rebindable hotkey. Keep them; ability-less placeholders
                 // that no shop sells stay filtered out.
-                let object_id_value = object_id.value();
-                let is_purchasable = SOLD_UNIT_IDS.contains(object_id_value);
+                let is_purchasable = SOLD_UNIT_IDS.contains(object_id);
                 let is_dead_placeholder =
                     !has_production && !has_visible_ability && !is_purchasable;
                 // A building that carries no ability of its own and whose only
@@ -356,12 +348,11 @@ impl UnitCatalog {
                 let is_rally_only_placeholder = is_building && !has_own_abilities && {
                     let unit_race = warcraft_object.race();
                     let primary_commands =
-                        CommandCatalog::primary_commands_for(unit_meta, unit_race, object_id_value);
+                        CommandCatalog::primary_commands_for(unit_meta, unit_race, *object_id);
                     let only_command = primary_commands.first();
+                    let rally_command = WarcraftObjectId::new("CmdRally");
                     primary_commands.len() == 1
-                        && only_command.is_some_and(|command_name| {
-                            command_name.eq_ignore_ascii_case("CmdRally")
-                        })
+                        && only_command.is_some_and(|command_name| *command_name == rally_command)
                 };
                 // `include_abilityless_units` is the sole gate for ability-less
                 // units, variant members included: an ability-less summon tier
@@ -380,7 +371,7 @@ impl UnitCatalog {
                 {
                     return None;
                 }
-                let entry_unit_id = WarcraftObjectId::new(object_id.value());
+                let entry_unit_id = *object_id;
                 let fuzzy_only = if let Some(query) = lowercase_query.as_deref() {
                     let query_match = match search_field {
                         SearchField::UnitName => {
@@ -420,7 +411,7 @@ impl UnitCatalog {
                             // abilities. No fuzzy fallback: subsequence over the
                             // concatenated haystack would match almost anything.
                             let ability_haystack = UNIT_ABILITY_HAYSTACK
-                                .get(entry_unit_id.value())
+                                .get(&entry_unit_id)
                                 .map(String::as_str)
                                 .unwrap_or("");
                             let is_direct = ability_haystack.contains(query)
@@ -483,12 +474,11 @@ impl UnitCatalog {
                 entries.push(entry);
                 continue;
             }
-            let canonical_lookup = VariantUnits::canonical_for(entry.unit_id.value());
+            let canonical_lookup = VariantUnits::canonical_for(entry.unit_id);
             if let Some(canonical) = canonical_lookup
-                && entry.unit_id.value() != canonical
+                && entry.unit_id != canonical
             {
-                let canonical_id = WarcraftObjectId::new(canonical);
-                if !seen_display_ids.insert(canonical_id) {
+                if !seen_display_ids.insert(canonical) {
                     continue;
                 }
                 if let Some(canonical_entry) = CatalogEntry::canonical_entry(canonical) {
@@ -843,7 +833,10 @@ mod tests {
             SearchField::UnitName,
             CatalogVisibility::default(),
         );
-        let ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id().value()).collect();
+        let ids: Vec<&str> = entries
+            .iter()
+            .map(|entry| entry.unit_id().value())
+            .collect();
         assert!(
             ids.contains(&"osp4"),
             "searching osp1 must surface canonical osp4"
@@ -874,7 +867,10 @@ mod tests {
             SearchField::UnitName,
             CatalogVisibility::default(),
         );
-        let entry_ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id().value()).collect();
+        let entry_ids: Vec<&str> = entries
+            .iter()
+            .map(|entry| entry.unit_id().value())
+            .collect();
         for required_id in ["nbnb", "nanm"] {
             assert!(
                 entry_ids.contains(&required_id),
@@ -900,7 +896,10 @@ mod tests {
             SearchField::UnitName,
             CatalogVisibility::default(),
         );
-        let entry_ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id().value()).collect();
+        let entry_ids: Vec<&str> = entries
+            .iter()
+            .map(|entry| entry.unit_id().value())
+            .collect();
         assert!(
             entry_ids.contains(&"nogm"),
             "search for 'Ogre Mauler' missing nogm (purchasable mercenary unit)",
@@ -998,7 +997,10 @@ mod tests {
             SearchField::UnitName,
             CatalogVisibility::default(),
         );
-        let entry_ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id().value()).collect();
+        let entry_ids: Vec<&str> = entries
+            .iter()
+            .map(|entry| entry.unit_id().value())
+            .collect();
         for campaign_id in ["nmyr", "nnsw", "ndrl", "nbel"] {
             assert!(
                 !entry_ids.contains(&campaign_id),
@@ -1022,7 +1024,10 @@ mod tests {
                 SearchField::Ability,
                 CatalogVisibility::default(),
             );
-            let entry_ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id().value()).collect();
+            let entry_ids: Vec<&str> = entries
+                .iter()
+                .map(|entry| entry.unit_id().value())
+                .collect();
             for carrier_id in ["nkog", "nmsn", "nsns"] {
                 assert!(
                     entry_ids.contains(&carrier_id),
@@ -1065,7 +1070,10 @@ mod tests {
             SearchField::UnitName,
             CatalogVisibility::default(),
         );
-        let unit_name_ids: Vec<&str> = by_unit_name.iter().map(|entry| entry.unit_id().value()).collect();
+        let unit_name_ids: Vec<&str> = by_unit_name
+            .iter()
+            .map(|entry| entry.unit_id().value())
+            .collect();
         assert!(
             unit_name_ids.contains(&"hfoo"),
             "unit-name search 'Footman' should still find the Footman",

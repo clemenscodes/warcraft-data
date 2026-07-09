@@ -11,7 +11,7 @@ use crate::identity::hotkey_token::HotkeyToken;
 use crate::identity::slot::GridSlotId;
 use crate::model::{ColumnIndex, GridCoordinate, Hotkey, RowIndex};
 use warcraft_api::WarcraftObjectId;
-use warcraft_database::{ObjectLookup, VariantUnits, WARCRAFT_DATABASE};
+use warcraft_api::{ObjectLookup, VariantUnits, WARCRAFT_DATABASE};
 
 impl CustomKeys {
     pub fn assign_position(
@@ -35,7 +35,7 @@ impl CustomKeys {
         let new_position = GridCoordinate::new(column_index, row_index);
         match slot {
             GridSlotId::Ability(ability_id) => {
-                let is_passive = ObjectLookup::is_passive_ability(ability_id.value());
+                let is_passive = ObjectLookup::is_passive_ability(ability_id.object_id());
                 let grid_hotkey = Self::grid_hotkey_for(*ability_id, letter);
                 if let Some(binding) = self.binding_or_default_mut(*ability_id) {
                     if is_research_context {
@@ -88,10 +88,7 @@ impl CustomKeys {
                 let GridSlotId::Ability(ability_id) = slot else {
                     return false;
                 };
-                if ability_id
-                    .value()
-                    .eq_ignore_ascii_case(request.moving_slot().as_str())
-                {
+                if ability_id.object_id() == request.moving_slot().id() {
                     return false;
                 }
                 let off_slot = GridSlotId::AbilityOff(*ability_id);
@@ -131,12 +128,8 @@ impl CustomKeys {
         if let Some(ref slot) = displaced_slot {
             let is_same_slot = match (slot, request.moving_slot()) {
                 (GridSlotId::Ability(left), GridSlotId::Ability(right))
-                | (GridSlotId::AbilityOff(left), GridSlotId::AbilityOff(right)) => {
-                    left.value().eq_ignore_ascii_case(right.value())
-                }
-                (GridSlotId::Command(left), GridSlotId::Command(right)) => {
-                    left.value().eq_ignore_ascii_case(right.value())
-                }
+                | (GridSlotId::AbilityOff(left), GridSlotId::AbilityOff(right)) => left == right,
+                (GridSlotId::Command(left), GridSlotId::Command(right)) => left == right,
                 _ => false,
             };
             if is_same_slot {
@@ -145,9 +138,7 @@ impl CustomKeys {
         }
         if request.prevent_swap()
             && let Some(ref slot) = displaced_slot
-            && !slot
-                .as_str()
-                .eq_ignore_ascii_case(request.moving_slot().as_str())
+            && slot.id() != request.moving_slot().id()
         {
             return;
         }
@@ -205,8 +196,7 @@ impl CustomKeys {
     }
 
     fn fan_out_position(&mut self, ability_id: AbilityId) {
-        let source_object_code = ability_id.value();
-        let siblings = VariantUnits::fanout_siblings(source_object_code);
+        let siblings = VariantUnits::fanout_siblings(ability_id.object_id());
         if siblings.is_empty() {
             return;
         }
@@ -216,8 +206,7 @@ impl CustomKeys {
         let button_position = source_binding.button_position().copied();
         let unbutton_position = source_binding.unbutton_position().copied();
         let research_button_position = source_binding.research_button_position().copied();
-        for sibling_code in siblings.iter().copied() {
-            let sibling_object_id = WarcraftObjectId::new(sibling_code);
+        for sibling_object_id in siblings.iter().copied() {
             let sibling_ability_id = AbilityId::from(sibling_object_id);
             let Some(sibling_binding) = self.binding_or_default_mut(sibling_ability_id) else {
                 continue;
@@ -237,21 +226,21 @@ impl CustomKeys {
         let command_names: Vec<WarcraftObjectId> =
             self.commands_in_order().map(|entry| entry.name()).collect();
         for ability_id in &ability_ids {
-            let ability_id_str = ability_id.value();
-            let is_passive = ObjectLookup::is_passive_ability(ability_id_str);
+            let bound_ability_id = *ability_id;
+            let is_passive = ObjectLookup::is_passive_ability(ability_id.object_id());
             let button_position = if is_passive {
                 None
             } else {
-                self.binding(ability_id_str)
+                self.binding(bound_ability_id)
                     .and_then(|binding| binding.button_position())
                     .copied()
             };
             let research_button_position = self
-                .binding(ability_id_str)
+                .binding(bound_ability_id)
                 .and_then(|binding| binding.research_button_position())
                 .copied();
             let unbutton_position = self
-                .binding(ability_id_str)
+                .binding(bound_ability_id)
                 .and_then(|binding| binding.unbutton_position())
                 .copied();
             if button_position.is_none()
@@ -303,7 +292,7 @@ impl CustomKeys {
         }
         for command_name in &command_names {
             let button_position = self
-                .command(command_name.value())
+                .command(*command_name)
                 .and_then(|binding| binding.button_position())
                 .copied();
             let Some(position) = button_position else {
@@ -340,10 +329,8 @@ impl CustomKeys {
         let Some(ability_id) = fan_out_ability_id else {
             return;
         };
-        let source_object_code = ability_id.value();
-        let siblings = VariantUnits::fanout_siblings(source_object_code);
-        for sibling_code in siblings.iter().copied() {
-            let sibling_object_id = WarcraftObjectId::new(sibling_code);
+        let siblings = VariantUnits::fanout_siblings(ability_id.object_id());
+        for sibling_object_id in siblings.iter().copied() {
             let sibling_ability_id = AbilityId::from(sibling_object_id);
             let sibling_target = match target {
                 HotkeyTarget::Ability(_) => HotkeyTarget::Ability(sibling_ability_id),
@@ -368,8 +355,7 @@ impl CustomKeys {
     /// yield `0`.
     fn upgrade_tier_count(ability_id: AbilityId) -> usize {
         let object_id = ability_id.object_id();
-        let object_code = object_id.value();
-        let object_option = WARCRAFT_DATABASE.by_id(object_code);
+        let object_option = WARCRAFT_DATABASE.object(object_id);
         object_option
             .and_then(|warcraft_object| warcraft_object.upgrade_max_level())
             .unwrap_or(0)
@@ -430,16 +416,13 @@ impl CustomKeys {
     pub fn find_hotkey_conflict(
         &self,
         slots: &[GridSlotId],
-        target_object_id: &str,
+        target_object_id: WarcraftObjectId,
         proposed_token: HotkeyToken,
         layout: GridLayout,
         is_research_context: bool,
     ) -> Option<HotkeyConflict> {
         for candidate_slot in slots {
-            if candidate_slot
-                .as_str()
-                .eq_ignore_ascii_case(target_object_id)
-            {
+            if candidate_slot.id() == target_object_id {
                 continue;
             }
             let candidate_token =
@@ -456,7 +439,7 @@ impl CustomKeys {
                     candidate_slot.display_name(ability_binding, None)
                 }
                 GridSlotId::Command(name) => {
-                    let command_binding = self.command(name.value());
+                    let command_binding = self.command(*name);
                     candidate_slot.display_name(None, command_binding)
                 }
             };
@@ -490,7 +473,7 @@ impl CustomKeys {
                     .and_then(|binding| binding.unhotkey())
             }
             GridSlotId::Command(command_name) => self
-                .command(command_name.value())
+                .command(*command_name)
                 .and_then(|binding| binding.hotkey()),
         };
         if let Some(hotkey) = override_hotkey {

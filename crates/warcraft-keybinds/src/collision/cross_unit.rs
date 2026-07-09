@@ -6,8 +6,8 @@ use crate::unit::grids::{GridRole, UnitGrids};
 use crate::unit::slots::UnitCommandSlots;
 use std::collections::{HashMap, HashSet};
 use std::fmt;
+use warcraft_api::WARCRAFT_DATABASE;
 use warcraft_api::WarcraftObjectId;
-use warcraft_database::WARCRAFT_DATABASE;
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash)]
 struct PositionContext {
@@ -110,18 +110,17 @@ impl CrossUnitCollisionReport {
             for (slot_id, unit_id_set) in &slot_to_unit_set {
                 for unit_id in unit_id_set {
                     let slots = unit_to_slot_ids.entry(*unit_id).or_default();
-                    let already_present = slots
-                        .iter()
-                        .any(|existing| existing.as_str() == slot_id.as_str());
+                    let already_present =
+                        slots.iter().any(|existing| existing.id() == slot_id.id());
                     if !already_present {
                         slots.push(*slot_id);
                     }
                 }
             }
-            let shared_str_set: HashSet<&str> = slot_to_unit_set
+            let shared_slot_id_set: HashSet<WarcraftObjectId> = slot_to_unit_set
                 .iter()
                 .filter(|(_, unit_id_set)| unit_id_set.len() >= 2)
-                .map(|(slot_id, _)| slot_id.as_str())
+                .map(|(slot_id, _)| slot_id.id())
                 .collect();
             let context_affected_units: Vec<AffectedUnitEntry> = unit_to_slot_ids
                 .into_iter()
@@ -129,11 +128,11 @@ impl CrossUnitCollisionReport {
                 .filter(|(_, slot_ids)| {
                     slot_ids
                         .iter()
-                        .any(|slot_id| shared_str_set.contains(slot_id.as_str()))
+                        .any(|slot_id| shared_slot_id_set.contains(&slot_id.id()))
                 })
                 .filter_map(|(unit_id, mut colliding_slot_ids)| {
                     let unit_name = WARCRAFT_DATABASE
-                        .by_id(unit_id.value())
+                        .object(unit_id)
                         .and_then(|object| object.names().first().copied())
                         .filter(|name| !name.is_empty())?;
                     colliding_slot_ids.sort_by(|left, right| left.as_str().cmp(right.as_str()));
@@ -152,19 +151,19 @@ impl CrossUnitCollisionReport {
                 let Some(first_slot) = entry.colliding_slot_ids.first() else {
                     continue;
                 };
-                let first_key = first_slot.as_str();
+                let first_key = first_slot.id();
                 island_partition.register(first_key);
                 for slot_id in entry.colliding_slot_ids.iter().skip(1) {
-                    let slot_key = slot_id.as_str();
-                    island_partition.union(first_key, slot_key);
+                    island_partition.union(first_key, slot_id.id());
                 }
             }
-            let mut units_by_island: HashMap<String, Vec<AffectedUnitEntry>> = HashMap::new();
+            let mut units_by_island: HashMap<WarcraftObjectId, Vec<AffectedUnitEntry>> =
+                HashMap::new();
             for entry in context_affected_units {
                 let Some(first_slot) = entry.colliding_slot_ids.first() else {
                     continue;
                 };
-                let island_key = island_partition.root(first_slot.as_str());
+                let island_key = island_partition.root(first_slot.id());
                 units_by_island.entry(island_key).or_default().push(entry);
             }
             for (_island_key, mut island_affected_units) in units_by_island {
@@ -332,10 +331,10 @@ impl fmt::Display for CrossUnitPositionGroup {
             formatter,
             "Position ({column},{row}) [{context}] — {unit_count} unit(s) affected:",
         )?;
-        let unit_count_for_slot: HashMap<&str, usize> = self
+        let unit_count_for_slot: HashMap<WarcraftObjectId, usize> = self
             .shared_abilities
             .iter()
-            .map(|entry| (entry.slot_id.as_str(), entry.unit_ids.len()))
+            .map(|entry| (entry.slot_id.id(), entry.unit_ids.len()))
             .collect();
         for affected in &self.affected_units {
             let parts: Vec<String> = affected
@@ -343,10 +342,7 @@ impl fmt::Display for CrossUnitPositionGroup {
                 .iter()
                 .map(|slot_id| {
                     let name = slot_id.display_name(None, None);
-                    let count = unit_count_for_slot
-                        .get(slot_id.as_str())
-                        .copied()
-                        .unwrap_or(1);
+                    let count = unit_count_for_slot.get(&slot_id.id()).copied().unwrap_or(1);
                     let noun = if count == 1 { "unit" } else { "units" };
                     format!("{name} [{count} {noun}]")
                 })
@@ -371,7 +367,7 @@ mod cross_unit_collision_tests {
     use crate::model::{AbilityBinding, ColumnIndex, GridCoordinate, RowIndex};
 
     fn paladin_id() -> WarcraftObjectId {
-        WarcraftObjectId::new("Hpal")
+        crate::test_support::object_id("Hpal")
     }
 
     #[test]
@@ -453,7 +449,7 @@ mod cross_unit_collision_tests {
         let custom_keys = CustomKeys::from_text("");
         let report = CrossUnitCollisionReport::compute(&custom_keys);
         let two_zero = GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero);
-        let demon_hunter_id = WarcraftObjectId::new("Eevi");
+        let demon_hunter_id = crate::test_support::object_id("Eevi");
         let demon_hunter_affected = report.position_groups().iter().any(|group| {
             group.position() == two_zero
                 && group.grid_role() == GridRole::MainCommand
@@ -478,8 +474,11 @@ mod cross_unit_collision_tests {
             .button_position(shared_position)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", holy_light_binding);
-        custom_keys.put_ability("AHds", divine_shield_binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHds"),
+            divine_shield_binding,
+        );
         let report = CrossUnitCollisionReport::compute(&custom_keys);
         assert!(
             !report.is_empty(),
@@ -497,8 +496,11 @@ mod cross_unit_collision_tests {
             .button_position(shared_position)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", holy_light_binding);
-        custom_keys.put_ability("AHds", divine_shield_binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHds"),
+            divine_shield_binding,
+        );
         let report = CrossUnitCollisionReport::compute(&custom_keys);
         let paladin_id = paladin_id();
         let group = report
@@ -526,8 +528,11 @@ mod cross_unit_collision_tests {
             .button_position(shared_position)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", holy_light_binding);
-        custom_keys.put_ability("AHds", divine_shield_binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHds"),
+            divine_shield_binding,
+        );
         let report = CrossUnitCollisionReport::compute(&custom_keys);
         let paladin_id = paladin_id();
         let paladin_affected = report.position_groups().iter().any(|group| {
@@ -553,8 +558,11 @@ mod cross_unit_collision_tests {
             .button_position(shared_position)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", holy_light_binding);
-        custom_keys.put_ability("AHds", divine_shield_binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHds"),
+            divine_shield_binding,
+        );
         let report = CrossUnitCollisionReport::compute(&custom_keys);
         let paladin_id = paladin_id();
         let group = report
@@ -568,13 +576,14 @@ mod cross_unit_collision_tests {
                         .any(|entry| entry.unit_id() == paladin_id)
             })
             .expect("the Paladin's island at (1,0) must exist");
-        let shared_ids: Vec<&str> = group
+        let shared_ids: Vec<WarcraftObjectId> = group
             .shared_abilities()
             .iter()
-            .map(|entry| entry.slot_id().as_str())
+            .map(|entry| entry.slot_id().id())
             .collect();
         assert!(
-            shared_ids.contains(&"AHhb") || shared_ids.contains(&"AHds"),
+            shared_ids.contains(&crate::test_support::object_id("AHhb"))
+                || shared_ids.contains(&crate::test_support::object_id("AHds")),
             "at least one of AHhb/AHds must appear in shared_abilities \
              (the one that is on the Paladin and potentially other units)",
         );
@@ -603,8 +612,11 @@ mod cross_unit_collision_tests {
             .button_position(position_b)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", holy_light_binding);
-        custom_keys.put_ability("AHds", divine_shield_binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHds"),
+            divine_shield_binding,
+        );
         let report = CrossUnitCollisionReport::compute(&custom_keys);
         let false_collision = report.position_groups().iter().any(|group| {
             let ids: Vec<&str> = group

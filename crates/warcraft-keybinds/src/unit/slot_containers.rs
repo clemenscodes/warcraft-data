@@ -8,8 +8,8 @@ use crate::identity::slot::GridSlotId;
 use crate::unit::slots::UnitCommandSlots;
 use std::collections::HashMap;
 use std::rc::Rc;
+use warcraft_api::WARCRAFT_DATABASE;
 use warcraft_api::WarcraftObjectId;
-use warcraft_database::WARCRAFT_DATABASE;
 
 /// A unit's resolved command containers and its train-unit upgrade map. Cheap to
 /// clone (the slot lists are reference-counted), so a renderer can memoise it on
@@ -26,11 +26,8 @@ pub struct UnitSlotContainers {
 impl UnitSlotContainers {
     /// Resolve every container and the upgrade map for the unit with the given id.
     /// An unknown id resolves to the default object, whose command card is empty.
-    pub fn resolve(unit_id: &str) -> Self {
-        let unit_object_id = WARCRAFT_DATABASE
-            .by_id_and_key(unit_id)
-            .map(|(object_id, _key)| object_id)
-            .unwrap_or_default();
+    pub fn resolve(unit_id: WarcraftObjectId) -> Self {
+        let unit_object_id = unit_id;
         let command_card: Rc<[GridSlotId]> = WARCRAFT_DATABASE
             .command_card(unit_object_id)
             .filled_slots()
@@ -81,7 +78,7 @@ mod tests {
 
     #[test]
     fn footman_has_a_non_empty_command_card() {
-        let containers = UnitSlotContainers::resolve("hfoo");
+        let containers = UnitSlotContainers::resolve(crate::test_support::object_id("hfoo"));
         assert!(
             !containers.command_card().is_empty(),
             "the footman (hfoo) should have a populated command card"
@@ -90,7 +87,7 @@ mod tests {
 
     #[test]
     fn unknown_unit_resolves_to_empty_command_card() {
-        let containers = UnitSlotContainers::resolve("this-is-not-a-real-unit-id");
+        let containers = UnitSlotContainers::resolve(crate::test_support::object_id("AHhb"));
         assert!(containers.command_card().is_empty());
         assert!(containers.build_menu().is_none());
     }

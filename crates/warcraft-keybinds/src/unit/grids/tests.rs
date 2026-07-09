@@ -3,28 +3,27 @@ mod unit_grids_tests {
     use super::super::*;
     use crate::custom_keys::CustomKeys;
     use crate::grid::layout::GridLayout;
-    use crate::identity::ability_id::AbilityId;
     use crate::identity::keycode::Letter;
     use crate::model::{AbilityBinding, ColumnIndex, GridCoordinate, Hotkey, RowIndex};
 
     fn paladin_id() -> WarcraftObjectId {
-        WarcraftObjectId::new("Hpal")
+        crate::test_support::object_id("Hpal")
     }
 
     fn peasant_id() -> WarcraftObjectId {
-        WarcraftObjectId::new("hpea")
+        crate::test_support::object_id("hpea")
     }
 
     fn footman_id() -> WarcraftObjectId {
-        WarcraftObjectId::new("hfoo")
+        crate::test_support::object_id("hfoo")
     }
 
     fn tree_of_life_id() -> WarcraftObjectId {
-        WarcraftObjectId::new("etol")
+        crate::test_support::object_id("etol")
     }
 
     fn firelord_id() -> WarcraftObjectId {
-        WarcraftObjectId::new("Nfir")
+        crate::test_support::object_id("Nfir")
     }
 
     /// Sections matching the Firelord (`Nfir`) abilities and Patrol command as
@@ -48,7 +47,7 @@ mod unit_grids_tests {
     fn ability_without_command_position_has_no_main_command_token() {
         let custom_keys = CustomKeys::from_text(firelord_incinerate_sections());
         let layout = GridLayout::qwerty_grid();
-        let incinerate_companion = GridSlotId::Ability(AbilityId::new("ANic"));
+        let incinerate_companion = crate::test_support::ability_slot("ANic");
         let main_command_token =
             custom_keys.effective_hotkey_token(&incinerate_companion, layout, false);
         assert_eq!(
@@ -62,7 +61,7 @@ mod unit_grids_tests {
     fn ability_with_research_position_keeps_research_token() {
         let custom_keys = CustomKeys::from_text(firelord_incinerate_sections());
         let layout = GridLayout::qwerty_grid();
-        let incinerate_companion = GridSlotId::Ability(AbilityId::new("ANic"));
+        let incinerate_companion = crate::test_support::ability_slot("ANic");
         let research_token =
             custom_keys.effective_hotkey_token(&incinerate_companion, layout, true);
         let expected = Some(HotkeyToken::Letter(Letter::E));
@@ -205,8 +204,11 @@ mod unit_grids_tests {
             .button_position(collision_position)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", holy_light_binding);
-        custom_keys.put_ability("AHds", divine_shield_binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHds"),
+            divine_shield_binding,
+        );
         let unit_grids = UnitGrids::for_unit(paladin_id());
         let cards = unit_grids.position_collisions(&custom_keys);
         let has_collision = cards
@@ -228,8 +230,11 @@ mod unit_grids_tests {
             .button_position(shared_position)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", holy_light_binding);
-        custom_keys.put_ability("AHds", divine_shield_binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHds"),
+            divine_shield_binding,
+        );
         let unit_grids = UnitGrids::for_unit(paladin_id());
         let cards = unit_grids.position_collisions(&custom_keys);
         let collision = cards
@@ -267,8 +272,11 @@ mod unit_grids_tests {
             .hotkey(hotkey_q)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", holy_light_binding);
-        custom_keys.put_ability("AHds", divine_shield_binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHds"),
+            divine_shield_binding,
+        );
         let layout = GridLayout::qwerty_grid();
         let unit_grids = UnitGrids::for_unit(paladin_id());
         let cards = unit_grids.hotkey_collisions(&custom_keys, layout);
@@ -292,8 +300,11 @@ mod unit_grids_tests {
             .hotkey(hotkey_w)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", holy_light_binding);
-        custom_keys.put_ability("AHds", divine_shield_binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHds"),
+            divine_shield_binding,
+        );
         let layout = GridLayout::qwerty_grid();
         let unit_grids = UnitGrids::for_unit(paladin_id());
         let cards = unit_grids.hotkey_collisions(&custom_keys, layout);
@@ -323,8 +334,11 @@ mod unit_grids_tests {
             .research_hotkey(hotkey_q)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", holy_light_binding);
-        custom_keys.put_ability("AHds", divine_shield_research);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), holy_light_binding);
+        custom_keys.put_ability(
+            crate::test_support::object_id("AHds"),
+            divine_shield_research,
+        );
         let layout = GridLayout::qwerty_grid();
         let unit_grids = UnitGrids::for_unit(paladin_id());
         let cards = unit_grids.hotkey_collisions(&custom_keys, layout);
@@ -345,7 +359,7 @@ mod unit_grids_tests {
 #[cfg(test)]
 mod cache_tests {
     use super::super::UnitGrids;
-    use warcraft_database::WARCRAFT_DATABASE;
+    use warcraft_api::WARCRAFT_DATABASE;
 
     fn first_unit_id() -> warcraft_api::WarcraftObjectId {
         // any real unit id from the DB; take the first command-card-bearing object

@@ -3,8 +3,8 @@ use crate::grid::layout::GridLayout;
 use crate::unit::grids::{HotkeyCollisionCard, PositionCollisionCard, UnitGrids};
 use crate::unit::slots::UnitCommandSlots;
 use std::fmt;
+use warcraft_api::WARCRAFT_DATABASE;
 use warcraft_api::WarcraftObjectId;
-use warcraft_database::WARCRAFT_DATABASE;
 
 #[derive(Debug)]
 pub struct UnitCollisionReport {
@@ -85,7 +85,7 @@ impl UnitCollisionReport {
             .all_unit_ids()
             .filter_map(|unit_id| {
                 let unit_name = WARCRAFT_DATABASE
-                    .by_id(unit_id.value())
+                    .object(unit_id)
                     .and_then(|object| object.names().first().copied())
                     .filter(|name| !name.is_empty())?;
                 let unit_grids = UnitGrids::for_unit(unit_id);
@@ -107,7 +107,7 @@ impl UnitCollisionReport {
         entries.sort_by(|left, right| {
             left.unit_name
                 .cmp(right.unit_name)
-                .then_with(|| left.unit_id.value().cmp(right.unit_id.value()))
+                .then_with(|| left.unit_id.cmp(&right.unit_id))
         });
         Self { entries }
     }
@@ -120,11 +120,11 @@ impl UnitCollisionReport {
         self.entries.is_empty()
     }
 
-    pub fn for_unit(&self, unit_id: &str) -> Self {
+    pub fn for_unit(&self, unit_id: WarcraftObjectId) -> Self {
         let entries = self
             .entries
             .iter()
-            .filter(|entry| entry.unit_id().value().eq_ignore_ascii_case(unit_id))
+            .filter(|entry| entry.unit_id() == unit_id)
             .copied()
             .collect();
         Self { entries }

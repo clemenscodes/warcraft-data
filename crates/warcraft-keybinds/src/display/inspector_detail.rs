@@ -3,8 +3,8 @@ use crate::display::ability_cell::{AbilityCell, AbilityIconPath};
 use crate::identity::hotkey_token::HotkeyToken;
 use crate::identity::slot::GridSlotId;
 use crate::text::color_codes::WarcraftColorCodes;
+use warcraft_api::{BuildingTraits, ObjectLookup};
 use warcraft_api::{GridCoordinate, WarcraftObjectId, WarcraftObjectMeta};
-use warcraft_database::{BuildingTraits, ObjectLookup};
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Default)]
 pub struct InspectorDetail {
@@ -60,7 +60,7 @@ impl InspectorDetail {
     pub fn build(
         slot: &GridSlotId,
         custom_keys: &Option<CustomKeys>,
-        host_unit_id: &str,
+        host_unit_id: WarcraftObjectId,
         from_uprooted: bool,
         from_research: bool,
         upgrade_unit_id: Option<WarcraftObjectId>,
@@ -68,12 +68,12 @@ impl InspectorDetail {
         let custom_keys_ref = custom_keys.as_ref();
         match slot {
             GridSlotId::Ability(ability_id) => {
-                let ability_id_str = ability_id.value();
-                let binding = custom_keys_ref.and_then(|file| file.binding(ability_id_str));
+                let ability_object_id = ability_id.object_id();
+                let binding = custom_keys_ref.and_then(|file| file.binding(*ability_id));
                 let cell = AbilityCell::for_ability(*ability_id, binding);
                 let position = custom_keys_ref.and_then(|file| file.position_for_slot(slot, false));
                 let research_position = custom_keys_ref
-                    .and_then(|file| file.binding(ability_id_str))
+                    .and_then(|file| file.binding(*ability_id))
                     .and_then(|ability_binding| ability_binding.research_button_position())
                     .copied();
                 let hotkey_token = binding
@@ -94,7 +94,7 @@ impl InspectorDetail {
                         .research_tip()
                         .map(WarcraftColorCodes::stripped)
                 });
-                let database_object = ObjectLookup::by_id(ability_id_str);
+                let database_object = ObjectLookup::object(ability_object_id);
                 let is_passive = database_object
                     .and_then(|warcraft_object| warcraft_object.icons().first().copied())
                     .map(|icon_path| {
@@ -120,9 +120,10 @@ impl InspectorDetail {
                     .unwrap_or(false);
                 let host_starts_in_alt =
                     BuildingTraits::unit_starts_in_toggle_alt_state(host_unit_id);
-                let is_morph_targeting_host = !host_unit_id.is_empty()
-                    && ObjectLookup::morph_target_unit(ability_id_str)
-                        .is_some_and(|target| target.eq_ignore_ascii_case(host_unit_id));
+                let host_is_present = host_unit_id != WarcraftObjectId::default();
+                let is_morph_targeting_host = host_is_present
+                    && ObjectLookup::morph_target_unit(ability_object_id)
+                        .is_some_and(|target| target == host_unit_id);
                 let prefer_un_state = !from_uprooted
                     && (host_starts_in_alt || is_morph_targeting_host)
                     && object_has_alt_state;
@@ -132,9 +133,9 @@ impl InspectorDetail {
                     database_object.and_then(|warcraft_object| warcraft_object.ubertip())
                 };
                 let ubertip = primary_ubertip.map(WarcraftColorCodes::stripped);
-                let ability_is_morph = ObjectLookup::morph_target_unit(ability_id_str).is_some();
+                let ability_is_morph = ObjectLookup::morph_target_unit(ability_object_id).is_some();
                 let ability_off_on_alt_unit = !ability_is_morph
-                    && BuildingTraits::ability_is_on_alt_state_unit(ability_id_str);
+                    && BuildingTraits::ability_is_on_alt_state_unit(ability_object_id);
                 let should_show_alt_state = object_has_alt_state
                     && !prefer_un_state
                     && !ability_is_morph
@@ -216,13 +217,12 @@ impl InspectorDetail {
                 let object_id = cell.object_id();
                 let upgrade_unit_id_field = upgrade_unit_id;
                 let upgrade_display_name = upgrade_unit_id
-                    .and_then(|upgrade_id| ObjectLookup::by_id(upgrade_id.value()))
+                    .and_then(ObjectLookup::object)
                     .and_then(|object| object.names().first().copied())
                     .map(String::from);
                 let upgrade_hotkey_token = upgrade_unit_id
                     .and_then(|upgrade_id| {
-                        let upgrade_id_str = upgrade_id.value();
-                        custom_keys_ref.and_then(|file| file.binding(upgrade_id_str))
+                        custom_keys_ref.and_then(|file| file.binding(upgrade_id))
                     })
                     .and_then(|upgrade_binding| upgrade_binding.hotkey())
                     .and_then(|hotkey| hotkey.first_token());
@@ -254,14 +254,13 @@ impl InspectorDetail {
                 }
             }
             GridSlotId::AbilityOff(ability_id) => {
-                let ability_id_str = ability_id.value();
-                let binding = custom_keys_ref.and_then(|file| file.binding(ability_id_str));
+                let binding = custom_keys_ref.and_then(|file| file.binding(*ability_id));
                 let cell = AbilityCell::for_ability_off(*ability_id, binding);
                 let position = custom_keys_ref.and_then(|file| file.position_for_slot(slot, false));
                 let hotkey_token = binding
                     .and_then(|ability_binding| ability_binding.unhotkey())
                     .and_then(|hotkey| hotkey.first_token());
-                let database_object = ObjectLookup::by_id(ability_id_str);
+                let database_object = ObjectLookup::object(ability_id.object_id());
                 let display_name = database_object
                     .and_then(|warcraft_object| warcraft_object.un_tip())
                     .map(WarcraftColorCodes::stripped)
@@ -299,14 +298,13 @@ impl InspectorDetail {
                 }
             }
             GridSlotId::Command(command_name) => {
-                let command_name_str = command_name.value();
-                let binding = custom_keys_ref.and_then(|file| file.command(command_name_str));
+                let binding = custom_keys_ref.and_then(|file| file.command(*command_name));
                 let cell = AbilityCell::for_command(*command_name, binding);
                 let position = custom_keys_ref.and_then(|file| file.position_for_slot(slot, false));
                 let hotkey_token = binding
                     .and_then(|command_binding| command_binding.hotkey())
                     .and_then(|hotkey| hotkey.first_token());
-                let database_object = ObjectLookup::by_id(command_name_str);
+                let database_object = ObjectLookup::object(*command_name);
                 let tip = database_object
                     .and_then(|warcraft_object| warcraft_object.tip())
                     .map(WarcraftColorCodes::stripped)

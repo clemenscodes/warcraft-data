@@ -1,7 +1,8 @@
 use std::{
-    borrow::Borrow,
+    cmp::Ordering,
     collections::{BTreeMap, HashMap},
     fmt,
+    hash::{Hash, Hasher},
     str::FromStr,
 };
 
@@ -211,13 +212,32 @@ impl FromStr for GridCoordinate {
     }
 }
 
-#[derive(Default, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+/// A Warcraft III object identity (unit, ability, upgrade, item, command, or
+/// system-keybind section id).
+///
+/// Identity is **case-insensitive**: the auto-generated database registers some
+/// objects under mixed casing (a unit may list `Acvs` while the object is stored
+/// `ACvs`), so `PartialEq`/`Eq`/`Hash`/`Ord` all fold ASCII case. Plain `==` and
+/// id-keyed `HashMap`/`BTreeMap`/`HashSet` therefore merge casing variants
+/// automatically — no `.eq_ignore_ascii_case`/`.to_ascii_lowercase` folding is
+/// needed anywhere else. Because equality ignores case, this type deliberately
+/// does **not** implement `Borrow<str>` (that would expose the case-sensitive
+/// `str` impls and make map lookups unsound).
+#[derive(Default, Debug, Copy, Clone)]
 pub struct WarcraftObjectId {
     pub(crate) value: &'static str,
 }
 
 impl WarcraftObjectId {
-    pub const fn new(value: &'static str) -> Self {
+    /// Mint an id from a static string. This is **`pub(crate)`**: only this
+    /// crate's own authoritative database data (the generated `db.rs` and the
+    /// `const`/`static` id tables) may call it. No downstream crate — keybinds,
+    /// the app, or their tests — can construct a `WarcraftObjectId` from an
+    /// arbitrary string; they must obtain ids from the database instead
+    /// (`ObjectLookup::resolve_raw`, DB-backed lookups, or by passing along an
+    /// already-typed id). This makes it impossible to fabricate an id whose
+    /// value is not a real object id.
+    pub(crate) const fn new(value: &'static str) -> Self {
         Self { value }
     }
 
@@ -226,9 +246,41 @@ impl WarcraftObjectId {
     }
 }
 
-impl From<&'static str> for WarcraftObjectId {
-    fn from(value: &'static str) -> Self {
-        Self::new(value)
+impl PartialEq for WarcraftObjectId {
+    fn eq(&self, other: &Self) -> bool {
+        self.value.eq_ignore_ascii_case(other.value)
+    }
+}
+
+impl Eq for WarcraftObjectId {}
+
+impl Hash for WarcraftObjectId {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        for byte in self.value.bytes() {
+            let folded = byte.to_ascii_lowercase();
+            state.write_u8(folded);
+        }
+        state.write_u8(0xff);
+    }
+}
+
+impl PartialOrd for WarcraftObjectId {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for WarcraftObjectId {
+    fn cmp(&self, other: &Self) -> Ordering {
+        let own = self.value.bytes().map(|byte| byte.to_ascii_lowercase());
+        let their = other.value.bytes().map(|byte| byte.to_ascii_lowercase());
+        own.cmp(their)
+    }
+}
+
+impl fmt::Display for WarcraftObjectId {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter.write_str(self.value)
     }
 }
 
@@ -243,7 +295,7 @@ pub struct UnitUpgradeSwap {
 }
 
 impl UnitUpgradeSwap {
-    pub const fn new(from_unit_id: &'static str, to_unit_id: &'static str) -> Self {
+    pub(crate) const fn new(from_unit_id: &'static str, to_unit_id: &'static str) -> Self {
         let from_unit_id = WarcraftObjectId::new(from_unit_id);
         let to_unit_id = WarcraftObjectId::new(to_unit_id);
         Self {
@@ -258,12 +310,6 @@ impl UnitUpgradeSwap {
 
     pub fn to_unit_id(&self) -> WarcraftObjectId {
         self.to_unit_id
-    }
-}
-
-impl Borrow<str> for WarcraftObjectId {
-    fn borrow(&self) -> &str {
-        self.value
     }
 }
 
@@ -440,23 +486,36 @@ impl WarcraftDatabase {
     }
 
     pub fn get(&self, id: Identifier) -> Option<&WarcraftObject> {
-        self.db.get(id.get_id().as_str())
+        let needle_id = id.get_id();
+        self.by_id(needle_id.as_str())
     }
 
     pub fn db(&self) -> &ObjectMap {
         &self.db
     }
 
+    /// Look up a known object by its already-typed id. Indexes the object map
+    /// directly through the (case-insensitive) [`WarcraftObjectId`] key — the
+    /// typed lookup that replaces every `.get(id.value())` that used to reach
+    /// the map through the removed `Borrow<str>`.
+    pub fn object(&self, id: WarcraftObjectId) -> Option<&WarcraftObject> {
+        self.db.get(&id)
+    }
+
+    /// Resolve a genuinely-external raw id string to its stored object. This and
+    /// [`Self::by_id_and_key`] are the only `&str`-in seam: they fold ASCII case
+    /// through `lowercase_index` because a runtime `&str` cannot be turned into a
+    /// `WarcraftObjectId` (which only the database may mint).
     pub fn by_id(&self, needle_id: &str) -> Option<&WarcraftObject> {
         let lowercase = needle_id.to_ascii_lowercase();
         let canonical_key = self.lowercase_index.get(&lowercase)?;
-        self.db.get(canonical_key.value())
+        self.db.get(canonical_key)
     }
 
     pub fn by_id_and_key(&self, needle_id: &str) -> Option<(WarcraftObjectId, &WarcraftObject)> {
         let lowercase = needle_id.to_ascii_lowercase();
         let canonical_key = self.lowercase_index.get(&lowercase)?;
-        let warcraft_object = self.db.get(canonical_key.value())?;
+        let warcraft_object = self.db.get(canonical_key)?;
         Some((*canonical_key, warcraft_object))
     }
 
@@ -525,10 +584,12 @@ impl WarcraftDatabase {
         }
     }
 
-    pub fn ability_names(&self) -> impl Iterator<Item = (&'static str, &'static [&'static str])> {
+    pub fn ability_names(
+        &self,
+    ) -> impl Iterator<Item = (WarcraftObjectId, &'static [&'static str])> {
         self.db.iter().filter_map(|(id, object)| {
             if object.kind == WarcraftObjectKind::Ability {
-                Some((id.value, object.names))
+                Some((*id, object.names))
             } else {
                 None
             }
@@ -754,18 +815,16 @@ impl WarcraftObject {
             .unwrap_or(false)
     }
 
-    pub fn ability_code(&self) -> Option<&'static str> {
+    pub fn ability_code(&self) -> Option<WarcraftObjectId> {
         match &self.meta {
             WarcraftObjectMeta::Ability(ability_meta) => ability_meta.code(),
             _ => None,
         }
     }
 
-    pub fn ability_morph_target_id(&self) -> Option<&'static str> {
+    pub fn ability_morph_target_id(&self) -> Option<WarcraftObjectId> {
         match &self.meta {
-            WarcraftObjectMeta::Ability(ability_meta) => {
-                ability_meta.morph_target_unit().map(|id| id.value())
-            }
+            WarcraftObjectMeta::Ability(ability_meta) => ability_meta.morph_target_unit().copied(),
             _ => None,
         }
     }
@@ -831,11 +890,25 @@ mod tests {
     }
 
     #[test]
-    fn warcraft_object_id_borrow_yields_str() {
-        use std::borrow::Borrow;
-        let id = WarcraftObjectId::new("hfoo");
-        let borrowed: &str = id.borrow();
-        assert_eq!(borrowed, "hfoo");
+    fn warcraft_object_id_equality_ignores_ascii_case() {
+        let mixed = WarcraftObjectId::new("ACvs");
+        let lower = WarcraftObjectId::new("acvs");
+        assert_eq!(mixed, lower);
+    }
+
+    #[test]
+    fn warcraft_object_id_hash_ignores_ascii_case() {
+        use std::collections::HashSet;
+        let mut ids = HashSet::new();
+        ids.insert(WarcraftObjectId::new("ACvs"));
+        assert!(ids.contains(&WarcraftObjectId::new("acvs")));
+    }
+
+    #[test]
+    fn warcraft_object_id_ordering_ignores_ascii_case() {
+        let alpha = WarcraftObjectId::new("acad");
+        let beta = WarcraftObjectId::new("ACAE");
+        assert!(alpha < beta);
     }
 
     #[test]

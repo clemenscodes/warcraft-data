@@ -5,7 +5,8 @@
 //! renderer keeps only presentation: turning the icon path into a URL and
 //! choosing a fallback when the object has no name.
 
-use warcraft_database::ObjectLookup;
+use warcraft_api::WarcraftObjectId;
+use warcraft_api::ObjectLookup;
 
 /// A warcraft object's name and icon database path, if it has them. Both are
 /// `None` for an unknown id.
@@ -17,8 +18,8 @@ pub struct ObjectDisplay {
 
 impl ObjectDisplay {
     /// Resolve the object with the given id to its name and icon database path.
-    pub fn resolve(object_id: &str) -> Self {
-        let object_option = ObjectLookup::by_id(object_id);
+    pub fn resolve(object_id: WarcraftObjectId) -> Self {
+        let object_option = ObjectLookup::object(object_id);
         let name = object_option
             .and_then(|object| object.names().first().copied())
             .map(|resolved_name| resolved_name.to_owned());
@@ -46,7 +47,7 @@ mod tests {
 
     #[test]
     fn footman_resolves_a_name_and_icon() {
-        let display = ObjectDisplay::resolve("hfoo");
+        let display = ObjectDisplay::resolve(crate::test_support::object_id("hfoo"));
         assert!(display.name().is_some(), "the footman should have a name");
         assert!(
             display.icon_database_path().is_some(),
@@ -55,9 +56,11 @@ mod tests {
     }
 
     #[test]
-    fn unknown_id_resolves_to_nothing() {
-        let display = ObjectDisplay::resolve("this-is-not-a-real-object-id");
-        assert!(display.name().is_none());
-        assert!(display.icon_database_path().is_none());
+    fn unknown_string_is_rejected_by_the_database() {
+        // Ids can only be obtained from the database, so an arbitrary string can
+        // never become a `WarcraftObjectId` in the first place — the database
+        // refuses to resolve it. This is the reachable guarantee that replaces
+        // the old "resolve a fabricated unknown id" test.
+        assert!(warcraft_api::ObjectLookup::resolve_raw("this-is-not-a-real-object-id").is_none());
     }
 }

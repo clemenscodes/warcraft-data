@@ -6,12 +6,6 @@ pub struct AbilityId {
 }
 
 impl AbilityId {
-    pub const fn new(id: &'static str) -> Self {
-        Self {
-            object_id: WarcraftObjectId::new(id),
-        }
-    }
-
     pub fn value(&self) -> &'static str {
         self.object_id.value()
     }
@@ -30,14 +24,6 @@ impl From<WarcraftObjectId> for AbilityId {
 impl From<AbilityId> for WarcraftObjectId {
     fn from(ability_id: AbilityId) -> Self {
         ability_id.object_id
-    }
-}
-
-impl From<&'static str> for AbilityId {
-    fn from(id: &'static str) -> Self {
-        Self {
-            object_id: WarcraftObjectId::from(id),
-        }
     }
 }
 

@@ -2,19 +2,18 @@
 resolver = "2"
 members = [
     "crates/warcraft-api",
-    "crates/warcraft-database",
     "crates/warcraft-keybinds",
     "crates/warcraft-extractor",
     "crates/warcraft-slk",
 ]
 # `warcraft-extractor` and `warcraft-slk` are native-only tools kept out of
 # default workspace operations (`cargo build`, `cargo clippy --all-targets`).
-# Regenerate the database:
+# The pre-extracted database lives inside `warcraft-api` (its `db.rs`), so only
+# that crate may mint object ids. Regenerate the database:
 #   cargo run -p warcraft-extractor -- --casc <PATH>
-#   cargo fmt -p warcraft-database
+#   cargo fmt -p warcraft-api
 default-members = [
     "crates/warcraft-api",
-    "crates/warcraft-database",
     "crates/warcraft-keybinds",
 ]
 

@@ -11,7 +11,8 @@ use crate::identity::hotkey_token::HotkeyToken;
 use crate::identity::slot::GridSlotId;
 use crate::model::{ColumnIndex, GridCoordinate, RowIndex};
 use std::collections::{HashMap, HashSet};
-use warcraft_database::ObjectLookup;
+use warcraft_api::ObjectLookup;
+use warcraft_api::WarcraftObjectId;
 
 /// One fully resolved tile, ready to paint. Its address is a [`GridCoordinate`],
 /// never a loose integer.
@@ -78,7 +79,7 @@ pub struct CommandGridRenderInput<'a> {
     layout: GridLayout,
     selected: Option<GridSlotId>,
     selected_is_research: bool,
-    tier_overrides: &'a HashMap<String, usize>,
+    tier_overrides: &'a HashMap<WarcraftObjectId, usize>,
     restrict_draggable_to: &'a [GridSlotId],
 }
 
@@ -88,7 +89,7 @@ impl<'a> CommandGridRenderInput<'a> {
         layout: GridLayout,
         selected: Option<GridSlotId>,
         selected_is_research: bool,
-        tier_overrides: &'a HashMap<String, usize>,
+        tier_overrides: &'a HashMap<WarcraftObjectId, usize>,
         restrict_draggable_to: &'a [GridSlotId],
     ) -> Self {
         Self {
@@ -117,7 +118,7 @@ impl<'a> CommandGridRenderInput<'a> {
         self.selected_is_research
     }
 
-    pub fn tier_overrides(&self) -> &'a HashMap<String, usize> {
+    pub fn tier_overrides(&self) -> &'a HashMap<WarcraftObjectId, usize> {
         self.tier_overrides
     }
 
@@ -166,14 +167,13 @@ impl CustomKeys {
         layout: GridLayout,
         is_research_context: bool,
     ) -> HashSet<HotkeyToken> {
-        let mut ids_by_token: HashMap<HotkeyToken, HashSet<String>> = HashMap::new();
+        let mut ids_by_token: HashMap<HotkeyToken, HashSet<WarcraftObjectId>> = HashMap::new();
         for slot in slots {
             let Some(token) = self.effective_hotkey_token(slot, layout, is_research_context) else {
                 continue;
             };
-            let slot_id = slot.as_str().to_ascii_lowercase();
             let ids = ids_by_token.entry(token).or_default();
-            ids.insert(slot_id);
+            ids.insert(slot.id());
         }
         let mut conflicting: HashSet<HotkeyToken> = HashSet::new();
         for (token, ids) in ids_by_token {
@@ -228,13 +228,13 @@ impl CustomKeys {
             u8::from(from.column()),
             u8::from(from.row()),
         )?;
-        let moving_id = moving_slot.as_str();
+        let moving_id = moving_slot.id();
         slots.iter().find_map(|slot| {
             let GridSlotId::Ability(ability_id) = slot else {
                 return None;
             };
-            let ability_code = ability_id.value();
-            if ability_code.eq_ignore_ascii_case(moving_id) {
+            let ability_object_id = ability_id.object_id();
+            if ability_object_id == moving_id {
                 return None;
             }
             let off_slot = GridSlotId::AbilityOff(*ability_id);
@@ -242,9 +242,9 @@ impl CustomKeys {
             if off_position != to {
                 return None;
             }
-            let database_object = ObjectLookup::by_id(ability_code);
+            let database_object = ObjectLookup::object(ability_object_id);
             let primary_name = database_object.and_then(|object| object.names().first().copied());
-            let blocker_name = primary_name.unwrap_or(ability_code).to_owned();
+            let blocker_name = primary_name.unwrap_or(ability_object_id.value()).to_owned();
             Some(blocker_name)
         })
     }
@@ -271,9 +271,9 @@ impl CustomKeys {
         });
         let object_id_option = occupant_cell.as_ref().map(|cell| cell.object_id());
         let tier_index = object_id_option
-            .and_then(|id| input.tier_overrides().get(id.value()).copied())
+            .and_then(|id| input.tier_overrides().get(&id).copied())
             .unwrap_or(0);
-        let database_object = object_id_option.and_then(|id| ObjectLookup::by_id(id.value()));
+        let database_object = object_id_option.and_then(ObjectLookup::object);
         let tier_name = database_object
             .and_then(|object| object.names().get(tier_index).copied())
             .map(String::from);
@@ -314,7 +314,7 @@ impl CustomKeys {
         let hotkey = effective_token.unwrap_or(layout_token);
         let is_passive = behavior.show_passive_badge()
             && object_id_option
-                .map(|id| ObjectLookup::is_passive_ability(id.value()))
+                .map(ObjectLookup::is_passive_ability)
                 .unwrap_or(false);
         let is_conflict = effective_token
             .map(|token| conflicting_tokens.contains(&token))
@@ -347,8 +347,7 @@ impl CustomKeys {
                 AbilityCell::for_ability_off(ability_id, binding)
             }
             GridSlotId::Command(command_name) => {
-                let command_code = command_name.value();
-                let binding = self.command(command_code);
+                let binding = self.command(command_name);
                 AbilityCell::for_command(command_name, binding)
             }
         }
@@ -391,10 +390,13 @@ mod tests {
     #[test]
     fn renders_occupant_hotkey_and_marks_it_draggable() {
         let keys = CustomKeys::parse_raw("[ACad]\nHotkey=P\nButtonpos=0,0\n");
-        let slots = [GridSlotId::ability("ACad")];
+        let slots = [crate::test_support::ability_slot("ACad")];
         let tiles = render(&keys, &slots, &[]);
         let occupied = tile_at(&tiles, 0, 0);
-        assert_eq!(occupied.occupant(), Some(GridSlotId::ability("ACad")));
+        assert_eq!(
+            occupied.occupant(),
+            Some(crate::test_support::ability_slot("ACad"))
+        );
         let expected_hotkey = HotkeyToken::try_from('P').expect("letter");
         assert_eq!(occupied.hotkey(), expected_hotkey);
         assert!(occupied.draggable());
@@ -404,7 +406,7 @@ mod tests {
     #[test]
     fn empty_tile_shows_its_layout_letter_and_is_not_draggable() {
         let keys = CustomKeys::parse_raw("[ACad]\nButtonpos=0,0\n");
-        let slots = [GridSlotId::ability("ACad")];
+        let slots = [crate::test_support::ability_slot("ACad")];
         let tiles = render(&keys, &slots, &[]);
         let empty = tile_at(&tiles, 1, 0);
         assert_eq!(empty.occupant(), None);
@@ -416,18 +418,21 @@ mod tests {
     #[test]
     fn cascade_pinned_slot_is_still_draggable_in_the_editor() {
         let keys = CustomKeys::parse_raw("[Aro1]\nButtonpos=0,0\n");
-        let slots = [GridSlotId::ability("Aro1")];
+        let slots = [crate::test_support::ability_slot("Aro1")];
         let tiles = render(&keys, &slots, &[]);
         let occupied = tile_at(&tiles, 0, 0);
-        assert!(GridSlotId::ability("Aro1").is_pinned());
+        assert!(crate::test_support::ability_slot("Aro1").is_pinned());
         assert!(occupied.draggable());
     }
 
     #[test]
     fn restrict_list_narrows_the_draggable_set() {
         let keys = CustomKeys::parse_raw("[ACad]\nButtonpos=0,0\n[AHbz]\nButtonpos=1,0\n");
-        let slots = [GridSlotId::ability("ACad"), GridSlotId::ability("AHbz")];
-        let restrict = [GridSlotId::ability("ACad")];
+        let slots = [
+            crate::test_support::ability_slot("ACad"),
+            crate::test_support::ability_slot("AHbz"),
+        ];
+        let restrict = [crate::test_support::ability_slot("ACad")];
         let tiles = render(&keys, &slots, &restrict);
         assert!(tile_at(&tiles, 0, 0).draggable());
         assert!(!tile_at(&tiles, 1, 0).draggable());
@@ -438,7 +443,10 @@ mod tests {
         let keys = CustomKeys::parse_raw(
             "[ACad]\nHotkey=F\nButtonpos=0,0\n[AHbz]\nHotkey=F\nButtonpos=1,0\n",
         );
-        let slots = [GridSlotId::ability("ACad"), GridSlotId::ability("AHbz")];
+        let slots = [
+            crate::test_support::ability_slot("ACad"),
+            crate::test_support::ability_slot("AHbz"),
+        ];
         let tiles = render(&keys, &slots, &[]);
         assert!(tile_at(&tiles, 0, 0).is_conflict());
         assert!(tile_at(&tiles, 1, 0).is_conflict());
@@ -447,11 +455,11 @@ mod tests {
     #[test]
     fn slot_at_resolves_the_occupant_in_the_behavior_namespace() {
         let keys = CustomKeys::parse_raw("[ACad]\nButtonpos=1,0\n");
-        let slots = [GridSlotId::ability("ACad")];
+        let slots = [crate::test_support::ability_slot("ACad")];
         let behavior = CommandBehavior;
         let occupied = GridCoordinate::new(ColumnIndex::One, RowIndex::Zero);
         let found = keys.slot_at(&behavior, &slots, occupied);
-        assert_eq!(found, Some(GridSlotId::ability("ACad")));
+        assert_eq!(found, Some(crate::test_support::ability_slot("ACad")));
         let empty = GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero);
         assert_eq!(keys.slot_at(&behavior, &slots, empty), None);
     }
@@ -461,7 +469,10 @@ mod tests {
         let keys = CustomKeys::parse_raw(
             "[ACad]\nButtonpos=0,0\n[AHbz]\nButtonpos=0,1\nUnbuttonpos=1,1\n",
         );
-        let slots = [GridSlotId::ability("ACad"), GridSlotId::ability("AHbz")];
+        let slots = [
+            crate::test_support::ability_slot("ACad"),
+            crate::test_support::ability_slot("AHbz"),
+        ];
         let behavior = CommandBehavior;
         let from = GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero);
         let to = GridCoordinate::new(ColumnIndex::One, RowIndex::One);

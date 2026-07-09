@@ -5,8 +5,8 @@ use crate::unit::grids::{GridRole, UnitGrids};
 use crate::unit::slots::UnitCommandSlots;
 use std::collections::{HashMap, HashSet};
 use std::fmt;
+use warcraft_api::WARCRAFT_DATABASE;
 use warcraft_api::{WarcraftObjectId, WarcraftObjectMeta};
-use warcraft_database::WARCRAFT_DATABASE;
 
 /// Canonical identifier for one ability state on one command card page type.
 ///
@@ -19,15 +19,15 @@ use warcraft_database::WARCRAFT_DATABASE;
 /// and resolve each state's collisions independently; collapsing them would
 /// leave whichever state the cascade did not track sitting on its collision.
 ///
-/// The `ability_str_lowercase` field collapses casing variants together: the
-/// auto-generated database contains some abilities registered under two
-/// different casings (e.g. `ACvs` and `Acvs` for Envenomed Weapons) with
-/// disjoint carrier unit sets.  Without lowercasing, the conflict graph would
-/// treat them as two separate abilities and miss the very real conflict
-/// between them.
-#[derive(Clone, PartialEq, Eq, Hash, Debug)]
+/// The `ability_id` field is the *canonical* database id: the auto-generated
+/// database contains some abilities registered under two different casings
+/// (e.g. `ACvs` and `Acvs` for Envenomed Weapons) with disjoint carrier unit
+/// sets. Folding each id onto its canonical form (see [`canonical_ability_id`])
+/// collapses those variants onto one node, so the conflict graph sees the very
+/// real conflict between them instead of two separate abilities.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]
 struct AbilityRoleKey {
-    ability_str_lowercase: String,
+    ability_id: WarcraftObjectId,
     grid_role: GridRole,
     is_off_state: bool,
 }
@@ -127,7 +127,7 @@ impl AbilityRoleKey {
     fn ability_list_priority(&self, carrier_unit_ids: &[WarcraftObjectId]) -> usize {
         let mut min_priority = usize::MAX;
         for carrier_id in carrier_unit_ids {
-            let Some(unit_object) = WARCRAFT_DATABASE.by_id(carrier_id.value()) else {
+            let Some(unit_object) = WARCRAFT_DATABASE.object(*carrier_id) else {
                 continue;
             };
             let WarcraftObjectMeta::Unit(unit_meta) = unit_object.meta() else {
@@ -135,8 +135,7 @@ impl AbilityRoleKey {
             };
             let abilities = unit_meta.abilities();
             for (position, listed_id) in abilities.iter().enumerate() {
-                let listed_lower = listed_id.value().to_ascii_lowercase();
-                if listed_lower == self.ability_str_lowercase {
+                if *listed_id == self.ability_id {
                     min_priority = min_priority.min(position);
                     break;
                 }
@@ -162,16 +161,16 @@ impl ConflictGraph {
                     let Some(position) = custom_keys.position_for_slot(&slot, is_research) else {
                         continue;
                     };
-                    let ability_str_lowercase = slot.as_str().to_ascii_lowercase();
+                    let ability_id = slot.id();
                     let is_off_state = matches!(slot, GridSlotId::AbilityOff(_));
                     let key = AbilityRoleKey {
-                        ability_str_lowercase,
+                        ability_id,
                         grid_role,
                         is_off_state,
                     };
                     let accumulator =
                         node_accumulators
-                            .entry(key.clone())
+                            .entry(key)
                             .or_insert_with(|| NodeAccumulator {
                                 canonical_slot: slot,
                                 position,
@@ -187,16 +186,16 @@ impl ConflictGraph {
                 }
             }
         }
-        let mut ordered_keys: Vec<AbilityRoleKey> = node_accumulators.keys().cloned().collect();
+        let mut ordered_keys: Vec<AbilityRoleKey> = node_accumulators.keys().copied().collect();
         ordered_keys.sort_by(|left, right| {
             let left_role_index = left.grid_role.sort_index();
             let right_role_index = right.grid_role.sort_index();
             let role_order = left_role_index.cmp(&right_role_index);
-            role_order.then_with(|| left.ability_str_lowercase.cmp(&right.ability_str_lowercase))
+            role_order.then_with(|| left.ability_id.value().cmp(right.ability_id.value()))
         });
         let mut key_to_index: HashMap<AbilityRoleKey, usize> = HashMap::new();
         for (index, key) in ordered_keys.iter().enumerate() {
-            key_to_index.insert(key.clone(), index);
+            key_to_index.insert(*key, index);
         }
         let mut nodes: Vec<ConflictNode> = Vec::with_capacity(ordered_keys.len());
         for key in &ordered_keys {
@@ -216,7 +215,7 @@ impl ConflictGraph {
         let mut edge_sets: Vec<HashSet<usize>> = (0..nodes.len()).map(|_| HashSet::new()).collect();
         for role_map in unit_role_keys.values() {
             for role_key_set in role_map.values() {
-                let role_keys: Vec<AbilityRoleKey> = role_key_set.iter().cloned().collect();
+                let role_keys: Vec<AbilityRoleKey> = role_key_set.iter().copied().collect();
                 for outer in 0..role_keys.len() {
                     for inner in (outer + 1)..role_keys.len() {
                         let index_outer = key_to_index[&role_keys[outer]];
@@ -272,9 +271,14 @@ impl ConflictGraph {
     /// lowercase form of the ability string so casing variants in the database
     /// are merged.  Off-state nodes are keyed separately; this returns the
     /// on-state (`Buttonpos`) node, which is what every caller wants.
-    pub fn find_node(&self, ability_str: &str, grid_role: GridRole) -> Option<usize> {
+    pub fn find_node(
+        &self,
+        ability_id: impl Into<WarcraftObjectId>,
+        grid_role: GridRole,
+    ) -> Option<usize> {
+        let ability_id = ability_id.into();
         let key = AbilityRoleKey {
-            ability_str_lowercase: ability_str.to_ascii_lowercase(),
+            ability_id,
             grid_role,
             is_off_state: false,
         };
@@ -443,10 +447,16 @@ mod conflict_graph_tests {
         let custom_keys = crate::custom_keys::CustomKeys::from_text("");
         let graph = ConflictGraph::build(&custom_keys);
         let holy_light_index = graph
-            .find_node("AHhb", GridRole::MainCommand)
+            .find_node(
+                crate::test_support::object_id("AHhb"),
+                GridRole::MainCommand,
+            )
             .expect("AHhb must be a node");
         let divine_shield_index = graph
-            .find_node("AHds", GridRole::MainCommand)
+            .find_node(
+                crate::test_support::object_id("AHds"),
+                GridRole::MainCommand,
+            )
             .expect("AHds must be a node");
         let holy_light_neighbors = graph.neighbors(holy_light_index);
         assert!(
@@ -459,11 +469,16 @@ mod conflict_graph_tests {
     fn abilities_on_different_pages_have_no_edge() {
         let custom_keys = crate::custom_keys::CustomKeys::from_text("");
         let graph = ConflictGraph::build(&custom_keys);
-        let Some(holy_light_index) = graph.find_node("AHhb", GridRole::MainCommand) else {
+        let Some(holy_light_index) = graph.find_node(
+            crate::test_support::object_id("AHhb"),
+            GridRole::MainCommand,
+        ) else {
             return;
         };
-        let Some(holy_light_research_index) = graph.find_node("AHhb", GridRole::HeroSkillTree)
-        else {
+        let Some(holy_light_research_index) = graph.find_node(
+            crate::test_support::object_id("AHhb"),
+            GridRole::HeroSkillTree,
+        ) else {
             return;
         };
         let neighbors = graph.neighbors(holy_light_index);
@@ -477,7 +492,10 @@ mod conflict_graph_tests {
     fn carrier_count_for_hold_position_is_large() {
         let graph = default_graph();
         let index = graph
-            .find_node("CmdHoldPos", GridRole::MainCommand)
+            .find_node(
+                crate::test_support::object_id("CmdHoldPos"),
+                GridRole::MainCommand,
+            )
             .expect("CmdHoldPos must be a node on MainCommand");
         let carrier_count = graph.node(index).carrier_count();
         assert!(
@@ -490,10 +508,16 @@ mod conflict_graph_tests {
     fn carrier_count_for_paladin_specific_ability_is_small() {
         let graph = default_graph();
         let hold_index = graph
-            .find_node("CmdHoldPos", GridRole::MainCommand)
+            .find_node(
+                crate::test_support::object_id("CmdHoldPos"),
+                GridRole::MainCommand,
+            )
             .expect("CmdHoldPos must be a node");
         let holy_light_index = graph
-            .find_node("AHhb", GridRole::MainCommand)
+            .find_node(
+                crate::test_support::object_id("AHhb"),
+                GridRole::MainCommand,
+            )
             .expect("AHhb must be a node on MainCommand");
         let hold_carrier_count = graph.node(hold_index).carrier_count();
         let holy_light_carrier_count = graph.node(holy_light_index).carrier_count();
@@ -511,8 +535,8 @@ mod conflict_graph_tests {
             .button_position(shared_position)
             .build();
         let mut custom_keys = crate::custom_keys::CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", binding.clone());
-        custom_keys.put_ability("AHds", binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), binding.clone());
+        custom_keys.put_ability(crate::test_support::object_id("AHds"), binding);
         let graph = ConflictGraph::build(&custom_keys);
         let pairs = graph.colliding_pairs();
         let involves_paladin_abilities = pairs.iter().any(|pair| {
@@ -537,8 +561,8 @@ mod conflict_graph_tests {
             .button_position(position_b)
             .build();
         let mut custom_keys = crate::custom_keys::CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", binding_a);
-        custom_keys.put_ability("AHds", binding_b);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), binding_a);
+        custom_keys.put_ability(crate::test_support::object_id("AHds"), binding_b);
         let graph = ConflictGraph::build(&custom_keys);
         let false_pair = graph.colliding_pairs().into_iter().any(|pair| {
             let first = graph.node(pair.first_index()).slot_id().as_str();
@@ -570,9 +594,18 @@ mod conflict_graph_tests {
     fn ability_casing_variants_collapse_into_a_single_node() {
         let custom_keys = CustomKeys::from_text("");
         let graph = ConflictGraph::build(&custom_keys);
-        let upper_index = graph.find_node("ACvs", GridRole::MainCommand);
-        let lower_index = graph.find_node("Acvs", GridRole::MainCommand);
-        let mixed_lower_index = graph.find_node("acvs", GridRole::MainCommand);
+        let upper_index = graph.find_node(
+            crate::test_support::object_id("ACvs"),
+            GridRole::MainCommand,
+        );
+        let lower_index = graph.find_node(
+            crate::test_support::object_id("Acvs"),
+            GridRole::MainCommand,
+        );
+        let mixed_lower_index = graph.find_node(
+            crate::test_support::object_id("acvs"),
+            GridRole::MainCommand,
+        );
         assert!(
             upper_index.is_some(),
             "expected to find Envenomed Weapons node via uppercase casing",

@@ -9,8 +9,8 @@ use super::values::{
     Armor, AttackRange, AttackSpeed, DamagePerSecond, DamageRange, EffectiveHitPoints, Evasion,
     HitPoints, HitPointsRegen, Mana, ManaRegen,
 };
+use warcraft_api::WARCRAFT_GAMEPLAY_CONSTANTS;
 use warcraft_api::{DefenseType, HeroAttributes, PrimaryAttribute, UnitAttack, UnitCombat};
-use warcraft_database::WARCRAFT_GAMEPLAY_CONSTANTS;
 
 /// Widens a count into `f32` for arithmetic. The lossy `as` cast is confined to this
 /// `From` body (RUST_STYLE permits `as` only inside `From`/`TryFrom` impls); stat

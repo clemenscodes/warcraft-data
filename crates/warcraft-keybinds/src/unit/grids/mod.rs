@@ -6,8 +6,8 @@ use crate::model::GridCoordinate;
 use crate::unit::slots::UnitCommandSlots;
 use std::collections::{HashMap, HashSet};
 use std::sync::LazyLock;
+use warcraft_api::WARCRAFT_DATABASE;
 use warcraft_api::WarcraftObjectId;
-use warcraft_database::WARCRAFT_DATABASE;
 
 const GRID_SLOT_COUNT: usize = 12;
 
@@ -178,8 +178,8 @@ impl UnitGrids {
             let mut cells: [[Option<HotkeyCollisionAtCell>; 4]; 3] =
                 std::array::from_fn(|_| std::array::from_fn(|_| None));
             for (token, mut colliding_slots) in slots_by_token {
-                let mut seen: HashSet<&str> = HashSet::new();
-                colliding_slots.retain(|slot| seen.insert(slot.as_str()));
+                let mut seen: HashSet<WarcraftObjectId> = HashSet::new();
+                colliding_slots.retain(|slot| seen.insert(slot.id()));
                 if colliding_slots.len() < 2 {
                     continue;
                 }

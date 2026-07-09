@@ -14,9 +14,6 @@ pub mod system;
 pub mod text;
 pub mod unit;
 
-#[cfg(test)]
-mod ddd_conformance;
-
 pub use cascade::conflict_graph::{CollidingPair, ConflictGraph, ConflictNode};
 pub use cascade::planner::{CascadePlan, MoveReason, PlannedMove, UnresolvedMover};
 pub use cascade::queue::{AssignmentQueue, AssignmentScope, GroupKind, PositionAssignmentGroup};
@@ -83,4 +80,52 @@ pub use unit::listing::{
 };
 pub use unit::slot_containers::UnitSlotContainers;
 pub use unit::slots::UnitCommandSlots;
-pub use warcraft_database::{BuildingTraits, CommandCatalog};
+pub use warcraft_api::{BuildingTraits, CommandCatalog};
+
+#[cfg(test)]
+mod ddd_conformance;
+
+/// Test-only helpers for obtaining object ids. Because `WarcraftObjectId::new`
+/// is `pub(crate)` inside `warcraft-api`, no keybinds code — tests included —
+/// can fabricate an id from a string; the only way to get one is to ask the
+/// database. These wrap `ObjectLookup::resolve_raw` so tests name ids by their
+/// real string and get the canonical typed id back (panicking on an unknown
+/// string, which is exactly the safety guarantee under test).
+#[cfg(test)]
+pub(crate) mod test_support {
+    use crate::identity::slot::GridSlotId;
+    use warcraft_api::{ObjectLookup, WARCRAFT_SYSTEM_KEYBINDS, WarcraftObjectId};
+
+    /// Resolve a raw id string to its typed id via the database. Object ids come
+    /// from [`ObjectLookup::resolve_raw`]; system-keybind section ids (which are
+    /// not entries in the object map, e.g. `Ctr1`/`QuickSave`) come from the
+    /// system-keybind table. Panics on an unknown string — proving the id was
+    /// obtained from the database, never fabricated.
+    pub(crate) fn object_id(raw_id: &str) -> WarcraftObjectId {
+        ObjectLookup::resolve_raw(raw_id)
+            .or_else(|| resolve_system_section(raw_id))
+            .unwrap_or_else(|| panic!("no known object or system-section id for {raw_id:?}"))
+    }
+
+    fn resolve_system_section(raw_id: &str) -> Option<WarcraftObjectId> {
+        WARCRAFT_SYSTEM_KEYBINDS
+            .iter()
+            .map(|system_keybind| system_keybind.section_id())
+            .find(|section_id| section_id.value().eq_ignore_ascii_case(raw_id))
+    }
+
+    pub(crate) fn ability_slot(raw_id: &str) -> GridSlotId {
+        let resolved = object_id(raw_id);
+        GridSlotId::ability(resolved)
+    }
+
+    pub(crate) fn ability_off_slot(raw_id: &str) -> GridSlotId {
+        let resolved = object_id(raw_id);
+        GridSlotId::ability_off(resolved)
+    }
+
+    pub(crate) fn command_slot(raw_id: &str) -> GridSlotId {
+        let resolved = object_id(raw_id);
+        GridSlotId::command(resolved)
+    }
+}

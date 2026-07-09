@@ -1,7 +1,7 @@
 use std::collections::{BTreeMap, HashMap, HashSet};
 use std::sync::LazyLock;
 
-use warcraft_api::{UnitKind, WarcraftObjectMeta};
+use crate::{UnitKind, WarcraftObjectId, WarcraftObjectMeta};
 
 use crate::{TIERED_UNIT_GROUPS, UNIT_UPGRADE_SWAPS, WARCRAFT_DATABASE};
 
@@ -14,12 +14,12 @@ use crate::{TIERED_UNIT_GROUPS, UNIT_UPGRADE_SWAPS, WARCRAFT_DATABASE};
 /// produced (trained/sold) hero.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct VariantGroup {
-    members: Vec<&'static str>,
+    members: Vec<WarcraftObjectId>,
 }
 
 impl VariantGroup {
     /// Every member id, ordered weakest → strongest.
-    pub fn members(&self) -> &[&'static str] {
+    pub fn members(&self) -> &[WarcraftObjectId] {
         &self.members
     }
 
@@ -27,14 +27,14 @@ impl VariantGroup {
     /// (strongest tier / upgraded unit / produced hero). It is always last.
     /// Groups are always built with at least two members, so a member always
     /// exists.
-    pub fn canonical(&self) -> &'static str {
+    pub fn canonical(&self) -> WarcraftObjectId {
         let strongest = self.members.last();
         strongest.copied().unwrap_or_default()
     }
 
     /// The weaker members an edit on the canonical fans out to (everything but
     /// the canonical itself), ordered weakest → strongest.
-    pub fn weaker_members(&self) -> &[&'static str] {
+    pub fn weaker_members(&self) -> &[WarcraftObjectId] {
         let member_count = self.members.len();
         let split_index = member_count.saturating_sub(1);
         &self.members[..split_index]
@@ -45,30 +45,30 @@ impl VariantGroup {
 /// them. Built once from the static database; never mutated.
 struct VariantRegistry {
     groups: Vec<VariantGroup>,
-    group_index_by_member: HashMap<&'static str, usize>,
-    canonical_by_member: HashMap<&'static str, &'static str>,
-    hidden_members: HashSet<&'static str>,
+    group_index_by_member: HashMap<WarcraftObjectId, usize>,
+    canonical_by_member: HashMap<WarcraftObjectId, WarcraftObjectId>,
+    hidden_members: HashSet<WarcraftObjectId>,
 }
 
 /// A `predecessor precedes successor` link between two adjacent tiers in one
 /// source chain — used to rank members weakest → strongest when chains merge.
 struct PrecedenceEdge {
-    predecessor: &'static str,
-    successor: &'static str,
+    predecessor: WarcraftObjectId,
+    successor: WarcraftObjectId,
 }
 
 /// Disjoint-set over unit ids, used to merge source chains that share a member
 /// (e.g. a 3-level and a 4-level summon of the same unit) into one group.
 #[derive(Default)]
 struct UnionFind {
-    parent: HashMap<&'static str, &'static str>,
+    parent: HashMap<WarcraftObjectId, WarcraftObjectId>,
 }
 
 impl UnionFind {
-    fn root(&self, node: &'static str) -> &'static str {
+    fn root(&self, node: WarcraftObjectId) -> WarcraftObjectId {
         let mut current = node;
         loop {
-            let parent_node = self.parent.get(current).copied().unwrap_or(current);
+            let parent_node = self.parent.get(&current).copied().unwrap_or(current);
             if parent_node == current {
                 return current;
             }
@@ -76,7 +76,7 @@ impl UnionFind {
         }
     }
 
-    fn merge(&mut self, left: &'static str, right: &'static str) {
+    fn merge(&mut self, left: WarcraftObjectId, right: WarcraftObjectId) {
         let left_root = self.root(left);
         let right_root = self.root(right);
         if left_root != right_root {
@@ -89,11 +89,11 @@ impl UnionFind {
 /// upgrade-swaps) and resolves them into the final, merged `VariantRegistry`.
 #[derive(Default)]
 struct VariantGraphBuilder {
-    chains: Vec<Vec<&'static str>>,
+    chains: Vec<Vec<WarcraftObjectId>>,
 }
 
 impl VariantGraphBuilder {
-    fn add_chain(&mut self, chain: Vec<&'static str>) {
+    fn add_chain(&mut self, chain: Vec<WarcraftObjectId>) {
         if chain.len() >= 2 {
             self.chains.push(chain);
         }
@@ -109,20 +109,20 @@ impl VariantGraphBuilder {
     /// alone, since the canonical would be ambiguous. The canonical is placed
     /// last so it ranks as the group's representative.
     fn add_hero_name_groups(&mut self) {
-        let mut produced_unit_ids: HashSet<&'static str> = HashSet::new();
+        let mut produced_unit_ids: HashSet<WarcraftObjectId> = HashSet::new();
         for (_object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
             let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
                 continue;
             };
             for trained_id in unit_meta.trains() {
-                produced_unit_ids.insert(trained_id.value());
+                produced_unit_ids.insert(*trained_id);
             }
             for sold_id in unit_meta.sell_units() {
-                produced_unit_ids.insert(sold_id.value());
+                produced_unit_ids.insert(*sold_id);
             }
         }
 
-        let mut members_by_name: BTreeMap<&'static str, Vec<&'static str>> = BTreeMap::new();
+        let mut members_by_name: BTreeMap<&'static str, Vec<WarcraftObjectId>> = BTreeMap::new();
         for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
             let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
                 continue;
@@ -137,14 +137,14 @@ impl VariantGraphBuilder {
                 continue;
             }
             let hero_ids = members_by_name.entry(display_name).or_default();
-            hero_ids.push(object_id.value());
+            hero_ids.push(*object_id);
         }
 
         for hero_ids in members_by_name.into_values() {
             if hero_ids.len() < 2 {
                 continue;
             }
-            let produced_members: Vec<&'static str> = hero_ids
+            let produced_members: Vec<WarcraftObjectId> = hero_ids
                 .iter()
                 .copied()
                 .filter(|hero_id| produced_unit_ids.contains(hero_id))
@@ -153,7 +153,7 @@ impl VariantGraphBuilder {
                 continue;
             }
             let canonical = produced_members[0];
-            let mut chain: Vec<&'static str> = hero_ids
+            let mut chain: Vec<WarcraftObjectId> = hero_ids
                 .into_iter()
                 .filter(|hero_id| *hero_id != canonical)
                 .collect();
@@ -165,11 +165,11 @@ impl VariantGraphBuilder {
 
     fn into_registry(self) -> VariantRegistry {
         let mut union_find = UnionFind::default();
-        let mut ordered_nodes: Vec<&'static str> = Vec::new();
-        let mut seen_nodes: HashSet<&'static str> = HashSet::new();
+        let mut ordered_nodes: Vec<WarcraftObjectId> = Vec::new();
+        let mut seen_nodes: HashSet<WarcraftObjectId> = HashSet::new();
         let mut edges: Vec<PrecedenceEdge> = Vec::new();
         for chain in &self.chains {
-            let mut previous_member: Option<&'static str> = None;
+            let mut previous_member: Option<WarcraftObjectId> = None;
             for member in chain {
                 let member_id = *member;
                 if seen_nodes.insert(member_id) {
@@ -191,7 +191,7 @@ impl VariantGraphBuilder {
 
         let ranks = Self::assign_ranks(&ordered_nodes, &edges);
 
-        let mut members_by_root: HashMap<&'static str, Vec<&'static str>> = HashMap::new();
+        let mut members_by_root: HashMap<WarcraftObjectId, Vec<WarcraftObjectId>> = HashMap::new();
         for node in &ordered_nodes {
             let node_id = *node;
             let root = union_find.root(node_id);
@@ -212,11 +212,11 @@ impl VariantGraphBuilder {
                 groups.push(group);
             }
         }
-        groups.sort_by(|left, right| left.canonical().cmp(right.canonical()));
+        groups.sort_by_key(|group| group.canonical());
 
-        let mut group_index_by_member: HashMap<&'static str, usize> = HashMap::new();
-        let mut canonical_by_member: HashMap<&'static str, &'static str> = HashMap::new();
-        let mut hidden_members: HashSet<&'static str> = HashSet::new();
+        let mut group_index_by_member: HashMap<WarcraftObjectId, usize> = HashMap::new();
+        let mut canonical_by_member: HashMap<WarcraftObjectId, WarcraftObjectId> = HashMap::new();
+        let mut hidden_members: HashSet<WarcraftObjectId> = HashSet::new();
         for (group_index, group) in groups.iter().enumerate() {
             let canonical = group.canonical();
             for member in group.members() {
@@ -242,10 +242,10 @@ impl VariantGraphBuilder {
     /// higher. Relaxation is capped at the node count so a malformed cyclic
     /// chain can never loop forever.
     fn assign_ranks(
-        nodes: &[&'static str],
+        nodes: &[WarcraftObjectId],
         edges: &[PrecedenceEdge],
-    ) -> HashMap<&'static str, u32> {
-        let mut ranks: HashMap<&'static str, u32> = HashMap::new();
+    ) -> HashMap<WarcraftObjectId, u32> {
+        let mut ranks: HashMap<WarcraftObjectId, u32> = HashMap::new();
         for node in nodes {
             let initial_rank: u32 = 0;
             ranks.insert(*node, initial_rank);
@@ -255,9 +255,9 @@ impl VariantGraphBuilder {
         loop {
             let mut changed = false;
             for edge in edges {
-                let predecessor_rank = ranks.get(edge.predecessor).copied().unwrap_or(0);
+                let predecessor_rank = ranks.get(&edge.predecessor).copied().unwrap_or(0);
                 let candidate_rank = predecessor_rank + 1;
-                let successor_rank = ranks.get(edge.successor).copied().unwrap_or(0);
+                let successor_rank = ranks.get(&edge.successor).copied().unwrap_or(0);
                 if candidate_rank > successor_rank {
                     ranks.insert(edge.successor, candidate_rank);
                     changed = true;
@@ -278,8 +278,8 @@ impl VariantGraphBuilder {
 /// ability happens to reference (Alchemist `Nal2`/`Nal3`). Heroes are excluded
 /// here on purpose — they collapse through a separate name-and-production path
 /// (`add_hero_name_groups`), never via summon tiers.
-fn is_mergeable_variant_unit(unit_id: &str) -> bool {
-    let lookup_result = WARCRAFT_DATABASE.by_id(unit_id);
+fn is_mergeable_variant_unit(unit_id: WarcraftObjectId) -> bool {
+    let lookup_result = WARCRAFT_DATABASE.object(unit_id);
     lookup_result.is_some_and(|warcraft_object| {
         let object_meta = warcraft_object.meta();
         matches!(
@@ -307,18 +307,27 @@ fn is_mergeable_variant_unit(unit_id: &str) -> bool {
 ///   difference is the Self Destruct id (`Asd2`/`Asd3`/`Asdg`). Nothing in the
 ///   data links them, so they are curated. The Self Destruct abilities share the
 ///   `Asds` code and the same cell, so the existing fan-out reaches every form.
-const CURATED_TIER_GROUPS: &[&[&str]] = &[
-    &["ucs1", "ucs2", "ucs3"],
-    &["ucsB", "ucsC"],
-    &["ncg1", "ncg2", "ncg3", "ncgb"],
+const CURATED_TIER_GROUPS: &[&[WarcraftObjectId]] = &[
+    &[
+        WarcraftObjectId::new("ucs1"),
+        WarcraftObjectId::new("ucs2"),
+        WarcraftObjectId::new("ucs3"),
+    ],
+    &[WarcraftObjectId::new("ucsB"), WarcraftObjectId::new("ucsC")],
+    &[
+        WarcraftObjectId::new("ncg1"),
+        WarcraftObjectId::new("ncg2"),
+        WarcraftObjectId::new("ncg3"),
+        WarcraftObjectId::new("ncgb"),
+    ],
 ];
 
 static VARIANT_REGISTRY: LazyLock<VariantRegistry> = LazyLock::new(|| {
     let mut builder = VariantGraphBuilder::default();
     for tiered_group in TIERED_UNIT_GROUPS {
-        let mut chain: Vec<&'static str> = Vec::new();
+        let mut chain: Vec<WarcraftObjectId> = Vec::new();
         for member_object_id in tiered_group.iter() {
-            let member_id = member_object_id.value();
+            let member_id = *member_object_id;
             if is_mergeable_variant_unit(member_id) {
                 chain.push(member_id);
             }
@@ -326,21 +335,19 @@ static VARIANT_REGISTRY: LazyLock<VariantRegistry> = LazyLock::new(|| {
         builder.add_chain(chain);
     }
     for curated_group in CURATED_TIER_GROUPS {
-        let mut chain: Vec<&'static str> = Vec::new();
+        let mut chain: Vec<WarcraftObjectId> = Vec::new();
         for member_id in curated_group.iter() {
-            if is_mergeable_variant_unit(member_id) {
-                chain.push(member_id);
+            if is_mergeable_variant_unit(*member_id) {
+                chain.push(*member_id);
             }
         }
         builder.add_chain(chain);
     }
     for swap in UNIT_UPGRADE_SWAPS {
-        let from_object_id = swap.from_unit_id();
-        let to_object_id = swap.to_unit_id();
-        let from_id = from_object_id.value();
-        let to_id = to_object_id.value();
+        let from_id = swap.from_unit_id();
+        let to_id = swap.to_unit_id();
         if is_mergeable_variant_unit(from_id) && is_mergeable_variant_unit(to_id) {
-            let chain: Vec<&'static str> = vec![from_id, to_id];
+            let chain: Vec<WarcraftObjectId> = vec![from_id, to_id];
             builder.add_chain(chain);
         }
     }
@@ -354,14 +361,14 @@ static VARIANT_REGISTRY: LazyLock<VariantRegistry> = LazyLock::new(|| {
 /// unrelated same-code ability elsewhere on the card.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 struct AbilityRoleKey {
-    code: &'static str,
+    code: WarcraftObjectId,
     column: u8,
     row: u8,
 }
 
 /// One button-positioned ability of a unit, tagged with its role key.
 struct AbilityDescriptor {
-    ability_id: &'static str,
+    ability_id: WarcraftObjectId,
     role: AbilityRoleKey,
 }
 
@@ -369,9 +376,9 @@ struct AbilityDescriptor {
 /// abilities), each tagged with the role key used to pair tier siblings.
 /// Abilities with no mechanic code or no default cell can't be paired and are
 /// skipped.
-fn unit_ability_descriptors(unit_id: &str) -> Vec<AbilityDescriptor> {
+fn unit_ability_descriptors(unit_id: WarcraftObjectId) -> Vec<AbilityDescriptor> {
     let mut descriptors: Vec<AbilityDescriptor> = Vec::new();
-    let Some(object) = WARCRAFT_DATABASE.by_id(unit_id) else {
+    let Some(object) = WARCRAFT_DATABASE.object(unit_id) else {
         return descriptors;
     };
     let WarcraftObjectMeta::Unit(unit_meta) = object.meta() else {
@@ -380,8 +387,7 @@ fn unit_ability_descriptors(unit_id: &str) -> Vec<AbilityDescriptor> {
     let own_abilities = unit_meta.abilities().iter();
     let hero_abilities = unit_meta.hero_abilities().iter();
     for ability_id in own_abilities.chain(hero_abilities) {
-        let ability_value = ability_id.value();
-        let Some(ability_object) = WARCRAFT_DATABASE.by_id(ability_value) else {
+        let Some(ability_object) = WARCRAFT_DATABASE.object(*ability_id) else {
             continue;
         };
         let WarcraftObjectMeta::Ability(ability_meta) = ability_object.meta() else {
@@ -397,7 +403,7 @@ fn unit_ability_descriptors(unit_id: &str) -> Vec<AbilityDescriptor> {
         let row = u8::from(default_position.row());
         let role = AbilityRoleKey { code, column, row };
         let descriptor = AbilityDescriptor {
-            ability_id: ability_value,
+            ability_id: *ability_id,
             role,
         };
         descriptors.push(descriptor);
@@ -411,34 +417,35 @@ fn unit_ability_descriptors(unit_id: &str) -> Vec<AbilityDescriptor> {
 /// Feral Spirit wolves) already share a single binding, so they produce no
 /// entry here; only different-id tiers like the Carrion Beetle's Burrow
 /// (`Abu2` ↔ `Abu3`) do.
-static ABILITY_FANOUT: LazyLock<HashMap<&'static str, Vec<&'static str>>> = LazyLock::new(|| {
-    let mut fanout: HashMap<&'static str, Vec<&'static str>> = HashMap::new();
-    for group in &VARIANT_REGISTRY.groups {
-        let mut ids_by_role: HashMap<AbilityRoleKey, Vec<&'static str>> = HashMap::new();
-        for member in group.members() {
-            for descriptor in unit_ability_descriptors(member) {
-                let role_ids = ids_by_role.entry(descriptor.role).or_default();
-                if !role_ids.contains(&descriptor.ability_id) {
-                    role_ids.push(descriptor.ability_id);
+static ABILITY_FANOUT: LazyLock<HashMap<WarcraftObjectId, Vec<WarcraftObjectId>>> =
+    LazyLock::new(|| {
+        let mut fanout: HashMap<WarcraftObjectId, Vec<WarcraftObjectId>> = HashMap::new();
+        for group in &VARIANT_REGISTRY.groups {
+            let mut ids_by_role: HashMap<AbilityRoleKey, Vec<WarcraftObjectId>> = HashMap::new();
+            for member in group.members() {
+                for descriptor in unit_ability_descriptors(*member) {
+                    let role_ids = ids_by_role.entry(descriptor.role).or_default();
+                    if !role_ids.contains(&descriptor.ability_id) {
+                        role_ids.push(descriptor.ability_id);
+                    }
                 }
             }
-        }
-        for role_ids in ids_by_role.into_values() {
-            if role_ids.len() < 2 {
-                continue;
-            }
-            for ability_id in &role_ids {
-                let siblings = fanout.entry(*ability_id).or_default();
-                for other_id in &role_ids {
-                    if other_id != ability_id && !siblings.contains(other_id) {
-                        siblings.push(*other_id);
+            for role_ids in ids_by_role.into_values() {
+                if role_ids.len() < 2 {
+                    continue;
+                }
+                for ability_id in &role_ids {
+                    let siblings = fanout.entry(*ability_id).or_default();
+                    for other_id in &role_ids {
+                        if other_id != ability_id && !siblings.contains(other_id) {
+                            siblings.push(*other_id);
+                        }
                     }
                 }
             }
         }
-    }
-    fanout
-});
+        fanout
+    });
 
 /// Read-only façade over the merged variant groups. The catalog uses it to hide
 /// the weaker variants, and the keybind facade uses it to fan edits out across
@@ -453,24 +460,24 @@ impl VariantUnits {
 
     /// The variant group a unit belongs to, or `None` when the unit stands
     /// alone (the common case).
-    pub fn group_for(unit_id: &str) -> Option<&'static VariantGroup> {
+    pub fn group_for(unit_id: WarcraftObjectId) -> Option<&'static VariantGroup> {
         let group_index = VARIANT_REGISTRY
             .group_index_by_member
-            .get(unit_id)
+            .get(&unit_id)
             .copied()?;
         VARIANT_REGISTRY.groups.get(group_index)
     }
 
     /// The strongest sibling of a unit (itself when it already is the
     /// strongest), or `None` when the unit is not part of any group.
-    pub fn canonical_for(unit_id: &str) -> Option<&'static str> {
-        VARIANT_REGISTRY.canonical_by_member.get(unit_id).copied()
+    pub fn canonical_for(unit_id: WarcraftObjectId) -> Option<WarcraftObjectId> {
+        VARIANT_REGISTRY.canonical_by_member.get(&unit_id).copied()
     }
 
     /// True when the unit is a weaker variant that the editor hides behind its
     /// canonical sibling.
-    pub fn is_hidden_variant(unit_id: &str) -> bool {
-        VARIANT_REGISTRY.hidden_members.contains(unit_id)
+    pub fn is_hidden_variant(unit_id: WarcraftObjectId) -> bool {
+        VARIANT_REGISTRY.hidden_members.contains(&unit_id)
     }
 
     /// The other tier abilities that must receive the same hotkey/position edit
@@ -479,8 +486,8 @@ impl VariantUnits {
     /// id (same-id tiers already share one binding). Empty for almost every
     /// ability; non-empty only for different-id tiers like the Carrion Beetle's
     /// Burrow (`Abu3` → `Abu2`).
-    pub fn fanout_siblings(ability_id: &str) -> &'static [&'static str] {
-        let siblings = ABILITY_FANOUT.get(ability_id);
+    pub fn fanout_siblings(ability_id: WarcraftObjectId) -> &'static [WarcraftObjectId] {
+        let siblings = ABILITY_FANOUT.get(&ability_id);
         siblings.map(Vec::as_slice).unwrap_or(&[])
     }
 }
@@ -495,15 +502,38 @@ mod tests {
     /// the strongest wolf's Critical Strike must reach the weaker wolves).
     #[test]
     fn leveled_summon_tiers_collapse_to_strongest() {
-        let group = VariantUnits::group_for("osw1").expect("osw1 belongs to a variant group");
-        assert_eq!(group.canonical(), "osw3");
-        assert_eq!(group.members(), ["osw1", "osw2", "osw3"]);
-        assert_eq!(group.weaker_members(), ["osw1", "osw2"]);
-        assert_eq!(VariantUnits::canonical_for("osw1"), Some("osw3"));
-        assert_eq!(VariantUnits::canonical_for("osw2"), Some("osw3"));
-        assert!(VariantUnits::is_hidden_variant("osw1"));
-        assert!(VariantUnits::is_hidden_variant("osw2"));
-        assert!(!VariantUnits::is_hidden_variant("osw3"));
+        let group = VariantUnits::group_for(WarcraftObjectId::new("osw1"))
+            .expect("osw1 belongs to a variant group");
+        assert_eq!(group.canonical(), WarcraftObjectId::new("osw3"));
+        assert_eq!(
+            group.members(),
+            [
+                WarcraftObjectId::new("osw1"),
+                WarcraftObjectId::new("osw2"),
+                WarcraftObjectId::new("osw3"),
+            ]
+        );
+        assert_eq!(
+            group.weaker_members(),
+            [WarcraftObjectId::new("osw1"), WarcraftObjectId::new("osw2")]
+        );
+        assert_eq!(
+            VariantUnits::canonical_for(WarcraftObjectId::new("osw1")),
+            Some(WarcraftObjectId::new("osw3"))
+        );
+        assert_eq!(
+            VariantUnits::canonical_for(WarcraftObjectId::new("osw2")),
+            Some(WarcraftObjectId::new("osw3"))
+        );
+        assert!(VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "osw1"
+        )));
+        assert!(VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "osw2"
+        )));
+        assert!(!VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "osw3"
+        )));
     }
 
     /// A 3-tier and a 4-tier summon of the same unit (Quillbeast
@@ -513,32 +543,67 @@ mod tests {
     /// canonical and no member appearing twice.
     #[test]
     fn overlapping_summon_chains_union_merge() {
-        let quillbeast = VariantUnits::group_for("nqb1").expect("nqb1 belongs to a group");
-        assert_eq!(quillbeast.members(), ["nqb1", "nqb2", "nqb3", "nqb4"]);
-        assert_eq!(quillbeast.canonical(), "nqb4");
-        assert_eq!(VariantUnits::canonical_for("nqb3"), Some("nqb4"));
+        let quillbeast = VariantUnits::group_for(WarcraftObjectId::new("nqb1"))
+            .expect("nqb1 belongs to a group");
+        assert_eq!(
+            quillbeast.members(),
+            [
+                WarcraftObjectId::new("nqb1"),
+                WarcraftObjectId::new("nqb2"),
+                WarcraftObjectId::new("nqb3"),
+                WarcraftObjectId::new("nqb4"),
+            ]
+        );
+        assert_eq!(quillbeast.canonical(), WarcraftObjectId::new("nqb4"));
+        assert_eq!(
+            VariantUnits::canonical_for(WarcraftObjectId::new("nqb3")),
+            Some(WarcraftObjectId::new("nqb4"))
+        );
 
-        let spiderling = VariantUnits::group_for("osp1").expect("osp1 belongs to a group");
-        assert_eq!(spiderling.members(), ["osp1", "osp2", "osp3", "osp4"]);
-        assert_eq!(spiderling.canonical(), "osp4");
+        let spiderling = VariantUnits::group_for(WarcraftObjectId::new("osp1"))
+            .expect("osp1 belongs to a group");
+        assert_eq!(
+            spiderling.members(),
+            [
+                WarcraftObjectId::new("osp1"),
+                WarcraftObjectId::new("osp2"),
+                WarcraftObjectId::new("osp3"),
+                WarcraftObjectId::new("osp4"),
+            ]
+        );
+        assert_eq!(spiderling.canonical(), WarcraftObjectId::new("osp4"));
     }
 
     /// An upgrade-swap collapses to the upgraded unit: Headhunter `ohun` hides
     /// behind Berserker `otbk`.
     #[test]
     fn headhunter_berserker_swap_canonical_is_berserker() {
-        assert_eq!(VariantUnits::canonical_for("ohun"), Some("otbk"));
-        assert!(VariantUnits::is_hidden_variant("ohun"));
-        assert!(!VariantUnits::is_hidden_variant("otbk"));
+        assert_eq!(
+            VariantUnits::canonical_for(WarcraftObjectId::new("ohun")),
+            Some(WarcraftObjectId::new("otbk"))
+        );
+        assert!(VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "ohun"
+        )));
+        assert!(!VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "otbk"
+        )));
     }
 
     /// The Barrage upgrade-swap collapses Siege Engine `hmtt` into the
     /// barrage-capable `hrtt`.
     #[test]
     fn siege_engine_barrage_swap_canonical_is_upgraded() {
-        assert_eq!(VariantUnits::canonical_for("hmtt"), Some("hrtt"));
-        assert!(VariantUnits::is_hidden_variant("hmtt"));
-        assert!(!VariantUnits::is_hidden_variant("hrtt"));
+        assert_eq!(
+            VariantUnits::canonical_for(WarcraftObjectId::new("hmtt")),
+            Some(WarcraftObjectId::new("hrtt"))
+        );
+        assert!(VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "hmtt"
+        )));
+        assert!(!VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "hrtt"
+        )));
     }
 
     /// The hand-curated Carrion Beetle group collapses to the strongest tier
@@ -546,19 +611,41 @@ mod tests {
     /// link, so it must come from the curated list.
     #[test]
     fn curated_carrion_beetle_group_collapses() {
-        let group = VariantUnits::group_for("ucs2").expect("ucs2 is a curated tier member");
-        assert_eq!(group.members(), ["ucs1", "ucs2", "ucs3"]);
-        assert_eq!(group.canonical(), "ucs3");
-        assert!(VariantUnits::is_hidden_variant("ucs1"));
-        assert!(VariantUnits::is_hidden_variant("ucs2"));
-        assert!(!VariantUnits::is_hidden_variant("ucs3"));
+        let group = VariantUnits::group_for(WarcraftObjectId::new("ucs2"))
+            .expect("ucs2 is a curated tier member");
+        assert_eq!(
+            group.members(),
+            [
+                WarcraftObjectId::new("ucs1"),
+                WarcraftObjectId::new("ucs2"),
+                WarcraftObjectId::new("ucs3"),
+            ]
+        );
+        assert_eq!(group.canonical(), WarcraftObjectId::new("ucs3"));
+        assert!(VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "ucs1"
+        )));
+        assert!(VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "ucs2"
+        )));
+        assert!(!VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "ucs3"
+        )));
 
         // The burrowed beetle forms collapse the same way.
-        let burrowed = VariantUnits::group_for("ucsB").expect("ucsB is a curated tier member");
-        assert_eq!(burrowed.members(), ["ucsB", "ucsC"]);
-        assert_eq!(burrowed.canonical(), "ucsC");
-        assert!(VariantUnits::is_hidden_variant("ucsB"));
-        assert!(!VariantUnits::is_hidden_variant("ucsC"));
+        let burrowed = VariantUnits::group_for(WarcraftObjectId::new("ucsB"))
+            .expect("ucsB is a curated tier member");
+        assert_eq!(
+            burrowed.members(),
+            [WarcraftObjectId::new("ucsB"), WarcraftObjectId::new("ucsC")]
+        );
+        assert_eq!(burrowed.canonical(), WarcraftObjectId::new("ucsC"));
+        assert!(VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "ucsB"
+        )));
+        assert!(!VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "ucsC"
+        )));
     }
 
     /// The hand-curated Clockwerk Goblin group collapses its four stat-identical
@@ -566,13 +653,30 @@ mod tests {
     /// game data links them, so the group must come from the curated list.
     #[test]
     fn curated_clockwerk_goblin_group_collapses() {
-        let group = VariantUnits::group_for("ncg1").expect("ncg1 is a curated tier member");
-        assert_eq!(group.members(), ["ncg1", "ncg2", "ncg3", "ncgb"]);
-        assert_eq!(group.canonical(), "ncgb");
-        assert!(VariantUnits::is_hidden_variant("ncg1"));
-        assert!(VariantUnits::is_hidden_variant("ncg2"));
-        assert!(VariantUnits::is_hidden_variant("ncg3"));
-        assert!(!VariantUnits::is_hidden_variant("ncgb"));
+        let group = VariantUnits::group_for(WarcraftObjectId::new("ncg1"))
+            .expect("ncg1 is a curated tier member");
+        assert_eq!(
+            group.members(),
+            [
+                WarcraftObjectId::new("ncg1"),
+                WarcraftObjectId::new("ncg2"),
+                WarcraftObjectId::new("ncg3"),
+                WarcraftObjectId::new("ncgb"),
+            ]
+        );
+        assert_eq!(group.canonical(), WarcraftObjectId::new("ncgb"));
+        assert!(VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "ncg1"
+        )));
+        assert!(VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "ncg2"
+        )));
+        assert!(VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "ncg3"
+        )));
+        assert!(!VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "ncgb"
+        )));
     }
 
     /// The Clockwerk Goblin tiers carry the Self Destruct ability under three
@@ -580,11 +684,20 @@ mod tests {
     /// same default cell, so editing one must fan out to the others.
     #[test]
     fn clockwerk_goblin_self_destruct_abilities_fan_out() {
-        let siblings = VariantUnits::fanout_siblings("Asdg");
-        assert!(siblings.contains(&"Asd2"), "Asdg must fan out to Asd2");
-        assert!(siblings.contains(&"Asd3"), "Asdg must fan out to Asd3");
-        let from_low = VariantUnits::fanout_siblings("Asd2");
-        assert!(from_low.contains(&"Asdg"), "Asd2 must fan out to Asdg");
+        let siblings = VariantUnits::fanout_siblings(WarcraftObjectId::new("Asdg"));
+        assert!(
+            siblings.contains(&WarcraftObjectId::new("Asd2")),
+            "Asdg must fan out to Asd2"
+        );
+        assert!(
+            siblings.contains(&WarcraftObjectId::new("Asd3")),
+            "Asdg must fan out to Asd3"
+        );
+        let from_low = VariantUnits::fanout_siblings(WarcraftObjectId::new("Asd2"));
+        assert!(
+            from_low.contains(&WarcraftObjectId::new("Asdg")),
+            "Asd2 must fan out to Asdg"
+        );
     }
 
     /// The Burrow ability uses a different id per beetle tier (`Abu2` on `ucs2`,
@@ -592,8 +705,14 @@ mod tests {
     /// the `Abur` code and the same default cell, so they pair as siblings.
     #[test]
     fn carrion_beetle_burrow_abilities_fan_out() {
-        assert_eq!(VariantUnits::fanout_siblings("Abu3"), ["Abu2"]);
-        assert_eq!(VariantUnits::fanout_siblings("Abu2"), ["Abu3"]);
+        assert_eq!(
+            VariantUnits::fanout_siblings(WarcraftObjectId::new("Abu3")),
+            [WarcraftObjectId::new("Abu2")]
+        );
+        assert_eq!(
+            VariantUnits::fanout_siblings(WarcraftObjectId::new("Abu2")),
+            [WarcraftObjectId::new("Abu3")]
+        );
     }
 
     /// Same-id tiers (the Feral Spirit wolves share `Asal`/`ACct`/`Apiv`) need
@@ -601,8 +720,8 @@ mod tests {
     /// fan-out entry.
     #[test]
     fn shared_id_tier_abilities_have_no_fan_out() {
-        assert!(VariantUnits::fanout_siblings("Asal").is_empty());
-        assert!(VariantUnits::fanout_siblings("ACct").is_empty());
+        assert!(VariantUnits::fanout_siblings(WarcraftObjectId::new("Asal")).is_empty());
+        assert!(VariantUnits::fanout_siblings(WarcraftObjectId::new("ACct")).is_empty());
     }
 
     /// Research/upgrade ids that are unit-id-shaped (`Rguv`/`Reuv`) leak into
@@ -611,12 +730,13 @@ mod tests {
     #[test]
     fn non_unit_false_positives_are_filtered_out() {
         for false_positive_id in ["Rguv", "Reuv"] {
+            let false_positive_object_id = WarcraftObjectId::new(false_positive_id);
             assert!(
-                VariantUnits::group_for(false_positive_id).is_none(),
+                VariantUnits::group_for(false_positive_object_id).is_none(),
                 "{false_positive_id} must not form a variant group",
             );
             assert!(
-                !VariantUnits::is_hidden_variant(false_positive_id),
+                !VariantUnits::is_hidden_variant(false_positive_object_id),
                 "{false_positive_id} must not be hidden as a variant",
             );
         }
@@ -630,17 +750,42 @@ mod tests {
     /// correctly grouped here instead.
     #[test]
     fn heroes_collapse_to_the_produced_hero() {
-        assert_eq!(VariantUnits::canonical_for("Nal2"), Some("Nalc"));
-        assert_eq!(VariantUnits::canonical_for("Nal3"), Some("Nalc"));
-        assert_eq!(VariantUnits::canonical_for("Nalm"), Some("Nalc"));
-        assert!(VariantUnits::is_hidden_variant("Nal2"));
-        assert!(!VariantUnits::is_hidden_variant("Nalc"));
+        assert_eq!(
+            VariantUnits::canonical_for(WarcraftObjectId::new("Nal2")),
+            Some(WarcraftObjectId::new("Nalc"))
+        );
+        assert_eq!(
+            VariantUnits::canonical_for(WarcraftObjectId::new("Nal3")),
+            Some(WarcraftObjectId::new("Nalc"))
+        );
+        assert_eq!(
+            VariantUnits::canonical_for(WarcraftObjectId::new("Nalm")),
+            Some(WarcraftObjectId::new("Nalc"))
+        );
+        assert!(VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "Nal2"
+        )));
+        assert!(!VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "Nalc"
+        )));
 
-        assert_eq!(VariantUnits::canonical_for("Nrob"), Some("Ntin"));
-        assert!(VariantUnits::is_hidden_variant("Nrob"));
+        assert_eq!(
+            VariantUnits::canonical_for(WarcraftObjectId::new("Nrob")),
+            Some(WarcraftObjectId::new("Ntin"))
+        );
+        assert!(VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "Nrob"
+        )));
 
-        assert_eq!(VariantUnits::canonical_for("Huth"), Some("Hpal"));
-        assert!(VariantUnits::is_hidden_variant("Huth"));
-        assert!(!VariantUnits::is_hidden_variant("Hpal"));
+        assert_eq!(
+            VariantUnits::canonical_for(WarcraftObjectId::new("Huth")),
+            Some(WarcraftObjectId::new("Hpal"))
+        );
+        assert!(VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "Huth"
+        )));
+        assert!(!VariantUnits::is_hidden_variant(WarcraftObjectId::new(
+            "Hpal"
+        )));
     }
 }

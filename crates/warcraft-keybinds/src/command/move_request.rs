@@ -131,8 +131,8 @@ mod tests {
 
     #[test]
     fn command_behavior_reads_primary_namespace_and_co_moves() {
-        let slot_ids = [GridSlotId::ability("ACad")];
-        let moving = GridSlotId::ability("ACad");
+        let slot_ids = [crate::test_support::ability_slot("ACad")];
+        let moving = crate::test_support::ability_slot("ACad");
         let layout = GridLayout::qwerty_grid();
         let behavior = CommandBehavior;
         let request = MoveRequest::for_behavior(&behavior, layout, &slot_ids, &moving, target());
@@ -146,8 +146,8 @@ mod tests {
 
     #[test]
     fn research_behavior_reads_secondary_namespace() {
-        let slot_ids = [GridSlotId::ability("ACad")];
-        let moving = GridSlotId::ability("ACad");
+        let slot_ids = [crate::test_support::ability_slot("ACad")];
+        let moving = crate::test_support::ability_slot("ACad");
         let layout = GridLayout::qwerty_grid();
         let behavior = ResearchBehavior;
         let request = MoveRequest::for_behavior(&behavior, layout, &slot_ids, &moving, target());
@@ -157,8 +157,8 @@ mod tests {
 
     #[test]
     fn alternate_form_behavior_prevents_off_state_co_move() {
-        let slot_ids = [GridSlotId::ability("ACad")];
-        let moving = GridSlotId::ability("ACad");
+        let slot_ids = [crate::test_support::ability_slot("ACad")];
+        let moving = crate::test_support::ability_slot("ACad");
         let layout = GridLayout::qwerty_grid();
         let behavior = AlternateFormBehavior;
         let request = MoveRequest::for_behavior(&behavior, layout, &slot_ids, &moving, target());

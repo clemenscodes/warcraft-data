@@ -5,7 +5,7 @@ mod parse_and_binding_tests {
     use crate::identity::hotkey_target::HotkeyTarget;
     use crate::identity::hotkey_token::HotkeyToken;
     use crate::model::{ColumnIndex, RowIndex};
-    use warcraft_database::WARCRAFT_DATABASE;
+    use warcraft_api::WARCRAFT_DATABASE;
 
     use crate::model::{
         AbilityBinding, AbilityModifier, CommandBinding, GridCoordinate, Hotkey, SystemBinding,
@@ -17,7 +17,9 @@ mod parse_and_binding_tests {
     fn parses_single_entry_with_hotkey_and_buttonpos() {
         let input = "[AHhb]\nHotkey=Q\nButtonpos=0,2\n";
         let file = CustomKeys::parse_raw(input);
-        let binding = file.binding("AHhb").unwrap();
+        let binding = file
+            .binding(crate::test_support::object_id("AHhb"))
+            .unwrap();
         let expected_hotkey = Hotkey::Letter('Q');
         assert_eq!(binding.hotkey(), Some(&expected_hotkey));
         let position = binding.button_position().unwrap();
@@ -29,28 +31,43 @@ mod parse_and_binding_tests {
     fn lookup_uses_canonical_case() {
         let input = "[Hpal]\nHotkey=T\nButtonpos=3,0\n";
         let file = CustomKeys::parse_raw(input);
-        assert!(file.binding("Hpal").is_some());
+        assert!(
+            file.binding(crate::test_support::object_id("Hpal"))
+                .is_some()
+        );
     }
 
     #[test]
     fn missing_hotkey_returns_none() {
         let input = "[AHbz]\nButtonpos=0,0\n";
         let file = CustomKeys::parse_raw(input);
-        assert_eq!(file.binding("AHbz").unwrap().hotkey(), None);
+        assert_eq!(
+            file.binding(crate::test_support::object_id("AHbz"))
+                .unwrap()
+                .hotkey(),
+            None
+        );
     }
 
     #[test]
     fn empty_hotkey_value_treated_as_absent() {
         let input = "[AHbz]\nHotkey=\nButtonpos=0,0\n";
         let file = CustomKeys::parse_raw(input);
-        assert_eq!(file.binding("AHbz").unwrap().hotkey(), None);
+        assert_eq!(
+            file.binding(crate::test_support::object_id("AHbz"))
+                .unwrap()
+                .hotkey(),
+            None
+        );
     }
 
     #[test]
     fn research_fields_parsed() {
         let input = "[AHhb]\nResearchhotkey=T\nResearchbuttonpos=3,1\n";
         let file = CustomKeys::parse_raw(input);
-        let binding = file.binding("AHhb").unwrap();
+        let binding = file
+            .binding(crate::test_support::object_id("AHhb"))
+            .unwrap();
         let expected_hotkey = Hotkey::Letter('T');
         assert_eq!(binding.research_hotkey(), Some(&expected_hotkey));
         let position = binding.research_button_position().unwrap();
@@ -63,8 +80,8 @@ mod parse_and_binding_tests {
         let binding_ahhb = AbilityBinding::builder().tip("first").build();
         let binding_ahbz = AbilityBinding::builder().tip("second").build();
         let file = CustomKeys::builder()
-            .ability("AHhb", binding_ahhb)
-            .ability("AHbz", binding_ahbz)
+            .ability(crate::test_support::object_id("AHhb"), binding_ahhb)
+            .ability(crate::test_support::object_id("AHbz"), binding_ahbz)
             .build();
         let ids: Vec<&str> = file
             .bindings_in_order()
@@ -77,7 +94,9 @@ mod parse_and_binding_tests {
     fn comment_lines_are_skipped() {
         let input = "// This is a comment\n[AHhb]\nHotkey=Q\n; Also a comment\nButtonpos=0,0\n";
         let file = CustomKeys::parse_raw(input);
-        let binding = file.binding("AHhb").unwrap();
+        let binding = file
+            .binding(crate::test_support::object_id("AHhb"))
+            .unwrap();
         let expected_hotkey = Hotkey::Letter('Q');
         assert_eq!(binding.hotkey(), Some(&expected_hotkey));
         assert!(binding.button_position().is_some());
@@ -89,7 +108,9 @@ mod parse_and_binding_tests {
         let file = CustomKeys::parse_raw(input);
         let expected_hotkey = Hotkey::Letter('Q');
         assert_eq!(
-            file.binding("AHhb").unwrap().hotkey(),
+            file.binding(crate::test_support::object_id("AHhb"))
+                .unwrap()
+                .hotkey(),
             Some(&expected_hotkey)
         );
     }
@@ -98,7 +119,12 @@ mod parse_and_binding_tests {
     fn malformed_buttonpos_gives_none() {
         let input = "[AHhb]\nButtonpos=notanumber\n";
         let file = CustomKeys::parse_raw(input);
-        assert!(file.binding("AHhb").unwrap().button_position().is_none());
+        assert!(
+            file.binding(crate::test_support::object_id("AHhb"))
+                .unwrap()
+                .button_position()
+                .is_none()
+        );
     }
 
     #[test]
@@ -114,7 +140,9 @@ mod parse_and_binding_tests {
         let file = CustomKeys::parse_raw(input);
         let expected_hotkey = Hotkey::Letter('Q');
         assert_eq!(
-            file.binding("AHhb").unwrap().hotkey(),
+            file.binding(crate::test_support::object_id("AHhb"))
+                .unwrap()
+                .hotkey(),
             Some(&expected_hotkey)
         );
     }
@@ -144,11 +172,11 @@ mod parse_and_binding_tests {
             .button_position(position_12)
             .build();
         let mut file = CustomKeys::builder()
-            .ability("AHhb", binding_ahhb)
-            .ability("AHbz", binding_ahbz)
+            .ability(crate::test_support::object_id("AHhb"), binding_ahhb)
+            .ability(crate::test_support::object_id("AHbz"), binding_ahbz)
             .build();
         let hotkey_r = Hotkey::from('R');
-        file.binding_or_default_mut("AHhb")
+        file.binding_or_default_mut(crate::test_support::object_id("AHhb"))
             .unwrap()
             .set_hotkey(Some(hotkey_r));
         let output = file.to_string();
@@ -163,7 +191,9 @@ mod parse_and_binding_tests {
     fn parses_command_section() {
         let input = "[CmdMove]\nHotkey=M\nButtonpos=1,2\nTip=Move\n";
         let file = CustomKeys::parse_raw(input);
-        let binding = file.command("CmdMove").expect("CmdMove parsed");
+        let binding = file
+            .command(crate::test_support::object_id("CmdMove"))
+            .expect("CmdMove parsed");
         let expected_hotkey = Hotkey::Letter('M');
         assert_eq!(binding.hotkey(), Some(&expected_hotkey));
         let position = binding.button_position().expect("position parsed");
@@ -175,7 +205,9 @@ mod parse_and_binding_tests {
     fn parses_system_section_game_command() {
         let input = "[itm1]\nHotkey=9\nGameCommand=1\n";
         let file = CustomKeys::parse_raw(input);
-        let sys = file.system("itm1").expect("system section parsed");
+        let sys = file
+            .system(crate::test_support::object_id("itm1"))
+            .expect("system section parsed");
         assert_eq!(sys.hotkey(), &Hotkey::VirtualKey(9));
         assert_eq!(sys.class(), SystemKeybindClass::Game);
         assert!(sys.modifier().is_none());
@@ -185,7 +217,9 @@ mod parse_and_binding_tests {
     fn parses_system_section_ctrl_group_with_modifier() {
         let input = "[Ctr1]\nHotkey=49\nCtrlGroupCommand=1\nModifier=Ctrl\n";
         let file = CustomKeys::parse_raw(input);
-        let sys = file.system("Ctr1").expect("parsed");
+        let sys = file
+            .system(crate::test_support::object_id("Ctr1"))
+            .expect("parsed");
         assert_eq!(sys.hotkey(), &Hotkey::VirtualKey(49));
         assert_eq!(sys.class(), SystemKeybindClass::ControlGroup);
         assert_eq!(sys.modifier(), Some(SystemKeybindModifier::Ctrl));
@@ -195,8 +229,14 @@ mod parse_and_binding_tests {
     fn system_section_not_returned_by_binding() {
         let input = "[itm1]\nHotkey=9\nGameCommand=1\n";
         let file = CustomKeys::parse_raw(input);
-        assert!(file.binding("itm1").is_none());
-        assert!(file.system("itm1").is_some());
+        assert!(
+            file.binding(crate::test_support::object_id("itm1"))
+                .is_none()
+        );
+        assert!(
+            file.system(crate::test_support::object_id("itm1"))
+                .is_some()
+        );
     }
 
     #[test]
@@ -221,7 +261,9 @@ mod parse_and_binding_tests {
             "Unubertip=Off form description.\n",
         );
         let file = CustomKeys::parse_raw(input);
-        let binding = file.binding("Ahrl").expect("Ahrl must be present");
+        let binding = file
+            .binding(crate::test_support::object_id("Ahrl"))
+            .expect("Ahrl must be present");
         assert_eq!(binding.tip(), Some("Cast Holy Light"));
         assert_eq!(binding.research_tip(), Some("Research something"));
         assert_eq!(binding.un_tip(), Some("Cancel"));
@@ -240,7 +282,9 @@ mod parse_and_binding_tests {
     fn icon_field_parsed() {
         let input = "[Ahrl]\nIcon=ReplaceableTextures\\CommandButtons\\BTNHolyLight.blp\n";
         let file = CustomKeys::parse_raw(input);
-        let binding = file.binding("Ahrl").expect("present");
+        let binding = file
+            .binding(crate::test_support::object_id("Ahrl"))
+            .expect("present");
         assert_eq!(
             binding.icon(),
             Some("ReplaceableTextures\\CommandButtons\\BTNHolyLight.blp"),
@@ -251,7 +295,9 @@ mod parse_and_binding_tests {
     fn art_alias_maps_to_icon_field() {
         let input = "[Ahrl]\nArt=ReplaceableTextures\\CommandButtons\\BTNHolyLight.blp\n";
         let file = CustomKeys::parse_raw(input);
-        let binding = file.binding("Ahrl").expect("present");
+        let binding = file
+            .binding(crate::test_support::object_id("Ahrl"))
+            .expect("present");
         assert_eq!(
             binding.icon(),
             Some("ReplaceableTextures\\CommandButtons\\BTNHolyLight.blp"),
@@ -262,7 +308,9 @@ mod parse_and_binding_tests {
     fn unart_alias_maps_to_un_icon_field() {
         let input = "[Ahrl]\nUnArt=ReplaceableTextures\\CommandButtons\\BTNCancel.blp\n";
         let file = CustomKeys::parse_raw(input);
-        let binding = file.binding("Ahrl").expect("present");
+        let binding = file
+            .binding(crate::test_support::object_id("Ahrl"))
+            .expect("present");
         assert_eq!(
             binding.un_icon(),
             Some("ReplaceableTextures\\CommandButtons\\BTNCancel.blp"),
@@ -273,7 +321,9 @@ mod parse_and_binding_tests {
     fn modifier_field_parsed_in_ability_binding() {
         let input = "[Ahrl]\nModifier=Alt\n";
         let file = CustomKeys::parse_raw(input);
-        let binding = file.binding("Ahrl").expect("present");
+        let binding = file
+            .binding(crate::test_support::object_id("Ahrl"))
+            .expect("present");
         assert_eq!(binding.modifier(), Some(AbilityModifier::Alt));
     }
 
@@ -281,7 +331,9 @@ mod parse_and_binding_tests {
     fn modifier_field_case_insensitive_in_parsing() {
         let input = "[Ahrl]\nMODIFIER=Ctrl\n";
         let file = CustomKeys::parse_raw(input);
-        let binding = file.binding("Ahrl").expect("present");
+        let binding = file
+            .binding(crate::test_support::object_id("Ahrl"))
+            .expect("present");
         assert_eq!(binding.modifier(), Some(AbilityModifier::Ctrl));
     }
 
@@ -305,18 +357,34 @@ mod parse_and_binding_tests {
     fn command_is_not_returned_by_binding_accessor() {
         let hotkey = Hotkey::from('M');
         let binding = CommandBinding::builder().hotkey(hotkey).build();
-        let file = CustomKeys::builder().command("CmdMove", binding).build();
-        assert!(file.binding("CmdMove").is_none());
-        assert!(file.command("CmdMove").is_some());
+        let file = CustomKeys::builder()
+            .command(crate::test_support::object_id("CmdMove"), binding)
+            .build();
+        assert!(
+            file.binding(crate::test_support::object_id("CmdMove"))
+                .is_none()
+        );
+        assert!(
+            file.command(crate::test_support::object_id("CmdMove"))
+                .is_some()
+        );
     }
 
     #[test]
     fn ability_is_not_returned_by_command_accessor() {
         let hotkey = Hotkey::from('Q');
         let binding = AbilityBinding::builder().hotkey(hotkey).build();
-        let file = CustomKeys::builder().ability("Ahrl", binding).build();
-        assert!(file.command("Ahrl").is_none());
-        assert!(file.binding("Ahrl").is_some());
+        let file = CustomKeys::builder()
+            .ability(crate::test_support::object_id("Ahrl"), binding)
+            .build();
+        assert!(
+            file.command(crate::test_support::object_id("Ahrl"))
+                .is_none()
+        );
+        assert!(
+            file.binding(crate::test_support::object_id("Ahrl"))
+                .is_some()
+        );
     }
 
     #[test]
@@ -328,9 +396,9 @@ mod parse_and_binding_tests {
         let cmd_move = CommandBinding::builder().hotkey(hotkey_m).build();
         let cmd_stop = CommandBinding::builder().hotkey(hotkey_s).build();
         let file = CustomKeys::builder()
-            .command("CmdAttack", cmd_attack)
-            .command("CmdMove", cmd_move)
-            .command("CmdStop", cmd_stop)
+            .command(crate::test_support::object_id("CmdAttack"), cmd_attack)
+            .command(crate::test_support::object_id("CmdMove"), cmd_move)
+            .command(crate::test_support::object_id("CmdStop"), cmd_stop)
             .build();
         let names: Vec<&str> = file
             .commands_in_order()
@@ -346,8 +414,8 @@ mod parse_and_binding_tests {
         let ability = AbilityBinding::builder().hotkey(ability_hotkey).build();
         let command = CommandBinding::builder().hotkey(command_hotkey).build();
         let file = CustomKeys::builder()
-            .ability("Ahrl", ability)
-            .command("CmdAttack", command)
+            .ability(crate::test_support::object_id("Ahrl"), ability)
+            .command(crate::test_support::object_id("CmdAttack"), command)
             .build();
         let command_count = file.commands_in_order().count();
         assert_eq!(command_count, 1);
@@ -360,8 +428,8 @@ mod parse_and_binding_tests {
         let command = CommandBinding::builder().hotkey(command_hotkey).build();
         let ability = AbilityBinding::builder().hotkey(ability_hotkey).build();
         let file = CustomKeys::builder()
-            .command("CmdAttack", command)
-            .ability("Ahrl", ability)
+            .command(crate::test_support::object_id("CmdAttack"), command)
+            .ability(crate::test_support::object_id("Ahrl"), ability)
             .build();
         let binding_count = file.bindings_in_order().count();
         assert_eq!(binding_count, 1);
@@ -371,7 +439,9 @@ mod parse_and_binding_tests {
     fn system_observer_command_parsed() {
         let input = "[THer]\nHotkey=120\nObserverCommand=1\n";
         let file = CustomKeys::parse_raw(input);
-        let sys = file.system("THer").expect("observer section parsed");
+        let sys = file
+            .system(crate::test_support::object_id("THer"))
+            .expect("observer section parsed");
         assert_eq!(sys.hotkey(), &Hotkey::VirtualKey(120));
         assert_eq!(sys.class(), SystemKeybindClass::Observer);
     }
@@ -380,7 +450,9 @@ mod parse_and_binding_tests {
     fn system_replay_command_parsed() {
         let input = "[TRpl]\nHotkey=80\nReplayCommand=1\n";
         let file = CustomKeys::parse_raw(input);
-        let sys = file.system("TRpl").expect("replay section parsed");
+        let sys = file
+            .system(crate::test_support::object_id("TRpl"))
+            .expect("replay section parsed");
         assert_eq!(sys.hotkey(), &Hotkey::VirtualKey(80));
         assert_eq!(sys.class(), SystemKeybindClass::Replay);
     }
@@ -389,7 +461,9 @@ mod parse_and_binding_tests {
     fn system_camera_command_parsed() {
         let input = "[ctcr]\nHotkey=65\nCameraCommand=1\n";
         let file = CustomKeys::parse_raw(input);
-        let sys = file.system("ctcr").expect("camera section parsed");
+        let sys = file
+            .system(crate::test_support::object_id("ctcr"))
+            .expect("camera section parsed");
         assert_eq!(sys.hotkey(), &Hotkey::VirtualKey(65));
         assert_eq!(sys.class(), SystemKeybindClass::Camera);
     }
@@ -398,7 +472,9 @@ mod parse_and_binding_tests {
     fn system_menu_command_parsed() {
         let input = "[QLog]\nHotkey=27\nMenuCommand=1\n";
         let file = CustomKeys::parse_raw(input);
-        let sys = file.system("QLog").expect("menu section parsed");
+        let sys = file
+            .system(crate::test_support::object_id("QLog"))
+            .expect("menu section parsed");
         assert_eq!(sys.hotkey(), &Hotkey::VirtualKey(27));
         assert_eq!(sys.class(), SystemKeybindClass::Menu);
     }
@@ -433,7 +509,9 @@ mod parse_and_binding_tests {
             let input =
                 format!("[Ctr1]\nHotkey=49\nCtrlGroupCommand=1\nModifier={modifier_text}\n",);
             let file = CustomKeys::parse_raw(input.as_str());
-            let sys = file.system("Ctr1").expect("section parsed");
+            let sys = file
+                .system(crate::test_support::object_id("Ctr1"))
+                .expect("section parsed");
             let expected_modifier = Some(case.expected_modifier);
             assert_eq!(
                 sys.modifier(),
@@ -448,13 +526,14 @@ mod parse_and_binding_tests {
         let initial_binding =
             SystemBinding::new(Hotkey::VirtualKey(27), SystemKeybindClass::Game, None);
         let mut file = CustomKeys::builder()
-            .system("QLog", initial_binding)
+            .system(crate::test_support::object_id("QLog"), initial_binding)
             .build();
         let new_key = KeyCode::try_from(65).expect("valid keycode");
-        file.set_system_hotkey("QLog", new_key);
+        file.set_system_hotkey(crate::test_support::object_id("QLog"), new_key);
         let expected_hotkey = Hotkey::VirtualKey(65);
         assert_eq!(
-            file.system("QLog").map(|binding| *binding.hotkey()),
+            file.system(crate::test_support::object_id("QLog"))
+                .map(|binding| *binding.hotkey()),
             Some(expected_hotkey),
         );
     }
@@ -463,8 +542,11 @@ mod parse_and_binding_tests {
     fn set_system_hotkey_is_noop_for_missing_section() {
         let mut file = CustomKeys::default();
         let new_key = KeyCode::try_from(65).expect("valid keycode");
-        file.set_system_hotkey("nonexistent", new_key);
-        assert!(file.system("nonexistent").is_none());
+        file.set_system_hotkey(crate::test_support::object_id("itm1"), new_key);
+        assert!(
+            file.system(crate::test_support::object_id("itm1"))
+                .is_none()
+        );
     }
 
     #[test]
@@ -472,10 +554,11 @@ mod parse_and_binding_tests {
         let hotkey = Hotkey::from('Q');
         let binding = AbilityBinding::builder().hotkey(hotkey).build();
         let mut file = CustomKeys::default();
-        file.put_ability("Ahrl", binding);
+        file.put_ability(crate::test_support::object_id("Ahrl"), binding);
         let expected_hotkey = Hotkey::Letter('Q');
         assert_eq!(
-            file.binding("Ahrl").and_then(|binding| binding.hotkey()),
+            file.binding(crate::test_support::object_id("Ahrl"))
+                .and_then(|binding| binding.hotkey()),
             Some(&expected_hotkey),
         );
     }
@@ -485,10 +568,10 @@ mod parse_and_binding_tests {
         let hotkey = Hotkey::from('A');
         let binding = CommandBinding::builder().hotkey(hotkey).build();
         let mut file = CustomKeys::default();
-        file.put_command("CmdAttack", binding);
+        file.put_command(crate::test_support::object_id("CmdAttack"), binding);
         let expected_hotkey = Hotkey::Letter('A');
         assert_eq!(
-            file.command("CmdAttack")
+            file.command(crate::test_support::object_id("CmdAttack"))
                 .and_then(|binding| binding.hotkey()),
             Some(&expected_hotkey),
         );
@@ -498,9 +581,9 @@ mod parse_and_binding_tests {
     fn put_system_inserts_and_is_accessible() {
         let binding = SystemBinding::new(Hotkey::VirtualKey(9), SystemKeybindClass::Game, None);
         let mut file = CustomKeys::default();
-        file.put_system("IsHeroSelect", binding);
+        file.put_system(crate::test_support::object_id("itm1"), binding);
         assert_eq!(
-            file.system("IsHeroSelect")
+            file.system(crate::test_support::object_id("itm1"))
                 .map(|system_binding| *system_binding.hotkey()),
             Some(Hotkey::VirtualKey(9)),
         );
@@ -513,11 +596,12 @@ mod parse_and_binding_tests {
         let first = AbilityBinding::builder().hotkey(first_hotkey).build();
         let second = AbilityBinding::builder().hotkey(second_hotkey).build();
         let mut file = CustomKeys::default();
-        file.put_ability("Ahrl", first);
-        file.put_ability("Ahrl", second);
+        file.put_ability(crate::test_support::object_id("Ahrl"), first);
+        file.put_ability(crate::test_support::object_id("Ahrl"), second);
         let expected_hotkey = Hotkey::Letter('W');
         assert_eq!(
-            file.binding("Ahrl").and_then(|binding| binding.hotkey()),
+            file.binding(crate::test_support::object_id("Ahrl"))
+                .and_then(|binding| binding.hotkey()),
             Some(&expected_hotkey),
         );
     }
@@ -569,11 +653,15 @@ mod parse_and_binding_tests {
     #[test]
     fn set_hotkey_replicates_to_two_tier_upgrade() {
         let binding_ruba = AbilityBinding::default();
-        let mut keys = CustomKeys::builder().ability("Ruba", binding_ruba).build();
+        let mut keys = CustomKeys::builder()
+            .ability(crate::test_support::object_id("Ruba"), binding_ruba)
+            .build();
         let new_token = HotkeyToken::try_from('F').expect("letter");
-        let target = HotkeyTarget::ability("Ruba");
+        let target = HotkeyTarget::ability(crate::test_support::object_id("Ruba"));
         keys.set_hotkey(target, Some(new_token));
-        let binding = keys.binding("Ruba").expect("Ruba exists");
+        let binding = keys
+            .binding(crate::test_support::object_id("Ruba"))
+            .expect("Ruba exists");
         let hotkey = binding.hotkey().expect("hotkey set");
         assert_eq!(hotkey.level_count(), 2);
     }
@@ -581,11 +669,15 @@ mod parse_and_binding_tests {
     #[test]
     fn set_hotkey_replicates_to_three_tier_upgrade() {
         let binding_rume = AbilityBinding::default();
-        let mut keys = CustomKeys::builder().ability("Rume", binding_rume).build();
+        let mut keys = CustomKeys::builder()
+            .ability(crate::test_support::object_id("Rume"), binding_rume)
+            .build();
         let new_token = HotkeyToken::try_from('F').expect("letter");
-        let target = HotkeyTarget::ability("Rume");
+        let target = HotkeyTarget::ability(crate::test_support::object_id("Rume"));
         keys.set_hotkey(target, Some(new_token));
-        let binding = keys.binding("Rume").expect("Rume exists");
+        let binding = keys
+            .binding(crate::test_support::object_id("Rume"))
+            .expect("Rume exists");
         let hotkey = binding.hotkey().expect("hotkey set");
         assert_eq!(hotkey.level_count(), 3);
     }
@@ -593,11 +685,15 @@ mod parse_and_binding_tests {
     #[test]
     fn set_hotkey_keeps_leveled_ability_single_tier() {
         let binding_aeah = AbilityBinding::default();
-        let mut keys = CustomKeys::builder().ability("AEah", binding_aeah).build();
+        let mut keys = CustomKeys::builder()
+            .ability(crate::test_support::object_id("AEah"), binding_aeah)
+            .build();
         let new_token = HotkeyToken::try_from('F').expect("letter");
-        let target = HotkeyTarget::ability("AEah");
+        let target = HotkeyTarget::ability(crate::test_support::object_id("AEah"));
         keys.set_hotkey(target, Some(new_token));
-        let binding = keys.binding("AEah").expect("AEah exists");
+        let binding = keys
+            .binding(crate::test_support::object_id("AEah"))
+            .expect("AEah exists");
         let hotkey = binding.hotkey().expect("hotkey set");
         assert_eq!(hotkey.level_count(), 1);
     }
@@ -605,9 +701,11 @@ mod parse_and_binding_tests {
     #[test]
     fn set_hotkey_serializes_upgrade_hotkey_per_tier() {
         let binding_rume = AbilityBinding::default();
-        let mut keys = CustomKeys::builder().ability("Rume", binding_rume).build();
+        let mut keys = CustomKeys::builder()
+            .ability(crate::test_support::object_id("Rume"), binding_rume)
+            .build();
         let new_token = HotkeyToken::try_from('F').expect("letter");
-        let target = HotkeyTarget::ability("Rume");
+        let target = HotkeyTarget::ability(crate::test_support::object_id("Rume"));
         keys.set_hotkey(target, Some(new_token));
         let serialized = keys.to_string();
         assert!(
@@ -622,7 +720,9 @@ mod parse_and_binding_tests {
         let mut keys = CustomKeys::parse_raw(input);
         let layout = GridLayout::qwerty_grid();
         keys.apply_grid_to_all_bindings(layout);
-        let binding = keys.binding("Rume").expect("Rume exists");
+        let binding = keys
+            .binding(crate::test_support::object_id("Rume"))
+            .expect("Rume exists");
         let hotkey = binding.hotkey().expect("hotkey set");
         let expected = Hotkey::try_from("Q,Q,Q").expect("valid hotkey");
         assert_eq!(hotkey, &expected);
@@ -634,7 +734,9 @@ mod parse_and_binding_tests {
         let mut keys = CustomKeys::parse_raw(input);
         let layout = GridLayout::qwerty_grid();
         keys.apply_grid_to_all_bindings(layout);
-        let binding = keys.binding("Ruba").expect("Ruba exists");
+        let binding = keys
+            .binding(crate::test_support::object_id("Ruba"))
+            .expect("Ruba exists");
         let hotkey = binding.hotkey().expect("hotkey set");
         let expected = Hotkey::try_from("X,X").expect("valid hotkey");
         assert_eq!(hotkey, &expected);
@@ -646,7 +748,9 @@ mod parse_and_binding_tests {
         let mut keys = CustomKeys::parse_raw(input);
         let layout = GridLayout::qwerty_grid();
         keys.apply_grid_to_all_bindings(layout);
-        let binding = keys.binding("AEah").expect("AEah exists");
+        let binding = keys
+            .binding(crate::test_support::object_id("AEah"))
+            .expect("AEah exists");
         let hotkey = binding.hotkey().expect("hotkey set");
         assert_eq!(hotkey.level_count(), 1);
     }
@@ -657,7 +761,9 @@ mod parse_and_binding_tests {
         let template = CustomKeys::parse_raw("[Rume]\nHotkey=Q\nButtonpos=0,0\n");
         baseline.extend(template);
         let normalized = baseline.normalize();
-        let binding = normalized.binding("Rume").expect("Rume exists");
+        let binding = normalized
+            .binding(crate::test_support::object_id("Rume"))
+            .expect("Rume exists");
         let hotkey = binding.hotkey().expect("hotkey set");
         let expected = Hotkey::try_from("Q,Q,Q").expect("valid hotkey");
         assert_eq!(hotkey, &expected);
@@ -670,7 +776,9 @@ mod parse_and_binding_tests {
         baseline.extend(template);
         let mut normalized = baseline.normalize();
         let _plan = normalized.resolve_conflicts();
-        let binding = normalized.binding("Rume").expect("Rume exists");
+        let binding = normalized
+            .binding(crate::test_support::object_id("Rume"))
+            .expect("Rume exists");
         let hotkey = binding.hotkey().expect("hotkey set");
         assert_eq!(hotkey.level_count(), 3);
     }
@@ -716,13 +824,14 @@ mod parse_and_binding_tests {
 
     #[test]
     fn assign_position_replicates_upgrade_hotkey_per_tier() {
-        use crate::identity::slot::GridSlotId;
         let input = "[Rume]\nHotkey=S,S,S\nButtonpos=0,0\n";
         let mut keys = CustomKeys::parse_raw(input);
         let layout = GridLayout::qwerty_grid();
-        let slot = GridSlotId::ability("Rume");
+        let slot = crate::test_support::ability_slot("Rume");
         keys.assign_position(layout, &slot, 1, 1, false, true);
-        let binding = keys.binding("Rume").expect("Rume exists");
+        let binding = keys
+            .binding(crate::test_support::object_id("Rume"))
+            .expect("Rume exists");
         let hotkey = binding.hotkey().expect("hotkey set");
         let expected = Hotkey::try_from("S,S,S").expect("valid hotkey");
         assert_eq!(hotkey, &expected);
@@ -731,16 +840,17 @@ mod parse_and_binding_tests {
     #[test]
     fn move_slot_keeps_hotkey_when_reassignment_disabled() {
         use crate::command::move_request::MoveRequest;
-        use crate::identity::slot::GridSlotId;
         let input = "[ACad]\nHotkey=P\nButtonpos=2,2\n";
         let mut keys = CustomKeys::parse_raw(input);
         let layout = GridLayout::qwerty_grid();
-        let moving = GridSlotId::ability("ACad");
+        let moving = crate::test_support::ability_slot("ACad");
         let slot_ids = [moving];
         let request = MoveRequest::new(layout, &slot_ids, &moving, 1, 1, false)
             .with_assign_hotkey_on_move(false);
         keys.move_slot(&request);
-        let binding = keys.binding("ACad").expect("ACad exists");
+        let binding = keys
+            .binding(crate::test_support::object_id("ACad"))
+            .expect("ACad exists");
         let position = binding.button_position().expect("position set");
         assert_eq!(u8::from(position.column()), 1);
         assert_eq!(u8::from(position.row()), 1);
@@ -752,15 +862,16 @@ mod parse_and_binding_tests {
     #[test]
     fn move_slot_reassigns_hotkey_by_default() {
         use crate::command::move_request::MoveRequest;
-        use crate::identity::slot::GridSlotId;
         let input = "[ACad]\nHotkey=P\nButtonpos=2,2\n";
         let mut keys = CustomKeys::parse_raw(input);
         let layout = GridLayout::qwerty_grid();
-        let moving = GridSlotId::ability("ACad");
+        let moving = crate::test_support::ability_slot("ACad");
         let slot_ids = [moving];
         let request = MoveRequest::new(layout, &slot_ids, &moving, 1, 1, false);
         keys.move_slot(&request);
-        let binding = keys.binding("ACad").expect("ACad exists");
+        let binding = keys
+            .binding(crate::test_support::object_id("ACad"))
+            .expect("ACad exists");
         let hotkey = binding.hotkey().expect("hotkey set");
         let expected = Hotkey::try_from("S").expect("valid hotkey");
         assert_eq!(hotkey, &expected);
@@ -769,21 +880,24 @@ mod parse_and_binding_tests {
     #[test]
     fn move_slot_swap_is_reversible_when_layout_consistent() {
         use crate::command::move_request::MoveRequest;
-        use crate::identity::slot::GridSlotId;
         let input = "[ACad]\nHotkey=Q\nButtonpos=0,0\n[AHbz]\nHotkey=S\nButtonpos=1,1\n";
         let mut keys = CustomKeys::parse_raw(input);
         let layout = GridLayout::qwerty_grid();
-        let acad = GridSlotId::ability("ACad");
-        let ahbz = GridSlotId::ability("AHbz");
+        let acad = crate::test_support::ability_slot("ACad");
+        let ahbz = crate::test_support::ability_slot("AHbz");
         let slot_ids = [acad, ahbz];
         let swap = MoveRequest::new(layout, &slot_ids, &acad, 1, 1, false);
         keys.move_slot(&swap);
         let swap_back = MoveRequest::new(layout, &slot_ids, &acad, 0, 0, false);
         keys.move_slot(&swap_back);
-        let acad_binding = keys.binding("ACad").expect("ACad exists");
+        let acad_binding = keys
+            .binding(crate::test_support::object_id("ACad"))
+            .expect("ACad exists");
         let acad_hotkey = acad_binding.hotkey().expect("hotkey set");
         assert_eq!(acad_hotkey, &Hotkey::try_from("Q").expect("valid"));
-        let ahbz_binding = keys.binding("AHbz").expect("AHbz exists");
+        let ahbz_binding = keys
+            .binding(crate::test_support::object_id("AHbz"))
+            .expect("AHbz exists");
         let ahbz_hotkey = ahbz_binding.hotkey().expect("hotkey set");
         assert_eq!(ahbz_hotkey, &Hotkey::try_from("S").expect("valid"));
     }
@@ -791,24 +905,27 @@ mod parse_and_binding_tests {
     #[test]
     fn move_slot_swap_keeps_both_hotkeys_when_reassignment_disabled() {
         use crate::command::move_request::MoveRequest;
-        use crate::identity::slot::GridSlotId;
         let input = "[ACad]\nHotkey=P\nButtonpos=0,0\n[AHbz]\nHotkey=K\nButtonpos=1,1\n";
         let mut keys = CustomKeys::parse_raw(input);
         let layout = GridLayout::qwerty_grid();
-        let moving = GridSlotId::ability("ACad");
-        let displaced = GridSlotId::ability("AHbz");
+        let moving = crate::test_support::ability_slot("ACad");
+        let displaced = crate::test_support::ability_slot("AHbz");
         let slot_ids = [moving, displaced];
         let request = MoveRequest::new(layout, &slot_ids, &moving, 1, 1, false)
             .with_assign_hotkey_on_move(false);
         keys.move_slot(&request);
-        let moving_binding = keys.binding("ACad").expect("ACad exists");
+        let moving_binding = keys
+            .binding(crate::test_support::object_id("ACad"))
+            .expect("ACad exists");
         let moving_position = moving_binding.button_position().expect("position set");
         assert_eq!(u8::from(moving_position.column()), 1);
         assert_eq!(u8::from(moving_position.row()), 1);
         let moving_hotkey = moving_binding.hotkey().expect("hotkey set");
         let expected_moving = Hotkey::try_from("P").expect("valid hotkey");
         assert_eq!(moving_hotkey, &expected_moving);
-        let displaced_binding = keys.binding("AHbz").expect("AHbz exists");
+        let displaced_binding = keys
+            .binding(crate::test_support::object_id("AHbz"))
+            .expect("AHbz exists");
         let displaced_position = displaced_binding.button_position().expect("position set");
         assert_eq!(u8::from(displaced_position.column()), 0);
         assert_eq!(u8::from(displaced_position.row()), 0);
@@ -824,13 +941,15 @@ mod parse_and_binding_tests {
         let hotkey_q_weak = Hotkey::from('Q');
         let binding_abu2 = AbilityBinding::builder().hotkey(hotkey_q_weak).build();
         let mut keys = CustomKeys::builder()
-            .ability("Abu3", binding_abu3)
-            .ability("Abu2", binding_abu2)
+            .ability(crate::test_support::object_id("Abu3"), binding_abu3)
+            .ability(crate::test_support::object_id("Abu2"), binding_abu2)
             .build();
         let new_token = HotkeyToken::try_from('Y').expect("letter");
-        let target = HotkeyTarget::ability("Abu3");
+        let target = HotkeyTarget::ability(crate::test_support::object_id("Abu3"));
         keys.set_hotkey(target, Some(new_token));
-        let sibling_binding = keys.binding("Abu2").expect("Abu2 exists");
+        let sibling_binding = keys
+            .binding(crate::test_support::object_id("Abu2"))
+            .expect("Abu2 exists");
         let sibling_hotkey = sibling_binding.hotkey().expect("Abu2 hotkey set");
         assert_eq!(sibling_hotkey.first_token(), Some(new_token));
     }
@@ -842,13 +961,15 @@ mod parse_and_binding_tests {
         let hotkey_q_weak = Hotkey::from('Q');
         let binding_abu2 = AbilityBinding::builder().hotkey(hotkey_q_weak).build();
         let mut keys = CustomKeys::builder()
-            .ability("Abu3", binding_abu3)
-            .ability("Abu2", binding_abu2)
+            .ability(crate::test_support::object_id("Abu3"), binding_abu3)
+            .ability(crate::test_support::object_id("Abu2"), binding_abu2)
             .build();
         let new_token = HotkeyToken::try_from('Z').expect("letter");
-        let target = HotkeyTarget::ability("Abu2");
+        let target = HotkeyTarget::ability(crate::test_support::object_id("Abu2"));
         keys.set_hotkey(target, Some(new_token));
-        let sibling_binding = keys.binding("Abu3").expect("Abu3 exists");
+        let sibling_binding = keys
+            .binding(crate::test_support::object_id("Abu3"))
+            .expect("Abu3 exists");
         let sibling_hotkey = sibling_binding.hotkey().expect("Abu3 hotkey set");
         assert_eq!(sibling_hotkey.first_token(), Some(new_token));
     }
@@ -862,13 +983,15 @@ mod parse_and_binding_tests {
         let unhotkey_q_weak = Hotkey::from('Q');
         let binding_abu2 = AbilityBinding::builder().unhotkey(unhotkey_q_weak).build();
         let mut keys = CustomKeys::builder()
-            .ability("Abu3", binding_abu3)
-            .ability("Abu2", binding_abu2)
+            .ability(crate::test_support::object_id("Abu3"), binding_abu3)
+            .ability(crate::test_support::object_id("Abu2"), binding_abu2)
             .build();
         let new_token = HotkeyToken::try_from('D').expect("letter");
-        let target = HotkeyTarget::ability_off_state("Abu3");
+        let target = HotkeyTarget::ability_off_state(crate::test_support::object_id("Abu3"));
         keys.set_hotkey(target, Some(new_token));
-        let sibling_binding = keys.binding("Abu2").expect("Abu2 exists");
+        let sibling_binding = keys
+            .binding(crate::test_support::object_id("Abu2"))
+            .expect("Abu2 exists");
         let sibling_unhotkey = sibling_binding.unhotkey().expect("Abu2 unhotkey set");
         assert_eq!(sibling_unhotkey.first_token(), Some(new_token));
     }
@@ -880,13 +1003,15 @@ mod parse_and_binding_tests {
         let hotkey_w = Hotkey::from('W');
         let binding_ahhb = AbilityBinding::builder().hotkey(hotkey_w).build();
         let mut keys = CustomKeys::builder()
-            .ability("AHbz", binding_ahbz)
-            .ability("AHhb", binding_ahhb)
+            .ability(crate::test_support::object_id("AHbz"), binding_ahbz)
+            .ability(crate::test_support::object_id("AHhb"), binding_ahhb)
             .build();
         let new_token = HotkeyToken::try_from('Y').expect("letter");
-        let target = HotkeyTarget::ability("AHbz");
+        let target = HotkeyTarget::ability(crate::test_support::object_id("AHbz"));
         keys.set_hotkey(target, Some(new_token));
-        let unrelated_binding = keys.binding("AHhb").expect("AHhb exists");
+        let unrelated_binding = keys
+            .binding(crate::test_support::object_id("AHhb"))
+            .expect("AHhb exists");
         let unrelated_hotkey = unrelated_binding.hotkey().expect("AHhb hotkey set");
         let expected_token = HotkeyToken::try_from('W').expect("letter");
         assert_eq!(unrelated_hotkey.first_token(), Some(expected_token));
@@ -908,15 +1033,17 @@ mod parse_and_binding_tests {
             .hotkey(hotkey_q_weak)
             .build();
         let mut keys = CustomKeys::builder()
-            .ability("Abu3", binding_abu3)
-            .ability("Abu2", binding_abu2)
+            .ability(crate::test_support::object_id("Abu3"), binding_abu3)
+            .ability(crate::test_support::object_id("Abu2"), binding_abu2)
             .build();
         let layout = GridLayout::qwerty_grid();
-        let moving = GridSlotId::ability("Abu3");
-        let slot_ids = [GridSlotId::ability("Abu3")];
+        let moving = crate::test_support::ability_slot("Abu3");
+        let slot_ids = [crate::test_support::ability_slot("Abu3")];
         let request = MoveRequest::new(layout, &slot_ids, &moving, 2, 1, false);
         keys.move_slot(&request);
-        let sibling_binding = keys.binding("Abu2").expect("Abu2 exists");
+        let sibling_binding = keys
+            .binding(crate::test_support::object_id("Abu2"))
+            .expect("Abu2 exists");
         let sibling_button = sibling_binding
             .button_position()
             .expect("Abu2 Buttonpos set");
@@ -939,15 +1066,17 @@ mod extend_tests {
         let target_binding = AbilityBinding::builder().hotkey(target_hotkey).build();
         let uploaded_binding = AbilityBinding::builder().hotkey(uploaded_hotkey).build();
         let mut target = CustomKeys::builder()
-            .ability("Ahrl", target_binding)
+            .ability(crate::test_support::object_id("Ahrl"), target_binding)
             .build();
         let uploaded = CustomKeys::builder()
-            .ability("Ahrl", uploaded_binding)
+            .ability(crate::test_support::object_id("Ahrl"), uploaded_binding)
             .build();
         target.extend(uploaded);
         let expected_hotkey = Hotkey::Letter('W');
         assert_eq!(
-            target.binding("Ahrl").and_then(|binding| binding.hotkey()),
+            target
+                .binding(crate::test_support::object_id("Ahrl"))
+                .and_then(|binding| binding.hotkey()),
             Some(&expected_hotkey),
         );
     }
@@ -965,14 +1094,16 @@ mod extend_tests {
             None,
         );
         let mut target = CustomKeys::builder()
-            .system("Ctr1", default_binding)
+            .system(crate::test_support::object_id("Ctr1"), default_binding)
             .build();
         let uploaded = CustomKeys::builder()
-            .system("Ctr1", imported_binding)
+            .system(crate::test_support::object_id("Ctr1"), imported_binding)
             .build();
         target.extend(uploaded);
         let expected_hotkey = Hotkey::VirtualKey(186);
-        let actual_hotkey = target.system("Ctr1").map(|binding| *binding.hotkey());
+        let actual_hotkey = target
+            .system(crate::test_support::object_id("Ctr1"))
+            .map(|binding| *binding.hotkey());
         assert_eq!(
             actual_hotkey,
             Some(expected_hotkey),
@@ -990,8 +1121,12 @@ mod extend_tests {
         let mut baseline = CustomKeys::parse_raw(DEFAULT_CUSTOM_KEYS);
         baseline.extend(uploaded);
         let normalized = baseline.normalize();
-        let control_group_hotkey = normalized.system("Ctr1").map(|binding| *binding.hotkey());
-        let inventory_hotkey = normalized.system("itm1").map(|binding| *binding.hotkey());
+        let control_group_hotkey = normalized
+            .system(crate::test_support::object_id("Ctr1"))
+            .map(|binding| *binding.hotkey());
+        let inventory_hotkey = normalized
+            .system(crate::test_support::object_id("itm1"))
+            .map(|binding| *binding.hotkey());
         assert_eq!(
             control_group_hotkey,
             Some(Hotkey::VirtualKey(186)),
@@ -1013,16 +1148,16 @@ mod extend_tests {
             .unhotkey(uploaded_unhotkey)
             .build();
         let mut target = CustomKeys::builder()
-            .ability("Amil", target_binding)
+            .ability(crate::test_support::object_id("Amil"), target_binding)
             .build();
         let uploaded = CustomKeys::builder()
-            .ability("Amil", uploaded_binding)
+            .ability(crate::test_support::object_id("Amil"), uploaded_binding)
             .build();
         target.extend(uploaded);
         let expected_unhotkey = Hotkey::Letter('C');
         assert_eq!(
             target
-                .binding("Amil")
+                .binding(crate::test_support::object_id("Amil"))
                 .and_then(|binding| binding.unhotkey()),
             Some(&expected_unhotkey),
         );
@@ -1039,14 +1174,14 @@ mod extend_tests {
             .button_position(uploaded_position)
             .build();
         let mut target = CustomKeys::builder()
-            .ability("Ahrl", target_binding)
+            .ability(crate::test_support::object_id("Ahrl"), target_binding)
             .build();
         let uploaded = CustomKeys::builder()
-            .ability("Ahrl", uploaded_binding)
+            .ability(crate::test_support::object_id("Ahrl"), uploaded_binding)
             .build();
         target.extend(uploaded);
         let position = target
-            .binding("Ahrl")
+            .binding(crate::test_support::object_id("Ahrl"))
             .and_then(|binding| binding.button_position())
             .copied();
         assert_eq!(
@@ -1059,14 +1194,20 @@ mod extend_tests {
     fn extend_does_not_overwrite_system_entries() {
         let system_binding =
             SystemBinding::new(Hotkey::VirtualKey(27), SystemKeybindClass::Game, None);
-        let mut target = CustomKeys::builder().system("IsS1", system_binding).build();
+        let mut target = CustomKeys::builder()
+            .system(crate::test_support::object_id("itm1"), system_binding)
+            .build();
         let uploaded_hotkey = Hotkey::from('Q');
         let uploaded_binding = AbilityBinding::builder().hotkey(uploaded_hotkey).build();
         let uploaded = CustomKeys::builder()
-            .ability("IsS1", uploaded_binding)
+            .ability(crate::test_support::object_id("itm1"), uploaded_binding)
             .build();
         target.extend(uploaded);
-        assert!(target.system("IsS1").is_some());
+        assert!(
+            target
+                .system(crate::test_support::object_id("itm1"))
+                .is_some()
+        );
     }
 
     #[test]
@@ -1078,19 +1219,21 @@ mod extend_tests {
             .button_position(uploaded_position)
             .build();
         let mut target = CustomKeys::builder()
-            .ability("Ahrl", target_binding)
+            .ability(crate::test_support::object_id("Ahrl"), target_binding)
             .build();
         let uploaded = CustomKeys::builder()
-            .ability("Ahrl", uploaded_binding)
+            .ability(crate::test_support::object_id("Ahrl"), uploaded_binding)
             .build();
         target.extend(uploaded);
         let expected_hotkey = Hotkey::Letter('Q');
         assert_eq!(
-            target.binding("Ahrl").and_then(|binding| binding.hotkey()),
+            target
+                .binding(crate::test_support::object_id("Ahrl"))
+                .and_then(|binding| binding.hotkey()),
             Some(&expected_hotkey),
         );
         let position = target
-            .binding("Ahrl")
+            .binding(crate::test_support::object_id("Ahrl"))
             .and_then(|binding| binding.button_position())
             .copied();
         assert_eq!(
@@ -1106,16 +1249,19 @@ mod extend_tests {
         let target_binding = CommandBinding::builder().hotkey(target_hotkey).build();
         let uploaded_binding = CommandBinding::builder().hotkey(uploaded_hotkey).build();
         let mut target = CustomKeys::builder()
-            .command("CmdAttack", target_binding)
+            .command(crate::test_support::object_id("CmdAttack"), target_binding)
             .build();
         let uploaded = CustomKeys::builder()
-            .command("CmdAttack", uploaded_binding)
+            .command(
+                crate::test_support::object_id("CmdAttack"),
+                uploaded_binding,
+            )
             .build();
         target.extend(uploaded);
         let expected_hotkey = Hotkey::Letter('G');
         assert_eq!(
             target
-                .command("CmdAttack")
+                .command(crate::test_support::object_id("CmdAttack"))
                 .and_then(|binding| binding.hotkey()),
             Some(&expected_hotkey),
         );
@@ -1128,15 +1274,17 @@ mod extend_tests {
         let target_binding = AbilityBinding::builder().hotkey(target_hotkey).build();
         let uploaded_binding = AbilityBinding::builder().hotkey(uploaded_hotkey).build();
         let mut target = CustomKeys::builder()
-            .ability("Ahrl", target_binding)
+            .ability(crate::test_support::object_id("Ahrl"), target_binding)
             .build();
         let uploaded = CustomKeys::builder()
-            .ability("Ahrl", uploaded_binding)
+            .ability(crate::test_support::object_id("Ahrl"), uploaded_binding)
             .build();
         target.extend(uploaded);
         let expected_hotkey = Hotkey::Letter('E');
         assert_eq!(
-            target.binding("Ahrl").and_then(|binding| binding.hotkey()),
+            target
+                .binding(crate::test_support::object_id("Ahrl"))
+                .and_then(|binding| binding.hotkey()),
             Some(&expected_hotkey),
         );
     }
@@ -1197,7 +1345,7 @@ mod export_tests {
         let baseline = include_str!("../../templates/CustomKeys.txt");
         let loaded = CustomKeys::parse_raw("");
         let output = loaded.serialize(baseline);
-        for item_id in &["bspd", "spro", "pinv"] {
+        for item_id in ["bspd", "spro", "pinv"] {
             let section_marker = format!("[{item_id}]");
             let after_section = output
                 .to_ascii_lowercase()
@@ -1245,7 +1393,6 @@ mod normalize_tests {
 
     #[test]
     fn normalize_syncs_single_button_toggle_offstate_to_onstate() {
-        use crate::identity::slot::GridSlotId;
         use crate::model::AbilityBinding;
         let on_position = GridCoordinate::new(ColumnIndex::Two, RowIndex::Two);
         let off_position = GridCoordinate::new(ColumnIndex::One, RowIndex::Two);
@@ -1254,10 +1401,12 @@ mod normalize_tests {
             .unbutton_position(off_position)
             .build();
         let mut overlay = CustomKeys::parse_raw("");
-        overlay.put_ability("ACf2", binding);
+        overlay.put_ability(crate::test_support::object_id("ACf2"), binding);
         let normalized = overlay.normalize();
-        let resolved_on = normalized.position_for_slot(&GridSlotId::ability("ACf2"), false);
-        let resolved_off = normalized.position_for_slot(&GridSlotId::ability_off("ACf2"), false);
+        let resolved_on =
+            normalized.position_for_slot(&crate::test_support::ability_slot("ACf2"), false);
+        let resolved_off =
+            normalized.position_for_slot(&crate::test_support::ability_off_slot("ACf2"), false);
         assert_eq!(resolved_on, Some(on_position));
         assert_eq!(
             resolved_off, resolved_on,
@@ -1279,10 +1428,12 @@ mod normalize_tests {
             .button_position(stale_position)
             .build();
         let mut overlay = CustomKeys::parse_raw("");
-        overlay.put_ability("Aave", aave_binding);
-        overlay.put_ability("ubsp", ubsp_binding);
+        overlay.put_ability(crate::test_support::object_id("Aave"), aave_binding);
+        overlay.put_ability(crate::test_support::object_id("ubsp"), ubsp_binding);
         let normalized = overlay.normalize();
-        let produced_unit = normalized.binding("ubsp").expect("ubsp section exists");
+        let produced_unit = normalized
+            .binding(crate::test_support::object_id("ubsp"))
+            .expect("ubsp section exists");
         let expected_hotkey = Hotkey::Letter('R');
         assert_eq!(produced_unit.hotkey(), Some(&expected_hotkey));
         assert_eq!(produced_unit.button_position(), Some(&morph_position));
@@ -1290,7 +1441,6 @@ mod normalize_tests {
 
     #[test]
     fn normalize_keeps_independent_offstate_separate() {
-        use crate::identity::slot::GridSlotId;
         use crate::model::AbilityBinding;
         let on_position = GridCoordinate::new(ColumnIndex::Two, RowIndex::Two);
         let off_position = GridCoordinate::new(ColumnIndex::Zero, RowIndex::One);
@@ -1299,9 +1449,10 @@ mod normalize_tests {
             .unbutton_position(off_position)
             .build();
         let mut overlay = CustomKeys::parse_raw("");
-        overlay.put_ability("Abur", binding);
+        overlay.put_ability(crate::test_support::object_id("Abur"), binding);
         let normalized = overlay.normalize();
-        let resolved_off = normalized.position_for_slot(&GridSlotId::ability_off("Abur"), false);
+        let resolved_off =
+            normalized.position_for_slot(&crate::test_support::ability_off_slot("Abur"), false);
         assert_eq!(
             resolved_off,
             Some(off_position),
@@ -1322,12 +1473,16 @@ mod normalize_tests {
         let normalized = CustomKeys::from_text("");
         for phantom_id in ["Aall", "Aneu", "Ane2", "Adt1"] {
             assert!(
-                normalized.binding(phantom_id).is_none(),
+                normalized
+                    .binding(crate::test_support::object_id(phantom_id))
+                    .is_none(),
                 "normalize must prune non-button mechanic {phantom_id}",
             );
         }
         assert!(
-            normalized.binding("Anei").is_some(),
+            normalized
+                .binding(crate::test_support::object_id("Anei"))
+                .is_some(),
             "normalize must keep Select User (Anei), a real shop button",
         );
     }
@@ -1337,7 +1492,9 @@ mod normalize_tests {
         let uploaded = "[Aall]\nHotkey=Q\nButtonpos=0,0\n";
         let normalized = CustomKeys::from_text(uploaded);
         assert!(
-            normalized.binding("Aall").is_none(),
+            normalized
+                .binding(crate::test_support::object_id("Aall"))
+                .is_none(),
             "normalize must strip a phantom [Aall] carried in over an upload",
         );
     }
@@ -1352,7 +1509,9 @@ mod normalize_tests {
     #[test]
     fn normalize_includes_known_ability() {
         let normalized = CustomKeys::from_text("");
-        let hpal_present = normalized.binding("Hpal").is_some();
+        let hpal_present = normalized
+            .binding(crate::test_support::object_id("Hpal"))
+            .is_some();
         assert!(hpal_present);
     }
 
@@ -1360,7 +1519,7 @@ mod normalize_tests {
     fn normalize_overlays_user_hotkey_on_baseline() {
         let user_input = "[Ahrl]\nHotkey=Z\n\n";
         let normalized = CustomKeys::from_text(user_input);
-        let ahrl_binding = normalized.binding("Ahrl");
+        let ahrl_binding = normalized.binding(crate::test_support::object_id("Ahrl"));
         let ahrl_hotkey = ahrl_binding.and_then(|binding| binding.hotkey());
         let expected_hotkey = Hotkey::Letter('Z');
         assert_eq!(ahrl_hotkey, Some(&expected_hotkey));
@@ -1386,8 +1545,8 @@ mod normalize_tests {
     #[test]
     fn normalize_assigns_positions_to_goblin_merchant_sell_items_without_template_positions() {
         let normalized = CustomKeys::from_text("");
-        for item_id in &["bspd", "spro", "pinv"] {
-            let binding = normalized.binding(*item_id);
+        for item_id in ["bspd", "spro", "pinv"] {
+            let binding = normalized.binding(crate::test_support::object_id(item_id));
             let button_position = binding.and_then(|binding| binding.button_position());
             assert!(
                 button_position.is_some(),
@@ -1401,7 +1560,7 @@ mod normalize_tests {
         let uploaded = "[CmdBuildHuman]\nHotkey=Q\nButtonpos=3,1\n";
         let normalized = CustomKeys::from_text(uploaded);
         let ability_binding = normalized
-            .binding("AHbu")
+            .binding(crate::test_support::object_id("AHbu"))
             .expect("build ability AHbu must exist after normalize");
         let mirrored_position = ability_binding.button_position();
         let expected_position = GridCoordinate::new(ColumnIndex::Three, RowIndex::One);
@@ -1424,9 +1583,9 @@ mod normalize_tests {
         let uploaded = "[CmdBuildOrc]\nButtonpos=2,1\n\n[CmdBuildUndead]\nButtonpos=2,1\n\n[CmdBuildNightElf]\nButtonpos=2,1\n";
         let normalized = CustomKeys::from_text(uploaded);
         let expected_position = GridCoordinate::new(ColumnIndex::Two, RowIndex::One);
-        for ability_id in &["AObu", "AUbu", "AEbu"] {
+        for ability_id in ["AObu", "AUbu", "AEbu"] {
             let ability_binding = normalized
-                .binding(*ability_id)
+                .binding(crate::test_support::object_id(ability_id))
                 .unwrap_or_else(|| panic!("build ability {ability_id} must exist after normalize"));
             let mirrored_position = ability_binding.button_position();
             assert_eq!(
@@ -1455,7 +1614,7 @@ mod normalize_tests {
     #[test]
     fn normalize_assigns_position_to_goblin_shredder_sell_unit() {
         let normalized = CustomKeys::from_text("");
-        let binding = normalized.binding("ngir");
+        let binding = normalized.binding(crate::test_support::object_id("ngir"));
         let button_position = binding.and_then(|binding| binding.button_position());
         assert!(
             button_position.is_some(),
@@ -1467,7 +1626,7 @@ mod normalize_tests {
     fn normalize_defaults_button_position_to_origin_when_database_has_no_position() {
         let normalized = CustomKeys::from_text("");
         let binding = normalized
-            .binding("Aatp")
+            .binding(crate::test_support::object_id("Aatp"))
             .expect("Aatp must have a binding after normalize");
         let button_position = binding
             .button_position()
@@ -1480,7 +1639,7 @@ mod normalize_tests {
     fn normalize_does_not_invent_off_state_for_one_shot_ability() {
         let normalized = CustomKeys::from_text("");
         let healing_wave_off = normalized
-            .binding("AChv")
+            .binding(crate::test_support::object_id("AChv"))
             .and_then(|binding| binding.unbutton_position());
         assert!(
             healing_wave_off.is_none(),
@@ -1492,15 +1651,16 @@ mod normalize_tests {
     fn move_slot_co_moves_colocated_offstate_when_slot_ids_lack_abilityoff_variant() {
         use crate::command::move_request::MoveRequest;
         use crate::grid::layout::GridLayout;
-        use crate::identity::slot::GridSlotId;
         let input = "[ACsw]\nButtonpos=0,0\nHotkey=Q\nUnbuttonpos=0,0\nUnhotkey=Q\n";
         let mut keys = CustomKeys::parse_raw(input);
         let layout = GridLayout::qwerty_grid();
-        let moving = GridSlotId::ability("ACsw");
-        let slot_ids = [GridSlotId::ability("ACsw")];
+        let moving = crate::test_support::ability_slot("ACsw");
+        let slot_ids = [crate::test_support::ability_slot("ACsw")];
         let request = MoveRequest::new(layout, &slot_ids, &moving, 1, 0, false);
         keys.move_slot(&request);
-        let binding = keys.binding("ACsw").expect("ACsw must exist");
+        let binding = keys
+            .binding(crate::test_support::object_id("ACsw"))
+            .expect("ACsw must exist");
         let button_position = binding.button_position().expect("Buttonpos set");
         let unbutton_position = binding
             .unbutton_position()
@@ -1525,18 +1685,22 @@ mod normalize_tests {
     fn move_slot_swaps_both_colocated_offstates_when_two_toggle_abilities_are_swapped() {
         use crate::command::move_request::MoveRequest;
         use crate::grid::layout::GridLayout;
-        use crate::identity::slot::GridSlotId;
         let input = concat!(
             "[ACsw]\nButtonpos=0,0\nHotkey=Q\nUnbuttonpos=0,0\nUnhotkey=Q\n",
             "[ACdm]\nButtonpos=1,0\nHotkey=W\nUnbuttonpos=1,0\nUnhotkey=W\n",
         );
         let mut keys = CustomKeys::parse_raw(input);
         let layout = GridLayout::qwerty_grid();
-        let moving = GridSlotId::ability("ACsw");
-        let slot_ids = [GridSlotId::ability("ACsw"), GridSlotId::ability("ACdm")];
+        let moving = crate::test_support::ability_slot("ACsw");
+        let slot_ids = [
+            crate::test_support::ability_slot("ACsw"),
+            crate::test_support::ability_slot("ACdm"),
+        ];
         let request = MoveRequest::new(layout, &slot_ids, &moving, 1, 0, false);
         keys.move_slot(&request);
-        let acsw = keys.binding("ACsw").expect("ACsw must exist");
+        let acsw = keys
+            .binding(crate::test_support::object_id("ACsw"))
+            .expect("ACsw must exist");
         let acsw_button = acsw.button_position().expect("ACsw Buttonpos set");
         let acsw_unbutton = acsw
             .unbutton_position()
@@ -1550,7 +1714,9 @@ mod normalize_tests {
             acsw_unbutton, acsw_button,
             "ACsw Unbuttonpos must co-move with Buttonpos",
         );
-        let acdm = keys.binding("ACdm").expect("ACdm must exist");
+        let acdm = keys
+            .binding(crate::test_support::object_id("ACdm"))
+            .expect("ACdm must exist");
         let acdm_button = acdm.button_position().expect("ACdm Buttonpos set");
         let acdm_unbutton = acdm
             .unbutton_position()
@@ -1570,18 +1736,22 @@ mod normalize_tests {
     fn move_slot_does_not_co_move_offstate_when_not_colocated() {
         use crate::command::move_request::MoveRequest;
         use crate::grid::layout::GridLayout;
-        use crate::identity::slot::GridSlotId;
         let input = concat!(
             "[ACsw]\nButtonpos=0,0\nHotkey=Q\nUnbuttonpos=2,0\nUnhotkey=E\n",
             "[ACdm]\nButtonpos=1,0\nHotkey=W\n",
         );
         let mut keys = CustomKeys::parse_raw(input);
         let layout = GridLayout::qwerty_grid();
-        let moving = GridSlotId::ability("ACsw");
-        let slot_ids = [GridSlotId::ability("ACsw"), GridSlotId::ability("ACdm")];
+        let moving = crate::test_support::ability_slot("ACsw");
+        let slot_ids = [
+            crate::test_support::ability_slot("ACsw"),
+            crate::test_support::ability_slot("ACdm"),
+        ];
         let request = MoveRequest::new(layout, &slot_ids, &moving, 1, 0, false);
         keys.move_slot(&request);
-        let acsw = keys.binding("ACsw").expect("ACsw must exist");
+        let acsw = keys
+            .binding(crate::test_support::object_id("ACsw"))
+            .expect("ACsw must exist");
         let acsw_unbutton = acsw
             .unbutton_position()
             .expect("Unbuttonpos must be preserved");
@@ -1602,7 +1772,7 @@ mod normalize_tests {
         use crate::model::{ColumnIndex, GridCoordinate, RowIndex};
         let mut keys = CustomKeys::from_text("");
         let normalized_position = keys
-            .binding("ACsw")
+            .binding(crate::test_support::object_id("ACsw"))
             .and_then(|binding| binding.button_position())
             .copied();
         let default_slow_position = GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two);
@@ -1613,7 +1783,7 @@ mod normalize_tests {
         );
         let _plan = keys.resolve_conflicts();
         let binding = keys
-            .binding("ACsw")
+            .binding(crate::test_support::object_id("ACsw"))
             .expect("ACsw must remain after resolve");
         let button_position = binding.button_position().copied();
         let unbutton_position = binding.unbutton_position().copied();
@@ -1690,7 +1860,7 @@ mod normalize_tests {
                     .and_then(|binding| binding.unbutton_position())
                     .copied(),
                 GridSlotId::Command(command_id) => keys
-                    .command(command_id.value())
+                    .command(command_id)
                     .and_then(|binding| binding.button_position())
                     .copied(),
             };
@@ -1811,8 +1981,10 @@ mod normalize_tests {
         use crate::unit::grids::GridRole;
         let graph = ConflictGraph::build(&keys);
         let check = |ability: &str, expected_column: u8, expected_row: u8| {
+            let ability_id = warcraft_api::ObjectLookup::resolve_raw(ability)
+                .unwrap_or_else(|| panic!("{ability} is not a known object"));
             let index = graph
-                .find_node(ability, GridRole::MainCommand)
+                .find_node(ability_id, GridRole::MainCommand)
                 .unwrap_or_else(|| panic!("{ability} not found in conflict graph"));
             let position = graph.node(index).current_position();
             let column = u8::from(position.column());
@@ -1835,7 +2007,9 @@ mod normalize_tests {
     fn resolve_conflicts_cascades_origin_default_to_leftmost_free_cell() {
         let mut keys = CustomKeys::from_text("");
         let _plan = keys.resolve_conflicts();
-        let binding = keys.binding("Aatp").expect("Aatp must have a binding");
+        let binding = keys
+            .binding(crate::test_support::object_id("Aatp"))
+            .expect("Aatp must have a binding");
         let position = binding
             .button_position()
             .expect("Aatp must have a button_position after resolve");
@@ -1929,9 +2103,9 @@ mod normalize_tests {
 mod template_generation_tests {
     use super::super::CustomKeys;
     use crate::grid::layout::GridLayout;
+    use warcraft_api::ObjectLookup;
     use warcraft_api::WarcraftObjectMeta;
-    use warcraft_database::ObjectLookup;
-    use warcraft_database::{WARCRAFT_DATABASE, WARCRAFT_SYSTEM_KEYBINDS};
+    use warcraft_api::{WARCRAFT_DATABASE, WARCRAFT_SYSTEM_KEYBINDS};
 
     fn join_levels(levels: &[&str]) -> Option<String> {
         if levels.is_empty() {
@@ -1945,7 +2119,7 @@ mod template_generation_tests {
         let tmpl = CustomKeys::parse_raw(super::super::DEFAULT_CUSTOM_KEYS);
         let mut out = String::new();
         for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
-            let id = object_id.value();
+            let id = *object_id;
             let WarcraftObjectMeta::Command(cmd_meta) = warcraft_object.meta() else {
                 continue;
             };
@@ -1981,7 +2155,7 @@ mod template_generation_tests {
             out.push('\n');
         }
         for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
-            let id = object_id.value();
+            let id = *object_id;
             let WarcraftObjectMeta::Ability(ability_meta) = warcraft_object.meta() else {
                 continue;
             };
@@ -2099,7 +2273,7 @@ mod template_generation_tests {
             out.push('\n');
         }
         for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
-            let id = object_id.value();
+            let id = *object_id;
             let WarcraftObjectMeta::Unit(_) = warcraft_object.meta() else {
                 continue;
             };
@@ -2139,7 +2313,7 @@ mod template_generation_tests {
             out.push('\n');
         }
         for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
-            let id = object_id.value();
+            let id = *object_id;
             if !matches!(
                 warcraft_object.meta(),
                 WarcraftObjectMeta::Upgrade(_) | WarcraftObjectMeta::Item(_)
@@ -2231,7 +2405,7 @@ mod template_generation_tests {
     }
 
     /// Regenerates CustomKeys.txt from the database. Run this whenever
-    /// warcraft-database changes to keep the default template in sync.
+    /// warcraft-api database changes to keep the default template in sync.
     /// Ignored in CI: this is a regeneration tool, not a spec.
     /// After running, inspect the diff before committing the new template.
     #[test]
@@ -2255,11 +2429,13 @@ mod system_hotkey_command_tests {
     fn set_system_hotkey_replaces_the_binding_key() {
         let initial = SystemBinding::new(Hotkey::VirtualKey(9), SystemKeybindClass::Game, None);
         let mut file = CustomKeys::builder()
-            .system("IsHeroSelect", initial)
+            .system(crate::test_support::object_id("itm1"), initial)
             .build();
         let replacement = KeyCode::try_from(49).expect("49 is a valid key code");
-        file.set_system_hotkey("IsHeroSelect", replacement);
-        let retrieved = file.system("IsHeroSelect").expect("system entry present");
+        file.set_system_hotkey(crate::test_support::object_id("itm1"), replacement);
+        let retrieved = file
+            .system(crate::test_support::object_id("itm1"))
+            .expect("system entry present");
         let expected_code = u32::from(replacement);
         assert_eq!(retrieved.hotkey(), &Hotkey::VirtualKey(expected_code));
     }
@@ -2269,12 +2445,19 @@ mod system_hotkey_command_tests {
         let first = SystemBinding::new(Hotkey::VirtualKey(9), SystemKeybindClass::Game, None);
         let second = SystemBinding::new(Hotkey::VirtualKey(49), SystemKeybindClass::Game, None);
         let mut file = CustomKeys::builder()
-            .system("Ctr1", first)
-            .system("Ctr2", second)
+            .system(crate::test_support::object_id("Ctr1"), first)
+            .system(crate::test_support::object_id("Ctr2"), second)
             .build();
-        file.swap_system_bindings("Ctr1", "Ctr2");
-        let source = file.system("Ctr1").expect("source present");
-        let target = file.system("Ctr2").expect("target present");
+        file.swap_system_bindings(
+            crate::test_support::object_id("Ctr1"),
+            crate::test_support::object_id("Ctr2"),
+        );
+        let source = file
+            .system(crate::test_support::object_id("Ctr1"))
+            .expect("source present");
+        let target = file
+            .system(crate::test_support::object_id("Ctr2"))
+            .expect("target present");
         assert_eq!(source.hotkey(), &Hotkey::VirtualKey(49));
         assert_eq!(target.hotkey(), &Hotkey::VirtualKey(9));
     }

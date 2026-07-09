@@ -1254,13 +1254,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "warcraft-database"
-version = "0.1.0"
-dependencies = [
- "warcraft-api",
-]
-
-[[package]]
 name = "warcraft-extractor"
 version = "0.1.0"
 dependencies = [
@@ -1284,7 +1277,6 @@ version = "0.1.0"
 dependencies = [
  "ddd",
  "warcraft-api",
- "warcraft-database",
 ]
 
 [[package]]

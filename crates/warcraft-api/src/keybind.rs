@@ -1,5 +1,7 @@
 use std::fmt;
 
+use crate::object::WarcraftObjectId;
+
 /// Set of runtime contexts in which a system hotkey is active.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub struct ContextSet {
@@ -136,8 +138,8 @@ impl SystemKeybind {
         }
     }
 
-    pub fn section_id(&self) -> &'static str {
-        self.section_id
+    pub fn section_id(&self) -> WarcraftObjectId {
+        WarcraftObjectId::new(self.section_id)
     }
 
     pub fn comment(&self) -> &'static str {
@@ -246,7 +248,7 @@ mod tests {
             SystemKeybindModifier::Ctrl,
             SystemKeybindClass::Game,
         );
-        assert_eq!(keybind.section_id(), "QuickSave");
+        assert_eq!(keybind.section_id(), WarcraftObjectId::new("QuickSave"));
         assert_eq!(keybind.comment(), "Quick Save");
         assert_eq!(keybind.default_hotkey(), 0x53);
         assert!(matches!(

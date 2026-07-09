@@ -1,7 +1,7 @@
 use crate::{CustomKeys, Hotkey, KeyCode};
 use std::collections::HashMap;
+use warcraft_api::WARCRAFT_SYSTEM_KEYBINDS;
 use warcraft_api::{ContextSet, SystemKeybindModifier, WarcraftObjectId};
-use warcraft_database::WARCRAFT_SYSTEM_KEYBINDS;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub struct EffectiveBinding {
@@ -16,9 +16,8 @@ impl EffectiveBinding {
         default_hotkey: u32,
         default_modifier: SystemKeybindModifier,
     ) -> Self {
-        let section_key = section_id.value();
         let custom_key = custom_keys
-            .and_then(|file| file.system(section_key))
+            .and_then(|file| file.system(section_id))
             .and_then(|binding| match binding.hotkey() {
                 Hotkey::VirtualKey(code) => KeyCode::try_from(*code).ok(),
                 _ => None,
@@ -79,7 +78,7 @@ impl SystemBindingMap {
         let mut bindings_by_section: HashMap<WarcraftObjectId, ResolvedSystemBinding> =
             HashMap::with_capacity(WARCRAFT_SYSTEM_KEYBINDS.len());
         for entry in WARCRAFT_SYSTEM_KEYBINDS.iter() {
-            let section_id = WarcraftObjectId::from(entry.section_id());
+            let section_id = entry.section_id();
             let section_comment = entry.comment().to_string();
             let binding = EffectiveBinding::resolve_from_file(
                 custom_keys,
@@ -171,9 +170,8 @@ impl SystemBindingMap {
     pub fn resolve_section(section_key: &str) -> Option<WarcraftObjectId> {
         let matching_entry = WARCRAFT_SYSTEM_KEYBINDS
             .iter()
-            .find(|entry| entry.section_id() == section_key)?;
-        let canonical_key = matching_entry.section_id();
-        let section_id = WarcraftObjectId::from(canonical_key);
+            .find(|entry| entry.section_id().value() == section_key)?;
+        let section_id = matching_entry.section_id();
         Some(section_id)
     }
 }
@@ -210,7 +208,7 @@ mod tests {
 
     #[test]
     fn has_no_binding_for_an_unknown_section() {
-        let stray_id = warcraft_api::WarcraftObjectId::from("not-a-real-section");
+        let stray_id = crate::test_support::object_id("AHhb");
         let map = SystemBindingMap::build(None);
         assert!(map.binding_for(stray_id).is_none());
     }

@@ -354,11 +354,13 @@ mod builder_tests {
             .un_icon("buttons\\BTNBar.blp")
             .modifier(AbilityModifier::Shift)
             .build();
-        let file = CustomKeys::builder().ability("Ahrl", binding).build();
+        let file = CustomKeys::builder()
+            .ability(crate::test_support::object_id("Ahrl"), binding)
+            .build();
         let serialized = file.to_string();
         let reparsed = CustomKeys::parse_raw(serialized.as_str());
         let reparsed_binding = reparsed
-            .binding("Ahrl")
+            .binding(crate::test_support::object_id("Ahrl"))
             .expect("Ahrl must survive round-trip");
         assert_eq!(reparsed_binding.hotkey(), Some(&Hotkey::Letter('Q')));
         assert_eq!(reparsed_binding.unhotkey(), Some(&Hotkey::Letter('W')));
@@ -392,11 +394,13 @@ mod builder_tests {
     fn ability_builder_function_key_hotkey_round_trips() {
         let hotkey = Hotkey::FunctionKey(5);
         let binding = AbilityBinding::builder().hotkey(hotkey).build();
-        let file = CustomKeys::builder().ability("Ahrl", binding).build();
+        let file = CustomKeys::builder()
+            .ability(crate::test_support::object_id("Ahrl"), binding)
+            .build();
         let serialized = file.to_string();
         let reparsed = CustomKeys::parse_raw(serialized.as_str());
         let parsed_hotkey = reparsed
-            .binding("Ahrl")
+            .binding(crate::test_support::object_id("Ahrl"))
             .and_then(|binding| binding.hotkey());
         assert_eq!(parsed_hotkey, Some(&Hotkey::FunctionKey(5)));
     }
@@ -465,11 +469,13 @@ mod builder_tests {
             .tip("Move Unit")
             .un_tip("Cancel Move")
             .build();
-        let file = CustomKeys::builder().command("CmdMove", binding).build();
+        let file = CustomKeys::builder()
+            .command(crate::test_support::object_id("CmdMove"), binding)
+            .build();
         let serialized = file.to_string();
         let reparsed = CustomKeys::parse_raw(serialized.as_str());
         let reparsed_binding = reparsed
-            .command("CmdMove")
+            .command(crate::test_support::object_id("CmdMove"))
             .expect("CmdMove must survive round-trip");
         assert_eq!(reparsed_binding.hotkey(), Some(&Hotkey::Letter('M')));
         assert_eq!(
@@ -493,8 +499,12 @@ mod builder_tests {
             .hotkey(hotkey)
             .button_position(position)
             .build();
-        let file = CustomKeys::builder().ability("Ahrl", binding).build();
-        let retrieved = file.binding("Ahrl").expect("Ahrl must be present");
+        let file = CustomKeys::builder()
+            .ability(crate::test_support::object_id("Ahrl"), binding)
+            .build();
+        let retrieved = file
+            .binding(crate::test_support::object_id("Ahrl"))
+            .expect("Ahrl must be present");
         assert_eq!(retrieved.hotkey(), Some(&expected));
     }
 
@@ -502,8 +512,13 @@ mod builder_tests {
     fn file_builder_lookup_uses_canonical_case() {
         let hotkey = Hotkey::from('T');
         let binding = AbilityBinding::builder().hotkey(hotkey).build();
-        let file = CustomKeys::builder().ability("Hpal", binding).build();
-        assert!(file.binding("Hpal").is_some());
+        let file = CustomKeys::builder()
+            .ability(crate::test_support::object_id("Hpal"), binding)
+            .build();
+        assert!(
+            file.binding(crate::test_support::object_id("Hpal"))
+                .is_some()
+        );
     }
 
     #[test]
@@ -512,9 +527,9 @@ mod builder_tests {
         let binding_ahbz = AbilityBinding::builder().tip("Second").build();
         let binding_ahhb = AbilityBinding::builder().tip("Third").build();
         let file = CustomKeys::builder()
-            .ability("Ahrl", binding_ahrl)
-            .ability("AHbz", binding_ahbz)
-            .ability("AHhb", binding_ahhb)
+            .ability(crate::test_support::object_id("Ahrl"), binding_ahrl)
+            .ability(crate::test_support::object_id("AHbz"), binding_ahbz)
+            .ability(crate::test_support::object_id("AHhb"), binding_ahhb)
             .build();
         let ids: Vec<&str> = file
             .bindings_in_order()
@@ -528,9 +543,11 @@ mod builder_tests {
         let hotkey = Hotkey::from('A');
         let expected = Hotkey::from('A');
         let binding = CommandBinding::builder().hotkey(hotkey).build();
-        let file = CustomKeys::builder().command("CmdAttack", binding).build();
+        let file = CustomKeys::builder()
+            .command(crate::test_support::object_id("CmdAttack"), binding)
+            .build();
         let retrieved = file
-            .command("CmdAttack")
+            .command(crate::test_support::object_id("CmdAttack"))
             .expect("CmdAttack must be present");
         assert_eq!(retrieved.hotkey(), Some(&expected));
     }
@@ -539,11 +556,11 @@ mod builder_tests {
     fn file_builder_system_entry_is_accessible() {
         let binding = SystemBinding::new(Hotkey::VirtualKey(9), SystemKeybindClass::Game, None);
         let file = CustomKeys::builder()
-            .system("IsHeroSelect", binding)
+            .system(crate::test_support::object_id("itm1"), binding)
             .build();
         let retrieved = file
-            .system("IsHeroSelect")
-            .expect("IsHeroSelect must be present");
+            .system(crate::test_support::object_id("itm1"))
+            .expect("itm1 must be present");
         assert_eq!(retrieved.hotkey(), &Hotkey::VirtualKey(9));
         assert_eq!(retrieved.class(), SystemKeybindClass::Game);
     }
@@ -556,28 +573,47 @@ mod builder_tests {
         let command = CommandBinding::builder().hotkey(command_hotkey).build();
         let system = SystemBinding::new(Hotkey::VirtualKey(9), SystemKeybindClass::Game, None);
         let file = CustomKeys::builder()
-            .ability("Ahrl", ability)
-            .command("CmdAttack", command)
-            .system("IsHeroSelect", system)
+            .ability(crate::test_support::object_id("Ahrl"), ability)
+            .command(crate::test_support::object_id("CmdAttack"), command)
+            .system(crate::test_support::object_id("itm1"), system)
             .build();
-        assert!(file.binding("Ahrl").is_some());
-        assert!(file.command("CmdAttack").is_some());
-        assert!(file.system("IsHeroSelect").is_some());
+        assert!(
+            file.binding(crate::test_support::object_id("Ahrl"))
+                .is_some()
+        );
+        assert!(
+            file.command(crate::test_support::object_id("CmdAttack"))
+                .is_some()
+        );
+        assert!(
+            file.system(crate::test_support::object_id("itm1"))
+                .is_some()
+        );
     }
 
     #[test]
     fn file_builder_ability_is_not_returned_as_command() {
         let hotkey = Hotkey::from('Q');
         let binding = AbilityBinding::builder().hotkey(hotkey).build();
-        let file = CustomKeys::builder().ability("Ahrl", binding).build();
-        assert!(file.command("Ahrl").is_none());
-        assert!(file.system("Ahrl").is_none());
+        let file = CustomKeys::builder()
+            .ability(crate::test_support::object_id("Ahrl"), binding)
+            .build();
+        assert!(
+            file.command(crate::test_support::object_id("Ahrl"))
+                .is_none()
+        );
+        assert!(
+            file.system(crate::test_support::object_id("Ahrl"))
+                .is_none()
+        );
     }
 
     #[test]
     fn file_builder_serializes_ability_section_header() {
         let binding = AbilityBinding::builder().tip("test").build();
-        let file = CustomKeys::builder().ability("AHhb", binding).build();
+        let file = CustomKeys::builder()
+            .ability(crate::test_support::object_id("AHhb"), binding)
+            .build();
         let serialized = file.to_string();
         assert!(
             serialized.contains("[AHhb]"),
@@ -588,7 +624,9 @@ mod builder_tests {
     #[test]
     fn file_builder_serializes_command_section_header() {
         let binding = CommandBinding::builder().tip("Move").build();
-        let file = CustomKeys::builder().command("CmdMove", binding).build();
+        let file = CustomKeys::builder()
+            .command(crate::test_support::object_id("CmdMove"), binding)
+            .build();
         let serialized = file.to_string();
         assert!(
             serialized.contains("[CmdMove]"),
@@ -605,12 +643,16 @@ mod builder_tests {
             .button_position(position)
             .tip("Holy Light")
             .build();
-        let original_file = CustomKeys::builder().ability("Ahrl", binding).build();
+        let original_file = CustomKeys::builder()
+            .ability(crate::test_support::object_id("Ahrl"), binding)
+            .build();
         let serialized = original_file.to_string();
         let reparsed_file = CustomKeys::parse_raw(serialized.as_str());
-        let original_binding = original_file.binding("Ahrl").expect("present in original");
+        let original_binding = original_file
+            .binding(crate::test_support::object_id("Ahrl"))
+            .expect("present in original");
         let reparsed_binding = reparsed_file
-            .binding("Ahrl")
+            .binding(crate::test_support::object_id("Ahrl"))
             .expect("present after round-trip");
         assert_eq!(original_binding.hotkey(), reparsed_binding.hotkey());
         assert_eq!(
@@ -627,10 +669,14 @@ mod builder_tests {
             SystemKeybindClass::ControlGroup,
             Some(SystemKeybindModifier::Ctrl),
         );
-        let file = CustomKeys::builder().system("Ctr1", binding).build();
+        let file = CustomKeys::builder()
+            .system(crate::test_support::object_id("Ctr1"), binding)
+            .build();
         let serialized = file.to_string();
         let reparsed = CustomKeys::parse_raw(serialized.as_str());
-        let retrieved = reparsed.system("Ctr1").expect("must survive round-trip");
+        let retrieved = reparsed
+            .system(crate::test_support::object_id("Ctr1"))
+            .expect("must survive round-trip");
         assert_eq!(retrieved.hotkey(), &Hotkey::VirtualKey(49));
         assert_eq!(retrieved.class(), SystemKeybindClass::ControlGroup);
         assert_eq!(retrieved.modifier(), Some(SystemKeybindModifier::Ctrl));

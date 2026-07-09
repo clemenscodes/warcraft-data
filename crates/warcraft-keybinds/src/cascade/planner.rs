@@ -667,8 +667,8 @@ mod cascade_planner_tests {
             .button_position(collision_position)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", binding.clone());
-        custom_keys.put_ability("AHds", binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), binding.clone());
+        custom_keys.put_ability(crate::test_support::object_id("AHds"), binding);
         let graph = ConflictGraph::build(&custom_keys);
         let queue = AssignmentQueue::build(graph);
         let plan = CascadePlan::from(&queue);
@@ -697,8 +697,8 @@ mod cascade_planner_tests {
             .button_position(collision_position)
             .build();
         let mut custom_keys = CustomKeys::from_text("");
-        custom_keys.put_ability("AHhb", binding.clone());
-        custom_keys.put_ability("AHds", binding);
+        custom_keys.put_ability(crate::test_support::object_id("AHhb"), binding.clone());
+        custom_keys.put_ability(crate::test_support::object_id("AHds"), binding);
         let graph = ConflictGraph::build(&custom_keys);
         let queue = AssignmentQueue::build(graph);
         let plan = CascadePlan::from(&queue);

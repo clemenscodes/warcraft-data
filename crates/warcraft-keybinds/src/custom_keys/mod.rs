@@ -11,7 +11,6 @@ use std::collections::BTreeMap;
 use std::fmt;
 use warcraft_api::WarcraftObjectId;
 
-mod mirrors;
 mod mutate;
 mod normalize;
 mod overlay;
@@ -86,10 +85,8 @@ mod ddd_marker_tests {
 impl CustomKeys {
     pub fn binding(&self, id: impl Into<AbilityId>) -> Option<&AbilityBinding> {
         let ability_id = id.into();
-        let canonical_object_id = self
-            .canonical_object_id_for(ability_id.object_id())
-            .unwrap_or_else(|| ability_id.object_id());
-        self.entries.get(canonical_object_id.value())?.as_ability()
+        let object_id = ability_id.object_id();
+        self.entries.get(&object_id)?.as_ability()
     }
 
     pub(crate) fn binding_or_default_mut(
@@ -97,39 +94,18 @@ impl CustomKeys {
         id: impl Into<AbilityId>,
     ) -> Option<&mut AbilityBinding> {
         let ability_id = id.into();
-        let requested_object_id = ability_id.object_id();
-        let canonical_object_id = self
-            .canonical_object_id_for(requested_object_id)
-            .unwrap_or(requested_object_id);
+        let object_id = ability_id.object_id();
         if !matches!(
-            self.entries.get(canonical_object_id.value()),
+            self.entries.get(&object_id),
             Some(WarcraftKeybinding::Ability(_))
         ) {
-            self.entries.insert(
-                canonical_object_id,
-                WarcraftKeybinding::Ability(AbilityBinding::default()),
-            );
+            let default_binding = AbilityBinding::default();
+            self.entries
+                .insert(object_id, WarcraftKeybinding::Ability(default_binding));
         }
         self.entries
-            .get_mut(canonical_object_id.value())
+            .get_mut(&object_id)
             .and_then(WarcraftKeybinding::as_ability_mut)
-    }
-
-    /// Looks up the actual key under which `requested` is stored, matching
-    /// case-insensitively.  This collapses casing variants from the auto-
-    /// generated database (e.g. `ACvs` and `Acvs` for Envenomed Weapons) so
-    /// they share a single binding in the entries map and produce a single
-    /// section in the serialized output.
-    fn canonical_object_id_for(&self, requested: WarcraftObjectId) -> Option<WarcraftObjectId> {
-        let requested_code = requested.value();
-        if self.entries.contains_key(requested_code) {
-            return Some(requested);
-        }
-        let requested_lowercase = requested_code.to_ascii_lowercase();
-        self.entries
-            .keys()
-            .find(|stored| stored.value().to_ascii_lowercase() == requested_lowercase)
-            .copied()
     }
 
     pub fn bindings_in_order(&self) -> impl Iterator<Item = BindingEntry<'_>> {
@@ -141,39 +117,26 @@ impl CustomKeys {
         })
     }
 
-    pub fn command(&self, name: &str) -> Option<&CommandBinding> {
-        if let Some(entry) = self.entries.get(name)
-            && let Some(command) = entry.as_command()
-        {
-            return Some(command);
-        }
-        let lowercase_name = name.to_ascii_lowercase();
-        let canonical = self
-            .entries
-            .keys()
-            .find(|stored| stored.value().to_ascii_lowercase() == lowercase_name)?;
-        self.entries.get(canonical.value())?.as_command()
+    pub fn command(&self, name: impl Into<WarcraftObjectId>) -> Option<&CommandBinding> {
+        let object_id = name.into();
+        self.entries.get(&object_id)?.as_command()
     }
 
     pub(crate) fn command_or_default_mut(
         &mut self,
         name: impl Into<WarcraftObjectId>,
     ) -> Option<&mut CommandBinding> {
-        let requested_object_id = name.into();
-        let canonical_object_id = self
-            .canonical_object_id_for(requested_object_id)
-            .unwrap_or(requested_object_id);
+        let object_id = name.into();
         if !matches!(
-            self.entries.get(canonical_object_id.value()),
+            self.entries.get(&object_id),
             Some(WarcraftKeybinding::Command(_))
         ) {
-            self.entries.insert(
-                canonical_object_id,
-                WarcraftKeybinding::Command(CommandBinding::default()),
-            );
+            let default_binding = CommandBinding::default();
+            self.entries
+                .insert(object_id, WarcraftKeybinding::Command(default_binding));
         }
         self.entries
-            .get_mut(canonical_object_id.value())
+            .get_mut(&object_id)
             .and_then(WarcraftKeybinding::as_command_mut)
     }
 
@@ -185,20 +148,24 @@ impl CustomKeys {
         })
     }
 
-    pub fn system(&self, id: &str) -> Option<&SystemBinding> {
-        self.entries.get(id)?.as_system()
+    pub fn system(&self, id: impl Into<WarcraftObjectId>) -> Option<&SystemBinding> {
+        let object_id = id.into();
+        self.entries.get(&object_id)?.as_system()
     }
 
-    pub(crate) fn system_mut(&mut self, id: &str) -> Option<&mut SystemBinding> {
-        self.entries.get_mut(id)?.as_system_mut()
+    pub(crate) fn system_mut(
+        &mut self,
+        id: impl Into<WarcraftObjectId>,
+    ) -> Option<&mut SystemBinding> {
+        let object_id = id.into();
+        self.entries.get_mut(&object_id)?.as_system_mut()
     }
 
     pub fn set_system_hotkey(&mut self, section_id: impl Into<WarcraftObjectId>, key: KeyCode) {
         let section_object_id = section_id.into();
-        let section_key = section_object_id.value();
         let hotkey_code = u32::from(key);
         let hotkey = Hotkey::VirtualKey(hotkey_code);
-        if let Some(binding) = self.system_mut(section_key) {
+        if let Some(binding) = self.system_mut(section_object_id) {
             binding.set_hotkey(hotkey);
         }
     }
@@ -233,24 +200,22 @@ impl CustomKeys {
     ) {
         let source_object_id = source_id.into();
         let target_object_id = target_id.into();
-        let source_key = source_object_id.value();
-        let target_key = target_object_id.value();
-        let source_hotkey = self
-            .system(source_key)
-            .and_then(|binding| match binding.hotkey() {
-                Hotkey::VirtualKey(code) => Some(*code),
-                _ => None,
-            });
-        let target_hotkey = self
-            .system(target_key)
-            .and_then(|binding| match binding.hotkey() {
-                Hotkey::VirtualKey(code) => Some(*code),
-                _ => None,
-            });
-        if let Some(binding) = self.system_mut(source_key) {
+        let source_hotkey =
+            self.system(source_object_id)
+                .and_then(|binding| match binding.hotkey() {
+                    Hotkey::VirtualKey(code) => Some(*code),
+                    _ => None,
+                });
+        let target_hotkey =
+            self.system(target_object_id)
+                .and_then(|binding| match binding.hotkey() {
+                    Hotkey::VirtualKey(code) => Some(*code),
+                    _ => None,
+                });
+        if let Some(binding) = self.system_mut(source_object_id) {
             binding.set_hotkey(Hotkey::VirtualKey(target_hotkey.unwrap_or(0)));
         }
-        if let Some(binding) = self.system_mut(target_key) {
+        if let Some(binding) = self.system_mut(target_object_id) {
             binding.set_hotkey(Hotkey::VirtualKey(source_hotkey.unwrap_or(0)));
         }
     }
@@ -276,7 +241,7 @@ impl CustomKeys {
                 binding.unbutton_position().copied()
             }
             GridSlotId::Command(command_name) => {
-                let binding = self.command(command_name.value())?;
+                let binding = self.command(*command_name)?;
                 binding.button_position().copied()
             }
         }

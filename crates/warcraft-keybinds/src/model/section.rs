@@ -9,7 +9,7 @@ use super::ability_binding::{AbilitySlotData, ResearchSlotData};
 use warcraft_api::{
     SystemKeybindClass, SystemKeybindModifier, WarcraftObjectId, WarcraftObjectKind,
 };
-use warcraft_database::{WARCRAFT_DATABASE, WARCRAFT_SYSTEM_KEYBINDS};
+use warcraft_api::{WARCRAFT_DATABASE, WARCRAFT_SYSTEM_KEYBINDS};
 
 /// The type of a CustomKeys.txt section, determined from the game database.
 #[derive(Debug, Clone, Copy)]
@@ -49,13 +49,13 @@ impl SectionResolution {
                 kind: section_kind,
             });
         }
-        let lowercase_id = section_id.to_ascii_lowercase();
-        if let Some(system_keybind) = WARCRAFT_SYSTEM_KEYBINDS
-            .iter()
-            .find(|system_keybind| system_keybind.section_id().to_ascii_lowercase() == lowercase_id)
-        {
-            let section_id_str = system_keybind.section_id();
-            let canonical_id = WarcraftObjectId::new(section_id_str);
+        if let Some(system_keybind) = WARCRAFT_SYSTEM_KEYBINDS.iter().find(|system_keybind| {
+            system_keybind
+                .section_id()
+                .value()
+                .eq_ignore_ascii_case(section_id)
+        }) {
+            let canonical_id = system_keybind.section_id();
             let system_class = system_keybind.class();
             return Some(Self {
                 canonical_id,
