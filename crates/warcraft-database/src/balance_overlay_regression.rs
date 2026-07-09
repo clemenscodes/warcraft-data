@@ -162,7 +162,7 @@ mod tests {
             SearchField::UnitName,
             CatalogVisibility::default(),
         );
-        let ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id()).collect();
+        let ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id().value()).collect();
         assert!(
             ids.contains(&"nanm"),
             "Barbed Arachnathid merc (nanm) must survive the Melee catalog filter",
@@ -343,7 +343,7 @@ mod tests {
                 assert!(
                     !unit_meta.is_campaign(),
                     "{race:?}/Melee leaked campaign unit {}",
-                    entry.unit_id(),
+                    entry.unit_id().value(),
                 );
             }
         }
@@ -363,7 +363,7 @@ mod tests {
             SearchField::UnitName,
             CatalogVisibility::default(),
         );
-        let ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id()).collect();
+        let ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id().value()).collect();
         for placeholder in ["nanc", "nanw"] {
             assert!(
                 !ids.contains(&placeholder),

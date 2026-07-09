@@ -1,7 +1,9 @@
 use std::collections::{HashMap, HashSet};
 use std::sync::LazyLock;
 
-use warcraft_api::{Race, UnitKind, WarcraftObject, WarcraftObjectKind, WarcraftObjectMeta};
+use warcraft_api::{
+    Race, UnitKind, WarcraftObject, WarcraftObjectId, WarcraftObjectKind, WarcraftObjectMeta,
+};
 
 use crate::WARCRAFT_DATABASE;
 use crate::catalog::CommandCatalog;
@@ -184,7 +186,7 @@ static BUILDING_RANKS: LazyLock<HashMap<&'static str, u32>> = LazyLock::new(|| {
 fn availability_key(entry: &CatalogEntry) -> u32 {
     if entry.unit_kind == UnitKind::Building {
         return BUILDING_RANKS
-            .get(entry.unit_id.as_str())
+            .get(entry.unit_id.value())
             .copied()
             .unwrap_or(0);
     }
@@ -209,14 +211,14 @@ fn is_subsequence(needle: &str, haystack: &str) -> bool {
 }
 
 pub struct CatalogEntry {
-    unit_id: String,
+    unit_id: WarcraftObjectId,
     warcraft_object: &'static WarcraftObject,
     unit_kind: UnitKind,
 }
 
 impl CatalogEntry {
-    pub fn unit_id(&self) -> &str {
-        &self.unit_id
+    pub fn unit_id(&self) -> WarcraftObjectId {
+        self.unit_id
     }
 
     pub fn warcraft_object(&self) -> &'static WarcraftObject {
@@ -236,9 +238,9 @@ impl CatalogEntry {
             return None;
         };
         let effective_kind = UnitKindHelpers::effective_kind(unit_meta);
-        let unit_id_string = unit_id.to_string();
+        let canonical_unit_id = WarcraftObjectId::new(unit_id);
         let entry = Self {
-            unit_id: unit_id_string,
+            unit_id: canonical_unit_id,
             warcraft_object,
             unit_kind: effective_kind,
         };
@@ -378,11 +380,11 @@ impl UnitCatalog {
                 {
                     return None;
                 }
-                let unit_id_string = object_id.value().to_string();
+                let entry_unit_id = WarcraftObjectId::new(object_id.value());
                 let fuzzy_only = if let Some(query) = lowercase_query.as_deref() {
                     let query_match = match search_field {
                         SearchField::UnitName => {
-                            let id_lower = unit_id_string.to_ascii_lowercase();
+                            let id_lower = entry_unit_id.value().to_ascii_lowercase();
                             // Check all names — some units have alternate display
                             // names.
                             let names_lower: String = warcraft_object
@@ -418,7 +420,7 @@ impl UnitCatalog {
                             // abilities. No fuzzy fallback: subsequence over the
                             // concatenated haystack would match almost anything.
                             let ability_haystack = UNIT_ABILITY_HAYSTACK
-                                .get(unit_id_string.as_str())
+                                .get(entry_unit_id.value())
                                 .map(String::as_str)
                                 .unwrap_or("");
                             let is_direct = ability_haystack.contains(query)
@@ -448,7 +450,7 @@ impl UnitCatalog {
                     return None;
                 }
                 let entry = CatalogEntry {
-                    unit_id: unit_id_string,
+                    unit_id: entry_unit_id,
                     warcraft_object,
                     unit_kind: effective_kind,
                 };
@@ -470,22 +472,22 @@ impl UnitCatalog {
         // With `expand_variants` on, the collapse is skipped: every member
         // lists as its own entry, deduped only by its own id.
         let expand_variants = visibility.expand_variants();
-        let mut seen_display_ids: HashSet<String> = HashSet::new();
+        let mut seen_display_ids: HashSet<WarcraftObjectId> = HashSet::new();
         let mut entries: Vec<CatalogEntry> = Vec::new();
         for entry in visible_entries {
             if expand_variants {
-                let entry_id = entry.unit_id.clone();
+                let entry_id = entry.unit_id;
                 if !seen_display_ids.insert(entry_id) {
                     continue;
                 }
                 entries.push(entry);
                 continue;
             }
-            let canonical_lookup = VariantUnits::canonical_for(&entry.unit_id);
+            let canonical_lookup = VariantUnits::canonical_for(entry.unit_id.value());
             if let Some(canonical) = canonical_lookup
-                && entry.unit_id != canonical
+                && entry.unit_id.value() != canonical
             {
-                let canonical_id = canonical.to_string();
+                let canonical_id = WarcraftObjectId::new(canonical);
                 if !seen_display_ids.insert(canonical_id) {
                     continue;
                 }
@@ -493,7 +495,7 @@ impl UnitCatalog {
                     entries.push(canonical_entry);
                 }
             } else {
-                let entry_id = entry.unit_id.clone();
+                let entry_id = entry.unit_id;
                 if !seen_display_ids.insert(entry_id) {
                     continue;
                 }
@@ -558,7 +560,7 @@ mod tests {
             curated,
         )
         .iter()
-        .map(|entry| entry.unit_id().to_string())
+        .map(|entry| entry.unit_id().value().to_string())
         .collect()
     }
 
@@ -572,7 +574,7 @@ mod tests {
             visibility,
         )
         .iter()
-        .map(|entry| entry.unit_id().to_string())
+        .map(|entry| entry.unit_id().value().to_string())
         .collect()
     }
 
@@ -586,7 +588,7 @@ mod tests {
             visibility,
         )
         .iter()
-        .map(|entry| entry.unit_id().to_string())
+        .map(|entry| entry.unit_id().value().to_string())
         .collect()
     }
 
@@ -841,7 +843,7 @@ mod tests {
             SearchField::UnitName,
             CatalogVisibility::default(),
         );
-        let ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id()).collect();
+        let ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id().value()).collect();
         assert!(
             ids.contains(&"osp4"),
             "searching osp1 must surface canonical osp4"
@@ -872,7 +874,7 @@ mod tests {
             SearchField::UnitName,
             CatalogVisibility::default(),
         );
-        let entry_ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id()).collect();
+        let entry_ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id().value()).collect();
         for required_id in ["nbnb", "nanm"] {
             assert!(
                 entry_ids.contains(&required_id),
@@ -898,7 +900,7 @@ mod tests {
             SearchField::UnitName,
             CatalogVisibility::default(),
         );
-        let entry_ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id()).collect();
+        let entry_ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id().value()).collect();
         assert!(
             entry_ids.contains(&"nogm"),
             "search for 'Ogre Mauler' missing nogm (purchasable mercenary unit)",
@@ -922,7 +924,7 @@ mod tests {
         let position = |unit_id: &str| {
             entries
                 .iter()
-                .position(|entry| entry.unit_id() == unit_id)
+                .position(|entry| entry.unit_id().value() == unit_id)
                 .unwrap_or_else(|| panic!("Human/Melee soldiers missing {unit_id}"))
         };
         let footman = position("hfoo");
@@ -959,7 +961,7 @@ mod tests {
             let position = |unit_id: &str| {
                 entries
                     .iter()
-                    .position(|entry| entry.unit_id() == unit_id)
+                    .position(|entry| entry.unit_id().value() == unit_id)
                     .unwrap_or_else(|| panic!("{race:?} buildings missing {unit_id}"))
             };
             let tier_one = position(chain[0]);
@@ -996,7 +998,7 @@ mod tests {
             SearchField::UnitName,
             CatalogVisibility::default(),
         );
-        let entry_ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id()).collect();
+        let entry_ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id().value()).collect();
         for campaign_id in ["nmyr", "nnsw", "ndrl", "nbel"] {
             assert!(
                 !entry_ids.contains(&campaign_id),
@@ -1020,7 +1022,7 @@ mod tests {
                 SearchField::Ability,
                 CatalogVisibility::default(),
             );
-            let entry_ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id()).collect();
+            let entry_ids: Vec<&str> = entries.iter().map(|entry| entry.unit_id().value()).collect();
             for carrier_id in ["nkog", "nmsn", "nsns"] {
                 assert!(
                     entry_ids.contains(&carrier_id),
@@ -1049,7 +1051,7 @@ mod tests {
         );
         let ability_name_ids: Vec<&str> = by_ability_name
             .iter()
-            .map(|entry| entry.unit_id())
+            .map(|entry| entry.unit_id().value())
             .collect();
         assert!(
             !ability_name_ids.contains(&"nkog"),
@@ -1063,7 +1065,7 @@ mod tests {
             SearchField::UnitName,
             CatalogVisibility::default(),
         );
-        let unit_name_ids: Vec<&str> = by_unit_name.iter().map(|entry| entry.unit_id()).collect();
+        let unit_name_ids: Vec<&str> = by_unit_name.iter().map(|entry| entry.unit_id().value()).collect();
         assert!(
             unit_name_ids.contains(&"hfoo"),
             "unit-name search 'Footman' should still find the Footman",

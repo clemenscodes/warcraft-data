@@ -4,7 +4,7 @@
 //! (ARCHITECTURE R3), so it lives here. The renderer hands over the raw browse
 //! inputs and reads back the already-shaped [`UnitListing`].
 
-use warcraft_api::{Race, UnitKind};
+use warcraft_api::{Race, UnitKind, WarcraftObjectId};
 use warcraft_database::{CatalogVisibility, SearchField, UnitCatalog, UnitMode};
 
 /// The inputs to a unit-list browse: the active race and mode, the current
@@ -47,13 +47,13 @@ impl UnitListingRequest {
 /// selects it when the current selection falls outside the results.
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub struct UnitListingEntry {
-    unit_id: String,
+    unit_id: WarcraftObjectId,
     unit_kind: UnitKind,
 }
 
 impl UnitListingEntry {
-    pub fn unit_id(&self) -> &str {
-        &self.unit_id
+    pub fn unit_id(&self) -> WarcraftObjectId {
+        self.unit_id
     }
 
     pub fn unit_kind(&self) -> UnitKind {
@@ -92,7 +92,7 @@ impl UnitListing {
         for entry in entries {
             let entry_kind = entry.unit_kind();
             if first_result.is_none() {
-                let unit_id = entry.unit_id().to_owned();
+                let unit_id = entry.unit_id();
                 let first_entry = UnitListingEntry {
                     unit_id,
                     unit_kind: entry_kind,
@@ -161,15 +161,15 @@ impl UnitCategoryRequest {
 /// turns the icon path into a URL — that is presentation, so it stays out here.
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub struct UnitCategoryEntry {
-    unit_id: String,
+    unit_id: WarcraftObjectId,
     unit_kind: UnitKind,
     display_name: String,
     icon_database_path: Option<String>,
 }
 
 impl UnitCategoryEntry {
-    pub fn unit_id(&self) -> &str {
-        &self.unit_id
+    pub fn unit_id(&self) -> WarcraftObjectId {
+        self.unit_id
     }
 
     pub fn unit_kind(&self) -> UnitKind {
@@ -217,7 +217,7 @@ impl UnitCategoryListing {
             let icons = warcraft_object.icons();
             let first_icon = icons.first().copied();
             let icon_database_path = first_icon.map(|icon_path| icon_path.to_owned());
-            let unit_id = catalog_entry.unit_id().to_owned();
+            let unit_id = catalog_entry.unit_id();
             let unit_kind = catalog_entry.unit_kind();
             let entry = UnitCategoryEntry {
                 unit_id,
@@ -266,7 +266,7 @@ mod tests {
         let first = listing
             .first_result()
             .expect("a human melee browse should have a first result");
-        assert!(!first.unit_id().is_empty());
+        assert!(!first.unit_id().value().is_empty());
         assert!(
             listing.category_kinds().contains(&first.unit_kind()),
             "the first result's category must appear in the category list"
@@ -324,7 +324,7 @@ mod tests {
             "the first category should contain at least one unit"
         );
         for entry in category_listing.entries() {
-            assert!(!entry.unit_id().is_empty());
+            assert!(!entry.unit_id().value().is_empty());
             assert!(!entry.display_name().is_empty());
             assert_eq!(entry.unit_kind(), category_kind);
         }

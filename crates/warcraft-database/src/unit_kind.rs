@@ -1,4 +1,4 @@
-use warcraft_api::{Race, UnitKind, UnitMeta};
+use warcraft_api::{Race, UnitKind, UnitMeta, WarcraftObjectId};
 
 use crate::unit_catalog::{CatalogVisibility, SearchField, UnitCatalog};
 use crate::unit_mode::UnitMode;
@@ -64,7 +64,7 @@ impl UnitKindHelpers {
         }
     }
 
-    pub fn default_unit_id_for(race: Race, mode: UnitMode) -> Option<String> {
+    pub fn default_unit_id_for(race: Race, mode: UnitMode) -> Option<WarcraftObjectId> {
         let curated = CatalogVisibility::default();
         let first_entry = UnitCatalog::entries_for(
             Some(race),
@@ -76,6 +76,6 @@ impl UnitKindHelpers {
         )
         .into_iter()
         .next();
-        first_entry.map(|entry| entry.unit_id().to_owned())
+        first_entry.map(|entry| entry.unit_id())
     }
 }
