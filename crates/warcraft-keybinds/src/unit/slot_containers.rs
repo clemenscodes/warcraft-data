@@ -59,6 +59,18 @@ impl UnitSlotContainers {
         self.build_menu.clone()
     }
 
+    /// Whether the given slot belongs to this unit's build menu, matched
+    /// case-insensitively. Which container an inspected ability edits against is a
+    /// domain membership fact — the renderer must not re-derive it by scanning the
+    /// slot lists itself (ARCHITECTURE R3).
+    pub fn build_menu_contains(&self, slot: &GridSlotId) -> bool {
+        let slot_id = slot.as_str();
+        self.build_menu.as_ref().is_some_and(|list| {
+            list.iter()
+                .any(|candidate| candidate.as_str().eq_ignore_ascii_case(slot_id))
+        })
+    }
+
     pub fn uprooted(&self) -> Option<Rc<[GridSlotId]>> {
         self.uprooted.clone()
     }
@@ -90,5 +102,31 @@ mod tests {
         let containers = UnitSlotContainers::resolve(crate::test_support::object_id("AHhb"));
         assert!(containers.command_card().is_empty());
         assert!(containers.build_menu().is_none());
+    }
+
+    #[test]
+    fn build_menu_contains_matches_its_own_slots() {
+        let containers = UnitSlotContainers::resolve(crate::test_support::object_id("hpea"));
+        let build_menu = containers
+            .build_menu()
+            .expect("the peasant (hpea) has a build menu");
+        assert!(!build_menu.is_empty(), "the build menu should be populated");
+        for slot in build_menu.iter() {
+            assert!(
+                containers.build_menu_contains(slot),
+                "every build-menu slot must report as contained"
+            );
+        }
+    }
+
+    #[test]
+    fn build_menu_contains_is_false_without_a_build_menu() {
+        let containers = UnitSlotContainers::resolve(crate::test_support::object_id("hfoo"));
+        assert!(containers.build_menu().is_none());
+        let command_card = containers.command_card();
+        let slot = command_card
+            .first()
+            .expect("the footman has a command card");
+        assert!(!containers.build_menu_contains(slot));
     }
 }

@@ -1,5 +1,6 @@
 use crate::custom_keys::CustomKeys;
 use crate::display::ability_cell::{AbilityCell, AbilityIconPath};
+use crate::grid::layout::GridLayout;
 use crate::identity::hotkey_token::HotkeyToken;
 use crate::identity::slot::GridSlotId;
 use crate::text::color_codes::WarcraftColorCodes;
@@ -377,6 +378,33 @@ impl InspectorDetail {
         self.research_button_position
     }
 
+    /// The hotkey effectively shown for this ability under `layout`: its own assigned
+    /// token, or — lacking one — the letter the grid layout places at its button
+    /// position. Resolving the ability's own token against the layout's letter is
+    /// domain work the renderer must not do itself (ARCHITECTURE R3).
+    pub fn effective_hotkey(&self, layout: &GridLayout) -> Option<HotkeyToken> {
+        let layout_token = Self::layout_token(layout, self.button_position);
+        self.hotkey_token.or(layout_token)
+    }
+
+    /// The research hotkey effectively shown under `layout`: its own research token, or
+    /// the layout letter at the research button position — falling back to the plain
+    /// button position, since a unit without a distinct research layout mirrors its
+    /// command card.
+    pub fn effective_research_hotkey(&self, layout: &GridLayout) -> Option<HotkeyToken> {
+        let position = self.research_button_position.or(self.button_position);
+        let layout_token = Self::layout_token(layout, position);
+        self.research_hotkey_token.or(layout_token)
+    }
+
+    fn layout_token(layout: &GridLayout, position: Option<GridCoordinate>) -> Option<HotkeyToken> {
+        let coordinate = position?;
+        let column = coordinate.column();
+        let row = coordinate.row();
+        let character = layout.letter_at(column, row)?;
+        HotkeyToken::try_from(character).ok()
+    }
+
     pub fn tip(&self) -> Option<&str> {
         self.tip.as_deref()
     }
@@ -447,3 +475,52 @@ impl InspectorDetail {
 }
 
 impl ddd::ReadModel for InspectorDetail {}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::grid::layout::GridLayout;
+    use crate::model::{ColumnIndex, RowIndex};
+
+    impl InspectorDetail {
+        fn positioned(
+            hotkey_token: Option<HotkeyToken>,
+            button_position: Option<GridCoordinate>,
+        ) -> Self {
+            Self {
+                hotkey_token,
+                button_position,
+                ..Self::default()
+            }
+        }
+    }
+
+    #[test]
+    fn effective_hotkey_prefers_the_abilitys_own_token() {
+        let own_token = HotkeyToken::try_from('R').ok();
+        let position = GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero);
+        let detail = InspectorDetail::positioned(own_token, Some(position));
+        let layout = GridLayout::qwerty_grid();
+        assert_eq!(detail.effective_hotkey(&layout), own_token);
+    }
+
+    #[test]
+    fn effective_hotkey_falls_back_to_the_layout_letter() {
+        let position = GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero);
+        let detail = InspectorDetail::positioned(None, Some(position));
+        let layout = GridLayout::qwerty_grid();
+        let letter = layout
+            .letter_at(ColumnIndex::Zero, RowIndex::Zero)
+            .expect("the qwerty grid has a letter at its top-left cell");
+        let expected = HotkeyToken::try_from(letter).ok();
+        assert!(expected.is_some());
+        assert_eq!(detail.effective_hotkey(&layout), expected);
+    }
+
+    #[test]
+    fn effective_hotkey_is_none_without_a_token_or_position() {
+        let detail = InspectorDetail::positioned(None, None);
+        let layout = GridLayout::qwerty_grid();
+        assert_eq!(detail.effective_hotkey(&layout), None);
+    }
+}
