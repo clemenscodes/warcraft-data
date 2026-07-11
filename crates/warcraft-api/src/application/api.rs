@@ -1,9 +1,11 @@
 //! The public read API over the bundled Warcraft III object database.
 
-use crate::db::WARCRAFT_DATABASE;
+use crate::application::ability::AbilityApi;
+use crate::application::unit::UnitApi;
 use crate::domain::identity::WarcraftObjectId;
 use crate::domain::object::WarcraftObject;
 use crate::infrastructure::database::WarcraftDatabase;
+use crate::infrastructure::database::generated::WARCRAFT_DATABASE;
 
 /// The single public entry point to the game data. Immutable and cheap to
 /// construct (`WarcraftApi::default()`); every method reads through the
@@ -48,7 +50,9 @@ impl WarcraftApi {
     }
 
     /// Iterate every known object with its id.
-    pub fn iter(&self) -> impl Iterator<Item = (&'static WarcraftObjectId, &'static WarcraftObject)> {
+    pub fn iter(
+        &self,
+    ) -> impl Iterator<Item = (&'static WarcraftObjectId, &'static WarcraftObject)> {
         self.database.iter()
     }
 
@@ -60,6 +64,18 @@ impl WarcraftApi {
     /// Whether the database is empty (it never is in practice).
     pub fn is_empty(&self) -> bool {
         self.len() == 0
+    }
+
+    // --- domain sub-APIs ---
+
+    /// The unit domain sub-API.
+    pub fn unit(&self) -> UnitApi {
+        UnitApi::new(self.database)
+    }
+
+    /// The ability domain sub-API.
+    pub fn ability(&self) -> AbilityApi {
+        AbilityApi::new(self.database)
     }
 
     // --- derived queries (formerly `ObjectLookup`) ---
@@ -120,5 +136,42 @@ mod tests {
     fn unknown_id_resolves_to_none() {
         let api = WarcraftApi::default();
         assert!(api.resolve("this-is-not-a-real-id").is_none());
+    }
+
+    #[test]
+    fn unit_api_rejects_non_units_and_ability_api_accepts_them() {
+        let api = WarcraftApi::default();
+        let storm_bolt = api.resolve("AHtb").expect("Storm Bolt exists");
+        assert!(
+            api.unit().get(storm_bolt).is_none(),
+            "an ability is not a unit"
+        );
+        assert!(
+            api.ability().get(storm_bolt).is_some(),
+            "Storm Bolt is an ability"
+        );
+    }
+
+    #[test]
+    fn ability_carriers_are_the_reverse_of_unit_abilities() {
+        let api = WarcraftApi::default();
+        // Find the first unit that resolves at least one ability, then check the
+        // ability lists that unit back as a carrier.
+        let (unit_id, ability_id) = api
+            .unit()
+            .all()
+            .find_map(|unit| {
+                api.unit()
+                    .abilities(unit.id())
+                    .next()
+                    .map(|ability| (unit.id(), ability.id()))
+            })
+            .expect("some unit resolves at least one ability");
+        assert!(
+            api.ability()
+                .carriers(ability_id)
+                .any(|carrier| carrier.id() == unit_id),
+            "ability must list its carrier unit back",
+        );
     }
 }

@@ -2,7 +2,9 @@
 //! through the public `WarcraftApi` only — they cannot reach the backing store
 //! or its type, which is exactly the encapsulation guarantee we want to hold.
 
-use warcraft_api::{ItemClass, Race, UnitKind, WarcraftApi, WarcraftObjectKind, WarcraftObjectMeta};
+use warcraft_api::{
+    ItemClass, Race, UnitKind, WarcraftApi, WarcraftObjectKind, WarcraftObjectMeta,
+};
 
 /// Exact expected object count — a golden pin, deliberately zero-tolerance.
 /// The test fails on ANY deviation, up or down, so that every object a game
@@ -53,7 +55,10 @@ fn every_object_has_valid_names_and_icons() {
             assert!(!name.trim().is_empty(), "object contains empty name");
         }
         for icon in object.icons() {
-            assert!(icon.ends_with(".blp"), "icon does not end with .blp: {icon}");
+            assert!(
+                icon.ends_with(".blp"),
+                "icon does not end with .blp: {icon}"
+            );
         }
     }
 }

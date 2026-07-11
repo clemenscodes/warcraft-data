@@ -5,8 +5,10 @@ use clap::Parser;
 use warcraft_api::GridCoordinate;
 use warcraft_extractor::*;
 
-const DEFAULT_DATABASE_FILE: &str =
-    concat!(env!("CARGO_WORKSPACE_DIR"), "crates/warcraft-api/src/db.rs");
+const DEFAULT_DATABASE_FILE: &str = concat!(
+    env!("CARGO_WORKSPACE_DIR"),
+    "crates/warcraft-api/src/infrastructure/database/generated.rs"
+);
 
 #[derive(Parser)]
 #[command(

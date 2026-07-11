@@ -2,4 +2,9 @@
 //! `ApplicationService` through which every consumer reads the game database;
 //! the backing store and its type are never exposed.
 
+pub(crate) mod ability;
 pub(crate) mod api;
+pub(crate) mod command_catalog;
+pub(crate) mod unit;
+pub(crate) mod unit_catalog;
+pub(crate) mod view;
