@@ -1,0 +1,11 @@
+[package]
+name = "warcraft-primitives"
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+description = "Byte-faithful primitive value wrappers mirroring Warcraft III's in-memory representation."
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true

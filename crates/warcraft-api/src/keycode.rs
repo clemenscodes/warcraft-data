@@ -1,5 +1,6 @@
 use std::fmt;
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct KeyCode {
     value: u32,
 }
@@ -73,3 +74,6 @@ impl fmt::Display for KeyCode {
         }
     }
 }
+
+impl ddd::Layered for KeyCode { type Layer = ddd::DomainLayer; }
+impl ddd::ValueObject for KeyCode {}

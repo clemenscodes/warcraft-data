@@ -10,5 +10,5 @@ description = "Parser and serializer for Warcraft III CustomKeys.txt files."
 path = "src/lib.rs"
 
 [dependencies]
-ddd = { git = "https://github.com/clemenscodes/ddd", tag = "v0.1.0" }
+ddd.workspace = true
 warcraft-api = { path = "../warcraft-api" }

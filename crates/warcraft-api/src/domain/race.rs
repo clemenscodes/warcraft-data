@@ -104,3 +104,13 @@ impl AllRaces {
         races.into_iter()
     }
 }
+
+// DDD roles: a race (and its per-race marker types) is an immutable Value Object.
+impl ddd::Layered for Race {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for Race {}
+impl ddd::Layered for AllRaces {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for AllRaces {}

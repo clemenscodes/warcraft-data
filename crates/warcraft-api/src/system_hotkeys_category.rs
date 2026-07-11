@@ -116,3 +116,6 @@ impl fmt::Display for SystemHotkeysCategory {
         formatter.write_str(label)
     }
 }
+
+impl ddd::Layered for SystemHotkeysCategory { type Layer = ddd::DomainLayer; }
+impl ddd::ValueObject for SystemHotkeysCategory {}

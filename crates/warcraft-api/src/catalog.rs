@@ -2,7 +2,7 @@ use std::sync::LazyLock;
 
 use crate::{Race, UnitKind, UnitMeta, WarcraftObjectId, WarcraftObjectKind, WarcraftObjectMeta};
 
-use crate::WARCRAFT_DATABASE;
+use crate::WarcraftApi;
 
 const ATTACKING_BUILDING_IDS: &[WarcraftObjectId] = &[
     WarcraftObjectId::new("hgtw"),
@@ -33,7 +33,7 @@ impl BuildingTraits {
     }
 
     pub fn can_uproot(object_id: WarcraftObjectId) -> bool {
-        let Some(warcraft_object) = WARCRAFT_DATABASE.object(object_id) else {
+        let Some(warcraft_object) = WarcraftApi::default().object(object_id) else {
             return false;
         };
         let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
@@ -46,7 +46,7 @@ impl BuildingTraits {
     }
 
     fn ability_is_root(ability_id: WarcraftObjectId) -> bool {
-        let Some(ability_object) = WARCRAFT_DATABASE.object(ability_id) else {
+        let Some(ability_object) = WarcraftApi::default().object(ability_id) else {
             return false;
         };
         let Some(ability_code) = ability_object.ability_code() else {
@@ -67,7 +67,7 @@ impl BuildingTraits {
     }
 
     pub fn ability_is_on_alt_state_unit(ability_id: WarcraftObjectId) -> bool {
-        for (unit_id_obj, warcraft_object) in WARCRAFT_DATABASE.iter() {
+        for (unit_id_obj, warcraft_object) in WarcraftApi::default().iter() {
             if !Self::unit_starts_in_toggle_alt_state(*unit_id_obj) {
                 continue;
             }
@@ -83,7 +83,7 @@ impl BuildingTraits {
     }
 
     pub fn is_burrowed_form(unit_id: WarcraftObjectId) -> bool {
-        let Some(warcraft_object) = WARCRAFT_DATABASE.object(unit_id) else {
+        let Some(warcraft_object) = WarcraftApi::default().object(unit_id) else {
             return false;
         };
         let names = warcraft_object.names();
@@ -95,7 +95,7 @@ impl BuildingTraits {
     }
 
     pub fn ability_has_alt_state(ability_id: WarcraftObjectId) -> bool {
-        let Some(warcraft_object) = WARCRAFT_DATABASE.object(ability_id) else {
+        let Some(warcraft_object) = WarcraftApi::default().object(ability_id) else {
             return false;
         };
         warcraft_object.un_tip().is_some() || warcraft_object.un_ubertip().is_some()
@@ -133,7 +133,7 @@ impl CommandCatalog {
     }
 
     pub fn known_command(wanted_command: WarcraftObjectId) -> Option<WarcraftObjectId> {
-        let warcraft_object = WARCRAFT_DATABASE.object(wanted_command)?;
+        let warcraft_object = WarcraftApi::default().object(wanted_command)?;
         if warcraft_object.kind() == WarcraftObjectKind::Command {
             Some(warcraft_object.id())
         } else {
@@ -356,7 +356,7 @@ mod catalog_tests {
     }
 
     fn primary_commands_for_unit(unit_id: &str) -> Vec<WarcraftObjectId> {
-        let warcraft_object = WARCRAFT_DATABASE.by_id(unit_id).expect("unit exists");
+        let warcraft_object = WarcraftApi::default().by_id(unit_id).expect("unit exists");
         let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
             panic!("{unit_id} is not a unit");
         };
@@ -415,3 +415,9 @@ mod catalog_tests {
         assert_eq!(command_name, cancel_command);
     }
 }
+
+// DDD roles.
+impl ddd::Layered for BuildingTraits { type Layer = ddd::DomainLayer; }
+impl ddd::DomainService for BuildingTraits {}
+impl ddd::Layered for CommandCatalog { type Layer = ddd::ApplicationLayer; }
+impl ddd::ApplicationService for CommandCatalog {}

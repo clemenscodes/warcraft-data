@@ -5,10 +5,10 @@ use crate::{
     Race, UnitKind, WarcraftObject, WarcraftObjectId, WarcraftObjectKind, WarcraftObjectMeta,
 };
 
-use crate::WARCRAFT_DATABASE;
+use crate::WarcraftApi;
 use crate::catalog::CommandCatalog;
 use crate::unit_kind::UnitKindHelpers;
-use crate::unit_mode::UnitMode;
+use crate::domain::unit::UnitMode;
 use crate::variant_groups::VariantUnits;
 
 /// What a search query is matched against. The sidebar exposes this as a
@@ -67,7 +67,7 @@ impl CatalogVisibility {
 /// placeholder. Built once; the database is static.
 static SOLD_UNIT_IDS: LazyLock<HashSet<WarcraftObjectId>> = LazyLock::new(|| {
     let mut sold_unit_ids = HashSet::new();
-    for (_seller_object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
+    for (_seller_object_id, warcraft_object) in WarcraftApi::default().iter() {
         let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
             continue;
         };
@@ -89,7 +89,7 @@ static SOLD_UNIT_IDS: LazyLock<HashSet<WarcraftObjectId>> = LazyLock::new(|| {
 /// is static, so per-keystroke matching is one lookup plus a `contains`.
 static UNIT_ABILITY_HAYSTACK: LazyLock<HashMap<WarcraftObjectId, String>> = LazyLock::new(|| {
     let mut unit_ability_haystack: HashMap<WarcraftObjectId, String> = HashMap::new();
-    for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
+    for (object_id, warcraft_object) in WarcraftApi::default().iter() {
         let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
             continue;
         };
@@ -100,7 +100,7 @@ static UNIT_ABILITY_HAYSTACK: LazyLock<HashMap<WarcraftObjectId, String>> = Lazy
         let mut haystack = String::new();
         for ability_id in ability_ids {
             let ability_id_value = ability_id.value();
-            let Some(ability_object) = WARCRAFT_DATABASE.object(*ability_id) else {
+            let Some(ability_object) = WarcraftApi::default().object(*ability_id) else {
                 continue;
             };
             let WarcraftObjectMeta::Ability(ability_meta) = ability_object.meta() else {
@@ -136,7 +136,7 @@ static UNIT_ABILITY_HAYSTACK: LazyLock<HashMap<WarcraftObjectId, String>> = Lazy
 static BUILDING_RANKS: LazyLock<HashMap<WarcraftObjectId, u32>> = LazyLock::new(|| {
     let mut gold_cost: HashMap<WarcraftObjectId, u32> = HashMap::new();
     let mut upgrade_parent: HashMap<WarcraftObjectId, WarcraftObjectId> = HashMap::new();
-    for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
+    for (object_id, warcraft_object) in WarcraftApi::default().iter() {
         let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
             continue;
         };
@@ -147,7 +147,7 @@ static BUILDING_RANKS: LazyLock<HashMap<WarcraftObjectId, u32>> = LazyLock::new(
         gold_cost.insert(source_id, unit_meta.gold_cost());
         for research_id in unit_meta.researches() {
             let target_id = *research_id;
-            let target_is_building = WARCRAFT_DATABASE.object(target_id).is_some_and(|object| {
+            let target_is_building = WarcraftApi::default().object(target_id).is_some_and(|object| {
                 matches!(
                     object.meta(),
                     WarcraftObjectMeta::Unit(target_meta)
@@ -228,7 +228,7 @@ impl CatalogEntry {
     /// database. Used when a weaker variant collapses onto its strongest
     /// sibling, which may not itself have matched the active filter or query.
     fn canonical_entry(unit_id: WarcraftObjectId) -> Option<Self> {
-        let warcraft_object = WARCRAFT_DATABASE.object(unit_id)?;
+        let warcraft_object = WarcraftApi::default().object(unit_id)?;
         let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
             return None;
         };
@@ -246,7 +246,7 @@ pub struct UnitCatalog;
 
 impl UnitCatalog {
     /// The single source of truth for "which units belong in a list view".
-    /// Walks `WARCRAFT_DATABASE`, applies race/mode/kind/search filters, and
+    /// Walks `WarcraftApi`, applies race/mode/kind/search filters, and
     /// sorts by category priority then display name.
     ///
     /// Variant groups collapse to a single entry (see `VariantUnits`): leveled
@@ -284,7 +284,7 @@ impl UnitCatalog {
             is_fuzzy: bool,
         }
 
-        let candidates: Vec<Candidate> = WARCRAFT_DATABASE
+        let candidates: Vec<Candidate> = WarcraftApi::default()
             .iter()
             .filter_map(|(object_id, warcraft_object)| {
                 if warcraft_object.kind() != WarcraftObjectKind::Unit {
@@ -318,7 +318,7 @@ impl UnitCatalog {
                     .iter()
                     .chain(unit_meta.hero_abilities().iter());
                 let has_visible_ability = all_abilities.any(|ability_id| {
-                    let Some(ability_object) = WARCRAFT_DATABASE.object(*ability_id) else {
+                    let Some(ability_object) = WarcraftApi::default().object(*ability_id) else {
                         return false;
                     };
                     let WarcraftObjectMeta::Ability(ability_meta) = ability_object.meta() else {
@@ -1080,3 +1080,12 @@ mod tests {
         );
     }
 }
+
+// DDD roles.
+impl ddd::Layered for SearchField { type Layer = ddd::DomainLayer; }
+impl ddd::ValueObject for SearchField {}
+impl ddd::Layered for CatalogVisibility { type Layer = ddd::DomainLayer; }
+impl ddd::ValueObject for CatalogVisibility {}
+impl ddd::ReadModel for CatalogEntry {}
+impl ddd::Layered for UnitCatalog { type Layer = ddd::ApplicationLayer; }
+impl ddd::ApplicationService for UnitCatalog {}

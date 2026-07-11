@@ -1,7 +1,7 @@
 use crate::{Race, UnitKind, UnitMeta, WarcraftObjectId};
 
 use crate::unit_catalog::{CatalogVisibility, SearchField, UnitCatalog};
-use crate::unit_mode::UnitMode;
+use crate::domain::unit::UnitMode;
 
 pub struct UnitKindHelpers;
 
@@ -79,3 +79,7 @@ impl UnitKindHelpers {
         first_entry.map(|entry| entry.unit_id())
     }
 }
+
+// DDD role: stateless domain logic over unit taxonomy.
+impl ddd::Layered for UnitKindHelpers { type Layer = ddd::DomainLayer; }
+impl ddd::DomainService for UnitKindHelpers {}

@@ -56,3 +56,6 @@ pub static HIDDEN_UNIT_ABILITIES: &[HiddenUnitAbility] = &[
     HiddenUnitAbility::new(WarcraftObjectId::new("hphx"), WarcraftObjectId::new("Apxf")),
     HiddenUnitAbility::new(WarcraftObjectId::new("egol"), WarcraftObjectId::new("Aenc")),
 ];
+
+impl ddd::Layered for HiddenUnitAbility { type Layer = ddd::DomainLayer; }
+impl ddd::ValueObject for HiddenUnitAbility {}

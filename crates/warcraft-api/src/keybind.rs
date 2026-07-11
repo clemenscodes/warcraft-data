@@ -1,6 +1,6 @@
 use std::fmt;
 
-use crate::object::WarcraftObjectId;
+use crate::domain::identity::WarcraftObjectId;
 
 /// Set of runtime contexts in which a system hotkey is active.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -112,7 +112,7 @@ impl TryFrom<&str> for SystemKeybindModifier {
     }
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct SystemKeybind {
     section_id: &'static str,
     comment: &'static str,
@@ -258,3 +258,13 @@ mod tests {
         assert!(matches!(keybind.class(), SystemKeybindClass::Game));
     }
 }
+
+// DDD roles: keybind value objects.
+impl ddd::Layered for ContextSet { type Layer = ddd::DomainLayer; }
+impl ddd::ValueObject for ContextSet {}
+impl ddd::Layered for SystemKeybindClass { type Layer = ddd::DomainLayer; }
+impl ddd::ValueObject for SystemKeybindClass {}
+impl ddd::Layered for SystemKeybindModifier { type Layer = ddd::DomainLayer; }
+impl ddd::ValueObject for SystemKeybindModifier {}
+impl ddd::Layered for SystemKeybind { type Layer = ddd::DomainLayer; }
+impl ddd::ValueObject for SystemKeybind {}

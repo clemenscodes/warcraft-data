@@ -96,3 +96,8 @@ pub static MORPH_ABILITY_MIRRORS: &[MorphAbilityMirror] = &[MorphAbilityMirror::
     WarcraftObjectId::new("Aave"),
     WarcraftObjectId::new("ubsp"),
 )];
+
+impl ddd::Layered for BuildCommandMirror { type Layer = ddd::DomainLayer; }
+impl ddd::ValueObject for BuildCommandMirror {}
+impl ddd::Layered for MorphAbilityMirror { type Layer = ddd::DomainLayer; }
+impl ddd::ValueObject for MorphAbilityMirror {}

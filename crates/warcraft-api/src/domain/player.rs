@@ -2,10 +2,10 @@ use std::collections::BTreeMap;
 
 use serde::{Deserialize, Serialize};
 
-use crate::primitives::Byte;
+use warcraft_primitives::Byte;
 
 #[repr(u8)]
-#[derive(Default, Debug, Copy, Clone, Deserialize, Serialize)]
+#[derive(Default, Debug, Copy, Clone, PartialEq, Eq, Deserialize, Serialize)]
 pub enum RacePreference {
     Human = 0x01,
     Orc = 0x02,
@@ -34,7 +34,7 @@ impl From<Byte> for RacePreference {
 }
 
 #[repr(u8)]
-#[derive(Default, Debug, Copy, Clone, Deserialize, Serialize)]
+#[derive(Default, Debug, Copy, Clone, PartialEq, Eq, Deserialize, Serialize)]
 pub enum PlayerRace {
     #[default]
     Unknown = 0,
@@ -74,7 +74,7 @@ impl From<Byte> for PlayerRace {
 }
 
 #[repr(u8)]
-#[derive(Debug, Copy, Clone, Deserialize, Serialize)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Deserialize, Serialize)]
 pub enum PlayerType {
     Empty = 0,
     Player = 1,
@@ -103,7 +103,7 @@ impl From<Byte> for PlayerType {
 }
 
 #[repr(u8)]
-#[derive(Debug, Copy, Clone, Deserialize, Serialize)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Deserialize, Serialize)]
 pub enum PlayerGameResult {
     Victory = 0,
     Defeat = 1,
@@ -148,7 +148,7 @@ impl From<Byte> for PlayerSlotState {
 }
 
 #[repr(u8)]
-#[derive(Debug, Copy, Clone, Deserialize, Serialize)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Deserialize, Serialize)]
 pub enum AiDifficultyPreference {
     Newbie = 0,
     Normal = 1,
@@ -169,7 +169,7 @@ impl From<Byte> for AiDifficultyPreference {
 }
 
 #[repr(u8)]
-#[derive(Default, Debug, Copy, Clone, Deserialize, Serialize)]
+#[derive(Default, Debug, Copy, Clone, PartialEq, Eq, Deserialize, Serialize)]
 pub enum PlayerColor {
     #[default]
     Red = 0,
@@ -307,7 +307,7 @@ pub enum CampaignMatchType {}
 pub type Team = BTreeMap<u32, TeamPlayer>;
 pub type Teams = BTreeMap<u8, Team>;
 
-#[derive(Default, Debug, Clone, Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct TeamPlayer {
     name: String,
     race_preference: RacePreference,
@@ -350,7 +350,7 @@ impl TeamPlayer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::primitives::Byte;
+    use warcraft_primitives::Byte;
 
     #[test]
     fn player_color_rgba_alpha_is_always_one() {
@@ -432,3 +432,17 @@ mod tests {
         assert!(matches!(player.color(), PlayerColor::Teal));
     }
 }
+
+// DDD roles: player/match setup value objects (equality-by-value; Team/Teams are
+// plain BTreeMap aliases and carry no role).
+macro_rules! player_value_object {
+    ($($ty:ty),* $(,)?) => {$(
+        impl ddd::Layered for $ty { type Layer = ddd::DomainLayer; }
+        impl ddd::ValueObject for $ty {}
+    )*};
+}
+player_value_object!(
+    RacePreference, PlayerRace, PlayerType, PlayerGameResult, PlayerSlotState,
+    AiDifficultyPreference, PlayerColor, MatchType, MeleeMatchType, CustomMatchType,
+    CampaignMatchType, TeamPlayer,
+);

@@ -5,6 +5,7 @@ members = [
     "crates/warcraft-keybinds",
     "crates/warcraft-extractor",
     "crates/warcraft-slk",
+    "crates/warcraft-primitives",
 ]
 # `warcraft-extractor` and `warcraft-slk` are native-only tools kept out of
 # default workspace operations (`cargo build`, `cargo clippy --all-targets`).
@@ -31,6 +32,7 @@ thiserror = "2.0.18"
 
 bcdec_rs = "0.2.0"
 casclib = { git = "https://github.com/clemenscodes/casclib-rs.git" }
+ddd = { git = "https://github.com/clemenscodes/ddd", tag = "v0.1.0" }
 clap = { version = "4.6.1", features = ["derive", "env"] }
 ddsfile = "0.6.0"
 image = "0.25.10"

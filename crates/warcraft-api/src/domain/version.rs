@@ -171,3 +171,9 @@ mod tests {
         assert_eq!(parsed.build(), 14481);
     }
 }
+
+// DDD role: a patch version is an immutable Value Object.
+impl ddd::Layered for WarcraftVersion {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for WarcraftVersion {}

@@ -27,12 +27,12 @@
 
 #[cfg(test)]
 mod tests {
-    use crate::{CatalogVisibility, SearchField, UnitCatalog, UnitMode, WARCRAFT_DATABASE};
-    use crate::{Race, WarcraftObjectId, WarcraftObjectMeta};
+    use warcraft_api::{CatalogVisibility, SearchField, UnitCatalog, UnitMode, WarcraftApi};
+    use warcraft_api::{Race, WarcraftObjectMeta};
 
-    fn unit_abilities(unit_id: WarcraftObjectId) -> Vec<String> {
-        let object = WARCRAFT_DATABASE
-            .object(unit_id)
+    fn unit_abilities(unit_id: &str) -> Vec<String> {
+        let object = WarcraftApi::default()
+            .by_id(unit_id)
             .unwrap_or_else(|| panic!("unit {unit_id} missing from database"));
         let WarcraftObjectMeta::Unit(unit_meta) = object.meta() else {
             panic!("{unit_id} is not a Unit");
@@ -44,9 +44,9 @@ mod tests {
             .collect()
     }
 
-    fn unit_trains(unit_id: WarcraftObjectId) -> Vec<String> {
-        let object = WARCRAFT_DATABASE
-            .object(unit_id)
+    fn unit_trains(unit_id: &str) -> Vec<String> {
+        let object = WarcraftApi::default()
+            .by_id(unit_id)
             .unwrap_or_else(|| panic!("unit {unit_id} missing from database"));
         let WarcraftObjectMeta::Unit(unit_meta) = object.meta() else {
             panic!("{unit_id} is not a Unit");
@@ -58,9 +58,9 @@ mod tests {
             .collect()
     }
 
-    fn unit_researches(unit_id: WarcraftObjectId) -> Vec<String> {
-        let object = WARCRAFT_DATABASE
-            .object(unit_id)
+    fn unit_researches(unit_id: &str) -> Vec<String> {
+        let object = WarcraftApi::default()
+            .by_id(unit_id)
             .unwrap_or_else(|| panic!("unit {unit_id} missing from database"));
         let WarcraftObjectMeta::Unit(unit_meta) = object.meta() else {
             panic!("{unit_id} is not a Unit");
@@ -72,9 +72,9 @@ mod tests {
             .collect()
     }
 
-    fn unit_sell_items(unit_id: WarcraftObjectId) -> Vec<String> {
-        let object = WARCRAFT_DATABASE
-            .object(unit_id)
+    fn unit_sell_items(unit_id: &str) -> Vec<String> {
+        let object = WarcraftApi::default()
+            .by_id(unit_id)
             .unwrap_or_else(|| panic!("unit {unit_id} missing from database"));
         let WarcraftObjectMeta::Unit(unit_meta) = object.meta() else {
             panic!("{unit_id} is not a Unit");
@@ -101,7 +101,7 @@ mod tests {
     /// reference.
     #[test]
     fn maiden_of_pain_carries_shadow_strike_and_life_drain() {
-        let abilities = unit_abilities(WarcraftObjectId::new("ndqp"));
+        let abilities = unit_abilities("ndqp");
         assert!(
             contains_ignore_case(&abilities, "ACss"),
             "ndqp must carry Shadow Strike (ACss); got {abilities:?}",
@@ -117,7 +117,7 @@ mod tests {
     /// (case-insensitive merge) AND add Shadow Strike from the overlay.
     #[test]
     fn earth_borer_carries_envenomed_and_shadow_strike() {
-        let abilities = unit_abilities(WarcraftObjectId::new("nane"));
+        let abilities = unit_abilities("nane");
         assert!(
             contains_ignore_case(&abilities, "ACvs"),
             "nane must carry Envenomed Weapons (ACvs); got {abilities:?}",
@@ -142,7 +142,7 @@ mod tests {
     /// catalog filter accidentally cutting it.
     #[test]
     fn burrowed_barbed_arachnathid_carries_burrow() {
-        let abilities = unit_abilities(WarcraftObjectId::new("nbnb"));
+        let abilities = unit_abilities("nbnb");
         assert!(
             contains_ignore_case(&abilities, "Abu5"),
             "nbnb must carry Burrow (Abu5); got {abilities:?}",
@@ -170,21 +170,21 @@ mod tests {
             ids.contains(&"nanm"),
             "Barbed Arachnathid merc (nanm) must survive the Melee catalog filter",
         );
-        let abilities = unit_abilities(WarcraftObjectId::new("nanm"));
+        let abilities = unit_abilities("nanm");
         assert!(
             contains_ignore_case(&abilities, "Abu5"),
             "nanm must carry Burrow (Abu5); got {abilities:?}",
         );
     }
 
-    /// Shadow Strike (ACss) was missing entirely from `WARCRAFT_DATABASE`
+    /// Shadow Strike (ACss) was missing entirely from `WarcraftApi::default()`
     /// as an `Ability` object before the unit_abilities union surfaced it.
     /// The default button position lives in `neutralabilityfunc.txt`
     /// section `[ACss]` at column 2, row 2.
     #[test]
     fn shadow_strike_ability_has_default_button_position() {
-        use crate::{ColumnIndex, GridCoordinate, RowIndex};
-        let object = WARCRAFT_DATABASE
+        use warcraft_api::{ColumnIndex, GridCoordinate, RowIndex};
+        let object = WarcraftApi::default()
             .by_id("ACss")
             .expect("Shadow Strike (ACss) must exist as an Ability object");
         let WarcraftObjectMeta::Ability(ability_meta) = object.meta() else {
@@ -206,7 +206,7 @@ mod tests {
     /// entirely. Base-only matchers preserve both.
     #[test]
     fn human_town_hall_has_backpack_research_and_keep_upgrade() {
-        let researches = unit_researches(WarcraftObjectId::new("htow"));
+        let researches = unit_researches("htow");
         assert!(
             researches.contains(&"Rhpm".to_string()),
             "htow must research Backpack (Rhpm); got {researches:?}",
@@ -215,7 +215,7 @@ mod tests {
             researches.contains(&"hkee".to_string()),
             "htow must upgrade to Keep (hkee); got {researches:?}",
         );
-        let trains = unit_trains(WarcraftObjectId::new("htow"));
+        let trains = unit_trains("htow");
         assert!(
             trains.contains(&"hpea".to_string()),
             "htow must train Peasant (hpea); got {trains:?}",
@@ -226,14 +226,14 @@ mod tests {
     /// researches. Variant overlays sometimes drop entries.
     #[test]
     fn orc_barracks_publishes_full_base_production() {
-        let trains = unit_trains(WarcraftObjectId::new("obar"));
+        let trains = unit_trains("obar");
         for required in ["ogru", "ohun", "otbk", "ocat"] {
             assert!(
                 trains.iter().any(|train| train == required),
                 "obar must train {required}; got {trains:?}",
             );
         }
-        let researches = unit_researches(WarcraftObjectId::new("obar"));
+        let researches = unit_researches("obar");
         for required in ["Robs", "Rotr", "Robk", "Robf"] {
             assert!(
                 researches.iter().any(|research| research == required),
@@ -249,7 +249,7 @@ mod tests {
     /// missing in the regression.
     #[test]
     fn goblin_merchant_publishes_base_sell_items_without_overlay_leak() {
-        let sell_items = unit_sell_items(WarcraftObjectId::new("ngme"));
+        let sell_items = unit_sell_items("ngme");
         let base = [
             "stwp", "bspd", "dust", "tret", "prvt", "cnob", "stel", "pnvl", "shea", "spro", "pinv",
         ];
@@ -283,7 +283,7 @@ mod tests {
     /// of them. Anchor the full set.
     #[test]
     fn destroyer_carries_full_base_ability_set() {
-        let abilities = unit_abilities(WarcraftObjectId::new("ubsp"));
+        let abilities = unit_abilities("ubsp");
         for required in ["Advm", "Afak", "Aave", "Aabs", "ACmi"] {
             assert!(
                 abilities.iter().any(|ability| ability == required),
@@ -302,7 +302,7 @@ mod tests {
     /// gets misinterpreted.
     #[test]
     fn owl_scout_flags_come_from_live_unitui_slk() {
-        let object = WARCRAFT_DATABASE
+        let object = WarcraftApi::default()
             .by_id("nowl")
             .expect("Owl Scout (nowl) must exist");
         let WarcraftObjectMeta::Unit(unit_meta) = object.meta() else {

@@ -1249,8 +1249,10 @@ checksum = "ba73ea9cf16a25df0c8caa16c51acb937d5712a8429db78a3ee29d5dcacd3a65"
 name = "warcraft-api"
 version = "0.1.0"
 dependencies = [
+ "ddd",
  "serde",
  "serde_json",
+ "warcraft-primitives",
 ]
 
 [[package]]
@@ -1277,6 +1279,14 @@ version = "0.1.0"
 dependencies = [
  "ddd",
  "warcraft-api",
+]
+
+[[package]]
+name = "warcraft-primitives"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
 ]
 
 [[package]]

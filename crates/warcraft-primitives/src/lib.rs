@@ -1,3 +1,10 @@
+//! Byte-faithful primitive value wrappers mirroring Warcraft III's in-memory
+//! representation. These types are the game's runtime byte reality (e.g. a
+//! 4-byte little-endian float is a [`Float`], an SLK object id is an
+//! [`Identifier`]). They are deliberately independent of any domain model so
+//! that byte-level consumers — a memory reader, an SLK parser — can depend on
+//! them without pulling in the game domain.
+
 use std::cmp::Ordering;
 
 use serde::{Deserialize, Serialize};

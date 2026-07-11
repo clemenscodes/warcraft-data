@@ -3,7 +3,7 @@ use std::sync::LazyLock;
 
 use crate::{UnitKind, WarcraftObjectId, WarcraftObjectMeta};
 
-use crate::{TIERED_UNIT_GROUPS, UNIT_UPGRADE_SWAPS, WARCRAFT_DATABASE};
+use crate::{TIERED_UNIT_GROUPS, UNIT_UPGRADE_SWAPS, WarcraftApi};
 
 /// A single logical unit that the game ships as several distinct unit ids —
 /// leveled summon tiers (Carrion Beetle `ucs1`/`ucs2`/`ucs3`), upgrade-swaps
@@ -110,7 +110,7 @@ impl VariantGraphBuilder {
     /// last so it ranks as the group's representative.
     fn add_hero_name_groups(&mut self) {
         let mut produced_unit_ids: HashSet<WarcraftObjectId> = HashSet::new();
-        for (_object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
+        for (_object_id, warcraft_object) in WarcraftApi::default().iter() {
             let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
                 continue;
             };
@@ -123,7 +123,7 @@ impl VariantGraphBuilder {
         }
 
         let mut members_by_name: BTreeMap<&'static str, Vec<WarcraftObjectId>> = BTreeMap::new();
-        for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
+        for (object_id, warcraft_object) in WarcraftApi::default().iter() {
             let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
                 continue;
             };
@@ -279,7 +279,7 @@ impl VariantGraphBuilder {
 /// here on purpose — they collapse through a separate name-and-production path
 /// (`add_hero_name_groups`), never via summon tiers.
 fn is_mergeable_variant_unit(unit_id: WarcraftObjectId) -> bool {
-    let lookup_result = WARCRAFT_DATABASE.object(unit_id);
+    let lookup_result = WarcraftApi::default().object(unit_id);
     lookup_result.is_some_and(|warcraft_object| {
         let object_meta = warcraft_object.meta();
         matches!(
@@ -378,7 +378,7 @@ struct AbilityDescriptor {
 /// skipped.
 fn unit_ability_descriptors(unit_id: WarcraftObjectId) -> Vec<AbilityDescriptor> {
     let mut descriptors: Vec<AbilityDescriptor> = Vec::new();
-    let Some(object) = WARCRAFT_DATABASE.object(unit_id) else {
+    let Some(object) = WarcraftApi::default().object(unit_id) else {
         return descriptors;
     };
     let WarcraftObjectMeta::Unit(unit_meta) = object.meta() else {
@@ -387,7 +387,7 @@ fn unit_ability_descriptors(unit_id: WarcraftObjectId) -> Vec<AbilityDescriptor>
     let own_abilities = unit_meta.abilities().iter();
     let hero_abilities = unit_meta.hero_abilities().iter();
     for ability_id in own_abilities.chain(hero_abilities) {
-        let Some(ability_object) = WARCRAFT_DATABASE.object(*ability_id) else {
+        let Some(ability_object) = WarcraftApi::default().object(*ability_id) else {
             continue;
         };
         let WarcraftObjectMeta::Ability(ability_meta) = ability_object.meta() else {
@@ -789,3 +789,9 @@ mod tests {
         )));
     }
 }
+
+// DDD roles.
+impl ddd::Layered for VariantGroup { type Layer = ddd::DomainLayer; }
+impl ddd::ValueObject for VariantGroup {}
+impl ddd::Layered for VariantUnits { type Layer = ddd::ApplicationLayer; }
+impl ddd::ApplicationService for VariantUnits {}
