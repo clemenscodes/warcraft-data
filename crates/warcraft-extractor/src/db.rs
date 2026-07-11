@@ -1,24 +1,28 @@
 use warcraft_api::{
-    AbilityMeta, AttackType, AttributeBase, AttributeGrowth, CommandMeta, DefenseType,
-    GameplayConstants, GridCoordinate, HeroAttributes, ItemMeta, ManaPool, ObjectMap,
-    PrimaryAttribute, Race, RegenType, UnitAttack, UnitCombat, UnitFlags, UnitKind, UnitMeta,
-    UnitProduction, UpgradeMeta, WarcraftDatabase, WarcraftObject, WarcraftObjectId,
-    WarcraftObjectKind, WarcraftObjectMeta, WarcraftObjectText, WeaponType,
+    AttackType, AttributeBase, AttributeGrowth, DefenseType, GameplayConstants, GridCoordinate,
+    HeroAttributes, ManaPool, PrimaryAttribute, Race, RegenType, UnitAttack, UnitCombat, UnitKind,
+    WarcraftObjectKind, WeaponType,
+};
+
+use crate::ir::{
+    ExtractedAbilityMeta, ExtractedAbilityMetaFields, ExtractedCommandMeta, ExtractedDatabase,
+    ExtractedItemMeta, ExtractedMeta, ExtractedObject, ExtractedObjectFields, ExtractedObjectId,
+    ExtractedObjectMap, ExtractedUnitMeta, ExtractedUnitMetaFields, ExtractedUpgradeMeta,
 };
 
 struct WarcraftObjectIdentity {
-    id: WarcraftObjectId,
-    names: &'static [&'static str],
-    icons: &'static [&'static str],
+    id: ExtractedObjectId,
+    names: Vec<String>,
+    icons: Vec<String>,
     kind: WarcraftObjectKind,
     race: Option<Race>,
 }
 
 impl WarcraftObjectIdentity {
     fn new(
-        id: WarcraftObjectId,
-        names: &'static [&'static str],
-        icons: &'static [&'static str],
+        id: ExtractedObjectId,
+        names: Vec<String>,
+        icons: Vec<String>,
         kind: WarcraftObjectKind,
         race: Option<Race>,
     ) -> Self {
@@ -47,7 +51,7 @@ use crate::{
     UnitUiFlagsDatabase, UpgradeSwapDatabase, race_from_unit_id, upgrades::RaceUpgradeEntry,
 };
 
-impl From<WarcraftDataAggregation> for WarcraftDatabase {
+impl From<WarcraftDataAggregation> for ExtractedDatabase {
     fn from(mut value: WarcraftDataAggregation) -> Self {
         value.split_toggle_passive_positions();
         let objects = value.get_ids();
@@ -181,67 +185,35 @@ impl WarcraftDataAggregation {
         &self,
         lookup_id: &str,
         identity: WarcraftObjectIdentity,
-        meta: WarcraftObjectMeta,
+        meta: ExtractedMeta,
         unit_ubertip_override: Option<String>,
-    ) -> WarcraftObject {
-        let tip_strings = self.resolve_object_tip_levels(lookup_id);
-        let ubertip_strings = match unit_ubertip_override {
+    ) -> ExtractedObject {
+        let tip_levels = self.resolve_object_tip_levels(lookup_id);
+        let ubertip_levels = match unit_ubertip_override {
             Some(ubertip) => vec![ubertip],
             None => self.resolve_object_ubertip_levels(lookup_id),
         };
-        let tip_static = Self::leak_str_slice(&tip_strings);
-        let ubertip_static = Self::leak_str_slice(&ubertip_strings);
-        let un_tip_static = self
-            .resolve_object_un_tip(lookup_id)
-            .map(|text| Self::leak(&text));
-        let un_ubertip_static = self
-            .resolve_object_un_ubertip(lookup_id)
-            .map(|text| Self::leak(&text));
-        let has_alt = un_tip_static.is_some() || un_ubertip_static.is_some();
-        let has_text = !tip_static.is_empty() || !ubertip_static.is_empty();
-        let object = if has_alt {
-            let text = WarcraftObjectText::with_alt(
-                tip_static,
-                ubertip_static,
-                un_tip_static,
-                un_ubertip_static,
-            );
-            WarcraftObject::with_text(
-                identity.id,
-                identity.names,
-                identity.icons,
-                identity.kind,
-                identity.race,
-                meta,
-                text,
-            )
-        } else if has_text {
-            let text = WarcraftObjectText::new(tip_static, ubertip_static);
-            WarcraftObject::with_text(
-                identity.id,
-                identity.names,
-                identity.icons,
-                identity.kind,
-                identity.race,
-                meta,
-                text,
-            )
-        } else {
-            WarcraftObject::new(
-                identity.id,
-                identity.names,
-                identity.icons,
-                identity.kind,
-                identity.race,
-                meta,
-            )
-        };
+        let un_tip = self.resolve_object_un_tip(lookup_id);
+        let un_ubertip = self.resolve_object_un_ubertip(lookup_id);
         let position_entry = self.lookup_default_position(lookup_id);
-        object
-            .with_default_position(position_entry.and_then(|entry| entry.button_position()))
-            .with_default_research_position(
-                position_entry.and_then(|entry| entry.research_button_position()),
-            )
+        let default_button_position = position_entry.and_then(|entry| entry.button_position());
+        let default_research_button_position =
+            position_entry.and_then(|entry| entry.research_button_position());
+        let fields = ExtractedObjectFields {
+            id: identity.id,
+            names: identity.names,
+            icons: identity.icons,
+            kind: identity.kind,
+            race: identity.race,
+            meta,
+            tip_levels,
+            ubertip_levels,
+            un_tip,
+            un_ubertip,
+            default_button_position,
+            default_research_button_position,
+        };
+        ExtractedObject::new(fields)
     }
 
     fn lookup_default_position(&self, id: &str) -> Option<&crate::DefaultPositionEntry> {
@@ -254,14 +226,6 @@ impl WarcraftDataAggregation {
             }
         }
         None
-    }
-
-    fn leak_str_slice(values: &[String]) -> &'static [&'static str] {
-        if values.is_empty() {
-            return &[];
-        }
-        let leaked: Vec<&'static str> = values.iter().map(|value| Self::leak(value)).collect();
-        Box::leak(leaked.into_boxed_slice())
     }
 
     fn resolve_object_un_tip(&self, id: &str) -> Option<String> {
@@ -858,26 +822,7 @@ impl WarcraftDataAggregation {
         }
     }
 
-    fn leak(s: &str) -> &'static str {
-        Box::leak(s.to_string().into_boxed_str())
-    }
-
-    fn leak_slice<T: Clone>(slice: &[T]) -> &'static [T] {
-        Box::leak(slice.to_vec().into_boxed_slice())
-    }
-
-    fn leak_object_ids(string_ids: &[String]) -> &'static [WarcraftObjectId] {
-        let object_ids: Vec<WarcraftObjectId> = string_ids
-            .iter()
-            .map(|raw_id| {
-                let leaked_id = Self::leak(raw_id);
-                WarcraftObjectId::new(leaked_id)
-            })
-            .collect();
-        Box::leak(object_ids.into_boxed_slice())
-    }
-
-    fn get_ids(&self) -> ObjectMap {
+    fn get_ids(&self) -> ExtractedObjectMap {
         let unit_ids = self.get_unit_ids();
         let ability_ids = self.get_ability_ids();
         let upgrade_ids = self.get_upgrade_ids();
@@ -892,13 +837,12 @@ impl WarcraftDataAggregation {
         ])
     }
 
-    fn get_command_ids(&self) -> ObjectMap {
-        let mut map = ObjectMap::new();
+    fn get_command_ids(&self) -> ExtractedObjectMap {
+        let mut map = ExtractedObjectMap::new();
         for (command_id, entry) in &self.command_defaults {
-            let leaked_id = Self::leak(command_id);
-            let object_id = WarcraftObjectId::new(leaked_id);
-            let pretty_name = Self::leak(&Self::pretty_command_name(command_id));
-            let names = Self::leak_slice(&[pretty_name]);
+            let object_id = ExtractedObjectId::new(command_id.clone());
+            let pretty_name = Self::pretty_command_name(command_id);
+            let names = vec![pretty_name];
             // Worker build commands all carry the generic "basic structure"
             // art, but in game the build button is the race build ability, whose
             // icon is race specific. Prefer the build ability's icon so the
@@ -908,30 +852,25 @@ impl WarcraftDataAggregation {
                 .map(|raw_icon| self.normalize_icon_path(&raw_icon));
             let icon_path =
                 build_ability_icon.or_else(|| entry.art().map(Self::resolve_command_icon));
-            let icons: &'static [&'static str] = match icon_path {
-                Some(path) => Self::leak_slice(&[Self::leak(path.as_str())]),
-                None => &[],
+            let icons: Vec<String> = match icon_path {
+                Some(path) => vec![path],
+                None => Vec::new(),
             };
-            let tip_static = entry.tip().map(Self::leak);
-            let ubertip_static = entry
+            let tip = entry.tip().map(str::to_string);
+            let ubertip = entry
                 .ubertip()
-                .map(|raw_text| self.substitute_placeholders(raw_text))
-                .map(|substituted| Self::leak(&substituted));
-            let command_meta =
-                CommandMeta::with_text(entry.button_position(), tip_static, ubertip_static);
+                .map(|raw_text| self.substitute_placeholders(raw_text));
+            let command_meta = ExtractedCommandMeta::new(entry.button_position(), tip, ubertip);
             let identity = WarcraftObjectIdentity::new(
-                object_id,
+                object_id.clone(),
                 names,
                 icons,
                 WarcraftObjectKind::Command,
                 None,
             );
-            let warcraft_object = self.build_object_with_text(
-                command_id,
-                identity,
-                WarcraftObjectMeta::Command(command_meta),
-                None,
-            );
+            let extracted_meta = ExtractedMeta::Command(command_meta);
+            let warcraft_object =
+                self.build_object_with_text(command_id, identity, extracted_meta, None);
             map.insert(object_id, warcraft_object);
         }
         map
@@ -977,7 +916,7 @@ impl WarcraftDataAggregation {
         output
     }
 
-    fn get_unit_ids(&self) -> ObjectMap {
+    fn get_unit_ids(&self) -> ExtractedObjectMap {
         let human_ids = self.get_unit_ids_from_race(&Race::Human);
         let nightelf_ids = self.get_unit_ids_from_race(&Race::Nightelf);
         let orc_ids = self.get_unit_ids_from_race(&Race::Orc);
@@ -1058,8 +997,8 @@ impl WarcraftDataAggregation {
             .any(|listed_id| listed_id.eq_ignore_ascii_case(ability_id))
     }
 
-    fn get_unit_ids_from_race(&self, race: &Race) -> ObjectMap {
-        let mut map = ObjectMap::new();
+    fn get_unit_ids_from_race(&self, race: &Race) -> ExtractedObjectMap {
+        let mut map = ExtractedObjectMap::new();
 
         let race_units = match self.units.get(race) {
             Some(v) => v,
@@ -1068,8 +1007,7 @@ impl WarcraftDataAggregation {
 
         for (kind, units) in race_units {
             for (id, unit) in units {
-                let leaked_id = Self::leak(id);
-                let object_id = WarcraftObjectId::new(leaked_id);
+                let object_id = ExtractedObjectId::new(id.clone());
 
                 let icon = self.get_unit_icon_by_id(id).unwrap_or_default();
                 let icon = self.normalize_icon_path(&icon);
@@ -1078,14 +1016,12 @@ impl WarcraftDataAggregation {
                     continue;
                 };
 
-                let leaked_name = Self::leak(name);
-                let leaked_icon = Self::leak(icon.as_str());
-                let names = Self::leak_slice(&[leaked_name]);
-                let icons = Self::leak_slice(&[leaked_icon]);
+                let names = vec![name.to_string()];
+                let icons = vec![icon];
                 let build_time = unit.build_time();
                 let level = unit.level();
                 let gold_cost = unit.gold_cost();
-                let abilities_for_unit: &'static [WarcraftObjectId] = {
+                let abilities_for_unit: Vec<String> = {
                     let mut combined: Vec<String> = match self.unit_abilities.get(id) {
                         Some(entry) => entry.abilities().to_vec(),
                         None => Vec::new(),
@@ -1241,9 +1177,9 @@ impl WarcraftDataAggregation {
                     // by split_toggle_passive_positions() (passive has no button_position
                     // after that step, so it is invisible here).
                     Self::suppress_same_slot_duplicates(&mut combined, self, *race);
-                    Self::leak_object_ids(&combined)
+                    combined
                 };
-                let hero_abilities_for_unit: &'static [WarcraftObjectId] = {
+                let hero_abilities_for_unit: Vec<String> = {
                     let mut hero_combined: Vec<String> = self
                         .unit_abilities
                         .get(id)
@@ -1265,7 +1201,7 @@ impl WarcraftDataAggregation {
                     // Rule 5 (hero abilities): same same-slot deduplication as for
                     // regular abilities above.
                     Self::suppress_same_slot_duplicates(&mut hero_combined, self, *race);
-                    Self::leak_object_ids(&hero_combined)
+                    hero_combined
                 };
                 let ui_flags = self.unit_ui_flags.get(id);
                 let is_campaign = ui_flags.map(|entry| entry.is_campaign()).unwrap_or(false);
@@ -1275,25 +1211,25 @@ impl WarcraftDataAggregation {
                     .unwrap_or(false);
                 let is_special = ui_flags.map(|entry| entry.is_special()).unwrap_or(false);
                 let unit_data_entry = self.unit_data.get(id);
-                let builds_for_unit: &'static [WarcraftObjectId] = match unit_data_entry {
-                    Some(entry) => Self::leak_object_ids(entry.builds()),
-                    None => &[],
+                let builds_for_unit: Vec<String> = match unit_data_entry {
+                    Some(entry) => entry.builds().to_vec(),
+                    None => Vec::new(),
                 };
-                let trains_for_unit: &'static [WarcraftObjectId] = match unit_data_entry {
-                    Some(entry) => Self::leak_object_ids(entry.trains()),
-                    None => &[],
+                let trains_for_unit: Vec<String> = match unit_data_entry {
+                    Some(entry) => entry.trains().to_vec(),
+                    None => Vec::new(),
                 };
-                let researches_for_unit: &'static [WarcraftObjectId] = match unit_data_entry {
+                let researches_for_unit: Vec<String> = match unit_data_entry {
                     Some(entry) => {
                         let mut combined: Vec<String> = entry.researches().to_vec();
                         for upgrade_id in entry.upgrades() {
                             combined.push(upgrade_id.clone());
                         }
-                        Self::leak_object_ids(&combined)
+                        combined
                     }
-                    None => &[],
+                    None => Vec::new(),
                 };
-                let sell_items_for_unit: &'static [WarcraftObjectId] = {
+                let sell_items_for_unit: Vec<String> = {
                     let combined: Vec<String> = match unit_data_entry {
                         Some(entry) => {
                             let mut items = entry.sell_items().to_vec();
@@ -1309,11 +1245,11 @@ impl WarcraftDataAggregation {
                         }
                         None => Vec::new(),
                     };
-                    Self::leak_object_ids(&combined)
+                    combined
                 };
-                let sell_units_for_unit: &'static [WarcraftObjectId] = match unit_data_entry {
-                    Some(entry) => Self::leak_object_ids(entry.sell_units()),
-                    None => &[],
+                let sell_units_for_unit: Vec<String> = match unit_data_entry {
+                    Some(entry) => entry.sell_units().to_vec(),
+                    None => Vec::new(),
                 };
                 let resolved_kind = match *kind {
                     UnitKind::Hero | UnitKind::Building => *kind,
@@ -1328,39 +1264,37 @@ impl WarcraftDataAggregation {
                         }
                     }
                 };
-                let production = UnitProduction::new(
-                    researches_for_unit,
-                    builds_for_unit,
-                    trains_for_unit,
-                    sell_items_for_unit,
-                    sell_units_for_unit,
-                );
-                let flags =
-                    UnitFlags::new(is_campaign, is_in_editor, is_hidden_in_editor, is_special);
                 let combat = self.build_unit_combat(id);
-                let mut unit_meta = UnitMeta::with_full_and_extras(
-                    resolved_kind,
+                let hero_attributes = self.build_hero_attributes(id);
+                let unit_meta_fields = ExtractedUnitMetaFields {
+                    unit_kind: resolved_kind,
                     build_time,
-                    abilities_for_unit,
-                    hero_abilities_for_unit,
-                    production,
-                    flags,
-                )
-                .with_combat(combat)
-                .with_level(level)
-                .with_gold_cost(gold_cost);
-                if let Some(hero_attributes) = self.build_hero_attributes(id) {
-                    unit_meta = unit_meta.with_hero_attributes(hero_attributes);
-                }
+                    abilities: abilities_for_unit,
+                    hero_abilities: hero_abilities_for_unit,
+                    researches: researches_for_unit,
+                    builds: builds_for_unit,
+                    trains: trains_for_unit,
+                    sell_items: sell_items_for_unit,
+                    sell_units: sell_units_for_unit,
+                    is_campaign,
+                    is_in_editor,
+                    is_hidden_in_editor,
+                    is_special,
+                    combat,
+                    level,
+                    gold_cost,
+                    hero_attributes,
+                };
+                let unit_meta = ExtractedUnitMeta::new(unit_meta_fields);
                 let identity = WarcraftObjectIdentity::new(
-                    object_id,
+                    object_id.clone(),
                     names,
                     icons,
                     WarcraftObjectKind::Unit,
                     Some(*race),
                 );
                 let unit_ubertip = self.resolve_unit_ubertip(*race, id);
-                let unit_meta_wrapped = WarcraftObjectMeta::Unit(unit_meta);
+                let unit_meta_wrapped = ExtractedMeta::Unit(unit_meta);
                 let warcraft_object =
                     self.build_object_with_text(id, identity, unit_meta_wrapped, unit_ubertip);
                 map.insert(object_id, warcraft_object);
@@ -1370,8 +1304,8 @@ impl WarcraftDataAggregation {
         map
     }
 
-    fn get_ability_ids(&self) -> ObjectMap {
-        let mut map = ObjectMap::new();
+    fn get_ability_ids(&self) -> ExtractedObjectMap {
+        let mut map = ExtractedObjectMap::new();
 
         for abilities in self.heroes().values() {
             for hero_ability in abilities {
@@ -1383,12 +1317,9 @@ impl WarcraftDataAggregation {
                     continue;
                 };
 
-                let leaked_id = Self::leak(hero_id);
-                let ability_id = WarcraftObjectId::new(leaked_id);
-                let leaked_name = Self::leak(name);
-                let leaked_icon = Self::leak(icon.as_str());
-                let names = Self::leak_slice(&[leaked_name]);
-                let icons = Self::leak_slice(&[leaked_icon]);
+                let ability_id = ExtractedObjectId::new(hero_id.to_string());
+                let names = vec![name.to_string()];
+                let icons = vec![icon];
                 let max_level = hero_ability.max_level();
                 let is_ultimate = hero_ability.is_ultimate();
                 let cooldowns = hero_ability.cooldowns();
@@ -1402,69 +1333,57 @@ impl WarcraftDataAggregation {
                 let raw_research_ubertip = self
                     .resolve_ability_research_ubertip(Some(hero_race), hero_id)
                     .or_else(|| defaults.and_then(|entry| entry.research_ubertip()));
-                let ubertip_static = raw_ubertip
-                    .map(|text| self.substitute_placeholders(text))
-                    .map(|text| Self::leak(&text));
-                let research_ubertip_static = raw_research_ubertip
-                    .map(|text| self.substitute_placeholders(text))
-                    .map(|text| Self::leak(&text));
+                let ubertip = raw_ubertip.map(|text| self.substitute_placeholders(text));
+                let research_ubertip =
+                    raw_research_ubertip.map(|text| self.substitute_placeholders(text));
                 let metadata = self.ability_metadata.get(hero_id);
-                let code_static = metadata.and_then(|entry| entry.code()).map(Self::leak);
+                let code = metadata.and_then(|entry| entry.code()).map(str::to_string);
                 let evasion_chances = metadata
                     .map(|entry| entry.evasion_chance_per_level())
                     .unwrap_or([0.0; 4]);
-                let morph_target = metadata
+                let morph_target_unit = metadata
                     .and_then(|entry| entry.morph_target_unit())
-                    .map(Self::leak)
-                    .map(WarcraftObjectId::new);
+                    .map(str::to_string);
                 let off_button_position = defaults.and_then(|entry| entry.off_button_position());
-                let off_tip_static = defaults
+                let off_tip = defaults
                     .and_then(|entry| entry.off_tip())
-                    .map(|text| self.substitute_placeholders(text))
-                    .map(|text| Self::leak(&text));
-                let off_ubertip_static = defaults
+                    .map(|text| self.substitute_placeholders(text));
+                let off_ubertip = defaults
                     .and_then(|entry| entry.off_ubertip())
-                    .map(|text| self.substitute_placeholders(text))
-                    .map(|text| Self::leak(&text));
+                    .map(|text| self.substitute_placeholders(text));
                 let off_icon_from_defaults = defaults
                     .and_then(|entry| entry.off_icon())
                     .map(str::to_owned);
                 let off_icon_from_skins = self.get_ability_off_icon_by_id(hero_id);
                 let raw_off_icon = off_icon_from_defaults.or(off_icon_from_skins);
-                let off_icon_static = raw_off_icon
-                    .map(|raw_icon| self.normalize_icon_path(&raw_icon))
-                    .map(|normalized| Self::leak(&normalized));
-                let ability_meta = AbilityMeta::with_ubertips(
+                let off_icon = raw_off_icon.map(|raw_icon| self.normalize_icon_path(&raw_icon));
+                let ability_meta_fields = ExtractedAbilityMetaFields {
                     max_level,
                     is_ultimate,
                     cooldowns,
-                    default_position,
-                    default_research_position,
-                    ubertip_static,
-                    research_ubertip_static,
-                )
-                .with_code(code_static)
-                .with_morph_target(morph_target)
-                .with_evasion_chances(evasion_chances)
-                .with_off_state(
+                    default_button_position: default_position,
+                    default_research_button_position: default_research_position,
+                    ubertip,
+                    research_ubertip,
+                    code,
+                    morph_target_unit,
+                    evasion_chances,
                     off_button_position,
-                    off_tip_static,
-                    off_ubertip_static,
-                    off_icon_static,
-                );
+                    off_tip,
+                    off_ubertip,
+                    off_icon,
+                };
+                let ability_meta = ExtractedAbilityMeta::new(ability_meta_fields);
                 let identity = WarcraftObjectIdentity::new(
-                    ability_id,
+                    ability_id.clone(),
                     names,
                     icons,
                     WarcraftObjectKind::Ability,
                     None,
                 );
-                let warcraft_object = self.build_object_with_text(
-                    hero_id,
-                    identity,
-                    WarcraftObjectMeta::Ability(ability_meta),
-                    None,
-                );
+                let extracted_meta = ExtractedMeta::Ability(ability_meta);
+                let warcraft_object =
+                    self.build_object_with_text(hero_id, identity, extracted_meta, None);
                 map.insert(ability_id, warcraft_object);
             }
         }
@@ -1478,7 +1397,8 @@ impl WarcraftDataAggregation {
                 .iter()
                 .chain(abilities_entry.hero_abilities().iter())
             {
-                if map.contains_key(ability_string_id.as_str()) {
+                let ability_lookup_key = ExtractedObjectId::from(ability_string_id.as_str());
+                if map.contains_key(&ability_lookup_key) {
                     continue;
                 }
                 let icon = self
@@ -1491,15 +1411,12 @@ impl WarcraftDataAggregation {
                     continue;
                 };
 
-                let leaked_id = Self::leak(ability_string_id);
-                let ability_id = WarcraftObjectId::new(leaked_id);
-                let leaked_name = Self::leak(resolved_name);
-                let leaked_icon = Self::leak(icon.as_str());
-                let names = Self::leak_slice(&[leaked_name]);
-                let icons: &'static [&'static str] = if leaked_icon.is_empty() {
-                    &[]
+                let ability_id = ExtractedObjectId::new(ability_string_id.to_string());
+                let names = vec![resolved_name.to_string()];
+                let icons: Vec<String> = if icon.is_empty() {
+                    Vec::new()
                 } else {
-                    Self::leak_slice(&[leaked_icon])
+                    vec![icon]
                 };
                 let defaults = self.ability_defaults.get(ability_string_id);
                 let default_position = defaults.and_then(|entry| entry.button_position());
@@ -1511,12 +1428,9 @@ impl WarcraftDataAggregation {
                 let raw_research_ubertip = self
                     .resolve_ability_research_ubertip(race_for_unit, ability_string_id)
                     .or_else(|| defaults.and_then(|entry| entry.research_ubertip()));
-                let ubertip_static = raw_ubertip
-                    .map(|text| self.substitute_placeholders(text))
-                    .map(|text| Self::leak(&text));
-                let research_ubertip_static = raw_research_ubertip
-                    .map(|text| self.substitute_placeholders(text))
-                    .map(|text| Self::leak(&text));
+                let ubertip = raw_ubertip.map(|text| self.substitute_placeholders(text));
+                let research_ubertip =
+                    raw_research_ubertip.map(|text| self.substitute_placeholders(text));
                 // Abilities listed in a unit's hero ability slots but absent from the
                 // hero database (hero=0 in abilitydata.slk) need their level count and
                 // ultimate flag derived from the raw SLK data so the hotkey editor can
@@ -1546,62 +1460,53 @@ impl WarcraftDataAggregation {
                 }
                 let zero_cooldowns: [u32; 4] = [0, 0, 0, 0];
                 let metadata = self.ability_metadata.get(ability_string_id);
-                let code_static = metadata.and_then(|entry| entry.code()).map(Self::leak);
+                let code = metadata.and_then(|entry| entry.code()).map(str::to_string);
                 let evasion_chances = metadata
                     .map(|entry| entry.evasion_chance_per_level())
                     .unwrap_or([0.0; 4]);
-                let morph_target = metadata
+                let morph_target_unit = metadata
                     .and_then(|entry| entry.morph_target_unit())
-                    .map(Self::leak)
-                    .map(WarcraftObjectId::new);
+                    .map(str::to_string);
                 let off_button_position = defaults.and_then(|entry| entry.off_button_position());
-                let off_tip_static = defaults
+                let off_tip = defaults
                     .and_then(|entry| entry.off_tip())
-                    .map(|text| self.substitute_placeholders(text))
-                    .map(|text| Self::leak(&text));
-                let off_ubertip_static = defaults
+                    .map(|text| self.substitute_placeholders(text));
+                let off_ubertip = defaults
                     .and_then(|entry| entry.off_ubertip())
-                    .map(|text| self.substitute_placeholders(text))
-                    .map(|text| Self::leak(&text));
+                    .map(|text| self.substitute_placeholders(text));
                 let off_icon_from_defaults = defaults
                     .and_then(|entry| entry.off_icon())
                     .map(str::to_owned);
                 let off_icon_from_skins = self.get_ability_off_icon_by_id(ability_string_id);
                 let raw_off_icon = off_icon_from_defaults.or(off_icon_from_skins);
-                let off_icon_static = raw_off_icon
-                    .map(|raw_icon| self.normalize_icon_path(&raw_icon))
-                    .map(|normalized| Self::leak(&normalized));
-                let ability_meta = AbilityMeta::with_ubertips(
-                    resolved_max_level,
-                    resolved_is_ultimate,
-                    zero_cooldowns,
-                    default_position,
-                    default_research_position,
-                    ubertip_static,
-                    research_ubertip_static,
-                )
-                .with_code(code_static)
-                .with_morph_target(morph_target)
-                .with_evasion_chances(evasion_chances)
-                .with_off_state(
+                let off_icon = raw_off_icon.map(|raw_icon| self.normalize_icon_path(&raw_icon));
+                let ability_meta_fields = ExtractedAbilityMetaFields {
+                    max_level: resolved_max_level,
+                    is_ultimate: resolved_is_ultimate,
+                    cooldowns: zero_cooldowns,
+                    default_button_position: default_position,
+                    default_research_button_position: default_research_position,
+                    ubertip,
+                    research_ubertip,
+                    code,
+                    morph_target_unit,
+                    evasion_chances,
                     off_button_position,
-                    off_tip_static,
-                    off_ubertip_static,
-                    off_icon_static,
-                );
+                    off_tip,
+                    off_ubertip,
+                    off_icon,
+                };
+                let ability_meta = ExtractedAbilityMeta::new(ability_meta_fields);
                 let identity = WarcraftObjectIdentity::new(
-                    ability_id,
+                    ability_id.clone(),
                     names,
                     icons,
                     WarcraftObjectKind::Ability,
                     None,
                 );
-                let warcraft_object = self.build_object_with_text(
-                    ability_string_id,
-                    identity,
-                    WarcraftObjectMeta::Ability(ability_meta),
-                    None,
-                );
+                let extracted_meta = ExtractedMeta::Ability(ability_meta);
+                let warcraft_object =
+                    self.build_object_with_text(ability_string_id, identity, extracted_meta, None);
                 map.insert(ability_id, warcraft_object);
             }
         }
@@ -1678,7 +1583,8 @@ impl WarcraftDataAggregation {
         }
 
         for (ability_id_str, race) in &inferred {
-            if map.contains_key(ability_id_str.as_str()) {
+            let ability_lookup_key = ExtractedObjectId::from(ability_id_str.as_str());
+            if map.contains_key(&ability_lookup_key) {
                 continue;
             }
             let icon = self
@@ -1697,96 +1603,81 @@ impl WarcraftDataAggregation {
                     build_ability.fallback_name
                 }
             };
-            let leaked_id = Self::leak(ability_id_str);
-            let ability_id = WarcraftObjectId::new(leaked_id);
-            let leaked_name = Self::leak(resolved_name);
-            let leaked_icon = Self::leak(icon.as_str());
-            let names = Self::leak_slice(&[leaked_name]);
-            let icons: &'static [&'static str] = if leaked_icon.is_empty() {
-                &[]
+            let ability_id = ExtractedObjectId::new(ability_id_str.to_string());
+            let names = vec![resolved_name.to_string()];
+            let icons: Vec<String> = if icon.is_empty() {
+                Vec::new()
             } else {
-                Self::leak_slice(&[leaked_icon])
+                vec![icon]
             };
             let defaults = self.ability_defaults.get(ability_id_str.as_str());
             let default_position = defaults.and_then(|entry| entry.button_position());
             let raw_ubertip = self
                 .resolve_ability_ubertip(*race, ability_id_str)
                 .or_else(|| defaults.and_then(|entry| entry.ubertip()));
-            let ubertip_static = raw_ubertip
-                .map(|text| self.substitute_placeholders(text))
-                .map(|text| Self::leak(&text));
+            let ubertip = raw_ubertip.map(|text| self.substitute_placeholders(text));
             let metadata = self.ability_metadata.get(ability_id_str.as_str());
-            let code_static = metadata.and_then(|entry| entry.code()).map(Self::leak);
+            let code = metadata.and_then(|entry| entry.code()).map(str::to_string);
             let evasion_chances = metadata
                 .map(|entry| entry.evasion_chance_per_level())
                 .unwrap_or([0.0; 4]);
-            let morph_target = metadata
+            let morph_target_unit = metadata
                 .and_then(|entry| entry.morph_target_unit())
-                .map(Self::leak)
-                .map(WarcraftObjectId::new);
+                .map(str::to_string);
             let off_button_position = defaults.and_then(|entry| entry.off_button_position());
-            let off_tip_static = defaults
+            let off_tip = defaults
                 .and_then(|entry| entry.off_tip())
-                .map(|text| self.substitute_placeholders(text))
-                .map(|text| Self::leak(&text));
-            let off_ubertip_static = defaults
+                .map(|text| self.substitute_placeholders(text));
+            let off_ubertip = defaults
                 .and_then(|entry| entry.off_ubertip())
-                .map(|text| self.substitute_placeholders(text))
-                .map(|text| Self::leak(&text));
+                .map(|text| self.substitute_placeholders(text));
             let off_icon_from_defaults = defaults
                 .and_then(|entry| entry.off_icon())
                 .map(str::to_owned);
             let off_icon_from_skins = self.get_ability_off_icon_by_id(ability_id_str);
             let raw_off_icon = off_icon_from_defaults.or(off_icon_from_skins);
-            let off_icon_static = raw_off_icon
-                .map(|raw_icon| self.normalize_icon_path(&raw_icon))
-                .map(|normalized| Self::leak(&normalized));
+            let off_icon = raw_off_icon.map(|raw_icon| self.normalize_icon_path(&raw_icon));
             let default_research_position = defaults
                 .and_then(|entry| entry.research_button_position())
                 .or_else(|| defaults.and_then(|entry| entry.button_position()));
-            let research_ubertip_static = defaults
+            let research_ubertip = defaults
                 .and_then(|entry| entry.research_ubertip())
-                .map(|text| self.substitute_placeholders(text))
-                .map(|text| Self::leak(&text));
-            let ability_meta = AbilityMeta::with_ubertips(
-                1,
-                false,
-                [0, 0, 0, 0],
-                default_position,
-                default_research_position,
-                ubertip_static,
-                research_ubertip_static,
-            )
-            .with_code(code_static)
-            .with_morph_target(morph_target)
-            .with_evasion_chances(evasion_chances)
-            .with_off_state(
+                .map(|text| self.substitute_placeholders(text));
+            let ability_meta_fields = ExtractedAbilityMetaFields {
+                max_level: 1,
+                is_ultimate: false,
+                cooldowns: [0, 0, 0, 0],
+                default_button_position: default_position,
+                default_research_button_position: default_research_position,
+                ubertip,
+                research_ubertip,
+                code,
+                morph_target_unit,
+                evasion_chances,
                 off_button_position,
-                off_tip_static,
-                off_ubertip_static,
-                off_icon_static,
-            );
+                off_tip,
+                off_ubertip,
+                off_icon,
+            };
+            let ability_meta = ExtractedAbilityMeta::new(ability_meta_fields);
             let identity = WarcraftObjectIdentity::new(
-                ability_id,
+                ability_id.clone(),
                 names,
                 icons,
                 WarcraftObjectKind::Ability,
                 None,
             );
-            let warcraft_object = self.build_object_with_text(
-                ability_id_str,
-                identity,
-                WarcraftObjectMeta::Ability(ability_meta),
-                None,
-            );
+            let extracted_meta = ExtractedMeta::Ability(ability_meta);
+            let warcraft_object =
+                self.build_object_with_text(ability_id_str, identity, extracted_meta, None);
             map.insert(ability_id, warcraft_object);
         }
 
         map
     }
 
-    fn get_upgrade_ids(&self) -> ObjectMap {
-        let mut map = ObjectMap::new();
+    fn get_upgrade_ids(&self) -> ExtractedObjectMap {
+        let mut map = ExtractedObjectMap::new();
 
         for entry in self.upgrades.races() {
             for (id, art_def) in entry.art_database() {
@@ -1794,37 +1685,27 @@ impl WarcraftDataAggregation {
                     continue;
                 };
 
-                let names: Vec<&'static str> = name_def
-                    .get_names()
-                    .iter()
-                    .map(|name| Self::leak(name))
-                    .collect();
-                let icons: Vec<&'static str> = art_def
+                let names: Vec<String> = name_def.get_names().iter().cloned().collect();
+                let icons: Vec<String> = art_def
                     .get_icons()
                     .iter()
-                    .map(|icon| Self::leak(&self.normalize_icon_path(icon)))
+                    .map(|icon| self.normalize_icon_path(icon))
                     .collect();
 
                 let max_level = icons.len().min(names.len());
-                let leaked_id = Self::leak(id);
-                let object_id = WarcraftObjectId::new(leaked_id);
-                let names_slice = Self::leak_slice(&names);
-                let icons_slice = Self::leak_slice(&icons);
-                let upgrade_meta = UpgradeMeta::new(max_level);
+                let object_id = ExtractedObjectId::new(id.clone());
+                let upgrade_meta = ExtractedUpgradeMeta::new(max_level);
 
                 let identity = WarcraftObjectIdentity::new(
-                    object_id,
-                    names_slice,
-                    icons_slice,
+                    object_id.clone(),
+                    names,
+                    icons,
                     WarcraftObjectKind::Upgrade,
                     Some(entry.race()),
                 );
-                let warcraft_object = self.build_object_with_text(
-                    id,
-                    identity,
-                    WarcraftObjectMeta::Upgrade(upgrade_meta),
-                    None,
-                );
+                let extracted_meta = ExtractedMeta::Upgrade(upgrade_meta);
+                let warcraft_object =
+                    self.build_object_with_text(id, identity, extracted_meta, None);
                 map.insert(object_id, warcraft_object);
             }
         }
@@ -1832,54 +1713,37 @@ impl WarcraftDataAggregation {
         map
     }
 
-    fn get_item_ids(&self) -> ObjectMap {
-        let mut map = ObjectMap::new();
+    fn get_item_ids(&self) -> ExtractedObjectMap {
+        let mut map = ExtractedObjectMap::new();
 
         for (item_class, items_per_class) in self.items() {
             for (id, item) in items_per_class {
-                let leaked_id = Self::leak(id);
-                let object_id = WarcraftObjectId::new(leaked_id);
+                let object_id = ExtractedObjectId::new(id.clone());
 
                 let icon = self.get_item_icon_by_id(id).unwrap_or_default();
                 let icon = self.normalize_icon_path(&icon);
 
-                let ability_ids: Vec<WarcraftObjectId> = item
-                    .ability_list()
-                    .iter()
-                    .map(|ability| {
-                        let leaked_ability = Self::leak(ability);
-                        WarcraftObjectId::new(leaked_ability)
-                    })
-                    .collect();
-                let abilities: &'static [WarcraftObjectId] = Self::leak_slice(&ability_ids);
+                let abilities: Vec<String> = item.ability_list().iter().cloned().collect();
 
-                let cooldown_id = item.cooldown_id().map(|cooldown_id| {
-                    let leaked_cooldown_id = Self::leak(cooldown_id);
-                    WarcraftObjectId::new(leaked_cooldown_id)
-                });
+                let cooldown_id = item.cooldown_id().map(str::to_string);
 
                 let Some(name) = self.resolve_item_name(id) else {
                     continue;
                 };
 
-                let leaked_name = Self::leak(name);
-                let leaked_icon = Self::leak(icon.as_str());
-                let names = Self::leak_slice(&[leaked_name]);
-                let icons = Self::leak_slice(&[leaked_icon]);
-                let item_meta = ItemMeta::new(*item_class, abilities, cooldown_id);
+                let names = vec![name.to_string()];
+                let icons = vec![icon];
+                let item_meta = ExtractedItemMeta::new(*item_class, abilities, cooldown_id);
                 let identity = WarcraftObjectIdentity::new(
-                    object_id,
+                    object_id.clone(),
                     names,
                     icons,
                     WarcraftObjectKind::Item,
                     None,
                 );
-                let warcraft_object = self.build_object_with_text(
-                    id,
-                    identity,
-                    WarcraftObjectMeta::Item(item_meta),
-                    None,
-                );
+                let extracted_meta = ExtractedMeta::Item(item_meta);
+                let warcraft_object =
+                    self.build_object_with_text(id, identity, extracted_meta, None);
                 map.insert(object_id, warcraft_object);
             }
         }
@@ -1887,8 +1751,8 @@ impl WarcraftDataAggregation {
         map
     }
 
-    fn merge_ids(&self, maps: Vec<ObjectMap>) -> ObjectMap {
-        let mut merged = ObjectMap::new();
+    fn merge_ids(&self, maps: Vec<ExtractedObjectMap>) -> ExtractedObjectMap {
+        let mut merged = ExtractedObjectMap::new();
         for map in maps {
             merged.extend(map);
         }

@@ -6,6 +6,7 @@ mod db;
 mod default_positions;
 mod gameplay_constants;
 mod heroes;
+mod ir;
 mod items;
 mod object_texts;
 mod skins;
@@ -46,6 +47,7 @@ pub use game::GAME_EXTRACTION_RULE;
 pub use image::{DdsDecoder, ExtractedImage};
 
 pub use db::WarcraftDataAggregation;
+pub use ir::*;
 
 use ::image::{ImageBuffer, Rgba};
 use casclib::{CascError, open};

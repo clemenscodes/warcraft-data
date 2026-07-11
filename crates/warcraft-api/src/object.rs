@@ -10,30 +10,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::meta::{AbilityMeta, CommandMeta, ItemMeta, UnitMeta, UpgradeMeta};
 use crate::primitives::Identifier;
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
-pub enum Race {
-    Human,
-    Nightelf,
-    Orc,
-    Undead,
-    Neutral,
-}
-
-impl TryFrom<&str> for Race {
-    type Error = ();
-
-    fn try_from(value: &str) -> Result<Self, Self::Error> {
-        match value {
-            "human" => Ok(Self::Human),
-            "orc" => Ok(Self::Orc),
-            "nightelf" => Ok(Self::Nightelf),
-            "undead" => Ok(Self::Undead),
-            "neutral" => Ok(Self::Neutral),
-            _ => Err(()),
-        }
-    }
-}
+use crate::race::Race;
 
 #[derive(Default, Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum UnitKind {

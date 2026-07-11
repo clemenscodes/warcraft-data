@@ -10,7 +10,7 @@ pub mod object;
 mod object_lookup;
 pub mod player;
 pub mod primitives;
-pub mod race_labels;
+pub mod race;
 mod system_hotkeys_category;
 mod test;
 mod unit_catalog;
@@ -47,7 +47,7 @@ pub use meta::{
     UnitAttack, UnitCombat, UnitFlags, UnitMeta, UnitProduction, UpgradeMeta, WeaponType,
 };
 pub use object::{
-    ColumnIndex, GridCoordinate, ItemClass, ObjectMap, ParseGridCoordinateError, Race, RowIndex,
+    ColumnIndex, GridCoordinate, ItemClass, ObjectMap, ParseGridCoordinateError, RowIndex,
     UnitKind, UnitUpgradeSwap, WarcraftDatabase, WarcraftObject, WarcraftObjectId,
     WarcraftObjectKind, WarcraftObjectMeta, WarcraftObjectText,
 };
@@ -57,5 +57,5 @@ pub use player::{
     TeamPlayer, Teams,
 };
 pub use primitives::{Boolean, Byte, ByteString, Bytes, Float, Identifier, Integer, Time};
-pub use race_labels::{RaceLabels, SUPPORTED_RACES};
+pub use race::{AllRaces, Race};
 pub use version::{SUPPORTED_VERSION, SUPPORTED_VERSION_STRING, WarcraftVersion};

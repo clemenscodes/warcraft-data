@@ -2,9 +2,7 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
 
 use clap::Parser;
-use warcraft_api::{
-    GridCoordinate, WarcraftDatabase, WarcraftObject, WarcraftObjectId, WarcraftObjectMeta,
-};
+use warcraft_api::GridCoordinate;
 use warcraft_extractor::*;
 
 const DEFAULT_DATABASE_FILE: &str =
@@ -308,7 +306,7 @@ impl CodegenContext {
             .map(|entry| entry.tiered_summon_units().to_vec())
             .collect();
         let unit_upgrade_swaps = aggregated_data.upgrade_swaps().clone();
-        let database: WarcraftDatabase = aggregated_data.into();
+        let database: ExtractedDatabase = aggregated_data.into();
 
         let mut context = CodegenContext::new();
         let mut output = String::new();
@@ -387,26 +385,17 @@ impl CodegenContext {
         output
     }
 
-    fn intern_str_slice_named(&mut self, name: String, values: &[&'static str]) -> String {
-        self.str_slices.entry(name.clone()).or_insert_with(|| {
-            values
-                .iter()
-                .map(|string_value| string_value.to_string())
-                .collect()
-        });
+    fn intern_str_slice_named(&mut self, name: String, values: &[String]) -> String {
+        self.str_slices
+            .entry(name.clone())
+            .or_insert_with(|| values.to_vec());
         name
     }
 
-    fn intern_id_slice_named(&mut self, name: String, values: &[WarcraftObjectId]) -> String {
-        self.id_slices.entry(name.clone()).or_insert_with(|| {
-            values
-                .iter()
-                .map(|object_id| {
-                    let object_id_value = object_id.value();
-                    object_id_value.to_string()
-                })
-                .collect()
-        });
+    fn intern_id_slice_named(&mut self, name: String, values: &[String]) -> String {
+        self.id_slices
+            .entry(name.clone())
+            .or_insert_with(|| values.to_vec());
         name
     }
 
@@ -444,8 +433,8 @@ impl CodegenContext {
     fn emit_object(
         &mut self,
         output: &mut String,
-        object_id: &WarcraftObjectId,
-        warcraft_object: &WarcraftObject,
+        object_id: &ExtractedObjectId,
+        warcraft_object: &ExtractedObject,
     ) {
         let id_value = object_id.value();
         let id_normalized = Self::normalize_identifier(id_value);
@@ -510,8 +499,7 @@ impl CodegenContext {
         let default_research = warcraft_object.default_research_button_position();
         let object_meta_has_position = matches!(
             warcraft_object.meta(),
-            warcraft_api::WarcraftObjectMeta::Ability(_)
-                | warcraft_api::WarcraftObjectMeta::Command(_)
+            ExtractedMeta::Ability(_) | ExtractedMeta::Command(_)
         );
         let emit_button = default_button.is_some() && !object_meta_has_position;
         let emit_research = default_research.is_some() && !object_meta_has_position;
@@ -547,14 +535,14 @@ impl CodegenContext {
     fn emit_object_metadata(
         &mut self,
         output: &mut String,
-        object_id: &WarcraftObjectId,
-        meta: &WarcraftObjectMeta,
+        object_id: &ExtractedObjectId,
+        meta: &ExtractedMeta,
     ) {
         let id_value = object_id.value();
         let id_normalized = Self::normalize_identifier(id_value);
 
         match meta {
-            WarcraftObjectMeta::Unit(unit_meta) => {
+            ExtractedMeta::Unit(unit_meta) => {
                 let unit_kind = unit_meta.unit_kind();
                 let build_time = unit_meta.build_time();
                 let level = unit_meta.level();
@@ -661,7 +649,7 @@ impl CodegenContext {
                 ));
             }
 
-            WarcraftObjectMeta::Ability(ability_meta) => {
+            ExtractedMeta::Ability(ability_meta) => {
                 let max_level = ability_meta.max_level();
                 let is_ultimate = ability_meta.is_ultimate();
                 let cooldowns = ability_meta.cooldowns();
@@ -676,11 +664,11 @@ impl CodegenContext {
                     format_static_str_option(ability_meta.research_ubertip());
                 let code_literal = ability_meta
                     .code()
-                    .map(|code| format!("Some(WarcraftObjectId::new(\"{}\"))", code.value()))
+                    .map(|code| format!("Some(WarcraftObjectId::new(\"{code}\"))"))
                     .unwrap_or_else(|| "None".to_string());
                 let morph_target_literal = ability_meta
                     .morph_target_unit()
-                    .map(|target| format!("Some(WarcraftObjectId::new(\"{}\"))", target.value()))
+                    .map(|target| format!("Some(WarcraftObjectId::new(\"{target}\"))"))
                     .unwrap_or_else(|| "None".to_string());
                 let off_button_literal =
                     format_button_position_option(ability_meta.off_button_position());
@@ -713,14 +701,14 @@ impl CodegenContext {
                 ));
             }
 
-            WarcraftObjectMeta::Upgrade(upgrade_meta) => {
+            ExtractedMeta::Upgrade(upgrade_meta) => {
                 let max_level = upgrade_meta.max_level();
                 output.push_str(&format!(
                     "            WarcraftObjectMeta::Upgrade(UpgradeMeta::new({max_level})),\n",
                 ));
             }
 
-            WarcraftObjectMeta::Command(command_meta) => {
+            ExtractedMeta::Command(command_meta) => {
                 let default_position =
                     format_button_position_option(command_meta.default_button_position());
                 let tip_literal = format_static_str_option(command_meta.tip());
@@ -731,17 +719,14 @@ impl CodegenContext {
                 ));
             }
 
-            WarcraftObjectMeta::Item(item_meta) => {
+            ExtractedMeta::Item(item_meta) => {
                 let item_abilities = item_meta.abilities();
                 let ability_const = self
                     .intern_id_slice_named(format!("{id_normalized}_ABILITIES"), item_abilities);
                 let item_class = item_meta.class();
                 let item_cooldown_id = item_meta.cooldown_id();
                 let cooldown_code = item_cooldown_id
-                    .map(|cooldown_id| {
-                        let cooldown_value = cooldown_id.value();
-                        format!("Some(WarcraftObjectId::new(\"{cooldown_value}\"))")
-                    })
+                    .map(|cooldown_id| format!("Some(WarcraftObjectId::new(\"{cooldown_id}\"))"))
                     .unwrap_or("None".into());
 
                 output.push_str("            WarcraftObjectMeta::Item(ItemMeta::new(\n");

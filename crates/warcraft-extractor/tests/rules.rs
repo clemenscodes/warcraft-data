@@ -9,9 +9,7 @@
 //! mapping shape so a patch that changes the SLK schema or a file move inside
 //! CASC fails loudly here before downstream crates rot.
 
-use warcraft_api::{
-    GridCoordinate, ItemClass, Race, UnitKind, WarcraftDatabase, WarcraftObjectMeta,
-};
+use warcraft_api::{GridCoordinate, ItemClass, Race, UnitKind};
 use warcraft_extractor::{
     ABILITY_DEFAULTS_EXTRACTION_RULE, ABILITY_METADATA_EXTRACTION_RULE,
     ABILITY_SKINS_EXTRACTION_RULE, CAMPAIGN_ABILITY_STRINGS_EXTRACTION_RULE,
@@ -28,6 +26,7 @@ use warcraft_extractor::{
     UNDEAD_UPGRADES_ART_EXTRACTION_RULE, UNIT_ABILITIES_EXTRACTION_RULE,
     UNIT_SKINS_EXTRACTION_RULE, UNITS_EXTRACTION_RULE, WarcraftDataAggregation,
 };
+use warcraft_extractor::{ExtractedDatabase, ExtractedMeta};
 
 const HEROES_CASC_PATH: &str = "war3.w3mod:units/abilitydata.slk";
 const UNITS_CASC_PATH: &str = "war3.w3mod:units/unitbalance.slk";
@@ -996,45 +995,37 @@ mod rule_5_same_slot_dedup {
         )
     }
 
-    fn build_database(results: Vec<ExtractResult>) -> WarcraftDatabase {
+    fn build_database(results: Vec<ExtractResult>) -> ExtractedDatabase {
         let aggregation = WarcraftDataAggregation::from(results);
-        WarcraftDatabase::from(aggregation)
+        ExtractedDatabase::from(aggregation)
     }
 
-    fn unit_ability_ids(database: &WarcraftDatabase, unit_id: &str) -> Vec<String> {
+    fn unit_ability_ids(database: &ExtractedDatabase, unit_id: &str) -> Vec<String> {
         let object = database
             .by_id(unit_id)
             .unwrap_or_else(|| panic!("unit {unit_id} missing from database"));
-        let WarcraftObjectMeta::Unit(unit_meta) = object.meta() else {
+        let ExtractedMeta::Unit(unit_meta) = object.meta() else {
             panic!("{unit_id} is not a Unit");
         };
-        unit_meta
-            .abilities()
-            .iter()
-            .map(|ability_id| ability_id.value().to_string())
-            .collect()
+        unit_meta.abilities().iter().cloned().collect()
     }
 
-    fn unit_hero_ability_ids(database: &WarcraftDatabase, unit_id: &str) -> Vec<String> {
+    fn unit_hero_ability_ids(database: &ExtractedDatabase, unit_id: &str) -> Vec<String> {
         let object = database
             .by_id(unit_id)
             .unwrap_or_else(|| panic!("unit {unit_id} missing from database"));
-        let WarcraftObjectMeta::Unit(unit_meta) = object.meta() else {
+        let ExtractedMeta::Unit(unit_meta) = object.meta() else {
             panic!("{unit_id} is not a Unit");
         };
-        unit_meta
-            .hero_abilities()
-            .iter()
-            .map(|ability_id| ability_id.value().to_string())
-            .collect()
+        unit_meta.hero_abilities().iter().cloned().collect()
     }
 
     fn ability_default_button_position(
-        database: &WarcraftDatabase,
+        database: &ExtractedDatabase,
         ability_id: &str,
     ) -> Option<GridCoordinate> {
         let object = database.by_id(ability_id)?;
-        let WarcraftObjectMeta::Ability(ability_meta) = object.meta() else {
+        let ExtractedMeta::Ability(ability_meta) = object.meta() else {
             return None;
         };
         ability_meta.default_button_position()
@@ -1375,23 +1366,19 @@ mod rule_2_transform_and_morph_suppression {
     const UNIT_STRINGS_PATH: &str = "x/enus.w3mod:units/humanunitstrings.txt";
     const ABILITY_STRINGS_PATH: &str = "x/enus.w3mod:units/humanabilitystrings.txt";
 
-    fn build_database(results: Vec<ExtractResult>) -> WarcraftDatabase {
+    fn build_database(results: Vec<ExtractResult>) -> ExtractedDatabase {
         let aggregation = WarcraftDataAggregation::from(results);
-        WarcraftDatabase::from(aggregation)
+        ExtractedDatabase::from(aggregation)
     }
 
-    fn unit_ability_ids(database: &WarcraftDatabase, unit_id: &str) -> Vec<String> {
+    fn unit_ability_ids(database: &ExtractedDatabase, unit_id: &str) -> Vec<String> {
         let object = database
             .by_id(unit_id)
             .unwrap_or_else(|| panic!("unit {unit_id} missing from database"));
-        let WarcraftObjectMeta::Unit(unit_meta) = object.meta() else {
+        let ExtractedMeta::Unit(unit_meta) = object.meta() else {
             panic!("{unit_id} is not a Unit");
         };
-        unit_meta
-            .abilities()
-            .iter()
-            .map(|ability_id| ability_id.value().to_string())
-            .collect()
+        unit_meta.abilities().iter().cloned().collect()
     }
 
     fn unit_balance_two(first_id: &str, second_id: &str) -> String {
@@ -1439,7 +1426,7 @@ mod rule_2_transform_and_morph_suppression {
         defaults_txt: &str,
         unit_strings_txt: &str,
         ability_strings_txt: &str,
-    ) -> WarcraftDatabase {
+    ) -> ExtractedDatabase {
         let unit_result = UNITS_EXTRACTION_RULE
             .process(UNIT_PATH, unit_slk.as_bytes())
             .unwrap();
