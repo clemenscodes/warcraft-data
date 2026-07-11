@@ -1,6 +1,7 @@
 //! The public read API over the bundled Warcraft III object database.
 
 use crate::application::ability::AbilityApi;
+use crate::application::command::CommandApi;
 use crate::application::unit::UnitApi;
 use crate::domain::identity::WarcraftObjectId;
 use crate::domain::object::WarcraftObject;
@@ -76,6 +77,11 @@ impl WarcraftApi {
     /// The ability domain sub-API.
     pub fn ability(&self) -> AbilityApi {
         AbilityApi::new(self.database)
+    }
+
+    /// The command domain sub-API.
+    pub fn command(&self) -> CommandApi {
+        CommandApi::new(self.database)
     }
 
     // --- derived queries (formerly `ObjectLookup`) ---

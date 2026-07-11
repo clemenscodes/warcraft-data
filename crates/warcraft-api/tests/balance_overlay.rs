@@ -27,8 +27,23 @@
 
 #[cfg(test)]
 mod tests {
-    use warcraft_api::{CatalogVisibility, SearchField, UnitCatalog, UnitMode, WarcraftApi};
-    use warcraft_api::{Race, WarcraftObjectMeta};
+    use warcraft_api::{Race, Scope, UnitMode, UnitQuery, WarcraftApi, WarcraftObjectMeta};
+
+    /// The ids a curated Melee browse lists for a race.
+    fn melee_browse_ids(race: Race) -> Vec<String> {
+        WarcraftApi::default()
+            .unit()
+            .list(&UnitQuery {
+                race: Some(race),
+                scope: Scope::Browse {
+                    mode: UnitMode::Melee,
+                },
+                ..UnitQuery::default()
+            })
+            .iter()
+            .map(|view| view.id().value().to_string())
+            .collect()
+    }
 
     fn unit_abilities(unit_id: &str) -> Vec<String> {
         let object = WarcraftApi::default()
@@ -154,20 +169,9 @@ mod tests {
     /// keeps it in the Melee catalog so users can bind Burrow on it.
     #[test]
     fn barbed_arachnathid_merc_is_in_melee_catalog() {
-        let entries = UnitCatalog::entries_for(
-            Some(Race::Neutral),
-            Some(UnitMode::Melee),
-            None,
-            None,
-            SearchField::UnitName,
-            CatalogVisibility::default(),
-        );
-        let ids: Vec<&str> = entries
-            .iter()
-            .map(|entry| entry.unit_id().value())
-            .collect();
+        let ids = melee_browse_ids(Race::Neutral);
         assert!(
-            ids.contains(&"nanm"),
+            ids.iter().any(|id| id == "nanm"),
             "Barbed Arachnathid merc (nanm) must survive the Melee catalog filter",
         );
         let abilities = unit_abilities("nanm");
@@ -331,22 +335,18 @@ mod tests {
             Race::Undead,
             Race::Neutral,
         ] {
-            let entries = UnitCatalog::entries_for(
-                Some(race),
-                Some(UnitMode::Melee),
-                None,
-                None,
-                SearchField::UnitName,
-                CatalogVisibility::default(),
-            );
+            let entries = WarcraftApi::default().unit().list(&UnitQuery {
+                race: Some(race),
+                scope: Scope::Browse {
+                    mode: UnitMode::Melee,
+                },
+                ..UnitQuery::default()
+            });
             for entry in &entries {
-                let WarcraftObjectMeta::Unit(unit_meta) = entry.warcraft_object().meta() else {
-                    continue;
-                };
                 assert!(
-                    !unit_meta.is_campaign(),
+                    !entry.is_campaign(),
                     "{race:?}/Melee leaked campaign unit {}",
-                    entry.unit_id().value(),
+                    entry.id().value(),
                 );
             }
         }
@@ -358,21 +358,10 @@ mod tests {
     /// they'd be dead entries in the unit list.
     #[test]
     fn ability_less_placeholders_stay_filtered() {
-        let entries = UnitCatalog::entries_for(
-            Some(Race::Neutral),
-            Some(UnitMode::Melee),
-            None,
-            None,
-            SearchField::UnitName,
-            CatalogVisibility::default(),
-        );
-        let ids: Vec<&str> = entries
-            .iter()
-            .map(|entry| entry.unit_id().value())
-            .collect();
+        let ids = melee_browse_ids(Race::Neutral);
         for placeholder in ["nanc", "nanw"] {
             assert!(
-                !ids.contains(&placeholder),
+                !ids.iter().any(|id| id == placeholder),
                 "{placeholder} must stay filtered (no abilities, no production)",
             );
         }

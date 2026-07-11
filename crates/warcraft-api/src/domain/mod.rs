@@ -4,8 +4,6 @@
 
 pub(crate) mod ability;
 pub(crate) mod balance;
-pub(crate) mod building;
-pub(crate) mod catalog;
 pub(crate) mod combat;
 pub(crate) mod command;
 pub(crate) mod grid;

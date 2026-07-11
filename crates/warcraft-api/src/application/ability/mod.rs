@@ -2,5 +2,6 @@
 //! [`AbilityView`](crate::AbilityView) read model it produces.
 
 pub(crate) mod api;
+pub(crate) mod fanout;
 
 pub use api::AbilityApi;

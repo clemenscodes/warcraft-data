@@ -216,3 +216,39 @@ Rest ohne VO-Marker — der kommt mit Slice 3.
   Lesen der jeweiligen Datei festgelegt, nicht geraten.
 - Ob `catalog`/`variant_groups` DomainService (Domain) oder Query/ReadModel
   (Application) sind — entscheidet sich beim Lesen ihrer Logik.
+
+## Abschluss (2026-07-11): Restrukturierung fertig, grün
+
+Alle Umzüge, Extraktionen und Einfaltungen sind durch; `warcraft-api` steht als saubere,
+folder-per-concept-DDD-API. `cargo test -p warcraft-api -p warcraft-primitives` grün
+(136 + 12 + 15 + 1 Doctest + 31), `cargo build -p warcraft-extractor` grün, `cargo fmt`
++ `cargo clippy` sauber. Keine flachen Dateien mehr (nur `lib.rs` + generierter Static).
+
+**Gefaltet/zerlegt (God-Files gelöscht):**
+- `meta.rs` → `domain/{unit,balance,ability}/…` (ein Typ pro Modul).
+- `domain/object.rs` → `domain/object/{kind,text,meta,aggregate}`.
+- `domain/{building,catalog}.rs` gelöscht: building-traits → `UnitView::can_attack`
+  (pures `is_attacking_building`) + `UnitApi::can_uproot`; catalog-Query-VOs
+  (`SearchField`/`CatalogVisibility`) → `application/unit/listing`.
+- `application/unit_catalog.rs` (`entries_for`, 275 Z., 6 Positional-Args, `is_search =
+  mode.is_none()`) → `application/unit/listing/` mit `UnitQuery` + `Scope{Browse,Search}`
+  und puren Stages `search`/`suppress`/`sort` (TDD) + Boundary-Stages `index`/`placeholder`;
+  öffentlich `api.unit().list(&UnitQuery)`.
+- `application/command_catalog.rs` → `application/unit/command_card/` (purer `assembly`-Kern,
+  TDD) + `api.unit().command_card()`; `command` als eigenes Konzept: `api.command()` +
+  `CommandView`.
+- variant-Cluster komplett neu: `application/unit/variant/{facts,chains,build,index,group,
+  union_find}` — `facts` einziger DB-Leser, `chains`/`build`/`union_find` pur & TDD;
+  `VariantGroup`/`VariantIndex` `pub(crate)`; Ability-Fanout → `application/ability/fanout/`
+  (purer `pairing`-Kern, TDD). Öffentlich nur `api.unit().variants()/canonical()/…` und
+  `api.ability().fanout()`.
+
+**Prinzipien durchgezogen:** Reinheit (Verarbeitungsfunktionen bekommen minimale Eingaben,
+nie die ganze DB; einziger DB-Zugriff je Subsystem an der Boundary), `TryFrom`/`From` statt
+`from_*`, DDD-Marker beim Typ (nie unter `mod tests`), keine `_for`-Namen, kein
+Namespace-über-Global. Golden-Verhalten via Integrationstests durch `api.unit()`/`api.ability()`
+gepinnt.
+
+**Bewusst offen:** Scheibe 3 (f32 → Festkomma-VOs + `db.rs`-Regeneration) — die Float-Typen
+in `domain/{unit,balance,ability}` bleiben `f32` und unmarkiert. Laut Handoff explizit außerhalb
+des Scopes.

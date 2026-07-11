@@ -5,6 +5,7 @@
 use crate::domain::identity::WarcraftObjectId;
 use crate::domain::object::{WarcraftObject, WarcraftObjectMeta};
 use crate::domain::race::Race;
+use crate::domain::unit::attacking_buildings::is_attacking_building;
 use crate::domain::unit::{UnitKind, UnitMeta};
 
 /// A single unit, as returned by a [`UnitApi`](crate::UnitApi) query. A `Copy`
@@ -39,6 +40,16 @@ impl UnitView {
         self.meta.unit_kind()
     }
 
+    /// Whether the unit is campaign-only (kept out of melee listings).
+    pub fn is_campaign(&self) -> bool {
+        self.meta.is_campaign()
+    }
+
+    /// The unit's in-game tech tier (`level`); lower is available earlier.
+    pub fn level(&self) -> u32 {
+        self.meta.level()
+    }
+
     /// The primary icon path, if any.
     pub fn icon(&self) -> Option<&'static str> {
         self.object.icons().first().copied()
@@ -59,6 +70,12 @@ impl UnitView {
     /// Ids of this unit's hero abilities (empty for non-heroes).
     pub fn hero_ability_ids(&self) -> &'static [WarcraftObjectId] {
         self.meta.hero_abilities()
+    }
+
+    /// Whether this is a building that carries a defensive weapon (a tower,
+    /// attacking ziggurat, ancient protector, …).
+    pub fn can_attack(&self) -> bool {
+        is_attacking_building(self.id())
     }
 }
 

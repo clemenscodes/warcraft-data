@@ -6,6 +6,7 @@
 //! conversion (slice 3).
 
 pub(crate) mod attack;
+pub(crate) mod attacking_buildings;
 pub(crate) mod combat;
 pub(crate) mod flags;
 pub(crate) mod hero;

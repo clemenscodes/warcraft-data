@@ -4,7 +4,6 @@
 
 pub(crate) mod ability;
 pub(crate) mod api;
-pub(crate) mod command_catalog;
+pub(crate) mod command;
 pub(crate) mod unit;
-pub(crate) mod unit_catalog;
 pub(crate) mod view;

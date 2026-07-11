@@ -4,18 +4,19 @@ mod infrastructure;
 
 pub use application::ability::AbilityApi;
 pub use application::api::WarcraftApi;
-pub use application::command_catalog::CommandCatalog;
+pub use application::command::CommandApi;
 pub use application::unit::UnitApi;
-pub use application::unit_catalog::{CatalogEntry, UnitCatalog};
+pub use application::unit::listing::query::{Scope, UnitQuery};
+pub use application::unit::listing::search_field::SearchField;
+pub use application::unit::listing::visibility::CatalogVisibility;
 pub use application::view::ability::AbilityView;
+pub use application::view::command::CommandView;
 pub use application::view::unit::UnitView;
 pub use domain::ability::AbilityMeta;
 pub use domain::balance::{
     AgilityBonuses, DamageEffectiveness, DamageMatrix, GameplayConstants, IntelligenceBonuses,
     StrengthBonuses,
 };
-pub use domain::building::BuildingTraits;
-pub use domain::catalog::{CatalogVisibility, SearchField};
 pub use domain::combat::{AttackType, DefenseType, WeaponType};
 pub use domain::command::CommandMeta;
 pub use domain::grid::{ColumnIndex, GridCoordinate, ParseGridCoordinateError, RowIndex};

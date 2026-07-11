@@ -4,4 +4,5 @@
 //! the `*Api` services — a view never queries.
 
 pub(crate) mod ability;
+pub(crate) mod command;
 pub(crate) mod unit;
