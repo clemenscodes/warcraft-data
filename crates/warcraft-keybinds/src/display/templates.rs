@@ -11,7 +11,7 @@ use crate::identity::slot::GridSlotId;
 use crate::unit::slots::UnitCommandSlots;
 use std::collections::HashMap;
 use std::sync::OnceLock;
-use warcraft_api::{ObjectLookup, WARCRAFT_DATABASE};
+use warcraft_api::WarcraftApi;
 
 /// A bundled preset: a name, a one-line description, and the CustomKeys text it
 /// ships.
@@ -123,13 +123,14 @@ impl ResolvedTemplate {
     }
 
     fn compute_all() -> Vec<Self> {
-        let archmage_id =
-            ObjectLookup::resolve_raw("Hamg").expect("the Archmage sample unit exists");
-        let command_slots: Vec<GridSlotId> = WARCRAFT_DATABASE
+        let archmage_id = WarcraftApi::default()
+            .resolve("Hamg")
+            .expect("the Archmage sample unit exists");
+        let command_slots: Vec<GridSlotId> = WarcraftApi::default()
             .command_card(archmage_id)
             .filled_slots()
             .collect();
-        let research_slots: Vec<GridSlotId> = WARCRAFT_DATABASE
+        let research_slots: Vec<GridSlotId> = WarcraftApi::default()
             .research_menu(archmage_id)
             .into_iter()
             .flat_map(|card| card.filled_slots().collect::<Vec<_>>())

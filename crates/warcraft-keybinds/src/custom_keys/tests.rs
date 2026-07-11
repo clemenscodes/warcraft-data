@@ -5,7 +5,7 @@ mod parse_and_binding_tests {
     use crate::identity::hotkey_target::HotkeyTarget;
     use crate::identity::hotkey_token::HotkeyToken;
     use crate::model::{ColumnIndex, RowIndex};
-    use warcraft_api::WARCRAFT_DATABASE;
+    use warcraft_api::WarcraftApi;
 
     use crate::model::{
         AbilityBinding, AbilityModifier, CommandBinding, GridCoordinate, Hotkey, SystemBinding,
@@ -792,7 +792,7 @@ mod parse_and_binding_tests {
         for entry in keys.bindings_in_order() {
             let ability_id = entry.ability_id();
             let object_code = ability_id.value();
-            let Some(object) = WARCRAFT_DATABASE.by_id(object_code) else {
+            let Some(object) = WarcraftApi::default().by_id(object_code) else {
                 continue;
             };
             let Some(max_level) = object.upgrade_max_level() else {
@@ -1981,7 +1981,8 @@ mod normalize_tests {
         use crate::unit::grids::GridRole;
         let graph = ConflictGraph::build(&keys);
         let check = |ability: &str, expected_column: u8, expected_row: u8| {
-            let ability_id = warcraft_api::ObjectLookup::resolve_raw(ability)
+            let ability_id = warcraft_api::WarcraftApi::default()
+                .resolve(ability)
                 .unwrap_or_else(|| panic!("{ability} is not a known object"));
             let index = graph
                 .find_node(ability_id, GridRole::MainCommand)
@@ -2103,9 +2104,8 @@ mod normalize_tests {
 mod template_generation_tests {
     use super::super::CustomKeys;
     use crate::grid::layout::GridLayout;
-    use warcraft_api::ObjectLookup;
     use warcraft_api::WarcraftObjectMeta;
-    use warcraft_api::{WARCRAFT_DATABASE, WARCRAFT_SYSTEM_KEYBINDS};
+    use warcraft_api::{WARCRAFT_SYSTEM_KEYBINDS, WarcraftApi};
 
     fn join_levels(levels: &[&str]) -> Option<String> {
         if levels.is_empty() {
@@ -2118,7 +2118,7 @@ mod template_generation_tests {
     fn build_text(layout: &GridLayout) -> String {
         let tmpl = CustomKeys::parse_raw(super::super::DEFAULT_CUSTOM_KEYS);
         let mut out = String::new();
-        for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
+        for (object_id, warcraft_object) in WarcraftApi::default().iter() {
             let id = *object_id;
             let WarcraftObjectMeta::Command(cmd_meta) = warcraft_object.meta() else {
                 continue;
@@ -2154,7 +2154,7 @@ mod template_generation_tests {
             }
             out.push('\n');
         }
-        for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
+        for (object_id, warcraft_object) in WarcraftApi::default().iter() {
             let id = *object_id;
             let WarcraftObjectMeta::Ability(ability_meta) = warcraft_object.meta() else {
                 continue;
@@ -2168,7 +2168,7 @@ mod template_generation_tests {
             {
                 continue;
             }
-            let is_passive = ObjectLookup::is_passive_ability(id);
+            let is_passive = WarcraftApi::default().is_passive_ability(id);
             let existing_binding = tmpl.binding(id);
             let section_header = format!("[{id}]\n");
             out.push_str(&section_header);
@@ -2272,7 +2272,7 @@ mod template_generation_tests {
             }
             out.push('\n');
         }
-        for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
+        for (object_id, warcraft_object) in WarcraftApi::default().iter() {
             let id = *object_id;
             let WarcraftObjectMeta::Unit(_) = warcraft_object.meta() else {
                 continue;
@@ -2312,7 +2312,7 @@ mod template_generation_tests {
             }
             out.push('\n');
         }
-        for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
+        for (object_id, warcraft_object) in WarcraftApi::default().iter() {
             let id = *object_id;
             if !matches!(
                 warcraft_object.meta(),

@@ -370,8 +370,8 @@ checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
 
 [[package]]
 name = "ddd"
-version = "0.1.0"
-source = "git+https://github.com/clemenscodes/ddd?tag=v0.1.0#a1d0caca8983313fd45ddb2ffce9f6adf404a338"
+version = "0.2.0"
+source = "git+https://github.com/clemenscodes/ddd?tag=v0.2.0#30aa81c432476c169405048a84c51e4be0ba5974"
 
 [[package]]
 name = "ddsfile"

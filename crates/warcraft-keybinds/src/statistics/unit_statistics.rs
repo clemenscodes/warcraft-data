@@ -72,11 +72,11 @@ impl LeveledFigures {
         let base_agility_float = AsFloat::from(base_agility).value;
         let base_intelligence_float = AsFloat::from(base_intelligence).value;
         let strength_total =
-            base_strength_float + attributes.strength_per_level() * levels_added_float;
+            base_strength_float + attributes.strength_per_level().as_f32() * levels_added_float;
         let agility_total =
-            base_agility_float + attributes.agility_per_level() * levels_added_float;
-        let intelligence_total =
-            base_intelligence_float + attributes.intelligence_per_level() * levels_added_float;
+            base_agility_float + attributes.agility_per_level().as_f32() * levels_added_float;
+        let intelligence_total = base_intelligence_float
+            + attributes.intelligence_per_level().as_f32() * levels_added_float;
         let strength = FlooredCount::from(strength_total).value.max(base_strength);
         let agility = FlooredCount::from(agility_total).value.max(base_agility);
         let intelligence = FlooredCount::from(intelligence_total)
@@ -90,14 +90,14 @@ impl LeveledFigures {
         let intelligence_float = AsFloat::from(intelligence).value;
         let hit_points = combat.hit_points()
             + strength_delta * WARCRAFT_GAMEPLAY_CONSTANTS.str_hit_point_bonus();
-        let hit_points_regen = combat.hit_points_regen()
-            + strength_float * WARCRAFT_GAMEPLAY_CONSTANTS.str_regen_bonus();
+        let hit_points_regen = combat.hit_points_regen().as_f32()
+            + strength_float * WARCRAFT_GAMEPLAY_CONSTANTS.str_regen_bonus().as_f32();
         let mana =
             attributes.mana() + intelligence_delta * WARCRAFT_GAMEPLAY_CONSTANTS.int_mana_bonus();
-        let mana_regen = attributes.mana_regen()
-            + intelligence_float * WARCRAFT_GAMEPLAY_CONSTANTS.int_regen_bonus();
-        let armor =
-            combat.armor() + agility_delta_float * WARCRAFT_GAMEPLAY_CONSTANTS.agi_defense_bonus();
+        let mana_regen = attributes.mana_regen().as_f32()
+            + intelligence_float * WARCRAFT_GAMEPLAY_CONSTANTS.int_regen_bonus().as_f32();
+        let armor = combat.armor().as_f32()
+            + agility_delta_float * WARCRAFT_GAMEPLAY_CONSTANTS.agi_defense_bonus().as_f32();
         let primary_now = match attributes.primary() {
             PrimaryAttribute::Strength => strength,
             PrimaryAttribute::Agility => agility,
@@ -111,7 +111,7 @@ impl LeveledFigures {
         let primary_delta = primary_now.saturating_sub(primary_base);
         let primary_delta_float = AsFloat::from(primary_delta).value;
         let attack_bonus_float =
-            primary_delta_float * WARCRAFT_GAMEPLAY_CONSTANTS.str_attack_bonus();
+            primary_delta_float * WARCRAFT_GAMEPLAY_CONSTANTS.str_attack_bonus().as_f32();
         let primary_delta_attack = FlooredCount::from(attack_bonus_float)
             .value
             .max(primary_delta);
@@ -167,12 +167,12 @@ impl UnitStatistics {
         let hit_points_regen_rate = leveled
             .as_ref()
             .map(|figures| figures.hit_points_regen)
-            .unwrap_or_else(|| combat.hit_points_regen());
+            .unwrap_or_else(|| combat.hit_points_regen().as_f32());
         let regen_type = combat.regen_type();
         let armor_amount = leveled
             .as_ref()
             .map(|figures| figures.armor)
-            .unwrap_or_else(|| combat.armor());
+            .unwrap_or_else(|| combat.armor().as_f32());
         let mana_amount = leveled
             .as_ref()
             .map(|figures| figures.mana)
@@ -183,7 +183,7 @@ impl UnitStatistics {
             .unwrap_or_else(|| {
                 combat
                     .mana_pool()
-                    .map(|pool| pool.mana_regen())
+                    .map(|pool| pool.mana_regen().as_f32())
                     .unwrap_or(0.0)
             });
         let defense_type = combat.defense_type();
@@ -200,7 +200,7 @@ impl UnitStatistics {
                 .unwrap_or_else(|| unit_attack.damage_max());
             let damage = DamageRange::new(damage_minimum, damage_maximum);
             let range = AttackRange::new(unit_attack.range());
-            let cooldown_seconds = unit_attack.cooldown_seconds();
+            let cooldown_seconds = unit_attack.cooldown().as_secs_f32();
             let speed = AttackSpeed::new(cooldown_seconds);
             let damage_per_second_amount = Self::damage_per_second(damage, cooldown_seconds);
             let damage_per_second = damage_per_second_amount.map(DamagePerSecond::new);
@@ -210,13 +210,17 @@ impl UnitStatistics {
         let hero = hero_attributes
             .zip(leveled.as_ref())
             .map(|(attributes, figures)| {
-                let strength =
-                    AttributeStatistic::new(figures.strength, attributes.strength_per_level());
-                let agility =
-                    AttributeStatistic::new(figures.agility, attributes.agility_per_level());
+                let strength = AttributeStatistic::new(
+                    figures.strength,
+                    attributes.strength_per_level().as_f32(),
+                );
+                let agility = AttributeStatistic::new(
+                    figures.agility,
+                    attributes.agility_per_level().as_f32(),
+                );
                 let intelligence = AttributeStatistic::new(
                     figures.intelligence,
-                    attributes.intelligence_per_level(),
+                    attributes.intelligence_per_level().as_f32(),
                 );
                 let primary = attributes.primary();
                 HeroStatistics::new(strength, agility, intelligence, primary)

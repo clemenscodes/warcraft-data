@@ -4,10 +4,12 @@ use crate::unit::ability_rules::{
     AbilityInDatabase, AbilityOnUnit, FormUpgradeSwap, HiddenAbility, MorphAgainstHost,
     RevertsToHost, RootedOnlyAbility, UnitPair,
 };
+use crate::unit::alt_state::AltState;
+use crate::unit::menu_commands::MenuCommands;
 use ddd::Specification;
 use std::collections::HashMap;
-use warcraft_api::{BuildingTraits, CommandCatalog, DEVOUR_ABILITY_ID};
-use warcraft_api::{UnitKind, WarcraftDatabase, WarcraftObjectId, WarcraftObjectMeta};
+use warcraft_api::{DEVOUR_ABILITY_ID, WarcraftApi};
+use warcraft_api::{UnitKind, WarcraftObjectId, WarcraftObjectMeta};
 
 pub trait UnitCommandSlots {
     fn command_card(&self, unit_id: WarcraftObjectId) -> CommandCard;
@@ -26,23 +28,15 @@ pub trait UnitCommandSlots {
     fn all_unit_ids(&self) -> impl Iterator<Item = WarcraftObjectId>;
 }
 
-fn slot_position_from_database(
-    database: &WarcraftDatabase,
-    object_id: WarcraftObjectId,
-) -> Option<GridCoordinate> {
-    let database_object = database.object(object_id)?;
-    database_object.default_button_position()
+fn slot_position(api: WarcraftApi, object_id: WarcraftObjectId) -> Option<GridCoordinate> {
+    api.object(object_id)?.default_button_position()
 }
 
-fn research_slot_position_from_database(
-    database: &WarcraftDatabase,
-    object_id: WarcraftObjectId,
-) -> Option<GridCoordinate> {
-    let database_object = database.object(object_id)?;
-    database_object.default_research_button_position()
+fn research_slot_position(api: WarcraftApi, object_id: WarcraftObjectId) -> Option<GridCoordinate> {
+    api.object(object_id)?.default_research_button_position()
 }
 
-impl UnitCommandSlots for WarcraftDatabase {
+impl UnitCommandSlots for WarcraftApi {
     fn command_card(&self, unit_id: WarcraftObjectId) -> CommandCard {
         let Some(unit_object) = self.object(unit_id) else {
             return CommandCard::empty();
@@ -50,9 +44,13 @@ impl UnitCommandSlots for WarcraftDatabase {
         let WarcraftObjectMeta::Unit(unit_meta) = unit_object.meta() else {
             return CommandCard::empty();
         };
-        let unit_race = unit_object.race();
-        let primary_commands = CommandCatalog::primary_commands_for(unit_meta, unit_race, unit_id);
-        let unit_kind = CommandCatalog::effective_kind(unit_meta);
+        let primary_commands: Vec<WarcraftObjectId> = self
+            .unit()
+            .command_card(unit_id)
+            .iter()
+            .map(|command| command.id())
+            .collect();
+        let unit_kind = unit_meta.effective_kind();
         let regular_abilities = unit_meta.abilities();
         let hero_abilities = unit_meta.hero_abilities();
         let primary_train_slots = if unit_kind == UnitKind::Building {
@@ -83,7 +81,7 @@ impl UnitCommandSlots for WarcraftDatabase {
             if !command_has_icon {
                 continue;
             }
-            let Some(slot_position) = slot_position_from_database(self, command_name) else {
+            let Some(slot_position) = slot_position(*self, command_name) else {
                 continue;
             };
             let command_slot = GridSlotId::command(command_name);
@@ -99,7 +97,7 @@ impl UnitCommandSlots for WarcraftDatabase {
                 continue;
             }
             let train_slot = GridSlotId::ability(trained_object_id);
-            match slot_position_from_database(self, trained_object_id) {
+            match slot_position(*self, trained_object_id) {
                 Some(slot_position) => {
                     if !card.place(slot_position, train_slot) {
                         let occupant = card.slot_at(slot_position);
@@ -131,7 +129,7 @@ impl UnitCommandSlots for WarcraftDatabase {
                 continue;
             }
             let research_slot = GridSlotId::ability(research_object_id);
-            match slot_position_from_database(self, research_object_id) {
+            match slot_position(*self, research_object_id) {
                 Some(slot_position) => {
                     if !card.place(slot_position, research_slot) {
                         unplaced_research_slots.push(research_slot);
@@ -155,7 +153,7 @@ impl UnitCommandSlots for WarcraftDatabase {
                 continue;
             }
             let sell_item_slot = GridSlotId::ability(sell_item_object_id);
-            match slot_position_from_database(self, sell_item_object_id) {
+            match slot_position(*self, sell_item_object_id) {
                 Some(sell_item_position) => {
                     if !card.place(sell_item_position, sell_item_slot) {
                         unplaced_sell_item_slots.push(sell_item_slot);
@@ -179,7 +177,7 @@ impl UnitCommandSlots for WarcraftDatabase {
                 continue;
             }
             let sell_unit_slot = GridSlotId::ability(sell_unit_object_id);
-            match slot_position_from_database(self, sell_unit_object_id) {
+            match slot_position(*self, sell_unit_object_id) {
                 Some(sell_unit_position) => {
                     if !card.place(sell_unit_position, sell_unit_slot) {
                         unplaced_sell_unit_slots.push(sell_unit_slot);
@@ -193,13 +191,13 @@ impl UnitCommandSlots for WarcraftDatabase {
         for unplaced_slot in unplaced_sell_unit_slots {
             card.place_at_next_empty(unplaced_slot);
         }
-        let is_uprootable = BuildingTraits::can_uproot(unit_id);
-        let host_is_burrowed = BuildingTraits::is_burrowed_form(unit_id);
-        let host_is_in_alt_state = BuildingTraits::unit_starts_in_toggle_alt_state(unit_id);
+        let is_uprootable = self.unit().can_uproot(unit_id);
+        let host_is_burrowed = self.is_burrowed_form(unit_id);
+        let host_is_in_alt_state = self.unit_starts_in_toggle_alt_state(unit_id);
         let devour_ability_id = DEVOUR_ABILITY_ID;
         let mut occupied_on_positions: Vec<GridCoordinate> = Vec::new();
         for ability_id in regular_abilities.iter().chain(hero_abilities.iter()) {
-            if let Some(on_position) = slot_position_from_database(self, *ability_id) {
+            if let Some(on_position) = slot_position(*self, *ability_id) {
                 occupied_on_positions.push(on_position);
             }
         }
@@ -227,10 +225,10 @@ impl UnitCommandSlots for WarcraftDatabase {
             if is_uprootable && ability_object_id == devour_ability_id {
                 continue;
             }
-            if host_is_burrowed && !BuildingTraits::ability_has_alt_state(ability_object_id) {
+            if host_is_burrowed && !self.ability_has_alt_state(ability_object_id) {
                 continue;
             }
-            let morph_candidate = MorphAgainstHost::new(self, ability_object_id, unit_id);
+            let morph_candidate = MorphAgainstHost::new(*self, ability_object_id, unit_id);
             if RevertsToHost.is_satisfied_by(&morph_candidate) {
                 continue;
             }
@@ -245,8 +243,7 @@ impl UnitCommandSlots for WarcraftDatabase {
                 morph_target_object.and_then(|object| object.ability_morph_target_id());
             let is_morph_back = morph_target_id.is_some_and(|target| target == unit_id);
             let use_off_state = is_morph_back
-                || (host_is_in_alt_state
-                    && BuildingTraits::ability_has_alt_state(ability_object_id));
+                || (host_is_in_alt_state && self.ability_has_alt_state(ability_object_id));
             let ability_slot = if use_off_state {
                 GridSlotId::ability_off(ability_object_id)
             } else {
@@ -257,7 +254,7 @@ impl UnitCommandSlots for WarcraftDatabase {
                 WarcraftObjectMeta::Ability(ability_meta) => ability_meta.off_button_position(),
                 _ => None,
             });
-            match slot_position_from_database(self, ability_object_id) {
+            match slot_position(*self, ability_object_id) {
                 Some(ability_position) => {
                     if !card.place(ability_position, ability_slot) {
                         unplaced_ability_slots.push(ability_slot);
@@ -284,13 +281,13 @@ impl UnitCommandSlots for WarcraftDatabase {
         }
         if unit_kind == UnitKind::Hero
             && !hero_abilities.is_empty()
-            && let Some(select_skill) = CommandCatalog::select_skill_command()
+            && let Some(select_skill) = self.select_skill_command()
         {
             let select_skill_object = self.object(select_skill);
             let select_skill_has_icon =
                 select_skill_object.is_some_and(|object| object.has_displayable_icon());
             if select_skill_has_icon {
-                let position_option = slot_position_from_database(self, select_skill);
+                let position_option = slot_position(*self, select_skill);
                 if let Some(slot_position) = position_option {
                     let select_skill_slot = GridSlotId::command(select_skill);
                     card.place(slot_position, select_skill_slot);
@@ -305,13 +302,13 @@ impl UnitCommandSlots for WarcraftDatabase {
         let WarcraftObjectMeta::Unit(unit_meta) = unit_object.meta() else {
             return None;
         };
-        if CommandCatalog::effective_kind(unit_meta) != UnitKind::Worker {
+        if unit_meta.effective_kind() != UnitKind::Worker {
             return None;
         }
         if unit_meta.builds().is_empty() {
             return None;
         }
-        let build_menu_commands = CommandCatalog::build_menu_commands_for(unit_meta);
+        let build_menu_commands = self.build_menu_commands(unit_meta);
         let mut card = CommandCard::empty();
         for command_name in build_menu_commands {
             let command_object = self.object(command_name);
@@ -320,7 +317,7 @@ impl UnitCommandSlots for WarcraftDatabase {
             if !command_has_icon {
                 continue;
             }
-            let Some(slot_position) = slot_position_from_database(self, command_name) else {
+            let Some(slot_position) = slot_position(*self, command_name) else {
                 continue;
             };
             let command_slot = GridSlotId::command(command_name);
@@ -334,8 +331,7 @@ impl UnitCommandSlots for WarcraftDatabase {
             if !production_has_icon {
                 continue;
             }
-            let Some(slot_position) = slot_position_from_database(self, production_object_id)
-            else {
+            let Some(slot_position) = slot_position(*self, production_object_id) else {
                 continue;
             };
             let production_slot = GridSlotId::ability(production_object_id);
@@ -349,7 +345,7 @@ impl UnitCommandSlots for WarcraftDatabase {
         let WarcraftObjectMeta::Unit(unit_meta) = unit_object.meta() else {
             return None;
         };
-        if CommandCatalog::effective_kind(unit_meta) != UnitKind::Hero {
+        if unit_meta.effective_kind() != UnitKind::Hero {
             return None;
         }
         let hero_abilities = unit_meta.hero_abilities();
@@ -365,19 +361,18 @@ impl UnitCommandSlots for WarcraftDatabase {
             if !ability_has_icon {
                 continue;
             }
-            let Some(slot_position) = research_slot_position_from_database(self, ability_object_id)
-            else {
+            let Some(slot_position) = research_slot_position(*self, ability_object_id) else {
                 continue;
             };
             let ability_slot = GridSlotId::ability(ability_object_id);
             card.place(slot_position, ability_slot);
         }
-        if let Some(back_command) = CommandCatalog::submenu_back_command() {
+        if let Some(back_command) = self.submenu_back_command() {
             let back_command_object = self.object(back_command);
             let back_command_has_icon =
                 back_command_object.is_some_and(|object| object.has_displayable_icon());
             if back_command_has_icon {
-                let position_option = slot_position_from_database(self, back_command);
+                let position_option = slot_position(*self, back_command);
                 if let Some(slot_position) = position_option {
                     let back_slot = GridSlotId::command(back_command);
                     card.place(slot_position, back_slot);
@@ -392,21 +387,21 @@ impl UnitCommandSlots for WarcraftDatabase {
         let WarcraftObjectMeta::Unit(unit_meta) = unit_object.meta() else {
             return None;
         };
-        if CommandCatalog::effective_kind(unit_meta) != UnitKind::Building {
+        if unit_meta.effective_kind() != UnitKind::Building {
             return None;
         }
-        if !BuildingTraits::can_uproot(unit_id) {
+        if !self.unit().can_uproot(unit_id) {
             return None;
         }
         let mut card = CommandCard::empty();
-        for command_name in CommandCatalog::mobile_command_ids().iter().copied() {
+        for command_name in self.mobile_command_ids().iter().copied() {
             let command_object = self.object(command_name);
             let command_has_icon =
                 command_object.is_some_and(|object| object.has_displayable_icon());
             if !command_has_icon {
                 continue;
             }
-            let Some(slot_position) = slot_position_from_database(self, command_name) else {
+            let Some(slot_position) = slot_position(*self, command_name) else {
                 continue;
             };
             let command_slot = GridSlotId::command(command_name);
@@ -420,15 +415,15 @@ impl UnitCommandSlots for WarcraftDatabase {
             if !ability_has_icon {
                 continue;
             }
-            let morph_candidate = MorphAgainstHost::new(self, ability_object_id, unit_id);
+            let morph_candidate = MorphAgainstHost::new(*self, ability_object_id, unit_id);
             if RevertsToHost.is_satisfied_by(&morph_candidate) {
                 continue;
             }
-            let rooted_candidate = AbilityInDatabase::new(self, ability_object_id);
+            let rooted_candidate = AbilityInDatabase::new(*self, ability_object_id);
             if RootedOnlyAbility.is_satisfied_by(&rooted_candidate) {
                 continue;
             }
-            let Some(slot_position) = slot_position_from_database(self, ability_object_id) else {
+            let Some(slot_position) = slot_position(*self, ability_object_id) else {
                 continue;
             };
             let ability_slot = GridSlotId::ability(ability_object_id);

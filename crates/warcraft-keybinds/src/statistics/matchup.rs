@@ -59,7 +59,7 @@ impl Matchup {
     /// damage multiplier from the game's gameplay constants and classify its band.
     pub fn resolve(attack_type: AttackType, defense_type: DefenseType) -> Self {
         let effectiveness = WARCRAFT_GAMEPLAY_CONSTANTS.damage_effectiveness(attack_type);
-        let multiplier = effectiveness.against(defense_type);
+        let multiplier = effectiveness.against(defense_type).as_f32();
         let strength = MatchupStrength::from(multiplier);
         Self {
             multiplier,

@@ -10,8 +10,8 @@ use crate::identity::hotkey_target::HotkeyTarget;
 use crate::identity::hotkey_token::HotkeyToken;
 use crate::identity::slot::GridSlotId;
 use crate::model::{ColumnIndex, GridCoordinate, Hotkey, RowIndex};
+use warcraft_api::WarcraftApi;
 use warcraft_api::WarcraftObjectId;
-use warcraft_api::{ObjectLookup, VariantUnits, WARCRAFT_DATABASE};
 
 impl CustomKeys {
     pub fn assign_position(
@@ -35,7 +35,7 @@ impl CustomKeys {
         let new_position = GridCoordinate::new(column_index, row_index);
         match slot {
             GridSlotId::Ability(ability_id) => {
-                let is_passive = ObjectLookup::is_passive_ability(ability_id.object_id());
+                let is_passive = WarcraftApi::default().is_passive_ability(ability_id.object_id());
                 let grid_hotkey = Self::grid_hotkey_for(*ability_id, letter);
                 if let Some(binding) = self.binding_or_default_mut(*ability_id) {
                     if is_research_context {
@@ -196,7 +196,11 @@ impl CustomKeys {
     }
 
     fn fan_out_position(&mut self, ability_id: AbilityId) {
-        let siblings = VariantUnits::fanout_siblings(ability_id.object_id());
+        let siblings: Vec<WarcraftObjectId> = WarcraftApi::default()
+            .ability()
+            .fanout(ability_id.object_id())
+            .map(|view| view.id())
+            .collect();
         if siblings.is_empty() {
             return;
         }
@@ -227,7 +231,7 @@ impl CustomKeys {
             self.commands_in_order().map(|entry| entry.name()).collect();
         for ability_id in &ability_ids {
             let bound_ability_id = *ability_id;
-            let is_passive = ObjectLookup::is_passive_ability(ability_id.object_id());
+            let is_passive = WarcraftApi::default().is_passive_ability(ability_id.object_id());
             let button_position = if is_passive {
                 None
             } else {
@@ -329,7 +333,11 @@ impl CustomKeys {
         let Some(ability_id) = fan_out_ability_id else {
             return;
         };
-        let siblings = VariantUnits::fanout_siblings(ability_id.object_id());
+        let siblings: Vec<WarcraftObjectId> = WarcraftApi::default()
+            .ability()
+            .fanout(ability_id.object_id())
+            .map(|view| view.id())
+            .collect();
         for sibling_object_id in siblings.iter().copied() {
             let sibling_ability_id = AbilityId::from(sibling_object_id);
             let sibling_target = match target {
@@ -355,7 +363,7 @@ impl CustomKeys {
     /// yield `0`.
     fn upgrade_tier_count(ability_id: AbilityId) -> usize {
         let object_id = ability_id.object_id();
-        let object_option = WARCRAFT_DATABASE.object(object_id);
+        let object_option = WarcraftApi::default().object(object_id);
         object_option
             .and_then(|warcraft_object| warcraft_object.upgrade_max_level())
             .unwrap_or(0)

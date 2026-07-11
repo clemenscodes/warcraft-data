@@ -6,7 +6,7 @@ use crate::unit::grids::{GridRole, UnitGrids};
 use crate::unit::slots::UnitCommandSlots;
 use std::collections::{HashMap, HashSet};
 use std::fmt;
-use warcraft_api::WARCRAFT_DATABASE;
+use warcraft_api::WarcraftApi;
 use warcraft_api::WarcraftObjectId;
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash)]
@@ -78,7 +78,7 @@ impl CrossUnitCollisionReport {
             PositionContext,
             HashMap<GridSlotId, HashSet<WarcraftObjectId>>,
         > = HashMap::new();
-        for unit_id in WARCRAFT_DATABASE.all_unit_ids() {
+        for unit_id in WarcraftApi::default().all_unit_ids() {
             let unit_grids = UnitGrids::for_unit(unit_id);
             for named_grid in unit_grids.grids() {
                 let grid_role = named_grid.role();
@@ -131,7 +131,7 @@ impl CrossUnitCollisionReport {
                         .any(|slot_id| shared_slot_id_set.contains(&slot_id.id()))
                 })
                 .filter_map(|(unit_id, mut colliding_slot_ids)| {
-                    let unit_name = WARCRAFT_DATABASE
+                    let unit_name = WarcraftApi::default()
                         .object(unit_id)
                         .and_then(|object| object.names().first().copied())
                         .filter(|name| !name.is_empty())?;

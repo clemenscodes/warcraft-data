@@ -3,7 +3,7 @@ use crate::grid::layout::GridLayout;
 use crate::unit::grids::{HotkeyCollisionCard, PositionCollisionCard, UnitGrids};
 use crate::unit::slots::UnitCommandSlots;
 use std::fmt;
-use warcraft_api::WARCRAFT_DATABASE;
+use warcraft_api::WarcraftApi;
 use warcraft_api::WarcraftObjectId;
 
 #[derive(Debug)]
@@ -81,10 +81,10 @@ impl PartialEq for UnitCollisionEntry {
 
 impl UnitCollisionReport {
     pub fn compute(custom_keys: &CustomKeys, layout: GridLayout) -> Self {
-        let mut entries: Vec<UnitCollisionEntry> = WARCRAFT_DATABASE
+        let mut entries: Vec<UnitCollisionEntry> = WarcraftApi::default()
             .all_unit_ids()
             .filter_map(|unit_id| {
-                let unit_name = WARCRAFT_DATABASE
+                let unit_name = WarcraftApi::default()
                     .object(unit_id)
                     .and_then(|object| object.names().first().copied())
                     .filter(|name| !name.is_empty())?;

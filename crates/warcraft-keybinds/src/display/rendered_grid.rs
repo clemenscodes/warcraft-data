@@ -11,7 +11,7 @@ use crate::identity::hotkey_token::HotkeyToken;
 use crate::identity::slot::GridSlotId;
 use crate::model::{ColumnIndex, GridCoordinate, RowIndex};
 use std::collections::{HashMap, HashSet};
-use warcraft_api::ObjectLookup;
+use warcraft_api::WarcraftApi;
 use warcraft_api::WarcraftObjectId;
 
 /// One fully resolved tile, ready to paint. Its address is a [`GridCoordinate`],
@@ -242,7 +242,7 @@ impl CustomKeys {
             if off_position != to {
                 return None;
             }
-            let database_object = ObjectLookup::object(ability_object_id);
+            let database_object = WarcraftApi::default().object(ability_object_id);
             let primary_name = database_object.and_then(|object| object.names().first().copied());
             let blocker_name = primary_name.unwrap_or(ability_object_id.value()).to_owned();
             Some(blocker_name)
@@ -273,7 +273,7 @@ impl CustomKeys {
         let tier_index = object_id_option
             .and_then(|id| input.tier_overrides().get(&id).copied())
             .unwrap_or(0);
-        let database_object = object_id_option.and_then(ObjectLookup::object);
+        let database_object = object_id_option.and_then(|id| WarcraftApi::default().object(id));
         let tier_name = database_object
             .and_then(|object| object.names().get(tier_index).copied())
             .map(String::from);
@@ -314,7 +314,7 @@ impl CustomKeys {
         let hotkey = effective_token.unwrap_or(layout_token);
         let is_passive = behavior.show_passive_badge()
             && object_id_option
-                .map(ObjectLookup::is_passive_ability)
+                .map(|id| WarcraftApi::default().is_passive_ability(id))
                 .unwrap_or(false);
         let is_conflict = effective_token
             .map(|token| conflicting_tokens.contains(&token))

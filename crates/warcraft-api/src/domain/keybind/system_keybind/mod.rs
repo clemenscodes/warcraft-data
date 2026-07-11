@@ -176,6 +176,24 @@ impl SystemKeybind {
     }
 }
 
+// DDD roles: keybind value objects.
+impl ddd::Layered for ContextSet {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for ContextSet {}
+impl ddd::Layered for SystemKeybindClass {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for SystemKeybindClass {}
+impl ddd::Layered for SystemKeybindModifier {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for SystemKeybindModifier {}
+impl ddd::Layered for SystemKeybind {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for SystemKeybind {}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -258,21 +276,3 @@ mod tests {
         assert!(matches!(keybind.class(), SystemKeybindClass::Game));
     }
 }
-
-// DDD roles: keybind value objects.
-impl ddd::Layered for ContextSet {
-    type Layer = ddd::DomainLayer;
-}
-impl ddd::ValueObject for ContextSet {}
-impl ddd::Layered for SystemKeybindClass {
-    type Layer = ddd::DomainLayer;
-}
-impl ddd::ValueObject for SystemKeybindClass {}
-impl ddd::Layered for SystemKeybindModifier {
-    type Layer = ddd::DomainLayer;
-}
-impl ddd::ValueObject for SystemKeybindModifier {}
-impl ddd::Layered for SystemKeybind {
-    type Layer = ddd::DomainLayer;
-}
-impl ddd::ValueObject for SystemKeybind {}

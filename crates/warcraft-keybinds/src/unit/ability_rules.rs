@@ -5,15 +5,15 @@
 //! stateless unit struct; the candidate it tests carries all the inputs,
 //! including the game database when a rule needs to consult it.
 
+use crate::unit::alt_state::AltState;
 use ddd::DomainLayer;
 use ddd::Layered;
 use ddd::Specification;
-use warcraft_api::BuildingTraits;
 use warcraft_api::HIDDEN_UNIT_ABILITIES;
 use warcraft_api::ROOTED_ONLY_ABILITY_CODES;
 use warcraft_api::ROOTED_ONLY_ABILITY_IDS;
 use warcraft_api::UNIT_UPGRADE_SWAPS;
-use warcraft_api::WarcraftDatabase;
+use warcraft_api::WarcraftApi;
 use warcraft_api::WarcraftObjectId;
 
 /// An ability considered on a specific unit's command card.
@@ -49,22 +49,22 @@ impl UnitPair {
 }
 
 /// A morph ability considered against the host unit it might revert to, together
-/// with the database that answers the morph question.
+/// with the api handle that answers the morph question.
 #[derive(Clone, Copy, Debug)]
-pub struct MorphAgainstHost<'a> {
-    database: &'a WarcraftDatabase,
+pub struct MorphAgainstHost {
+    api: WarcraftApi,
     ability_id: WarcraftObjectId,
     host_unit_id: WarcraftObjectId,
 }
 
-impl<'a> MorphAgainstHost<'a> {
+impl MorphAgainstHost {
     pub fn new(
-        database: &'a WarcraftDatabase,
+        api: WarcraftApi,
         ability_id: WarcraftObjectId,
         host_unit_id: WarcraftObjectId,
     ) -> Self {
         Self {
-            database,
+            api,
             ability_id,
             host_unit_id,
         }
@@ -73,17 +73,14 @@ impl<'a> MorphAgainstHost<'a> {
 
 /// An ability looked up in the database to decide whether it is rooted-only.
 #[derive(Clone, Copy, Debug)]
-pub struct AbilityInDatabase<'a> {
-    database: &'a WarcraftDatabase,
+pub struct AbilityInDatabase {
+    api: WarcraftApi,
     ability_id: WarcraftObjectId,
 }
 
-impl<'a> AbilityInDatabase<'a> {
-    pub fn new(database: &'a WarcraftDatabase, ability_id: WarcraftObjectId) -> Self {
-        Self {
-            database,
-            ability_id,
-        }
+impl AbilityInDatabase {
+    pub fn new(api: WarcraftApi, ability_id: WarcraftObjectId) -> Self {
+        Self { api, ability_id }
     }
 }
 
@@ -139,9 +136,9 @@ impl Layered for RevertsToHost {
     type Layer = DomainLayer;
 }
 
-impl Specification<MorphAgainstHost<'_>> for RevertsToHost {
-    fn is_satisfied_by(&self, candidate: &MorphAgainstHost<'_>) -> bool {
-        let ability_object = candidate.database.object(candidate.ability_id);
+impl Specification<MorphAgainstHost> for RevertsToHost {
+    fn is_satisfied_by(&self, candidate: &MorphAgainstHost) -> bool {
+        let ability_object = candidate.api.object(candidate.ability_id);
         let Some(target_id) = ability_object.and_then(|object| object.ability_morph_target_id())
         else {
             return false;
@@ -149,7 +146,7 @@ impl Specification<MorphAgainstHost<'_>> for RevertsToHost {
         if target_id != candidate.host_unit_id {
             return false;
         }
-        !BuildingTraits::ability_has_alt_state(candidate.ability_id)
+        !candidate.api.ability_has_alt_state(candidate.ability_id)
     }
 }
 
@@ -162,12 +159,12 @@ impl Layered for RootedOnlyAbility {
     type Layer = DomainLayer;
 }
 
-impl Specification<AbilityInDatabase<'_>> for RootedOnlyAbility {
-    fn is_satisfied_by(&self, candidate: &AbilityInDatabase<'_>) -> bool {
+impl Specification<AbilityInDatabase> for RootedOnlyAbility {
+    fn is_satisfied_by(&self, candidate: &AbilityInDatabase) -> bool {
         if ROOTED_ONLY_ABILITY_IDS.contains(&candidate.ability_id) {
             return true;
         }
-        let ability_object = candidate.database.object(candidate.ability_id);
+        let ability_object = candidate.api.object(candidate.ability_id);
         let Some(ability_code) = ability_object.and_then(|object| object.ability_code()) else {
             return false;
         };
@@ -187,14 +184,14 @@ mod ddd_marker_tests {
     use super::UnitPair;
     use crate::ddd_conformance::assert_specification;
     use ddd::Specification;
-    use warcraft_api::WARCRAFT_DATABASE;
+    use warcraft_api::WarcraftApi;
 
     #[test]
     fn ability_rules_are_specifications() {
         assert_specification::<AbilityOnUnit, HiddenAbility>();
         assert_specification::<UnitPair, FormUpgradeSwap>();
-        assert_specification::<MorphAgainstHost<'_>, RevertsToHost>();
-        assert_specification::<AbilityInDatabase<'_>, RootedOnlyAbility>();
+        assert_specification::<MorphAgainstHost, RevertsToHost>();
+        assert_specification::<AbilityInDatabase, RootedOnlyAbility>();
     }
 
     #[test]
@@ -215,10 +212,9 @@ mod ddd_marker_tests {
     #[test]
     fn rooted_only_ability_flags_a_known_rooted_ability() {
         let rooted_only = RootedOnlyAbility;
-        let rooted =
-            AbilityInDatabase::new(&WARCRAFT_DATABASE, crate::test_support::object_id("Anei"));
-        let regular =
-            AbilityInDatabase::new(&WARCRAFT_DATABASE, crate::test_support::object_id("AHbz"));
+        let api = WarcraftApi::default();
+        let rooted = AbilityInDatabase::new(api, crate::test_support::object_id("Anei"));
+        let regular = AbilityInDatabase::new(api, crate::test_support::object_id("AHbz"));
         assert!(rooted_only.is_satisfied_by(&rooted));
         assert!(!rooted_only.is_satisfied_by(&regular));
     }

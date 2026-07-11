@@ -4,7 +4,7 @@
 //! (ARCHITECTURE R3), so it lives here. The renderer hands over the raw browse
 //! inputs and reads back the already-shaped [`UnitListing`].
 
-use warcraft_api::{CatalogVisibility, SearchField, UnitCatalog, UnitMode};
+use warcraft_api::{CatalogVisibility, Scope, SearchField, UnitMode, UnitQuery, WarcraftApi};
 use warcraft_api::{Race, UnitKind, WarcraftObjectId};
 
 /// The inputs to a unit-list browse: the active race and mode, the current
@@ -75,24 +75,26 @@ impl UnitListing {
     /// remembering the very first entry.
     pub fn resolve(request: &UnitListingRequest) -> Self {
         let searching = request.is_searching();
-        let race_filter = if searching { None } else { Some(request.race) };
-        let mode_filter = if searching { None } else { Some(request.mode) };
-        let query = request.search_query.as_str();
-        let query_filter = Some(query);
-        let entries = UnitCatalog::entries_for(
-            race_filter,
-            mode_filter,
-            None,
-            query_filter,
-            request.search_field,
-            request.visibility,
-        );
+        let query = UnitQuery {
+            race: if searching { None } else { Some(request.race) },
+            kind: None,
+            visibility: request.visibility,
+            scope: if searching {
+                Scope::Search {
+                    field: request.search_field,
+                    query: request.search_query.as_str(),
+                }
+            } else {
+                Scope::Browse { mode: request.mode }
+            },
+        };
+        let entries = WarcraftApi::default().unit().list(&query);
         let mut category_kinds: Vec<UnitKind> = Vec::new();
         let mut first_result: Option<UnitListingEntry> = None;
         for entry in entries {
-            let entry_kind = entry.unit_kind();
+            let entry_kind = entry.effective_kind();
             if first_result.is_none() {
-                let unit_id = entry.unit_id();
+                let unit_id = entry.id();
                 let first_entry = UnitListingEntry {
                     unit_id,
                     unit_kind: entry_kind,
@@ -195,30 +197,30 @@ impl UnitCategoryListing {
     /// Browse the catalog for one category and shape each entry into card data.
     pub fn resolve(request: &UnitCategoryRequest) -> Self {
         let searching = request.is_searching();
-        let race_filter = if searching { None } else { Some(request.race) };
-        let mode_filter = if searching { None } else { Some(request.mode) };
-        let category_filter = Some(request.category_kind);
-        let query = request.search_query.as_str();
-        let query_filter = Some(query);
-        let catalog_entries = UnitCatalog::entries_for(
-            race_filter,
-            mode_filter,
-            category_filter,
-            query_filter,
-            request.search_field,
-            request.visibility,
-        );
+        let query = UnitQuery {
+            race: if searching { None } else { Some(request.race) },
+            kind: Some(request.category_kind),
+            visibility: request.visibility,
+            scope: if searching {
+                Scope::Search {
+                    field: request.search_field,
+                    query: request.search_query.as_str(),
+                }
+            } else {
+                Scope::Browse { mode: request.mode }
+            },
+        };
+        let catalog_entries = WarcraftApi::default().unit().list(&query);
         let mut entries: Vec<UnitCategoryEntry> = Vec::new();
         for catalog_entry in catalog_entries {
-            let warcraft_object = catalog_entry.warcraft_object();
-            let names = warcraft_object.names();
+            let names = catalog_entry.names();
             let first_name = names.first().copied().unwrap_or("(unnamed)");
             let display_name = first_name.to_owned();
-            let icons = warcraft_object.icons();
+            let icons = catalog_entry.icons();
             let first_icon = icons.first().copied();
             let icon_database_path = first_icon.map(|icon_path| icon_path.to_owned());
-            let unit_id = catalog_entry.unit_id();
-            let unit_kind = catalog_entry.unit_kind();
+            let unit_id = catalog_entry.id();
+            let unit_kind = catalog_entry.effective_kind();
             let entry = UnitCategoryEntry {
                 unit_id,
                 unit_kind,
@@ -246,7 +248,10 @@ mod tests {
     use super::*;
 
     fn full_visibility() -> CatalogVisibility {
-        CatalogVisibility::new(true, true)
+        CatalogVisibility {
+            include_abilityless: true,
+            expand_variants: true,
+        }
     }
 
     #[test]

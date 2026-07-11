@@ -359,12 +359,12 @@ mod unit_grids_tests {
 #[cfg(test)]
 mod cache_tests {
     use super::super::UnitGrids;
-    use warcraft_api::WARCRAFT_DATABASE;
+    use warcraft_api::WarcraftApi;
 
     fn first_unit_id() -> warcraft_api::WarcraftObjectId {
         // any real unit id from the DB; take the first command-card-bearing object
-        *WARCRAFT_DATABASE
-            .into_iter()
+        *WarcraftApi::default()
+            .iter()
             .map(|(object_id, _object)| object_id)
             .next()
             .expect("database is non-empty")

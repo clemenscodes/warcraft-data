@@ -6,7 +6,7 @@ use crate::model::GridCoordinate;
 use crate::unit::slots::UnitCommandSlots;
 use std::collections::{HashMap, HashSet};
 use std::sync::LazyLock;
-use warcraft_api::WARCRAFT_DATABASE;
+use warcraft_api::WarcraftApi;
 use warcraft_api::WarcraftObjectId;
 
 const GRID_SLOT_COUNT: usize = 12;
@@ -80,7 +80,7 @@ pub struct UnitGrids {
 
 static UNIT_GRIDS_CACHE: LazyLock<HashMap<WarcraftObjectId, UnitGrids>> = LazyLock::new(|| {
     let mut cache = HashMap::new();
-    for unit_id in WARCRAFT_DATABASE.all_unit_ids() {
+    for unit_id in WarcraftApi::default().all_unit_ids() {
         let grids = UnitGrids::build_for_unit(unit_id);
         cache.insert(unit_id, grids);
     }
@@ -96,16 +96,16 @@ impl UnitGrids {
     }
 
     fn build_for_unit(unit_id: WarcraftObjectId) -> Self {
-        let main_card = WARCRAFT_DATABASE.command_card(unit_id);
+        let main_card = WarcraftApi::default().command_card(unit_id);
         let main_grid = NamedCommandGrid::new(GridRole::MainCommand, main_card);
         let mut grids = vec![main_grid];
-        if let Some(hero_card) = WARCRAFT_DATABASE.research_menu(unit_id) {
+        if let Some(hero_card) = WarcraftApi::default().research_menu(unit_id) {
             let hero_grid = NamedCommandGrid::new(GridRole::HeroSkillTree, hero_card);
             grids.push(hero_grid);
-        } else if let Some(build_card) = WARCRAFT_DATABASE.build_menu(unit_id) {
+        } else if let Some(build_card) = WarcraftApi::default().build_menu(unit_id) {
             let build_grid = NamedCommandGrid::new(GridRole::BuildMenu, build_card);
             grids.push(build_grid);
-        } else if let Some(uprooted_card) = WARCRAFT_DATABASE.uprooted_menu(unit_id) {
+        } else if let Some(uprooted_card) = WarcraftApi::default().uprooted_menu(unit_id) {
             let uprooted_grid = NamedCommandGrid::new(GridRole::UprootedForm, uprooted_card);
             grids.push(uprooted_grid);
         }

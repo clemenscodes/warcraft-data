@@ -11,7 +11,7 @@ use crate::unit::grids::UnitGrids;
 use crate::unit::slots::UnitCommandSlots;
 use std::collections::HashSet;
 use std::sync::OnceLock;
-use warcraft_api::WARCRAFT_DATABASE;
+use warcraft_api::WarcraftApi;
 use warcraft_api::{BUILD_COMMAND_MIRRORS, MORPH_ABILITY_MIRRORS};
 use warcraft_api::{WarcraftObjectId, WarcraftObjectKind, WarcraftObjectMeta};
 
@@ -41,7 +41,7 @@ impl CustomKeys {
             let WarcraftKeybinding::Ability(ability_binding) = keybinding else {
                 continue;
             };
-            let object_option = WARCRAFT_DATABASE.object(*object_id);
+            let object_option = WarcraftApi::default().object(*object_id);
             let Some(warcraft_object) = object_option else {
                 continue;
             };
@@ -174,7 +174,7 @@ impl CustomKeys {
             if !matches!(binding, WarcraftKeybinding::Ability(_)) {
                 return true;
             }
-            let object_option = WARCRAFT_DATABASE.object(*object_id);
+            let object_option = WarcraftApi::default().object(*object_id);
             let Some(warcraft_object) = object_option else {
                 return true;
             };
@@ -218,7 +218,7 @@ impl CustomKeys {
         static CACHE: OnceLock<HashSet<WarcraftObjectId>> = OnceLock::new();
         CACHE.get_or_init(|| {
             let mut independent: HashSet<WarcraftObjectId> = HashSet::new();
-            for unit_id in WARCRAFT_DATABASE.all_unit_ids() {
+            for unit_id in WarcraftApi::default().all_unit_ids() {
                 let unit_grids = UnitGrids::for_unit(unit_id);
                 for named_grid in unit_grids.grids() {
                     for slot in named_grid.card().filled_slots() {
@@ -233,7 +233,7 @@ impl CustomKeys {
     }
 
     fn materialize_default_positions(&mut self) {
-        for (object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
+        for (object_id, warcraft_object) in WarcraftApi::default().iter() {
             let default_button = warcraft_object.default_button_position();
             let default_research = warcraft_object.default_research_button_position();
             match warcraft_object.kind() {
@@ -293,7 +293,7 @@ impl CustomKeys {
     }
 
     fn materialize_shop_item_positions(&mut self) {
-        for (_object_id, warcraft_object) in WARCRAFT_DATABASE.iter() {
+        for (_object_id, warcraft_object) in WarcraftApi::default().iter() {
             let WarcraftObjectMeta::Unit(unit_meta) = warcraft_object.meta() else {
                 continue;
             };

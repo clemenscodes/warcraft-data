@@ -4,7 +4,8 @@ use crate::grid::layout::GridLayout;
 use crate::identity::hotkey_token::HotkeyToken;
 use crate::identity::slot::GridSlotId;
 use crate::text::color_codes::WarcraftColorCodes;
-use warcraft_api::{BuildingTraits, ObjectLookup};
+use crate::unit::alt_state::AltState;
+use warcraft_api::WarcraftApi;
 use warcraft_api::{GridCoordinate, WarcraftObjectId, WarcraftObjectMeta};
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Default)]
@@ -95,7 +96,7 @@ impl InspectorDetail {
                         .research_tip()
                         .map(WarcraftColorCodes::stripped)
                 });
-                let database_object = ObjectLookup::object(ability_object_id);
+                let database_object = WarcraftApi::default().object(ability_object_id);
                 let is_passive = database_object
                     .and_then(|warcraft_object| warcraft_object.icons().first().copied())
                     .map(|icon_path| {
@@ -120,10 +121,11 @@ impl InspectorDetail {
                     })
                     .unwrap_or(false);
                 let host_starts_in_alt =
-                    BuildingTraits::unit_starts_in_toggle_alt_state(host_unit_id);
+                    WarcraftApi::default().unit_starts_in_toggle_alt_state(host_unit_id);
                 let host_is_present = host_unit_id != WarcraftObjectId::default();
                 let is_morph_targeting_host = host_is_present
-                    && ObjectLookup::morph_target_unit(ability_object_id)
+                    && WarcraftApi::default()
+                        .morph_target_unit(ability_object_id)
                         .is_some_and(|target| target == host_unit_id);
                 let prefer_un_state = !from_uprooted
                     && (host_starts_in_alt || is_morph_targeting_host)
@@ -134,9 +136,11 @@ impl InspectorDetail {
                     database_object.and_then(|warcraft_object| warcraft_object.ubertip())
                 };
                 let ubertip = primary_ubertip.map(WarcraftColorCodes::stripped);
-                let ability_is_morph = ObjectLookup::morph_target_unit(ability_object_id).is_some();
+                let ability_is_morph = WarcraftApi::default()
+                    .morph_target_unit(ability_object_id)
+                    .is_some();
                 let ability_off_on_alt_unit = !ability_is_morph
-                    && BuildingTraits::ability_is_on_alt_state_unit(ability_object_id);
+                    && WarcraftApi::default().ability_is_on_alt_state_unit(ability_object_id);
                 let should_show_alt_state = object_has_alt_state
                     && !prefer_un_state
                     && !ability_is_morph
@@ -218,7 +222,7 @@ impl InspectorDetail {
                 let object_id = cell.object_id();
                 let upgrade_unit_id_field = upgrade_unit_id;
                 let upgrade_display_name = upgrade_unit_id
-                    .and_then(ObjectLookup::object)
+                    .and_then(|id| WarcraftApi::default().object(id))
                     .and_then(|object| object.names().first().copied())
                     .map(String::from);
                 let upgrade_hotkey_token = upgrade_unit_id
@@ -261,7 +265,7 @@ impl InspectorDetail {
                 let hotkey_token = binding
                     .and_then(|ability_binding| ability_binding.unhotkey())
                     .and_then(|hotkey| hotkey.first_token());
-                let database_object = ObjectLookup::object(ability_id.object_id());
+                let database_object = WarcraftApi::default().object(ability_id.object_id());
                 let display_name = database_object
                     .and_then(|warcraft_object| warcraft_object.un_tip())
                     .map(WarcraftColorCodes::stripped)
@@ -305,7 +309,7 @@ impl InspectorDetail {
                 let hotkey_token = binding
                     .and_then(|command_binding| command_binding.hotkey())
                     .and_then(|hotkey| hotkey.first_token());
-                let database_object = ObjectLookup::object(*command_name);
+                let database_object = WarcraftApi::default().object(*command_name);
                 let tip = database_object
                     .and_then(|warcraft_object| warcraft_object.tip())
                     .map(WarcraftColorCodes::stripped)

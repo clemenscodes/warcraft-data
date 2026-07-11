@@ -8,7 +8,7 @@ use crate::identity::slot::GridSlotId;
 use crate::unit::slots::UnitCommandSlots;
 use std::collections::HashMap;
 use std::rc::Rc;
-use warcraft_api::WARCRAFT_DATABASE;
+use warcraft_api::WarcraftApi;
 use warcraft_api::WarcraftObjectId;
 
 /// A unit's resolved command containers and its train-unit upgrade map. Cheap to
@@ -28,20 +28,20 @@ impl UnitSlotContainers {
     /// An unknown id resolves to the default object, whose command card is empty.
     pub fn resolve(unit_id: WarcraftObjectId) -> Self {
         let unit_object_id = unit_id;
-        let command_card: Rc<[GridSlotId]> = WARCRAFT_DATABASE
+        let command_card: Rc<[GridSlotId]> = WarcraftApi::default()
             .command_card(unit_object_id)
             .filled_slots()
             .collect();
-        let build_menu: Option<Rc<[GridSlotId]>> = WARCRAFT_DATABASE
+        let build_menu: Option<Rc<[GridSlotId]>> = WarcraftApi::default()
             .build_menu(unit_object_id)
             .map(|card| card.filled_slots().collect());
-        let uprooted: Option<Rc<[GridSlotId]>> = WARCRAFT_DATABASE
+        let uprooted: Option<Rc<[GridSlotId]>> = WarcraftApi::default()
             .uprooted_menu(unit_object_id)
             .map(|card| card.filled_slots().collect());
-        let research: Option<Rc<[GridSlotId]>> = WARCRAFT_DATABASE
+        let research: Option<Rc<[GridSlotId]>> = WarcraftApi::default()
             .research_menu(unit_object_id)
             .map(|card| card.filled_slots().collect());
-        let train_upgrades = WARCRAFT_DATABASE.train_unit_upgrades(unit_object_id);
+        let train_upgrades = WarcraftApi::default().train_unit_upgrades(unit_object_id);
         Self {
             command_card,
             build_menu,

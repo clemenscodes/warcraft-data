@@ -3,7 +3,7 @@ use crate::identity::hotkey_token::HotkeyToken;
 use crate::model::{AbilityBinding, CommandBinding, Hotkey};
 use crate::text::command_label::CommandLabel;
 use crate::text::tip::Tip;
-use warcraft_api::ObjectLookup;
+use warcraft_api::WarcraftApi;
 use warcraft_api::WarcraftObjectId;
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, PartialOrd, Ord)]
@@ -23,7 +23,7 @@ pub struct AbilityCell {
 
 impl AbilityCell {
     pub fn for_ability(ability_id: AbilityId, binding: Option<&AbilityBinding>) -> Self {
-        let database_object = ObjectLookup::object(ability_id.object_id());
+        let database_object = WarcraftApi::default().object(ability_id.object_id());
         let database_name = database_object
             .and_then(|warcraft_object| warcraft_object.names().first().copied())
             .map(String::from);
@@ -64,7 +64,7 @@ impl AbilityCell {
     /// alternate name (`un_tip` from the database, falling back to the
     /// on-state name) and the `unhotkey` from the binding.
     pub fn for_ability_off(ability_id: AbilityId, binding: Option<&AbilityBinding>) -> Self {
-        let database_object = ObjectLookup::object(ability_id.object_id());
+        let database_object = WarcraftApi::default().object(ability_id.object_id());
         let alt_name = database_object
             .and_then(|warcraft_object| warcraft_object.un_tip())
             .map(String::from);
@@ -78,8 +78,9 @@ impl AbilityCell {
             .or(database_name)
             .or(tip_name)
             .unwrap_or_else(|| String::from("(unknown)"));
-        let database_off_icon_path: Option<AbilityIconPath> =
-            ObjectLookup::off_icon(ability_id.object_id()).map(AbilityIconPath::Database);
+        let database_off_icon_path: Option<AbilityIconPath> = WarcraftApi::default()
+            .off_icon(ability_id.object_id())
+            .map(AbilityIconPath::Database);
         let database_icon_path: Option<AbilityIconPath> = database_object
             .and_then(|warcraft_object| warcraft_object.icons().first().copied())
             .map(AbilityIconPath::Database);
@@ -106,7 +107,7 @@ impl AbilityCell {
     }
 
     pub fn for_command(command_name: WarcraftObjectId, binding: Option<&CommandBinding>) -> Self {
-        let database_object = ObjectLookup::object(command_name);
+        let database_object = WarcraftApi::default().object(command_name);
         let database_name = database_object
             .and_then(|warcraft_object| warcraft_object.names().first().copied())
             .map(String::from);

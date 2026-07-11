@@ -4,7 +4,7 @@ use crate::model::{AbilityBinding, AbilityBindingBuilder, GridCoordinate, Hotkey
 use crate::unit::slots::UnitCommandSlots;
 use std::collections::HashMap;
 use std::fmt;
-use warcraft_api::WARCRAFT_DATABASE;
+use warcraft_api::WarcraftApi;
 use warcraft_api::{WarcraftObjectId, WarcraftObjectKind, WarcraftObjectMeta};
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Default)]
@@ -81,7 +81,7 @@ impl From<&CustomKeys> for UnitKeyedCustomKeys {
             .bindings_in_order()
             .map(|entry| (entry.ability_id().object_id(), entry.binding()))
             .collect();
-        let mut groups: Vec<UnitAbilityGroup> = WARCRAFT_DATABASE
+        let mut groups: Vec<UnitAbilityGroup> = WarcraftApi::default()
             .iter()
             .filter_map(|(unit_id, warcraft_object)| {
                 if warcraft_object.kind() != WarcraftObjectKind::Unit {
@@ -94,7 +94,7 @@ impl From<&CustomKeys> for UnitKeyedCustomKeys {
                 if unit_name.is_empty() {
                     return None;
                 }
-                let command_card = WARCRAFT_DATABASE.command_card(*unit_id);
+                let command_card = WarcraftApi::default().command_card(*unit_id);
                 let mut slots: [Option<UnitAbilitySlot>; 12] = [None; 12];
                 let mut slot_count: usize = 0;
                 for slot_id in command_card.filled_slots() {

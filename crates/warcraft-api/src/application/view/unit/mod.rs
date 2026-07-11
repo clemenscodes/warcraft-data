@@ -40,6 +40,12 @@ impl UnitView {
         self.meta.unit_kind()
     }
 
+    /// The kind this unit behaves as on a command card (a "special" worker acts
+    /// as a soldier).
+    pub fn effective_kind(&self) -> UnitKind {
+        self.meta.effective_kind()
+    }
+
     /// Whether the unit is campaign-only (kept out of melee listings).
     pub fn is_campaign(&self) -> bool {
         self.meta.is_campaign()

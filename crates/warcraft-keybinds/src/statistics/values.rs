@@ -5,7 +5,7 @@
 //! figure into a display string, choosing a colour — is the renderer's job, never
 //! the domain's; these types carry only the value.
 
-use warcraft_api::ObjectLookup;
+use warcraft_api::WarcraftApi;
 use warcraft_api::{RegenType, UnitMeta, WarcraftObjectMeta};
 
 /// A unit's maximum hit points.
@@ -75,11 +75,13 @@ impl Mana {
 #[cfg(test)]
 mod evasion_tests {
     use super::Evasion;
-    use warcraft_api::ObjectLookup;
+    use warcraft_api::WarcraftApi;
     use warcraft_api::{WarcraftObjectId, WarcraftObjectMeta};
 
     fn unit_evasion(unit_id: WarcraftObjectId) -> f32 {
-        let object = ObjectLookup::object(unit_id).expect("unit exists in the database");
+        let object = WarcraftApi::default()
+            .object(unit_id)
+            .expect("unit exists in the database");
         let WarcraftObjectMeta::Unit(unit_meta) = object.meta() else {
             panic!("object is not a unit");
         };
@@ -191,10 +193,11 @@ impl Evasion {
         let standard_abilities = unit_meta.abilities();
         let hero_abilities = unit_meta.hero_abilities();
         let ability_lists = [standard_abilities, hero_abilities];
+        let api = WarcraftApi::default();
         let mut best_chance: f32 = 0.0;
         for ability_list in ability_lists {
             for ability_id in ability_list {
-                let Some(ability_object) = ObjectLookup::object(*ability_id) else {
+                let Some(ability_object) = api.object(*ability_id) else {
                     continue;
                 };
                 let WarcraftObjectMeta::Ability(ability_meta) = ability_object.meta() else {
@@ -202,8 +205,9 @@ impl Evasion {
                 };
                 let evasion_chances = ability_meta.evasion_chances();
                 for chance in evasion_chances {
-                    if chance > best_chance {
-                        best_chance = chance;
+                    let fraction = chance.as_fraction();
+                    if fraction > best_chance {
+                        best_chance = fraction;
                     }
                 }
             }

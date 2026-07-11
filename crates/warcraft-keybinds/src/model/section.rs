@@ -9,7 +9,7 @@ use super::ability_binding::{AbilitySlotData, ResearchSlotData};
 use warcraft_api::{
     SystemKeybindClass, SystemKeybindModifier, WarcraftObjectId, WarcraftObjectKind,
 };
-use warcraft_api::{WARCRAFT_DATABASE, WARCRAFT_SYSTEM_KEYBINDS};
+use warcraft_api::{WARCRAFT_SYSTEM_KEYBINDS, WarcraftApi};
 
 /// The type of a CustomKeys.txt section, determined from the game database.
 #[derive(Debug, Clone, Copy)]
@@ -39,7 +39,10 @@ impl SectionResolution {
     /// Look up `section_id` in the game database and system-keybind table.
     /// Returns `None` for unknown section IDs.
     pub(crate) fn from_section_id(section_id: &str) -> Option<Self> {
-        if let Some((canonical_id, warcraft_object)) = WARCRAFT_DATABASE.by_id_and_key(section_id) {
+        let api = WarcraftApi::default();
+        if let Some(canonical_id) = api.resolve(section_id)
+            && let Some(warcraft_object) = api.object(canonical_id)
+        {
             let section_kind = match warcraft_object.kind() {
                 WarcraftObjectKind::Command => SectionKind::Command,
                 _ => SectionKind::Ability,

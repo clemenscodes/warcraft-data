@@ -1,12 +1,12 @@
 //! The display essentials of a warcraft object — its name and its icon's
 //! database path — resolved by id. Several list/detail views used to call
-//! `ObjectLookup::by_id` and reach into `names()`/`icons()` themselves at render
+//! `WarcraftApi::default().by_id` and reach into `names()`/`icons()` themselves at render
 //! time; that lookup is domain work (ARCHITECTURE R3), so it lives here. The
 //! renderer keeps only presentation: turning the icon path into a URL and
 //! choosing a fallback when the object has no name.
 
 use warcraft_api::WarcraftObjectId;
-use warcraft_api::ObjectLookup;
+use warcraft_api::WarcraftApi;
 
 /// A warcraft object's name and icon database path, if it has them. Both are
 /// `None` for an unknown id.
@@ -19,7 +19,7 @@ pub struct ObjectDisplay {
 impl ObjectDisplay {
     /// Resolve the object with the given id to its name and icon database path.
     pub fn resolve(object_id: WarcraftObjectId) -> Self {
-        let object_option = ObjectLookup::object(object_id);
+        let object_option = WarcraftApi::default().object(object_id);
         let name = object_option
             .and_then(|object| object.names().first().copied())
             .map(|resolved_name| resolved_name.to_owned());
@@ -61,6 +61,6 @@ mod tests {
         // never become a `WarcraftObjectId` in the first place — the database
         // refuses to resolve it. This is the reachable guarantee that replaces
         // the old "resolve a fabricated unknown id" test.
-        assert!(warcraft_api::ObjectLookup::resolve_raw("this-is-not-a-real-object-id").is_none());
+        assert!(warcraft_api::WarcraftApi::default().resolve("this-is-not-a-real-object-id").is_none());
     }
 }

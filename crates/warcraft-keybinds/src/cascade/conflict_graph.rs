@@ -5,7 +5,7 @@ use crate::unit::grids::{GridRole, UnitGrids};
 use crate::unit::slots::UnitCommandSlots;
 use std::collections::{HashMap, HashSet};
 use std::fmt;
-use warcraft_api::WARCRAFT_DATABASE;
+use warcraft_api::WarcraftApi;
 use warcraft_api::{WarcraftObjectId, WarcraftObjectMeta};
 
 /// Canonical identifier for one ability state on one command card page type.
@@ -127,7 +127,7 @@ impl AbilityRoleKey {
     fn ability_list_priority(&self, carrier_unit_ids: &[WarcraftObjectId]) -> usize {
         let mut min_priority = usize::MAX;
         for carrier_id in carrier_unit_ids {
-            let Some(unit_object) = WARCRAFT_DATABASE.object(*carrier_id) else {
+            let Some(unit_object) = WarcraftApi::default().object(*carrier_id) else {
                 continue;
             };
             let WarcraftObjectMeta::Unit(unit_meta) = unit_object.meta() else {
@@ -152,7 +152,7 @@ impl ConflictGraph {
             WarcraftObjectId,
             HashMap<GridRole, HashSet<AbilityRoleKey>>,
         > = HashMap::new();
-        for unit_id in WARCRAFT_DATABASE.all_unit_ids() {
+        for unit_id in WarcraftApi::default().all_unit_ids() {
             let unit_grids = UnitGrids::for_unit(unit_id);
             for named_grid in unit_grids.grids() {
                 let grid_role = named_grid.role();
