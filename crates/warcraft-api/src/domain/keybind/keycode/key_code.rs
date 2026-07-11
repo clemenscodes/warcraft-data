@@ -177,7 +177,12 @@ impl ValueObject for KeyCode {}
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::ddd_conformance::assert_value_object;
+
+    fn assert_value_object<Type>()
+    where
+        Type: ddd::ValueObject,
+    {
+    }
 
     #[test]
     fn rejects_codes_that_are_not_real_keys() {

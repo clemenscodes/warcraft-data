@@ -2,7 +2,7 @@
 //! can attack.
 
 use super::values::{AttackRange, AttackSpeed, DamagePerSecond, DamageRange};
-use warcraft_api::AttackType;
+use crate::AttackType;
 
 /// The complete attack profile of a unit that can attack. `damage_per_second` is
 /// `None` when the attack has no real cooldown (so a rate is undefined).

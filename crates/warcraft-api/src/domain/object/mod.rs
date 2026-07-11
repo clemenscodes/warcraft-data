@@ -9,4 +9,4 @@ pub(crate) mod text;
 pub use aggregate::WarcraftObject;
 pub use kind::WarcraftObjectKind;
 pub use meta::WarcraftObjectMeta;
-pub use text::WarcraftObjectText;
+pub use text::{Description, Tip, WarcraftColorCodes, WarcraftObjectText};

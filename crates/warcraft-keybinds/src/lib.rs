@@ -9,9 +9,7 @@ pub mod editor_history;
 pub mod grid;
 pub mod identity;
 pub mod model;
-pub mod statistics;
 pub mod system;
-pub mod text;
 pub mod unit;
 
 pub use cascade::conflict_graph::{CollidingPair, ConflictGraph, ConflictNode};
@@ -59,12 +57,6 @@ pub use model::{
     RowIndex, SystemBinding, WarcraftKeybinding,
 };
 
-pub use statistics::{
-    Armor, AttackRange, AttackSpeed, AttackStatistics, AttributeStatistic, DamagePerSecond,
-    DamageRange, EffectiveHitPoints, Evasion, Gain, HeroStatistics, HitPoints, HitPointsRegen,
-    Mana, ManaRegen, Matchup, MatchupStrength, UnitStatistics,
-};
-
 pub use system::binding_map::{EffectiveBinding, ResolvedSystemBinding, SystemBindingMap};
 
 pub use unit::grids::{
@@ -74,10 +66,6 @@ pub use unit::grids::{
 };
 
 pub use unit::keyed::{UnitAbilityGroup, UnitAbilitySlot, UnitKeyedCustomKeys};
-pub use unit::listing::{
-    UnitCategoryEntry, UnitCategoryListing, UnitCategoryRequest, UnitListing, UnitListingEntry,
-    UnitListingRequest,
-};
 pub use unit::slot_containers::UnitSlotContainers;
 pub use unit::slots::UnitCommandSlots;
 

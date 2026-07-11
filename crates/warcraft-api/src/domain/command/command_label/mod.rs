@@ -1,4 +1,4 @@
-use warcraft_api::WarcraftObjectId;
+use crate::domain::identity::WarcraftObjectId;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CommandLabel;

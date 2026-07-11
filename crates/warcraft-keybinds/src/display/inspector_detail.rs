@@ -3,9 +3,8 @@ use crate::display::ability_cell::{AbilityCell, AbilityIconPath};
 use crate::grid::layout::GridLayout;
 use crate::identity::hotkey_token::HotkeyToken;
 use crate::identity::slot::GridSlotId;
-use crate::text::color_codes::WarcraftColorCodes;
-use crate::unit::alt_state::AltState;
 use warcraft_api::WarcraftApi;
+use warcraft_api::WarcraftColorCodes;
 use warcraft_api::{GridCoordinate, WarcraftObjectId, WarcraftObjectMeta};
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Default)]

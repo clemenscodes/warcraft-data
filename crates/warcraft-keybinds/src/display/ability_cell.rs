@@ -1,10 +1,9 @@
 use crate::identity::ability_id::AbilityId;
 use crate::identity::hotkey_token::HotkeyToken;
 use crate::model::{AbilityBinding, CommandBinding, Hotkey};
-use crate::text::command_label::CommandLabel;
-use crate::text::tip::Tip;
 use warcraft_api::WarcraftApi;
 use warcraft_api::WarcraftObjectId;
+use warcraft_api::{CommandLabel, Tip};
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum AbilityIconPath {

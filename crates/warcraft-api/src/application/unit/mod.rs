@@ -7,3 +7,7 @@ pub(crate) mod listing;
 pub(crate) mod variant;
 
 pub use api::UnitApi;
+pub use listing::browse::{
+    UnitCategoryEntry, UnitCategoryListing, UnitCategoryRequest, UnitListing, UnitListingEntry,
+    UnitListingRequest,
+};

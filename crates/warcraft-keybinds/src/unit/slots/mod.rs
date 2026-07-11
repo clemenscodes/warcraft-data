@@ -1,12 +1,5 @@
 use crate::GridCoordinate;
 use crate::identity::slot::{CommandCard, GridSlotId};
-use crate::unit::ability_rules::{
-    AbilityInDatabase, AbilityOnUnit, FormUpgradeSwap, HiddenAbility, MorphAgainstHost,
-    RevertsToHost, RootedOnlyAbility, UnitPair,
-};
-use crate::unit::alt_state::AltState;
-use crate::unit::menu_commands::MenuCommands;
-use ddd::Specification;
 use std::collections::HashMap;
 use warcraft_api::{DEVOUR_ABILITY_ID, WarcraftApi};
 use warcraft_api::{UnitKind, WarcraftObjectId, WarcraftObjectMeta};
@@ -102,9 +95,7 @@ impl UnitCommandSlots for WarcraftApi {
                     if !card.place(slot_position, train_slot) {
                         let occupant = card.slot_at(slot_position);
                         let collapses_into_swap = occupant.is_some_and(|existing| {
-                            let existing_id = existing.id();
-                            let pair = UnitPair::new(trained_object_id, existing_id);
-                            FormUpgradeSwap.is_satisfied_by(&pair)
+                            self.units_are_upgrade_swap(trained_object_id, existing.id())
                         });
                         if !collapses_into_swap {
                             unplaced_train_slots.push(train_slot);
@@ -218,8 +209,7 @@ impl UnitCommandSlots for WarcraftApi {
                     continue;
                 }
             }
-            let hidden_candidate = AbilityOnUnit::new(unit_id, ability_object_id);
-            if HiddenAbility.is_satisfied_by(&hidden_candidate) {
+            if self.ability_is_hidden_on_unit(unit_id, ability_object_id) {
                 continue;
             }
             if is_uprootable && ability_object_id == devour_ability_id {
@@ -228,8 +218,7 @@ impl UnitCommandSlots for WarcraftApi {
             if host_is_burrowed && !self.ability_has_alt_state(ability_object_id) {
                 continue;
             }
-            let morph_candidate = MorphAgainstHost::new(*self, ability_object_id, unit_id);
-            if RevertsToHost.is_satisfied_by(&morph_candidate) {
+            if self.morph_reverts_to_host(ability_object_id, unit_id) {
                 continue;
             }
             let ability_database_object = self.object(ability_object_id);
@@ -415,12 +404,10 @@ impl UnitCommandSlots for WarcraftApi {
             if !ability_has_icon {
                 continue;
             }
-            let morph_candidate = MorphAgainstHost::new(*self, ability_object_id, unit_id);
-            if RevertsToHost.is_satisfied_by(&morph_candidate) {
+            if self.morph_reverts_to_host(ability_object_id, unit_id) {
                 continue;
             }
-            let rooted_candidate = AbilityInDatabase::new(*self, ability_object_id);
-            if RootedOnlyAbility.is_satisfied_by(&rooted_candidate) {
+            if self.ability_is_rooted_only(ability_object_id) {
                 continue;
             }
             let Some(slot_position) = slot_position(*self, ability_object_id) else {
@@ -458,8 +445,7 @@ impl UnitCommandSlots for WarcraftApi {
                 continue;
             };
             if let Some(existing_id) = seen_positions.get(&position).copied() {
-                let pair = UnitPair::new(existing_id, trained_object_id);
-                if FormUpgradeSwap.is_satisfied_by(&pair) {
+                if self.units_are_upgrade_swap(existing_id, trained_object_id) {
                     upgrades.entry(existing_id).or_insert(trained_object_id);
                 }
             } else {

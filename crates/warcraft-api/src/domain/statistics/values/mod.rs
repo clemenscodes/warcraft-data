@@ -5,8 +5,7 @@
 //! figure into a display string, choosing a colour — is the renderer's job, never
 //! the domain's; these types carry only the value.
 
-use warcraft_api::WarcraftApi;
-use warcraft_api::{RegenType, UnitMeta, WarcraftObjectMeta};
+use crate::domain::unit::RegenType;
 
 /// A unit's maximum hit points.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Debug, Default)]
@@ -72,36 +71,6 @@ impl Mana {
     }
 }
 
-#[cfg(test)]
-mod evasion_tests {
-    use super::Evasion;
-    use warcraft_api::WarcraftApi;
-    use warcraft_api::{WarcraftObjectId, WarcraftObjectMeta};
-
-    fn unit_evasion(unit_id: WarcraftObjectId) -> f32 {
-        let object = WarcraftApi::default()
-            .object(unit_id)
-            .expect("unit exists in the database");
-        let WarcraftObjectMeta::Unit(unit_meta) = object.meta() else {
-            panic!("object is not a unit");
-        };
-        let evasion = Evasion::resolve(unit_meta);
-        evasion.chance()
-    }
-
-    #[test]
-    fn a_unit_without_an_evasion_ability_resolves_to_zero() {
-        let footman_evasion = unit_evasion(crate::test_support::object_id("hfoo"));
-        assert_eq!(footman_evasion, 0.0);
-    }
-
-    #[test]
-    fn a_hero_with_evasion_resolves_a_positive_chance() {
-        let demon_hunter_evasion = unit_evasion(crate::test_support::object_id("Edem"));
-        assert!(demon_hunter_evasion > 0.0);
-    }
-}
-
 /// Mana regeneration per second.
 #[derive(Clone, Copy, PartialEq, PartialOrd, Debug, Default)]
 pub struct ManaRegen {
@@ -123,13 +92,16 @@ impl ManaRegen {
     }
 }
 
-/// A unit's armor. Fractional and can be negative (which amplifies incoming damage).
+/// A unit's armor, as a derived combat figure. Fractional and can be negative
+/// (which amplifies incoming damage). Named `ArmorFigure` to distinguish it from
+/// the stored [`crate::Armor`] quantity (an `Eq` fixed-point value); this is the
+/// computed `f32` figure the statistics card shows.
 #[derive(Clone, Copy, PartialEq, PartialOrd, Debug, Default)]
-pub struct Armor {
+pub struct ArmorFigure {
     value: f32,
 }
 
-impl Armor {
+impl ArmorFigure {
     pub fn new(value: f32) -> Self {
         Self { value }
     }
@@ -182,37 +154,6 @@ impl Evasion {
     /// is shown.
     pub fn is_zero(self) -> bool {
         self.chance <= 0.0
-    }
-
-    /// The highest evasion chance a unit can field, across its standard and hero
-    /// abilities at each ability's full level. Evasion abilities do not stack — the
-    /// strongest wins — so this is the unit's dodge chance. `Evasion::default()` (a
-    /// chance of zero) when the unit has no evasion source. This resolution scans the
-    /// game database, so it is domain work and lives here, never in the renderer.
-    pub fn resolve(unit_meta: &UnitMeta) -> Self {
-        let standard_abilities = unit_meta.abilities();
-        let hero_abilities = unit_meta.hero_abilities();
-        let ability_lists = [standard_abilities, hero_abilities];
-        let api = WarcraftApi::default();
-        let mut best_chance: f32 = 0.0;
-        for ability_list in ability_lists {
-            for ability_id in ability_list {
-                let Some(ability_object) = api.object(*ability_id) else {
-                    continue;
-                };
-                let WarcraftObjectMeta::Ability(ability_meta) = ability_object.meta() else {
-                    continue;
-                };
-                let evasion_chances = ability_meta.evasion_chances();
-                for chance in evasion_chances {
-                    let fraction = chance.as_fraction();
-                    if fraction > best_chance {
-                        best_chance = fraction;
-                    }
-                }
-            }
-        }
-        Self::new(best_chance)
     }
 }
 

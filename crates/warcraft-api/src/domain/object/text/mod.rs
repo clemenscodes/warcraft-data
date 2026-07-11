@@ -1,4 +1,18 @@
-//! [`WarcraftObjectText`]: the tooltip strings attached to an object.
+//! Object text: the tooltip strings attached to an object ([`WarcraftObjectText`])
+//! and the Warcraft III markup/tooltip processors that turn those raw game
+//! strings into display-ready lines (color-code stripping, level markers,
+//! substitution placeholders, tip shortening).
+
+pub(crate) mod color_codes;
+pub(crate) mod description;
+pub(crate) mod inner_spaces;
+pub(crate) mod level_markers;
+pub(crate) mod substitution_placeholders;
+pub(crate) mod tip;
+
+pub use color_codes::WarcraftColorCodes;
+pub use description::Description;
+pub use tip::Tip;
 
 /// Display text (tooltips) attached to an object. `un_*` variants are the
 /// "off"/alternate-state strings for toggleable objects.

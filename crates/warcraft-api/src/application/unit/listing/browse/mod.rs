@@ -4,8 +4,8 @@
 //! (ARCHITECTURE R3), so it lives here. The renderer hands over the raw browse
 //! inputs and reads back the already-shaped [`UnitListing`].
 
-use warcraft_api::{CatalogVisibility, Scope, SearchField, UnitMode, UnitQuery, WarcraftApi};
-use warcraft_api::{Race, UnitKind, WarcraftObjectId};
+use crate::{CatalogVisibility, Scope, SearchField, UnitMode, UnitQuery, WarcraftApi};
+use crate::{Race, UnitKind, WarcraftObjectId};
 
 /// The inputs to a unit-list browse: the active race and mode, the current
 /// search query and the field it searches, and whether hidden units are shown.

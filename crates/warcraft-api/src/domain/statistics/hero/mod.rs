@@ -2,7 +2,7 @@
 //! level, each with its per-level growth, and which one is the hero's primary.
 
 use super::values::Gain;
-use warcraft_api::PrimaryAttribute;
+use crate::PrimaryAttribute;
 
 /// One hero attribute at the selected level: its current value and its per-level
 /// growth (shown as the `+x.x` gain).

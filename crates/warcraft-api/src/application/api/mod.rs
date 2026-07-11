@@ -1,5 +1,7 @@
 //! The public read API over the bundled Warcraft III object database.
 
+mod command_card_policy;
+
 use crate::application::ability::AbilityApi;
 use crate::application::command::CommandApi;
 use crate::application::unit::UnitApi;

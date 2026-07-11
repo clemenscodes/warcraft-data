@@ -12,6 +12,7 @@ use crate::application::view::unit::UnitView;
 use crate::domain::identity::WarcraftObjectId;
 use crate::domain::object::WarcraftObjectMeta;
 use crate::domain::race::Race;
+use crate::domain::statistics::Evasion;
 use crate::domain::unit::UnitMode;
 use crate::infrastructure::database::WarcraftDatabase;
 
@@ -131,6 +132,42 @@ impl UnitApi {
     /// cross-mode search — sorted by category, in-game availability, then name.
     pub fn list(&self, query: &UnitQuery<'_>) -> Vec<UnitView> {
         listing::list(self.database, query)
+    }
+
+    /// The highest evasion chance the unit can field, across its standard and
+    /// hero abilities at each ability's full level. Evasion abilities do not
+    /// stack — the strongest wins — so this is the unit's dodge chance.
+    /// [`Evasion::default`] (a chance of zero) when the id is unknown, names a
+    /// non-unit, or the unit has no evasion source. Scanning the ability catalog
+    /// for the granted chance is application work, so it lives here; the derived
+    /// figure it feeds ([`UnitStatistics`](crate::UnitStatistics)) stays pure.
+    pub fn evasion(&self, unit_id: WarcraftObjectId) -> Evasion {
+        let Some(object) = self.database.object(unit_id) else {
+            return Evasion::default();
+        };
+        let WarcraftObjectMeta::Unit(unit_meta) = object.meta() else {
+            return Evasion::default();
+        };
+        let mut best_chance: f32 = 0.0;
+        for ability_id in unit_meta
+            .abilities()
+            .iter()
+            .chain(unit_meta.hero_abilities().iter())
+        {
+            let Some(ability_object) = self.database.object(*ability_id) else {
+                continue;
+            };
+            let WarcraftObjectMeta::Ability(ability_meta) = ability_object.meta() else {
+                continue;
+            };
+            for chance in ability_meta.evasion_chances() {
+                let fraction = chance.as_fraction();
+                if fraction > best_chance {
+                    best_chance = fraction;
+                }
+            }
+        }
+        Evasion::new(best_chance)
     }
 
     /// The natural default selection for a race/mode browse: the first unit a
@@ -262,6 +299,18 @@ mod tests {
                 .can_attack()
         );
         assert!(!api.unit().get(id("htow")).expect("town hall").can_attack());
+    }
+
+    #[test]
+    fn a_unit_without_an_evasion_ability_resolves_to_zero() {
+        let footman_evasion = WarcraftApi::default().unit().evasion(id("hfoo")).chance();
+        assert_eq!(footman_evasion, 0.0);
+    }
+
+    #[test]
+    fn a_hero_with_evasion_resolves_a_positive_chance() {
+        let demon_hunter_evasion = WarcraftApi::default().unit().evasion(id("Edem")).chance();
+        assert!(demon_hunter_evasion > 0.0);
     }
 
     #[test]

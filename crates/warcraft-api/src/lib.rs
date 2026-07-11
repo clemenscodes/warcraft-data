@@ -9,6 +9,10 @@ pub use application::unit::UnitApi;
 pub use application::unit::listing::query::{Scope, UnitQuery};
 pub use application::unit::listing::search_field::SearchField;
 pub use application::unit::listing::visibility::CatalogVisibility;
+pub use application::unit::{
+    UnitCategoryEntry, UnitCategoryListing, UnitCategoryRequest, UnitListing, UnitListingEntry,
+    UnitListingRequest,
+};
 pub use application::view::ability::AbilityView;
 pub use application::view::command::CommandView;
 pub use application::view::unit::UnitView;
@@ -18,7 +22,7 @@ pub use domain::balance::{
     StrengthBonuses,
 };
 pub use domain::combat::{AttackType, DefenseType, WeaponType};
-pub use domain::command::CommandMeta;
+pub use domain::command::{CommandLabel, CommandMeta};
 pub use domain::grid::{ColumnIndex, GridCoordinate, ParseGridCoordinateError, RowIndex};
 pub use domain::identity::WarcraftObjectId;
 pub use domain::item::{ItemClass, ItemMeta};
@@ -27,7 +31,10 @@ pub use domain::keybind::ability_tables::{
     ROOTED_ONLY_ABILITY_CODES, ROOTED_ONLY_ABILITY_IDS,
 };
 pub use domain::keybind::category::SystemHotkeysCategory;
-pub use domain::keybind::keycode::KeyCode;
+pub use domain::keybind::keycode::{
+    Digit, FunctionKey, KeyCode, KeyCodeOutOfRange, Letter, MouseButton, NotALetter, NumpadKey,
+    Punctuation,
+};
 pub use domain::keybind::mirrors::{
     BUILD_COMMAND_MIRRORS, BuildCommandMirror, MORPH_ABILITY_MIRRORS, MorphAbilityMirror,
 };
@@ -35,7 +42,8 @@ pub use domain::keybind::system_keybind::{
     ContextSet, SystemKeybind, SystemKeybindClass, SystemKeybindModifier,
 };
 pub use domain::object::{
-    WarcraftObject, WarcraftObjectKind, WarcraftObjectMeta, WarcraftObjectText,
+    Description, Tip, WarcraftColorCodes, WarcraftObject, WarcraftObjectKind, WarcraftObjectMeta,
+    WarcraftObjectText,
 };
 pub use domain::player::{
     AiDifficultyPreference, CampaignMatchType, CustomMatchType, MatchType, MeleeMatchType,
@@ -44,6 +52,11 @@ pub use domain::player::{
 };
 pub use domain::quantity::{Armor, Chance, Cooldown, Multiplier, RegenRate, StatGrowth};
 pub use domain::race::{AllRaces, Race};
+pub use domain::statistics::{
+    ArmorFigure, AttackRange, AttackSpeed, AttackStatistics, AttributeStatistic, DamagePerSecond,
+    DamageRange, EffectiveHitPoints, Evasion, Gain, HeroStatistics, HitPoints, HitPointsRegen,
+    Mana, ManaRegen, Matchup, MatchupStrength, UnitStatistics,
+};
 pub use domain::unit::hero::{
     AttributeBase, AttributeGrowth, HeroAttributes, ManaPool, PrimaryAttribute,
 };

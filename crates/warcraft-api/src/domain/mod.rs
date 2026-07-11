@@ -14,6 +14,7 @@ pub(crate) mod object;
 pub(crate) mod player;
 pub(crate) mod quantity;
 pub(crate) mod race;
+pub(crate) mod statistics;
 pub(crate) mod unit;
 pub(crate) mod upgrade;
 pub(crate) mod version;

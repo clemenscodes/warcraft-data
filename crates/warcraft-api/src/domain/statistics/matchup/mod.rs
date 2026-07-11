@@ -4,8 +4,8 @@
 //! domain, so the renderer only formats the percentage and never re-derives the
 //! balance decision (the classification thresholds live here, not in the UI).
 
-use warcraft_api::WARCRAFT_GAMEPLAY_CONSTANTS;
-use warcraft_api::{AttackType, DefenseType};
+use crate::WARCRAFT_GAMEPLAY_CONSTANTS;
+use crate::{AttackType, DefenseType};
 
 /// Where a matchup sits relative to full (100%) damage, seen from the attacker's
 /// side: `Strong` above 105% damage, `Weak` below 95%, `Neutral` in between.

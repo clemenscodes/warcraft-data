@@ -6,11 +6,11 @@
 use super::attack::AttackStatistics;
 use super::hero::{AttributeStatistic, HeroStatistics};
 use super::values::{
-    Armor, AttackRange, AttackSpeed, DamagePerSecond, DamageRange, EffectiveHitPoints, Evasion,
-    HitPoints, HitPointsRegen, Mana, ManaRegen,
+    ArmorFigure, AttackRange, AttackSpeed, DamagePerSecond, DamageRange, EffectiveHitPoints,
+    Evasion, HitPoints, HitPointsRegen, Mana, ManaRegen,
 };
-use warcraft_api::WARCRAFT_GAMEPLAY_CONSTANTS;
-use warcraft_api::{DefenseType, HeroAttributes, PrimaryAttribute, UnitAttack, UnitCombat};
+use crate::WARCRAFT_GAMEPLAY_CONSTANTS;
+use crate::{DefenseType, HeroAttributes, PrimaryAttribute, UnitAttack, UnitCombat};
 
 /// Widens a count into `f32` for arithmetic. The lossy `as` cast is confined to this
 /// `From` body (RUST_STYLE permits `as` only inside `From`/`TryFrom` impls); stat
@@ -141,7 +141,7 @@ pub struct UnitStatistics {
     hit_points_regen: HitPointsRegen,
     mana: Mana,
     mana_regen: ManaRegen,
-    armor: Armor,
+    armor: ArmorFigure,
     defense_type: DefenseType,
     effective_hit_points: EffectiveHitPoints,
     evasion: Evasion,
@@ -229,7 +229,7 @@ impl UnitStatistics {
         let hit_points_regen = HitPointsRegen::new(hit_points_regen_rate, regen_type);
         let mana = Mana::new(mana_amount);
         let mana_regen = ManaRegen::new(mana_regen_rate);
-        let armor = Armor::new(armor_amount);
+        let armor = ArmorFigure::new(armor_amount);
         let effective_hit_points = EffectiveHitPoints::new(effective_hit_points_amount);
         let evasion = Evasion::new(evasion_chance);
         Self {
@@ -262,7 +262,7 @@ impl UnitStatistics {
         self.mana_regen
     }
 
-    pub fn armor(self) -> Armor {
+    pub fn armor(self) -> ArmorFigure {
         self.armor
     }
 

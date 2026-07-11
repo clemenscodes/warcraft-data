@@ -3,6 +3,7 @@
 //! `suppress`, `sort`) take only the values they need, the database-driven
 //! stages are the boundary composed here.
 
+pub(crate) mod browse;
 pub(crate) mod index;
 pub(crate) mod placeholder;
 pub(crate) mod query;

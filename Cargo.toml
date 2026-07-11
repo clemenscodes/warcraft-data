@@ -22,7 +22,7 @@ default-members = [
 authors = ["clemenscodes"]
 edition = "2024"
 license = "AGPL-3.0-only"
-version = "0.1.0"
+version = "0.7.0"
 
 [workspace.dependencies]
 serde = { version = "1.0.228", features = ["derive"] }
