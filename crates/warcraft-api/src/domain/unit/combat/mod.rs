@@ -1,16 +1,17 @@
 //! [`UnitCombat`]: a unit's defensive stats plus its optional attack and mana.
 
 use crate::domain::combat::DefenseType;
+use crate::domain::quantity::{Armor, RegenRate};
 use crate::domain::unit::attack::UnitAttack;
 use crate::domain::unit::hero::ManaPool;
 use crate::domain::unit::regen::RegenType;
 
-#[derive(Default, Debug, Clone, Copy, PartialEq)]
+#[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
 pub struct UnitCombat {
     hit_points: u32,
-    hit_points_regen: f32,
+    hit_points_regen: RegenRate,
     regen_type: RegenType,
-    armor: f32,
+    armor: Armor,
     defense_type: DefenseType,
     attack: Option<UnitAttack>,
     mana_pool: Option<ManaPool>,
@@ -19,9 +20,9 @@ pub struct UnitCombat {
 impl UnitCombat {
     pub const EMPTY: UnitCombat = UnitCombat {
         hit_points: 0,
-        hit_points_regen: 0.0,
+        hit_points_regen: RegenRate::from_milli(0),
         regen_type: RegenType::Always,
-        armor: 0.0,
+        armor: Armor::from_milli(0),
         defense_type: DefenseType::Unarmored,
         attack: None,
         mana_pool: None,
@@ -29,9 +30,9 @@ impl UnitCombat {
 
     pub const fn new(
         hit_points: u32,
-        hit_points_regen: f32,
+        hit_points_regen: RegenRate,
         regen_type: RegenType,
-        armor: f32,
+        armor: Armor,
         defense_type: DefenseType,
         attack: Option<UnitAttack>,
     ) -> Self {
@@ -55,7 +56,7 @@ impl UnitCombat {
         self.hit_points
     }
 
-    pub fn hit_points_regen(&self) -> f32 {
+    pub fn hit_points_regen(&self) -> RegenRate {
         self.hit_points_regen
     }
 
@@ -63,7 +64,7 @@ impl UnitCombat {
         self.regen_type
     }
 
-    pub fn armor(&self) -> f32 {
+    pub fn armor(&self) -> Armor {
         self.armor
     }
 
@@ -79,3 +80,9 @@ impl UnitCombat {
         self.mana_pool
     }
 }
+
+// DDD role: immutable, equality-by-value → Value Object.
+impl ddd::Layered for UnitCombat {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for UnitCombat {}

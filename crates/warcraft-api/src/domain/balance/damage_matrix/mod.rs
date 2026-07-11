@@ -2,8 +2,9 @@
 
 use crate::domain::balance::damage_effectiveness::DamageEffectiveness;
 use crate::domain::combat::AttackType;
+use crate::domain::quantity::Multiplier;
 
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct DamageMatrix {
     normal: DamageEffectiveness,
     pierce: DamageEffectiveness,
@@ -44,7 +45,7 @@ impl DamageMatrix {
             AttackType::Chaos => self.chaos,
             AttackType::Spells => self.spells,
             AttackType::Hero => self.hero,
-            AttackType::Unknown => DamageEffectiveness::new([1.0; 8]),
+            AttackType::Unknown => DamageEffectiveness::new([Multiplier::from_milli(1000); 8]),
         }
     }
 
@@ -76,3 +77,9 @@ impl DamageMatrix {
         self.hero
     }
 }
+
+// DDD role: immutable, equality-by-value → Value Object.
+impl ddd::Layered for DamageMatrix {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for DamageMatrix {}

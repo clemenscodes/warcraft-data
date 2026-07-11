@@ -2,17 +2,18 @@
 
 use crate::domain::grid::GridCoordinate;
 use crate::domain::identity::WarcraftObjectId;
+use crate::domain::quantity::Chance;
 
-#[derive(Default, Debug, Clone)]
+#[derive(Default, Debug, Clone, PartialEq, Eq)]
 pub struct AbilityMeta {
     max_level: usize,
     is_ultimate: bool,
     cooldowns: [u32; 4],
-    /// Per-level chance to evade an attack (0.0..=1.0), one slot per ability
-    /// level. Non-zero only for evasion abilities (Evasion `AEev`, Drunken
-    /// Brawler `ANdb`); every other ability leaves this `[0.0; 4]`. Sourced
-    /// from the real `abilitydata.slk` data field, not the tooltip text.
-    evasion_chances: [f32; 4],
+    /// Per-level chance to evade an attack, one slot per ability level. Non-zero
+    /// only for evasion abilities (Evasion `AEev`, Drunken Brawler `ANdb`);
+    /// every other ability leaves this all-zero. Sourced from the real
+    /// `abilitydata.slk` data field, not the tooltip text.
+    evasion_chances: [Chance; 4],
     default_button_position: Option<GridCoordinate>,
     default_research_button_position: Option<GridCoordinate>,
     ubertip: Option<&'static str>,
@@ -31,7 +32,7 @@ impl AbilityMeta {
             max_level,
             is_ultimate,
             cooldowns,
-            evasion_chances: [0.0; 4],
+            evasion_chances: [Chance::from_permille(0); 4],
             default_button_position: None,
             default_research_button_position: None,
             ubertip: None,
@@ -56,7 +57,7 @@ impl AbilityMeta {
             max_level,
             is_ultimate,
             cooldowns,
-            evasion_chances: [0.0; 4],
+            evasion_chances: [Chance::from_permille(0); 4],
             default_button_position,
             default_research_button_position,
             ubertip: None,
@@ -83,7 +84,7 @@ impl AbilityMeta {
             max_level,
             is_ultimate,
             cooldowns,
-            evasion_chances: [0.0; 4],
+            evasion_chances: [Chance::from_permille(0); 4],
             default_button_position,
             default_research_button_position,
             ubertip,
@@ -107,7 +108,7 @@ impl AbilityMeta {
         self
     }
 
-    pub const fn with_evasion_chances(mut self, evasion_chances: [f32; 4]) -> Self {
+    pub const fn with_evasion_chances(mut self, evasion_chances: [Chance; 4]) -> Self {
         self.evasion_chances = evasion_chances;
         self
     }
@@ -218,15 +219,15 @@ impl AbilityMeta {
         self.cooldowns
     }
 
-    /// Per-level chance to evade an attack (0.0..=1.0). `[0.0; 4]` for any
-    /// ability that is not an evasion ability.
-    pub fn evasion_chances(&self) -> [f32; 4] {
+    /// Per-level chance to evade an attack. All-zero for any ability that is not
+    /// an evasion ability.
+    pub fn evasion_chances(&self) -> [Chance; 4] {
         self.evasion_chances
     }
 
     /// Chance to evade at a given ability level (1-based), or `None` when the
     /// level is out of range. Levels beyond `max_level` are not real.
-    pub fn evasion_chance_for_level(&self, level: usize) -> Option<f32> {
+    pub fn evasion_chance_for_level(&self, level: usize) -> Option<Chance> {
         if level == 0 || level > self.max_level {
             None
         } else {
@@ -236,9 +237,15 @@ impl AbilityMeta {
 
     /// True if the ability grants any evasion at any level.
     pub fn has_evasion(&self) -> bool {
-        self.evasion_chances.iter().any(|chance| *chance > 0.0)
+        self.evasion_chances.iter().any(|chance| chance.is_some())
     }
 }
+
+// DDD role: immutable, equality-by-value → Value Object.
+impl ddd::Layered for AbilityMeta {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for AbilityMeta {}
 
 #[cfg(test)]
 mod tests {

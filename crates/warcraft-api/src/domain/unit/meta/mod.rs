@@ -8,7 +8,7 @@ use crate::domain::unit::kind::UnitKind;
 use crate::domain::unit::mode::UnitMode;
 use crate::domain::unit::production::UnitProduction;
 
-#[derive(Default, Debug, Clone)]
+#[derive(Default, Debug, Clone, PartialEq, Eq)]
 pub struct UnitMeta {
     unit_kind: UnitKind,
     build_time: u32,
@@ -266,6 +266,12 @@ impl UnitMeta {
         }
     }
 }
+
+// DDD role: immutable, equality-by-value → Value Object.
+impl ddd::Layered for UnitMeta {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for UnitMeta {}
 
 #[cfg(test)]
 mod tests {

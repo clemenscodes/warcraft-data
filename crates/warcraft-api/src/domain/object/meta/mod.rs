@@ -7,7 +7,7 @@ use crate::domain::item::ItemMeta;
 use crate::domain::unit::UnitMeta;
 use crate::domain::upgrade::UpgradeMeta;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum WarcraftObjectMeta {
     Unit(UnitMeta),
     Ability(AbilityMeta),
@@ -22,9 +22,12 @@ impl Default for WarcraftObjectMeta {
     }
 }
 
-// NOTE: `WarcraftObjectMeta` becomes a `ValueObject` once its float-bearing
-// variants (UnitMeta/AbilityMeta) are Eq-able via the fixed-point quantity VOs
-// (slice 3). Until then it carries no role marker.
+// DDD role: immutable, equality-by-value → Value Object (now that every variant
+// is `Eq` via the fixed-point quantity VOs).
+impl ddd::Layered for WarcraftObjectMeta {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for WarcraftObjectMeta {}
 
 #[cfg(test)]
 mod tests {

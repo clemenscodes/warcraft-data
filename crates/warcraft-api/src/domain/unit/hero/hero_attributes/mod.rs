@@ -1,11 +1,12 @@
 //! [`HeroAttributes`]: the composite attribute block of a hero unit.
 
+use crate::domain::quantity::{RegenRate, StatGrowth};
 use crate::domain::unit::hero::attribute_base::AttributeBase;
 use crate::domain::unit::hero::attribute_growth::AttributeGrowth;
 use crate::domain::unit::hero::mana_pool::ManaPool;
 use crate::domain::unit::hero::primary_attribute::PrimaryAttribute;
 
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct HeroAttributes {
     mana_pool: ManaPool,
     base: AttributeBase,
@@ -44,7 +45,7 @@ impl HeroAttributes {
         self.mana_pool.mana()
     }
 
-    pub fn mana_regen(&self) -> f32 {
+    pub fn mana_regen(&self) -> RegenRate {
         self.mana_pool.mana_regen()
     }
 
@@ -64,15 +65,21 @@ impl HeroAttributes {
         self.primary
     }
 
-    pub fn strength_per_level(&self) -> f32 {
+    pub fn strength_per_level(&self) -> StatGrowth {
         self.growth.strength_per_level()
     }
 
-    pub fn agility_per_level(&self) -> f32 {
+    pub fn agility_per_level(&self) -> StatGrowth {
         self.growth.agility_per_level()
     }
 
-    pub fn intelligence_per_level(&self) -> f32 {
+    pub fn intelligence_per_level(&self) -> StatGrowth {
         self.growth.intelligence_per_level()
     }
 }
+
+// DDD role: immutable, equality-by-value → Value Object.
+impl ddd::Layered for HeroAttributes {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for HeroAttributes {}

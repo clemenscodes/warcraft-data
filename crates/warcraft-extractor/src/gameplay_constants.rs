@@ -2,9 +2,10 @@ use std::path::PathBuf;
 
 use warcraft_api::{
     AgilityBonuses, DamageEffectiveness, DamageMatrix, GameplayConstants, IntelligenceBonuses,
-    StrengthBonuses,
+    Multiplier, StrengthBonuses,
 };
 
+use crate::fixed_point::milli_u32;
 use crate::{ExtractError, ExtractResult, ExtractTarget, ExtractionRule, casc_filename};
 
 pub static GAMEPLAY_CONSTANTS_EXTRACTION_RULE: ExtractionRule = ExtractionRule {
@@ -33,14 +34,14 @@ impl GameplayConstantsExtraction {
 }
 
 fn parse_damage_bonus(value: &str) -> DamageEffectiveness {
-    let mut multipliers: [f32; 8] = [1.0; 8];
+    let mut multipliers = [Multiplier::from_milli(1000); 8];
     for (parsed_index, raw_part) in value.split(',').enumerate() {
         if parsed_index >= multipliers.len() {
             break;
         }
         let trimmed_part = raw_part.trim();
         if let Ok(parsed_value) = trimmed_part.parse::<f32>() {
-            multipliers[parsed_index] = parsed_value;
+            multipliers[parsed_index] = Multiplier::from_milli(milli_u32(parsed_value));
         }
     }
     DamageEffectiveness::new(multipliers)
@@ -127,10 +128,19 @@ fn parse_miscgame(text: &str) -> GameplayConstants {
         }
     }
 
-    let strength_bonuses =
-        StrengthBonuses::new(str_attack_bonus, str_hit_point_bonus, str_regen_bonus);
-    let intelligence_bonuses = IntelligenceBonuses::new(int_mana_bonus, int_regen_bonus);
-    let agility_bonuses = AgilityBonuses::new(agi_defense_bonus, agi_attack_speed_bonus);
+    let strength_bonuses = StrengthBonuses::new(
+        Multiplier::from_milli(milli_u32(str_attack_bonus)),
+        str_hit_point_bonus,
+        Multiplier::from_milli(milli_u32(str_regen_bonus)),
+    );
+    let intelligence_bonuses = IntelligenceBonuses::new(
+        int_mana_bonus,
+        Multiplier::from_milli(milli_u32(int_regen_bonus)),
+    );
+    let agility_bonuses = AgilityBonuses::new(
+        Multiplier::from_milli(milli_u32(agi_defense_bonus)),
+        Multiplier::from_milli(milli_u32(agi_attack_speed_bonus)),
+    );
     let damage_matrix = DamageMatrix::new(
         damage_normal,
         damage_pierce,

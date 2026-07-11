@@ -12,6 +12,7 @@ pub(crate) mod item;
 pub(crate) mod keybind;
 pub(crate) mod object;
 pub(crate) mod player;
+pub(crate) mod quantity;
 pub(crate) mod race;
 pub(crate) mod unit;
 pub(crate) mod upgrade;

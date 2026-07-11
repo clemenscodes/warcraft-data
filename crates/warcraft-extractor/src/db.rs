@@ -1,8 +1,10 @@
 use warcraft_api::{
-    AttackType, AttributeBase, AttributeGrowth, DefenseType, GameplayConstants, GridCoordinate,
-    HeroAttributes, ManaPool, PrimaryAttribute, Race, RegenType, UnitAttack, UnitCombat, UnitKind,
-    WarcraftObjectKind, WeaponType,
+    Armor, AttackType, AttributeBase, AttributeGrowth, Cooldown, DefenseType, GameplayConstants,
+    GridCoordinate, HeroAttributes, ManaPool, PrimaryAttribute, Race, RegenRate, RegenType,
+    StatGrowth, UnitAttack, UnitCombat, UnitKind, WarcraftObjectKind, WeaponType,
 };
+
+use crate::fixed_point::{milli_i32, milli_u32};
 
 use crate::ir::{
     ExtractedAbilityMeta, ExtractedAbilityMetaFields, ExtractedCommandMeta, ExtractedDatabase,
@@ -615,14 +617,17 @@ impl WarcraftDataAggregation {
             .unwrap_or(0.0);
         let mut combat = UnitCombat::new(
             hit_points,
-            hit_points_regen,
+            RegenRate::from_milli(milli_u32(hit_points_regen)),
             regen_type,
-            armor,
+            Armor::from_milli(milli_i32(armor)),
             defense_type,
             attack,
         );
         if mana > 0 {
-            combat = combat.with_mana_pool(ManaPool::new(mana, mana_regen));
+            combat = combat.with_mana_pool(ManaPool::new(
+                mana,
+                RegenRate::from_milli(milli_u32(mana_regen)),
+            ));
         }
         combat
     }
@@ -693,7 +698,7 @@ impl WarcraftDataAggregation {
             damage_min,
             damage_max,
             attack_range,
-            cooldown_seconds,
+            Cooldown::from_millis(milli_u32(cooldown_seconds)),
             attack_type,
             weapon_type,
         );
@@ -731,12 +736,12 @@ impl WarcraftDataAggregation {
             .data_table_lookup(id, "INTplus")
             .and_then(|raw_value| raw_value.parse::<f32>().ok())
             .unwrap_or(0.0);
-        let mana_pool = ManaPool::new(mana, mana_regen);
+        let mana_pool = ManaPool::new(mana, RegenRate::from_milli(milli_u32(mana_regen)));
         let base = AttributeBase::new(strength, agility, intelligence);
         let growth = AttributeGrowth::new(
-            strength_per_level,
-            agility_per_level,
-            intelligence_per_level,
+            StatGrowth::from_milli(milli_u32(strength_per_level)),
+            StatGrowth::from_milli(milli_u32(agility_per_level)),
+            StatGrowth::from_milli(milli_u32(intelligence_per_level)),
         );
         let hero_attributes = HeroAttributes::new(mana_pool, base, growth, primary);
         Some(hero_attributes)

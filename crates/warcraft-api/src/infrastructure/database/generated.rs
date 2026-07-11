@@ -1141,7 +1141,7 @@ fn insert_objects_chunk_0(
             ACDB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(4, false, ACDB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 7% chance to dodge an attack and a 10% chance to deal 2 times normal damage."), Some("Gives a percent chance to avoid attacks and a 10% chance to deal additional damage. |n|n|cffffcc00Level 1|r - 7% dodge, 2 times normal damage. |n|cffffcc00Level 2|r - 14% dodge, 3 times normal damage. |n|cffffcc00Level 3|r - 21% dodge, 4 times normal damage. |n|cffffcc00Level 4|r - 30% dodge, 6 times normal damage.")).with_code(Some(WarcraftObjectId::new("ANdb"))).with_morph_target(None).with_evasion_chances([0.07, 0.14, 0.21, 0.3]).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(4, false, ACDB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 7% chance to dodge an attack and a 10% chance to deal 2 times normal damage."), Some("Gives a percent chance to avoid attacks and a 10% chance to deal additional damage. |n|n|cffffcc00Level 1|r - 7% dodge, 2 times normal damage. |n|cffffcc00Level 2|r - 14% dodge, 3 times normal damage. |n|cffffcc00Level 3|r - 21% dodge, 4 times normal damage. |n|cffffcc00Level 4|r - 30% dodge, 6 times normal damage.")).with_code(Some(WarcraftObjectId::new("ANdb"))).with_morph_target(None).with_evasion_chances([Chance::from_permille(70), Chance::from_permille(140), Chance::from_permille(210), Chance::from_permille(300)]).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ACDB_TIP_LEVELS, ACDB_UBERTIP_LEVELS),
         ),
     );
@@ -1283,7 +1283,12 @@ fn insert_objects_chunk_0(
                 )
                 .with_code(Some(WarcraftObjectId::new("AEev")))
                 .with_morph_target(None)
-                .with_evasion_chances([0.15, 0.0, 0.0, 0.0])
+                .with_evasion_chances([
+                    Chance::from_permille(150),
+                    Chance::from_permille(0),
+                    Chance::from_permille(0),
+                    Chance::from_permille(0),
+                ])
                 .with_off_state(None, None, None, None),
             ),
             WarcraftObjectText::new(ACEV_TIP_LEVELS, ACEV_UBERTIP_LEVELS),
@@ -2784,7 +2789,7 @@ fn insert_objects_chunk_0(
             AEEV_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEEV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 10% chance to avoid an attack."), Some("Gives a percent chance to avoid attacks. |n|n|cffffcc00Level 1|r - 10% chance that an opponent misses. |n|cffffcc00Level 2|r - 20% chance that an opponent misses. |n|cffffcc00Level 3|r - 30% chance that an opponent misses.")).with_code(Some(WarcraftObjectId::new("AEev"))).with_morph_target(None).with_evasion_chances([0.1, 0.2, 0.3, 0.0]).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AEEV_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 10% chance to avoid an attack."), Some("Gives a percent chance to avoid attacks. |n|n|cffffcc00Level 1|r - 10% chance that an opponent misses. |n|cffffcc00Level 2|r - 20% chance that an opponent misses. |n|cffffcc00Level 3|r - 30% chance that an opponent misses.")).with_code(Some(WarcraftObjectId::new("AEev"))).with_morph_target(None).with_evasion_chances([Chance::from_permille(100), Chance::from_permille(200), Chance::from_permille(300), Chance::from_permille(0)]).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AEEV_TIP_LEVELS, AEEV_UBERTIP_LEVELS),
         ),
     );
@@ -5143,7 +5148,7 @@ fn insert_objects_chunk_1(
             ANDB_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANDB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 7% chance to dodge an attack and a 10% chance to deal 2 times total damage."), Some("Gives a percent chance to avoid attacks and a 10% chance to deal additional damage. |n|n|cffffcc00Level 1|r - 7% dodge, 2 times total damage. |n|cffffcc00Level 2|r - 14% dodge, 3 times total damage. |n|cffffcc00Level 3|r - 21% dodge, 4 times total damage.")).with_code(Some(WarcraftObjectId::new("ANdb"))).with_morph_target(None).with_evasion_chances([0.07, 0.14, 0.21, 0.0]).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANDB_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives a 7% chance to dodge an attack and a 10% chance to deal 2 times total damage."), Some("Gives a percent chance to avoid attacks and a 10% chance to deal additional damage. |n|n|cffffcc00Level 1|r - 7% dodge, 2 times total damage. |n|cffffcc00Level 2|r - 14% dodge, 3 times total damage. |n|cffffcc00Level 3|r - 21% dodge, 4 times total damage.")).with_code(Some(WarcraftObjectId::new("ANdb"))).with_morph_target(None).with_evasion_chances([Chance::from_permille(70), Chance::from_permille(140), Chance::from_permille(210), Chance::from_permille(0)]).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANDB_TIP_LEVELS, ANDB_UBERTIP_LEVELS),
         ),
     );
@@ -9664,15 +9669,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         41,
                         50,
                         128,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -9710,15 +9715,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         37,
                         47,
                         128,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -9756,15 +9761,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         38,
                         46,
                         128,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -9802,15 +9807,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     275,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         16,
                         18,
                         500,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -9848,9 +9853,9 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -9887,15 +9892,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         45,
                         62,
                         1150,
-                        3.5,
+                        Cooldown::from_millis(3500),
                         AttackType::Siege,
                         WeaponType::Artillery,
                     )),
@@ -9933,15 +9938,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     1000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         78,
                         105,
                         900,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Siege,
                         WeaponType::Artillery,
                     )),
@@ -9980,27 +9985,31 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         3100,
-                        3.0,
+                        RegenRate::from_milli(3000),
                         RegenType::Always,
-                        2.5,
+                        Armor::from_milli(2500),
                         DefenseType::Divine,
                         Some(UnitAttack::new(
                             66,
                             122,
                             1000,
-                            2.0,
+                            Cooldown::from_millis(2000),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(325, 2.0)),
+                    .with_mana_pool(ManaPool::new(325, RegenRate::from_milli(2000))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 2.0),
+                    ManaPool::new(270, RegenRate::from_milli(2000)),
                     AttributeBase::new(17, 15, 18),
-                    AttributeGrowth::new(4.0, 0.6, 5.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(4000),
+                        StatGrowth::from_milli(600),
+                        StatGrowth::from_milli(5000),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -10032,15 +10041,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     1000,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         45,
                         55,
                         850,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Siege,
                         WeaponType::Missile,
                     )),
@@ -10079,20 +10088,20 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         810,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Night,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             26,
                             31,
                             100,
-                            1.5,
+                            Cooldown::from_millis(1500),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.33333334)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(333))),
                 )
                 .with_level(4)
                 .with_gold_cost(255),
@@ -10128,27 +10137,31 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         575,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        4.3,
+                        Armor::from_milli(4300),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             23,
                             45,
                             100,
-                            1.7,
+                            Cooldown::from_millis(1700),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(19, 21, 16),
-                    AttributeGrowth::new(2.4, 1.5, 2.1),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2400),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2100),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -10182,15 +10195,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     450,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         21,
                         25,
                         128,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -10228,15 +10241,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     575,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         55,
                         69,
                         600,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::MissileSplash,
                     )),
@@ -10275,27 +10288,31 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         750,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Night,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             44,
                             600,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(26, 20, 16),
-                    AttributeGrowth::new(2.4, 1.5, 2.1),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2400),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2100),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -10329,9 +10346,9 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     1100,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -10369,20 +10386,20 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         430,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             19,
                             22,
                             100,
-                            1.5,
+                            Cooldown::from_millis(1500),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.6666667)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(667))),
                 )
                 .with_level(4)
                 .with_gold_cost(255),
@@ -10417,9 +10434,9 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -10457,20 +10474,20 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         300,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             11,
                             13,
                             600,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Magic,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.6666667)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(667))),
                 )
                 .with_level(2)
                 .with_gold_cost(135),
@@ -10506,20 +10523,20 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         435,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             17,
                             19,
                             500,
-                            2.0,
+                            Cooldown::from_millis(2000),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.75)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(145),
@@ -10555,20 +10572,20 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         300,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Night,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             27,
                             33,
                             600,
-                            1.75,
+                            Cooldown::from_millis(1750),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.6666667)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(667))),
                 )
                 .with_level(2)
                 .with_gold_cost(135),
@@ -10604,27 +10621,31 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         625,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        4.6,
+                        Armor::from_milli(4600),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             24,
                             46,
                             100,
-                            1.7,
+                            Cooldown::from_millis(1700),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(21, 22, 16),
-                    AttributeGrowth::new(2.4, 1.5, 2.1),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2400),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2100),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -10658,27 +10679,31 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         750,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Night,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             34,
                             56,
                             600,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(26, 20, 16),
-                    AttributeGrowth::new(2.4, 1.5, 2.1),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2400),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2100),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -10712,20 +10737,20 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         450,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Light,
                         Some(UnitAttack::new(
                             13,
                             15,
                             300,
-                            1.75,
+                            Cooldown::from_millis(1750),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.75)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(155),
@@ -10760,15 +10785,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         15,
                         17,
                         100,
-                        1.65,
+                        Cooldown::from_millis(1650),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -10806,27 +10831,31 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         525,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        4.5,
+                        Armor::from_milli(4500),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             20,
                             26,
                             600,
-                            2.18,
+                            Cooldown::from_millis(2180),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(17, 15, 18),
-                    AttributeGrowth::new(1.8, 1.5, 2.7),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1800),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2700),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -10859,9 +10888,9 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     800,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -10897,15 +10926,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     525,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Unarmored,
                     Some(UnitAttack::new(
                         50,
                         57,
                         128,
-                        1.05,
+                        Cooldown::from_millis(1050),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -10943,15 +10972,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     800,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Night,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         16,
                         18,
                         400,
-                        1.1,
+                        Cooldown::from_millis(1100),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -10990,27 +11019,31 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         750,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Night,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             34,
                             56,
                             600,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(26, 20, 16),
-                    AttributeGrowth::new(2.4, 1.5, 2.1),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2400),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2100),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -11044,27 +11077,31 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         625,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        4.6,
+                        Armor::from_milli(4600),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             24,
                             46,
                             100,
-                            1.7,
+                            Cooldown::from_millis(1700),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(21, 22, 16),
-                    AttributeGrowth::new(2.4, 1.5, 2.1),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2400),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2100),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -11098,27 +11135,31 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         750,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Night,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             34,
                             56,
                             600,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(26, 20, 16),
-                    AttributeGrowth::new(2.4, 1.5, 2.1),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2400),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2100),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -11151,9 +11192,9 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     330,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -11189,27 +11230,31 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         500,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        2.5,
+                        Armor::from_milli(2500),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             20,
                             26,
                             600,
-                            2.18,
+                            Cooldown::from_millis(2180),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(16, 15, 18),
-                    AttributeGrowth::new(2.0, 1.5, 2.7),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2700),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -11244,27 +11289,31 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         500,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        2.5,
+                        Armor::from_milli(2500),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             20,
                             26,
                             600,
-                            2.18,
+                            Cooldown::from_millis(2180),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(16, 15, 18),
-                    AttributeGrowth::new(1.8, 1.5, 2.7),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1800),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2700),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -11298,27 +11347,31 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         525,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        4.5,
+                        Armor::from_milli(4500),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             20,
                             26,
                             600,
-                            2.18,
+                            Cooldown::from_millis(2180),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(17, 15, 18),
-                    AttributeGrowth::new(1.8, 1.5, 2.7),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1800),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2700),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -11352,27 +11405,31 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         525,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        4.5,
+                        Armor::from_milli(4500),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             20,
                             26,
                             600,
-                            2.18,
+                            Cooldown::from_millis(2180),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(17, 15, 18),
-                    AttributeGrowth::new(1.8, 1.5, 2.7),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1800),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2700),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -11406,27 +11463,31 @@ fn insert_objects_chunk_2(
                 .with_combat(
                     UnitCombat::new(
                         550,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        3.7,
+                        Armor::from_milli(3700),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             31,
                             600,
-                            2.33,
+                            Cooldown::from_millis(2330),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(225, 0.01)),
+                    .with_mana_pool(ManaPool::new(225, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(225, 0.01),
+                    ManaPool::new(225, RegenRate::from_milli(10)),
                     AttributeBase::new(18, 19, 15),
-                    AttributeGrowth::new(1.9, 1.5, 2.6),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1900),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2600),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -11459,8 +11520,15 @@ fn insert_objects_chunk_2(
                     UnitFlags::new(false, true, false, false),
                 )
                 .with_combat(
-                    UnitCombat::new(600, 0.0, RegenType::None, 5.0, DefenseType::Fortified, None)
-                        .with_mana_pool(ManaPool::new(300, 1.45)),
+                    UnitCombat::new(
+                        600,
+                        RegenRate::from_milli(0),
+                        RegenType::None,
+                        Armor::from_milli(5000),
+                        DefenseType::Fortified,
+                        None,
+                    )
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(1450))),
                 )
                 .with_level(0)
                 .with_gold_cost(180),
@@ -11495,15 +11563,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     1600,
-                    1.5,
+                    RegenRate::from_milli(1500),
                     RegenType::Night,
-                    6.0,
+                    Armor::from_milli(6000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         28,
                         40,
                         128,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -11541,9 +11609,9 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -11608,15 +11676,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     700,
-                    1.5,
+                    RegenRate::from_milli(1500),
                     RegenType::Night,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         27,
                         31,
                         225,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Normal,
                         WeaponType::MissileBounce,
                     )),
@@ -11687,15 +11755,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Unarmored,
                     Some(UnitAttack::new(
                         16,
                         18,
                         225,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Normal,
                         WeaponType::MissileBounce,
                     )),
@@ -11733,15 +11801,15 @@ fn insert_objects_chunk_2(
                 )
                 .with_combat(UnitCombat::new(
                     450,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Night,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         27,
                         32,
                         600,
-                        1.3,
+                        Cooldown::from_millis(1300),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -11781,9 +11849,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -11820,20 +11888,20 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         1200,
-                        1.6,
+                        RegenRate::from_milli(1600),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             25,
                             36,
                             450,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 2.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(2000))),
                 )
                 .with_level(7)
                 .with_gold_cost(0),
@@ -11867,15 +11935,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1700,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         49,
                         60,
                         128,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -11913,15 +11981,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     2000,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         60,
                         74,
                         128,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -11959,15 +12027,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         41,
                         50,
                         128,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -12005,15 +12073,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         26,
                         33,
                         128,
-                        1.4,
+                        Cooldown::from_millis(1400),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -12054,9 +12122,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -12093,27 +12161,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         550,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        3.7,
+                        Armor::from_milli(3700),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             31,
                             600,
-                            2.46,
+                            Cooldown::from_millis(2460),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(225, 0.01)),
+                    .with_mana_pool(ManaPool::new(225, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(225, 0.01),
+                    ManaPool::new(225, RegenRate::from_milli(10)),
                     AttributeBase::new(18, 19, 15),
-                    AttributeGrowth::new(1.9, 1.5, 2.6),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1900),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2600),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -12146,15 +12218,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    1.6,
+                    RegenRate::from_milli(1600),
                     RegenType::Always,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         17,
                         21,
                         450,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -12209,27 +12281,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         550,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             42,
                             100,
-                            2.05,
+                            Cooldown::from_millis(2050),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(18, 20, 16),
-                    AttributeGrowth::new(2.4, 1.6, 2.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2400),
+                        StatGrowth::from_milli(1600),
+                        StatGrowth::from_milli(2000),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -12264,27 +12340,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         550,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             42,
                             100,
-                            2.05,
+                            Cooldown::from_millis(2050),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(225, 0.01)),
+                    .with_mana_pool(ManaPool::new(225, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(225, 0.01),
+                    ManaPool::new(225, RegenRate::from_milli(10)),
                     AttributeBase::new(18, 20, 15),
-                    AttributeGrowth::new(2.4, 1.6, 2.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2400),
+                        StatGrowth::from_milli(1600),
+                        StatGrowth::from_milli(2000),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -12318,9 +12398,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -12766,9 +12846,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -12806,27 +12886,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         450,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.1,
+                        Armor::from_milli(3100),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             27,
                             600,
-                            2.13,
+                            Cooldown::from_millis(2130),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(285, 0.01)),
+                    .with_mana_pool(ManaPool::new(285, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(285, 0.01),
+                    ManaPool::new(285, RegenRate::from_milli(10)),
                     AttributeBase::new(14, 17, 19),
-                    AttributeGrowth::new(2.0, 1.0, 3.2),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3200),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -12861,27 +12945,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         475,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.1,
+                        Armor::from_milli(3100),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             27,
                             600,
-                            2.13,
+                            Cooldown::from_millis(2130),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(285, 0.01)),
+                    .with_mana_pool(ManaPool::new(285, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(285, 0.01),
+                    ManaPool::new(285, RegenRate::from_milli(10)),
                     AttributeBase::new(15, 17, 19),
-                    AttributeGrowth::new(1.8, 1.0, 3.2),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1800),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3200),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -12916,27 +13004,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.9,
+                        Armor::from_milli(3900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             46,
                             56,
                             100,
-                            2.2,
+                            Cooldown::from_millis(2200),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(22, 13, 17),
-                    AttributeGrowth::new(2.7, 1.5, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2700),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -12970,27 +13062,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.9,
+                        Armor::from_milli(3900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             46,
                             56,
                             100,
-                            2.2,
+                            Cooldown::from_millis(2200),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(22, 13, 17),
-                    AttributeGrowth::new(2.7, 1.5, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2700),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -13023,9 +13119,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -13062,9 +13158,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -13101,9 +13197,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1050,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -13141,27 +13237,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.9,
+                        Armor::from_milli(3900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             24,
                             34,
                             100,
-                            2.2,
+                            Cooldown::from_millis(2200),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(22, 13, 17),
-                    AttributeGrowth::new(2.7, 1.5, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2700),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -13194,15 +13294,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         8,
                         10,
                         800,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -13240,9 +13340,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -13279,9 +13379,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -13316,9 +13416,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -13359,27 +13459,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         550,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        2.2,
+                        Armor::from_milli(2200),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             27,
                             600,
-                            1.64,
+                            Cooldown::from_millis(1640),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(285, 0.01)),
+                    .with_mana_pool(ManaPool::new(285, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(285, 0.01),
+                    ManaPool::new(285, RegenRate::from_milli(10)),
                     AttributeBase::new(18, 14, 19),
-                    AttributeGrowth::new(2.0, 1.0, 3.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3000),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -13413,9 +13517,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -13452,15 +13556,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         78,
                         105,
                         900,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Siege,
                         WeaponType::Artillery,
                     )),
@@ -13515,9 +13619,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     2500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -13554,15 +13658,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         20,
                         21,
                         100,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -13598,15 +13702,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         90,
                         111,
                         800,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Siege,
                         WeaponType::Artillery,
                     )),
@@ -13661,15 +13765,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     575,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         55,
                         69,
                         600,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::MissileSplash,
                     )),
@@ -13708,27 +13812,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.9,
+                        Armor::from_milli(3900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             24,
                             34,
                             100,
-                            2.2,
+                            Cooldown::from_millis(2200),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(22, 13, 17),
-                    AttributeGrowth::new(2.7, 1.5, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2700),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -13762,20 +13870,20 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         625,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Light,
                         Some(UnitAttack::new(
                             20,
                             22,
                             300,
-                            1.75,
+                            Cooldown::from_millis(1750),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(200),
@@ -13810,15 +13918,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     420,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         13,
                         90,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -13857,27 +13965,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         450,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.1,
+                        Armor::from_milli(3100),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             27,
                             600,
-                            2.13,
+                            Cooldown::from_millis(2130),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(285, 0.01)),
+                    .with_mana_pool(ManaPool::new(285, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(285, 0.01),
+                    ManaPool::new(285, RegenRate::from_milli(10)),
                     AttributeBase::new(14, 17, 19),
-                    AttributeGrowth::new(1.8, 1.0, 3.2),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1800),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3200),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -13911,9 +14023,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -13950,15 +14062,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     875,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         45,
                         55,
                         450,
-                        2.2,
+                        Cooldown::from_millis(2200),
                         AttackType::Magic,
                         WeaponType::MissileLine,
                     )),
@@ -13996,15 +14108,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         23,
                         27,
                         700,
-                        0.9,
+                        Cooldown::from_millis(900),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -14042,15 +14154,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     250,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         18,
                         19,
                         500,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Pierce,
                         WeaponType::Instant,
                     )),
@@ -14088,9 +14200,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     100,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -14125,15 +14237,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     420,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         13,
                         90,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -14171,27 +14283,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.9,
+                        Armor::from_milli(3900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             24,
                             34,
                             100,
-                            2.2,
+                            Cooldown::from_millis(2200),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(22, 13, 17),
-                    AttributeGrowth::new(2.7, 1.5, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2700),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -14224,9 +14340,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -14264,27 +14380,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         475,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.1,
+                        Armor::from_milli(3100),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             27,
                             600,
-                            2.13,
+                            Cooldown::from_millis(2130),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(285, 0.01)),
+                    .with_mana_pool(ManaPool::new(285, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(285, 0.01),
+                    ManaPool::new(285, RegenRate::from_milli(10)),
                     AttributeBase::new(15, 17, 19),
-                    AttributeGrowth::new(1.8, 1.0, 3.2),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1800),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3200),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -14318,27 +14438,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         500,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        2.5,
+                        Armor::from_milli(2500),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             27,
                             600,
-                            2.13,
+                            Cooldown::from_millis(2130),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(285, 0.01)),
+                    .with_mana_pool(ManaPool::new(285, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(285, 0.01),
+                    ManaPool::new(285, RegenRate::from_milli(10)),
                     AttributeBase::new(16, 15, 19),
-                    AttributeGrowth::new(2.0, 1.0, 3.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3000),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -14372,9 +14496,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     2000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -14411,15 +14535,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     885,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         30,
                         38,
                         100,
-                        1.4,
+                        Cooldown::from_millis(1400),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -14458,27 +14582,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.9,
+                        Armor::from_milli(3900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             24,
                             34,
                             100,
-                            2.2,
+                            Cooldown::from_millis(2200),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(22, 13, 17),
-                    AttributeGrowth::new(2.7, 1.5, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2700),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -14528,9 +14656,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -14568,27 +14696,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         700,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        2.3,
+                        Armor::from_milli(2300),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             26,
                             36,
                             100,
-                            2.22,
+                            Cooldown::from_millis(2220),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(225, 0.01)),
+                    .with_mana_pool(ManaPool::new(225, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(225, 0.01),
+                    ManaPool::new(225, RegenRate::from_milli(10)),
                     AttributeBase::new(24, 11, 15),
-                    AttributeGrowth::new(3.0, 1.5, 1.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3000),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1500),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -14622,27 +14754,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.9,
+                        Armor::from_milli(3900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             24,
                             34,
                             100,
-                            2.2,
+                            Cooldown::from_millis(2200),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(22, 13, 17),
-                    AttributeGrowth::new(2.7, 1.5, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2700),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -14675,15 +14811,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         13,
                         90,
-                        1.2,
+                        Cooldown::from_millis(1200),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -14720,27 +14856,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         700,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        2.3,
+                        Armor::from_milli(2300),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             26,
                             36,
                             100,
-                            2.22,
+                            Cooldown::from_millis(2220),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(225, 0.01)),
+                    .with_mana_pool(ManaPool::new(225, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(225, 0.01),
+                    ManaPool::new(225, RegenRate::from_milli(10)),
                     AttributeBase::new(24, 11, 15),
-                    AttributeGrowth::new(3.0, 1.5, 1.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3000),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1500),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -14775,20 +14915,20 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         290,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             8,
                             9,
                             600,
-                            2.0,
+                            Cooldown::from_millis(2000),
                             AttackType::Magic,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.72)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(720))),
                 )
                 .with_level(2)
                 .with_gold_cost(135),
@@ -14823,15 +14963,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     360,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         52,
                         64,
                         1150,
-                        3.5,
+                        Cooldown::from_millis(3500),
                         AttackType::Siege,
                         WeaponType::Artillery,
                     )),
@@ -14869,15 +15009,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     700,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         45,
                         55,
                         192,
-                        2.1,
+                        Cooldown::from_millis(2100),
                         AttackType::Siege,
                         WeaponType::Instant,
                     )),
@@ -14933,27 +15073,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.9,
+                        Armor::from_milli(3900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             24,
                             34,
                             100,
-                            2.0,
+                            Cooldown::from_millis(2000),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(22, 13, 17),
-                    AttributeGrowth::new(2.7, 1.5, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2700),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -14988,27 +15132,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.9,
+                        Armor::from_milli(3900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             24,
                             34,
                             100,
-                            2.2,
+                            Cooldown::from_millis(2200),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(22, 13, 17),
-                    AttributeGrowth::new(2.7, 1.5, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2700),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -15042,27 +15190,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.9,
+                        Armor::from_milli(3900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             24,
                             34,
                             100,
-                            2.2,
+                            Cooldown::from_millis(2200),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(22, 13, 17),
-                    AttributeGrowth::new(2.7, 1.5, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2700),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -15095,15 +15247,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         5,
                         6,
                         90,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -15141,15 +15293,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1250,
-                    -25.0,
+                    RegenRate::from_milli(0),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         61,
                         75,
                         600,
-                        1.4,
+                        Cooldown::from_millis(1400),
                         AttackType::Magic,
                         WeaponType::MissileSplash,
                     )),
@@ -15186,9 +15338,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     100,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -15224,9 +15376,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -15261,9 +15413,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     100,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -15298,15 +15450,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     535,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         18,
                         24,
                         400,
-                        1.4,
+                        Cooldown::from_millis(1400),
                         AttackType::Pierce,
                         WeaponType::Instant,
                     )),
@@ -15344,15 +15496,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     700,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         45,
                         55,
                         192,
-                        2.1,
+                        Cooldown::from_millis(2100),
                         AttackType::Siege,
                         WeaponType::Instant,
                     )),
@@ -15390,9 +15542,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -15447,20 +15599,20 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         325,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             10,
                             12,
                             600,
-                            1.75,
+                            Cooldown::from_millis(1750),
                             AttackType::Magic,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.6666667)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(667))),
                 )
                 .with_level(2)
                 .with_gold_cost(155),
@@ -15496,20 +15648,20 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             13,
                             15,
                             250,
-                            1.9,
+                            Cooldown::from_millis(1900),
                             AttackType::Normal,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(250, 0.8)),
+                    .with_mana_pool(ManaPool::new(250, RegenRate::from_milli(800))),
                 )
                 .with_level(3)
                 .with_gold_cost(215),
@@ -15544,9 +15696,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -15584,27 +15736,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.9,
+                        Armor::from_milli(3900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             24,
                             34,
                             100,
-                            2.2,
+                            Cooldown::from_millis(2200),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(22, 13, 17),
-                    AttributeGrowth::new(2.7, 1.5, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2700),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -15654,9 +15810,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     485,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -15694,27 +15850,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         475,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        2.2,
+                        Armor::from_milli(2200),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             28,
                             600,
-                            1.9,
+                            Cooldown::from_millis(1900),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.01)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(300, 0.01),
+                    ManaPool::new(300, RegenRate::from_milli(10)),
                     AttributeBase::new(15, 14, 20),
-                    AttributeGrowth::new(2.0, 1.0, 3.4),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3400),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -15749,27 +15909,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         550,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.7,
+                        Armor::from_milli(3700),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             31,
                             600,
-                            2.46,
+                            Cooldown::from_millis(2460),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(225, 0.01)),
+                    .with_mana_pool(ManaPool::new(225, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(225, 0.01),
+                    ManaPool::new(225, RegenRate::from_milli(10)),
                     AttributeBase::new(18, 19, 15),
-                    AttributeGrowth::new(1.9, 1.5, 2.6),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1900),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2600),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -15801,15 +15965,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         19,
                         23,
                         300,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -15845,15 +16009,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     625,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         32,
                         40,
                         300,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -15889,15 +16053,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     825,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         44,
                         52,
                         300,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -15933,9 +16097,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     None,
                 ))
@@ -16470,15 +16634,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     950,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         31,
                         42,
                         500,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -16515,15 +16679,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     2200,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    6.0,
+                    Armor::from_milli(6000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         45,
                         78,
                         500,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Chaos,
                         WeaponType::MissileSplash,
                     )),
@@ -16560,15 +16724,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     340,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         23,
                         30,
                         600,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -16606,20 +16770,20 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         1600,
-                        25.0,
+                        RegenRate::from_milli(25000),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             77,
                             97,
                             500,
-                            1.5,
+                            Cooldown::from_millis(1500),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(600, 1.5)),
+                    .with_mana_pool(ManaPool::new(600, RegenRate::from_milli(1500))),
                 )
                 .with_level(10)
                 .with_gold_cost(745),
@@ -16655,27 +16819,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         475,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        5.0,
+                        Armor::from_milli(5000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             35,
                             128,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(285, 0.01)),
+                    .with_mana_pool(ManaPool::new(285, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(285, 0.01),
+                    ManaPool::new(285, RegenRate::from_milli(10)),
                     AttributeBase::new(15, 20, 19),
-                    AttributeGrowth::new(2.0, 1.2, 2.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1200),
+                        StatGrowth::from_milli(2800),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -16709,27 +16877,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         725,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             28,
                             55,
                             100,
-                            1.42,
+                            Cooldown::from_millis(1420),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(25, 10, 18),
-                    AttributeGrowth::new(3.3, 1.0, 2.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3300),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(2000),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -16764,27 +16936,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         725,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             28,
                             55,
                             100,
-                            1.11,
+                            Cooldown::from_millis(1110),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(25, 10, 18),
-                    AttributeGrowth::new(3.3, 1.0, 2.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3300),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(2000),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -16818,9 +16994,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -16858,27 +17034,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         725,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             28,
                             55,
                             100,
-                            2.5,
+                            Cooldown::from_millis(2500),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(25, 10, 18),
-                    AttributeGrowth::new(3.3, 1.0, 2.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3300),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(2000),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -16913,27 +17093,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         725,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             28,
                             55,
                             100,
-                            2.0,
+                            Cooldown::from_millis(2000),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(25, 10, 18),
-                    AttributeGrowth::new(3.3, 1.0, 2.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3300),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(2000),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -16967,15 +17151,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     200,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         13,
                         15,
                         600,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -17013,15 +17197,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     200,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -17059,15 +17243,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     450,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         24,
                         29,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -17105,15 +17289,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     200,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         13,
                         15,
                         600,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -17151,15 +17335,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     750,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         24,
                         27,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -17197,15 +17381,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     375,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -17243,15 +17427,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         11,
                         12,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -17288,15 +17472,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     450,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         25,
                         30,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -17335,20 +17519,20 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         1600,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             41,
                             48,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(8)
                 .with_gold_cost(480),
@@ -17383,20 +17567,20 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         1350,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             41,
                             48,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(8)
                 .with_gold_cost(480),
@@ -17430,15 +17614,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -17476,27 +17660,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         575,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        4.9,
+                        Armor::from_milli(4900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             25,
                             47,
                             100,
-                            1.77,
+                            Cooldown::from_millis(1770),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(19, 23, 16),
-                    AttributeGrowth::new(2.0, 1.75, 2.25),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1750),
+                        StatGrowth::from_milli(2250),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -17530,20 +17718,20 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         350,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             28,
                             34,
                             100,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(250, 0.625)),
+                    .with_mana_pool(ManaPool::new(250, RegenRate::from_milli(625))),
                 )
                 .with_level(4)
                 .with_gold_cost(195),
@@ -17578,15 +17766,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     950,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         34,
                         45,
                         500,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -17623,15 +17811,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     370,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         13,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -17670,20 +17858,20 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         1000,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             49,
                             55,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(8)
                 .with_gold_cost(480),
@@ -17718,15 +17906,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     340,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         25,
                         32,
                         600,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -17764,20 +17952,20 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         675,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             29,
                             34,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(6)
                 .with_gold_cost(365),
@@ -17812,15 +18000,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     775,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         24,
                         27,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -17858,15 +18046,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     220,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         7,
                         8,
                         90,
-                        3.0,
+                        Cooldown::from_millis(3000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -17905,20 +18093,20 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         750,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        5.0,
+                        Armor::from_milli(5000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             37,
                             47,
                             200,
-                            1.9,
+                            Cooldown::from_millis(1900),
                             AttackType::Normal,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(250, 0.625)),
+                    .with_mana_pool(ManaPool::new(250, RegenRate::from_milli(625))),
                 )
                 .with_level(2)
                 .with_gold_cost(155),
@@ -17953,9 +18141,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -17991,20 +18179,20 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         950,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             39,
                             44,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(7)
                 .with_gold_cost(425),
@@ -18038,9 +18226,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     200,
-                    10.0,
+                    RegenRate::from_milli(10000),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -18077,9 +18265,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     None,
                 ))
@@ -18116,15 +18304,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         17,
                         20,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -18162,27 +18350,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         550,
-                        2.0,
+                        RegenRate::from_milli(2000),
                         RegenType::Blight,
-                        4.3,
+                        Armor::from_milli(4300),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             23,
                             33,
                             600,
-                            2.42,
+                            Cooldown::from_millis(2420),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(225, 0.01)),
+                    .with_mana_pool(ManaPool::new(225, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(225, 0.01),
+                    ManaPool::new(225, RegenRate::from_milli(10)),
                     AttributeBase::new(18, 21, 15),
-                    AttributeGrowth::new(1.9, 1.5, 2.6),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1900),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2600),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -18216,9 +18408,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -18254,9 +18446,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     50,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -18291,9 +18483,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -18329,27 +18521,31 @@ fn insert_objects_chunk_3(
                 .with_combat(
                     UnitCombat::new(
                         700,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        2.2,
+                        Armor::from_milli(2200),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             26,
                             36,
                             128,
-                            2.2,
+                            Cooldown::from_millis(2200),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(225, 0.01)),
+                    .with_mana_pool(ManaPool::new(225, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(225, 0.01),
+                    ManaPool::new(225, RegenRate::from_milli(10)),
                     AttributeBase::new(24, 14, 15),
-                    AttributeGrowth::new(2.9, 1.3, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2900),
+                        StatGrowth::from_milli(1300),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -18383,9 +18579,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -18421,15 +18617,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         90,
                         111,
                         800,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Siege,
                         WeaponType::Artillery,
                     )),
@@ -18467,15 +18663,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         90,
                         111,
                         800,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Siege,
                         WeaponType::Artillery,
                     )),
@@ -18513,9 +18709,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     1100,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -18550,15 +18746,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     2200,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    6.0,
+                    Armor::from_milli(6000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         48,
                         81,
                         500,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Chaos,
                         WeaponType::MissileSplash,
                     )),
@@ -18595,15 +18791,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     2200,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    6.0,
+                    Armor::from_milli(6000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         48,
                         81,
                         500,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Chaos,
                         WeaponType::MissileSplash,
                     )),
@@ -18640,15 +18836,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     950,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         34,
                         45,
                         500,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -18685,15 +18881,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     340,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         25,
                         32,
                         600,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -18730,15 +18926,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         34,
                         41,
                         128,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -18779,15 +18975,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     425,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         84,
                         144,
                         1150,
-                        4.5,
+                        Cooldown::from_millis(4500),
                         AttackType::Siege,
                         WeaponType::Artillery,
                     )),
@@ -18825,15 +19021,15 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     800,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         45,
                         55,
                         128,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -18870,9 +19066,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -18908,9 +19104,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -18946,9 +19142,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -18984,9 +19180,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19022,9 +19218,9 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19064,9 +19260,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19102,9 +19298,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19140,9 +19336,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19178,9 +19374,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19216,9 +19412,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19254,9 +19450,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19292,9 +19488,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19330,9 +19526,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19368,9 +19564,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19406,9 +19602,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19444,9 +19640,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19482,9 +19678,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     700,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19520,9 +19716,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     700,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19558,9 +19754,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     700,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19596,9 +19792,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     700,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -19634,15 +19830,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         17,
                         20,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -19680,15 +19876,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         18,
                         21,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -19726,15 +19922,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         13,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -19771,15 +19967,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -19817,15 +20013,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     80,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         14,
                         60,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -19862,15 +20058,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     80,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         14,
                         60,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -19907,15 +20103,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     80,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         14,
                         60,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -19952,15 +20148,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     80,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         14,
                         60,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -19997,15 +20193,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     780,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         23,
                         27,
                         100,
-                        1.2,
+                        Cooldown::from_millis(1200),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -20043,20 +20239,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         370,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             8,
                             9,
                             600,
-                            2.0,
+                            Cooldown::from_millis(2000),
                             AttackType::Magic,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.3333334)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1333))),
                 )
                 .with_level(2)
                 .with_gold_cost(135),
@@ -20091,15 +20287,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     690,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         23,
                         27,
                         100,
-                        1.65,
+                        Cooldown::from_millis(1650),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -20137,20 +20333,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         360,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             21,
                             29,
                             600,
-                            1.75,
+                            Cooldown::from_millis(1750),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(2)
                 .with_gold_cost(220),
@@ -20185,20 +20381,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         400,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             25,
                             30,
                             500,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(4)
                 .with_gold_cost(255),
@@ -20233,15 +20429,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         16,
                         20,
                         500,
-                        1.2,
+                        Cooldown::from_millis(1200),
                         AttackType::Chaos,
                         WeaponType::Missile,
                     )),
@@ -20280,20 +20476,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             28,
                             37,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(5)
                 .with_gold_cost(320),
@@ -20326,8 +20522,15 @@ fn insert_objects_chunk_4(
                     UnitFlags::new(true, true, false, false),
                 )
                 .with_combat(
-                    UnitCombat::new(600, 0.0, RegenType::None, 2.0, DefenseType::Fortified, None)
-                        .with_mana_pool(ManaPool::new(300, 1.25)),
+                    UnitCombat::new(
+                        600,
+                        RegenRate::from_milli(0),
+                        RegenType::None,
+                        Armor::from_milli(2000),
+                        DefenseType::Fortified,
+                        None,
+                    )
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(1250))),
                 )
                 .with_level(0)
                 .with_gold_cost(155),
@@ -20363,20 +20566,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         900,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             49,
                             55,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(8)
                 .with_gold_cost(480),
@@ -20410,9 +20613,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -20448,9 +20651,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -20486,9 +20689,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -20524,9 +20727,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -20562,15 +20765,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     320,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         7,
                         8,
                         90,
-                        3.0,
+                        Cooldown::from_millis(3000),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -20608,9 +20811,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -20647,9 +20850,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -20685,9 +20888,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -20723,15 +20926,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     2000,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         49,
                         60,
                         128,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -20769,15 +20972,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     2500,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         60,
                         74,
                         128,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -20815,15 +21018,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     1500,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         41,
                         50,
                         128,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -20861,9 +21064,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -20899,9 +21102,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -20937,9 +21140,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -20974,15 +21177,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         21,
                         29,
                         600,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -21018,9 +21221,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -21056,9 +21259,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -21094,9 +21297,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     1500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -21132,9 +21335,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     1250,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -21170,9 +21373,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     1150,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -21208,9 +21411,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     2000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -21245,9 +21448,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     2000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -21282,9 +21485,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     2000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -21319,15 +21522,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     330,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         14,
                         90,
-                        1.3,
+                        Cooldown::from_millis(1300),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -21364,9 +21567,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -21402,15 +21605,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         15,
                         17,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -21448,20 +21651,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         1050,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             54,
                             60,
                             500,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(8)
                 .with_gold_cost(480),
@@ -21496,20 +21699,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         1600,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             69,
                             77,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(10)
                 .with_gold_cost(225),
@@ -21543,15 +21746,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     750,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         29,
                         33,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -21589,20 +21792,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         510,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             31,
                             37,
                             500,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(5)
                 .with_gold_cost(225),
@@ -21636,15 +21839,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     215,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         9,
                         10,
                         90,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -21681,15 +21884,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     290,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         15,
                         17,
                         90,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -21726,15 +21929,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     405,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         16,
                         19,
                         90,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -21771,9 +21974,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -21810,20 +22013,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         525,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             19,
                             21,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(5)
                 .with_gold_cost(260),
@@ -21861,15 +22064,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -21907,9 +22110,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -21946,20 +22149,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         450,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             29,
                             34,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(4)
                 .with_gold_cost(165),
@@ -21994,15 +22197,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -22039,9 +22242,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -22077,15 +22280,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     280,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         6,
                         7,
                         90,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -22124,20 +22327,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         280,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             22,
                             26,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.8)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(800))),
                 )
                 .with_level(2)
                 .with_gold_cost(195),
@@ -22172,15 +22375,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    1.5,
+                    RegenRate::from_milli(1500),
                     RegenType::Always,
-                    4.0,
+                    Armor::from_milli(4000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         29,
                         33,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -22218,9 +22421,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -22256,15 +22459,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     325,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         13,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -22302,9 +22505,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -22341,20 +22544,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         775,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             36,
                             42,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.5)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1500))),
                 )
                 .with_level(6)
                 .with_gold_cost(210),
@@ -22389,15 +22592,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     465,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         32,
                         42,
                         100,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -22435,9 +22638,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -22474,20 +22677,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         1000,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             49,
                             55,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(8)
                 .with_gold_cost(425),
@@ -22522,15 +22725,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -22568,9 +22771,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -22606,15 +22809,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     625,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         33,
                         40,
                         500,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -22651,15 +22854,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         21,
                         29,
                         600,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Magic,
                         WeaponType::Missile,
                     )),
@@ -22697,15 +22900,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         21,
                         29,
                         600,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Magic,
                         WeaponType::Missile,
                     )),
@@ -22743,15 +22946,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     450,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         28,
                         37,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -22789,20 +22992,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         450,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             25,
                             32,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(4)
                 .with_gold_cost(255),
@@ -22837,20 +23040,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         240,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             17,
                             24,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(175),
@@ -22884,15 +23087,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         17,
                         20,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -22929,15 +23132,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     340,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         21,
                         29,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -22974,15 +23177,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     750,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         36,
                         43,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -23019,9 +23222,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -23058,9 +23261,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -23097,9 +23300,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -23136,9 +23339,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -23173,9 +23376,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -23210,9 +23413,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -23247,9 +23450,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -23284,9 +23487,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -23321,9 +23524,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -23358,9 +23561,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -23395,9 +23598,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -23432,9 +23635,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -23469,15 +23672,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         21,
                         29,
                         600,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -23513,15 +23716,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     450,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         21,
                         29,
                         700,
-                        1.2,
+                        Cooldown::from_millis(1200),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -23557,15 +23760,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         21,
                         29,
                         600,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -23602,9 +23805,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     100,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -23640,20 +23843,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         850,
-                        15.0,
+                        RegenRate::from_milli(15000),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             35,
                             44,
                             600,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(7)
                 .with_gold_cost(255),
@@ -23689,20 +23892,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         1100,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             39,
                             47,
                             300,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(8)
                 .with_gold_cost(480),
@@ -23736,15 +23939,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         17,
                         25,
                         300,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -23782,20 +23985,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         220,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             8,
                             13,
                             600,
-                            2.0,
+                            Cooldown::from_millis(2000),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(205),
@@ -23828,15 +24031,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -23873,15 +24076,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         29,
                         34,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -23918,15 +24121,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     350,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         18,
                         21,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -23964,20 +24167,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             32,
                             36,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(5)
                 .with_gold_cost(320),
@@ -24012,20 +24215,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         630,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             28,
                             34,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(6)
                 .with_gold_cost(105),
@@ -24060,20 +24263,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         425,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             21,
                             24,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(4)
                 .with_gold_cost(105),
@@ -24108,20 +24311,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         1350,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             49,
                             55,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(9)
                 .with_gold_cost(545),
@@ -24155,15 +24358,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         21,
                         29,
                         600,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Magic,
                         WeaponType::Missile,
                     )),
@@ -24201,15 +24404,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         21,
                         29,
                         600,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Magic,
                         WeaponType::Missile,
                     )),
@@ -24247,9 +24450,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     450,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -24285,9 +24488,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -24323,9 +24526,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -24361,9 +24564,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -24401,20 +24604,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         750,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             24,
                             27,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(5)
                 .with_gold_cost(320),
@@ -24448,15 +24651,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     450,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         23,
                         26,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -24495,20 +24698,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         5600,
-                        3.0,
+                        RegenRate::from_milli(3000),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             39,
                             60,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(600, 1.5)),
+                    .with_mana_pool(ManaPool::new(600, RegenRate::from_milli(1500))),
                 )
                 .with_level(11)
                 .with_gold_cost(500),
@@ -24543,20 +24746,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         4000,
-                        10.0,
+                        RegenRate::from_milli(10000),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             170,
                             70,
                             600,
-                            2.0,
+                            Cooldown::from_millis(2000),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(1000, 5.0)),
+                    .with_mana_pool(ManaPool::new(1000, RegenRate::from_milli(5000))),
                 )
                 .with_level(15)
                 .with_gold_cost(745),
@@ -24591,15 +24794,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     200,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         26,
                         30,
                         180,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -24636,15 +24839,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         11,
                         12,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -24681,9 +24884,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -24719,9 +24922,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -24758,27 +24961,31 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         475,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             28,
                             550,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(15, 20, 18),
-                    AttributeGrowth::new(2.0, 1.6, 2.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1600),
+                        StatGrowth::from_milli(2500),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -24825,9 +25032,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -24863,20 +25070,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         1900,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             48,
                             81,
                             500,
-                            1.5,
+                            Cooldown::from_millis(1500),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(10)
                 .with_gold_cost(745),
@@ -24911,9 +25118,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -24950,20 +25157,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         675,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             29,
                             33,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(6)
                 .with_gold_cost(255),
@@ -24999,20 +25206,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         1150,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             41,
                             48,
                             500,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(8)
                 .with_gold_cost(480),
@@ -25048,20 +25255,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         775,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             26,
                             29,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(6)
                 .with_gold_cost(170),
@@ -25095,15 +25302,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     950,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         39,
                         44,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -25142,20 +25349,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         950,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             31,
                             39,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(8)
                 .with_gold_cost(480),
@@ -25190,15 +25397,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         18,
                         21,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -25237,20 +25444,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         550,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             25,
                             32,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(4)
                 .with_gold_cost(275),
@@ -25286,20 +25493,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         950,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             29,
                             33,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(6)
                 .with_gold_cost(365),
@@ -25335,20 +25542,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         1100,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             49,
                             55,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(8)
                 .with_gold_cost(480),
@@ -25383,9 +25590,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -25421,9 +25628,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -25460,20 +25667,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         1100,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             49,
                             55,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(8)
                 .with_gold_cost(480),
@@ -25509,20 +25716,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         950,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             29,
                             33,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(6)
                 .with_gold_cost(365),
@@ -25558,20 +25765,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         950,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             31,
                             39,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(7)
                 .with_gold_cost(425),
@@ -25606,15 +25813,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     950,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         39,
                         44,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -25652,15 +25859,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         18,
                         21,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -25698,9 +25905,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -25735,9 +25942,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -25774,15 +25981,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         18,
                         21,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -25820,20 +26027,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         550,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             25,
                             32,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(4)
                 .with_gold_cost(255),
@@ -25868,9 +26075,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -25907,20 +26114,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         450,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             25,
                             32,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(4)
                 .with_gold_cost(305),
@@ -25955,20 +26162,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         240,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             17,
                             24,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(195),
@@ -26003,15 +26210,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         21,
                         29,
                         600,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Magic,
                         WeaponType::Missile,
                     )),
@@ -26049,15 +26256,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         21,
                         29,
                         600,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Magic,
                         WeaponType::Missile,
                     )),
@@ -26095,15 +26302,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     450,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         28,
                         37,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -26141,15 +26348,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     750,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         36,
                         43,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -26186,15 +26393,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         17,
                         20,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -26231,15 +26438,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         21,
                         25,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -26276,9 +26483,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -26313,9 +26520,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -26350,9 +26557,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -26387,9 +26594,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -26424,9 +26631,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -26461,9 +26668,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -26499,15 +26706,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         34,
                         61,
                         200,
-                        1.4,
+                        Cooldown::from_millis(1400),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -26543,15 +26750,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     950,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         34,
                         45,
                         500,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -26589,20 +26796,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         675,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             29,
                             33,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(6)
                 .with_gold_cost(365),
@@ -26637,20 +26844,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         1500,
-                        1.5,
+                        RegenRate::from_milli(1500),
                         RegenType::Always,
-                        5.0,
+                        Armor::from_milli(5000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             61,
                             68,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(600, 1.5)),
+                    .with_mana_pool(ManaPool::new(600, RegenRate::from_milli(1500))),
                 )
                 .with_level(9)
                 .with_gold_cost(545),
@@ -26685,20 +26892,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         1500,
-                        1.5,
+                        RegenRate::from_milli(1500),
                         RegenType::Always,
-                        5.0,
+                        Armor::from_milli(5000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             61,
                             68,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(600, 1.5)),
+                    .with_mana_pool(ManaPool::new(600, RegenRate::from_milli(1500))),
                 )
                 .with_level(9)
                 .with_gold_cost(545),
@@ -26733,20 +26940,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         1500,
-                        1.5,
+                        RegenRate::from_milli(1500),
                         RegenType::Always,
-                        5.0,
+                        Armor::from_milli(5000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             61,
                             68,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(600, 1.5)),
+                    .with_mana_pool(ManaPool::new(600, RegenRate::from_milli(1500))),
                 )
                 .with_level(9)
                 .with_gold_cost(545),
@@ -26781,20 +26988,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         300,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             23,
                             27,
                             400,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(215),
@@ -26829,20 +27036,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         750,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             31,
                             41,
                             500,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(6)
                 .with_gold_cost(365),
@@ -26876,15 +27083,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         34,
                         61,
                         128,
-                        1.4,
+                        Cooldown::from_millis(1400),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -26921,9 +27128,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     100,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -26958,9 +27165,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -26996,15 +27203,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         13,
                         15,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -27042,15 +27249,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -27088,9 +27295,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -27126,9 +27333,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -27164,15 +27371,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -27210,15 +27417,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     320,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         21,
                         29,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -27256,15 +27463,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     750,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         24,
                         27,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -27306,20 +27513,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         330,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             21,
                             29,
                             500,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(180),
@@ -27354,9 +27561,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -27391,9 +27598,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -27429,9 +27636,9 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -27467,15 +27674,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     750,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         24,
                         27,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -27515,15 +27722,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     750,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         24,
                         27,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -27563,15 +27770,15 @@ fn insert_objects_chunk_4(
                 )
                 .with_combat(UnitCombat::new(
                     2200,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    6.0,
+                    Armor::from_milli(6000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         48,
                         81,
                         500,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Chaos,
                         WeaponType::MissileSplash,
                     )),
@@ -27609,20 +27816,20 @@ fn insert_objects_chunk_4(
                 .with_combat(
                     UnitCombat::new(
                         240,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             12,
                             13,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(2)
                 .with_gold_cost(145),
@@ -27661,15 +27868,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     340,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         25,
                         32,
                         600,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -27706,9 +27913,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     100,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -27746,20 +27953,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         675,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             29,
                             33,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(6)
                 .with_gold_cost(365),
@@ -27793,9 +28000,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -27831,9 +28038,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -27869,15 +28076,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         19,
                         21,
                         128,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -27913,15 +28120,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         28,
                         30,
                         128,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -27957,15 +28164,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    1.5,
+                    RegenRate::from_milli(1500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         38,
                         40,
                         128,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -28001,15 +28208,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     2250,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         59,
                         69,
                         128,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -28045,15 +28252,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1800,
-                    1.5,
+                    RegenRate::from_milli(1500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         46,
                         49,
                         128,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -28089,15 +28296,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         28,
                         31,
                         128,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -28133,15 +28340,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         38,
                         41,
                         128,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -28177,15 +28384,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     210,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         7,
                         10,
                         600,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -28223,9 +28430,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -28261,20 +28468,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         300,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             23,
                             27,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(215),
@@ -28308,15 +28515,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     310,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Night,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         16,
                         18,
                         500,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -28353,9 +28560,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -28391,9 +28598,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -28428,9 +28635,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -28465,15 +28672,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     220,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         7,
                         8,
                         90,
-                        3.0,
+                        Cooldown::from_millis(3000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -28510,15 +28717,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         9,
                         12,
                         600,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -28556,20 +28763,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             28,
                             37,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(5)
                 .with_gold_cost(320),
@@ -28603,9 +28810,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -28642,9 +28849,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -28680,9 +28887,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -28719,20 +28926,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             28,
                             37,
                             500,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(5)
                 .with_gold_cost(320),
@@ -28767,20 +28974,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         750,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             24,
                             32,
                             500,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(7)
                 .with_gold_cost(365),
@@ -28814,15 +29021,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     340,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         21,
                         25,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -28861,20 +29068,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         280,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Light,
                         Some(UnitAttack::new(
                             23,
                             27,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(240),
@@ -28909,15 +29116,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     750,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         23,
                         26,
                         480,
-                        1.75,
+                        Cooldown::from_millis(1750),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -28955,15 +29162,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     575,
-                    10.0,
+                    RegenRate::from_milli(10000),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         26,
                         31,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -29001,15 +29208,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     350,
-                    4.0,
+                    RegenRate::from_milli(4000),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         21,
                         25,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -29048,20 +29255,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         405,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             8,
                             10,
                             600,
-                            1.75,
+                            Cooldown::from_millis(1750),
                             AttackType::Magic,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.3333334)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1333))),
                 )
                 .with_level(2)
                 .with_gold_cost(155),
@@ -29095,9 +29302,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -29133,20 +29340,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         1500,
-                        0.0,
+                        RegenRate::from_milli(0),
                         RegenType::None,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             61,
                             69,
                             600,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(10)
                 .with_gold_cost(275),
@@ -29180,15 +29387,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         28,
                         33,
                         600,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -29225,15 +29432,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1500,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    6.0,
+                    Armor::from_milli(6000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         49,
                         60,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -29271,20 +29478,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         1200,
-                        0.0,
+                        RegenRate::from_milli(0),
                         RegenType::None,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             36,
                             43,
                             600,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(350, 0.875)),
+                    .with_mana_pool(ManaPool::new(350, RegenRate::from_milli(875))),
                 )
                 .with_level(8)
                 .with_gold_cost(275),
@@ -29318,9 +29525,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -29357,20 +29564,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         450,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             25,
                             32,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(4)
                 .with_gold_cost(255),
@@ -29405,20 +29612,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         240,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             17,
                             24,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(175),
@@ -29452,15 +29659,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         17,
                         20,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -29497,15 +29704,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     450,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         28,
                         37,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -29543,15 +29750,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         21,
                         25,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -29589,15 +29796,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     750,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         36,
                         43,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -29634,15 +29841,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         128,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -29679,15 +29886,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         36,
                         40,
                         128,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -29725,20 +29932,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         1600,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             61,
                             68,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(600, 1.5)),
+                    .with_mana_pool(ManaPool::new(600, RegenRate::from_milli(1500))),
                 )
                 .with_level(9)
                 .with_gold_cost(545),
@@ -29772,15 +29979,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         39,
                         44,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -29818,27 +30025,31 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Blight,
-                        2.8,
+                        Armor::from_milli(2800),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             32,
                             100,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(20, 16, 18),
-                    AttributeGrowth::new(2.5, 1.0, 4.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2500),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(4500),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -29871,27 +30082,31 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Blight,
-                        2.8,
+                        Armor::from_milli(2800),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             32,
                             100,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(20, 16, 18),
-                    AttributeGrowth::new(2.5, 1.0, 4.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2500),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(4500),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -29923,15 +30138,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -29969,20 +30184,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         300,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             23,
                             27,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(215),
@@ -30017,15 +30232,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     650,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         24,
                         27,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -30062,15 +30277,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     325,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -30109,20 +30324,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         480,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        6.0,
+                        Armor::from_milli(6000),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             28,
                             37,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(5)
                 .with_gold_cost(500),
@@ -30160,15 +30375,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     800,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    6.0,
+                    Armor::from_milli(6000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         39,
                         44,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -30206,15 +30421,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     210,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    6.0,
+                    Armor::from_milli(6000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         8,
                         13,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -30252,15 +30467,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     170,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    6.0,
+                    Armor::from_milli(6000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -30298,15 +30513,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     170,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    6.0,
+                    Armor::from_milli(6000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -30345,20 +30560,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         2100,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             69,
                             77,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(600, 1.5)),
+                    .with_mana_pool(ManaPool::new(600, RegenRate::from_milli(1500))),
                 )
                 .with_level(10)
                 .with_gold_cost(745),
@@ -30393,15 +30608,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     620,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    6.0,
+                    Armor::from_milli(6000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         26,
                         30,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -30440,20 +30655,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         240,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        6.0,
+                        Armor::from_milli(6000),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             17,
                             20,
                             500,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(2)
                 .with_gold_cost(105),
@@ -30489,20 +30704,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         300,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             15,
                             16,
                             600,
-                            1.5,
+                            Cooldown::from_millis(1500),
                             AttackType::Pierce,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(195),
@@ -30536,9 +30751,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -30574,15 +30789,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     425,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         11,
                         27,
                         300,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -30618,15 +30833,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         21,
                         45,
                         300,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -30662,15 +30877,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     700,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         32,
                         56,
                         300,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -30707,27 +30922,31 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         725,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.9,
+                        Armor::from_milli(1900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             27,
                             37,
                             200,
-                            2.05,
+                            Cooldown::from_millis(2050),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(25, 13, 16),
-                    AttributeGrowth::new(3.0, 1.2, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3000),
+                        StatGrowth::from_milli(1200),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -30760,15 +30979,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     450,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         16,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -30807,27 +31026,31 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         5000,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        3.1,
+                        Armor::from_milli(3100),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             45,
                             52,
                             200,
-                            1.3,
+                            Cooldown::from_millis(1300),
                             AttackType::Pierce,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.01)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(300, 0.01),
+                    ManaPool::new(300, RegenRate::from_milli(10)),
                     AttributeBase::new(30, 17, 20),
-                    AttributeGrowth::new(3.0, 1.0, 2.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3000),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(2000),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -30860,20 +31083,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         300,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             17,
                             20,
                             500,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(195),
@@ -30908,15 +31131,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -30955,20 +31178,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         280,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             9,
                             24,
                             600,
-                            1.1,
+                            Cooldown::from_millis(1100),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(185),
@@ -31001,15 +31224,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1550,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         61,
                         69,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -31048,20 +31271,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         280,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             9,
                             24,
                             600,
-                            1.1,
+                            Cooldown::from_millis(1100),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(185),
@@ -31094,9 +31317,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -31132,15 +31355,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         13,
                         14,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -31178,9 +31401,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -31216,9 +31439,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -31254,9 +31477,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -31293,20 +31516,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         2100,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             76,
                             85,
                             100,
-                            1.5,
+                            Cooldown::from_millis(1500),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(10)
                 .with_gold_cost(745),
@@ -31342,20 +31565,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         1500,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             54,
                             61,
                             100,
-                            1.5,
+                            Cooldown::from_millis(1500),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(350, 0.875)),
+                    .with_mana_pool(ManaPool::new(350, RegenRate::from_milli(875))),
                 )
                 .with_level(8)
                 .with_gold_cost(255),
@@ -31390,9 +31613,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -31428,15 +31651,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         27,
                         30,
                         100,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -31477,9 +31700,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -31515,9 +31738,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -31553,15 +31776,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     925,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         24,
                         27,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -31600,20 +31823,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         750,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             25,
                             29,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(6)
                 .with_gold_cost(365),
@@ -31647,9 +31870,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -31685,15 +31908,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     250,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Unarmored,
                     Some(UnitAttack::new(
                         7,
                         8,
                         90,
-                        3.0,
+                        Cooldown::from_millis(3000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -31731,15 +31954,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     180,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -31776,9 +31999,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -31814,9 +32037,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -31852,9 +32075,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -31890,9 +32113,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -31928,9 +32151,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -31966,9 +32189,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -32004,9 +32227,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -32042,9 +32265,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -32080,9 +32303,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -32118,9 +32341,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -32156,9 +32379,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -32194,9 +32417,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -32232,9 +32455,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -32270,9 +32493,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -32308,9 +32531,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -32346,9 +32569,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -32384,15 +32607,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         9,
                         10,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -32429,15 +32652,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -32474,15 +32697,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         6,
                         10,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -32519,15 +32742,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1000,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         29,
                         33,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -32566,20 +32789,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         1000,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             31,
                             39,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(7)
                 .with_gold_cost(105),
@@ -32614,15 +32837,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     475,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         21,
                         25,
                         128,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -32659,20 +32882,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         400,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             27,
                             36,
                             500,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(4)
                 .with_gold_cost(265),
@@ -32708,27 +32931,31 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         1350,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        238.0,
+                        Armor::from_milli(238000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             31,
                             600,
-                            1.9,
+                            Cooldown::from_millis(1900),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(27000, 0.01)),
+                    .with_mana_pool(ManaPool::new(27000, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(500)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(285, 0.01),
+                    ManaPool::new(285, RegenRate::from_milli(10)),
                     AttributeBase::new(14, 17, 19),
-                    AttributeGrowth::new(1.8, 1.0, 3.2),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1800),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3200),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -32762,15 +32989,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -32808,15 +33035,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1080,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         33,
                         39,
                         128,
-                        1.9,
+                        Cooldown::from_millis(1900),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -32854,9 +33081,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1080,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -32893,9 +33120,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -32932,15 +33159,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     950,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         34,
                         45,
                         500,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -32978,20 +33205,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         2200,
-                        2.0,
+                        RegenRate::from_milli(2000),
                         RegenType::Always,
-                        6.0,
+                        Armor::from_milli(6000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             48,
                             81,
                             500,
-                            1.5,
+                            Cooldown::from_millis(1500),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(10)
                 .with_gold_cost(745),
@@ -33025,9 +33252,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -33065,27 +33292,31 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         475,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        2.8,
+                        Armor::from_milli(2800),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             24,
                             34,
                             600,
-                            1.9,
+                            Cooldown::from_millis(1900),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(330, 0.01)),
+                    .with_mana_pool(ManaPool::new(330, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(330, 0.01),
+                    ManaPool::new(330, RegenRate::from_milli(10)),
                     AttributeBase::new(15, 16, 22),
-                    AttributeGrowth::new(2.0, 1.0, 3.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3000),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -33119,15 +33350,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     340,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         25,
                         32,
                         600,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -33164,15 +33395,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         18,
                         21,
                         100,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -33211,20 +33442,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         1350,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        5.0,
+                        Armor::from_milli(5000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             47,
                             59,
                             128,
-                            1.7,
+                            Cooldown::from_millis(1700),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(6)
                 .with_gold_cost(300),
@@ -33258,8 +33489,15 @@ fn insert_objects_chunk_5(
                     UnitFlags::new(true, true, false, true),
                 )
                 .with_combat(
-                    UnitCombat::new(1350, 1.0, RegenType::Always, 5.0, DefenseType::Heavy, None)
-                        .with_mana_pool(ManaPool::new(500, 1.25)),
+                    UnitCombat::new(
+                        1350,
+                        RegenRate::from_milli(1000),
+                        RegenType::Always,
+                        Armor::from_milli(5000),
+                        DefenseType::Heavy,
+                        None,
+                    )
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(6)
                 .with_gold_cost(300),
@@ -33294,9 +33532,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1050,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -33333,9 +33571,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -33373,20 +33611,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         350,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             9,
                             12,
                             600,
-                            1.75,
+                            Cooldown::from_millis(1750),
                             AttackType::Magic,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(130),
@@ -33422,20 +33660,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         350,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             9,
                             12,
                             600,
-                            1.75,
+                            Cooldown::from_millis(1750),
                             AttackType::Magic,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(130),
@@ -33470,15 +33708,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         33,
                         45,
                         700,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -33519,9 +33757,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -33558,15 +33796,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -33605,20 +33843,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         350,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             21,
                             25,
                             600,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(200),
@@ -33654,20 +33892,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         950,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             31,
                             40,
                             600,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(7)
                 .with_gold_cost(425),
@@ -33702,20 +33940,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             30,
                             36,
                             500,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(5)
                 .with_gold_cost(320),
@@ -33749,15 +33987,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     750,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         24,
                         27,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -33794,9 +34032,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -33832,15 +34070,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     3300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    4.0,
+                    Armor::from_milli(4000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         96,
                         114,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -33878,20 +34116,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         950,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             39,
                             44,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(7)
                 .with_gold_cost(425),
@@ -33926,15 +34164,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     850,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         24,
                         27,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -33976,20 +34214,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         1060,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             29,
                             33,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(7)
                 .with_gold_cost(450),
@@ -34023,15 +34261,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1060,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         29,
                         33,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -34068,15 +34306,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -34115,20 +34353,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             24,
                             27,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(5)
                 .with_gold_cost(320),
@@ -34166,9 +34404,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     40,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -34203,9 +34441,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     40,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -34240,15 +34478,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         19,
                         22,
                         128,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -34286,15 +34524,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     950,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         29,
                         33,
                         128,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -34332,20 +34570,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         1100,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             49,
                             55,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(8)
                 .with_gold_cost(480),
@@ -34379,9 +34617,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     40,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -34417,27 +34655,31 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         675,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.2,
+                        Armor::from_milli(3200),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             25,
                             35,
                             100,
-                            2.22,
+                            Cooldown::from_millis(2220),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(23, 14, 16),
-                    AttributeGrowth::new(3.0, 1.5, 1.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3000),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1500),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -34471,15 +34713,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     390,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -34518,20 +34760,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         950,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             39,
                             44,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(7)
                 .with_gold_cost(320),
@@ -34565,9 +34807,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -34603,9 +34845,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -34640,9 +34882,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -34678,15 +34920,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     475,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         21,
                         25,
                         128,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -34725,27 +34967,31 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         850,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        3.1,
+                        Armor::from_milli(3100),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             42,
                             52,
                             128,
-                            2.05,
+                            Cooldown::from_millis(2050),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.01)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(300, 0.01),
+                    ManaPool::new(300, RegenRate::from_milli(10)),
                     AttributeBase::new(30, 17, 20),
-                    AttributeGrowth::new(3.0, 1.0, 2.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3000),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(2000),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -34777,15 +35023,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         34,
                         38,
                         128,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -34824,27 +35070,31 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         800,
-                        2.0,
+                        RegenRate::from_milli(2000),
                         RegenType::Blight,
-                        2.8,
+                        Armor::from_milli(2800),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             30,
                             40,
                             100,
-                            2.05,
+                            Cooldown::from_millis(2050),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(210, 0.01)),
+                    .with_mana_pool(ManaPool::new(210, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(210, 0.01),
+                    ManaPool::new(210, RegenRate::from_milli(10)),
                     AttributeBase::new(28, 16, 14),
-                    AttributeGrowth::new(3.2, 1.3, 1.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3200),
+                        StatGrowth::from_milli(1300),
+                        StatGrowth::from_milli(1500),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -34878,15 +35128,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1100,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         68,
                         82,
                         128,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -34924,20 +35174,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         1200,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             49,
                             57,
                             500,
-                            1.5,
+                            Cooldown::from_millis(1500),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.5)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1500))),
                 )
                 .with_level(6)
                 .with_gold_cost(0),
@@ -34971,15 +35221,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1700,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         49,
                         57,
                         128,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -35016,15 +35266,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     1350,
-                    4.0,
+                    RegenRate::from_milli(4000),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         78,
                         93,
                         128,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -35062,20 +35312,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         1500,
-                        2.0,
+                        RegenRate::from_milli(2000),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             55,
                             64,
                             500,
-                            1.5,
+                            Cooldown::from_millis(1500),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(750, 1.5)),
+                    .with_mana_pool(ManaPool::new(750, RegenRate::from_milli(1500))),
                 )
                 .with_level(8)
                 .with_gold_cost(0),
@@ -35109,15 +35359,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     2250,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         55,
                         64,
                         128,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -35154,9 +35404,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -35192,9 +35442,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -35230,15 +35480,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     425,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         13,
                         15,
                         550,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -35274,15 +35524,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     515,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         26,
                         30,
                         550,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -35318,15 +35568,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    1.5,
+                    RegenRate::from_milli(1500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         39,
                         45,
                         550,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -35362,15 +35612,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     700,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         52,
                         60,
                         550,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -35406,15 +35656,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     375,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         21,
                         25,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -35451,9 +35701,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -35490,9 +35740,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -35528,15 +35778,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         25,
                         32,
                         600,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -35573,15 +35823,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     950,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         36,
                         47,
                         400,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -35618,15 +35868,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         17,
                         20,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -35664,27 +35914,31 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.5,
+                        Armor::from_milli(3500),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             28,
                             128,
-                            2.0,
+                            Cooldown::from_millis(2000),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.01)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(300, 0.01),
+                    ManaPool::new(300, RegenRate::from_milli(10)),
                     AttributeBase::new(22, 15, 20),
-                    AttributeGrowth::new(2.4, 1.0, 2.6),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2400),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(2600),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -35718,15 +35972,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -35764,20 +36018,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         1500,
-                        1.5,
+                        RegenRate::from_milli(1500),
                         RegenType::Always,
-                        5.0,
+                        Armor::from_milli(5000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             61,
                             68,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(600, 1.5)),
+                    .with_mana_pool(ManaPool::new(600, RegenRate::from_milli(1500))),
                 )
                 .with_level(9)
                 .with_gold_cost(545),
@@ -35812,20 +36066,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         340,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             14,
                             15,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(215),
@@ -35860,20 +36114,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         1100,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             49,
                             55,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(8)
                 .with_gold_cost(480),
@@ -35908,20 +36162,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         750,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             29,
                             33,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(6)
                 .with_gold_cost(365),
@@ -35956,20 +36210,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         450,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             18,
                             20,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(4)
                 .with_gold_cost(255),
@@ -36007,15 +36261,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     2200,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    6.0,
+                    Armor::from_milli(6000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         48,
                         81,
                         500,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Chaos,
                         WeaponType::MissileSplash,
                     )),
@@ -36052,15 +36306,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -36098,20 +36352,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         950,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             39,
                             44,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(7)
                 .with_gold_cost(425),
@@ -36146,20 +36400,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             24,
                             27,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(5)
                 .with_gold_cost(350),
@@ -36197,15 +36451,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -36242,15 +36496,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         13,
                         15,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -36288,20 +36542,20 @@ fn insert_objects_chunk_5(
                 .with_combat(
                     UnitCombat::new(
                         240,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             7,
                             10,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(1)
                 .with_gold_cost(105),
@@ -36335,15 +36589,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     750,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         29,
                         33,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -36380,9 +36634,9 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -36419,15 +36673,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -36465,15 +36719,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     850,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         24,
                         27,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -36511,15 +36765,15 @@ fn insert_objects_chunk_5(
                 )
                 .with_combat(UnitCombat::new(
                     190,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         13,
                         15,
                         500,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -36560,15 +36814,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -36606,15 +36860,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     190,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         90,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -36651,9 +36905,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -36689,15 +36943,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         28,
                         37,
                         600,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -36734,15 +36988,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1250,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         25,
                         100,
                         500,
-                        1.1,
+                        Cooldown::from_millis(1100),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -36779,20 +37033,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         1000,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             43,
                             49,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(8)
                 .with_gold_cost(265),
@@ -36827,15 +37081,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1900,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         29,
                         33,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -36872,15 +37126,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     725,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         20,
                         23,
                         100,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -36918,15 +37172,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     350,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         13,
                         100,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -36964,15 +37218,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         18,
                         21,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -37009,9 +37263,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -37047,9 +37301,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -37085,9 +37339,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -37123,9 +37377,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -37161,9 +37415,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -37198,9 +37452,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -37237,27 +37491,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         675,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        2.6,
+                        Armor::from_milli(2600),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             25,
                             35,
                             100,
-                            2.22,
+                            Cooldown::from_millis(2220),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(225, 0.01)),
+                    .with_mana_pool(ManaPool::new(225, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(225, 0.01),
+                    ManaPool::new(225, RegenRate::from_milli(10)),
                     AttributeBase::new(23, 12, 15),
-                    AttributeGrowth::new(3.0, 1.5, 1.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3000),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1500),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -37291,15 +37549,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     190,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         13,
                         15,
                         500,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -37336,15 +37594,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     190,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         90,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -37382,20 +37640,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         300,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             21,
                             29,
                             500,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(225),
@@ -37430,15 +37688,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     380,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    4.0,
+                    Armor::from_milli(4000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         18,
                         90,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -37475,9 +37733,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -37515,20 +37773,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         300,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             21,
                             29,
                             500,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(215),
@@ -37562,15 +37820,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     375,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -37609,20 +37867,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         340,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             23,
                             27,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(255),
@@ -37657,15 +37915,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         20,
                         27,
                         400,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -37703,20 +37961,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         1800,
-                        2.0,
+                        RegenRate::from_milli(2000),
                         RegenType::Always,
-                        6.0,
+                        Armor::from_milli(6000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             46,
                             67,
                             500,
-                            1.4,
+                            Cooldown::from_millis(1400),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(700, 1.75)),
+                    .with_mana_pool(ManaPool::new(700, RegenRate::from_milli(1750))),
                 )
                 .with_level(10)
                 .with_gold_cost(745),
@@ -37751,20 +38009,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         240,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             10,
                             11,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(1)
                 .with_gold_cost(105),
@@ -37799,20 +38057,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             24,
                             27,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(5)
                 .with_gold_cost(320),
@@ -37848,20 +38106,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             30,
                             39,
                             500,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(5)
                 .with_gold_cost(320),
@@ -37896,20 +38154,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         950,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             31,
                             39,
                             500,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(7)
                 .with_gold_cost(425),
@@ -37943,9 +38201,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -37982,15 +38240,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         25,
                         29,
                         550,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -38029,20 +38287,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         375,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             28,
                             37,
                             500,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(320),
@@ -38078,20 +38336,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         1100,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             49,
                             55,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(8)
                 .with_gold_cost(90),
@@ -38126,15 +38384,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     850,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         24,
                         27,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -38175,15 +38433,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -38220,9 +38478,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     50,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -38257,15 +38515,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -38302,15 +38560,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -38364,15 +38622,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     200,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         11,
                         12,
                         90,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -38408,15 +38666,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -38454,20 +38712,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         1200,
-                        1.5,
+                        RegenRate::from_milli(1500),
                         RegenType::Always,
-                        5.0,
+                        Armor::from_milli(5000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             61,
                             68,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(600, 1.5)),
+                    .with_mana_pool(ManaPool::new(600, RegenRate::from_milli(1500))),
                 )
                 .with_level(9)
                 .with_gold_cost(545),
@@ -38502,20 +38760,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         950,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             29,
                             33,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(6)
                 .with_gold_cost(365),
@@ -38550,20 +38808,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         950,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             39,
                             44,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(7)
                 .with_gold_cost(425),
@@ -38597,15 +38855,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     750,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         24,
                         27,
                         128,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -38642,15 +38900,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         17,
                         20,
                         500,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -38689,20 +38947,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         340,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             21,
                             25,
                             500,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(3)
                 .with_gold_cost(190),
@@ -38738,20 +38996,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         675,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             36,
                             43,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(350, 0.875)),
+                    .with_mana_pool(ManaPool::new(350, RegenRate::from_milli(875))),
                 )
                 .with_level(6)
                 .with_gold_cost(180),
@@ -38786,15 +39044,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         24,
                         27,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -38833,20 +39091,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         1500,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             75,
                             89,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(9)
                 .with_gold_cost(545),
@@ -38881,15 +39139,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         9,
                         16,
                         650,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -38925,15 +39183,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     350,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         25,
                         32,
                         600,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -38972,20 +39230,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         1100,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             49,
                             55,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(8)
                 .with_gold_cost(480),
@@ -39020,20 +39278,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             24,
                             27,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(5)
                 .with_gold_cost(320),
@@ -39069,20 +39327,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         340,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             23,
                             27,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(200),
@@ -39121,20 +39379,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         1500,
-                        1.5,
+                        RegenRate::from_milli(1500),
                         RegenType::Always,
-                        5.0,
+                        Armor::from_milli(5000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             46,
                             55,
                             500,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(600, 1.5)),
+                    .with_mana_pool(ManaPool::new(600, RegenRate::from_milli(1500))),
                 )
                 .with_level(9)
                 .with_gold_cost(545),
@@ -39168,15 +39426,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -39213,15 +39471,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     200,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         11,
                         12,
                         90,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -39257,15 +39515,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         16,
                         17,
                         90,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -39302,20 +39560,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         400,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             21,
                             22,
                             90,
-                            1.0,
+                            Cooldown::from_millis(1000),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(150, 0.375)),
+                    .with_mana_pool(ManaPool::new(150, RegenRate::from_milli(375))),
                 )
                 .with_level(4)
                 .with_gold_cost(0),
@@ -39349,27 +39607,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         1650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        238.0,
+                        Armor::from_milli(238000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             31,
                             600,
-                            1.9,
+                            Cooldown::from_millis(1900),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(27000, 0.01)),
+                    .with_mana_pool(ManaPool::new(27000, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(500)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(285, 0.01),
+                    ManaPool::new(285, RegenRate::from_milli(10)),
                     AttributeBase::new(14, 17, 19),
-                    AttributeGrowth::new(1.8, 1.0, 3.2),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1800),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3200),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -39403,9 +39665,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -39441,9 +39703,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     75,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -39479,9 +39741,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -39517,9 +39779,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -39556,20 +39818,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         750,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             27,
                             34,
                             500,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(6)
                 .with_gold_cost(365),
@@ -39603,15 +39865,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     800,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         54,
                         93,
                         500,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -39648,27 +39910,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.5,
+                        Armor::from_milli(3500),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             28,
                             128,
-                            2.0,
+                            Cooldown::from_millis(2000),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.01)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(300, 0.01),
+                    ManaPool::new(300, RegenRate::from_milli(10)),
                     AttributeBase::new(22, 15, 20),
-                    AttributeGrowth::new(2.4, 1.0, 2.6),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2400),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(2600),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -39702,15 +39968,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         23,
                         27,
                         500,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -39748,15 +40014,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     950,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    4.0,
+                    Armor::from_milli(4000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         44,
                         49,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -39794,15 +40060,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     250,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -39841,20 +40107,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         300,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             23,
                             27,
                             125,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(3)
                 .with_gold_cost(215),
@@ -39890,20 +40156,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         475,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             34,
                             40,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(5)
                 .with_gold_cost(195),
@@ -39938,15 +40204,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     475,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         28,
                         34,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -39984,15 +40250,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     475,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         21,
                         25,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -40030,9 +40296,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     75,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -40068,9 +40334,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     75,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -40106,9 +40372,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -40144,9 +40410,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -40182,20 +40448,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         2000,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             65,
                             83,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(600, 1.5)),
+                    .with_mana_pool(ManaPool::new(600, RegenRate::from_milli(1500))),
                 )
                 .with_level(10)
                 .with_gold_cost(745),
@@ -40230,15 +40496,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1250,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    4.0,
+                    Armor::from_milli(4000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         39,
                         46,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Chaos,
                         WeaponType::Normal,
                     )),
@@ -40276,15 +40542,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     220,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         13,
                         15,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -40322,15 +40588,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     250,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    4.0,
+                    Armor::from_milli(4000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         6,
                         10,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -40368,15 +40634,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     375,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    4.0,
+                    Armor::from_milli(4000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         28,
                         37,
                         500,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -40414,15 +40680,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     375,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -40460,15 +40726,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         21,
                         29,
                         600,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Chaos,
                         WeaponType::Missile,
                     )),
@@ -40506,9 +40772,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -40544,15 +40810,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     400,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -40590,15 +40856,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         21,
                         29,
                         600,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Chaos,
                         WeaponType::Missile,
                     )),
@@ -40636,15 +40902,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     250,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -40682,15 +40948,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     475,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         21,
                         25,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -40729,20 +40995,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             24,
                             27,
                             100,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(5)
                 .with_gold_cost(320),
@@ -40778,20 +41044,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         1500,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             68,
                             75,
                             450,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(9)
                 .with_gold_cost(545),
@@ -40826,20 +41092,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         750,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             36,
                             43,
                             450,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(6)
                 .with_gold_cost(300),
@@ -40877,15 +41143,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         13,
                         15,
                         450,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -40923,20 +41189,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         365,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             23,
                             27,
                             450,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(3)
                 .with_gold_cost(245),
@@ -40971,9 +41237,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     60,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -41009,9 +41275,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -41047,9 +41313,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     60,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -41085,9 +41351,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -41123,9 +41389,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     60,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -41161,9 +41427,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -41198,9 +41464,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -41235,9 +41501,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -41272,9 +41538,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     15,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -41311,20 +41577,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         250,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             16,
                             20,
                             600,
-                            1.75,
+                            Cooldown::from_millis(1750),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(2)
                 .with_gold_cost(215),
@@ -41358,9 +41624,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     50,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -41395,15 +41661,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     700,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         45,
                         55,
                         192,
-                        2.1,
+                        Cooldown::from_millis(2100),
                         AttackType::Siege,
                         WeaponType::Instant,
                     )),
@@ -41441,20 +41707,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         300,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             10,
                             11,
                             100,
-                            1.6,
+                            Cooldown::from_millis(1600),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.5)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(140),
@@ -41487,9 +41753,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -41525,9 +41791,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -41563,9 +41829,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -41601,9 +41867,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -41639,9 +41905,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     None,
                 ))
@@ -41676,15 +41942,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     450,
-                    1.0,
+                    RegenRate::from_milli(1000),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         21,
                         25,
                         300,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Magic,
                         WeaponType::MissileSplash,
                     )),
@@ -41720,15 +41986,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     650,
-                    1.5,
+                    RegenRate::from_milli(1500),
                     RegenType::Always,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         48,
                         57,
                         300,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Magic,
                         WeaponType::MissileSplash,
                     )),
@@ -41764,15 +42030,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         18,
                         21,
                         128,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -41810,20 +42076,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         525,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Light,
                         Some(UnitAttack::new(
                             42,
                             50,
                             450,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(235),
@@ -41858,9 +42124,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -41896,15 +42162,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     200,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         9,
                         12,
                         600,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -41942,20 +42208,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         750,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             29,
                             33,
                             90,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(6)
                 .with_gold_cost(365),
@@ -41989,15 +42255,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         18,
                         21,
                         90,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -42034,15 +42300,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         13,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -42080,20 +42346,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         1200,
-                        1.5,
+                        RegenRate::from_milli(1500),
                         RegenType::Always,
-                        5.0,
+                        Armor::from_milli(5000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             61,
                             68,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(600, 1.5)),
+                    .with_mana_pool(ManaPool::new(600, RegenRate::from_milli(1500))),
                 )
                 .with_level(9)
                 .with_gold_cost(545),
@@ -42127,15 +42393,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     950,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         29,
                         33,
                         128,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -42173,20 +42439,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         950,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             39,
                             44,
                             128,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(7)
                 .with_gold_cost(425),
@@ -42220,15 +42486,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1000,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    4.0,
+                    Armor::from_milli(4000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         29,
                         33,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -42265,15 +42531,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     700,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         41,
                         50,
                         600,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -42312,20 +42578,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         750,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             29,
                             33,
                             90,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Normal,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(6)
                 .with_gold_cost(365),
@@ -42359,15 +42625,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         13,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -42404,15 +42670,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         18,
                         21,
                         90,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -42450,20 +42716,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         1200,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             39,
                             47,
                             500,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(500, 1.25)),
+                    .with_mana_pool(ManaPool::new(500, RegenRate::from_milli(1250))),
                 )
                 .with_level(8)
                 .with_gold_cost(480),
@@ -42498,20 +42764,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        1.0,
+                        Armor::from_milli(1000),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             30,
                             39,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, 1.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(1000))),
                 )
                 .with_level(5)
                 .with_gold_cost(320),
@@ -42546,20 +42812,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         340,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             23,
                             27,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(215),
@@ -42594,20 +42860,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         340,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             23,
                             27,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.75)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(750))),
                 )
                 .with_level(3)
                 .with_gold_cost(215),
@@ -42641,9 +42907,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     575,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     None,
                 ))
@@ -42680,9 +42946,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     150000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -42718,9 +42984,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     100,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -42756,15 +43022,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -42801,15 +43067,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         10,
                         11,
                         100,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -42846,9 +43112,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -42885,9 +43151,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -42924,9 +43190,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1100,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -42964,27 +43230,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         550,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        4.6,
+                        Armor::from_milli(4600),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             24,
                             46,
                             100,
-                            1.77,
+                            Cooldown::from_millis(1770),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(18, 22, 16),
-                    AttributeGrowth::new(2.0, 1.75, 2.25),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1750),
+                        StatGrowth::from_milli(2250),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -43018,9 +43288,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -43057,15 +43327,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     425,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         72,
                         89,
                         1150,
-                        4.5,
+                        Cooldown::from_millis(4500),
                         AttackType::Siege,
                         WeaponType::Artillery,
                     )),
@@ -43104,27 +43374,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         725,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             27,
                             37,
                             128,
-                            2.05,
+                            Cooldown::from_millis(2050),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(210, 0.01)),
+                    .with_mana_pool(ManaPool::new(210, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(210, 0.01),
+                    ManaPool::new(210, RegenRate::from_milli(10)),
                     AttributeBase::new(25, 10, 14),
-                    AttributeGrowth::new(3.2, 1.5, 1.3),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3200),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1300),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -43158,27 +43432,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         725,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             27,
                             37,
                             128,
-                            2.05,
+                            Cooldown::from_millis(2050),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(210, 0.01)),
+                    .with_mana_pool(ManaPool::new(210, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(210, 0.01),
+                    ManaPool::new(210, RegenRate::from_milli(10)),
                     AttributeBase::new(25, 10, 14),
-                    AttributeGrowth::new(3.2, 1.5, 1.3),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3200),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1300),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -43211,15 +43489,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         34,
                         41,
                         700,
-                        4.0,
+                        Cooldown::from_millis(4000),
                         AttackType::Chaos,
                         WeaponType::Missile,
                     )),
@@ -43292,15 +43570,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     575,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         55,
                         69,
                         600,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::MissileSplash,
                     )),
@@ -43339,20 +43617,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         675,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             28,
                             37,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(350, 0.875)),
+                    .with_mana_pool(ManaPool::new(350, RegenRate::from_milli(875))),
                 )
                 .with_level(6)
                 .with_gold_cost(145),
@@ -43387,20 +43665,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         315,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             10,
                             14,
                             600,
-                            1.75,
+                            Cooldown::from_millis(1750),
                             AttackType::Magic,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.72)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(720))),
                 )
                 .with_level(2)
                 .with_gold_cost(145),
@@ -43436,27 +43714,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         475,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.4,
+                        Armor::from_milli(3400),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             27,
                             600,
-                            2.28,
+                            Cooldown::from_millis(2280),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(285, 0.01)),
+                    .with_mana_pool(ManaPool::new(285, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(285, 0.01),
+                    ManaPool::new(285, RegenRate::from_milli(10)),
                     AttributeBase::new(15, 18, 19),
-                    AttributeGrowth::new(2.0, 1.0, 3.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3000),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -43490,9 +43772,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     50,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -43528,27 +43810,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         475,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.4,
+                        Armor::from_milli(3400),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             27,
                             600,
-                            2.28,
+                            Cooldown::from_millis(2280),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(285, 0.01)),
+                    .with_mana_pool(ManaPool::new(285, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(285, 0.01),
+                    ManaPool::new(285, RegenRate::from_milli(10)),
                     AttributeBase::new(15, 18, 19),
-                    AttributeGrowth::new(2.0, 1.0, 3.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3000),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -43613,9 +43899,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -43687,9 +43973,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     2500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -43727,27 +44013,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         650,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.9,
+                        Armor::from_milli(3900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             106,
                             182,
                             1500,
-                            2.28,
+                            Cooldown::from_millis(2280),
                             AttackType::Chaos,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(22, 13, 17),
-                    AttributeGrowth::new(2.7, 1.5, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2700),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -43781,9 +44071,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -43821,27 +44111,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         575,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        4.9,
+                        Armor::from_milli(4900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             25,
                             47,
                             100,
-                            1.77,
+                            Cooldown::from_millis(1770),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(19, 23, 16),
-                    AttributeGrowth::new(2.0, 1.75, 2.25),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1750),
+                        StatGrowth::from_milli(2250),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -43874,15 +44168,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     700,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         18,
                         21,
                         100,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -43919,15 +44213,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     700,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         18,
                         21,
                         100,
-                        1.6,
+                        Cooldown::from_millis(1600),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -43965,15 +44259,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     375,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         23,
                         27,
                         550,
-                        2.31,
+                        Cooldown::from_millis(2310),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -44011,9 +44305,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     5,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -44048,15 +44342,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         78,
                         105,
                         900,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Siege,
                         WeaponType::Artillery,
                     )),
@@ -44093,15 +44387,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1000,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Unarmored,
                     Some(UnitAttack::new(
                         16,
                         20,
                         500,
-                        1.44,
+                        Cooldown::from_millis(1440),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -44175,15 +44469,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     340,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         4,
                         18,
                         100,
-                        1.1,
+                        Cooldown::from_millis(1100),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -44219,15 +44513,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     610,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         23,
                         27,
                         100,
-                        1.85,
+                        Cooldown::from_millis(1850),
                         AttackType::Siege,
                         WeaponType::Normal,
                     )),
@@ -44264,9 +44558,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     330,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -44301,15 +44595,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     250,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         7,
                         8,
                         90,
-                        3.0,
+                        Cooldown::from_millis(3000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -44348,27 +44642,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         575,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        4.9,
+                        Armor::from_milli(4900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             37,
                             59,
                             100,
-                            1.77,
+                            Cooldown::from_millis(1770),
                             AttackType::Chaos,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(19, 23, 16),
-                    AttributeGrowth::new(2.0, 1.75, 2.25),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1750),
+                        StatGrowth::from_milli(2250),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -44401,15 +44699,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     610,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         23,
                         27,
                         100,
-                        1.85,
+                        Cooldown::from_millis(1850),
                         AttackType::Siege,
                         WeaponType::Normal,
                     )),
@@ -44448,27 +44746,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         725,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Always,
-                        3.2,
+                        Armor::from_milli(3200),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             37,
                             47,
                             128,
-                            2.05,
+                            Cooldown::from_millis(2050),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(25, 14, 18),
-                    AttributeGrowth::new(2.9, 1.3, 2.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2900),
+                        StatGrowth::from_milli(1300),
+                        StatGrowth::from_milli(2000),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -44503,27 +44805,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         475,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             28,
                             600,
-                            2.28,
+                            Cooldown::from_millis(2280),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(15, 20, 18),
-                    AttributeGrowth::new(2.0, 1.5, 2.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2500),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -44558,27 +44864,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         550,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        4.9,
+                        Armor::from_milli(4900),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             25,
                             47,
                             100,
-                            1.77,
+                            Cooldown::from_millis(1770),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(240, 0.01)),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(240, 0.01),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
                     AttributeBase::new(18, 23, 16),
-                    AttributeGrowth::new(2.0, 1.75, 2.25),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1750),
+                        StatGrowth::from_milli(2250),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -44613,27 +44923,31 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         475,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             28,
                             600,
-                            2.28,
+                            Cooldown::from_millis(2280),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(15, 20, 17),
-                    AttributeGrowth::new(2.0, 1.5, 2.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2500),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -44668,20 +44982,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         350,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             10,
                             11,
                             600,
-                            2.1,
+                            Cooldown::from_millis(2100),
                             AttackType::Magic,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.72)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(720))),
                 )
                 .with_level(2)
                 .with_gold_cost(130),
@@ -44716,9 +45030,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -44754,9 +45068,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     800,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -44811,15 +45125,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     90,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         16,
                         600,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -44855,15 +45169,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     165,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         27,
                         30,
                         600,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -44899,15 +45213,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     200,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         46,
                         50,
                         600,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -44943,15 +45257,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     135,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         41,
                         45,
                         600,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -44988,13 +45302,13 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         500,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         None,
                     )
-                    .with_mana_pool(ManaPool::new(300, 1.0)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(1000))),
                 )
                 .with_level(3)
                 .with_gold_cost(195),
@@ -45030,20 +45344,20 @@ fn insert_objects_chunk_6(
                 .with_combat(
                     UnitCombat::new(
                         500,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             17,
                             22,
                             400,
-                            1.75,
+                            Cooldown::from_millis(1750),
                             AttackType::Magic,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 1.0)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(1000))),
                 )
                 .with_level(3)
                 .with_gold_cost(195),
@@ -45078,9 +45392,9 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     2000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -45117,15 +45431,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     250,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         11,
                         12,
                         90,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -45161,15 +45475,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     350,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         16,
                         17,
                         90,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -45205,15 +45519,15 @@ fn insert_objects_chunk_6(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         21,
                         22,
                         90,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -45253,9 +45567,9 @@ fn insert_objects_chunk_7(
                 )
                 .with_combat(UnitCombat::new(
                     520,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     None,
                 ))
@@ -45290,15 +45604,15 @@ fn insert_objects_chunk_7(
                 )
                 .with_combat(UnitCombat::new(
                     1300,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         30,
                         36,
                         100,
-                        1.9,
+                        Cooldown::from_millis(1900),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -45336,15 +45650,15 @@ fn insert_objects_chunk_7(
                 )
                 .with_combat(UnitCombat::new(
                     475,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         23,
                         27,
                         550,
-                        2.31,
+                        Cooldown::from_millis(2310),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -45382,15 +45696,15 @@ fn insert_objects_chunk_7(
                 )
                 .with_combat(UnitCombat::new(
                     325,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         16,
                         18,
                         300,
-                        1.8,
+                        Cooldown::from_millis(1800),
                         AttackType::Siege,
                         WeaponType::Missile,
                     )),
@@ -45432,27 +45746,31 @@ fn insert_objects_chunk_7(
                 .with_combat(
                     UnitCombat::new(
                         725,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             27,
                             37,
                             128,
-                            2.05,
+                            Cooldown::from_millis(2050),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(210, 0.01)),
+                    .with_mana_pool(ManaPool::new(210, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(210, 0.01),
+                    ManaPool::new(210, RegenRate::from_milli(10)),
                     AttributeBase::new(25, 10, 14),
-                    AttributeGrowth::new(3.2, 1.5, 1.3),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3200),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1300),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -45486,27 +45804,31 @@ fn insert_objects_chunk_7(
                 .with_combat(
                     UnitCombat::new(
                         725,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        2.0,
+                        Armor::from_milli(2000),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             27,
                             37,
                             128,
-                            2.05,
+                            Cooldown::from_millis(2050),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(225, 0.01)),
+                    .with_mana_pool(ManaPool::new(225, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(225, 0.01),
+                    ManaPool::new(225, RegenRate::from_milli(10)),
                     AttributeBase::new(25, 10, 15),
-                    AttributeGrowth::new(3.2, 1.5, 1.3),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3200),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1300),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -45541,27 +45863,31 @@ fn insert_objects_chunk_7(
                 .with_combat(
                     UnitCombat::new(
                         500,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.4,
+                        Armor::from_milli(3400),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             27,
                             600,
-                            2.28,
+                            Cooldown::from_millis(2280),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(285, 0.01)),
+                    .with_mana_pool(ManaPool::new(285, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(285, 0.01),
+                    ManaPool::new(285, RegenRate::from_milli(10)),
                     AttributeBase::new(16, 18, 19),
-                    AttributeGrowth::new(2.0, 1.0, 3.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3000),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -45595,27 +45921,31 @@ fn insert_objects_chunk_7(
                 .with_combat(
                     UnitCombat::new(
                         500,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        3.4,
+                        Armor::from_milli(3400),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             27,
                             600,
-                            2.28,
+                            Cooldown::from_millis(2280),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(285, 0.01)),
+                    .with_mana_pool(ManaPool::new(285, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(285, 0.01),
+                    ManaPool::new(285, RegenRate::from_milli(10)),
                     AttributeBase::new(16, 18, 19),
-                    AttributeGrowth::new(2.0, 1.0, 3.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3000),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -45648,9 +45978,9 @@ fn insert_objects_chunk_7(
                 )
                 .with_combat(UnitCombat::new(
                     25,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -45685,15 +46015,15 @@ fn insert_objects_chunk_7(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         23,
                         27,
                         700,
-                        4.0,
+                        Cooldown::from_millis(4000),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -45731,9 +46061,9 @@ fn insert_objects_chunk_7(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -45789,20 +46119,20 @@ fn insert_objects_chunk_7(
                 .with_combat(
                     UnitCombat::new(
                         315,
-                        0.25,
+                        RegenRate::from_milli(250),
                         RegenType::Always,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             10,
                             14,
                             600,
-                            1.75,
+                            Cooldown::from_millis(1750),
                             AttackType::Magic,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(145),
@@ -45836,9 +46166,9 @@ fn insert_objects_chunk_7(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -45875,15 +46205,15 @@ fn insert_objects_chunk_7(
                 )
                 .with_combat(UnitCombat::new(
                     340,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         4,
                         18,
                         100,
-                        1.1,
+                        Cooldown::from_millis(1100),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -45919,15 +46249,15 @@ fn insert_objects_chunk_7(
                 )
                 .with_combat(UnitCombat::new(
                     520,
-                    0.5,
+                    RegenRate::from_milli(500),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         38,
                         42,
                         128,
-                        1.2,
+                        Cooldown::from_millis(1200),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -45963,15 +46293,15 @@ fn insert_objects_chunk_7(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         16,
                         18,
                         800,
-                        0.6,
+                        Cooldown::from_millis(600),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -46012,15 +46342,15 @@ fn insert_objects_chunk_7(
                 )
                 .with_combat(UnitCombat::new(
                     570,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         36,
                         44,
                         450,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -49914,15 +50244,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     1080,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         33,
                         39,
                         128,
-                        1.9,
+                        Cooldown::from_millis(1900),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -49960,15 +50290,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     1175,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         35,
                         41,
                         128,
-                        1.9,
+                        Cooldown::from_millis(1900),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -50006,15 +50336,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     230,
-                    3.0,
+                    RegenRate::from_milli(3000),
                     RegenType::Blight,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         9,
                         10,
                         90,
-                        2.5,
+                        Cooldown::from_millis(2500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -50053,27 +50383,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         675,
-                        2.0,
+                        RegenRate::from_milli(2000),
                         RegenType::Blight,
-                        2.2,
+                        Armor::from_milli(2200),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             28,
                             34,
                             128,
-                            1.9,
+                            Cooldown::from_millis(1900),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(210, 0.01)),
+                    .with_mana_pool(ManaPool::new(210, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(210, 0.01),
+                    ManaPool::new(210, RegenRate::from_milli(10)),
                     AttributeBase::new(26, 14, 14),
-                    AttributeGrowth::new(3.2, 1.2, 1.6),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3200),
+                        StatGrowth::from_milli(1200),
+                        StatGrowth::from_milli(1600),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -50107,9 +50441,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -50146,9 +50480,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     None,
                 ))
@@ -50186,27 +50520,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Blight,
-                        2.8,
+                        Armor::from_milli(2800),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             32,
                             100,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(20, 16, 18),
-                    AttributeGrowth::new(2.5, 1.0, 4.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2500),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(4500),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -50240,20 +50578,20 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         285,
-                        2.0,
+                        RegenRate::from_milli(2000),
                         RegenType::Blight,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             9,
                             13,
                             600,
-                            1.5,
+                            Cooldown::from_millis(1500),
                             AttackType::Magic,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.6666667)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(667))),
                 )
                 .with_level(2)
                 .with_gold_cost(155),
@@ -50288,15 +50626,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     1100,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         85,
                         105,
                         300,
-                        3.0,
+                        Cooldown::from_millis(3000),
                         AttackType::Pierce,
                         WeaponType::MissileSplash,
                     )),
@@ -50333,15 +50671,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     1800,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    6.0,
+                    Armor::from_milli(6000),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         48,
                         81,
                         500,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Chaos,
                         WeaponType::MissileSplash,
                     )),
@@ -50377,9 +50715,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     1500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -50416,9 +50754,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     1500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -50456,20 +50794,20 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         850,
-                        2.0,
+                        RegenRate::from_milli(2000),
                         RegenType::Blight,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Light,
                         Some(UnitAttack::new(
                             19,
                             21,
                             450,
-                            1.35,
+                            Cooldown::from_millis(1350),
                             AttackType::Magic,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(400, -3.0)),
+                    .with_mana_pool(ManaPool::new(400, RegenRate::from_milli(0))),
                 )
                 .with_level(5)
                 .with_gold_cost(300),
@@ -50504,27 +50842,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         450,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Blight,
-                        2.2,
+                        Armor::from_milli(2200),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             28,
                             600,
-                            1.9,
+                            Cooldown::from_millis(1900),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.01)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(300, 0.01),
+                    ManaPool::new(300, RegenRate::from_milli(10)),
                     AttributeBase::new(14, 14, 20),
-                    AttributeGrowth::new(1.6, 1.0, 3.4),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1600),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3400),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -50558,27 +50900,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         675,
-                        2.0,
+                        RegenRate::from_milli(2000),
                         RegenType::Blight,
-                        2.2,
+                        Armor::from_milli(2200),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             28,
                             34,
                             128,
-                            1.9,
+                            Cooldown::from_millis(1900),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(210, 0.01)),
+                    .with_mana_pool(ManaPool::new(210, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(210, 0.01),
+                    ManaPool::new(210, RegenRate::from_milli(10)),
                     AttributeBase::new(26, 14, 14),
-                    AttributeGrowth::new(3.2, 1.2, 1.6),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3200),
+                        StatGrowth::from_milli(1200),
+                        StatGrowth::from_milli(1600),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -50612,9 +50958,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    5.0,
+                    RegenRate::from_milli(5000),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -50651,15 +50997,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     550,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         26,
                         31,
                         550,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -50697,15 +51043,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     170,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         8,
                         9,
                         90,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -50741,15 +51087,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         15,
                         18,
                         90,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -50785,15 +51131,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     440,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         22,
                         27,
                         90,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -50829,9 +51175,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     300,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -50866,9 +51212,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     440,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Always,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     None,
                 ))
@@ -50904,27 +51250,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         675,
-                        2.0,
+                        RegenRate::from_milli(2000),
                         RegenType::Blight,
-                        2.6,
+                        Armor::from_milli(2600),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             25,
                             35,
                             100,
-                            2.33,
+                            Cooldown::from_millis(2330),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(23, 12, 17),
-                    AttributeGrowth::new(2.7, 1.5, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2700),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -50958,15 +51308,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     575,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         55,
                         69,
                         600,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Normal,
                         WeaponType::MissileSplash,
                     )),
@@ -51005,27 +51355,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        2.0,
+                        RegenRate::from_milli(2000),
                         RegenType::Blight,
-                        2.8,
+                        Armor::from_milli(2800),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             32,
                             100,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(20, 16, 18),
-                    AttributeGrowth::new(2.5, 1.0, 2.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2500),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(2500),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -51060,27 +51414,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Blight,
-                        2.8,
+                        Armor::from_milli(2800),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             32,
                             100,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(20, 16, 18),
-                    AttributeGrowth::new(2.5, 1.0, 4.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2500),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(4500),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -51114,27 +51472,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         675,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Blight,
-                        3.6,
+                        Armor::from_milli(3600),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             25,
                             35,
                             100,
-                            2.33,
+                            Cooldown::from_millis(2330),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, 0.01)),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, 0.01),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
                     AttributeBase::new(23, 12, 17),
-                    AttributeGrowth::new(2.7, 1.5, 1.8),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2700),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(1800),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -51180,15 +51542,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     1350,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         93,
                         115,
                         375,
-                        3.0,
+                        Cooldown::from_millis(3000),
                         AttackType::Magic,
                         WeaponType::MissileSplash,
                     )),
@@ -51226,15 +51588,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     410,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    3.0,
+                    Armor::from_milli(3000),
                     DefenseType::Unarmored,
                     Some(UnitAttack::new(
                         61,
                         70,
                         128,
-                        1.4,
+                        Cooldown::from_millis(1400),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -51272,15 +51634,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     340,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         12,
                         14,
                         90,
-                        1.35,
+                        Cooldown::from_millis(1350),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -51318,9 +51680,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     950,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -51357,9 +51719,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     410,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    15.0,
+                    Armor::from_milli(15000),
                     DefenseType::Unarmored,
                     None,
                 ))
@@ -51396,9 +51758,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -51437,8 +51799,15 @@ fn insert_objects_chunk_8(
                     UnitFlags::new(true, true, false, false),
                 )
                 .with_combat(
-                    UnitCombat::new(280, 0.5, RegenType::Night, 0.0, DefenseType::Heavy, None)
-                        .with_mana_pool(ManaPool::new(200, 0.5)),
+                    UnitCombat::new(
+                        280,
+                        RegenRate::from_milli(500),
+                        RegenType::Night,
+                        Armor::from_milli(0),
+                        DefenseType::Heavy,
+                        None,
+                    )
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(195),
@@ -51472,27 +51841,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         450,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Blight,
-                        2.2,
+                        Armor::from_milli(2200),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             28,
                             600,
-                            1.9,
+                            Cooldown::from_millis(1900),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.01)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(300, 0.01),
+                    ManaPool::new(300, RegenRate::from_milli(10)),
                     AttributeBase::new(14, 14, 20),
-                    AttributeGrowth::new(1.6, 1.0, 3.4),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1600),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3400),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -51526,20 +51899,20 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         280,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             9,
                             12,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Pierce,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.5)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(500))),
                 )
                 .with_level(2)
                 .with_gold_cost(195),
@@ -51573,27 +51946,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         475,
-                        2.0,
+                        RegenRate::from_milli(2000),
                         RegenType::Blight,
-                        2.2,
+                        Armor::from_milli(2200),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             28,
                             600,
-                            1.9,
+                            Cooldown::from_millis(1900),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.01)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(400)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(300, 0.01),
+                    ManaPool::new(300, RegenRate::from_milli(10)),
                     AttributeBase::new(15, 14, 20),
-                    AttributeGrowth::new(2.0, 1.0, 3.4),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(3400),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -51627,15 +52004,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     65,
-                    0.25,
+                    RegenRate::from_milli(250),
                     RegenType::Always,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Light,
                     Some(UnitAttack::new(
                         13,
                         14,
                         10,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Spells,
                         WeaponType::Missile,
                     )),
@@ -51672,27 +52049,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Blight,
-                        2.8,
+                        Armor::from_milli(2800),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             32,
                             100,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(20, 16, 18),
-                    AttributeGrowth::new(2.5, 1.0, 2.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2500),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(2500),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -51725,15 +52106,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     380,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         71,
                         88,
                         1150,
-                        4.0,
+                        Cooldown::from_millis(4000),
                         AttackType::Siege,
                         WeaponType::Artillery,
                     )),
@@ -51772,20 +52153,20 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         315,
-                        2.0,
+                        RegenRate::from_milli(2000),
                         RegenType::Blight,
-                        0.0,
+                        Armor::from_milli(0),
                         DefenseType::Unarmored,
                         Some(UnitAttack::new(
                             10,
                             11,
                             600,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Magic,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(200, 0.6666667)),
+                    .with_mana_pool(ManaPool::new(200, RegenRate::from_milli(667))),
                 )
                 .with_level(2)
                 .with_gold_cost(145),
@@ -51820,15 +52201,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     1750,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         11,
                         12,
                         800,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -51866,15 +52247,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     2000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         13,
                         15,
                         800,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -51912,9 +52293,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     1500,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -51952,20 +52333,20 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         500,
-                        0.0,
+                        RegenRate::from_milli(0),
                         RegenType::None,
-                        4.0,
+                        Armor::from_milli(4000),
                         DefenseType::Heavy,
                         Some(UnitAttack::new(
                             7,
                             8,
                             575,
-                            2.1,
+                            Cooldown::from_millis(2100),
                             AttackType::Magic,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(600, 1.5)),
+                    .with_mana_pool(ManaPool::new(600, RegenRate::from_milli(1500))),
                 )
                 .with_level(3)
                 .with_gold_cost(200),
@@ -52000,9 +52381,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     100,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -52037,9 +52418,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     900,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -52076,9 +52457,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     1300,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -52115,9 +52496,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     125,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     None,
                 ))
@@ -52153,9 +52534,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     750,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    2.0,
+                    Armor::from_milli(2000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -52191,15 +52572,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     180,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    1.0,
+                    Armor::from_milli(1000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         14,
                         15,
                         90,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Normal,
                         WeaponType::Normal,
                     )),
@@ -52236,15 +52617,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     240,
-                    2.0,
+                    RegenRate::from_milli(2000),
                     RegenType::Blight,
-                    0.0,
+                    Armor::from_milli(0),
                     DefenseType::Medium,
                     Some(UnitAttack::new(
                         11,
                         12,
                         500,
-                        1.5,
+                        Cooldown::from_millis(1500),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -52281,9 +52662,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     1200,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -52321,20 +52702,20 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         400,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Always,
-                        3.0,
+                        Armor::from_milli(3000),
                         DefenseType::Medium,
                         Some(UnitAttack::new(
                             21,
                             29,
                             500,
-                            1.4,
+                            Cooldown::from_millis(1400),
                             AttackType::Normal,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 0.8)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(800))),
                 )
                 .with_level(3)
                 .with_gold_cost(225),
@@ -52369,27 +52750,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         550,
-                        0.5,
+                        RegenRate::from_milli(500),
                         RegenType::Night,
-                        3.7,
+                        Armor::from_milli(3700),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             21,
                             31,
                             600,
-                            2.46,
+                            Cooldown::from_millis(2460),
                             AttackType::Hero,
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(225, 0.01)),
+                    .with_mana_pool(ManaPool::new(225, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(225, 0.01),
+                    ManaPool::new(225, RegenRate::from_milli(10)),
                     AttributeBase::new(18, 19, 15),
-                    AttributeGrowth::new(1.9, 1.5, 2.6),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(1900),
+                        StatGrowth::from_milli(1500),
+                        StatGrowth::from_milli(2600),
+                    ),
                     PrimaryAttribute::Agility,
                 )),
             ),
@@ -52424,27 +52809,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Blight,
-                        2.8,
+                        Armor::from_milli(2800),
                         DefenseType::Divine,
                         Some(UnitAttack::new(
                             22,
                             32,
                             100,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(20, 16, 18),
-                    AttributeGrowth::new(2.5, 1.0, 4.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2500),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(4500),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -52477,9 +52866,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     1100,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -52516,9 +52905,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     475,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -52555,15 +52944,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     1000,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Heavy,
                     Some(UnitAttack::new(
                         78,
                         105,
                         900,
-                        2.0,
+                        Cooldown::from_millis(2000),
                         AttackType::Siege,
                         WeaponType::Artillery,
                     )),
@@ -52602,27 +52991,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Blight,
-                        2.8,
+                        Armor::from_milli(2800),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             32,
                             100,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(20, 16, 18),
-                    AttributeGrowth::new(2.5, 1.0, 4.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2500),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(4500),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -52656,27 +53049,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         600,
-                        1.0,
+                        RegenRate::from_milli(1000),
                         RegenType::Blight,
-                        2.8,
+                        Armor::from_milli(2800),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
                             22,
                             32,
                             100,
-                            1.8,
+                            Cooldown::from_millis(1800),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(270, 0.01)),
+                    .with_mana_pool(ManaPool::new(270, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(270, 0.01),
+                    ManaPool::new(270, RegenRate::from_milli(10)),
                     AttributeBase::new(20, 16, 18),
-                    AttributeGrowth::new(2.5, 1.0, 4.5),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(2500),
+                        StatGrowth::from_milli(1000),
+                        StatGrowth::from_milli(4500),
+                    ),
                     PrimaryAttribute::Strength,
                 )),
             ),
@@ -52710,27 +53107,31 @@ fn insert_objects_chunk_8(
                 .with_combat(
                     UnitCombat::new(
                         2525,
-                        3.0,
+                        RegenRate::from_milli(3000),
                         RegenType::Always,
-                        3.1,
+                        Armor::from_milli(3100),
                         DefenseType::Divine,
                         Some(UnitAttack::new(
                             26,
                             140,
                             600,
-                            2.0,
+                            Cooldown::from_millis(2000),
                             AttackType::Chaos,
                             WeaponType::MissileSplash,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(300, 2.0)),
+                    .with_mana_pool(ManaPool::new(300, RegenRate::from_milli(2000))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(300, 2.0),
+                    ManaPool::new(300, RegenRate::from_milli(2000)),
                     AttributeBase::new(21, 17, 20),
-                    AttributeGrowth::new(3.0, 3.0, 4.0),
+                    AttributeGrowth::new(
+                        StatGrowth::from_milli(3000),
+                        StatGrowth::from_milli(3000),
+                        StatGrowth::from_milli(4000),
+                    ),
                     PrimaryAttribute::Intelligence,
                 )),
             ),
@@ -52762,15 +53163,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         27,
                         32,
                         700,
-                        1.0,
+                        Cooldown::from_millis(1000),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -52808,15 +53209,15 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     Some(UnitAttack::new(
                         9,
                         10,
                         700,
-                        1.15,
+                        Cooldown::from_millis(1150),
                         AttackType::Pierce,
                         WeaponType::Missile,
                     )),
@@ -52854,9 +53255,9 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(UnitCombat::new(
                     600,
-                    0.0,
+                    RegenRate::from_milli(0),
                     RegenType::None,
-                    5.0,
+                    Armor::from_milli(5000),
                     DefenseType::Fortified,
                     None,
                 ))
@@ -53148,18 +53549,81 @@ fn insert_objects_chunk_8(
 }
 
 pub static WARCRAFT_GAMEPLAY_CONSTANTS: GameplayConstants = GameplayConstants::new(
-    StrengthBonuses::new(1.0, 25, 0.05),
-    IntelligenceBonuses::new(15, 0.05),
-    AgilityBonuses::new(0.3, 0.02),
+    StrengthBonuses::new(Multiplier::from_milli(1000), 25, Multiplier::from_milli(50)),
+    IntelligenceBonuses::new(15, Multiplier::from_milli(50)),
+    AgilityBonuses::new(Multiplier::from_milli(300), Multiplier::from_milli(20)),
     10,
     DamageMatrix::new(
-        DamageEffectiveness::new([1.0, 1.5, 1.0, 0.7, 1.0, 1.0, 0.05, 1.0]),
-        DamageEffectiveness::new([2.0, 0.75, 0.9, 0.35, 1.0, 0.5, 0.05, 1.5]),
-        DamageEffectiveness::new([1.0, 0.5, 1.0, 1.5, 1.0, 0.5, 0.05, 1.5]),
-        DamageEffectiveness::new([1.25, 0.75, 2.0, 0.35, 1.0, 0.5, 0.05, 1.0]),
-        DamageEffectiveness::new([1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]),
-        DamageEffectiveness::new([1.0, 1.0, 1.0, 1.0, 1.0, 0.7, 0.05, 1.0]),
-        DamageEffectiveness::new([1.0, 1.0, 1.0, 0.5, 1.0, 1.0, 0.05, 1.0]),
+        DamageEffectiveness::new([
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1500),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(700),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(50),
+            Multiplier::from_milli(1000),
+        ]),
+        DamageEffectiveness::new([
+            Multiplier::from_milli(2000),
+            Multiplier::from_milli(750),
+            Multiplier::from_milli(900),
+            Multiplier::from_milli(350),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(500),
+            Multiplier::from_milli(50),
+            Multiplier::from_milli(1500),
+        ]),
+        DamageEffectiveness::new([
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(500),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1500),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(500),
+            Multiplier::from_milli(50),
+            Multiplier::from_milli(1500),
+        ]),
+        DamageEffectiveness::new([
+            Multiplier::from_milli(1250),
+            Multiplier::from_milli(750),
+            Multiplier::from_milli(2000),
+            Multiplier::from_milli(350),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(500),
+            Multiplier::from_milli(50),
+            Multiplier::from_milli(1000),
+        ]),
+        DamageEffectiveness::new([
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+        ]),
+        DamageEffectiveness::new([
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(700),
+            Multiplier::from_milli(50),
+            Multiplier::from_milli(1000),
+        ]),
+        DamageEffectiveness::new([
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(500),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(1000),
+            Multiplier::from_milli(50),
+            Multiplier::from_milli(1000),
+        ]),
     ),
 );
 

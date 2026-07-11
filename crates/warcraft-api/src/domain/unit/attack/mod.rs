@@ -1,13 +1,14 @@
 //! [`UnitAttack`]: a unit's weapon — damage, range, cooldown, and typing.
 
 use crate::domain::combat::{AttackType, WeaponType};
+use crate::domain::quantity::Cooldown;
 
-#[derive(Default, Debug, Clone, Copy, PartialEq)]
+#[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
 pub struct UnitAttack {
     damage_min: u32,
     damage_max: u32,
     range: u32,
-    cooldown_seconds: f32,
+    cooldown: Cooldown,
     attack_type: AttackType,
     weapon_type: WeaponType,
 }
@@ -17,7 +18,7 @@ impl UnitAttack {
         damage_min: u32,
         damage_max: u32,
         range: u32,
-        cooldown_seconds: f32,
+        cooldown: Cooldown,
         attack_type: AttackType,
         weapon_type: WeaponType,
     ) -> Self {
@@ -25,7 +26,7 @@ impl UnitAttack {
             damage_min,
             damage_max,
             range,
-            cooldown_seconds,
+            cooldown,
             attack_type,
             weapon_type,
         }
@@ -43,8 +44,8 @@ impl UnitAttack {
         self.range
     }
 
-    pub fn cooldown_seconds(&self) -> f32 {
-        self.cooldown_seconds
+    pub fn cooldown(&self) -> Cooldown {
+        self.cooldown
     }
 
     pub fn attack_type(&self) -> AttackType {
@@ -60,16 +61,34 @@ impl UnitAttack {
     }
 }
 
+// DDD role: immutable, equality-by-value → Value Object.
+impl ddd::Layered for UnitAttack {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for UnitAttack {}
+
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn unit_attack_targets_ground_reflects_weapon_type() {
-        let artillery_attack =
-            UnitAttack::new(50, 60, 1000, 2.0, AttackType::Siege, WeaponType::Artillery);
-        let normal_attack =
-            UnitAttack::new(10, 12, 90, 1.5, AttackType::Normal, WeaponType::Normal);
+        let artillery_attack = UnitAttack::new(
+            50,
+            60,
+            1000,
+            Cooldown::from_millis(2000),
+            AttackType::Siege,
+            WeaponType::Artillery,
+        );
+        let normal_attack = UnitAttack::new(
+            10,
+            12,
+            90,
+            Cooldown::from_millis(1500),
+            AttackType::Normal,
+            WeaponType::Normal,
+        );
         assert!(artillery_attack.targets_ground());
         assert!(!normal_attack.targets_ground());
     }

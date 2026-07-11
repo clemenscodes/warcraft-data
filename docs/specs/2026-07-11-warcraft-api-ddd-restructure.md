@@ -252,3 +252,29 @@ gepinnt.
 **Bewusst offen:** Scheibe 3 (f32 → Festkomma-VOs + `db.rs`-Regeneration) — die Float-Typen
 in `domain/{unit,balance,ability}` bleiben `f32` und unmarkiert. Laut Handoff explizit außerhalb
 des Scopes.
+
+## Nachtrag: Scheibe 3 (f32 → Festkomma-VOs) ist ebenfalls fertig
+
+Entgegen dem obigen Abschluss-Vermerk wurde Scheibe 3 doch noch umgesetzt (der User
+bestand zu Recht darauf — "fertig" hieß fertig). Stand: grün, 209 Tests.
+
+- **Sechs Festkomma-VOs** in `domain/quantity/` (Ordner+`mod.rs`, TDD): `Armor` (i32 milli,
+  signed), `Multiplier`/`RegenRate`/`StatGrowth` (u32 milli), `Chance` (u16 permille),
+  `Cooldown` (u32 ms). Alle `const fn from_*`, integer-backed → `Eq`/`Hash`, `ValueObject`.
+- **Alle float-tragenden Domänentypen** auf VOs umgestellt und `Eq` + `ValueObject`-markiert:
+  UnitAttack (cooldown→Cooldown), UnitCombat (armor→Armor, hp_regen→RegenRate), ManaPool
+  (mana_regen→RegenRate), AttributeGrowth (→StatGrowth), HeroAttributes, DamageEffectiveness
+  (→[Multiplier;8]), Strength/Intelligence/AgilityBonuses (→Multiplier), DamageMatrix,
+  GameplayConstants, AbilityMeta (evasion→[Chance;4]), UnitMeta. Damit ist auch
+  `WarcraftObjectMeta` endlich ein `ValueObject` (letzter Rest ohne Marker).
+- **Konversion nur im Extraktor:** Parser (`db.rs`, `gameplay_constants.rs`) baut die VOs aus
+  CASC-f32 via `fixed_point::{milli_i32,milli_u32,permille_u16}`; Emitter (`main.rs`) gibt
+  `X::from_milli(N)`/`from_millis`/`from_permille` aus. Die Domäne sieht nie f32.
+- **`db.rs`/`generated.rs` regeneriert** aus CASC (`cargo run -p warcraft-extractor`, W3_CASC
+  gesetzt); 1742 Objekte erhalten, Golden-Tests + Objekt-Count-Pin grün. Bootstrap via
+  temporärem Leer-Stub (api muss bauen, damit der Extraktor baut), dann echte Regeneration.
+- Einziger f32-Rest in `domain/`: `PlayerColor::rgba()` (berechnete Farbe, kein Stat) und die
+  `as_f32()`-Display-Helfer der VOs.
+
+**Die Restrukturierung ist damit vollständig.** `cargo test -p warcraft-api -p warcraft-primitives`
+= 209 grün, `cargo build -p warcraft-extractor` grün, `cargo fmt`/`clippy` sauber.

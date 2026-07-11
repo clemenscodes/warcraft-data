@@ -3,6 +3,7 @@ use std::path::{Path, PathBuf};
 
 use clap::Parser;
 use warcraft_api::GridCoordinate;
+use warcraft_extractor::fixed_point::permille_u16;
 use warcraft_extractor::*;
 
 const DEFAULT_DATABASE_FILE: &str = concat!(
@@ -587,21 +588,21 @@ impl CodegenContext {
 
                 let combat = unit_meta.combat();
                 let hit_points = combat.hit_points();
-                let hit_points_regen = combat.hit_points_regen();
+                let hit_points_regen = combat.hit_points_regen().milli();
                 let regen_type = combat.regen_type();
-                let armor = combat.armor();
+                let armor = combat.armor().milli();
                 let defense_type = combat.defense_type();
                 let attack_expression = match combat.attack() {
                     Some(unit_attack) => {
                         let damage_min = unit_attack.damage_min();
                         let damage_max = unit_attack.damage_max();
                         let attack_range = unit_attack.range();
-                        let cooldown_seconds = unit_attack.cooldown_seconds();
+                        let cooldown_millis = unit_attack.cooldown().millis();
                         let attack_type = unit_attack.attack_type();
                         let weapon_type = unit_attack.weapon_type();
                         format!(
                             "Some(UnitAttack::new({damage_min}, {damage_max}, {attack_range}, \
-                             {cooldown_seconds:?}, AttackType::{attack_type:?}, \
+                             Cooldown::from_millis({cooldown_millis}), AttackType::{attack_type:?}, \
                              WeaponType::{weapon_type:?}))"
                         )
                     }
@@ -610,31 +611,37 @@ impl CodegenContext {
                 let mana_pool_chain = match combat.mana_pool() {
                     Some(mana_pool) => {
                         let mana = mana_pool.mana();
-                        let mana_regen = mana_pool.mana_regen();
-                        format!(".with_mana_pool(ManaPool::new({mana}, {mana_regen:?}))")
+                        let mana_regen = mana_pool.mana_regen().milli();
+                        format!(
+                            ".with_mana_pool(ManaPool::new({mana}, RegenRate::from_milli({mana_regen})))"
+                        )
                     }
                     None => String::new(),
                 };
                 let combat_expression = format!(
-                    "UnitCombat::new({hit_points}, {hit_points_regen:?}, RegenType::{regen_type:?}, \
-                     {armor:?}, DefenseType::{defense_type:?}, {attack_expression}){mana_pool_chain}"
+                    "UnitCombat::new({hit_points}, RegenRate::from_milli({hit_points_regen}), \
+                     RegenType::{regen_type:?}, Armor::from_milli({armor}), \
+                     DefenseType::{defense_type:?}, {attack_expression}){mana_pool_chain}"
                 );
                 let hero_attributes_chain = match unit_meta.hero_attributes() {
                     Some(hero_attributes) => {
                         let mana = hero_attributes.mana();
-                        let mana_regen = hero_attributes.mana_regen();
+                        let mana_regen = hero_attributes.mana_regen().milli();
                         let strength = hero_attributes.strength();
                         let agility = hero_attributes.agility();
                         let intelligence = hero_attributes.intelligence();
                         let primary = hero_attributes.primary();
-                        let strength_per_level = hero_attributes.strength_per_level();
-                        let agility_per_level = hero_attributes.agility_per_level();
-                        let intelligence_per_level = hero_attributes.intelligence_per_level();
+                        let strength_per_level = hero_attributes.strength_per_level().milli();
+                        let agility_per_level = hero_attributes.agility_per_level().milli();
+                        let intelligence_per_level =
+                            hero_attributes.intelligence_per_level().milli();
                         format!(
                             ".with_hero_attributes(HeroAttributes::new(\
-                             ManaPool::new({mana}, {mana_regen:?}), \
+                             ManaPool::new({mana}, RegenRate::from_milli({mana_regen})), \
                              AttributeBase::new({strength}, {agility}, {intelligence}), \
-                             AttributeGrowth::new({strength_per_level:?}, {agility_per_level:?}, {intelligence_per_level:?}), \
+                             AttributeGrowth::new(StatGrowth::from_milli({strength_per_level}), \
+                             StatGrowth::from_milli({agility_per_level}), \
+                             StatGrowth::from_milli({intelligence_per_level})), \
                              PrimaryAttribute::{primary:?}))"
                         )
                     }
@@ -680,14 +687,14 @@ impl CodegenContext {
                 let evasion_chances = ability_meta.evasion_chances();
                 let has_evasion = evasion_chances.iter().any(|chance| *chance > 0.0);
                 let evasion_call = if has_evasion {
-                    // `{:?}` keeps the decimal point so the slot stays an f32
-                    // literal (`0.0`, not `0`) — and round-trips the value.
                     format!(
-                        ".with_evasion_chances([{:?}, {:?}, {:?}, {:?}])",
-                        evasion_chances[0],
-                        evasion_chances[1],
-                        evasion_chances[2],
-                        evasion_chances[3]
+                        ".with_evasion_chances([Chance::from_permille({}), \
+                         Chance::from_permille({}), Chance::from_permille({}), \
+                         Chance::from_permille({})])",
+                        permille_u16(evasion_chances[0]),
+                        permille_u16(evasion_chances[1]),
+                        permille_u16(evasion_chances[2]),
+                        permille_u16(evasion_chances[3]),
                     )
                 } else {
                     String::new()
@@ -818,13 +825,13 @@ fn emit_unit_upgrade_swaps(output: &mut String, swaps: &BTreeSet<UnitUpgradeSwap
 }
 
 fn emit_gameplay_constants(output: &mut String, constants: &warcraft_api::GameplayConstants) {
-    let str_attack = constants.str_attack_bonus();
+    let str_attack = constants.str_attack_bonus().milli();
     let str_hp = constants.str_hit_point_bonus();
-    let str_regen = constants.str_regen_bonus();
+    let str_regen = constants.str_regen_bonus().milli();
     let int_mana = constants.int_mana_bonus();
-    let int_regen = constants.int_regen_bonus();
-    let agi_def = constants.agi_defense_bonus();
-    let agi_atk_speed = constants.agi_attack_speed_bonus();
+    let int_regen = constants.int_regen_bonus().milli();
+    let agi_def = constants.agi_defense_bonus().milli();
+    let agi_atk_speed = constants.agi_attack_speed_bonus().milli();
     let max_level = constants.max_hero_level();
     let damage_normal = format_damage_effectiveness(
         constants.damage_effectiveness(warcraft_api::AttackType::Normal),
@@ -848,9 +855,10 @@ fn emit_gameplay_constants(output: &mut String, constants: &warcraft_api::Gamepl
         format_damage_effectiveness(constants.damage_effectiveness(warcraft_api::AttackType::Hero));
     output.push_str(&format!(
         "pub static WARCRAFT_GAMEPLAY_CONSTANTS: GameplayConstants = GameplayConstants::new(\
-         StrengthBonuses::new({str_attack:?}, {str_hp}, {str_regen:?}), \
-         IntelligenceBonuses::new({int_mana}, {int_regen:?}), \
-         AgilityBonuses::new({agi_def:?}, {agi_atk_speed:?}), \
+         StrengthBonuses::new(Multiplier::from_milli({str_attack}), {str_hp}, \
+         Multiplier::from_milli({str_regen})), \
+         IntelligenceBonuses::new({int_mana}, Multiplier::from_milli({int_regen})), \
+         AgilityBonuses::new(Multiplier::from_milli({agi_def}), Multiplier::from_milli({agi_atk_speed})), \
          {max_level}, \
          DamageMatrix::new({damage_normal}, {damage_pierce}, {damage_siege}, \
          {damage_magic}, {damage_chaos}, {damage_spells}, {damage_hero}));\n"
@@ -858,18 +866,12 @@ fn emit_gameplay_constants(output: &mut String, constants: &warcraft_api::Gamepl
 }
 
 fn format_damage_effectiveness(effectiveness: warcraft_api::DamageEffectiveness) -> String {
-    let multipliers = effectiveness.multipliers();
-    let m0 = multipliers[0];
-    let m1 = multipliers[1];
-    let m2 = multipliers[2];
-    let m3 = multipliers[3];
-    let m4 = multipliers[4];
-    let m5 = multipliers[5];
-    let m6 = multipliers[6];
-    let m7 = multipliers[7];
-    format!(
-        "DamageEffectiveness::new([{m0:?}, {m1:?}, {m2:?}, {m3:?}, {m4:?}, {m5:?}, {m6:?}, {m7:?}])"
-    )
+    let slots: Vec<String> = effectiveness
+        .multipliers()
+        .iter()
+        .map(|multiplier| format!("Multiplier::from_milli({})", multiplier.milli()))
+        .collect();
+    format!("DamageEffectiveness::new([{}])", slots.join(", "))
 }
 
 fn emit_system_keybinds(output: &mut String, entries: &[warcraft_extractor::SystemKeybindEntry]) {

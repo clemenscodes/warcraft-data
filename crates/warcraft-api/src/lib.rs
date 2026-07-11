@@ -42,6 +42,7 @@ pub use domain::player::{
     PlayerColor, PlayerGameResult, PlayerRace, PlayerSlotState, PlayerType, RacePreference, Team,
     TeamPlayer, Teams,
 };
+pub use domain::quantity::{Armor, Chance, Cooldown, Multiplier, RegenRate, StatGrowth};
 pub use domain::race::{AllRaces, Race};
 pub use domain::unit::hero::{
     AttributeBase, AttributeGrowth, HeroAttributes, ManaPool, PrimaryAttribute,

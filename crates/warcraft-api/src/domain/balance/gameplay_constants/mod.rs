@@ -7,8 +7,9 @@ use crate::domain::balance::damage_matrix::DamageMatrix;
 use crate::domain::balance::intelligence_bonuses::IntelligenceBonuses;
 use crate::domain::balance::strength_bonuses::StrengthBonuses;
 use crate::domain::combat::AttackType;
+use crate::domain::quantity::Multiplier;
 
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct GameplayConstants {
     // Defaults below mirror the standard WC3 Reforged values from
     // war3.w3mod:units/miscgame.txt; used only when extraction is missing
@@ -57,7 +58,7 @@ impl GameplayConstants {
         self.damage_matrix.effectiveness(attack_type)
     }
 
-    pub fn str_attack_bonus(&self) -> f32 {
+    pub fn str_attack_bonus(&self) -> Multiplier {
         self.strength_bonuses.attack_bonus()
     }
 
@@ -65,7 +66,7 @@ impl GameplayConstants {
         self.strength_bonuses.hit_point_bonus()
     }
 
-    pub fn str_regen_bonus(&self) -> f32 {
+    pub fn str_regen_bonus(&self) -> Multiplier {
         self.strength_bonuses.regen_bonus()
     }
 
@@ -73,15 +74,15 @@ impl GameplayConstants {
         self.intelligence_bonuses.mana_bonus()
     }
 
-    pub fn int_regen_bonus(&self) -> f32 {
+    pub fn int_regen_bonus(&self) -> Multiplier {
         self.intelligence_bonuses.regen_bonus()
     }
 
-    pub fn agi_defense_bonus(&self) -> f32 {
+    pub fn agi_defense_bonus(&self) -> Multiplier {
         self.agility_bonuses.defense_bonus()
     }
 
-    pub fn agi_attack_speed_bonus(&self) -> f32 {
+    pub fn agi_attack_speed_bonus(&self) -> Multiplier {
         self.agility_bonuses.attack_speed_bonus()
     }
 
@@ -90,36 +91,38 @@ impl GameplayConstants {
     }
 }
 
+/// Build the eight per-defense multipliers from their milli values.
+const fn effectiveness(milli: [u32; 8]) -> DamageEffectiveness {
+    DamageEffectiveness::new([
+        Multiplier::from_milli(milli[0]),
+        Multiplier::from_milli(milli[1]),
+        Multiplier::from_milli(milli[2]),
+        Multiplier::from_milli(milli[3]),
+        Multiplier::from_milli(milli[4]),
+        Multiplier::from_milli(milli[5]),
+        Multiplier::from_milli(milli[6]),
+        Multiplier::from_milli(milli[7]),
+    ])
+}
+
 impl Default for GameplayConstants {
     fn default() -> Self {
         // SMALL, MEDIUM, LARGE, FORT, NORMAL, HERO, DIVINE, NONE — matches
-        // miscgame.txt DamageBonus* line order.
-        let damage_normal =
-            DamageEffectiveness::new([1.00, 1.50, 1.00, 0.70, 1.00, 1.00, 0.05, 1.00]);
-        let damage_pierce =
-            DamageEffectiveness::new([2.00, 0.75, 1.00, 0.35, 1.00, 0.50, 0.05, 1.50]);
-        let damage_siege =
-            DamageEffectiveness::new([1.00, 0.50, 1.00, 1.50, 1.00, 0.50, 0.05, 1.50]);
-        let damage_magic =
-            DamageEffectiveness::new([1.25, 0.75, 2.00, 0.35, 1.00, 0.50, 0.05, 1.00]);
-        let damage_chaos =
-            DamageEffectiveness::new([1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00]);
-        let damage_spells =
-            DamageEffectiveness::new([1.00, 1.00, 1.00, 1.00, 1.00, 0.70, 0.05, 1.00]);
-        let damage_hero =
-            DamageEffectiveness::new([1.00, 1.00, 1.00, 0.50, 1.00, 1.00, 0.05, 1.00]);
+        // miscgame.txt DamageBonus* line order. Values in milli (×1000).
         let damage_matrix = DamageMatrix::new(
-            damage_normal,
-            damage_pierce,
-            damage_siege,
-            damage_magic,
-            damage_chaos,
-            damage_spells,
-            damage_hero,
+            effectiveness([1000, 1500, 1000, 700, 1000, 1000, 50, 1000]),
+            effectiveness([2000, 750, 1000, 350, 1000, 500, 50, 1500]),
+            effectiveness([1000, 500, 1000, 1500, 1000, 500, 50, 1500]),
+            effectiveness([1250, 750, 2000, 350, 1000, 500, 50, 1000]),
+            effectiveness([1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]),
+            effectiveness([1000, 1000, 1000, 1000, 1000, 700, 50, 1000]),
+            effectiveness([1000, 1000, 1000, 500, 1000, 1000, 50, 1000]),
         );
-        let strength_bonuses = StrengthBonuses::new(1.0, 25, 0.05);
-        let intelligence_bonuses = IntelligenceBonuses::new(15, 0.05);
-        let agility_bonuses = AgilityBonuses::new(0.30, 0.02);
+        let strength_bonuses =
+            StrengthBonuses::new(Multiplier::from_milli(1000), 25, Multiplier::from_milli(50));
+        let intelligence_bonuses = IntelligenceBonuses::new(15, Multiplier::from_milli(50));
+        let agility_bonuses =
+            AgilityBonuses::new(Multiplier::from_milli(300), Multiplier::from_milli(20));
         Self::new(
             strength_bonuses,
             intelligence_bonuses,
@@ -130,28 +133,31 @@ impl Default for GameplayConstants {
     }
 }
 
+// DDD role: immutable, equality-by-value → Value Object.
+impl ddd::Layered for GameplayConstants {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for GameplayConstants {}
+
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn gameplay_constants_default_has_reasonable_max_hero_level() {
-        let constants = GameplayConstants::default();
-        assert_eq!(constants.max_hero_level(), 10);
+        assert_eq!(GameplayConstants::default().max_hero_level(), 10);
     }
 
     #[test]
     fn gameplay_constants_default_str_per_hp_is_nonzero() {
-        let constants = GameplayConstants::default();
-        assert!(constants.str_hit_point_bonus() > 0);
+        assert!(GameplayConstants::default().str_hit_point_bonus() > 0);
     }
 
     #[test]
     fn damage_matrix_chaos_is_effective_against_all_armor() {
-        let constants = GameplayConstants::default();
-        let chaos = constants.damage_effectiveness(AttackType::Chaos);
-        for &multiplier in chaos.multipliers() {
-            assert_eq!(multiplier, 1.0);
+        let chaos = GameplayConstants::default().damage_effectiveness(AttackType::Chaos);
+        for multiplier in chaos.multipliers() {
+            assert_eq!(*multiplier, Multiplier::from_milli(1000));
         }
     }
 }

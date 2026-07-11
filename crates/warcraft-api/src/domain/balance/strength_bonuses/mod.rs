@@ -1,14 +1,20 @@
 //! [`StrengthBonuses`]: the per-point bonuses a hero's Strength attribute grants.
 
-#[derive(Debug, Clone, Copy, PartialEq)]
+use crate::domain::quantity::Multiplier;
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct StrengthBonuses {
-    attack_bonus: f32,
+    attack_bonus: Multiplier,
     hit_point_bonus: u32,
-    regen_bonus: f32,
+    regen_bonus: Multiplier,
 }
 
 impl StrengthBonuses {
-    pub const fn new(attack_bonus: f32, hit_point_bonus: u32, regen_bonus: f32) -> Self {
+    pub const fn new(
+        attack_bonus: Multiplier,
+        hit_point_bonus: u32,
+        regen_bonus: Multiplier,
+    ) -> Self {
         Self {
             attack_bonus,
             hit_point_bonus,
@@ -16,7 +22,7 @@ impl StrengthBonuses {
         }
     }
 
-    pub fn attack_bonus(&self) -> f32 {
+    pub fn attack_bonus(&self) -> Multiplier {
         self.attack_bonus
     }
 
@@ -24,7 +30,13 @@ impl StrengthBonuses {
         self.hit_point_bonus
     }
 
-    pub fn regen_bonus(&self) -> f32 {
+    pub fn regen_bonus(&self) -> Multiplier {
         self.regen_bonus
     }
 }
+
+// DDD role: immutable, equality-by-value → Value Object.
+impl ddd::Layered for StrengthBonuses {
+    type Layer = ddd::DomainLayer;
+}
+impl ddd::ValueObject for StrengthBonuses {}

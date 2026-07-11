@@ -4,6 +4,7 @@ mod command_defaults;
 mod data_tables;
 mod db;
 mod default_positions;
+pub mod fixed_point;
 mod gameplay_constants;
 mod heroes;
 mod ir;
