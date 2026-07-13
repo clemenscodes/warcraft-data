@@ -1247,7 +1247,7 @@ checksum = "ba73ea9cf16a25df0c8caa16c51acb937d5712a8429db78a3ee29d5dcacd3a65"
 
 [[package]]
 name = "warcraft-api"
-version = "0.1.0"
+version = "0.7.0"
 dependencies = [
  "ddd",
  "serde",
@@ -1257,7 +1257,7 @@ dependencies = [
 
 [[package]]
 name = "warcraft-extractor"
-version = "0.1.0"
+version = "0.7.0"
 dependencies = [
  "bcdec_rs",
  "casclib",
@@ -1275,7 +1275,7 @@ dependencies = [
 
 [[package]]
 name = "warcraft-keybinds"
-version = "0.1.0"
+version = "0.7.0"
 dependencies = [
  "ddd",
  "warcraft-api",
@@ -1283,7 +1283,7 @@ dependencies = [
 
 [[package]]
 name = "warcraft-primitives"
-version = "0.1.0"
+version = "0.7.0"
 dependencies = [
  "serde",
  "serde_json",
@@ -1291,7 +1291,7 @@ dependencies = [
 
 [[package]]
 name = "warcraft-slk"
-version = "0.1.0"
+version = "0.7.0"
 
 [[package]]
 name = "wasip2"

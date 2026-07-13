@@ -38,6 +38,9 @@ pub use domain::keybind::keycode::{
 pub use domain::keybind::mirrors::{
     BUILD_COMMAND_MIRRORS, BuildCommandMirror, MORPH_ABILITY_MIRRORS, MorphAbilityMirror,
 };
+pub use domain::keybind::slots::{
+    ControlGroupSlots, HeroSelectionSlots, InventorySlots, SystemHotkeysSlot,
+};
 pub use domain::keybind::system_keybind::{
     ContextSet, SystemKeybind, SystemKeybindClass, SystemKeybindModifier,
 };

@@ -1,34 +1,11 @@
 use std::fmt;
 
-use crate::{SystemKeybind, SystemKeybindClass, WarcraftObjectId};
+use crate::{
+    ControlGroupSlots, HeroSelectionSlots, InventorySlots, SystemKeybind, SystemKeybindClass,
+    WarcraftObjectId,
+};
 
 use crate::WARCRAFT_SYSTEM_KEYBINDS;
-
-const INVENTORY_SLOT_IDS: [WarcraftObjectId; 6] = [
-    WarcraftObjectId::new("itm1"),
-    WarcraftObjectId::new("itm2"),
-    WarcraftObjectId::new("itm3"),
-    WarcraftObjectId::new("itm4"),
-    WarcraftObjectId::new("itm5"),
-    WarcraftObjectId::new("itm6"),
-];
-const HERO_SELECTION_IDS: [WarcraftObjectId; 3] = [
-    WarcraftObjectId::new("her1"),
-    WarcraftObjectId::new("her2"),
-    WarcraftObjectId::new("her3"),
-];
-const CONTROL_GROUP_IDS: [WarcraftObjectId; 10] = [
-    WarcraftObjectId::new("Ctr1"),
-    WarcraftObjectId::new("Ctr2"),
-    WarcraftObjectId::new("Ctr3"),
-    WarcraftObjectId::new("Ctr4"),
-    WarcraftObjectId::new("Ctr5"),
-    WarcraftObjectId::new("Ctr6"),
-    WarcraftObjectId::new("Ctr7"),
-    WarcraftObjectId::new("Ctr8"),
-    WarcraftObjectId::new("Ctr9"),
-    WarcraftObjectId::new("Ctr0"),
-];
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum SystemHotkeysCategory {
@@ -54,11 +31,39 @@ impl SystemHotkeysCategory {
         SystemHotkeysCategory::Replay,
     ];
 
+    /// The per-category intro text the editor shows above the category's slots,
+    /// or `None` for categories that render without a caption.
+    pub fn caption(self) -> Option<&'static str> {
+        match self {
+            SystemHotkeysCategory::Inventory => {
+                Some("Drag a slot onto another to swap their keys.")
+            }
+            SystemHotkeysCategory::HeroSelection => {
+                Some("Hotkeys for selecting your heroes by index.")
+            }
+            SystemHotkeysCategory::ControlGroups => Some("Hotkeys for control groups 1–10."),
+            SystemHotkeysCategory::GeneralCommands
+            | SystemHotkeysCategory::Menu
+            | SystemHotkeysCategory::Camera
+            | SystemHotkeysCategory::Observer
+            | SystemHotkeysCategory::Replay => None,
+        }
+    }
+
     pub fn entries(self) -> Vec<&'static SystemKeybind> {
         match self {
-            SystemHotkeysCategory::Inventory => Self::collect_in_order(&INVENTORY_SLOT_IDS),
-            SystemHotkeysCategory::HeroSelection => Self::collect_in_order(&HERO_SELECTION_IDS),
-            SystemHotkeysCategory::ControlGroups => Self::collect_in_order(&CONTROL_GROUP_IDS),
+            SystemHotkeysCategory::Inventory => {
+                let section_ids = InventorySlots::ALL.iter().map(|slot| slot.section_id());
+                Self::collect_in_order(section_ids)
+            }
+            SystemHotkeysCategory::HeroSelection => {
+                let section_ids = HeroSelectionSlots::ALL.iter().map(|slot| slot.section_id());
+                Self::collect_in_order(section_ids)
+            }
+            SystemHotkeysCategory::ControlGroups => {
+                let section_ids = ControlGroupSlots::ALL.iter().map(|slot| slot.section_id());
+                Self::collect_in_order(section_ids)
+            }
             SystemHotkeysCategory::GeneralCommands => Self::collect_general_commands(),
             SystemHotkeysCategory::Menu => Self::collect_by_class(SystemKeybindClass::Menu),
             SystemHotkeysCategory::Camera => Self::collect_by_class(SystemKeybindClass::Camera),
@@ -67,11 +72,14 @@ impl SystemHotkeysCategory {
         }
     }
 
-    fn collect_in_order(section_ids: &'static [WarcraftObjectId]) -> Vec<&'static SystemKeybind> {
-        let mut ordered: Vec<&'static SystemKeybind> = Vec::with_capacity(section_ids.len());
-        for wanted_id in section_ids {
+    fn collect_in_order(
+        section_ids: impl IntoIterator<Item = WarcraftObjectId>,
+    ) -> Vec<&'static SystemKeybind> {
+        let wanted_ids: Vec<WarcraftObjectId> = section_ids.into_iter().collect();
+        let mut ordered: Vec<&'static SystemKeybind> = Vec::with_capacity(wanted_ids.len());
+        for wanted_id in wanted_ids {
             for entry in WARCRAFT_SYSTEM_KEYBINDS.iter() {
-                if entry.section_id() == *wanted_id {
+                if entry.section_id() == wanted_id {
                     ordered.push(entry);
                     break;
                 }
@@ -88,6 +96,14 @@ impl SystemHotkeysCategory {
     }
 
     fn collect_general_commands() -> Vec<&'static SystemKeybind> {
+        let inventory_ids: Vec<WarcraftObjectId> = InventorySlots::ALL
+            .iter()
+            .map(|slot| slot.section_id())
+            .collect();
+        let hero_selection_ids: Vec<WarcraftObjectId> = HeroSelectionSlots::ALL
+            .iter()
+            .map(|slot| slot.section_id())
+            .collect();
         WARCRAFT_SYSTEM_KEYBINDS
             .iter()
             .filter(|entry| {
@@ -95,7 +111,7 @@ impl SystemHotkeysCategory {
                     return false;
                 }
                 let id = entry.section_id();
-                !INVENTORY_SLOT_IDS.contains(&id) && !HERO_SELECTION_IDS.contains(&id)
+                !inventory_ids.contains(&id) && !hero_selection_ids.contains(&id)
             })
             .collect()
     }

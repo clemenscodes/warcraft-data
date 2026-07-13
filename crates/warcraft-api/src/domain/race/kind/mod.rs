@@ -12,6 +12,21 @@ pub enum Race {
     Neutral,
 }
 
+impl Race {
+    /// The lowercase, spaceless slug for this race — the serialize inverse of
+    /// [`Race::try_from`]: `Race::try_from(race.slug())` round-trips back to
+    /// `race` for every race.
+    pub fn slug(self) -> &'static str {
+        match self {
+            Self::Human => "human",
+            Self::Orc => "orc",
+            Self::Nightelf => "nightelf",
+            Self::Undead => "undead",
+            Self::Neutral => "neutral",
+        }
+    }
+}
+
 impl TryFrom<&str> for Race {
     type Error = ();
 
@@ -47,3 +62,21 @@ impl ddd::Layered for Race {
     type Layer = ddd::DomainLayer;
 }
 impl ddd::ValueObject for Race {}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::AllRaces;
+
+    #[test]
+    fn slug_round_trips_through_try_from_for_every_race() {
+        for race in AllRaces::ALL.iter() {
+            let slug = race.slug();
+            assert_eq!(
+                Race::try_from(slug),
+                Ok(race),
+                "slug round trip failed for {race}"
+            );
+        }
+    }
+}
