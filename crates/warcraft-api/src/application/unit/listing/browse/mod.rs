@@ -9,7 +9,8 @@ use crate::{CatalogVisibility, Scope, SearchField, UnitModeSelection, UnitQuery,
 use crate::{Race, UnitKind, UnitView, WarcraftObjectId};
 
 /// The inputs to a unit-list browse: the active race and mode, the current
-/// search query and the field it searches, and whether hidden units are shown.
+/// search query and the field it searches, whether hidden units are shown, and
+/// the races a search is scoped to.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct UnitListingRequest {
     race: Race,
@@ -17,10 +18,13 @@ pub struct UnitListingRequest {
     search_query: String,
     search_field: SearchField,
     visibility: CatalogVisibility,
+    search_race_scope: RaceSelection,
 }
 
 impl UnitListingRequest {
-    /// Build a browse request from the current list-view inputs.
+    /// Build a browse request from the current list-view inputs. The search race
+    /// scope defaults to every race, so a search behaves as it did before until
+    /// [`searching_within`](Self::searching_within) narrows it.
     pub fn new(
         race: Race,
         modes: UnitModeSelection,
@@ -34,24 +38,35 @@ impl UnitListingRequest {
             search_query,
             search_field,
             visibility,
+            search_race_scope: RaceSelection::All,
         }
     }
 
+    /// Narrow the search to a set of races. A browse ignores this, it always
+    /// lists the one active race. The default, when this is not called, is every
+    /// race.
+    pub fn searching_within(mut self, search_race_scope: RaceSelection) -> Self {
+        self.search_race_scope = search_race_scope;
+        self
+    }
+
     /// Whether a non-empty search is in effect. A search browses across every
-    /// race and mode, so it drops the race and mode filters.
+    /// mode, so it drops the mode filter, and across the search race scope, which
+    /// defaults to every race.
     fn is_searching(&self) -> bool {
         !self.search_query.is_empty()
     }
 
     /// The catalog query these inputs describe, across every category.
     ///
-    /// Searching drops the race and the mode: the scope becomes a cross-mode
-    /// [`Scope::Search`] and the race goes to `None`. That rule is subtle enough
-    /// that it lives here once rather than in each caller's `resolve`.
+    /// A browse narrows to the one active race. A search drops the mode and
+    /// applies the search race scope instead, which is every race by default.
+    /// That rule is subtle enough that it lives here once rather than in each
+    /// caller's `resolve`.
     fn catalog_query(&self) -> UnitQuery<'_> {
         let searching = self.is_searching();
         let races = if searching {
-            RaceSelection::All
+            self.search_race_scope.clone()
         } else {
             RaceSelection::only(self.race)
         };
@@ -148,10 +163,12 @@ pub struct UnitCategoryRequest {
     search_query: String,
     search_field: SearchField,
     visibility: CatalogVisibility,
+    search_race_scope: RaceSelection,
 }
 
 impl UnitCategoryRequest {
-    /// Build a per-category browse request.
+    /// Build a per-category browse request. The search race scope defaults to
+    /// every race, as [`UnitListingRequest::new`].
     pub fn new(
         race: Race,
         modes: UnitModeSelection,
@@ -167,7 +184,15 @@ impl UnitCategoryRequest {
             search_query,
             search_field,
             visibility,
+            search_race_scope: RaceSelection::All,
         }
+    }
+
+    /// Narrow the search to a set of races, as
+    /// [`UnitListingRequest::searching_within`].
+    pub fn searching_within(mut self, search_race_scope: RaceSelection) -> Self {
+        self.search_race_scope = search_race_scope;
+        self
     }
 
     fn is_searching(&self) -> bool {
@@ -235,7 +260,7 @@ impl From<&UnitCategoryRequest> for UnitCategoryListing {
     fn from(request: &UnitCategoryRequest) -> Self {
         let searching = request.is_searching();
         let races = if searching {
-            RaceSelection::All
+            request.search_race_scope.clone()
         } else {
             RaceSelection::only(request.race)
         };
@@ -538,6 +563,54 @@ mod tests {
         assert_eq!(
             grouped, expected,
             "grouping must partition the catalog pass, never drop or duplicate an entry"
+        );
+    }
+
+    #[test]
+    fn a_search_scoped_to_one_race_drops_the_other_races_hits() {
+        let across_all = search_request("a");
+        let human_only = search_request("a").searching_within(RaceSelection::only(Race::Human));
+        let all_count: usize = UnitCatalogListing::from(&across_all)
+            .groups()
+            .iter()
+            .map(|group| group.entries().len())
+            .sum();
+        let human_count: usize = UnitCatalogListing::from(&human_only)
+            .groups()
+            .iter()
+            .map(|group| group.entries().len())
+            .sum();
+        assert!(
+            human_count > 0,
+            "a human-scoped search for a common letter must still find human units"
+        );
+        assert!(
+            human_count < all_count,
+            "scoping a cross-race search to one race must drop the other races' hits; \
+             equal counts would mean the scope was ignored, the bug this fixes"
+        );
+    }
+
+    #[test]
+    fn the_default_search_scope_is_every_race() {
+        let implicit = search_request("a");
+        let explicit_all = search_request("a").searching_within(RaceSelection::All);
+        let human_only = search_request("a").searching_within(RaceSelection::only(Race::Human));
+        let count = |request: &UnitListingRequest| -> usize {
+            UnitCatalogListing::from(request)
+                .groups()
+                .iter()
+                .map(|group| group.entries().len())
+                .sum()
+        };
+        assert_eq!(
+            count(&implicit),
+            count(&explicit_all),
+            "not narrowing the scope must equal explicitly scoping to every race"
+        );
+        assert!(
+            count(&explicit_all) > count(&human_only),
+            "the default scope spans every race, so it finds more than one race can alone"
         );
     }
 
