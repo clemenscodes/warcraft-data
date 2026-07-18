@@ -5,8 +5,10 @@
 
 pub(crate) mod browse;
 pub(crate) mod index;
+pub(crate) mod mode_selection;
 pub(crate) mod placeholder;
 pub(crate) mod query;
+pub(crate) mod race_selection;
 pub(crate) mod search;
 pub(crate) mod search_field;
 pub(crate) mod sort;
@@ -19,7 +21,7 @@ use crate::application::unit::variant::variant_index;
 use crate::application::view::unit::UnitView;
 use crate::domain::identity::WarcraftObjectId;
 use crate::domain::object::{WarcraftObject, WarcraftObjectMeta};
-use crate::domain::unit::{UnitKind, UnitMeta, UnitMode};
+use crate::domain::unit::UnitKind;
 use crate::infrastructure::database::WarcraftDatabase;
 use index::ability_haystack::ability_haystack;
 use index::building_ranks::building_ranks;
@@ -97,7 +99,8 @@ fn evaluate(
     {
         return None;
     }
-    if !passes_mode(meta, &query.scope) {
+    let selected_modes = query.scope.modes();
+    if !selected_modes.admits(meta) {
         return None;
     }
     if is_placeholder(database, object_id, meta, sold) && !query.visibility.include_abilityless {
@@ -116,17 +119,6 @@ fn evaluate(
         return None;
     }
     Some(Candidate { object, outcome })
-}
-
-/// Whether the unit passes the scope's mode gate: the browsed mode, or either
-/// mode for a cross-mode search.
-fn passes_mode(meta: &UnitMeta, scope: &Scope<'_>) -> bool {
-    match scope {
-        Scope::Browse { mode } => meta.passes_filter(*mode),
-        Scope::Search { .. } => {
-            meta.passes_filter(UnitMode::Melee) || meta.passes_filter(UnitMode::Campaign)
-        }
-    }
 }
 
 /// The search match outcome for a candidate. Browse and empty-query searches
@@ -247,6 +239,7 @@ fn listing_key<'a>(
 #[cfg(test)]
 mod tests {
     use crate::WarcraftApi;
+    use crate::application::unit::listing::mode_selection::UnitModeSelection;
     use crate::application::unit::listing::query::{Scope, UnitQuery};
     use crate::application::unit::listing::search_field::SearchField;
     use crate::application::unit::listing::visibility::CatalogVisibility;
@@ -262,32 +255,108 @@ mod tests {
             .collect()
     }
 
-    fn browse(race: Race, mode: UnitMode, visibility: CatalogVisibility) -> Vec<String> {
+    fn browse(race: Race, modes: UnitModeSelection, visibility: CatalogVisibility) -> Vec<String> {
         ids(&UnitQuery {
             race: Some(race),
             visibility,
-            scope: Scope::Browse { mode },
+            scope: Scope::Browse { modes },
             ..UnitQuery::default()
         })
     }
 
     fn melee(race: Race) -> Vec<String> {
-        browse(race, UnitMode::Melee, CatalogVisibility::default())
+        let modes = UnitModeSelection::only(UnitMode::Melee);
+        browse(race, modes, CatalogVisibility::default())
     }
 
     fn has(list: &[String], id: &str) -> bool {
         list.iter().any(|entry| entry == id)
     }
 
+    #[test]
+    fn browsing_both_modes_lists_the_union_of_each_mode_alone() {
+        let melee_only = UnitModeSelection::only(UnitMode::Melee);
+        let campaign_only = UnitModeSelection::only(UnitMode::Campaign);
+        let both = UnitModeSelection::both();
+        let visibility = CatalogVisibility::default();
+        let melee_ids = browse(Race::Human, melee_only, visibility);
+        let campaign_ids = browse(Race::Human, campaign_only, visibility);
+        let both_ids = browse(Race::Human, both, visibility);
+        for id in &melee_ids {
+            assert!(
+                has(&both_ids, id),
+                "{id} is melee, so both modes must list it"
+            );
+        }
+        for id in &campaign_ids {
+            assert!(
+                has(&both_ids, id),
+                "{id} is campaign, so both modes must list it"
+            );
+        }
+        for id in &both_ids {
+            let in_either = has(&melee_ids, id) || has(&campaign_ids, id);
+            assert!(
+                in_either,
+                "{id} appeared out of nowhere: neither mode lists it"
+            );
+        }
+    }
+
+    #[test]
+    fn browsing_both_modes_finds_units_a_single_mode_hides() {
+        let melee_only = UnitModeSelection::only(UnitMode::Melee);
+        let both = UnitModeSelection::both();
+        let visibility = CatalogVisibility::default();
+        let melee_ids = browse(Race::Human, melee_only, visibility);
+        let both_ids = browse(Race::Human, both, visibility);
+        assert!(
+            both_ids.len() > melee_ids.len(),
+            "campaign holds human units melee does not, so selecting both must widen the list; \
+             this is the whole point of the modes being independent rather than a switch"
+        );
+    }
+
+    #[test]
+    fn browsing_no_mode_lists_nothing() {
+        let neither = UnitModeSelection {
+            melee: false,
+            campaign: false,
+        };
+        let visibility = CatalogVisibility::default();
+        let ids = browse(Race::Human, neither, visibility);
+        assert!(
+            ids.is_empty(),
+            "a selection that admits no mode admits no unit"
+        );
+    }
+
+    #[test]
+    fn a_search_spans_both_modes_whatever_the_browse_selected() {
+        let melee_only = UnitModeSelection::only(UnitMode::Melee);
+        let browse_scope = Scope::Browse { modes: melee_only };
+        let search_scope = Scope::Search {
+            field: SearchField::UnitName,
+            query: "a",
+        };
+        assert_eq!(
+            browse_scope.modes(),
+            melee_only,
+            "a browse lists exactly what it selected"
+        );
+        assert_eq!(
+            search_scope.modes(),
+            UnitModeSelection::both(),
+            "a hit may be a campaign unit even while the browse behind it shows melee"
+        );
+    }
+
     const RALLY_ONLY: [&str; 7] = ["ndmg", "ndke", "ndkw", "ndrb", "ndh3", "ndh4", "nheb"];
 
     #[test]
     fn rally_only_buildings_hidden_in_curated_browsing() {
-        let visible = browse(
-            Race::Neutral,
-            UnitMode::Campaign,
-            CatalogVisibility::default(),
-        );
+        let campaign = UnitModeSelection::only(UnitMode::Campaign);
+        let visible = browse(Race::Neutral, campaign, CatalogVisibility::default());
         for placeholder in RALLY_ONLY {
             assert!(!has(&visible, placeholder), "{placeholder} must be hidden");
         }
@@ -295,14 +364,12 @@ mod tests {
 
     #[test]
     fn rally_only_buildings_surface_with_abilityless() {
-        let visible = browse(
-            Race::Neutral,
-            UnitMode::Campaign,
-            CatalogVisibility {
-                include_abilityless: true,
-                expand_variants: false,
-            },
-        );
+        let campaign = UnitModeSelection::only(UnitMode::Campaign);
+        let visibility = CatalogVisibility {
+            include_abilityless: true,
+            expand_variants: false,
+        };
+        let visible = browse(Race::Neutral, campaign, visibility);
         for placeholder in RALLY_ONLY {
             assert!(has(&visible, placeholder), "{placeholder} must surface");
         }
@@ -335,7 +402,7 @@ mod tests {
     fn expand_variants_lists_ability_bearing_members() {
         let expanded = browse(
             Race::Orc,
-            UnitMode::Melee,
+            UnitModeSelection::only(UnitMode::Melee),
             CatalogVisibility {
                 include_abilityless: false,
                 expand_variants: true,
@@ -352,12 +419,16 @@ mod tests {
             include_abilityless: false,
             expand_variants: true,
         };
-        let expanded = browse(Race::Orc, UnitMode::Melee, expand_only);
+        let expanded = browse(
+            Race::Orc,
+            UnitModeSelection::only(UnitMode::Melee),
+            expand_only,
+        );
         assert!(has(&expanded, "otbk"));
         assert!(!has(&expanded, "ohun"), "ability-less base stays gated");
         let both = browse(
             Race::Orc,
-            UnitMode::Melee,
+            UnitModeSelection::only(UnitMode::Melee),
             CatalogVisibility {
                 include_abilityless: true,
                 expand_variants: true,
@@ -370,7 +441,7 @@ mod tests {
     fn include_abilityless_reveals_placeholders_as_a_superset() {
         let revealed = browse(
             Race::Neutral,
-            UnitMode::Melee,
+            UnitModeSelection::only(UnitMode::Melee),
             CatalogVisibility {
                 include_abilityless: true,
                 expand_variants: false,
@@ -476,7 +547,7 @@ mod tests {
             race: Some(Race::Human),
             kind: Some(UnitKind::Soldier),
             scope: Scope::Browse {
-                mode: UnitMode::Melee,
+                modes: UnitModeSelection::only(UnitMode::Melee),
             },
             ..UnitQuery::default()
         });
@@ -497,7 +568,7 @@ mod tests {
                 race: Some(race),
                 kind: Some(UnitKind::Building),
                 scope: Scope::Browse {
-                    mode: UnitMode::Melee,
+                    modes: UnitModeSelection::only(UnitMode::Melee),
                 },
                 ..UnitQuery::default()
             });
