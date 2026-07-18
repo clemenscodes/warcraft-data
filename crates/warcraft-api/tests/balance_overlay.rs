@@ -27,16 +27,19 @@
 
 #[cfg(test)]
 mod tests {
-    use warcraft_api::{Race, Scope, UnitMode, UnitQuery, WarcraftApi, WarcraftObjectMeta};
+    use warcraft_api::{
+        Race, RaceSelection, Scope, UnitMode, UnitModeSelection, UnitQuery, WarcraftApi,
+        WarcraftObjectMeta,
+    };
 
     /// The ids a curated Melee browse lists for a race.
     fn melee_browse_ids(race: Race) -> Vec<String> {
         WarcraftApi::default()
             .unit()
             .list(&UnitQuery {
-                race: Some(race),
+                races: RaceSelection::only(race),
                 scope: Scope::Browse {
-                    mode: UnitMode::Melee,
+                    modes: UnitModeSelection::only(UnitMode::Melee),
                 },
                 ..UnitQuery::default()
             })
@@ -336,9 +339,9 @@ mod tests {
             Race::Neutral,
         ] {
             let entries = WarcraftApi::default().unit().list(&UnitQuery {
-                race: Some(race),
+                races: RaceSelection::only(race),
                 scope: Scope::Browse {
-                    mode: UnitMode::Melee,
+                    modes: UnitModeSelection::only(UnitMode::Melee),
                 },
                 ..UnitQuery::default()
             });

@@ -4,7 +4,9 @@
 
 use crate::application::unit::command_card::command_card;
 use crate::application::unit::listing;
+use crate::application::unit::listing::mode_selection::UnitModeSelection;
 use crate::application::unit::listing::query::{Scope, UnitQuery};
+use crate::application::unit::listing::race_selection::RaceSelection;
 use crate::application::unit::variant::variant_index;
 use crate::application::view::ability::AbilityView;
 use crate::application::view::command::CommandView;
@@ -13,7 +15,6 @@ use crate::domain::identity::WarcraftObjectId;
 use crate::domain::object::WarcraftObjectMeta;
 use crate::domain::race::Race;
 use crate::domain::statistics::Evasion;
-use crate::domain::unit::UnitMode;
 use crate::infrastructure::database::WarcraftDatabase;
 
 /// Root and Uproot are the two states of one ability; every uprootable Night Elf
@@ -172,10 +173,10 @@ impl UnitApi {
 
     /// The natural default selection for a race/mode browse: the first unit a
     /// curated listing would show.
-    pub fn default_unit(&self, race: Race, mode: UnitMode) -> Option<UnitView> {
+    pub fn default_unit(&self, race: Race, modes: UnitModeSelection) -> Option<UnitView> {
         self.list(&UnitQuery {
-            race: Some(race),
-            scope: Scope::Browse { mode },
+            races: RaceSelection::only(race),
+            scope: Scope::Browse { modes },
             ..UnitQuery::default()
         })
         .into_iter()

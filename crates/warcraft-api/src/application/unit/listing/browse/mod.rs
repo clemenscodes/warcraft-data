@@ -4,15 +4,16 @@
 //! (ARCHITECTURE R3), so it lives here. The renderer hands over the raw browse
 //! inputs and reads back the already-shaped [`UnitListing`].
 
-use crate::{CatalogVisibility, Scope, SearchField, UnitMode, UnitQuery, WarcraftApi};
-use crate::{Race, UnitKind, WarcraftObjectId};
+use crate::application::unit::listing::race_selection::RaceSelection;
+use crate::{CatalogVisibility, Scope, SearchField, UnitModeSelection, UnitQuery, WarcraftApi};
+use crate::{Race, UnitKind, UnitView, WarcraftObjectId};
 
 /// The inputs to a unit-list browse: the active race and mode, the current
 /// search query and the field it searches, and whether hidden units are shown.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct UnitListingRequest {
     race: Race,
-    mode: UnitMode,
+    modes: UnitModeSelection,
     search_query: String,
     search_field: SearchField,
     visibility: CatalogVisibility,
@@ -22,14 +23,14 @@ impl UnitListingRequest {
     /// Build a browse request from the current list-view inputs.
     pub fn new(
         race: Race,
-        mode: UnitMode,
+        modes: UnitModeSelection,
         search_query: String,
         search_field: SearchField,
         visibility: CatalogVisibility,
     ) -> Self {
         Self {
             race,
-            mode,
+            modes,
             search_query,
             search_field,
             visibility,
@@ -40,6 +41,34 @@ impl UnitListingRequest {
     /// race and mode, so it drops the race and mode filters.
     fn is_searching(&self) -> bool {
         !self.search_query.is_empty()
+    }
+
+    /// The catalog query these inputs describe, across every category.
+    ///
+    /// Searching drops the race and the mode: the scope becomes a cross-mode
+    /// [`Scope::Search`] and the race goes to `None`. That rule is subtle enough
+    /// that it lives here once rather than in each caller's `resolve`.
+    fn catalog_query(&self) -> UnitQuery<'_> {
+        let searching = self.is_searching();
+        let races = if searching {
+            RaceSelection::All
+        } else {
+            RaceSelection::only(self.race)
+        };
+        let scope = if searching {
+            Scope::Search {
+                field: self.search_field,
+                query: self.search_query.as_str(),
+            }
+        } else {
+            Scope::Browse { modes: self.modes }
+        };
+        UnitQuery {
+            races,
+            kind: None,
+            visibility: self.visibility,
+            scope,
+        }
     }
 }
 
@@ -69,25 +98,12 @@ pub struct UnitListing {
     first_result: Option<UnitListingEntry>,
 }
 
-impl UnitListing {
+impl From<&UnitListingRequest> for UnitListing {
     /// Browse the catalog for the given request and shape the result: walk the
     /// entries once, collecting each distinct category in first-seen order and
     /// remembering the very first entry.
-    pub fn resolve(request: &UnitListingRequest) -> Self {
-        let searching = request.is_searching();
-        let query = UnitQuery {
-            race: if searching { None } else { Some(request.race) },
-            kind: None,
-            visibility: request.visibility,
-            scope: if searching {
-                Scope::Search {
-                    field: request.search_field,
-                    query: request.search_query.as_str(),
-                }
-            } else {
-                Scope::Browse { mode: request.mode }
-            },
-        };
+    fn from(request: &UnitListingRequest) -> Self {
+        let query = request.catalog_query();
         let entries = WarcraftApi::default().unit().list(&query);
         let mut category_kinds: Vec<UnitKind> = Vec::new();
         let mut first_result: Option<UnitListingEntry> = None;
@@ -110,7 +126,9 @@ impl UnitListing {
             first_result,
         }
     }
+}
 
+impl UnitListing {
     pub fn category_kinds(&self) -> &[UnitKind] {
         &self.category_kinds
     }
@@ -125,7 +143,7 @@ impl UnitListing {
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct UnitCategoryRequest {
     race: Race,
-    mode: UnitMode,
+    modes: UnitModeSelection,
     category_kind: UnitKind,
     search_query: String,
     search_field: SearchField,
@@ -136,7 +154,7 @@ impl UnitCategoryRequest {
     /// Build a per-category browse request.
     pub fn new(
         race: Race,
-        mode: UnitMode,
+        modes: UnitModeSelection,
         category_kind: UnitKind,
         search_query: String,
         search_field: SearchField,
@@ -144,7 +162,7 @@ impl UnitCategoryRequest {
     ) -> Self {
         Self {
             race,
-            mode,
+            modes,
             category_kind,
             search_query,
             search_field,
@@ -187,18 +205,42 @@ impl UnitCategoryEntry {
     }
 }
 
+impl From<&UnitView> for UnitCategoryEntry {
+    fn from(view: &UnitView) -> Self {
+        let names = view.names();
+        let first_name = names.first().copied().unwrap_or("(unnamed)");
+        let display_name = first_name.to_owned();
+        let icons = view.icons();
+        let first_icon = icons.first().copied();
+        let icon_database_path = first_icon.map(|icon_path| icon_path.to_owned());
+        let unit_id = view.id();
+        let unit_kind = view.effective_kind();
+        Self {
+            unit_id,
+            unit_kind,
+            display_name,
+            icon_database_path,
+        }
+    }
+}
+
 /// The units of one category, shaped for the list view's cards.
 #[derive(Clone, Debug, PartialEq, Eq, Default)]
 pub struct UnitCategoryListing {
     entries: Vec<UnitCategoryEntry>,
 }
 
-impl UnitCategoryListing {
+impl From<&UnitCategoryRequest> for UnitCategoryListing {
     /// Browse the catalog for one category and shape each entry into card data.
-    pub fn resolve(request: &UnitCategoryRequest) -> Self {
+    fn from(request: &UnitCategoryRequest) -> Self {
         let searching = request.is_searching();
+        let races = if searching {
+            RaceSelection::All
+        } else {
+            RaceSelection::only(request.race)
+        };
         let query = UnitQuery {
-            race: if searching { None } else { Some(request.race) },
+            races,
             kind: Some(request.category_kind),
             visibility: request.visibility,
             scope: if searching {
@@ -207,29 +249,42 @@ impl UnitCategoryListing {
                     query: request.search_query.as_str(),
                 }
             } else {
-                Scope::Browse { mode: request.mode }
+                Scope::Browse {
+                    modes: request.modes,
+                }
             },
         };
         let catalog_entries = WarcraftApi::default().unit().list(&query);
         let mut entries: Vec<UnitCategoryEntry> = Vec::new();
         for catalog_entry in catalog_entries {
-            let names = catalog_entry.names();
-            let first_name = names.first().copied().unwrap_or("(unnamed)");
-            let display_name = first_name.to_owned();
-            let icons = catalog_entry.icons();
-            let first_icon = icons.first().copied();
-            let icon_database_path = first_icon.map(|icon_path| icon_path.to_owned());
-            let unit_id = catalog_entry.id();
-            let unit_kind = catalog_entry.effective_kind();
-            let entry = UnitCategoryEntry {
-                unit_id,
-                unit_kind,
-                display_name,
-                icon_database_path,
-            };
+            let entry = UnitCategoryEntry::from(&catalog_entry);
             entries.push(entry);
         }
         Self { entries }
+    }
+}
+
+impl UnitCategoryListing {
+    pub fn entries(&self) -> &[UnitCategoryEntry] {
+        &self.entries
+    }
+
+    pub fn into_entries(self) -> Vec<UnitCategoryEntry> {
+        self.entries
+    }
+}
+
+/// One category of a catalog browse: the kind, and the units listed under it in
+/// the catalog's own order.
+#[derive(Clone, Debug, PartialEq, Eq, Default)]
+pub struct UnitCatalogGroup {
+    category_kind: UnitKind,
+    entries: Vec<UnitCategoryEntry>,
+}
+
+impl UnitCatalogGroup {
+    pub fn category_kind(&self) -> UnitKind {
+        self.category_kind
     }
 
     pub fn entries(&self) -> &[UnitCategoryEntry] {
@@ -241,7 +296,88 @@ impl UnitCategoryListing {
     }
 }
 
+/// A whole browse in one pass: every category with its units, plus the first
+/// result.
+///
+/// This exists because the pair [`UnitListing`] + one [`UnitCategoryListing`]
+/// per category asks the same question N+1 times: the caller resolves the
+/// categories, then re-scans the whole database once per category to fill it.
+/// One pass answers both.
+///
+/// It also removes a disagreement the split *allows*, even though the bundled
+/// database never triggers it (checked exhaustively over every one-, two- and
+/// three-letter query): `suppress_fuzzy` runs across the whole candidate set, so
+/// a per-category query re-runs it over that category alone and could keep a
+/// fuzzy match the full browse dropped. Grouping one pass makes the categories
+/// and their contents agree by construction rather than by luck.
+///
+/// Groups come out in first-seen order. A search sorts by
+/// [`UnitKind::search_sort_priority`], which sinks campaign units below melee
+/// ones and so lists a kind twice, non-adjacently; the runs are merged back into
+/// that kind's one group.
+#[derive(Clone, Debug, PartialEq, Eq, Default)]
+pub struct UnitCatalogListing {
+    groups: Vec<UnitCatalogGroup>,
+    first_result: Option<UnitListingEntry>,
+}
+
+impl From<&UnitListingRequest> for UnitCatalogListing {
+    /// Browse the catalog once and shape every entry into its category's group.
+    fn from(request: &UnitListingRequest) -> Self {
+        let query = request.catalog_query();
+        let catalog_entries = WarcraftApi::default().unit().list(&query);
+        let mut groups: Vec<UnitCatalogGroup> = Vec::new();
+        let mut first_result: Option<UnitListingEntry> = None;
+        for catalog_entry in catalog_entries {
+            let entry = UnitCategoryEntry::from(&catalog_entry);
+            let entry_kind = entry.unit_kind();
+            if first_result.is_none() {
+                let unit_id = entry.unit_id();
+                let first_entry = UnitListingEntry {
+                    unit_id,
+                    unit_kind: entry_kind,
+                };
+                first_result = Some(first_entry);
+            }
+            let existing = groups
+                .iter_mut()
+                .find(|group| group.category_kind == entry_kind);
+            match existing {
+                Some(group) => group.entries.push(entry),
+                None => {
+                    let entries = vec![entry];
+                    let group = UnitCatalogGroup {
+                        category_kind: entry_kind,
+                        entries,
+                    };
+                    groups.push(group);
+                }
+            }
+        }
+        Self {
+            groups,
+            first_result,
+        }
+    }
+}
+
+impl UnitCatalogListing {
+    pub fn groups(&self) -> &[UnitCatalogGroup] {
+        &self.groups
+    }
+
+    pub fn into_groups(self) -> Vec<UnitCatalogGroup> {
+        self.groups
+    }
+
+    pub fn first_result(&self) -> Option<&UnitListingEntry> {
+        self.first_result.as_ref()
+    }
+}
+
 impl ddd::ReadModel for UnitListing {}
+
+impl ddd::ReadModel for UnitCatalogListing {}
 
 #[cfg(test)]
 mod tests {
@@ -258,12 +394,12 @@ mod tests {
     fn human_melee_browse_yields_categories_and_a_first_result() {
         let request = UnitListingRequest::new(
             Race::Human,
-            UnitMode::Melee,
+            UnitModeSelection::default(),
             String::new(),
             SearchField::UnitName,
             full_visibility(),
         );
-        let listing = UnitListing::resolve(&request);
+        let listing = UnitListing::from(&request);
         assert!(
             !listing.category_kinds().is_empty(),
             "a human melee browse should surface at least one category"
@@ -282,12 +418,12 @@ mod tests {
     fn category_kinds_are_deduped() {
         let request = UnitListingRequest::new(
             Race::Human,
-            UnitMode::Melee,
+            UnitModeSelection::default(),
             String::new(),
             SearchField::UnitName,
             full_visibility(),
         );
-        let listing = UnitListing::resolve(&request);
+        let listing = UnitListing::from(&request);
         let mut seen = listing.category_kinds().to_vec();
         seen.sort();
         let unique_len = {
@@ -301,29 +437,133 @@ mod tests {
         );
     }
 
+    fn human_melee_request() -> UnitListingRequest {
+        UnitListingRequest::new(
+            Race::Human,
+            UnitModeSelection::default(),
+            String::new(),
+            SearchField::UnitName,
+            full_visibility(),
+        )
+    }
+
+    fn search_request(search_query: &str) -> UnitListingRequest {
+        let owned_query = search_query.to_owned();
+        UnitListingRequest::new(
+            Race::Human,
+            UnitModeSelection::default(),
+            owned_query,
+            SearchField::UnitName,
+            full_visibility(),
+        )
+    }
+
+    #[test]
+    fn catalog_groups_agree_with_the_listing_categories() {
+        let request = human_melee_request();
+        let listing = UnitListing::from(&request);
+        let catalog = UnitCatalogListing::from(&request);
+        let grouped_kinds: Vec<UnitKind> = catalog
+            .groups()
+            .iter()
+            .map(|group| group.category_kind())
+            .collect();
+        assert_eq!(
+            grouped_kinds,
+            listing.category_kinds().to_vec(),
+            "the grouped catalog must surface exactly the listing's categories, in the same order"
+        );
+    }
+
+    #[test]
+    fn catalog_first_result_agrees_with_the_listing() {
+        let request = human_melee_request();
+        let listing = UnitListing::from(&request);
+        let catalog = UnitCatalogListing::from(&request);
+        assert_eq!(
+            catalog.first_result(),
+            listing.first_result(),
+            "both browses walk the same catalog, so they must agree on the first result"
+        );
+    }
+
+    #[test]
+    fn every_group_holds_only_units_of_its_own_category() {
+        let request = human_melee_request();
+        let catalog = UnitCatalogListing::from(&request);
+        assert!(!catalog.groups().is_empty(), "a human melee browse groups");
+        for group in catalog.groups() {
+            assert!(
+                !group.entries().is_empty(),
+                "a group must never be empty: an empty group renders as a heading with nothing under it"
+            );
+            for entry in group.entries() {
+                assert_eq!(entry.unit_kind(), group.category_kind());
+                assert!(!entry.display_name().is_empty());
+            }
+        }
+    }
+
+    #[test]
+    fn no_category_is_grouped_twice() {
+        let request = search_request("a");
+        let catalog = UnitCatalogListing::from(&request);
+        let mut kinds: Vec<UnitKind> = catalog
+            .groups()
+            .iter()
+            .map(|group| group.category_kind())
+            .collect();
+        let grouped_count = kinds.len();
+        kinds.sort();
+        kinds.dedup();
+        assert_eq!(
+            kinds.len(),
+            grouped_count,
+            "a search sorts campaign units below melee ones, so a kind appears twice \
+             non-adjacently in the sort order; those runs must merge into one group"
+        );
+    }
+
+    #[test]
+    fn a_search_keeps_every_matching_unit_across_the_groups() {
+        let request = search_request("a");
+        let query = request.catalog_query();
+        let expected = WarcraftApi::default().unit().list(&query).len();
+        let catalog = UnitCatalogListing::from(&request);
+        let grouped: usize = catalog
+            .groups()
+            .iter()
+            .map(|group| group.entries().len())
+            .sum();
+        assert_eq!(
+            grouped, expected,
+            "grouping must partition the catalog pass, never drop or duplicate an entry"
+        );
+    }
+
     #[test]
     fn category_browse_yields_named_entries() {
         let listing_request = UnitListingRequest::new(
             Race::Human,
-            UnitMode::Melee,
+            UnitModeSelection::default(),
             String::new(),
             SearchField::UnitName,
             full_visibility(),
         );
-        let listing = UnitListing::resolve(&listing_request);
+        let listing = UnitListing::from(&listing_request);
         let category_kind = *listing
             .category_kinds()
             .first()
             .expect("human melee should have at least one category");
         let category_request = UnitCategoryRequest::new(
             Race::Human,
-            UnitMode::Melee,
+            UnitModeSelection::default(),
             category_kind,
             String::new(),
             SearchField::UnitName,
             full_visibility(),
         );
-        let category_listing = UnitCategoryListing::resolve(&category_request);
+        let category_listing = UnitCategoryListing::from(&category_request);
         assert!(
             !category_listing.entries().is_empty(),
             "the first category should contain at least one unit"

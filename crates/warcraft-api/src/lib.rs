@@ -6,12 +6,14 @@ pub use application::ability::AbilityApi;
 pub use application::api::WarcraftApi;
 pub use application::command::CommandApi;
 pub use application::unit::UnitApi;
+pub use application::unit::listing::mode_selection::UnitModeSelection;
 pub use application::unit::listing::query::{Scope, UnitQuery};
+pub use application::unit::listing::race_selection::RaceSelection;
 pub use application::unit::listing::search_field::SearchField;
 pub use application::unit::listing::visibility::CatalogVisibility;
 pub use application::unit::{
-    UnitCategoryEntry, UnitCategoryListing, UnitCategoryRequest, UnitListing, UnitListingEntry,
-    UnitListingRequest,
+    UnitCatalogGroup, UnitCatalogListing, UnitCategoryEntry, UnitCategoryListing,
+    UnitCategoryRequest, UnitListing, UnitListingEntry, UnitListingRequest,
 };
 pub use application::view::ability::AbilityView;
 pub use application::view::command::CommandView;
@@ -58,7 +60,7 @@ pub use domain::race::{AllRaces, Race};
 pub use domain::statistics::{
     ArmorFigure, AttackRange, AttackSpeed, AttackStatistics, AttributeStatistic, DamagePerSecond,
     DamageRange, EffectiveHitPoints, Evasion, Gain, HeroStatistics, HitPoints, HitPointsRegen,
-    Mana, ManaRegen, Matchup, MatchupStrength, UnitStatistics,
+    Mana, ManaRegen, Matchup, MatchupPairing, MatchupStrength, UnitStatistics,
 };
 pub use domain::unit::hero::{
     AttributeBase, AttributeGrowth, HeroAttributes, ManaPool, PrimaryAttribute,

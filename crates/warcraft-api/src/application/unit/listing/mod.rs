@@ -94,9 +94,8 @@ fn evaluate(
     let WarcraftObjectMeta::Unit(meta) = object.meta() else {
         return None;
     };
-    if let Some(race) = query.race
-        && object.race() != Some(race)
-    {
+    let object_race = object.race();
+    if !query.races.admits(object_race) {
         return None;
     }
     let selected_modes = query.scope.modes();
@@ -241,6 +240,7 @@ mod tests {
     use crate::WarcraftApi;
     use crate::application::unit::listing::mode_selection::UnitModeSelection;
     use crate::application::unit::listing::query::{Scope, UnitQuery};
+    use crate::application::unit::listing::race_selection::RaceSelection;
     use crate::application::unit::listing::search_field::SearchField;
     use crate::application::unit::listing::visibility::CatalogVisibility;
     use crate::domain::race::Race;
@@ -257,7 +257,7 @@ mod tests {
 
     fn browse(race: Race, modes: UnitModeSelection, visibility: CatalogVisibility) -> Vec<String> {
         ids(&UnitQuery {
-            race: Some(race),
+            races: RaceSelection::only(race),
             visibility,
             scope: Scope::Browse { modes },
             ..UnitQuery::default()
@@ -544,7 +544,7 @@ mod tests {
     #[test]
     fn soldiers_sort_by_in_game_tech_tier() {
         let soldiers = ids(&UnitQuery {
-            race: Some(Race::Human),
+            races: RaceSelection::only(Race::Human),
             kind: Some(UnitKind::Soldier),
             scope: Scope::Browse {
                 modes: UnitModeSelection::only(UnitMode::Melee),
@@ -565,7 +565,7 @@ mod tests {
         ];
         for (race, chain) in chains {
             let buildings = ids(&UnitQuery {
-                race: Some(race),
+                races: RaceSelection::only(race),
                 kind: Some(UnitKind::Building),
                 scope: Scope::Browse {
                     modes: UnitModeSelection::only(UnitMode::Melee),
