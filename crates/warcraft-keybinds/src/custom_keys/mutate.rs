@@ -35,7 +35,6 @@ impl CustomKeys {
         let new_position = GridCoordinate::new(column_index, row_index);
         match slot {
             GridSlotId::Ability(ability_id) => {
-                let is_passive = WarcraftApi::default().is_passive_ability(ability_id.object_id());
                 let grid_hotkey = Self::grid_hotkey_for(*ability_id, letter);
                 if let Some(binding) = self.binding_or_default_mut(*ability_id) {
                     if is_research_context {
@@ -45,7 +44,7 @@ impl CustomKeys {
                         }
                     } else {
                         binding.set_button_position(Some(new_position));
-                        if assign_hotkey && !is_passive {
+                        if assign_hotkey {
                             binding.set_hotkey(Some(grid_hotkey));
                         }
                     }
@@ -231,14 +230,10 @@ impl CustomKeys {
             self.commands_in_order().map(|entry| entry.name()).collect();
         for ability_id in &ability_ids {
             let bound_ability_id = *ability_id;
-            let is_passive = WarcraftApi::default().is_passive_ability(ability_id.object_id());
-            let button_position = if is_passive {
-                None
-            } else {
-                self.binding(bound_ability_id)
-                    .and_then(|binding| binding.button_position())
-                    .copied()
-            };
+            let button_position = self
+                .binding(bound_ability_id)
+                .and_then(|binding| binding.button_position())
+                .copied();
             let research_button_position = self
                 .binding(bound_ability_id)
                 .and_then(|binding| binding.research_button_position())

@@ -20,7 +20,7 @@ pub(crate) mod values;
 
 pub use attack::AttackStatistics;
 pub use hero::{AttributeStatistic, HeroStatistics};
-pub use matchup::{Matchup, MatchupStrength};
+pub use matchup::{Matchup, MatchupPairing, MatchupStrength};
 pub use unit_statistics::UnitStatistics;
 pub use values::{
     ArmorFigure, AttackRange, AttackSpeed, DamagePerSecond, DamageRange, EffectiveHitPoints,

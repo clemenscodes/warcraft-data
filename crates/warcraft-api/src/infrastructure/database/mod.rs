@@ -12,6 +12,7 @@ use std::collections::{BTreeMap, HashMap};
 
 use warcraft_primitives::Identifier;
 
+use crate::domain::ability::MAX_ABILITY_LEVEL;
 use crate::domain::identity::WarcraftObjectId;
 use crate::domain::object::{WarcraftObject, WarcraftObjectKind, WarcraftObjectMeta};
 
@@ -127,7 +128,7 @@ impl WarcraftDatabase {
         }
     }
 
-    pub fn get_ability_cooldowns(&self, id: Identifier) -> Option<[u32; 4]> {
+    pub fn get_ability_cooldowns(&self, id: Identifier) -> Option<[u32; MAX_ABILITY_LEVEL]> {
         match self.get(id)?.meta() {
             WarcraftObjectMeta::Ability(meta) => Some(meta.cooldowns()),
             _ => None,

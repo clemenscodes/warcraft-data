@@ -12,7 +12,7 @@ use crate::unit::slots::UnitCommandSlots;
 use std::collections::HashSet;
 use std::sync::OnceLock;
 use warcraft_api::WarcraftApi;
-use warcraft_api::{BUILD_COMMAND_MIRRORS, MORPH_ABILITY_MIRRORS};
+use warcraft_api::{BUILD_COMMAND_MIRRORS, MORPH_ABILITY_MIRRORS, TALENT_VARIANTS};
 use warcraft_api::{WarcraftObjectId, WarcraftObjectKind, WarcraftObjectMeta};
 
 impl CustomKeys {
@@ -24,6 +24,7 @@ impl CustomKeys {
         result.mirror_build_commands_to_abilities();
         result.mirror_morph_abilities_to_unit_commands();
         result.sync_mirrored_off_states();
+        result.mirror_talent_variants_from_bases();
         result.materialize_upgrade_hotkey_tiers();
         result
     }
@@ -158,6 +159,37 @@ impl CustomKeys {
             produced_binding.set_button_position(button_position);
             produced_binding.set_hotkey(hotkey);
             self.put_ability(produced_unit_id, produced_binding);
+        }
+    }
+
+    /// Copies each hero talent's base keybind onto the talent (see
+    /// [`warcraft_api::TalentVariant`]). A picked talent replaces its base on the
+    /// same command card button and the live game then reads the talent's own
+    /// section, so without this mirror the button falls back to Blizzard's
+    /// default the moment the talent is chosen. The editor never shows a talent
+    /// on its own; it always follows its base.
+    fn mirror_talent_variants_from_bases(&mut self) {
+        for talent_variant in TALENT_VARIANTS {
+            let base_id = talent_variant.base_id();
+            let Some(base_binding) = self.binding(base_id) else {
+                continue;
+            };
+            let button_position = base_binding.button_position().copied();
+            let unbutton_position = base_binding.unbutton_position().copied();
+            let research_button_position = base_binding.research_button_position().copied();
+            let hotkey = base_binding.hotkey().cloned();
+            let unhotkey = base_binding.unhotkey().cloned();
+            let research_hotkey = base_binding.research_hotkey().cloned();
+            let variant_id = talent_variant.variant_id();
+            let existing_binding = self.binding(variant_id).cloned();
+            let mut variant_binding = existing_binding.unwrap_or_default();
+            variant_binding.set_button_position(button_position);
+            variant_binding.set_unbutton_position(unbutton_position);
+            variant_binding.set_research_button_position(research_button_position);
+            variant_binding.set_hotkey(hotkey);
+            variant_binding.set_unhotkey(unhotkey);
+            variant_binding.set_research_hotkey(research_hotkey);
+            self.put_ability(variant_id, variant_binding);
         }
     }
 

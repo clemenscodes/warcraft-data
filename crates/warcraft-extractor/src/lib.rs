@@ -3,6 +3,7 @@ mod ability_defaults;
 mod command_defaults;
 mod data_tables;
 mod db;
+mod default_hotkeys;
 mod default_positions;
 pub mod fixed_point;
 mod gameplay_constants;
@@ -13,6 +14,7 @@ mod object_texts;
 mod skins;
 mod strings;
 mod system_keybinds;
+mod talent_variants;
 mod unit_abilities;
 mod unit_data;
 mod unit_ui_flags;
@@ -28,6 +30,7 @@ pub use abilities::*;
 pub use ability_defaults::*;
 pub use command_defaults::*;
 pub use data_tables::*;
+pub use default_hotkeys::*;
 pub use default_positions::*;
 pub use gameplay_constants::*;
 pub use heroes::*;
@@ -36,6 +39,7 @@ pub use object_texts::*;
 pub use skins::*;
 pub use strings::*;
 pub use system_keybinds::*;
+pub use talent_variants::*;
 pub use unit_abilities::*;
 pub use unit_data::*;
 pub use unit_ui_flags::*;
@@ -45,7 +49,7 @@ pub use upgrades::*;
 
 pub use game::GAME_EXTRACTION_RULE;
 
-pub use image::{DdsDecoder, ExtractedImage};
+pub use image::{BlpDecoder, DdsDecoder, ExtractedImage};
 
 pub use db::WarcraftDataAggregation;
 pub use ir::*;
@@ -76,6 +80,8 @@ pub enum ExtractResult {
     DefaultPositions(DefaultPositionsDatabase),
     ObjectTexts(ObjectTextDatabase),
     SystemKeybinds(SystemKeybindsDatabase),
+    LocalizedDefaultHotkeys(DefaultHotkeysDatabase),
+    ShippedDefaultHotkeys(DefaultHotkeysDatabase),
     Items(ItemDatabase),
     AbilitySkin(AbilitySkins),
     ItemSkin(ItemSkins),
@@ -124,6 +130,9 @@ pub enum ExtractError {
 
     #[error("unsupported DDS format: {0:?}")]
     UnsupportedFormat(Option<DxgiFormat>),
+
+    #[error("unsupported or malformed BLP image")]
+    UnsupportedBlp,
 
     #[error(transparent)]
     Casc(#[from] CascError),

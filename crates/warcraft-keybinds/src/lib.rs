@@ -81,17 +81,19 @@ mod ddd_conformance;
 #[cfg(test)]
 pub(crate) mod test_support {
     use crate::identity::slot::GridSlotId;
-    use warcraft_api::{WARCRAFT_SYSTEM_KEYBINDS, WarcraftApi, WarcraftObjectId};
+    use warcraft_api::{TALENT_VARIANTS, WARCRAFT_SYSTEM_KEYBINDS, WarcraftApi, WarcraftObjectId};
 
     /// Resolve a raw id string to its typed id via the database. Object ids come
     /// from [`WarcraftApi::default().resolve`]; system-keybind section ids (which are
     /// not entries in the object map, e.g. `Ctr1`/`QuickSave`) come from the
-    /// system-keybind table. Panics on an unknown string — proving the id was
+    /// system-keybind table, hero talent section ids (e.g. `AHq1`) from the
+    /// talent-variant table. Panics on an unknown string, proving the id was
     /// obtained from the database, never fabricated.
     pub(crate) fn object_id(raw_id: &str) -> WarcraftObjectId {
         WarcraftApi::default()
             .resolve(raw_id)
             .or_else(|| resolve_system_section(raw_id))
+            .or_else(|| resolve_talent_section(raw_id))
             .unwrap_or_else(|| panic!("no known object or system-section id for {raw_id:?}"))
     }
 
@@ -100,6 +102,13 @@ pub(crate) mod test_support {
             .iter()
             .map(|system_keybind| system_keybind.section_id())
             .find(|section_id| section_id.value().eq_ignore_ascii_case(raw_id))
+    }
+
+    fn resolve_talent_section(raw_id: &str) -> Option<WarcraftObjectId> {
+        TALENT_VARIANTS
+            .iter()
+            .map(|talent_variant| talent_variant.variant_id())
+            .find(|variant_id| variant_id.value().eq_ignore_ascii_case(raw_id))
     }
 
     pub(crate) fn ability_slot(raw_id: &str) -> GridSlotId {

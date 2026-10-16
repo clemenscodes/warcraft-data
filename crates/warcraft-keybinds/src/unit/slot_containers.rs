@@ -23,10 +23,10 @@ pub struct UnitSlotContainers {
     train_upgrades: HashMap<WarcraftObjectId, WarcraftObjectId>,
 }
 
-impl UnitSlotContainers {
+impl From<WarcraftObjectId> for UnitSlotContainers {
     /// Resolve every container and the upgrade map for the unit with the given id.
     /// An unknown id resolves to the default object, whose command card is empty.
-    pub fn resolve(unit_id: WarcraftObjectId) -> Self {
+    fn from(unit_id: WarcraftObjectId) -> Self {
         let unit_object_id = unit_id;
         let command_card: Rc<[GridSlotId]> = WarcraftApi::default()
             .command_card(unit_object_id)
@@ -50,7 +50,9 @@ impl UnitSlotContainers {
             train_upgrades,
         }
     }
+}
 
+impl UnitSlotContainers {
     pub fn command_card(&self) -> Rc<[GridSlotId]> {
         self.command_card.clone()
     }
@@ -90,7 +92,7 @@ mod tests {
 
     #[test]
     fn footman_has_a_non_empty_command_card() {
-        let containers = UnitSlotContainers::resolve(crate::test_support::object_id("hfoo"));
+        let containers = UnitSlotContainers::from(crate::test_support::object_id("hfoo"));
         assert!(
             !containers.command_card().is_empty(),
             "the footman (hfoo) should have a populated command card"
@@ -99,14 +101,14 @@ mod tests {
 
     #[test]
     fn unknown_unit_resolves_to_empty_command_card() {
-        let containers = UnitSlotContainers::resolve(crate::test_support::object_id("AHhb"));
+        let containers = UnitSlotContainers::from(crate::test_support::object_id("AHhb"));
         assert!(containers.command_card().is_empty());
         assert!(containers.build_menu().is_none());
     }
 
     #[test]
     fn build_menu_contains_matches_its_own_slots() {
-        let containers = UnitSlotContainers::resolve(crate::test_support::object_id("hpea"));
+        let containers = UnitSlotContainers::from(crate::test_support::object_id("hpea"));
         let build_menu = containers
             .build_menu()
             .expect("the peasant (hpea) has a build menu");
@@ -121,7 +123,7 @@ mod tests {
 
     #[test]
     fn build_menu_contains_is_false_without_a_build_menu() {
-        let containers = UnitSlotContainers::resolve(crate::test_support::object_id("hfoo"));
+        let containers = UnitSlotContainers::from(crate::test_support::object_id("hfoo"));
         assert!(containers.build_menu().is_none());
         let command_card = containers.command_card();
         let slot = command_card

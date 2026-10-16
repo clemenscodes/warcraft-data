@@ -54,10 +54,29 @@ pub struct Matchup {
     strength: MatchupStrength,
 }
 
-impl Matchup {
+/// One attack type striking one defense type: the pairing a [`Matchup`] answers.
+/// A named struct, because the pairing is two values and a conversion takes one.
+#[derive(Clone, Copy, PartialEq, Debug, Default)]
+pub struct MatchupPairing {
+    attack_type: AttackType,
+    defense_type: DefenseType,
+}
+
+impl MatchupPairing {
+    pub fn new(attack_type: AttackType, defense_type: DefenseType) -> Self {
+        Self {
+            attack_type,
+            defense_type,
+        }
+    }
+}
+
+impl From<MatchupPairing> for Matchup {
     /// Resolve the matchup for an attack type striking a defense type: read the
     /// damage multiplier from the game's gameplay constants and classify its band.
-    pub fn resolve(attack_type: AttackType, defense_type: DefenseType) -> Self {
+    fn from(pairing: MatchupPairing) -> Self {
+        let attack_type = pairing.attack_type;
+        let defense_type = pairing.defense_type;
         let effectiveness = WARCRAFT_GAMEPLAY_CONSTANTS.damage_effectiveness(attack_type);
         let multiplier = effectiveness.against(defense_type).as_f32();
         let strength = MatchupStrength::from(multiplier);
@@ -66,7 +85,9 @@ impl Matchup {
             strength,
         }
     }
+}
 
+impl Matchup {
     pub fn multiplier(self) -> f32 {
         self.multiplier
     }

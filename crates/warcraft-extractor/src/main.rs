@@ -2,7 +2,7 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
 
 use clap::Parser;
-use warcraft_api::GridCoordinate;
+use warcraft_api::{GridCoordinate, MAX_ABILITY_LEVEL};
 use warcraft_extractor::fixed_point::permille_u16;
 use warcraft_extractor::*;
 
@@ -237,7 +237,7 @@ impl Preflight {
     }
 }
 
-const EXTRACTION_RULES: [ExtractionRule; 42] = [
+const EXTRACTION_RULES: [ExtractionRule; 43] = [
     HEROES_EXTRACTION_RULE,
     UNITS_EXTRACTION_RULE,
     UNIT_ABILITIES_EXTRACTION_RULE,
@@ -251,6 +251,7 @@ const EXTRACTION_RULES: [ExtractionRule; 42] = [
     DEFAULT_POSITIONS_EXTRACTION_RULE,
     OBJECT_TEXTS_EXTRACTION_RULE,
     SYSTEM_KEYBINDS_EXTRACTION_RULE,
+    DEFAULT_HOTKEYS_EXTRACTION_RULE,
     ITEMS_EXTRACTION_RULE,
     ITEM_SKINS_EXTRACTION_RULE,
     UNIT_SKINS_EXTRACTION_RULE,
@@ -285,7 +286,7 @@ const EXTRACTION_RULES: [ExtractionRule; 42] = [
 struct CodegenContext {
     str_slices: BTreeMap<String, Vec<String>>,
     id_slices: BTreeMap<String, Vec<String>>,
-    cooldown_arrays: BTreeMap<String, [u32; 4]>,
+    cooldown_arrays: BTreeMap<String, [u32; MAX_ABILITY_LEVEL]>,
 }
 
 impl CodegenContext {
@@ -309,6 +310,9 @@ impl CodegenContext {
             .map(|entry| entry.tiered_summon_units().to_vec())
             .collect();
         let unit_upgrade_swaps = aggregated_data.upgrade_swaps().clone();
+        let talent_variants = aggregated_data.talent_variants();
+        let shipped_hotkeys = aggregated_data.shipped_default_hotkeys().clone();
+        let localized_hotkeys = aggregated_data.localized_default_hotkeys().clone();
         let database: ExtractedDatabase = aggregated_data.into();
 
         let mut context = CodegenContext::new();
@@ -383,6 +387,12 @@ impl CodegenContext {
         output.push('\n');
         emit_unit_upgrade_swaps(&mut output, &unit_upgrade_swaps);
         output.push('\n');
+        emit_talent_variants(&mut output, &talent_variants);
+        output.push('\n');
+        emit_hotkeys_table(&mut output, "DEFAULT_HOTKEYS", &shipped_hotkeys);
+        output.push('\n');
+        emit_hotkeys_table(&mut output, "LOCALIZED_HOTKEYS", &localized_hotkeys);
+        output.push('\n');
         context.emit_consts(&mut output);
 
         output
@@ -402,7 +412,7 @@ impl CodegenContext {
         name
     }
 
-    fn intern_cooldowns_named(&mut self, name: String, values: [u32; 4]) -> String {
+    fn intern_cooldowns_named(&mut self, name: String, values: [u32; MAX_ABILITY_LEVEL]) -> String {
         self.cooldown_arrays.entry(name.clone()).or_insert(values);
         name
     }
@@ -426,9 +436,13 @@ impl CodegenContext {
         }
 
         for (name, values) in &self.cooldown_arrays {
+            let joined_values = values
+                .iter()
+                .map(|value| value.to_string())
+                .collect::<Vec<String>>()
+                .join(", ");
             output.push_str(&format!(
-                "const {name}: [u32; 4] = [{}, {}, {}, {}];\n",
-                values[0], values[1], values[2], values[3]
+                "const {name}: [u32; {MAX_ABILITY_LEVEL}] = [{joined_values}];\n"
             ));
         }
     }
@@ -687,15 +701,12 @@ impl CodegenContext {
                 let evasion_chances = ability_meta.evasion_chances();
                 let has_evasion = evasion_chances.iter().any(|chance| *chance > 0.0);
                 let evasion_call = if has_evasion {
-                    format!(
-                        ".with_evasion_chances([Chance::from_permille({}), \
-                         Chance::from_permille({}), Chance::from_permille({}), \
-                         Chance::from_permille({})])",
-                        permille_u16(evasion_chances[0]),
-                        permille_u16(evasion_chances[1]),
-                        permille_u16(evasion_chances[2]),
-                        permille_u16(evasion_chances[3]),
-                    )
+                    let joined_chances = evasion_chances
+                        .iter()
+                        .map(|chance| format!("Chance::from_permille({})", permille_u16(*chance)))
+                        .collect::<Vec<String>>()
+                        .join(", ");
+                    format!(".with_evasion_chances([{joined_chances}])")
                 } else {
                     String::new()
                 };
@@ -822,6 +833,60 @@ fn emit_unit_upgrade_swaps(output: &mut String, swaps: &BTreeSet<UnitUpgradeSwap
         ));
     }
     output.push_str("];\n");
+}
+
+/// Emits the `TALENT_VARIANTS` table: each entry is a hero talent paired with
+/// the hero ability it replaces on the command card (`variant` → `base`), so
+/// consumers can give every talent its base's keybind. Ordered by variant id
+/// for stable regen.
+fn emit_talent_variants(output: &mut String, talent_variants: &TalentVariantDatabase) {
+    output.push_str("pub const TALENT_VARIANTS: &[TalentVariant] = &[\n");
+    for talent_variant in talent_variants {
+        let variant_id = talent_variant.variant_id();
+        let base_id = talent_variant.base_id();
+        output.push_str(&format!(
+            "    TalentVariant::new({variant_id:?}, {base_id:?}),\n"
+        ));
+    }
+    output.push_str("];\n");
+}
+
+/// Emits one hotkeys table, ordered by section id: `DEFAULT_HOTKEYS` holds
+/// Blizzard's shipped `war3.w3mod:customkeys.txt` verbatim, `LOCALIZED_HOTKEYS`
+/// the localized `*strings.txt` values. `Some("")` marks a deliberately
+/// unbound field.
+fn emit_hotkeys_table(output: &mut String, table_name: &str, hotkeys: &DefaultHotkeysDatabase) {
+    output.push_str(&format!("pub const {table_name}: &[DefaultHotkeys] = &[\n"));
+    for (section_id, entry) in hotkeys {
+        let hotkey = DefaultHotkeysLiteral::from(entry.hotkey());
+        let unhotkey = DefaultHotkeysLiteral::from(entry.unhotkey());
+        let research_hotkey = DefaultHotkeysLiteral::from(entry.research_hotkey());
+        output.push_str(&format!(
+            "    DefaultHotkeys::new({section_id:?}, {hotkey}, {unhotkey}, {research_hotkey}),\n"
+        ));
+    }
+    output.push_str("];\n");
+}
+
+/// An optional hotkey value rendered as a Rust `Option<&'static str>` literal.
+struct DefaultHotkeysLiteral {
+    literal: String,
+}
+
+impl From<Option<&str>> for DefaultHotkeysLiteral {
+    fn from(value: Option<&str>) -> Self {
+        let literal = match value {
+            Some(text) => format!("Some({text:?})"),
+            None => String::from("None"),
+        };
+        Self { literal }
+    }
+}
+
+impl std::fmt::Display for DefaultHotkeysLiteral {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str(&self.literal)
+    }
 }
 
 fn emit_gameplay_constants(output: &mut String, constants: &warcraft_api::GameplayConstants) {

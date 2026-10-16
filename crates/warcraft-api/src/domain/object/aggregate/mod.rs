@@ -3,6 +3,7 @@
 //! [`WarcraftObjectId`], owning its kind, display text, race, and kind-specific
 //! metadata.
 
+use crate::domain::ability::MAX_ABILITY_LEVEL;
 use crate::domain::grid::GridCoordinate;
 use crate::domain::identity::WarcraftObjectId;
 use crate::domain::object::kind::WarcraftObjectKind;
@@ -185,7 +186,7 @@ impl WarcraftObject {
         }
     }
 
-    pub fn cooldowns(&self) -> Option<[u32; 4]> {
+    pub fn cooldowns(&self) -> Option<[u32; MAX_ABILITY_LEVEL]> {
         match self.meta() {
             WarcraftObjectMeta::Ability(ability_meta) => Some(ability_meta.cooldowns()),
             _ => None,

@@ -4,16 +4,21 @@ use crate::domain::grid::GridCoordinate;
 use crate::domain::identity::WarcraftObjectId;
 use crate::domain::quantity::Chance;
 
+/// The most levels a Warcraft III ability can have. Patch 3.0.0 (Forsaken)
+/// introduced five-level hero abilities; every per-level ability array is
+/// sized to this.
+pub const MAX_ABILITY_LEVEL: usize = 5;
+
 #[derive(Default, Debug, Clone, PartialEq, Eq)]
 pub struct AbilityMeta {
     max_level: usize,
     is_ultimate: bool,
-    cooldowns: [u32; 4],
+    cooldowns: [u32; MAX_ABILITY_LEVEL],
     /// Per-level chance to evade an attack, one slot per ability level. Non-zero
     /// only for evasion abilities (Evasion `AEev`, Drunken Brawler `ANdb`);
     /// every other ability leaves this all-zero. Sourced from the real
     /// `abilitydata.slk` data field, not the tooltip text.
-    evasion_chances: [Chance; 4],
+    evasion_chances: [Chance; MAX_ABILITY_LEVEL],
     default_button_position: Option<GridCoordinate>,
     default_research_button_position: Option<GridCoordinate>,
     ubertip: Option<&'static str>,
@@ -27,12 +32,16 @@ pub struct AbilityMeta {
 }
 
 impl AbilityMeta {
-    pub const fn new(max_level: usize, is_ultimate: bool, cooldowns: [u32; 4]) -> Self {
+    pub const fn new(
+        max_level: usize,
+        is_ultimate: bool,
+        cooldowns: [u32; MAX_ABILITY_LEVEL],
+    ) -> Self {
         Self {
             max_level,
             is_ultimate,
             cooldowns,
-            evasion_chances: [Chance::from_permille(0); 4],
+            evasion_chances: [Chance::from_permille(0); MAX_ABILITY_LEVEL],
             default_button_position: None,
             default_research_button_position: None,
             ubertip: None,
@@ -49,7 +58,7 @@ impl AbilityMeta {
     pub const fn with_defaults(
         max_level: usize,
         is_ultimate: bool,
-        cooldowns: [u32; 4],
+        cooldowns: [u32; MAX_ABILITY_LEVEL],
         default_button_position: Option<GridCoordinate>,
         default_research_button_position: Option<GridCoordinate>,
     ) -> Self {
@@ -57,7 +66,7 @@ impl AbilityMeta {
             max_level,
             is_ultimate,
             cooldowns,
-            evasion_chances: [Chance::from_permille(0); 4],
+            evasion_chances: [Chance::from_permille(0); MAX_ABILITY_LEVEL],
             default_button_position,
             default_research_button_position,
             ubertip: None,
@@ -74,7 +83,7 @@ impl AbilityMeta {
     pub const fn with_ubertips(
         max_level: usize,
         is_ultimate: bool,
-        cooldowns: [u32; 4],
+        cooldowns: [u32; MAX_ABILITY_LEVEL],
         default_button_position: Option<GridCoordinate>,
         default_research_button_position: Option<GridCoordinate>,
         ubertip: Option<&'static str>,
@@ -84,7 +93,7 @@ impl AbilityMeta {
             max_level,
             is_ultimate,
             cooldowns,
-            evasion_chances: [Chance::from_permille(0); 4],
+            evasion_chances: [Chance::from_permille(0); MAX_ABILITY_LEVEL],
             default_button_position,
             default_research_button_position,
             ubertip,
@@ -108,7 +117,10 @@ impl AbilityMeta {
         self
     }
 
-    pub const fn with_evasion_chances(mut self, evasion_chances: [Chance; 4]) -> Self {
+    pub const fn with_evasion_chances(
+        mut self,
+        evasion_chances: [Chance; MAX_ABILITY_LEVEL],
+    ) -> Self {
         self.evasion_chances = evasion_chances;
         self
     }
@@ -215,13 +227,13 @@ impl AbilityMeta {
         self.cooldowns[0]
     }
 
-    pub fn cooldowns(&self) -> [u32; 4] {
+    pub fn cooldowns(&self) -> [u32; MAX_ABILITY_LEVEL] {
         self.cooldowns
     }
 
     /// Per-level chance to evade an attack. All-zero for any ability that is not
     /// an evasion ability.
-    pub fn evasion_chances(&self) -> [Chance; 4] {
+    pub fn evasion_chances(&self) -> [Chance; MAX_ABILITY_LEVEL] {
         self.evasion_chances
     }
 
@@ -254,19 +266,19 @@ mod tests {
 
     #[test]
     fn ability_meta_cooldown_for_level_returns_none_for_zero() {
-        let meta = AbilityMeta::new(3, false, [10, 8, 6, 0]);
+        let meta = AbilityMeta::new(3, false, [10, 8, 6, 0, 0]);
         assert_eq!(meta.cooldown_for_level(0), None);
     }
 
     #[test]
     fn ability_meta_cooldown_for_level_returns_none_beyond_max() {
-        let meta = AbilityMeta::new(3, false, [10, 8, 6, 0]);
+        let meta = AbilityMeta::new(3, false, [10, 8, 6, 0, 0]);
         assert_eq!(meta.cooldown_for_level(4), None);
     }
 
     #[test]
     fn ability_meta_cooldown_for_valid_levels() {
-        let meta = AbilityMeta::new(3, false, [10, 8, 6, 0]);
+        let meta = AbilityMeta::new(3, false, [10, 8, 6, 0, 0]);
         assert_eq!(meta.cooldown_for_level(1), Some(10));
         assert_eq!(meta.cooldown_for_level(2), Some(8));
         assert_eq!(meta.cooldown_for_level(3), Some(6));
@@ -274,21 +286,22 @@ mod tests {
 
     #[test]
     fn ability_meta_base_cooldown_is_level_one() {
-        let meta = AbilityMeta::new(3, false, [15, 10, 5, 0]);
+        let meta = AbilityMeta::new(3, false, [15, 10, 5, 0, 0]);
         assert_eq!(meta.base_cooldown(), 15);
     }
 
     #[test]
     fn ability_meta_with_morph_target_stores_id() {
         let target = WarcraftObjectId::new("Hamg");
-        let meta = AbilityMeta::new(1, false, [0; 4]).with_morph_target(Some(target));
+        let meta =
+            AbilityMeta::new(1, false, [0; MAX_ABILITY_LEVEL]).with_morph_target(Some(target));
         assert_eq!(meta.morph_target_unit().map(|id| id.value()), Some("Hamg"));
     }
 
     #[test]
     fn ability_meta_with_off_state_stores_all_fields() {
         let position = GridCoordinate::new(ColumnIndex::Three, RowIndex::Two);
-        let meta = AbilityMeta::new(1, false, [0; 4]).with_off_state(
+        let meta = AbilityMeta::new(1, false, [0; MAX_ABILITY_LEVEL]).with_off_state(
             Some(position),
             Some("Stop Defending"),
             Some("Deactivates defend"),

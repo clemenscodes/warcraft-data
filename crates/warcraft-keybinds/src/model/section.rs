@@ -9,7 +9,7 @@ use super::ability_binding::{AbilitySlotData, ResearchSlotData};
 use warcraft_api::{
     SystemKeybindClass, SystemKeybindModifier, WarcraftObjectId, WarcraftObjectKind,
 };
-use warcraft_api::{WARCRAFT_SYSTEM_KEYBINDS, WarcraftApi};
+use warcraft_api::{TALENT_VARIANTS, WARCRAFT_SYSTEM_KEYBINDS, WarcraftApi};
 
 /// The type of a CustomKeys.txt section, determined from the game database.
 #[derive(Debug, Clone, Copy)]
@@ -63,6 +63,21 @@ impl SectionResolution {
             return Some(Self {
                 canonical_id,
                 kind: SectionKind::System(system_class),
+            });
+        }
+        // Hero talents are no database objects of their own, yet the live game
+        // reads each one's section once the talent replaces its base button, so
+        // their sections are kept as ability bindings.
+        if let Some(talent_variant) = TALENT_VARIANTS.iter().find(|talent_variant| {
+            talent_variant
+                .variant_id()
+                .value()
+                .eq_ignore_ascii_case(section_id)
+        }) {
+            let canonical_id = talent_variant.variant_id();
+            return Some(Self {
+                canonical_id,
+                kind: SectionKind::Ability,
             });
         }
         None

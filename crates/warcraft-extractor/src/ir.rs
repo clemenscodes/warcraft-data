@@ -21,7 +21,8 @@ use std::collections::BTreeMap;
 use std::hash::{Hash, Hasher};
 
 use warcraft_api::{
-    GridCoordinate, HeroAttributes, ItemClass, Race, UnitCombat, UnitKind, WarcraftObjectKind,
+    GridCoordinate, HeroAttributes, ItemClass, MAX_ABILITY_LEVEL, Race, UnitCombat, UnitKind,
+    WarcraftObjectKind,
 };
 
 pub type ExtractedObjectMap = BTreeMap<ExtractedObjectId, ExtractedObject>;
@@ -375,14 +376,14 @@ pub struct ExtractedUnitMetaFields {
 pub struct ExtractedAbilityMeta {
     max_level: usize,
     is_ultimate: bool,
-    cooldowns: [u32; 4],
+    cooldowns: [u32; MAX_ABILITY_LEVEL],
     default_button_position: Option<GridCoordinate>,
     default_research_button_position: Option<GridCoordinate>,
     ubertip: Option<String>,
     research_ubertip: Option<String>,
     code: Option<String>,
     morph_target_unit: Option<String>,
-    evasion_chances: [f32; 4],
+    evasion_chances: [f32; MAX_ABILITY_LEVEL],
     off_button_position: Option<GridCoordinate>,
     off_tip: Option<String>,
     off_ubertip: Option<String>,
@@ -417,7 +418,7 @@ impl ExtractedAbilityMeta {
         self.is_ultimate
     }
 
-    pub fn cooldowns(&self) -> [u32; 4] {
+    pub fn cooldowns(&self) -> [u32; MAX_ABILITY_LEVEL] {
         self.cooldowns
     }
 
@@ -445,7 +446,7 @@ impl ExtractedAbilityMeta {
         self.morph_target_unit.as_deref()
     }
 
-    pub fn evasion_chances(&self) -> [f32; 4] {
+    pub fn evasion_chances(&self) -> [f32; MAX_ABILITY_LEVEL] {
         self.evasion_chances
     }
 
@@ -471,14 +472,14 @@ impl ExtractedAbilityMeta {
 pub struct ExtractedAbilityMetaFields {
     pub max_level: usize,
     pub is_ultimate: bool,
-    pub cooldowns: [u32; 4],
+    pub cooldowns: [u32; MAX_ABILITY_LEVEL],
     pub default_button_position: Option<GridCoordinate>,
     pub default_research_button_position: Option<GridCoordinate>,
     pub ubertip: Option<String>,
     pub research_ubertip: Option<String>,
     pub code: Option<String>,
     pub morph_target_unit: Option<String>,
-    pub evasion_chances: [f32; 4],
+    pub evasion_chances: [f32; MAX_ABILITY_LEVEL],
     pub off_button_position: Option<GridCoordinate>,
     pub off_tip: Option<String>,
     pub off_ubertip: Option<String>,

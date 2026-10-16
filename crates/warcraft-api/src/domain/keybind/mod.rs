@@ -4,12 +4,14 @@
 //!   - [`keycode`]           — a keyboard key code and its human label.
 //!   - [`system_keybind`]    — the system-hotkey definition value objects.
 //!   - [`category`]          — grouping of system hotkeys into editor sections.
+//!   - [`default_hotkeys`]   - the game's own shipped default hotkeys per section.
 //!   - [`slots`]             — ordered slot collections for the editor.
 //!   - [`mirrors`]           — build/morph command → live-game section mirrors.
 //!   - [`ability_tables`]    — ability command-card classification tables.
 
 pub(crate) mod ability_tables;
 pub(crate) mod category;
+pub(crate) mod default_hotkeys;
 pub(crate) mod keycode;
 pub(crate) mod mirrors;
 pub(crate) mod slots;

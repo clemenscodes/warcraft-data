@@ -756,6 +756,42 @@ mod parse_and_binding_tests {
     }
 
     #[test]
+    fn apply_grid_rebinds_passive_abilities_to_their_cell() {
+        // A passive ability has a hotkey the game shows on its button even
+        // though it cannot be pressed. Applying the grid must rebind it like
+        // every other button, or a stale default (`E` on Devotion Aura at the
+        // bottom row) keeps colliding with a real button bound to that key.
+        let input = "[AHad]\nHotkey=E\nButtonpos=2,2\n";
+        let mut keys = CustomKeys::parse_raw(input);
+        let layout = GridLayout::qwerty_grid();
+        keys.apply_grid_to_all_bindings(layout);
+        let binding = keys
+            .binding(crate::test_support::object_id("AHad"))
+            .expect("AHad exists");
+        let hotkey = binding.hotkey().expect("hotkey set");
+        let expected = Hotkey::try_from("C").expect("valid hotkey");
+        assert_eq!(hotkey, &expected);
+    }
+
+    #[test]
+    fn moving_a_passive_ability_takes_the_grid_letter_along() {
+        let input = "[AHad]\nHotkey=E\nButtonpos=2,2\n";
+        let mut keys = CustomKeys::parse_raw(input);
+        let layout = GridLayout::qwerty_grid();
+        let slot = crate::test_support::ability_slot("AHad");
+        keys.assign_position(layout, &slot, 3, 2, false, true);
+        let binding = keys
+            .binding(crate::test_support::object_id("AHad"))
+            .expect("AHad exists");
+        let position = binding.button_position().expect("position set");
+        assert_eq!(u8::from(position.column()), 3);
+        assert_eq!(u8::from(position.row()), 2);
+        let hotkey = binding.hotkey().expect("hotkey set");
+        let expected = Hotkey::try_from("V").expect("valid hotkey");
+        assert_eq!(hotkey, &expected);
+    }
+
+    #[test]
     fn normalize_restores_upgrade_hotkey_tiers_after_template_overlay() {
         let mut baseline = CustomKeys::parse_raw(DEFAULT_CUSTOM_KEYS);
         let template = CustomKeys::parse_raw("[Rume]\nHotkey=Q\nButtonpos=0,0\n");
@@ -1440,6 +1476,56 @@ mod normalize_tests {
     }
 
     #[test]
+    fn normalize_mirrors_base_keybind_onto_every_talent_variant() {
+        use crate::model::AbilityBinding;
+        // A picked talent (`AHq1`..`AHq3`) replaces Guiding Hand `AHgh` on the
+        // same button and the live game then reads the talent's own section.
+        // Editing the button only touches `AHgh`, so normalize must copy its
+        // positions and hotkeys onto every talent, overriding the talent's
+        // stale Blizzard default.
+        let button_position = GridCoordinate::new(ColumnIndex::One, RowIndex::Two);
+        let research_position = GridCoordinate::new(ColumnIndex::One, RowIndex::Zero);
+        let base_binding = AbilityBinding::builder()
+            .hotkey(Hotkey::Letter('X'))
+            .button_position(button_position)
+            .research_hotkey(Hotkey::Letter('W'))
+            .research_button_position(research_position)
+            .build();
+        let stale_position = GridCoordinate::new(ColumnIndex::Three, RowIndex::Two);
+        let stale_talent_binding = AbilityBinding::builder()
+            .hotkey(Hotkey::Letter('R'))
+            .button_position(stale_position)
+            .build();
+        let mut overlay = CustomKeys::parse_raw("");
+        overlay.put_ability(crate::test_support::object_id("AHgh"), base_binding);
+        overlay.put_ability(crate::test_support::object_id("AHq1"), stale_talent_binding);
+        let normalized = overlay.normalize();
+        let expected_hotkey = Hotkey::Letter('X');
+        let expected_research_hotkey = Hotkey::Letter('W');
+        for talent_id in ["AHq1", "AHq2", "AHq3"] {
+            let talent = normalized
+                .binding(crate::test_support::object_id(talent_id))
+                .expect("talent section exists");
+            assert_eq!(talent.hotkey(), Some(&expected_hotkey));
+            assert_eq!(talent.button_position(), Some(&button_position));
+            assert_eq!(talent.research_hotkey(), Some(&expected_research_hotkey));
+            assert_eq!(talent.research_button_position(), Some(&research_position));
+        }
+    }
+
+    #[test]
+    fn talent_sections_survive_parsing() {
+        // Talents are no database objects of their own, yet their sections
+        // must be kept: the live game reads them once a talent is picked.
+        let file = CustomKeys::parse_raw("[AHq1]\nHotkey=R\nButtonpos=3,2\n");
+        let talent = file
+            .binding(crate::test_support::object_id("AHq1"))
+            .expect("talent section kept");
+        let expected_hotkey = Hotkey::Letter('R');
+        assert_eq!(talent.hotkey(), Some(&expected_hotkey));
+    }
+
+    #[test]
     fn normalize_keeps_independent_offstate_separate() {
         use crate::model::AbilityBinding;
         let on_position = GridCoordinate::new(ColumnIndex::Two, RowIndex::Two);
@@ -2102,10 +2188,11 @@ mod normalize_tests {
 
 #[cfg(all(test, not(target_arch = "wasm32")))]
 mod template_generation_tests {
-    use super::super::CustomKeys;
     use crate::grid::layout::GridLayout;
     use warcraft_api::WarcraftObjectMeta;
-    use warcraft_api::{WARCRAFT_SYSTEM_KEYBINDS, WarcraftApi};
+    use warcraft_api::{
+        DEFAULT_HOTKEYS, DefaultHotkeys, LOCALIZED_HOTKEYS, WARCRAFT_SYSTEM_KEYBINDS, WarcraftApi,
+    };
 
     fn join_levels(levels: &[&str]) -> Option<String> {
         if levels.is_empty() {
@@ -2115,9 +2202,48 @@ mod template_generation_tests {
         }
     }
 
+    /// The section of Blizzard's shipped `customkeys.txt` for an object.
+    fn shipped_hotkeys(id: &str) -> Option<&'static DefaultHotkeys> {
+        DEFAULT_HOTKEYS
+            .iter()
+            .find(|entry| entry.section_id().eq_ignore_ascii_case(id))
+    }
+
+    /// The section of the localized `*strings.txt` for an object.
+    fn localized_hotkeys(id: &str) -> Option<&'static DefaultHotkeys> {
+        LOCALIZED_HOTKEYS
+            .iter()
+            .find(|entry| entry.section_id().eq_ignore_ascii_case(id))
+    }
+
+    /// A field of the shipped `customkeys.txt` always wins: an empty value
+    /// stays unbound. Only a field the shipped file never mentions falls back
+    /// to the grid letter of the button's cell.
+    fn shipped_or_grid(
+        shipped_value: Option<&'static str>,
+        grid_letter: Option<char>,
+    ) -> Option<String> {
+        match shipped_value {
+            Some("") => None,
+            Some(value) => Some(value.to_string()),
+            None => grid_letter.map(|letter| letter.to_string()),
+        }
+    }
+
+    /// A field of the shipped `customkeys.txt`, with no grid fallback.
+    fn shipped_only(shipped_value: Option<&'static str>) -> Option<String> {
+        shipped_value
+            .filter(|value| !value.is_empty())
+            .map(str::to_string)
+    }
+
+    /// Regenerates the default `CustomKeys.txt` the way the game writes it:
+    /// hotkeys from Blizzard's shipped `customkeys.txt` (`DEFAULT_HOTKEYS`),
+    /// positions and texts from the game database. The current template is
+    /// never read, so the output depends on the game data alone.
     fn build_text(layout: &GridLayout) -> String {
-        let tmpl = CustomKeys::parse_raw(super::super::DEFAULT_CUSTOM_KEYS);
         let mut out = String::new();
+
         for (object_id, warcraft_object) in WarcraftApi::default().iter() {
             let id = *object_id;
             let WarcraftObjectMeta::Command(cmd_meta) = warcraft_object.meta() else {
@@ -2126,13 +2252,11 @@ mod template_generation_tests {
             let Some(default_position) = cmd_meta.default_button_position() else {
                 continue;
             };
-            let traditional = tmpl.command(id);
+            let shipped = shipped_hotkeys(id.value());
             let section_header = format!("[{id}]\n");
             out.push_str(&section_header);
-            if let Some(hotkey_string) = traditional
-                .and_then(|command| command.hotkey())
-                .map(|hotkey_display| hotkey_display.to_string())
-            {
+            let shipped_hotkey = shipped.and_then(|entry| entry.hotkey());
+            if let Some(hotkey_string) = shipped_only(shipped_hotkey) {
                 let hotkey_line = format!("Hotkey={hotkey_string}\n");
                 out.push_str(&hotkey_line);
             }
@@ -2140,20 +2264,19 @@ mod template_generation_tests {
             let default_row = u8::from(default_position.row());
             let buttonpos_line = format!("Buttonpos={default_column},{default_row}\n");
             out.push_str(&buttonpos_line);
-            if let Some(tip) = traditional
-                .and_then(|command| command.tip())
-                .map(str::to_owned)
-                .or_else(|| join_levels(warcraft_object.tip_levels()))
-            {
-                let tip_line = format!("Tip={tip}\n");
+            if let Some(tip) = join_levels(warcraft_object.tip_levels()) {
+                let tip_text = tip.trim_end();
+                let tip_line = format!("Tip={tip_text}\n");
                 out.push_str(&tip_line);
             }
             if let Some(ubertip) = warcraft_object.ubertip() {
-                let ubertip_line = format!("Ubertip={ubertip}\n");
+                let ubertip_text = ubertip.trim_end();
+                let ubertip_line = format!("Ubertip={ubertip_text}\n");
                 out.push_str(&ubertip_line);
             }
             out.push('\n');
         }
+
         for (object_id, warcraft_object) in WarcraftApi::default().iter() {
             let id = *object_id;
             let WarcraftObjectMeta::Ability(ability_meta) = warcraft_object.meta() else {
@@ -2168,59 +2291,44 @@ mod template_generation_tests {
             {
                 continue;
             }
-            let is_passive = WarcraftApi::default().is_passive_ability(id);
-            let existing_binding = tmpl.binding(id);
+            let shipped = shipped_hotkeys(id.value());
+
             let section_header = format!("[{id}]\n");
             out.push_str(&section_header);
+
             if let Some(button_position) = default_button_position {
-                if !is_passive {
-                    let hotkey = existing_binding
-                        .and_then(|binding| binding.hotkey())
-                        .map(|hotkey_display| hotkey_display.to_string())
-                        .or_else(|| {
-                            layout
-                                .letter_at(button_position.column(), button_position.row())
-                                .map(|letter| letter.to_string())
-                        });
-                    if let Some(hotkey_string) = hotkey {
-                        let hotkey_line = format!("Hotkey={hotkey_string}\n");
-                        out.push_str(&hotkey_line);
-                    }
+                let shipped_hotkey = shipped.and_then(|entry| entry.hotkey());
+                let grid_letter = layout.letter_at(button_position.column(), button_position.row());
+                let hotkey = shipped_or_grid(shipped_hotkey, grid_letter);
+                if let Some(hotkey_string) = hotkey {
+                    let hotkey_line = format!("Hotkey={hotkey_string}\n");
+                    out.push_str(&hotkey_line);
                 }
                 let btn_column = u8::from(button_position.column());
                 let btn_row = u8::from(button_position.row());
                 let buttonpos_line = format!("Buttonpos={btn_column},{btn_row}\n");
                 out.push_str(&buttonpos_line);
             }
+
             if let Some(research_position) = default_research_position {
-                let research_hotkey = existing_binding
-                    .and_then(|binding| binding.research_hotkey())
-                    .map(|hotkey_display| hotkey_display.to_string())
-                    .or_else(|| {
-                        layout
-                            .letter_at(research_position.column(), research_position.row())
-                            .map(|letter| letter.to_string())
-                    });
+                let shipped_research_hotkey = shipped.and_then(|entry| entry.research_hotkey());
+                let grid_letter =
+                    layout.letter_at(research_position.column(), research_position.row());
+                let research_hotkey = shipped_or_grid(shipped_research_hotkey, grid_letter);
                 if let Some(research_hotkey_string) = research_hotkey {
-                    let research_hotkey_line =
-                        format!("ResearchHotkey={research_hotkey_string}\n",);
+                    let research_hotkey_line = format!("ResearchHotkey={research_hotkey_string}\n");
                     out.push_str(&research_hotkey_line);
                 }
                 let res_column = u8::from(research_position.column());
                 let res_row = u8::from(research_position.row());
-                let research_buttonpos_line =
-                    format!("ResearchButtonpos={res_column},{res_row}\n",);
+                let research_buttonpos_line = format!("ResearchButtonpos={res_column},{res_row}\n");
                 out.push_str(&research_buttonpos_line);
             }
+
             if let Some(off_position) = off_button_position {
-                let un_hotkey = existing_binding
-                    .and_then(|binding| binding.unhotkey())
-                    .map(|hotkey_display| hotkey_display.to_string())
-                    .or_else(|| {
-                        layout
-                            .letter_at(off_position.column(), off_position.row())
-                            .map(|letter| letter.to_string())
-                    });
+                let shipped_unhotkey = shipped.and_then(|entry| entry.unhotkey());
+                let grid_letter = layout.letter_at(off_position.column(), off_position.row());
+                let un_hotkey = shipped_or_grid(shipped_unhotkey, grid_letter);
                 if let Some(unhotkey_string) = un_hotkey {
                     let unhotkey_line = format!("Unhotkey={unhotkey_string}\n");
                     out.push_str(&unhotkey_line);
@@ -2230,48 +2338,36 @@ mod template_generation_tests {
                 let unbuttonpos_line = format!("Unbuttonpos={off_column},{off_row}\n");
                 out.push_str(&unbuttonpos_line);
             }
-            if let Some(tip) = existing_binding
-                .and_then(|binding| binding.tip())
-                .map(str::to_owned)
-                .or_else(|| join_levels(warcraft_object.tip_levels()))
-            {
-                let tip_line = format!("Tip={tip}\n");
+
+            if let Some(tip) = join_levels(warcraft_object.tip_levels()) {
+                let tip_text = tip.trim_end();
+                let tip_line = format!("Tip={tip_text}\n");
                 out.push_str(&tip_line);
             }
-            if let Some(un_tip) = existing_binding
-                .and_then(|binding| binding.un_tip())
-                .map(str::to_owned)
-                .or_else(|| warcraft_object.un_tip().map(str::to_owned))
-            {
-                let untip_line = format!("Untip={un_tip}\n");
+            if let Some(un_tip) = warcraft_object.un_tip() {
+                let un_tip_text = un_tip.trim_end();
+                let untip_line = format!("Untip={un_tip_text}\n");
                 out.push_str(&untip_line);
             }
-            if let Some(ubertip) = existing_binding
-                .and_then(|binding| binding.ubertip())
-                .map(str::to_owned)
-                .or_else(|| join_levels(warcraft_object.ubertip_levels()))
-            {
-                let ubertip_line = format!("Ubertip={ubertip}\n");
+            if let Some(ubertip) = join_levels(warcraft_object.ubertip_levels()) {
+                let ubertip_text = ubertip.trim_end();
+                let ubertip_line = format!("Ubertip={ubertip_text}\n");
                 out.push_str(&ubertip_line);
             }
-            if let Some(un_ubertip) = existing_binding
-                .and_then(|binding| binding.un_ubertip())
-                .map(str::to_owned)
-                .or_else(|| warcraft_object.un_ubertip().map(str::to_owned))
-            {
-                let un_ubertip_line = format!("Unubertip={un_ubertip}\n");
+            if let Some(un_ubertip) = warcraft_object.un_ubertip() {
+                let un_ubertip_text = un_ubertip.trim_end();
+                let un_ubertip_line = format!("Unubertip={un_ubertip_text}\n");
                 out.push_str(&un_ubertip_line);
             }
-            if let Some(research_ubertip) = existing_binding
-                .and_then(|binding| binding.research_ubertip())
-                .map(str::to_owned)
-                .or_else(|| warcraft_object.research_ubertip().map(str::to_owned))
-            {
-                let research_ubertip_line = format!("Researchubertip={research_ubertip}\n",);
+            if let Some(research_ubertip) = warcraft_object.research_ubertip() {
+                let research_ubertip_text = research_ubertip.trim_end();
+                let research_ubertip_line = format!("Researchubertip={research_ubertip_text}\n");
                 out.push_str(&research_ubertip_line);
             }
+
             out.push('\n');
         }
+
         for (object_id, warcraft_object) in WarcraftApi::default().iter() {
             let id = *object_id;
             let WarcraftObjectMeta::Unit(_) = warcraft_object.meta() else {
@@ -2280,13 +2376,16 @@ mod template_generation_tests {
             let Some(default_position) = warcraft_object.default_button_position() else {
                 continue;
             };
-            let existing_binding = tmpl.binding(id);
+            let shipped = shipped_hotkeys(id.value());
+            let localized = localized_hotkeys(id.value());
             let section_header = format!("[{id}]\n");
             out.push_str(&section_header);
-            if let Some(hotkey_string) = existing_binding
-                .and_then(|binding| binding.hotkey())
-                .map(|hotkey_display| hotkey_display.to_string())
-            {
+            // A unit's train/sell button takes the shipped hotkey, otherwise the
+            // localized `*strings.txt` default every unit carries.
+            let unit_hotkey = shipped
+                .and_then(|entry| entry.hotkey())
+                .or_else(|| localized.and_then(|entry| entry.hotkey()));
+            if let Some(hotkey_string) = shipped_only(unit_hotkey) {
                 let hotkey_line = format!("Hotkey={hotkey_string}\n");
                 out.push_str(&hotkey_line);
             }
@@ -2294,24 +2393,19 @@ mod template_generation_tests {
             let cmd_row = u8::from(default_position.row());
             let buttonpos_line = format!("Buttonpos={cmd_column},{cmd_row}\n");
             out.push_str(&buttonpos_line);
-            if let Some(tip) = existing_binding
-                .and_then(|binding| binding.tip())
-                .map(str::to_owned)
-                .or_else(|| join_levels(warcraft_object.tip_levels()))
-            {
-                let tip_line = format!("Tip={tip}\n");
+            if let Some(tip) = join_levels(warcraft_object.tip_levels()) {
+                let tip_text = tip.trim_end();
+                let tip_line = format!("Tip={tip_text}\n");
                 out.push_str(&tip_line);
             }
-            if let Some(ubertip) = existing_binding
-                .and_then(|binding| binding.ubertip())
-                .map(str::to_owned)
-                .or_else(|| join_levels(warcraft_object.ubertip_levels()))
-            {
-                let ubertip_line = format!("Ubertip={ubertip}\n");
+            if let Some(ubertip) = join_levels(warcraft_object.ubertip_levels()) {
+                let ubertip_text = ubertip.trim_end();
+                let ubertip_line = format!("Ubertip={ubertip_text}\n");
                 out.push_str(&ubertip_line);
             }
             out.push('\n');
         }
+
         for (object_id, warcraft_object) in WarcraftApi::default().iter() {
             let id = *object_id;
             if !matches!(
@@ -2324,17 +2418,14 @@ mod template_generation_tests {
                 continue;
             };
             let research_position = warcraft_object.default_research_button_position();
-            let existing_binding = tmpl.binding(id);
+            let shipped = shipped_hotkeys(id.value());
+
             let section_header = format!("[{id}]\n");
             out.push_str(&section_header);
-            let hotkey = existing_binding
-                .and_then(|binding| binding.hotkey())
-                .map(|hotkey_display| hotkey_display.to_string())
-                .or_else(|| {
-                    layout
-                        .letter_at(default_position.column(), default_position.row())
-                        .map(|letter| letter.to_string())
-                });
+
+            let shipped_hotkey = shipped.and_then(|entry| entry.hotkey());
+            let grid_letter = layout.letter_at(default_position.column(), default_position.row());
+            let hotkey = shipped_or_grid(shipped_hotkey, grid_letter);
             if let Some(hotkey_string) = hotkey {
                 let hotkey_line = format!("Hotkey={hotkey_string}\n");
                 out.push_str(&hotkey_line);
@@ -2343,52 +2434,43 @@ mod template_generation_tests {
             let upg_row = u8::from(default_position.row());
             let buttonpos_line = format!("Buttonpos={upg_column},{upg_row}\n");
             out.push_str(&buttonpos_line);
+
             if let Some(research_button_position) = research_position {
-                let research_hotkey_string = existing_binding
-                    .and_then(|binding| binding.research_hotkey())
-                    .map(|hotkey_display| hotkey_display.to_string())
-                    .or_else(|| {
-                        layout
-                            .letter_at(
-                                research_button_position.column(),
-                                research_button_position.row(),
-                            )
-                            .map(|letter| letter.to_string())
-                    });
-                if let Some(research_hotkey_line) = research_hotkey_string {
-                    let research_hotkey_line = format!("ResearchHotkey={research_hotkey_line}\n",);
+                let shipped_research_hotkey = shipped.and_then(|entry| entry.research_hotkey());
+                let grid_letter = layout.letter_at(
+                    research_button_position.column(),
+                    research_button_position.row(),
+                );
+                let research_hotkey_string = shipped_or_grid(shipped_research_hotkey, grid_letter);
+                if let Some(research_hotkey_line_value) = research_hotkey_string {
+                    let research_hotkey_line =
+                        format!("ResearchHotkey={research_hotkey_line_value}\n");
                     out.push_str(&research_hotkey_line);
                 }
                 let res_btn_column = u8::from(research_button_position.column());
                 let res_btn_row = u8::from(research_button_position.row());
                 let research_buttonpos_line =
-                    format!("ResearchButtonpos={res_btn_column},{res_btn_row}\n",);
+                    format!("ResearchButtonpos={res_btn_column},{res_btn_row}\n");
                 out.push_str(&research_buttonpos_line);
             }
-            if let Some(tip) = existing_binding
-                .and_then(|binding| binding.tip())
-                .map(str::to_owned)
-                .or_else(|| join_levels(warcraft_object.tip_levels()))
-            {
-                let tip_line = format!("Tip={tip}\n");
+
+            if let Some(tip) = join_levels(warcraft_object.tip_levels()) {
+                let tip_text = tip.trim_end();
+                let tip_line = format!("Tip={tip_text}\n");
                 out.push_str(&tip_line);
             }
-            if let Some(ubertip) = existing_binding
-                .and_then(|binding| binding.ubertip())
-                .map(str::to_owned)
-                .or_else(|| join_levels(warcraft_object.ubertip_levels()))
-            {
-                let ubertip_line = format!("Ubertip={ubertip}\n");
+            if let Some(ubertip) = join_levels(warcraft_object.ubertip_levels()) {
+                let ubertip_text = ubertip.trim_end();
+                let ubertip_line = format!("Ubertip={ubertip_text}\n");
                 out.push_str(&ubertip_line);
             }
+
             out.push('\n');
         }
+
         for entry in WARCRAFT_SYSTEM_KEYBINDS.iter() {
             let id = entry.section_id();
-            let hotkey_code = tmpl
-                .system(id)
-                .map(|binding| binding.hotkey().to_string())
-                .unwrap_or_else(|| entry.default_hotkey().to_string());
+            let hotkey_code = entry.default_hotkey();
             let section_header = format!("[{id}]\n");
             out.push_str(&section_header);
             let hotkey_line = format!("Hotkey={hotkey_code}\n");
@@ -2401,11 +2483,12 @@ mod template_generation_tests {
             }
             out.push('\n');
         }
+
         out
     }
 
     /// Regenerates CustomKeys.txt from the database. Run this whenever
-    /// warcraft-api database changes to keep the default template in sync.
+    /// warcraft-database changes to keep the default template in sync.
     /// Ignored in CI: this is a regeneration tool, not a spec.
     /// After running, inspect the diff before committing the new template.
     #[test]

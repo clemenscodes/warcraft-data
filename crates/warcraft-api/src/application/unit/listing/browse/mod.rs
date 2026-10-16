@@ -5,8 +5,11 @@
 //! inputs and reads back the already-shaped [`UnitListing`].
 
 use crate::application::unit::listing::race_selection::RaceSelection;
-use crate::{CatalogVisibility, Scope, SearchField, UnitModeSelection, UnitQuery, WarcraftApi};
-use crate::{Race, UnitKind, UnitView, WarcraftObjectId};
+use crate::{
+    AllRaces, CatalogVisibility, Scope, SearchField, UnitModeSelection, UnitQuery, WarcraftApi,
+};
+use crate::{Race, UnitKind, UnitMode, UnitView, WarcraftObjectId};
+use std::collections::HashSet;
 
 /// The inputs to a unit-list browse: the active race and mode, the current
 /// search query and the field it searches, whether hidden units are shown, and
@@ -400,9 +403,96 @@ impl UnitCatalogListing {
     }
 }
 
+/// The inputs to a full unit roster: only the visibility toggles. A roster
+/// always spans every race in canonical order across both modes, so the race
+/// and the mode are fixed rather than inputs.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct UnitRosterRequest {
+    visibility: CatalogVisibility,
+}
+
+impl UnitRosterRequest {
+    /// Build a roster request from the visibility toggles applied to every race
+    /// and both modes.
+    pub fn new(visibility: CatalogVisibility) -> Self {
+        Self { visibility }
+    }
+}
+
+/// Every unit across all five races and both modes, each listed once, in one
+/// fixed domain order: the whole melee block first — race by race in canonical
+/// tab order (Human, Orc, Night Elf, Undead, Neutral) — then the whole campaign
+/// block, race by race the same way. A unit available in both modes appears once,
+/// in the melee block, because that block runs first.
+///
+/// This exists so a mobile pager can walk every unit in a single, stable order
+/// without the renderer composing that order itself — composing the full list
+/// across races and modes is a domain decision (ARCHITECTURE R3), so it lives
+/// here.
+#[derive(Clone, Debug, PartialEq, Eq, Default)]
+pub struct UnitRoster {
+    entries: Vec<UnitCategoryEntry>,
+}
+
+impl From<&UnitRosterRequest> for UnitRoster {
+    /// Walk the whole melee block first — race by race in canonical order — then
+    /// the whole campaign block the same way, filing each unit under its own race
+    /// the first time it is seen. So every melee unit precedes every campaign
+    /// unit, and the last melee unit (a Neutral one) leads into the first campaign
+    /// unit (a Human one).
+    ///
+    /// A race's browse admits every unit that race can reach, which includes the
+    /// shared neutral units (tavern heroes, mercenaries, neutral buildings) any
+    /// race can use. Keeping those under the first race that reached them would
+    /// scatter neutral units through every block and break the race order, so a
+    /// unit is filed under its own race only — a shared neutral unit lands in the
+    /// Neutral block, once. The `seen` set collapses the melee/campaign overlap so
+    /// a unit available in both modes stays in the melee block.
+    fn from(request: &UnitRosterRequest) -> Self {
+        let visibility = request.visibility;
+        let mut seen: HashSet<WarcraftObjectId> = HashSet::new();
+        let mut entries: Vec<UnitCategoryEntry> = Vec::new();
+        for mode in [UnitMode::Melee, UnitMode::Campaign] {
+            for race in AllRaces::ALL.iter() {
+                let modes = UnitModeSelection::only(mode);
+                let scope = Scope::Browse { modes };
+                let query = UnitQuery {
+                    races: RaceSelection::only(race),
+                    kind: None,
+                    visibility,
+                    scope,
+                };
+                let views = WarcraftApi::default().unit().list(&query);
+                for view in &views {
+                    if view.race() != Some(race) {
+                        continue;
+                    }
+                    if seen.insert(view.id()) {
+                        let entry = UnitCategoryEntry::from(view);
+                        entries.push(entry);
+                    }
+                }
+            }
+        }
+        Self { entries }
+    }
+}
+
+impl UnitRoster {
+    pub fn entries(&self) -> &[UnitCategoryEntry] {
+        &self.entries
+    }
+
+    pub fn into_entries(self) -> Vec<UnitCategoryEntry> {
+        self.entries
+    }
+}
+
 impl ddd::ReadModel for UnitListing {}
 
 impl ddd::ReadModel for UnitCatalogListing {}
+
+impl ddd::ReadModel for UnitRoster {}
 
 #[cfg(test)]
 mod tests {
@@ -646,5 +736,133 @@ mod tests {
             assert!(!entry.display_name().is_empty());
             assert_eq!(entry.unit_kind(), category_kind);
         }
+    }
+
+    #[test]
+    fn the_roster_lists_every_unit_once_across_all_races_and_modes() {
+        let request = UnitRosterRequest::new(full_visibility());
+        let roster = UnitRoster::from(&request);
+        assert!(
+            !roster.entries().is_empty(),
+            "a roster spanning every race and both modes must surface units"
+        );
+        let mut ids: Vec<WarcraftObjectId> = roster
+            .entries()
+            .iter()
+            .map(|entry| entry.unit_id())
+            .collect();
+        let listed = ids.len();
+        ids.sort();
+        ids.dedup();
+        assert_eq!(
+            ids.len(),
+            listed,
+            "a unit valid in both modes must appear once, not twice"
+        );
+        for entry in roster.entries() {
+            assert!(!entry.unit_id().value().is_empty());
+            assert!(!entry.display_name().is_empty());
+        }
+    }
+
+    #[test]
+    fn the_roster_runs_all_melee_then_all_campaign_each_in_canonical_race_order() {
+        let visibility = full_visibility();
+        let api = WarcraftApi::default();
+        let request = UnitRosterRequest::new(visibility);
+        let roster = UnitRoster::from(&request);
+
+        // The units any race reaches in its melee browse, filed under their own
+        // race — exactly the ones the roster's melee block should hold.
+        let mut melee_ids: HashSet<WarcraftObjectId> = HashSet::new();
+        for race in AllRaces::ALL.iter() {
+            let modes = UnitModeSelection::only(UnitMode::Melee);
+            let scope = Scope::Browse { modes };
+            let query = UnitQuery {
+                races: RaceSelection::only(race),
+                kind: None,
+                visibility,
+                scope,
+            };
+            for view in &api.unit().list(&query) {
+                if view.race() == Some(race) {
+                    melee_ids.insert(view.id());
+                }
+            }
+        }
+
+        let canonical: Vec<Race> = AllRaces::ALL.iter().collect();
+        let rank = |race: &Race| {
+            canonical
+                .iter()
+                .position(|candidate| candidate == race)
+                .expect("every race has a canonical rank")
+        };
+        let mut melee_blocks: Vec<Race> = Vec::new();
+        let mut campaign_blocks: Vec<Race> = Vec::new();
+        let mut in_campaign = false;
+        for entry in roster.entries() {
+            let race = api
+                .object(entry.unit_id())
+                .and_then(|object| object.race())
+                .expect("every roster unit is filed under its own race, so it has one");
+            if melee_ids.contains(&entry.unit_id()) {
+                assert!(
+                    !in_campaign,
+                    "a melee unit follows a campaign unit — the mode blocks are interleaved"
+                );
+                if melee_blocks.last() != Some(&race) {
+                    melee_blocks.push(race);
+                }
+            } else {
+                in_campaign = true;
+                if campaign_blocks.last() != Some(&race) {
+                    campaign_blocks.push(race);
+                }
+            }
+        }
+
+        assert_eq!(
+            melee_blocks, canonical,
+            "the melee block runs every race contiguously in canonical order"
+        );
+        for pair in campaign_blocks.windows(2) {
+            assert!(
+                rank(&pair[0]) < rank(&pair[1]),
+                "the campaign block runs the races it has in canonical order"
+            );
+        }
+    }
+
+    #[test]
+    fn the_roster_is_the_deduped_union_of_every_race_and_mode_browse() {
+        let visibility = full_visibility();
+        let request = UnitRosterRequest::new(visibility);
+        let roster = UnitRoster::from(&request);
+        let mut expected: HashSet<WarcraftObjectId> = HashSet::new();
+        for race in AllRaces::ALL.iter() {
+            for mode in [UnitMode::Melee, UnitMode::Campaign] {
+                let modes = UnitModeSelection::only(mode);
+                let scope = Scope::Browse { modes };
+                let query = UnitQuery {
+                    races: RaceSelection::only(race),
+                    kind: None,
+                    visibility,
+                    scope,
+                };
+                for view in &WarcraftApi::default().unit().list(&query) {
+                    expected.insert(view.id());
+                }
+            }
+        }
+        let listed: HashSet<WarcraftObjectId> = roster
+            .entries()
+            .iter()
+            .map(|entry| entry.unit_id())
+            .collect();
+        assert_eq!(
+            listed, expected,
+            "the roster must hold exactly the units the per-race, per-mode browses do"
+        );
     }
 }

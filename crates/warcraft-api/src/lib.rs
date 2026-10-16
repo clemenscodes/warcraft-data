@@ -13,12 +13,13 @@ pub use application::unit::listing::search_field::SearchField;
 pub use application::unit::listing::visibility::CatalogVisibility;
 pub use application::unit::{
     UnitCatalogGroup, UnitCatalogListing, UnitCategoryEntry, UnitCategoryListing,
-    UnitCategoryRequest, UnitListing, UnitListingEntry, UnitListingRequest,
+    UnitCategoryRequest, UnitListing, UnitListingEntry, UnitListingRequest, UnitRoster,
+    UnitRosterRequest,
 };
 pub use application::view::ability::AbilityView;
 pub use application::view::command::CommandView;
 pub use application::view::unit::UnitView;
-pub use domain::ability::AbilityMeta;
+pub use domain::ability::{AbilityMeta, MAX_ABILITY_LEVEL, TalentVariant};
 pub use domain::balance::{
     AgilityBonuses, DamageEffectiveness, DamageMatrix, GameplayConstants, IntelligenceBonuses,
     StrengthBonuses,
@@ -33,6 +34,7 @@ pub use domain::keybind::ability_tables::{
     ROOTED_ONLY_ABILITY_CODES, ROOTED_ONLY_ABILITY_IDS,
 };
 pub use domain::keybind::category::SystemHotkeysCategory;
+pub use domain::keybind::default_hotkeys::DefaultHotkeys;
 pub use domain::keybind::keycode::{
     Digit, FunctionKey, KeyCode, KeyCodeOutOfRange, Letter, MouseButton, NotALetter, NumpadKey,
     Punctuation,
@@ -71,7 +73,8 @@ pub use domain::unit::{
 pub use domain::upgrade::{UnitUpgradeSwap, UpgradeMeta};
 pub use domain::version::{SUPPORTED_VERSION, SUPPORTED_VERSION_STRING, WarcraftVersion};
 pub use infrastructure::database::generated::{
-    TIERED_UNIT_GROUPS, UNIT_UPGRADE_SWAPS, WARCRAFT_GAMEPLAY_CONSTANTS, WARCRAFT_SYSTEM_KEYBINDS,
+    DEFAULT_HOTKEYS, LOCALIZED_HOTKEYS, TALENT_VARIANTS, TIERED_UNIT_GROUPS, UNIT_UPGRADE_SWAPS,
+    WARCRAFT_GAMEPLAY_CONSTANTS, WARCRAFT_SYSTEM_KEYBINDS,
 };
 // Infrastructure type. Kept crate-internal (never public API), but visible at the
 // crate root so the generated `database/generated.rs` (which imports `crate::*`)

@@ -3,7 +3,8 @@
 //! or its type, which is exactly the encapsulation guarantee we want to hold.
 
 use warcraft_api::{
-    ItemClass, Race, UnitKind, WarcraftApi, WarcraftObjectKind, WarcraftObjectMeta,
+    ItemClass, MAX_ABILITY_LEVEL, Race, UnitKind, WarcraftApi, WarcraftObjectKind,
+    WarcraftObjectMeta,
 };
 
 /// Exact expected object count — a golden pin, deliberately zero-tolerance.
@@ -13,7 +14,7 @@ use warcraft_api::{
 /// (that's the review record); when it isn't, it's a regression you want to see
 /// the moment it happens. (Case-insensitive id collisions merge, so this is the
 /// map size, not the raw number of extracted rows.)
-const EXPECTED_OBJECT_COUNT: usize = 1742;
+const EXPECTED_OBJECT_COUNT: usize = 1885;
 
 /// Object IDs that must always exist. If Blizzard removes or renames any of
 /// these, the corresponding test fails and a human has to decide whether to
@@ -111,7 +112,7 @@ fn all_abilities_have_valid_meta() {
         };
         let max_level = ability_meta.max_level();
         assert!(
-            (1..=4).contains(&max_level),
+            (1..=MAX_ABILITY_LEVEL).contains(&max_level),
             "ability {id:?} has invalid max_level {max_level}"
         );
         // base cooldown must be materialized for every ability level
@@ -144,7 +145,7 @@ fn ultimate_abilities_have_max_level_one() {
 }
 
 #[test]
-fn non_ultimate_abilities_have_max_level_at_most_four() {
+fn non_ultimate_abilities_have_max_level_at_most_five() {
     let api = WarcraftApi::default();
     for (id, object) in api.iter() {
         let WarcraftObjectMeta::Ability(ability_meta) = object.meta() else {
@@ -154,8 +155,8 @@ fn non_ultimate_abilities_have_max_level_at_most_four() {
             continue;
         }
         assert!(
-            ability_meta.max_level() <= 4,
-            "non-ultimate ability {id:?} has max_level {} (> 4)",
+            ability_meta.max_level() <= MAX_ABILITY_LEVEL,
+            "non-ultimate ability {id:?} has max_level {} (> {MAX_ABILITY_LEVEL})",
             ability_meta.max_level()
         );
     }
@@ -187,8 +188,10 @@ fn unit_build_times_are_reasonable() {
             continue;
         };
         let build_time = unit_meta.build_time();
+        // A build time of 0 is valid: helper units such as the campaign
+        // `ndum` Dummy are never built.
         assert!(
-            build_time > 0 && build_time < 1000,
+            build_time < 1000,
             "unit {id:?} has suspicious build time {build_time}"
         );
     }
