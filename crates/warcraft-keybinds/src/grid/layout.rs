@@ -1,4 +1,5 @@
 use crate::custom_keys::CustomKeys;
+use crate::identity::grid_layout_identity::GridLayoutIdentity;
 use crate::model::{ColumnIndex, GridCoordinate, RowIndex};
 use std::collections::HashMap;
 
@@ -13,6 +14,7 @@ pub const COMMAND_GRID_TILE_COUNT: usize = 12;
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub struct GridLayout {
     letters: [[char; 4]; 3],
+    identity: GridLayoutIdentity,
 }
 
 impl GridLayout {
@@ -23,11 +25,15 @@ impl GridLayout {
                 ['A', 'S', 'D', 'F'],
                 ['Z', 'X', 'C', 'V'],
             ],
+            identity: GridLayoutIdentity,
         }
     }
 
     const fn from_letters(letters: [[char; 4]; 3]) -> Self {
-        Self { letters }
+        Self {
+            letters,
+            identity: GridLayoutIdentity,
+        }
     }
 
     pub fn to_storage_string(self) -> String {
@@ -179,6 +185,14 @@ impl Default for GridLayout {
 
 impl ddd::Layered for GridLayout {
     type Layer = ddd::DomainLayer;
+}
+
+impl ddd::Entity for GridLayout {
+    type Identity = GridLayoutIdentity;
+
+    fn identity(&self) -> &Self::Identity {
+        &self.identity
+    }
 }
 
 impl ddd::AggregateRoot for GridLayout {}

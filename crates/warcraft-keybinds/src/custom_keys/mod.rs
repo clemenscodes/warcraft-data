@@ -20,6 +20,7 @@ mod resolve;
 #[cfg(test)]
 mod tests;
 
+use crate::identity::custom_keys_identity::CustomKeysIdentity;
 use parser::CustomKeysParser;
 
 pub const DEFAULT_CUSTOM_KEYS: &str = include_str!("../../templates/CustomKeys.txt");
@@ -42,16 +43,28 @@ const GRID_ROWS: u8 = 3;
 #[derive(Clone, Debug, Default)]
 pub struct CustomKeys {
     entries: BTreeMap<WarcraftObjectId, WarcraftKeybinding>,
+    identity: CustomKeysIdentity,
 }
 
 impl From<BTreeMap<WarcraftObjectId, WarcraftKeybinding>> for CustomKeys {
     fn from(entries: BTreeMap<WarcraftObjectId, WarcraftKeybinding>) -> Self {
-        Self { entries }
+        Self {
+            entries,
+            identity: CustomKeysIdentity,
+        }
     }
 }
 
 impl ddd::Layered for CustomKeys {
     type Layer = ddd::DomainLayer;
+}
+
+impl ddd::Entity for CustomKeys {
+    type Identity = CustomKeysIdentity;
+
+    fn identity(&self) -> &Self::Identity {
+        &self.identity
+    }
 }
 
 impl ddd::AggregateRoot for CustomKeys {}

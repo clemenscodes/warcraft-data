@@ -41,6 +41,9 @@ pub use grid::layout::{
 pub use editor_history::{EditorHistory, EditorSnapshot};
 
 pub use identity::ability_id::AbilityId;
+pub use identity::custom_keys_identity::CustomKeysIdentity;
+pub use identity::editor_history_identity::EditorHistoryIdentity;
+pub use identity::grid_layout_identity::GridLayoutIdentity;
 pub use identity::hotkey_target::HotkeyTarget;
 pub use identity::hotkey_token::{HotkeyToken, HotkeyTokenIsNotLetter, HotkeyTokenParseError};
 

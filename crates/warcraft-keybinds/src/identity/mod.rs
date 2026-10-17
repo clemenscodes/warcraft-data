@@ -1,6 +1,9 @@
 //! Identifiers and lookup keys for abilities, slots, and hotkeys.
 
 pub mod ability_id;
+pub mod custom_keys_identity;
+pub mod editor_history_identity;
+pub mod grid_layout_identity;
 pub mod hotkey_target;
 pub mod hotkey_token;
 pub mod slot;

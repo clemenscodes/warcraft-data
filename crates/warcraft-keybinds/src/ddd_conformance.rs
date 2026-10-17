@@ -41,6 +41,7 @@ where
 
 pub(crate) fn assert_factory<Product, TheFactory>()
 where
+    Product: ddd::Layered<Layer = ddd::DomainLayer>,
     TheFactory: ddd::Factory<Product>,
 {
 }

@@ -1,3 +1,4 @@
+use crate::identity::editor_history_identity::EditorHistoryIdentity;
 use std::fmt;
 use std::str::FromStr;
 
@@ -78,6 +79,7 @@ pub struct EditorHistory {
     undo_stack: Vec<EditorSnapshot>,
     redo_stack: Vec<EditorSnapshot>,
     present: EditorSnapshot,
+    identity: EditorHistoryIdentity,
 }
 
 impl EditorHistory {
@@ -86,6 +88,7 @@ impl EditorHistory {
             undo_stack: Vec::new(),
             redo_stack: Vec::new(),
             present,
+            identity: EditorHistoryIdentity,
         }
     }
 
@@ -161,6 +164,14 @@ impl ddd::Layered for EditorHistory {
     type Layer = ddd::DomainLayer;
 }
 
+impl ddd::Entity for EditorHistory {
+    type Identity = EditorHistoryIdentity;
+
+    fn identity(&self) -> &Self::Identity {
+        &self.identity
+    }
+}
+
 impl ddd::AggregateRoot for EditorHistory {}
 
 impl fmt::Display for EditorHistory {
@@ -188,6 +199,7 @@ impl FromStr for EditorHistory {
             undo_stack: Self::parse_stack(undo_part),
             redo_stack: Self::parse_stack(redo_part),
             present,
+            identity: EditorHistoryIdentity,
         };
         Ok(history)
     }
