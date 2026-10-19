@@ -1842,7 +1842,7 @@ impl WarcraftDataAggregation {
                     continue;
                 };
 
-                let names: Vec<String> = name_def.get_names().iter().cloned().collect();
+                let names: Vec<String> = name_def.get_names().to_vec();
                 let icons: Vec<String> = art_def
                     .get_icons()
                     .iter()
@@ -1880,7 +1880,7 @@ impl WarcraftDataAggregation {
                 let icon = self.get_item_icon_by_id(id).unwrap_or_default();
                 let icon = self.normalize_icon_path(&icon);
 
-                let abilities: Vec<String> = item.ability_list().iter().cloned().collect();
+                let abilities: Vec<String> = item.ability_list().to_vec();
 
                 let cooldown_id = item.cooldown_id().map(str::to_string);
 

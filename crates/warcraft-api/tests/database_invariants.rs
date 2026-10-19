@@ -14,7 +14,7 @@ use warcraft_api::{
 /// (that's the review record); when it isn't, it's a regression you want to see
 /// the moment it happens. (Case-insensitive id collisions merge, so this is the
 /// map size, not the raw number of extracted rows.)
-const EXPECTED_OBJECT_COUNT: usize = 1885;
+const EXPECTED_OBJECT_COUNT: usize = 1886;
 
 /// Object IDs that must always exist. If Blizzard removes or renames any of
 /// these, the corresponding test fails and a human has to decide whether to

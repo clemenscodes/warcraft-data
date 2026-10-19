@@ -1533,8 +1533,8 @@ Buttonpos=1,2
 Researchhotkey=C
 Researchbuttonpos=1,0
 Tip=Consecration - [Level 1],Consecration - [Level 2],Consecration - [Level 3]
-Ubertip=Bless the ground, healing nearby friendly living units for 25 hit points per second. Enemy Undead units take 20 damage per second and have incoming healing reduced by 25%. Lasts 5 seconds.,Bless the ground, healing nearby friendly living units for 35 hit points per second. Enemy Undead units take 30 damage per second and have incoming healing reduced by 33%. Lasts 5 seconds.,Bless the ground, healing nearby friendly living units for 50 hit points per second. Enemy Undead units take 40 damage per second and have incoming healing reduced by 50%. Lasts 5 seconds.
-Researchubertip=Bless the ground, healing living allies and burning enemy Undead while reducing their healing received. |n|n|cffffcc00Level 1|r - Heals 25 hit points per second, deals 20 damage per second, reduces healing by 25%. Lasts 5 seconds. |n|cffffcc00Level 2|r - Heals 35 hit points per second, deals 30 damage per second, reduces healing by 33%. Lasts 5 seconds. |n|cffffcc00Level 3|r - Heals 50 hit points per second, deals 40 damage per second, reduces healing by 50%. Lasts 5 seconds.
+Ubertip=Bless the ground, healing nearby friendly living units for 15 hit points per second. Enemy Undead units take 15 damage per second and have incoming healing reduced by 25%. Lasts 10 seconds.,Bless the ground, healing nearby friendly living units for 25 hit points per second. Enemy Undead units take 20 damage per second and have incoming healing reduced by 33%. Lasts 10 seconds.,Bless the ground, healing nearby friendly living units for 35 hit points per second. Enemy Undead units take 25 damage per second and have incoming healing reduced by 50%. Lasts 10 seconds.
+Researchubertip=Bless the ground, healing living allies and burning enemy Undead while reducing their healing received. |n|n|cffffcc00Level 1|r - Heals 15 hit points per second, deals 15 damage per second, reduces healing by 25%. Lasts 10 seconds. |n|cffffcc00Level 2|r - Heals 25 hit points per second, deals 20 damage per second, reduces healing by 33%. Lasts 10 seconds. |n|cffffcc00Level 3|r - Heals 35 hit points per second, deals 25 damage per second, reduces healing by 50%. Lasts 10 seconds.
 
 [AHct]
 Hotkey=R
@@ -1644,7 +1644,7 @@ Researchbuttonpos=3,0
 Tip=Activate Guiding Hand - [Level 1],Activate Guiding Hand - [Level 2],Activate Guiding Hand - [Level 3]
 UnTip=Deactivate Guiding Hand - [|cffffcc00Level 1|r]
 Ubertip=Leonid inspires friendly units within 900 range. Affected units gain 20% attack rate, 10% Ability Speed, and 10% movement speed. Drains 15 mana per second until deactivated.,Leonid inspires friendly units within 900 range. Affected units gain 30% attack rate, 25% Ability Speed, and 15% movement speed. Drains 15 mana per second until deactivated.,Leonid inspires friendly units within 900 range. Affected units gain 40% attack rate, 40% Ability Speed, and 20% movement speed. Drains 15 mana per second until deactivated.
-Researchubertip=Leonid inspires nearby friendly units, granting several bonuses.|nDrains mana until deactivated. |n|n|cffffcc00Level 1|r - 20% attack rate, 10% Ability Speed, 10% movement speed. |n|cffffcc00Level 2|r - 30% attack rate, 25% Ability Speed, 15% movement speed. |n|cffffcc00Level 3|r - 40% attack rate, 40% Ability Speed, 20% movement speed
+Researchubertip=Leonid inspires nearby friendly units, granting several bonuses.|nDrains mana until deactivated. |n|n|cffffcc00Level 1|r - 20% attack rate, 10% Ability Speed, 10% movement speed. |n|cffffcc00Level 2|r - 30% attack rate, 25% Ability Speed, 15% movement speed. |n|cffffcc00Level 3|r - 40% attack rate, 40% Ability Speed, 20% movement speed.
 Unubertip=Deactivate Guiding Hand to stop draining mana.
 
 [AHgr]
@@ -1812,8 +1812,8 @@ Buttonpos=2,2
 Researchhotkey=E
 Researchbuttonpos=2,0
 Tip=Sacred Aura - [Level 1],Sacred Aura - [Level 2],Sacred Aura - [Level 3]
-Ubertip=Gives 15% Magic Resistance and 15% increased healing received to nearby friendly units.,Gives 25% Magic Resistance and 20% increased healing received to nearby friendly units.,Gives 35% Magic Resistance and 25% increased healing recieved to nearby friendly units.
-Researchubertip=Gives additional Magic Resistance and increased healing received to nearby friendly units. |n|n|cffffcc00Level 1|r - 15% Magic Resistance, 15% increased healing received. |n|cffffcc00Level 2|r - 25% Magic Resistance, 20% increased healing received. |n|cffffcc00Level 3|r - 35% Magic Resistance, 25% increased healing received.
+Ubertip=Gives 15% Magic Resistance and 15% increased healing received to nearby friendly units.,Gives 20% Magic Resistance and 20% increased healing received to nearby friendly units.,Gives 25% Magic Resistance and 25% increased healing recieved to nearby friendly units.
+Researchubertip=Gives additional Magic Resistance and increased healing received to nearby friendly units. |n|n|cffffcc00Level 1|r - 15% Magic Resistance, 15% increased healing received. |n|cffffcc00Level 2|r - 20% Magic Resistance, 20% increased healing received. |n|cffffcc00Level 3|r - 25% Magic Resistance, 25% increased healing received.
 
 [Ahpe]
 Buttonpos=0,2
@@ -1944,8 +1944,8 @@ Buttonpos=0,2
 Researchhotkey=Q
 Researchbuttonpos=0,0
 Tip=Sweeping Strike - [Level 1],Sweeping Strike - [Level 2],Sweeping Strike - [Level 3]
-Ubertip=Strikes the target area, dealing 100 damage to enemy units, and restoring 25 hit points per unit hit.,Strikes the target area, dealing 175 damage to enemy units, and restoring 35 hit points per unit hit.,Strikes the target area, dealing 250 damage to enemy units, and restoring 45 hit points per unit hit.
-Researchubertip=Strikes the target area, dealing damage and restoring hit points per enemy hit. |n|n|cffffcc00Level 1|r - 100 damage, 25 hit points. |n|cffffcc00Level 2|r - 175 damage, 35 hit points. |n|cffffcc00Level 3|r - 250 damage 45 hit points.
+Ubertip=Strikes the target area, dealing 100 damage to enemy units, and restoring 25 hit points per unit hit.,Strikes the target area, dealing 150 damage to enemy units, and restoring 35 hit points per unit hit.,Strikes the target area, dealing 200 damage to enemy units, and restoring 45 hit points per unit hit.
+Researchubertip=Strikes the target area, dealing damage and restoring hit points per enemy hit. |n|n|cffffcc00Level 1|r - 100 damage, 25 hit points. |n|cffffcc00Level 2|r - 150 damage, 35 hit points. |n|cffffcc00Level 3|r - 200 damage 45 hit points.
 
 [AHta]
 Hotkey=R
@@ -2350,8 +2350,8 @@ Buttonpos=0,2
 Researchhotkey=F
 Researchbuttonpos=0,0
 Tip=Righteous Fury - [Level 1],Righteous Fury - [Level 2],Righteous Fury - [Level 3]
-Ubertip=Dashes towards a target point up to 725 range away, dealing 100 damage to enemy land units hit along the way, and slowing their movement by 20% and attack rate by 30%.,Dashes towards a target point up to 725 range away, dealing 150 damage to enemy land units hit along the way, and slowing their movement by 30% and attack rate by 40%.,Dashes towards a target point up to 725 range away, dealing 200 damage to enemy land units hit along the way, and slowing their movement by 40% and attack rate by 50%.
-Researchubertip=Dash towards a target point, dealing damage to and slowing the movement speed and attack rate of enemy land units passed through.|n|n|cffffcc00Level 1|r - 725 range, 100 damage, 20% movement speed, 30% attack rate. |n|cffffcc00Level 2|r - 725 range, 150 damage, 30% movement speed, 40% attack rate. |n|cffffcc00Level 3|r - 725 range, 200 damage, 40% movement speed, 50% attack rate.
+Ubertip=Dashes towards a target point up to 725 range away, dealing 100 damage to enemy land units hit along the way, and slowing their movement by 40% and attack rate by 40%.,Dashes towards a target point up to 725 range away, dealing 135 damage to enemy land units hit along the way, and slowing their movement by 40% and attack rate by 40%.,Dashes towards a target point up to 725 range away, dealing 180 damage to enemy land units hit along the way, and slowing their movement by 40% and attack rate by 40%.
+Researchubertip=Dash towards a target point, dealing damage to and slowing the movement speed and attack rate of enemy land units passed through.|n|n|cffffcc00Level 1|r - 725 range, 90 damage, 40% movement speed, 40% attack rate. |n|cffffcc00Level 2|r - 725 range, 135 damage, 40% movement speed, 40% attack rate. |n|cffffcc00Level 3|r - 725 range, 180 damage, 40% movement speed, 40% attack rate.
 
 [ANcr]
 Hotkey=R
@@ -3640,8 +3640,8 @@ Buttonpos=1,2
 Researchhotkey=W
 Researchbuttonpos=1,0
 Tip=Undying Defiance - [Level 1],Undying Defiance - [Level 2],Undying Defiance - [Level 3],Undying Defiance - [Level 4],Undying Defiance - [Level 5]
-Ubertip=Enter a defensive stance, reducing incoming damage by 65% and movement speed by 40%. During this time, if Garek takes any damage, he gains 30% attack rate for 3 seconds. Lasts 10 seconds.,Enter a defensive stance, reducing incoming damage by 65% and movement speed by 40%. During this time, if Garek takes any damage, he gains 35% attack rate for 3 seconds. Lasts 10 seconds.,Enter a defensive stance, reducing incoming damage by 65% and movement speed by 40%. During this time, if Garek takes any damage, he gains 40% attack rate for 3 seconds. Lasts 10 seconds.,Enter a defensive stance, reducing incoming damage by 65% and movement speed by 40%. During this time, if Garek takes any damage, he gains 45% attack rate for 3 seconds. Lasts 10 seconds.,Enter a defensive stance, reducing incoming damage by 65% and movement speed by 40%. During this time, if Garek takes any damage, he gains 50% attack rate for 3 seconds. Lasts 10 seconds.
-Researchubertip=Take reduced damage, at the cost of movement speed. Taking damage grants increased attack rate. |n|n|cffffcc00Level 1|r - 65% reduced damage, 40% reduced movement speed, 30% attack rate for 3 seconds. Lasts 10 seconds. |n|cffffcc00Level 2|r - 65% reduced damage, 40% reduced movement speed, 35% attack rate for 3 seconds. Lasts 10 seconds. |n|cffffcc00Level 3|r - 65% reduced damage, 40% reduced movement speed, 40% attack rate for 3 seconds. Lasts 10 seconds. |n|cffffcc00Level 4|r - 65% reduced damage, 40% reduced movement speed, 45% attack rate for 3 seconds. Lasts 10 seconds.
+Ubertip=Enter a defensive stance, reducing incoming damage by 65% and movement speed by 40%. During this time, if Garek takes any damage, he gains 30% attack rate for 3 seconds. Lasts 10 seconds.,Enter a defensive stance, reducing incoming damage by 65% and movement speed by 35%. During this time, if Garek takes any damage, he gains 35% attack rate for 3 seconds. Lasts 10 seconds.,Enter a defensive stance, reducing incoming damage by 65% and movement speed by 30%. During this time, if Garek takes any damage, he gains 40% attack rate for 3 seconds. Lasts 10 seconds.,Enter a defensive stance, reducing incoming damage by 65% and movement speed by 25%. During this time, if Garek takes any damage, he gains 45% attack rate for 3 seconds. Lasts 10 seconds.,Enter a defensive stance, reducing incoming damage by 65% and movement speed by 20%. During this time, if Garek takes any damage, he gains 50% attack rate for 3 seconds. Lasts 10 seconds.
+Researchubertip=Take reduced damage, at the cost of movement speed. Taking damage grants increased attack rate. |n|n|cffffcc00Level 1|r - 65% reduced damage, 40% reduced movement speed, 30% attack rate for 3 seconds. Lasts 10 seconds. |n|cffffcc00Level 2|r - 65% reduced damage, 35% reduced movement speed, 35% attack rate for 3 seconds. Lasts 10 seconds. |n|cffffcc00Level 3|r - 65% reduced damage, 30% reduced movement speed, 40% attack rate for 3 seconds. Lasts 10 seconds. |n|cffffcc00Level 4|r - 65% reduced damage, 25% reduced movement speed, 45% attack rate for 3 seconds. Lasts 10 seconds. |n|cffffcc00Level 5|r - 65% reduced damage, 20% reduced movement speed, 50% attack rate for 3 seconds. Lasts 10 seconds.
 
 [AUbr]
 Hotkey=E
@@ -3950,8 +3950,8 @@ Buttonpos=0,2
 Researchhotkey=Q
 Researchbuttonpos=0,0
 Tip=Relentless Cleave - [Level 1],Relentless Cleave - [Level 2],Relentless Cleave - [Level 3],Relentless Cleave - [Level 4],Relentless Cleave - [Level 5]
-Ubertip=Strikes the target area, dealing 100 damage to enemy units, reducing their armor by 2, and restoring 25 hit points per unit hit.,Strikes the target area, dealing 175 damage to enemy units, reducing their armor by 2, and restoring 35 hit points per unit hit.,Strikes the target area, dealing 250 damage to enemy units, reducing their armor by 3, and restoring 45 hit points per unit hit.,Strikes the target area, dealing 325 damage to enemy units, reducing their armor by 3, and restoring 55 hit points per unit hit.,Strikes the target area, dealing 400 damage to enemy units, reducing their armor by 4, and restoring 65 hit points per unit hit.
-Researchubertip=Strikes the target area, dealing damage, reducing armor and restoring hit points per unit hit. |n|n|cffffcc00Level 1|r - 100 damage, 2 armor reduction, 25 hit points. |n|cffffcc00Level 2|r - 175 damage, 2 armor reduction, 35 hit points. |n|cffffcc00Level 3|r - 250 damage, 3 armor reduction, 45 hit points. |n|cffffcc00Level 4|r - 325 damage, 3 armor reduction, 55 hit points. |n|cffffcc00Level 5|r - 400 damage, 4 armor reduction, 65 hit points.
+Ubertip=Strikes the target area, dealing 100 damage to enemy units, reducing their armor by 2, and restoring 25 hit points per unit hit.,Strikes the target area, dealing 150 damage to enemy units, reducing their armor by 2, and restoring 35 hit points per unit hit.,Strikes the target area, dealing 200 damage to enemy units, reducing their armor by 3, and restoring 45 hit points per unit hit.,Strikes the target area, dealing 250 damage to enemy units, reducing their armor by 3, and restoring 55 hit points per unit hit.,Strikes the target area, dealing 300 damage to enemy units, reducing their armor by 4, and restoring 65 hit points per unit hit.
+Researchubertip=Strikes the target area, dealing damage, reducing armor and restoring hit points per unit hit. |n|n|cffffcc00Level 1|r - 100 damage, 2 armor reduction, 25 hit points. |n|cffffcc00Level 2|r - 150 damage, 2 armor reduction, 35 hit points. |n|cffffcc00Level 3|r - 200 damage, 3 armor reduction, 45 hit points. |n|cffffcc00Level 4|r - 250 damage, 3 armor reduction, 55 hit points. |n|cffffcc00Level 5|r - 300 damage, 4 armor reduction, 65 hit points.
 
 [AUts]
 Unhotkey=X
@@ -4009,7 +4009,7 @@ Researchhotkey=R
 Researchbuttonpos=3,0
 Tip=Banshee's Wail - [Level 1],Banshee's Wail - [Level 2],Banshee's Wail - [Level 3]
 Ubertip=Anya summons 5 Banshees to attack nearby enemies. Banshee attacks apply a debuff that increases Magic Damage taken by 30%. Lasts 30 seconds.,Anya summons 7 Banshees to attack nearby enemies. Banshee attacks apply a debuff that increases Magic Damage taken by 30%. Lasts 30 seconds.,Anya summons 9 Banshees to attack nearby enemies. Banshee attacks apply a debuff that increases Magic Damage taken by 30%. Lasts 30 seconds.
-Researchubertip=Anya summons Banshees to attack nearby enemies. Banshee attacks apply a debuff that increases Magic Damage taken by 30%.|n|n|cffffcc00Level 1|r - 5 Banshees |n|cffffcc00Level 2|r - 7 Banshees |n|cffffcc00Level 3|r - 9 Banshees
+Researchubertip=Anya summons Banshees to attack nearby enemies. Banshee attacks apply a debuff that increases Magic Damage taken by 30%.|n|n|cffffcc00Level 1|r - 5 Banshees. |n|cffffcc00Level 2|r - 7 Banshees. |n|cffffcc00Level 3|r - 9 Banshees.
 
 [AUwf]
 Hotkey=Q
@@ -5747,7 +5747,7 @@ Tip=Summon Wildkin
 Ubertip=Medium melee unit. Attacks land units.
 
 [Npal]
-Hotkey=F
+Hotkey=Y
 Buttonpos=3,0
 Tip=Summon Forsaken Paladin
 Ubertip=Warrior Hero, adept at wielding the Light offensively and defensively. Can learn Consecration, Righteous Fury, Sacred Aura, and Cleansing Fire. Attacks land units.

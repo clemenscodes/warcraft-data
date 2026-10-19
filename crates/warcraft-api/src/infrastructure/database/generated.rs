@@ -4061,7 +4061,7 @@ fn insert_objects_chunk_1(
             AHCR_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHCR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Bless the ground, healing nearby friendly living units for 25 hit points per second. Enemy Undead units take 20 damage per second and have incoming healing reduced by 25%. |nLasts 5 seconds."), Some("Bless the ground, healing living allies and burning enemy Undead while reducing their healing received. |n|n|cffffcc00Level 1|r - Heals 25 hit points per second, deals 20 damage per second, reduces healing by 25%. Lasts 5 seconds. |n|cffffcc00Level 2|r - Heals 35 hit points per second, deals 30 damage per second, reduces healing by 33%. Lasts 5 seconds. |n|cffffcc00Level 3|r - Heals 50 hit points per second, deals 40 damage per second, reduces healing by 50%. Lasts 5 seconds.")).with_code(Some(WarcraftObjectId::new("AHcr"))).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHCR_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Bless the ground, healing nearby friendly living units for 15 hit points per second. Enemy Undead units take 15 damage per second and have incoming healing reduced by 25%. |nLasts 10 seconds."), Some("Bless the ground, healing living allies and burning enemy Undead while reducing their healing received. |n|n|cffffcc00Level 1|r - Heals 15 hit points per second, deals 15 damage per second, reduces healing by 25%. Lasts 10 seconds. |n|cffffcc00Level 2|r - Heals 25 hit points per second, deals 20 damage per second, reduces healing by 33%. Lasts 10 seconds. |n|cffffcc00Level 3|r - Heals 35 hit points per second, deals 25 damage per second, reduces healing by 50%. Lasts 10 seconds.")).with_code(Some(WarcraftObjectId::new("AHcr"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHCR_TIP_LEVELS, AHCR_UBERTIP_LEVELS),
         ),
     );
@@ -4222,7 +4222,7 @@ fn insert_objects_chunk_1(
             AHGH_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHGH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Leonid inspires friendly units within 900 range. Affected units gain 20% attack rate, 10% Ability Speed, and 10% movement speed.|nDrains 15 mana per second until deactivated."), Some("Leonid inspires nearby friendly units, granting several bonuses.|nDrains mana until deactivated. |n|n|cffffcc00Level 1|r - 20% attack rate, 10% Ability Speed, 10% movement speed. |n|cffffcc00Level 2|r - 30% attack rate, 25% Ability Speed, 15% movement speed. |n|cffffcc00Level 3|r - 40% attack rate, 40% Ability Speed, 20% movement speed")).with_code(Some(WarcraftObjectId::new("AHgh"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnguidinghandoff.blp"))),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHGH_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Leonid inspires friendly units within 900 range. Affected units gain 20% attack rate, 10% Ability Speed, and 10% movement speed.|nDrains 15 mana per second until deactivated."), Some("Leonid inspires nearby friendly units, granting several bonuses.|nDrains mana until deactivated. |n|n|cffffcc00Level 1|r - 20% attack rate, 10% Ability Speed, 10% movement speed. |n|cffffcc00Level 2|r - 30% attack rate, 25% Ability Speed, 15% movement speed. |n|cffffcc00Level 3|r - 40% attack rate, 40% Ability Speed, 20% movement speed.")).with_code(Some(WarcraftObjectId::new("AHgh"))).with_morph_target(None).with_off_state(Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), None, None, Some("commandbuttons/btnguidinghandoff.blp"))),
             WarcraftObjectText::with_alt(AHGH_TIP_LEVELS, AHGH_UBERTIP_LEVELS, Some("Deactivate Guiding Hand - [|cffffcc00Level 1|r]"), Some("Deactivate Guiding Hand to stop draining mana.")),
         ),
     );
@@ -4404,7 +4404,7 @@ fn insert_objects_chunk_1(
             AHPA_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHPA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives 15% Magic Resistance and 15% increased healing received to nearby friendly units."), Some("Gives additional Magic Resistance and increased healing received to nearby friendly units. |n|n|cffffcc00Level 1|r - 15% Magic Resistance, 15% increased healing received. |n|cffffcc00Level 2|r - 25% Magic Resistance, 20% increased healing received. |n|cffffcc00Level 3|r - 35% Magic Resistance, 25% increased healing received.")).with_code(Some(WarcraftObjectId::new("AHas"))).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHPA_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero)), Some("Gives 15% Magic Resistance and 15% increased healing received to nearby friendly units."), Some("Gives additional Magic Resistance and increased healing received to nearby friendly units. |n|n|cffffcc00Level 1|r - 15% Magic Resistance, 15% increased healing received. |n|cffffcc00Level 2|r - 20% Magic Resistance, 20% increased healing received. |n|cffffcc00Level 3|r - 25% Magic Resistance, 25% increased healing received.")).with_code(Some(WarcraftObjectId::new("AHas"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHPA_TIP_LEVELS, AHPA_UBERTIP_LEVELS),
         ),
     );
@@ -4655,7 +4655,7 @@ fn insert_objects_chunk_1(
             AHSW_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHSW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Strikes the target area, dealing 100 damage to enemy units, and restoring 25 hit points per unit hit."), Some("Strikes the target area, dealing damage and restoring hit points per enemy hit. |n|n|cffffcc00Level 1|r - 100 damage, 25 hit points. |n|cffffcc00Level 2|r - 175 damage, 35 hit points. |n|cffffcc00Level 3|r - 250 damage 45 hit points.")).with_code(Some(WarcraftObjectId::new("AHsw"))).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AHSW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Strikes the target area, dealing 100 damage to enemy units, and restoring 25 hit points per unit hit."), Some("Strikes the target area, dealing damage and restoring hit points per enemy hit. |n|n|cffffcc00Level 1|r - 100 damage, 25 hit points. |n|cffffcc00Level 2|r - 150 damage, 35 hit points. |n|cffffcc00Level 3|r - 200 damage 45 hit points.")).with_code(Some(WarcraftObjectId::new("AHsw"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AHSW_TIP_LEVELS, AHSW_UBERTIP_LEVELS),
         ),
     );
@@ -5550,7 +5550,7 @@ fn insert_objects_chunk_1(
             ANCP_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANCP_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Dashes towards a target point up to 725 range away, dealing 100 damage to enemy land units hit along the way, and slowing their movement by 20% and attack rate by 30%."), Some("Dash towards a target point, dealing damage to and slowing the movement speed and attack rate of enemy land units passed through.|n|n|cffffcc00Level 1|r - 725 range, 100 damage, 20% movement speed, 30% attack rate. |n|cffffcc00Level 2|r - 725 range, 150 damage, 30% movement speed, 40% attack rate. |n|cffffcc00Level 3|r - 725 range, 200 damage, 40% movement speed, 50% attack rate.")).with_code(Some(WarcraftObjectId::new("ANcp"))).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, ANCP_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Dashes towards a target point up to 725 range away, dealing 100 damage to enemy land units hit along the way, and slowing their movement by 40% and attack rate by 40%."), Some("Dash towards a target point, dealing damage to and slowing the movement speed and attack rate of enemy land units passed through.|n|n|cffffcc00Level 1|r - 725 range, 90 damage, 40% movement speed, 40% attack rate. |n|cffffcc00Level 2|r - 725 range, 135 damage, 40% movement speed, 40% attack rate. |n|cffffcc00Level 3|r - 725 range, 180 damage, 40% movement speed, 40% attack rate.")).with_code(Some(WarcraftObjectId::new("ANcp"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(ANCP_TIP_LEVELS, ANCP_UBERTIP_LEVELS),
         ),
     );
@@ -8933,7 +8933,7 @@ fn insert_objects_chunk_2(
             AUBD_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(5, false, AUBD_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Enter a defensive stance, reducing incoming damage by 65% and movement speed by 40%. During this time, if Garek takes any damage, he gains 30% attack rate for 3 seconds. |nLasts 10 seconds."), Some("Take reduced damage, at the cost of movement speed. Taking damage grants increased attack rate. |n|n|cffffcc00Level 1|r - 65% reduced damage, 40% reduced movement speed, 30% attack rate for 3 seconds. Lasts 10 seconds. |n|cffffcc00Level 2|r - 65% reduced damage, 40% reduced movement speed, 35% attack rate for 3 seconds. Lasts 10 seconds. |n|cffffcc00Level 3|r - 65% reduced damage, 40% reduced movement speed, 40% attack rate for 3 seconds. Lasts 10 seconds. |n|cffffcc00Level 4|r - 65% reduced damage, 40% reduced movement speed, 45% attack rate for 3 seconds. Lasts 10 seconds.")).with_code(Some(WarcraftObjectId::new("AHbd"))).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(5, false, AUBD_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero)), Some("Enter a defensive stance, reducing incoming damage by 65% and movement speed by 40%. During this time, if Garek takes any damage, he gains 30% attack rate for 3 seconds. |nLasts 10 seconds."), Some("Take reduced damage, at the cost of movement speed. Taking damage grants increased attack rate. |n|n|cffffcc00Level 1|r - 65% reduced damage, 40% reduced movement speed, 30% attack rate for 3 seconds. Lasts 10 seconds. |n|cffffcc00Level 2|r - 65% reduced damage, 35% reduced movement speed, 35% attack rate for 3 seconds. Lasts 10 seconds. |n|cffffcc00Level 3|r - 65% reduced damage, 30% reduced movement speed, 40% attack rate for 3 seconds. Lasts 10 seconds. |n|cffffcc00Level 4|r - 65% reduced damage, 25% reduced movement speed, 45% attack rate for 3 seconds. Lasts 10 seconds. |n|cffffcc00Level 5|r - 65% reduced damage, 20% reduced movement speed, 50% attack rate for 3 seconds. Lasts 10 seconds.")).with_code(Some(WarcraftObjectId::new("AHbd"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUBD_TIP_LEVELS, AUBD_UBERTIP_LEVELS),
         ),
     );
@@ -9360,7 +9360,7 @@ fn insert_objects_chunk_2(
             AUSW_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(5, false, AUSW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Strikes the target area, dealing 100 damage to enemy units, reducing their armor by 2, and restoring 25 hit points per unit hit."), Some("Strikes the target area, dealing damage, reducing armor and restoring hit points per unit hit. |n|n|cffffcc00Level 1|r - 100 damage, 2 armor reduction, 25 hit points. |n|cffffcc00Level 2|r - 175 damage, 2 armor reduction, 35 hit points. |n|cffffcc00Level 3|r - 250 damage, 3 armor reduction, 45 hit points. |n|cffffcc00Level 4|r - 325 damage, 3 armor reduction, 55 hit points. |n|cffffcc00Level 5|r - 400 damage, 4 armor reduction, 65 hit points.")).with_code(Some(WarcraftObjectId::new("AHsw"))).with_morph_target(None).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(5, false, AUSW_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::Zero)), Some("Strikes the target area, dealing 100 damage to enemy units, reducing their armor by 2, and restoring 25 hit points per unit hit."), Some("Strikes the target area, dealing damage, reducing armor and restoring hit points per unit hit. |n|n|cffffcc00Level 1|r - 100 damage, 2 armor reduction, 25 hit points. |n|cffffcc00Level 2|r - 150 damage, 2 armor reduction, 35 hit points. |n|cffffcc00Level 3|r - 200 damage, 3 armor reduction, 45 hit points. |n|cffffcc00Level 4|r - 250 damage, 3 armor reduction, 55 hit points. |n|cffffcc00Level 5|r - 300 damage, 4 armor reduction, 65 hit points.")).with_code(Some(WarcraftObjectId::new("AHsw"))).with_morph_target(None).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUSW_TIP_LEVELS, AUSW_UBERTIP_LEVELS),
         ),
     );
@@ -9399,7 +9399,7 @@ fn insert_objects_chunk_2(
             AUWC_ICONS,
             Ability,
             None,
-            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUWC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Anya summons 5 Banshees to attack nearby enemies. Banshee attacks apply a debuff that increases Magic Damage taken by 30%. |nLasts 30 seconds."), Some("Anya summons Banshees to attack nearby enemies. Banshee attacks apply a debuff that increases Magic Damage taken by 30%.|n|n|cffffcc00Level 1|r - 5 Banshees |n|cffffcc00Level 2|r - 7 Banshees |n|cffffcc00Level 3|r - 9 Banshees")).with_code(Some(WarcraftObjectId::new("AUwc"))).with_morph_target(Some(WarcraftObjectId::new("ufrb"))).with_off_state(None, None, None, None)),
+            WarcraftObjectMeta::Ability(AbilityMeta::with_ubertips(3, false, AUWC_COOLDOWNS, Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Two)), Some(GridCoordinate::new(ColumnIndex::Three, RowIndex::Zero)), Some("Anya summons 5 Banshees to attack nearby enemies. Banshee attacks apply a debuff that increases Magic Damage taken by 30%. |nLasts 30 seconds."), Some("Anya summons Banshees to attack nearby enemies. Banshee attacks apply a debuff that increases Magic Damage taken by 30%.|n|n|cffffcc00Level 1|r - 5 Banshees. |n|cffffcc00Level 2|r - 7 Banshees. |n|cffffcc00Level 3|r - 9 Banshees.")).with_code(Some(WarcraftObjectId::new("AUwc"))).with_morph_target(Some(WarcraftObjectId::new("ufrb"))).with_off_state(None, None, None, None)),
             WarcraftObjectText::new(AUWC_TIP_LEVELS, AUWC_UBERTIP_LEVELS),
         ),
     );
@@ -10073,6 +10073,23 @@ fn insert_objects_chunk_2(
     );
 
     objects.insert(
+        WarcraftObjectId::new("cgah"),
+        WarcraftObject::with_text(
+            WarcraftObjectId::new("cgah"),
+            CGAH_NAMES,
+            CGAH_ICONS,
+            Item,
+            None,
+            WarcraftObjectMeta::Item(ItemMeta::new(
+                Campaign,
+                CGAH_ABILITIES,
+                Some(WarcraftObjectId::new("_")),
+            )),
+            WarcraftObjectText::new(CGAH_TIP_LEVELS, CGAH_UBERTIP_LEVELS),
+        ),
+    );
+
+    objects.insert(
         WarcraftObjectId::new("ches"),
         WarcraftObject::with_text(
             WarcraftObjectId::new("ches"),
@@ -10320,7 +10337,11 @@ fn insert_objects_chunk_2(
             WarcraftObjectText::new(CMDBUILDNIGHTELF_TIP_LEVELS, CMDBUILDNIGHTELF_UBERTIP_LEVELS),
         ),
     );
+}
 
+fn insert_objects_chunk_3(
+    objects: &mut std::collections::BTreeMap<WarcraftObjectId, WarcraftObject>,
+) {
     objects.insert(
         WarcraftObjectId::new("CmdBuildOrc"),
         WarcraftObject::with_text(
@@ -10339,11 +10360,7 @@ fn insert_objects_chunk_2(
             WarcraftObjectText::new(CMDBUILDORC_TIP_LEVELS, CMDBUILDORC_UBERTIP_LEVELS),
         ),
     );
-}
 
-fn insert_objects_chunk_3(
-    objects: &mut std::collections::BTreeMap<WarcraftObjectId, WarcraftObject>,
-) {
     objects.insert(
         WarcraftObjectId::new("CmdBuildUndead"),
         WarcraftObject::with_text(
@@ -16308,31 +16325,31 @@ fn insert_objects_chunk_3(
                 )
                 .with_combat(
                     UnitCombat::new(
-                        650,
+                        700,
                         RegenRate::from_milli(250),
                         RegenType::Always,
-                        Armor::from_milli(3900),
+                        Armor::from_milli(4600),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
-                            24,
-                            34,
+                            26,
+                            36,
                             100,
                             Cooldown::from_millis(2200),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
+                    .with_mana_pool(ManaPool::new(240, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, RegenRate::from_milli(10)),
-                    AttributeBase::new(22, 13, 17),
+                    ManaPool::new(240, RegenRate::from_milli(10)),
+                    AttributeBase::new(24, 12, 16),
                     AttributeGrowth::new(
-                        StatGrowth::from_milli(2700),
-                        StatGrowth::from_milli(1500),
-                        StatGrowth::from_milli(1800),
+                        StatGrowth::from_milli(3000),
+                        StatGrowth::from_milli(1300),
+                        StatGrowth::from_milli(1700),
                     ),
                     PrimaryAttribute::Strength,
                 )),
@@ -17455,7 +17472,11 @@ fn insert_objects_chunk_3(
         )
         .with_default_position(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero))),
     );
+}
 
+fn insert_objects_chunk_4(
+    objects: &mut std::collections::BTreeMap<WarcraftObjectId, WarcraftObject>,
+) {
     objects.insert(
         WarcraftObjectId::new("Htmx"),
         WarcraftObject::with_text(
@@ -17513,11 +17534,7 @@ fn insert_objects_chunk_3(
             WarcraftObjectText::new(HTMX_TIP_LEVELS, HTMX_UBERTIP_LEVELS),
         ),
     );
-}
 
-fn insert_objects_chunk_4(
-    objects: &mut std::collections::BTreeMap<WarcraftObjectId, WarcraftObject>,
-) {
     objects.insert(
         WarcraftObjectId::new("htow"),
         WarcraftObject::with_text(
@@ -25304,7 +25321,11 @@ fn insert_objects_chunk_4(
             ),
         ),
     );
+}
 
+fn insert_objects_chunk_5(
+    objects: &mut std::collections::BTreeMap<WarcraftObjectId, WarcraftObject>,
+) {
     objects.insert(
         WarcraftObjectId::new("nef3"),
         WarcraftObject::new(
@@ -25341,11 +25362,7 @@ fn insert_objects_chunk_4(
             ),
         ),
     );
-}
 
-fn insert_objects_chunk_5(
-    objects: &mut std::collections::BTreeMap<WarcraftObjectId, WarcraftObject>,
-) {
     objects.insert(
         WarcraftObjectId::new("nef4"),
         WarcraftObject::new(
@@ -34139,7 +34156,11 @@ fn insert_objects_chunk_5(
             WarcraftObjectText::new(NMR6_TIP_LEVELS, NMR6_UBERTIP_LEVELS),
         ),
     );
+}
 
+fn insert_objects_chunk_6(
+    objects: &mut std::collections::BTreeMap<WarcraftObjectId, WarcraftObject>,
+) {
     objects.insert(
         WarcraftObjectId::new("nmr7"),
         WarcraftObject::with_text(
@@ -34177,11 +34198,7 @@ fn insert_objects_chunk_5(
             WarcraftObjectText::new(NMR7_TIP_LEVELS, NMR7_UBERTIP_LEVELS),
         ),
     );
-}
 
-fn insert_objects_chunk_6(
-    objects: &mut std::collections::BTreeMap<WarcraftObjectId, WarcraftObject>,
-) {
     objects.insert(
         WarcraftObjectId::new("nmr8"),
         WarcraftObject::with_text(
@@ -43162,7 +43179,11 @@ fn insert_objects_chunk_6(
             WarcraftObjectText::new(NVDL_TIP_LEVELS, NVDL_UBERTIP_LEVELS),
         ),
     );
+}
 
+fn insert_objects_chunk_7(
+    objects: &mut std::collections::BTreeMap<WarcraftObjectId, WarcraftObject>,
+) {
     objects.insert(
         WarcraftObjectId::new("nvdw"),
         WarcraftObject::with_text(
@@ -43211,11 +43232,7 @@ fn insert_objects_chunk_6(
         )
         .with_default_position(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero))),
     );
-}
 
-fn insert_objects_chunk_7(
-    objects: &mut std::collections::BTreeMap<WarcraftObjectId, WarcraftObject>,
-) {
     objects.insert(
         WarcraftObjectId::new("nvil"),
         WarcraftObject::with_text(
@@ -46689,8 +46706,8 @@ fn insert_objects_chunk_7(
                     Armor::from_milli(0),
                     DefenseType::Unarmored,
                     Some(UnitAttack::new(
-                        75,
-                        75,
+                        45,
+                        45,
                         750,
                         Cooldown::from_millis(5000),
                         AttackType::Normal,
@@ -50026,7 +50043,11 @@ fn insert_objects_chunk_7(
         )
         .with_default_position(Some(GridCoordinate::new(ColumnIndex::One, RowIndex::Zero))),
     );
+}
 
+fn insert_objects_chunk_8(
+    objects: &mut std::collections::BTreeMap<WarcraftObjectId, WarcraftObject>,
+) {
     objects.insert(
         WarcraftObjectId::new("Reuv"),
         WarcraftObject::with_text(
@@ -50040,11 +50061,7 @@ fn insert_objects_chunk_7(
         )
         .with_default_position(Some(GridCoordinate::new(ColumnIndex::Two, RowIndex::Zero))),
     );
-}
 
-fn insert_objects_chunk_8(
-    objects: &mut std::collections::BTreeMap<WarcraftObjectId, WarcraftObject>,
-) {
     objects.insert(
         WarcraftObjectId::new("Rews"),
         WarcraftObject::with_text(
@@ -53121,7 +53138,7 @@ fn insert_objects_chunk_8(
                 )
                 .with_combat(
                     UnitCombat::new(
-                        550,
+                        500,
                         RegenRate::from_milli(250),
                         RegenType::Always,
                         Armor::from_milli(3700),
@@ -53135,17 +53152,17 @@ fn insert_objects_chunk_8(
                             WeaponType::Missile,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(225, RegenRate::from_milli(10))),
+                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(225, RegenRate::from_milli(10)),
-                    AttributeBase::new(18, 19, 15),
+                    ManaPool::new(255, RegenRate::from_milli(10)),
+                    AttributeBase::new(16, 19, 17),
                     AttributeGrowth::new(
-                        StatGrowth::from_milli(1900),
-                        StatGrowth::from_milli(1500),
-                        StatGrowth::from_milli(2600),
+                        StatGrowth::from_milli(1700),
+                        StatGrowth::from_milli(2000),
+                        StatGrowth::from_milli(2300),
                     ),
                     PrimaryAttribute::Agility,
                 )),
@@ -53875,7 +53892,11 @@ fn insert_objects_chunk_8(
             WarcraftObjectText::new(UCLC_TIP_LEVELS, UCLC_UBERTIP_LEVELS),
         ),
     );
+}
 
+fn insert_objects_chunk_9(
+    objects: &mut std::collections::BTreeMap<WarcraftObjectId, WarcraftObject>,
+) {
     objects.insert(
         WarcraftObjectId::new("Ucrl"),
         WarcraftObject::with_text(
@@ -53934,11 +53955,7 @@ fn insert_objects_chunk_8(
         )
         .with_default_position(Some(GridCoordinate::new(ColumnIndex::Zero, RowIndex::One))),
     );
-}
 
-fn insert_objects_chunk_9(
-    objects: &mut std::collections::BTreeMap<WarcraftObjectId, WarcraftObject>,
-) {
     objects.insert(
         WarcraftObjectId::new("ucrm"),
         WarcraftObject::with_text(
@@ -55077,31 +55094,31 @@ fn insert_objects_chunk_9(
                 )
                 .with_combat(
                     UnitCombat::new(
-                        650,
+                        625,
                         RegenRate::from_milli(250),
                         RegenType::Always,
-                        Armor::from_milli(3900),
+                        Armor::from_milli(4800),
                         DefenseType::Hero,
                         Some(UnitAttack::new(
-                            24,
-                            34,
+                            23,
+                            33,
                             100,
                             Cooldown::from_millis(2200),
                             AttackType::Hero,
                             WeaponType::Normal,
                         )),
                     )
-                    .with_mana_pool(ManaPool::new(255, RegenRate::from_milli(10))),
+                    .with_mana_pool(ManaPool::new(225, RegenRate::from_milli(10))),
                 )
                 .with_level(5)
                 .with_gold_cost(425)
                 .with_hero_attributes(HeroAttributes::new(
-                    ManaPool::new(255, RegenRate::from_milli(10)),
-                    AttributeBase::new(22, 13, 17),
+                    ManaPool::new(225, RegenRate::from_milli(10)),
+                    AttributeBase::new(21, 16, 15),
                     AttributeGrowth::new(
                         StatGrowth::from_milli(2700),
-                        StatGrowth::from_milli(1500),
                         StatGrowth::from_milli(1800),
+                        StatGrowth::from_milli(1500),
                     ),
                     PrimaryAttribute::Strength,
                 )),
@@ -58604,7 +58621,7 @@ pub const DEFAULT_HOTKEYS: &[DefaultHotkeys] = &[
     DefaultHotkeys::new("Nbst", Some("S"), None, None),
     DefaultHotkeys::new("Nfir", Some("O"), None, None),
     DefaultHotkeys::new("Nngs", Some("G"), None, None),
-    DefaultHotkeys::new("Npal", Some("F"), None, None),
+    DefaultHotkeys::new("Npal", Some("Y"), None, None),
     DefaultHotkeys::new("Npbm", Some("N"), None, None),
     DefaultHotkeys::new("Nplh", Some("I"), None, None),
     DefaultHotkeys::new("Nrob", Some("Z"), None, None),
@@ -59828,7 +59845,7 @@ pub const LOCALIZED_HOTKEYS: &[DefaultHotkeys] = &[
     DefaultHotkeys::new("Nman", Some("M"), None, None),
     DefaultHotkeys::new("Nmsr", Some("S"), None, None),
     DefaultHotkeys::new("Nngs", Some("G"), None, None),
-    DefaultHotkeys::new("Npal", Some("F"), None, None),
+    DefaultHotkeys::new("Npal", Some("Y"), None, None),
     DefaultHotkeys::new("Npbm", Some("N"), None, None),
     DefaultHotkeys::new("Npld", Some("P"), None, None),
     DefaultHotkeys::new("Nplh", Some("I"), None, None),
@@ -61845,9 +61862,9 @@ const AHCR_TIP_LEVELS: &[&str] = &[
     "Consecration - [Level 3]",
 ];
 const AHCR_UBERTIP_LEVELS: &[&str] = &[
-    "Bless the ground, healing nearby friendly living units for 25 hit points per second. Enemy Undead units take 20 damage per second and have incoming healing reduced by 25%. Lasts 5 seconds.",
-    "Bless the ground, healing nearby friendly living units for 35 hit points per second. Enemy Undead units take 30 damage per second and have incoming healing reduced by 33%. Lasts 5 seconds.",
-    "Bless the ground, healing nearby friendly living units for 50 hit points per second. Enemy Undead units take 40 damage per second and have incoming healing reduced by 50%. Lasts 5 seconds.",
+    "Bless the ground, healing nearby friendly living units for 15 hit points per second. Enemy Undead units take 15 damage per second and have incoming healing reduced by 25%. Lasts 10 seconds.",
+    "Bless the ground, healing nearby friendly living units for 25 hit points per second. Enemy Undead units take 20 damage per second and have incoming healing reduced by 33%. Lasts 10 seconds.",
+    "Bless the ground, healing nearby friendly living units for 35 hit points per second. Enemy Undead units take 25 damage per second and have incoming healing reduced by 50%. Lasts 10 seconds.",
 ];
 const AHCT_ICONS: &[&str] = &["commandbuttons/btnraisethebanner.blp"];
 const AHCT_NAMES: &[&str] = &["Raise the Banner"];
@@ -62069,8 +62086,8 @@ const AHPA_TIP_LEVELS: &[&str] = &[
 ];
 const AHPA_UBERTIP_LEVELS: &[&str] = &[
     "Gives 15% Magic Resistance and 15% increased healing received to nearby friendly units.",
-    "Gives 25% Magic Resistance and 20% increased healing received to nearby friendly units.",
-    "Gives 35% Magic Resistance and 25% increased healing recieved to nearby friendly units.",
+    "Gives 20% Magic Resistance and 20% increased healing received to nearby friendly units.",
+    "Gives 25% Magic Resistance and 25% increased healing recieved to nearby friendly units.",
 ];
 const AHPE_ICONS: &[&str] = &["passivebuttons/pasbtnmarkoffire.blp"];
 const AHPE_NAMES: &[&str] = &["Phoenix"];
@@ -62138,8 +62155,8 @@ const AHSW_TIP_LEVELS: &[&str] = &[
 ];
 const AHSW_UBERTIP_LEVELS: &[&str] = &[
     "Strikes the target area, dealing 100 damage to enemy units, and restoring 25 hit points per unit hit.",
-    "Strikes the target area, dealing 175 damage to enemy units, and restoring 35 hit points per unit hit.",
-    "Strikes the target area, dealing 250 damage to enemy units, and restoring 45 hit points per unit hit.",
+    "Strikes the target area, dealing 150 damage to enemy units, and restoring 35 hit points per unit hit.",
+    "Strikes the target area, dealing 200 damage to enemy units, and restoring 45 hit points per unit hit.",
 ];
 const AHTA_ICONS: &[&str] = &["commandbuttons/btnreveal.blp"];
 const AHTA_NAMES: &[&str] = &["Reveal"];
@@ -62505,9 +62522,9 @@ const ANCP_TIP_LEVELS: &[&str] = &[
     "Righteous Fury - [Level 3]",
 ];
 const ANCP_UBERTIP_LEVELS: &[&str] = &[
-    "Dashes towards a target point up to 725 range away, dealing 100 damage to enemy land units hit along the way, and slowing their movement by 20% and attack rate by 30%.",
-    "Dashes towards a target point up to 725 range away, dealing 150 damage to enemy land units hit along the way, and slowing their movement by 30% and attack rate by 40%.",
-    "Dashes towards a target point up to 725 range away, dealing 200 damage to enemy land units hit along the way, and slowing their movement by 40% and attack rate by 50%.",
+    "Dashes towards a target point up to 725 range away, dealing 100 damage to enemy land units hit along the way, and slowing their movement by 40% and attack rate by 40%.",
+    "Dashes towards a target point up to 725 range away, dealing 135 damage to enemy land units hit along the way, and slowing their movement by 40% and attack rate by 40%.",
+    "Dashes towards a target point up to 725 range away, dealing 180 damage to enemy land units hit along the way, and slowing their movement by 40% and attack rate by 40%.",
 ];
 const ANCR_ICONS: &[&str] = &["commandbuttons/btnchemicalrage.blp"];
 const ANCR_NAMES: &[&str] = &["Chemical Rage"];
@@ -63773,10 +63790,10 @@ const AUBD_TIP_LEVELS: &[&str] = &[
 ];
 const AUBD_UBERTIP_LEVELS: &[&str] = &[
     "Enter a defensive stance, reducing incoming damage by 65% and movement speed by 40%. During this time, if Garek takes any damage, he gains 30% attack rate for 3 seconds. Lasts 10 seconds.",
-    "Enter a defensive stance, reducing incoming damage by 65% and movement speed by 40%. During this time, if Garek takes any damage, he gains 35% attack rate for 3 seconds. Lasts 10 seconds.",
-    "Enter a defensive stance, reducing incoming damage by 65% and movement speed by 40%. During this time, if Garek takes any damage, he gains 40% attack rate for 3 seconds. Lasts 10 seconds.",
-    "Enter a defensive stance, reducing incoming damage by 65% and movement speed by 40%. During this time, if Garek takes any damage, he gains 45% attack rate for 3 seconds. Lasts 10 seconds.",
-    "Enter a defensive stance, reducing incoming damage by 65% and movement speed by 40%. During this time, if Garek takes any damage, he gains 50% attack rate for 3 seconds. Lasts 10 seconds.",
+    "Enter a defensive stance, reducing incoming damage by 65% and movement speed by 35%. During this time, if Garek takes any damage, he gains 35% attack rate for 3 seconds. Lasts 10 seconds.",
+    "Enter a defensive stance, reducing incoming damage by 65% and movement speed by 30%. During this time, if Garek takes any damage, he gains 40% attack rate for 3 seconds. Lasts 10 seconds.",
+    "Enter a defensive stance, reducing incoming damage by 65% and movement speed by 25%. During this time, if Garek takes any damage, he gains 45% attack rate for 3 seconds. Lasts 10 seconds.",
+    "Enter a defensive stance, reducing incoming damage by 65% and movement speed by 20%. During this time, if Garek takes any damage, he gains 50% attack rate for 3 seconds. Lasts 10 seconds.",
 ];
 const AUBR_ICONS: &[&str] = &["commandbuttons/btnbatteringram.blp"];
 const AUBR_NAMES: &[&str] = &["Battering Ram"];
@@ -64020,10 +64037,10 @@ const AUSW_TIP_LEVELS: &[&str] = &[
 ];
 const AUSW_UBERTIP_LEVELS: &[&str] = &[
     "Strikes the target area, dealing 100 damage to enemy units, reducing their armor by 2, and restoring 25 hit points per unit hit.",
-    "Strikes the target area, dealing 175 damage to enemy units, reducing their armor by 2, and restoring 35 hit points per unit hit.",
-    "Strikes the target area, dealing 250 damage to enemy units, reducing their armor by 3, and restoring 45 hit points per unit hit.",
-    "Strikes the target area, dealing 325 damage to enemy units, reducing their armor by 3, and restoring 55 hit points per unit hit.",
-    "Strikes the target area, dealing 400 damage to enemy units, reducing their armor by 4, and restoring 65 hit points per unit hit.",
+    "Strikes the target area, dealing 150 damage to enemy units, reducing their armor by 2, and restoring 35 hit points per unit hit.",
+    "Strikes the target area, dealing 200 damage to enemy units, reducing their armor by 3, and restoring 45 hit points per unit hit.",
+    "Strikes the target area, dealing 250 damage to enemy units, reducing their armor by 3, and restoring 55 hit points per unit hit.",
+    "Strikes the target area, dealing 300 damage to enemy units, reducing their armor by 4, and restoring 65 hit points per unit hit.",
 ];
 const AUTS_ICONS: &[&str] = &["passivebuttons/pasbtnthornshield.blp"];
 const AUTS_NAMES: &[&str] = &["Spiked Carapace"];
@@ -64254,6 +64271,12 @@ const CEXP_ICONS: &[&str] = &["commandbuttons/btnbarrel.blp"];
 const CEXP_NAMES: &[&str] = &["|cffffff00Explosive Barrel|r"];
 const CEXP_TIP_LEVELS: &[&str] = &["Purchase Explosive Barrel"];
 const CEXP_UBERTIP_LEVELS: &[&str] = &["Quest Item A heavy barrel loaded with gunpowder."];
+const CGAH_ICONS: &[&str] = &["commandbuttons/btngarithosabomination.blp"];
+const CGAH_NAMES: &[&str] = &["|cffed6de0Garithos's Head|r"];
+const CGAH_TIP_LEVELS: &[&str] = &["Purchase Garithos's Head"];
+const CGAH_UBERTIP_LEVELS: &[&str] = &[
+    "Secret Item Even the hungriest of beasts will not devour this grotesque head. Even in this state it continues to talk when prompted.",
+];
 const CHES_ICONS: &[&str] = &["commandbuttons/btncheese.blp"];
 const CHES_NAMES: &[&str] = &["Cheese"];
 const CHES_TIP_LEVELS: &[&str] = &["Purchase the Cheese"];
@@ -64914,7 +64937,7 @@ const FRGD_UBERTIP_LEVELS: &[&str] = &[
 const FRHG_ICONS: &[&str] = &["commandbuttons/btnadvancedunholystrength.blp"];
 const FRHG_NAMES: &[&str] = &["Firehand Gauntlets"];
 const FRHG_TIP_LEVELS: &[&str] = &["Purchase Firehand Gauntlets"];
-const FRHG_UBERTIP_LEVELS: &[&str] = &["Increases armor by 5 and attack rate by 0% when worn."];
+const FRHG_UBERTIP_LEVELS: &[&str] = &["Increases armor by 5 and attack rate by 20% when worn."];
 const FWSS_ICONS: &[&str] = &["commandbuttons/btngrimward.blp"];
 const FWSS_NAMES: &[&str] = &["Frost Wyrm Skull Shield"];
 const FWSS_TIP_LEVELS: &[&str] = &["Purchase Frost Wyrm Skull Shield"];
@@ -70673,6 +70696,7 @@ const CEGI_ABILITIES: &[WarcraftObjectId] = &[WarcraftObjectId::new("Acgi")];
 const CELI_ABILITIES: &[WarcraftObjectId] = &[WarcraftObjectId::new("Acli")];
 const CESE_ABILITIES: &[WarcraftObjectId] = &[WarcraftObjectId::new("ASYR")];
 const CEXP_ABILITIES: &[WarcraftObjectId] = &[];
+const CGAH_ABILITIES: &[WarcraftObjectId] = &[WarcraftObjectId::new("AIgs")];
 const CHES_ABILITIES: &[WarcraftObjectId] = &[];
 const CIRI_ABILITIES: &[WarcraftObjectId] = &[WarcraftObjectId::new("AIi6")];
 const CKCM_ABILITIES: &[WarcraftObjectId] = &[];
