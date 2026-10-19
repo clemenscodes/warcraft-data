@@ -5,7 +5,7 @@ use std::fmt;
 
 use serde::{Deserialize, Serialize};
 
-pub const SUPPORTED_VERSION_STRING: &str = "3.0.1.24370";
+pub const SUPPORTED_VERSION_STRING: &str = "3.0.1.24371";
 
 pub const SUPPORTED_VERSION: WarcraftVersion = WarcraftVersion::parse(SUPPORTED_VERSION_STRING);
 
