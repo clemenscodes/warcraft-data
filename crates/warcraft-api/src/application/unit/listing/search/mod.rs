@@ -16,7 +16,7 @@ pub(crate) enum Match {
 }
 
 /// Match a query against a unit's own text: its space-joined lowercased names
-/// and its lowercased id. Direct when a name/id substring or a ≥3-char query
+/// and its lowercased id. Direct when a name/id substring or every ≥3-char query
 /// token whole-word-matches a name word; otherwise fuzzy when every query char
 /// appears in order within the names.
 pub(crate) fn match_unit_name(query: &str, id_lower: &str, names_lower: &str) -> Match {
@@ -44,13 +44,18 @@ pub(crate) fn match_ability(query: &str, haystack: &str) -> Match {
     }
 }
 
-/// Whether some ≥3-char whitespace token of `query` exactly equals a whitespace
-/// word of `text`.
+/// Whether every ≥3-char whitespace token of `query` exactly equals a whitespace
+/// word of `text`. Every token has to land, so a second word narrows the search
+/// instead of widening it: "shadow meld" is not a hit for "shadow strike".
 fn token_word_match(query: &str, text: &str) -> bool {
-    query
+    let mut tokens = query
         .split_whitespace()
         .filter(|token| token.len() >= 3)
-        .any(|token| text.split_whitespace().any(|word| word == token))
+        .peekable();
+    if tokens.peek().is_none() {
+        return false;
+    }
+    tokens.all(|token| text.split_whitespace().any(|word| word == token))
 }
 
 /// Whether every character of `needle` appears in order within `haystack` (not
@@ -113,5 +118,37 @@ mod tests {
         assert!(is_subsequence("ftm", "footman"));
         assert!(!is_subsequence("mtf", "footman"));
         assert!(is_subsequence("", "anything"));
+    }
+
+    #[test]
+    fn every_query_token_has_to_match_an_ability_word() {
+        // Both words land on Shadow Meld.
+        assert_eq!(
+            match_ability("shadow meld", " shadow meld ashm "),
+            Match::Direct
+        );
+        // "shadow" alone lands on Shadow Strike, but "meld" does not, so the
+        // second word narrows the hit away.
+        assert_eq!(
+            match_ability("shadow meld", " shadow strike acss "),
+            Match::None
+        );
+        // Word order does not matter once every word lands.
+        assert_eq!(
+            match_ability("meld shadow", " shadow meld ashm "),
+            Match::Direct
+        );
+    }
+
+    #[test]
+    fn every_query_token_has_to_match_a_unit_name_word() {
+        assert_eq!(
+            match_unit_name("shadow hunter", "oshd", "shadow hunter"),
+            Match::Direct
+        );
+        assert_ne!(
+            match_unit_name("shadow hunter", "nsts", "satyr shadowdancer"),
+            Match::Direct
+        );
     }
 }
